@@ -13,14 +13,14 @@ import org.h2.tools.Server;
 
 /**
  * @author oky
- * 
+ *
  */
-public class H2Demo {
+public class StartH2Service {
 	private Server server;
 	private String port = "9094";
-	private String dbDir = "./h2db/sample";
-	private String user = "sa";
-	private String password = "123";
+	private String dbDir = "./h2db/lover";
+	private String user = "heyu";
+	private String password = "heyulovelian1990";
 
 	public void startServer() {
 		try {
@@ -66,10 +66,10 @@ public class H2Demo {
 	}
 
 	public static void main(String[] args) {
-		H2Demo h2 = new H2Demo();
+		StartH2Service h2 = new StartH2Service();
 		h2.startServer();
-		h2.useH2();
-		h2.stopServer();
-		System.out.println("==END==");
+//		h2.useH2();
+//		h2.stopServer();
+//		System.out.println("==END==");
 	}
 }
