@@ -4,14 +4,13 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.r</groupId>
+		<groupId>com.rain</groupId>
 		<artifactId>r-team</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>r-components</artifactId>
 	<packaging>pom</packaging>
-
 	<name>r-components</name>
 	<description>tx-components</description>
 
@@ -21,15 +20,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.r</groupId>
+			<groupId>com.rain</groupId>
 			<artifactId>r-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
