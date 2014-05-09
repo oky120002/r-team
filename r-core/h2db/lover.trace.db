@@ -1,0 +1,12 @@
+05-09 09:39:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].TABLES"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.TABLES [42001-178]
+05-09 09:40:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].USERS"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.USERS [42001-178]
+05-09 09:40:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].USERS"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.USERS [42001-178]
+05-09 09:46:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+SELECT * FROM TEST ORDER BY ID [42102-178]

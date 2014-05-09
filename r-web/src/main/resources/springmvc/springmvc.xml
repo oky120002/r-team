@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd  
@@ -11,7 +12,8 @@
 	<mvc:annotation-driven />
 
 	<!-- 首页跳转 -->
-	<!-- <mvc:view-controller path="/" view-name="forward:/rain/page/index" /> -->
+	<!-- <mvc:view-controller path="/" view-name="forward:/rain/page/index" 
+		/> -->
 	<!-- <mvc:resources mapping="/static/**" location="/static/" /> -->
 
 
@@ -22,52 +24,65 @@
 
 	<!-- 添加mvc拦截器 -->
 	<!-- <mvc:interceptors> -->
-	<!-- <bean class="com.hiyouyu.webapp.app.rain.sys.global.interceptor.GlobalParameterInterceptor" /> -->
-	<!-- <bean class="com.hiyouyu.webapp.app.rain.admin.jumpurl.interceptor.JumpUrlInterceptor" /> -->
+	<!-- <bean class="com.hiyouyu.webapp.app.rain.sys.global.interceptor.GlobalParameterInterceptor" 
+		/> -->
+	<!-- <bean class="com.hiyouyu.webapp.app.rain.admin.jumpurl.interceptor.JumpUrlInterceptor" 
+		/> -->
 	<!-- </mvc:interceptors> -->
 
 	<!-- 注解式参数自动装配 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="webBindingInitializer">
-			<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-				<property name="validator">
-					<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-				</property>
-			</bean>
-		</property>
-		<property name="messageConverters">
-			<list>
-				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
-				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"></bean>
-				<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean>
-				<bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean>
-			</list>
-		</property>
-	</bean>
-
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->
+	<!-- <property name="webBindingInitializer"> -->
+	<!-- <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> -->
+	<!-- <property name="validator"> -->
+	<!-- <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
+		/> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- </property> -->
+	<!-- <property name="messageConverters"> -->
+	<!-- <list> -->
+	<!-- <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean> -->
+	<!-- <bean class="org.springframework.http.converter.StringHttpMessageConverter"> -->
+	<!-- <property name="supportedMediaTypes"> -->
+	<!-- <list> -->
+	<!-- <value>text/plain;charset=UTF-8</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean> -->
+	<!-- <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"></bean> -->
+	<!-- <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean> -->
+	<!-- <bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
 
 
 	<!-- 使用短URL映射 -->
-	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="mediaTypes">
-			<map>
-				<entry key="html" value="text/html" />
-				<!-- 使用json过滤.自动转换返回的类为json数据 -->
-				<entry key="json" value="application/json" />
-			</map>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager">
+			<bean
+				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+				<property name="ignoreAcceptHeader" value="true" />
+				<property name="defaultContentType" value="application/json" />
+				<property name="mediaTypes">
+					<map>
+						<entry key="page" value="text/html" />
+						<entry key="json" value="application/json" />
+					</map>
+				</property>
+			</bean>
 		</property>
+
 		<property name="viewResolvers">
 			<list>
 				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.JstlView" />
 					<property name="prefix" value="/WEB-INF/views/" />
 					<property name="suffix" value=".jsp" />
 				</bean>
@@ -75,7 +90,8 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
 	</bean>

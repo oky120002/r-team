@@ -16,7 +16,7 @@ import org.h2.tools.Server;
  *
  */
 public class StartH2Service {
-	private Server server;
+	private static Server tcpServer;
 	private String port = "9094";
 	private String dbDir = "./h2db/lover";
 	private String user = "heyu";
@@ -24,8 +24,10 @@ public class StartH2Service {
 
 	public void startServer() {
 		try {
-			System.out.println("正在启动h2...");
-			server = Server.createTcpServer(new String[] { "-tcpPort", port }).start();
+			System.out.println("正在启动h2..tcp..");
+			tcpServer = Server.createTcpServer(new String[] { "-tcpPort", port }).start();
+			System.out.println("正在启动h2..web..");
+			Server.createWebServer(new String[] { "-webAllowOthers"}).start();
 		} catch (SQLException e) {
 			System.out.println("启动h2出错：" + e.toString());
 			e.printStackTrace();
@@ -34,9 +36,9 @@ public class StartH2Service {
 	}
 
 	public void stopServer() {
-		if (server != null) {
+		if (tcpServer != null) {
 			System.out.println("正在关闭h2...");
-			server.stop();
+			tcpServer.stop();
 			System.out.println("关闭成功.");
 		}
 	}
@@ -60,7 +62,6 @@ public class StartH2Service {
 			stat.close();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

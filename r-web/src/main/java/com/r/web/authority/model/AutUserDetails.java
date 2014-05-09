@@ -12,18 +12,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
-
-import com.r.web.user.model.User;
 
 /**
  * 权限用户 
@@ -79,9 +75,9 @@ public class AutUserDetails implements org.springframework.security.core.userdet
 	@Column(name = "isLock")
 	private Boolean isLock;
 
-	/** 用户 */
-	@OneToOne(mappedBy = "userDetails", fetch = FetchType.EAGER)
-	private User user;
+//	/** 用户 */
+//	@OneToOne(mappedBy = "userDetails", fetch = FetchType.EAGER)
+//	private User user;
 
 	/** 默认构造函数 */
 	public AutUserDetails() {
@@ -287,14 +283,14 @@ public class AutUserDetails implements org.springframework.security.core.userdet
 		this.isLock = isLock;
 	}
 
-	/** 获取用户 */
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	/** 获取用户 */
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	@Override
 	public String toString() {
