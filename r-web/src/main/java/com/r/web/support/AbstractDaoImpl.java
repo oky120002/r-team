@@ -40,17 +40,6 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	/** 此Dao查询的Model类型 */
 	private Class<?> modelClass = null;
 
-	/**
-	 * 
-	 * 获得当前事务Seesion
-	 * 
-	 * @return Session
-	 * @author rain
-	 */
-	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
-
 	/** 在实现时,要实现一个无参构造方法,同时调用此构造方法 */
 	public AbstractDaoImpl(Class<?> modelClass) {
 		super();
@@ -61,86 +50,97 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 		}
 	}
 
+	/**
+	 * 
+	 * 获得当前事务Seesion
+	 * 
+	 * @return Session
+	 * @author rain
+	 */
+	protected final Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+
 	@Override
-	public void create(T model) {
+	public final void create(T model) {
 		getSession().save(model);
 	}
 
 	@Override
-	public void creates(List<T> models) {
+	public final void creates(List<T> models) {
 		for (T t : models) {
 			create(t);
 		}
 	}
 
 	@Override
-	public void update(T model) {
+	public final void update(T model) {
 		getSession().update(model);
 	}
 
 	@Override
-	public void updates(List<T> models) {
+	public final void updates(List<T> models) {
 		for (T t : models) {
 			update(t);
 		}
 	}
 
 	@Override
-	public void save(T model) {
+	public final void save(T model) {
 		getSession().saveOrUpdate(model);
 	}
 
 	@Override
-	public void saves(List<T> models) {
+	public final void saves(List<T> models) {
 		for (T t : models) {
 			save(t);
 		}
 	}
 
 	@Override
-	public void merge(T model) {
+	public final void merge(T model) {
 		getSession().merge(model);
 	}
 
 	@Override
-	public void merges(List<T> models) {
+	public final void merges(List<T> models) {
 		for (T t : models) {
 			merge(t);
 		}
 	}
 
 	@Override
-	public void delete(T model) {
+	public final void delete(T model) {
 		getSession().delete(model);
 	}
 
 	@Override
-	public void deletes(List<T> models) {
+	public final void deletes(List<T> models) {
 		for (T t : models) {
 			delete(t);
 		}
 	}
 
 	@Override
-	public void deleteAll() {
+	public final void deleteAll() {
 		Query query = getSession().createQuery("delete " + modelClass.getName());
 		query.executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T find(String id) {
+	public final T find(String id) {
 		return (T) getSession().get(this.modelClass, id);
 	}
 
 	@Override
-	public List<T> queryAll() {
+	public final List<T> queryAll() {
 		return query(-1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> query(int firstResult, int maxResults, Order... orders) {
+	public final List<T> query(int firstResult, int maxResults, Order... orders) {
 		String hql = "from " + this.modelClass.getName();
 		if (ArrayUtils.isNotEmpty(orders)) {
 			hql += " order";
@@ -161,13 +161,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> queryByExample(T model) {
+	public final List<T> queryByExample(T model) {
 		return queryByExample(model, -1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> queryByExample(T model, int firstResult, int maxResults, Order... orders) {
+	public final List<T> queryByExample(T model, int firstResult, int maxResults, Order... orders) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(model.getClass());
 		criteria.add(Example.create(model).ignoreCase());
 		if (ArrayUtils.isNotEmpty(orders)) {
@@ -185,13 +185,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> queryByHql(String hql) {
+	public final List<T> queryByHql(String hql) {
 		return queryByHql(hql, null, -1, -1);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SafeVarargs
 	@Override
-	public List<T> queryByHql(String hql, KeyValue<String, ?>... keyValues) {
+	public final List<T> queryByHql(String hql, KeyValue<String, ?>... keyValues) {
 		if (ArrayUtils.isEmpty(keyValues)) {
 			return queryByHql(hql, null, -1, -1);
 		}
@@ -203,13 +203,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> queryByHql(String hql, Map<String, Object> pars) {
+	public final List<T> queryByHql(String hql, Map<String, Object> pars) {
 		return queryByHql(hql, pars, -1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+	public final List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		if (ArrayUtils.isNotEmpty(orders)) {
 			hql += " order";
 			for (Order order : orders) {
@@ -238,13 +238,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> queryBySql(String sql) {
+	public final List<T> queryBySql(String sql) {
 		return queryBySql(sql, null, -1, -1);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SafeVarargs
 	@Override
-	public List<T> queryBySql(String sql, KeyValue<String, ?>... keyValues) {
+	public final List<T> queryBySql(String sql, KeyValue<String, ?>... keyValues) {
 		if (ArrayUtils.isEmpty(keyValues)) {
 			return queryBySql(sql, null, -1, -1);
 		}
@@ -256,13 +256,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> queryBySql(String sql, Map<String, Object> pars) {
+	public final List<T> queryBySql(String sql, Map<String, Object> pars) {
 		return queryBySql(sql, pars, -1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+	public final List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		if (ArrayUtils.isNotEmpty(orders)) {
 			sql += " order";
 			for (Order order : orders) {

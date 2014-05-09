@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.authority.model;
+package com.r.web.authority.bean;
 
 import org.springframework.security.core.GrantedAuthority;
 

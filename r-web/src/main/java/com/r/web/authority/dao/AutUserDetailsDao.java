@@ -6,15 +6,17 @@
  */
 package com.r.web.authority.dao;
 
-import com.r.web.authority.model.AutUserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.r.web.support.AbstractDao;
+import com.r.web.user.model.User;
 
 /**
  * 用户Dao
  * 
  * @author rain
  */
-public interface AutUserDetailsDao extends AbstractDao<AutUserDetails> {
+public interface AutUserDetailsDao extends AbstractDao<User> {
 
 	/**
 	 * 
@@ -27,5 +29,5 @@ public interface AutUserDetailsDao extends AbstractDao<AutUserDetails> {
 	 * @return User 用户
 	 * @author rain
 	 */
-	AutUserDetails findByUsername(String username);
+	UserDetails findByUsername(String username);
 }

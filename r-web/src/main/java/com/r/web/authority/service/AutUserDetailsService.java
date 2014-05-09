@@ -21,7 +21,7 @@ import com.r.web.authority.dao.AutUserDetailsDao;
  * 
  */
 public class AutUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(AutUserDetailsService.class); // 日志
 
 	@Resource(name = "authority.autUserDetailsDao")
@@ -42,4 +42,5 @@ public class AutUserDetailsService implements org.springframework.security.core.
 			throw new UsernameNotFoundException(e.toString());
 		}
 	}
+
 }

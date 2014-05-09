@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.r.web.authority.dao.AutUserDetailsDao;
 import com.r.web.user.dao.UserDao;
 import com.r.web.user.model.User;
 
@@ -24,6 +25,11 @@ import com.r.web.user.model.User;
  */
 @Service("user.userService")
 public class UserService {
+
+//	private static final Logger logger = LoggerFactory.getLogger(UserService.class); // 日志
+
+	@Resource(name = "authority.autUserDetailsDao")
+	private AutUserDetailsDao autUserDetailsDao;
 
 	@Resource(name = "user.userDao")
 	private UserDao userDao;
