@@ -1,9 +1,11 @@
-package com.r.web.support;
+package com.r.web.support.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.criterion.Order;
+
+import com.r.web.support.bean.KeyValue;
 
 /**
  * 

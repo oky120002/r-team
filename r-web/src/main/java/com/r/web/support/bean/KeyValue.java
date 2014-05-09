@@ -4,7 +4,7 @@
  * 修改时间:  2013-10-14
  * 修改描述:
  */
-package com.r.web.support;
+package com.r.web.support.bean;
 
 import java.util.Map;
 

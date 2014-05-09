@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.r.web.support.AbstractDaoImpl;
-import com.r.web.support.KeyValue;
+import com.r.web.support.bean.KeyValue;
+import com.r.web.support.dao.AbstractDaoImpl;
 import com.r.web.user.model.User;
 
 /**

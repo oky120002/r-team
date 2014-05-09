@@ -12,8 +12,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 首页跳转 -->
-	<!-- <mvc:view-controller path="/" view-name="forward:/rain/page/index" 
-		/> -->
+<!-- 	<mvc:view-controller path="/" view-name="forward:/login" /> -->
 	<!-- <mvc:resources mapping="/static/**" location="/static/" /> -->
 
 
@@ -31,32 +30,31 @@
 	<!-- </mvc:interceptors> -->
 
 	<!-- 注解式参数自动装配 -->
-	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->
-	<!-- <property name="webBindingInitializer"> -->
-	<!-- <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> -->
-	<!-- <property name="validator"> -->
-	<!-- <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
-		/> -->
-	<!-- </property> -->
-	<!-- </bean> -->
-	<!-- </property> -->
-	<!-- <property name="messageConverters"> -->
-	<!-- <list> -->
-	<!-- <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean> -->
-	<!-- <bean class="org.springframework.http.converter.StringHttpMessageConverter"> -->
-	<!-- <property name="supportedMediaTypes"> -->
-	<!-- <list> -->
-	<!-- <value>text/plain;charset=UTF-8</value> -->
-	<!-- </list> -->
-	<!-- </property> -->
-	<!-- </bean> -->
-	<!-- <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean> -->
-	<!-- <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"></bean> -->
-	<!-- <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean> -->
-	<!-- <bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean> -->
-	<!-- </list> -->
-	<!-- </property> -->
-	<!-- </bean> -->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->
+<!-- 	<property name="webBindingInitializer"> -->
+<!-- 	<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> -->
+<!-- 	<property name="validator"> -->
+<!-- 	<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 		/> -->
+<!-- 	</property> -->
+<!-- 	</bean> -->
+<!-- 	</property> -->
+<!-- 	<property name="messageConverters"> -->
+<!-- 	<list> -->
+<!-- 	<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean> -->
+<!-- 	<bean class="org.springframework.http.converter.StringHttpMessageConverter"> -->
+<!-- 	<property name="supportedMediaTypes"> -->
+<!-- 	<list> -->
+<!-- 	<value>text/plain;charset=UTF-8</value> -->
+<!-- 	</list> -->
+<!-- 	</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean> -->
+<!-- 	<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"></bean> -->
+<!-- 	<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean> -->
+<!-- 	<bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean> -->
+<!-- 	</list> -->
+<!-- 	</property> -->
+<!-- 	</bean> -->
 
 
 	<!-- 使用短URL映射 -->
@@ -66,10 +64,10 @@
 			<bean
 				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 				<property name="ignoreAcceptHeader" value="true" />
-				<property name="defaultContentType" value="application/json" />
+				<property name="defaultContentType" value="text/html" />
 				<property name="mediaTypes">
 					<map>
-						<entry key="page" value="text/html" />
+						<entry key="html" value="text/html" />
 						<entry key="json" value="application/json" />
 					</map>
 				</property>
@@ -81,8 +79,7 @@
 				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 				<bean
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="viewClass"
-						value="org.springframework.web.servlet.view.JstlView" />
+					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 					<property name="prefix" value="/WEB-INF/views/" />
 					<property name="suffix" value=".jsp" />
 				</bean>
@@ -90,8 +87,7 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
 	</bean>

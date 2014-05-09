@@ -4,7 +4,7 @@
  * 修改时间:  2013-4-3
  * <修改描述:>
  */
-package com.r.web.support;
+package com.r.web.support.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +24,8 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.r.web.support.bean.KeyValue;
 
 /**
  * 顶级Dao实现

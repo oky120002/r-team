@@ -14,7 +14,7 @@
 	<!-- 	<http pattern="/fromwork/include/**" security="none" /> -->
 
 	<!-- 配置http -->
-	<http access-denied-page="/error" auto-config="true">
+	<http access-denied-page="/denied" auto-config="true">
 		<!-- 配置权限控制URL -->
 		<!-- <intercept-url pattern='/static/**' filters='none' /> -->
 		<!-- <intercept-url pattern="/secure/extreme/**" access="hasRole('supervisor')" /F> -->

@@ -8,7 +8,7 @@ package com.r.web.user.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.web.support.AbstractDaoImpl;
+import com.r.web.support.dao.AbstractDaoImpl;
 import com.r.web.user.model.User;
 
 /**

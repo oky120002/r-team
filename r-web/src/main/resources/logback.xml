@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="10 seconds">
 
 	<property name="appName" value="r-web" />
-	<property name="logPath" value="./log" />
+	<property name="logPath" value="D:/logs/r-web/log" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
 	<property name="commonPattern"
@@ -44,42 +44,35 @@
 	</appender>
 
 	<!-- spring框架打印日志级别 -->
-	<logger name="org.springframework" level="INFO" />
-	<logger name="org.springframework.web.servlet.mvc.annotation"
-		level="WARN" />
-	<logger name="org.springframework.web.servlet.view.JstlView"
-		level="WARN" />
-	<logger
-		name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
-		level="WARN" />
-	<logger name="org.springframework.web.servlet.DispatcherServlet"
-		level="WARN" />
-	<logger
-		name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker"
-		level="WARN" />
+<!-- 	<logger name="org.springframework" level="INFO" /> -->
+<!-- 	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN" /> -->
+<!-- 	<logger name="org.springframework.web.servlet.view.JstlView" level="WARN" /> -->
+<!-- 	<logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="WARN" /> -->
+<!-- 	<logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN" /> -->
+<!-- 	<logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="WARN" /> -->
 		
 	<!-- springMVC答应日志级别 -->
-	<logger name="org.springframework.aop" level="ERROR" />
-	<logger name="org.springframework.web" level="DEBUG" />
-	<logger name="org.springframework.beans" level="ERROR" />
+<!-- 	<logger name="org.springframework.aop" level="ERROR" /> -->
+<!-- 	<logger name="org.springframework.web" level="DEBUG" /> -->
+<!-- 	<logger name="org.springframework.beans" level="ERROR" /> -->
 	
 	<!-- hibernate -->
-	<logger name="org.hibernate" level="WARN" />
+<!-- 	<logger name="org.hibernate" level="WARN" /> -->
 	
 	<!-- cxf日志级别 -->
-	<logger name="org.apache.cxf" level="WARN" />
+<!-- 	<logger name="org.apache.cxf" level="WARN" /> -->
 	
 	<!-- ehcache日志级别 -->
-	<logger name="net.sf.ehcache" level="WARN" />
+<!-- 	<logger name="net.sf.ehcache" level="WARN" /> -->
 	
 	<!-- mybatis日志级别 -->
-	<logger name="org.apache.ibatis" level="WARN" />
-	<logger name="org.mybais" level="WARN" />
+<!-- 	<logger name="org.apache.ibatis" level="WARN" /> -->
+<!-- 	<logger name="org.mybais" level="WARN" /> -->
 	
 	<!-- sql日志级别 -->
-	<logger name="java.sql.Connection" level="ERROR">
-		<appender-ref ref="SQL_FILE" />
-	</logger>
+<!-- 	<logger name="java.sql.Connection" level="ERROR"> -->
+<!-- 		<appender-ref ref="SQL_FILE" /> -->
+<!-- 	</logger> -->
 	
 	
 	<logger name="com.r" level="DEBUG" />
