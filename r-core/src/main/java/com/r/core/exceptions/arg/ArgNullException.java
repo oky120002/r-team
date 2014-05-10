@@ -24,14 +24,17 @@ public class ArgNullException extends SException {
 		return "参数为空错误";
 	}
 
+	/** 参数为空异常 */
 	public ArgNullException(String message, Object... objects) {
 		super(message, objects);
 	}
 
+	/** 参数为空异常 */
 	public ArgNullException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/** 参数为空异常 */
 	public ArgNullException(String message) {
 		super(message);
 	}

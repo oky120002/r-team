@@ -22,9 +22,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.r.core.util.AssertUtil;
 import com.r.web.support.bean.KeyValue;
 
 /**
@@ -33,9 +32,6 @@ import com.r.web.support.bean.KeyValue;
  * @author rain
  */
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
-	/** 日志 */
-	protected Logger logger = null;
-
 	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
@@ -47,8 +43,6 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 		super();
 		if (modelClass != null) {
 			this.modelClass = modelClass;
-			logger = LoggerFactory.getLogger(this.getClass());
-			logger.info("------@Repository--------初始化" + this.getClass().getSimpleName() + "类------------------");
 		}
 	}
 
@@ -65,73 +59,93 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
 	@Override
 	public final void create(T model) {
+		AssertUtil.isNotNull("创建实体时，实体不能为空。", model);
 		getSession().save(model);
 	}
 
 	@Override
 	public final void creates(List<T> models) {
+		AssertUtil.isNotEmpty("创建实体时，实体集合不能为空。", models);
 		for (T t : models) {
-			create(t);
+			if (t != null) {
+				create(t);
+			}
 		}
 	}
 
 	@Override
 	public final void update(T model) {
+		AssertUtil.isNotNull("更新实体时，实体不能为空。", model);
 		getSession().update(model);
 	}
 
 	@Override
 	public final void updates(List<T> models) {
+		AssertUtil.isNotEmpty("更新实体时，实体集合不能为空。", models);
 		for (T t : models) {
-			update(t);
+			if (t != null) {
+				update(t);
+			}
 		}
 	}
 
 	@Override
 	public final void save(T model) {
+		AssertUtil.isNotNull("保存实体时，实体不能为空。", model);
 		getSession().saveOrUpdate(model);
 	}
 
 	@Override
 	public final void saves(List<T> models) {
+		AssertUtil.isNotEmpty("保存实体时，实体集合不能为空。", models);
 		for (T t : models) {
-			save(t);
+			if (t != null) {
+				save(t);
+			}
 		}
 	}
 
 	@Override
 	public final void merge(T model) {
+		AssertUtil.isNotNull("合并实体时，实体不能为空。", model);
 		getSession().merge(model);
 	}
 
 	@Override
 	public final void merges(List<T> models) {
+		AssertUtil.isNotEmpty("合并实体时，实体集合不能为空。", models);
 		for (T t : models) {
-			merge(t);
+			if (t != null) {
+				merge(t);
+			}
 		}
 	}
 
 	@Override
 	public final void delete(T model) {
+		AssertUtil.isNotNull("删除实体时，实体不能为空。", model);
 		getSession().delete(model);
 	}
 
 	@Override
 	public final void deletes(List<T> models) {
+		AssertUtil.isNotEmpty("删除实体时，实体集合不能为空。", models);
 		for (T t : models) {
-			delete(t);
+			if (t != null) {
+				delete(t);
+			}
 		}
 	}
 
 	@Override
-	public final void deleteAll() {
-		Query query = getSession().createQuery("delete " + modelClass.getName());
-		query.executeUpdate();
+	public final int deleteAll() {
+		return getSession().createQuery("delete " + modelClass.getName()).executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public final T find(String id) {
+		AssertUtil.isNotBlank("根据实体id查询实体时，实体id不能为空。", id);
 		return (T) getSession().get(this.modelClass, id);
 	}
 
@@ -170,6 +184,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public final List<T> queryByExample(T model, int firstResult, int maxResults, Order... orders) {
+		AssertUtil.isNotNull("根据实体属性查询时，实体不能为空。", model);
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(model.getClass());
 		criteria.add(Example.create(model).ignoreCase());
 		if (ArrayUtils.isNotEmpty(orders)) {
@@ -188,6 +203,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
 	@Override
 	public final List<T> queryByHql(String hql) {
+		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
 		return queryByHql(hql, null, -1, -1);
 	}
 
@@ -212,6 +228,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public final List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
+
 		if (ArrayUtils.isNotEmpty(orders)) {
 			hql += " order";
 			for (Order order : orders) {
@@ -265,6 +283,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public final List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+		AssertUtil.isNotBlank("根据Sql语句查询时，Sql语句不能为空。", sql);
 		if (ArrayUtils.isNotEmpty(orders)) {
 			sql += " order";
 			for (Order order : orders) {

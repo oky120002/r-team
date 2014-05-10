@@ -3,6 +3,7 @@
  */
 package com.r.web.user.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,9 +12,13 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.common.log.Logger;
+import com.r.common.log.LoggerFactory;
+import com.r.web.user.dao.UserDao;
 import com.r.web.user.model.User;
 
 /**
@@ -24,28 +29,53 @@ import com.r.web.user.model.User;
 @ContextConfiguration(locations = { "classpath:spring/*.xml" })
 public class UserServiceTest extends TestCase {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class); // 日志
+
 	@Resource(name = "user.userService")
 	private UserService userService;
 
+	@Resource(name = "passwordEncoder")
+	private PasswordEncoder passwordEncoder;
+
 	@Test
-	public void test() {
+	public void testCreateAdminUser() {
+		logger.debug("testCreateAdminUser");
+		User user = new User();
+		user.setId("0");
+		user.setCreateDate(new Date());
+		user.setEmail("heyu.520@qq.com");
+		user.setIsAccountNonLocked(true);
+		user.setIsCredentialsNonExpired(true);
+		user.setIsEnabled(true);
+		user.setIsLock(true);
+		user.setNickname("admin");
+		user.setPassword("admin");
+		user.setUsername("admin");
+
+		userService.createUser(user);
+		logger.debug("user : " + user.toString() + "       id : " + user.getId());
+
+		user.setUsername("admin222");
+		userService.updateUser(user);
+		logger.debug("user : " + user.toString() + "       id : " + user.getId());
+
+		logger.debug("清空所有用户 : " + String.valueOf(userService.deleteAllUser()) + "位");
+	}
+
+	 @Test
+	public void testCreateUsers() {
+		logger.debug("testCreateAdminUser");
 		User user1 = userService.createUser("oky", "oky", "abcd", "aaaa", true, false);
-		User user2 = userService.createUser("oky2", "oky2", "abcd", "aaaa", true, false);
-		User user3 = userService.createUser("oky3", "oky3", "abcd", "aaaa", true, false);
-		User user4 = userService.createUser("oky4", "oky4", "abcd", "aaaa", true, false);
-		User user5 = userService.createUser("oky5", "oky5", "abcd", "aaaa", true, false);
+		User user2 = userService.createUser("oky2", "oky", "abcd", "aaaa", true, false);
+		User user3 = userService.createUser("oky3", "oky", "abcd", "aaaa", true, false);
+		User user4 = userService.createUser("oky4", "oky", "abcd", "aaaa", true, false);
+		User user5 = userService.createUser("oky5", "oky", "abcd", "aaaa", true, false);
 
 		List<User> queryAll = userService.queryAll();
 		for (User user : queryAll) {
-			System.out.println(user.toString());
+			logger.debug(user.toString() + " : " + passwordEncoder.matches("oky", user.getPassword()) + " : " + user.getId());
 		}
 
-		userService.deleteUser(user1);
-		userService.deleteUser(user2);
-		userService.deleteUser(user3);
-		userService.deleteUser(user4);
-		userService.deleteUser(user5);
-		
-		System.out.println(userService.queryAll().size());
+		logger.debug("清空所有用户 : " + String.valueOf(userService.deleteAllUser()) + "位");
 	}
 }

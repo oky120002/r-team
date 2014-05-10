@@ -8,6 +8,8 @@ package com.r.web.user.dao;
 
 import org.springframework.stereotype.Repository;
 
+import com.r.common.log.Logger;
+import com.r.common.log.LoggerFactory;
 import com.r.web.support.dao.AbstractDaoImpl;
 import com.r.web.user.model.User;
 
@@ -19,7 +21,10 @@ import com.r.web.user.model.User;
 @Repository("user.userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class); // 日志
+
 	public UserDaoImpl() {
 		super(User.class);
+		logger.info("Instance UserDaoImpl............................");
 	}
 }

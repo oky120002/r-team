@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.r.common.log.Logger;
+import com.r.common.log.LoggerFactory;
 import com.r.web.support.bean.KeyValue;
 import com.r.web.support.dao.AbstractDaoImpl;
 import com.r.web.user.model.User;
@@ -27,8 +29,11 @@ import com.r.web.user.model.User;
 @Repository("authority.autUserDetailsDao")
 public class AutUserDetailsDaoImpl extends AbstractDaoImpl<User> implements AutUserDetailsDao {
 
+	private static final Logger logger = LoggerFactory.getLogger(AutUserDetailsDaoImpl.class);
+
 	public AutUserDetailsDaoImpl() {
 		super(User.class);
+		logger.info("Instance AutUserDetailsDaoImpl............................");
 	}
 
 	@Override

@@ -19,6 +19,11 @@ import com.r.web.user.service.UserService;
 public class InitSystemService {
 	private static final Logger logger = LoggerFactory.getLogger(InitSystemService.class); // 日志
 
+	public InitSystemService() {
+		super();
+		logger.info("Instance InitSystemService............................");
+	}
+
 	@Resource(name = "user.userService")
 	private UserService userService;
 
@@ -31,7 +36,9 @@ public class InitSystemService {
 	 *            管理员密码
 	 */
 	public void initSystem(String adminUsername, String password) {
-		logger.debug("初始化管理员帐号({} , {})", adminUsername);
-
+		logger.debug("初始化管理员帐号({})", adminUsername);
+		
+		
+		
 	}
 }

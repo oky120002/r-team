@@ -4,20 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>css布局案例实验页面-www.divcss5.com.cn</title>
-<link rel="stylesheet"  type="text/css"  href="<c:url value="/res/css/layout.css" />" />
+<title>初始化系统</title>
 </head>
 <body>
 	<div id="page">
-		<div id="header">我是头部（上）</div>
-		<div id="centers">
-			<div class="c_left">我是中的左</div>
-			<div class="c_right">
-				<iframe id="content_iframe"  src="http://www.baidu.com"  width="100%"  height="100%"></iframe>
-			</div>
-			<div class="clear">&nbsp;</div>
-		</div>
-		<div id="footer">我是底部（下）</div>
+	<form action="<c:url value='/init/complete' />" method="post">
+		后台管理员账号:<input type="text" name="username"  /><p>
+		后台管理员密码:<input type="password" name="password"  /><p>
+		后台管理员密码:<input type="submit" value="提交"  /><p>
+	</form>
 	</div>
 </body>
 </html>

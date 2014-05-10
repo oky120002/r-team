@@ -26,6 +26,13 @@ public class AutUserDetailsService implements org.springframework.security.core.
 
 	@Resource(name = "authority.autUserDetailsDao")
 	private AutUserDetailsDao autUserDetailsDao;
+	
+	public AutUserDetailsService() {
+		super();
+		logger.info("Instance AutUserDetailsService............................");
+	}
+
+
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)

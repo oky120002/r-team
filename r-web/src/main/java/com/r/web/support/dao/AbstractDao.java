@@ -90,9 +90,8 @@ public interface AbstractDao<T> {
 
 	/**
 	 * 合并对象后执行saveOrUpdate()方法<br />
-	 * <b>1.如果session中没有缓存数据,则直接saveOrUpdate()</b><br />
-	 * <b>2.如果session中有一个缓存数据,则直接saveOrUpdate()</b><br />
-	 * <b>3.如果session中有超过一个的缓存数据,则先以最后一个为准进行数据合并,然后把合并后的数据saveOrUpdate()到数据库</b>
+	 * <b>如果session中没有缓存数据或者有一个缓存数据,则直接saveOrUpdate()</b><br />
+	 * <b>如果session中有超过一个的缓存数据,则先以最后一个为准进行数据合并,然后把合并后的数据saveOrUpdate()到数据库</b>
 	 * 
 	 * @param model
 	 *            [参数说明]
@@ -103,9 +102,8 @@ public interface AbstractDao<T> {
 
 	/**
 	 * 合并对象集后执行saveOrUpdate()方法<br />
-	 * <b>1.如果session中没有缓存数据,则直接saveOrUpdate()</b><br />
-	 * <b>2.如果session中有一个缓存数据,则直接saveOrUpdate()</b><br />
-	 * <b>3.如果session中有超过一个的缓存数据,则先以最后一个为准进行数据合并,然后把合并后的数据saveOrUpdate()到数据库</b>
+	 * <b>如果session中没有缓存数据或者有一个缓存数据,则直接saveOrUpdate()</b><br />
+	 * <b>如果session中有超过一个的缓存数据,则先以最后一个为准进行数据合并,然后把合并后的数据saveOrUpdate()到数据库</b>
 	 * 
 	 * @param models
 	 *            实体集
@@ -140,14 +138,13 @@ public interface AbstractDao<T> {
 	 */
 	public void deletes(List<T> models);
 
-	/***
-	 * 
+	/**
 	 * 删除全部实体集
 	 * 
 	 * @author rain
-	 * 
+	 * @return integer 删除实体数量
 	 */
-	public void deleteAll();
+	public int deleteAll();
 
 	/**
 	 * 

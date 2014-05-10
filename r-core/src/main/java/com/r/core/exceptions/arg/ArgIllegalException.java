@@ -24,14 +24,17 @@ public class ArgIllegalException extends SException {
 		return "参数非法错误";
 	}
 
+	/** 参数非法异常 */
 	public ArgIllegalException(String message, Object... objects) {
 		super(message, objects);
 	}
 
+	/** 参数非法异常 */
 	public ArgIllegalException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/** 参数非法异常 */
 	public ArgIllegalException(String message) {
 		super(message);
 	}

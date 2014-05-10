@@ -38,7 +38,7 @@ public class User implements org.springframework.security.core.userdetails.UserD
 	@Column(name = "id")
 	@GeneratedValue(generator = "sys_uuid")
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid")
-	private String id;
+	public String id;
 
 	/** 电子邮件 */
 	@Column(name = "email", unique = true, nullable = false)
@@ -88,34 +88,12 @@ public class User implements org.springframework.security.core.userdetails.UserD
 	@Column(name = "isLock")
 	private Boolean isLock;
 
-	public User() {
-		super();
+	public String getId() {
+		return id;
 	}
 
-	/**
-	 * 创建用户实体
-	 * 
-	 * @param username
-	 *            账号
-	 * @param password
-	 *            密码
-	 * @param email
-	 *            电子邮件
-	 * @param nickname
-	 *            昵称
-	 * @param isEnabled
-	 *            是否启用
-	 * @param isLock
-	 *            是否锁定
-	 */
-	public User(String username, String password, String email, String nickname, Boolean isEnabled, Boolean isLock) {
-		super();
-		this.email = email;
-		this.nickname = nickname;
-		this.username = username;
-		this.password = password;
-		this.isEnabled = isEnabled;
-		this.isLock = isLock;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -190,20 +168,6 @@ public class User implements org.springframework.security.core.userdetails.UserD
 			return false;
 		}
 		return this.isEnabled.booleanValue();
-	}
-
-	/**
-	 * @return 返回 id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param 对id进行赋值
-	 */
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	/**
