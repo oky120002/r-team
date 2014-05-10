@@ -19,10 +19,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.slf4j.helpers.MessageFormatter;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.r.web.authority.bean.AutGrantedAuthority;
-
 
 /**
  * 用户信息
@@ -87,6 +87,36 @@ public class User implements org.springframework.security.core.userdetails.UserD
 	/** 是否锁定 */
 	@Column(name = "isLock")
 	private Boolean isLock;
+
+	public User() {
+		super();
+	}
+
+	/**
+	 * 创建用户实体
+	 * 
+	 * @param username
+	 *            账号
+	 * @param password
+	 *            密码
+	 * @param email
+	 *            电子邮件
+	 * @param nickname
+	 *            昵称
+	 * @param isEnabled
+	 *            是否启用
+	 * @param isLock
+	 *            是否锁定
+	 */
+	public User(String username, String password, String email, String nickname, Boolean isEnabled, Boolean isLock) {
+		super();
+		this.email = email;
+		this.nickname = nickname;
+		this.username = username;
+		this.password = password;
+		this.isEnabled = isEnabled;
+		this.isLock = isLock;
+	}
 
 	public String getEmail() {
 		return email;
@@ -290,7 +320,7 @@ public class User implements org.springframework.security.core.userdetails.UserD
 
 	@Override
 	public String toString() {
-		return "User [" + username + "]";
+		return MessageFormatter.format("User [ {}({}) ]", this.username, this.nickname).getMessage();
 	}
 
 	@Override

@@ -6,9 +6,22 @@
 <head>
 </head>
 <body>
-	<!-- jsp_body -->
-	<div id="frame_main">
-main
+<div id="page">
+	<div id="top-tools-panel"></div>
+	<div id="main-panel">
+		<div id="tabs">
+			<ul>
+				<li><a href="#tab1">tab1</a></li>
+			</ul>
+			<div id="tab1">
+				<iframe id='tab1iframe' border=0 frameBorder='no' src='http://www.baidu.com' width='100%'></iframe>
+			</div>
+		</div>
 	</div>
+	<div id="navigator-panel">
+		<div id="navTree"></div>
+	</div>
+	<div id="east-panel"></div>
+</div>
 </body>
 </html>

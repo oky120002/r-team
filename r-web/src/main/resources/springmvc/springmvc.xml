@@ -12,9 +12,13 @@
 	<mvc:annotation-driven />
 
 	<!-- 首页跳转 -->
-<!-- 	<mvc:view-controller path="/" view-name="forward:/login" /> -->
-	<!-- <mvc:resources mapping="/static/**" location="/static/" /> -->
+	<!-- 	<mvc:view-controller path="/" view-name="forward:/login" /> -->
+	
+	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+	<mvc:default-servlet-handler />
 
+	<!-- 静态资源映射 -->
+	<mvc:resources mapping="/res/**" location="/WEB-INF/res/" />
 
 	<!-- 扫描并自动装配Control -->
 	<context:component-scan base-package="com.r" use-default-filters="false">
@@ -91,4 +95,5 @@
 			</list>
 		</property>
 	</bean>
+	
 </beans>

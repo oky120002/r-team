@@ -10,3 +10,15 @@ INFORMATION_SCHEMA.USERS [42001-178]
 05-09 09:46:09 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
 SELECT * FROM TEST ORDER BY ID [42102-178]
+05-09 22:04:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].TYPE_INFO"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.TYPE_INFO [42001-178]
+05-09 22:04:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].TRIGGERS"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.TRIGGERS [42001-178]
+05-09 22:05:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].TABLE_TYPES"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.TABLE_TYPES [42001-178]
+05-09 22:05:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].TABLE_PRIVILEGES"; expected "INSERT, {"; SQL statement:
+INFORMATION_SCHEMA.TABLE_PRIVILEGES [42001-178]

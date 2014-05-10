@@ -44,12 +44,12 @@
 	</appender>
 
 	<!-- spring框架打印日志级别 -->
-<!-- 	<logger name="org.springframework" level="INFO" /> -->
-<!-- 	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN" /> -->
-<!-- 	<logger name="org.springframework.web.servlet.view.JstlView" level="WARN" /> -->
-<!-- 	<logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="WARN" /> -->
-<!-- 	<logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN" /> -->
-<!-- 	<logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="WARN" /> -->
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN" />
+	<logger name="org.springframework.web.servlet.view.JstlView" level="WARN" />
+	<logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="WARN" />
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN" />
+	<logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="WARN" />
 		
 	<!-- springMVC答应日志级别 -->
 <!-- 	<logger name="org.springframework.aop" level="ERROR" /> -->
@@ -57,7 +57,7 @@
 <!-- 	<logger name="org.springframework.beans" level="ERROR" /> -->
 	
 	<!-- hibernate -->
-<!-- 	<logger name="org.hibernate" level="WARN" /> -->
+	<logger name="org.hibernate" level="WARN" />
 	
 	<!-- cxf日志级别 -->
 <!-- 	<logger name="org.apache.cxf" level="WARN" /> -->
