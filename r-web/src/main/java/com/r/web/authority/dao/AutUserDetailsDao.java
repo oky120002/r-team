@@ -8,7 +8,7 @@ package com.r.web.authority.dao;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.r.web.support.dao.AbstractDao;
+import com.r.core.hibernate.AbstractDao;
 import com.r.web.user.model.User;
 
 /**

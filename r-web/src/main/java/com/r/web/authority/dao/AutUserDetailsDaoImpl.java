@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
-import com.r.web.support.bean.KeyValue;
-import com.r.web.support.dao.AbstractDaoImpl;
+import com.r.core.hibernate.AbstractDaoImpl;
+import com.r.core.hibernate.KeyValue;
 import com.r.web.user.model.User;
 
 /**

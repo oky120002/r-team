@@ -44,6 +44,18 @@ public class UserService {
 	private PasswordEncoder passwordEncoder; // 密码
 
 	/**
+	 * 查询用户
+	 * 
+	 * @param id
+	 *            用户ID
+	 * @return 用户
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public User find(String id) {
+		return userDao.find(id);
+	}
+
+	/**
 	 * 返回所有用户实体
 	 * 
 	 * @return
@@ -139,5 +151,10 @@ public class UserService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public int deleteAllUser() {
 		return userDao.deleteAll();
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void us(User user) {
+		userDao.updateOrDeleteByHql("update " + User.class.getName() + " set id = '0' where id = '" + user.getId() + "'");
 	}
 }

@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
-import com.r.web.user.dao.UserDao;
 import com.r.web.user.model.User;
 
 /**
@@ -55,21 +54,22 @@ public class UserServiceTest extends TestCase {
 		userService.createUser(user);
 		logger.debug("user : " + user.toString() + "       id : " + user.getId());
 
-		user.setUsername("admin222");
-		userService.updateUser(user);
-		logger.debug("user : " + user.toString() + "       id : " + user.getId());
+		// user.setUsername("admin222");
+		userService.us(user);
+		User find = userService.find("0");
+		logger.debug("user : " + find.toString() + "       id : " + find.getId());
 
 		logger.debug("清空所有用户 : " + String.valueOf(userService.deleteAllUser()) + "位");
 	}
 
-	 @Test
+	@Test
 	public void testCreateUsers() {
 		logger.debug("testCreateAdminUser");
-		User user1 = userService.createUser("oky", "oky", "abcd", "aaaa", true, false);
-		User user2 = userService.createUser("oky2", "oky", "abcd", "aaaa", true, false);
-		User user3 = userService.createUser("oky3", "oky", "abcd", "aaaa", true, false);
-		User user4 = userService.createUser("oky4", "oky", "abcd", "aaaa", true, false);
-		User user5 = userService.createUser("oky5", "oky", "abcd", "aaaa", true, false);
+		userService.createUser("oky", "oky", "abcd", "aaaa", true, false);
+		userService.createUser("oky2", "oky", "abcd", "aaaa", true, false);
+		userService.createUser("oky3", "oky", "abcd", "aaaa", true, false);
+		userService.createUser("oky4", "oky", "abcd", "aaaa", true, false);
+		userService.createUser("oky5", "oky", "abcd", "aaaa", true, false);
 
 		List<User> queryAll = userService.queryAll();
 		for (User user : queryAll) {

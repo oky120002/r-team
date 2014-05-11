@@ -6,7 +6,7 @@
  */
 package com.r.web.user.dao;
 
-import com.r.web.support.dao.AbstractDao;
+import com.r.core.hibernate.AbstractDao;
 import com.r.web.user.model.User;
 
 /**

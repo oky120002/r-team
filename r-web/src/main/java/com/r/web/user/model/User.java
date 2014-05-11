@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.r.web.authority.bean.AutGrantedAuthority;
 
@@ -31,7 +32,7 @@ import com.r.web.authority.bean.AutGrantedAuthority;
  */
 @Entity
 @Table(name = "RAIN_USER")
-public class User implements org.springframework.security.core.userdetails.UserDetails {
+public class User implements UserDetails {
 	private static final long serialVersionUID = -1064414075421084764L;
 
 	@Id
