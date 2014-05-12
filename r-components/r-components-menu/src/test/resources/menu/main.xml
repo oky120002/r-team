@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="main">
+	<name>主菜单</name>
+	<url>百度url</url>
+	<execjs>执行js</execjs>
+	<attrid>id</attrid>
+	<attrclass>class</attrclass>
+	<otherAttribute>
+		<property key="css" value="css" />
+		<property key="title" value="测试" />
+	</otherAttribute>
+	<menu id="main.one1">
+		<name>一级菜单1</name>
+	</menu>
+	<menu id="main.one2">
+		<name>一级菜单2</name>
+	</menu>
+</menu>

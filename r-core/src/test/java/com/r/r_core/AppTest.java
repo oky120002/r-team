@@ -1,38 +1,34 @@
 package com.r.r_core;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.io.IOException;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:*.xml" })
+public class AppTest {
+	
+	private PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+//	private String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+	@Test
+	public void test() throws IOException {
+		System.out.println(0);
+//		Resource[] resources = resolver.getResources("classpath:/menu/*.xml");
+		Resource resource = resolver.getResource("classpath:/menu/*.xml");
+		System.out.println(resource.getURI());
+		
+//		for (Resource res : resources) {
+//			System.out.println(res.getFile().getName());
+//		}
+	}
 }

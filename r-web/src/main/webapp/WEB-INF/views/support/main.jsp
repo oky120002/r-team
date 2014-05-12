@@ -14,7 +14,7 @@
 				<li><a href="#tab1">tab1</a></li>
 			</ul>
 			<div id="tab1">
-				<iframe id='tab1iframe' border=0 frameBorder='no' src='http://www.baidu.com' width='100%'></iframe>
+				<iframe id='tab1iframe' src='http://www.baidu.com' width='100%'></iframe>
 			</div>
 		</div>
 	</div>

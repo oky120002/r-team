@@ -69,6 +69,11 @@
 				<artifactId>r-components</artifactId>
 				<version>${r-version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-menu</artifactId>
+				<version>${r-version}</version>
+			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -413,13 +418,31 @@
 				<version>2.2.2</version>
 			</dependency>
 
-			<!-- 定时噄1�7 -->
+			<!-- 定时器 -->
 			<dependency>
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
 				<version>2.2.1</version>
 			</dependency>
 
+			<!-- xml处理 -->
+			<dependency>
+				<groupId>xmlpull</groupId>
+				<artifactId>xmlpull</artifactId>
+				<version>1.1.3.4d_b4_min</version>
+			</dependency>
+			<dependency>
+				<groupId>xpp3</groupId>
+				<artifactId>xpp3_min</artifactId>
+				<version>1.1.4c</version>
+			</dependency>
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.4.6</version>
+			</dependency>
+
+			<!-- junit -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

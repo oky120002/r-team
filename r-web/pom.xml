@@ -21,6 +21,11 @@
 			<artifactId>r-core</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.rain</groupId>
+			<artifactId>r-components-menu</artifactId>
+		</dependency>
+
 
 		<!-- spring -->
 		<dependency>

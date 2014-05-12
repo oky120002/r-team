@@ -46,7 +46,6 @@ public class AutUserDetailsDaoImpl extends AbstractDaoImpl<User> implements AutU
 		if (users.size() > 1) {
 			throw new UsernameNotFoundException("存在两个[" + username + "]用户；登陆失败！");
 		}
-
 		return users.get(0);
 	}
 }

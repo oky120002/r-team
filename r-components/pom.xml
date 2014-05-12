@@ -25,4 +25,7 @@
 		</dependency>
 	</dependencies>
 
+	<modules>
+		<module>r-components-menu</module>
+	</modules>
 </project>
