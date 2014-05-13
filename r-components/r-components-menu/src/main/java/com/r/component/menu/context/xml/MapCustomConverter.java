@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.component.menu.bean;
+package com.r.component.menu.context.xml;
 
 import java.util.Iterator;
 import java.util.Map;

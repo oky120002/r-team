@@ -126,6 +126,11 @@
 			<artifactId>cglib-nodep</artifactId>
 		</dependency>
 
+		<!-- 模板引擎 -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
 
 		<!-- test -->
 		<dependency>

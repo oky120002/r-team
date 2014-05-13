@@ -3,39 +3,21 @@
  */
 package com.r.component.menu.context;
 
+import com.r.component.menu.Menu;
+
 /**
- * 菜单描述项
+ * 可以实现此接口,从数据库,网络,外部文件中获取菜单的定义.
  * 
  * @author oky
  * 
  */
-public class MenuDescription {
-	private String name; // 菜单名称
-	private String menuLocation; // 菜单文件位置
-	private String templateLocation; // 菜单模板位置
+public interface MenuDescription {
+	/** 获取菜单名称 */
+	String getMenuName();
 
-	public String getName() {
-		return name;
-	}
+	/** 获取菜单实体 */
+	Menu getMenu();
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMenuLocation() {
-		return menuLocation;
-	}
-
-	public void setMenuLocation(String menuLocation) {
-		this.menuLocation = menuLocation;
-	}
-
-	public String getTemplateLocation() {
-		return templateLocation;
-	}
-
-	public void setTemplateLocation(String templateLocation) {
-		this.templateLocation = templateLocation;
-	}
-
+	/** 获取菜单模板 */
+	String getMenuTemplate();
 }

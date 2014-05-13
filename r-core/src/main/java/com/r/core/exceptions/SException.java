@@ -120,7 +120,7 @@ public class SException extends RuntimeException {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SILException: ").append(this.getClass().getName()).append("\n");
+		sb.append("SException: ").append(this.getClass().getName()).append("\n");
 		sb.append("   errorCode: ").append(this.errorCode).append("\n");
 		sb.append("   errorMessage: ").append(this.errorMessage).append("\n");
 		sb.append("   message: ").append(super.getMessage()).append("\n");

@@ -3,8 +3,8 @@
 	<name>xxx</name>
 	<url>fdsfurl</url>
 	<execjs>fdsfjs</execjs>
-	<attrid>id</attrid>
-	<attrclass>class</attrclass>
+<!-- 	<attrid>id</attrid> -->
+<!-- 	<attrclass>class</attrclass> -->
 	<otherAttribute>
 		<property key="css" value="css" />
 		<property key="title" value="fdsafsda" />
