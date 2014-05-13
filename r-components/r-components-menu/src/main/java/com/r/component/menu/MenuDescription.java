@@ -1,9 +1,8 @@
 /**
  * 
  */
-package com.r.component.menu.context;
+package com.r.component.menu;
 
-import com.r.component.menu.Menu;
 
 /**
  * 可以实现此接口,从数据库,网络,外部文件中获取菜单的定义.

@@ -6,17 +6,17 @@
 	<bean id="menuContext" class="com.r.component.menu.context.MenuFactory">
 		<property name="menuDescriptions">
 			<list>
-				<bean class="com.r.component.menu.context.MenuDescription">
+				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml">
 					<property name="name" value="MainMenu" />
 					<property name="menuLocation" value="classpath:/menu/main.xml" />
-					<property name="templateLocation" value="classpath:/menu/main.template.xml" />
+					<property name="templateLocation" value="classpath:/menu/main.ftl" />
 				</bean>
-				<bean class="com.r.component.menu.context.MenuDescription">
+				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml">
 					<property name="name" value="RainMenu" />
 					<property name="menuLocation" value="classpath:/menu/rain.xml" />
-					<property name="templateLocation" value="classpath:/menu/rain.template.xml" />
+					<property name="templateLocation" value="classpath:/menu/rain.ftl" />
 				</bean>
 			</list>
-		</property>
+		</property> 
 	</bean>
 </beans>

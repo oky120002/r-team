@@ -11,7 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.r.component.menu.Menu;
-import com.r.component.menu.context.MenuDescription;
+import com.r.component.menu.MenuDescription;
 import com.r.core.exceptions.io.IOReadErrorException;
 import com.r.core.util.XStreamUtil;
 

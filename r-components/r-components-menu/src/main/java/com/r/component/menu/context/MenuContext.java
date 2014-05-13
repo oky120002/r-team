@@ -16,6 +16,8 @@ import org.springframework.beans.factory.InitializingBean;
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
 import com.r.component.menu.Menu;
+import com.r.component.menu.MenuDescription;
+import com.r.component.menu.MenuImpl;
 import com.r.core.exceptions.CloneErrorException;
 import com.r.core.exceptions.io.IOReadErrorException;
 
@@ -43,7 +45,7 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 	private Configuration freemarkerConfiguration = null;
 
 	/** 菜单资源 */
-	private Map<String, Menu> menus;
+	private Map<String, MenuImpl> menus;
 
 	/** 获取菜单Context唯一实体 */
 	public static MenuContext getContext() {
@@ -55,7 +57,7 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 		super.afterPropertiesSet();
 		logger.info("Init MenuContext");
 		context = this;
-		menus = new HashMap<String, Menu>();
+		menus = new HashMap<String, MenuImpl>();
 		freemarkerConfiguration = new Configuration();
 
 		// 获取menu资源文件
@@ -67,7 +69,7 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 					throw new IOReadErrorException("菜单重复 : {}", menuDescription.getMenuName());
 				}
 				stringTemplateLoader.putTemplate(menuDescription.getMenuName(), menuDescription.getMenuTemplate());
-				menus.put(menuDescription.getMenuName(), menuDescription.getMenu());
+				menus.put(menuDescription.getMenuName(), new MenuImpl(menuDescription.getMenu()));
 			}
 			freemarkerConfiguration.setTemplateLoader(stringTemplateLoader);
 			freemarkerConfiguration.setObjectWrapper(new DefaultObjectWrapper());
@@ -88,8 +90,8 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 		if (menus.containsKey(menuName)) {
 			try {
 				// XXX r-component-menu 这里是每次都要解析菜单.不够效率.需要创建一个缓存机制,等待修改
-				Menu curr = (Menu) menus.get(menuName).clone();
-				curr.updateCanOutput(canOutputMenuIds);
+				MenuImpl cMenu = (MenuImpl) menus.get(menuName).clone();
+				cMenu.updateCanOutput(canOutputMenuIds);
 
 				Template template = null;
 				try {
@@ -103,7 +105,7 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 
 				Writer writer = new StringWriter();
 				try {
-					template.process(curr, writer);
+					template.process(cMenu, writer);
 					writer.flush();
 					return writer.toString();
 				} catch (TemplateException e) {

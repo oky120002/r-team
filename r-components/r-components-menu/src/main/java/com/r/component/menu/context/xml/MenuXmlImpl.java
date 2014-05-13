@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
 
 import com.r.component.menu.Menu;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
  * 菜单
@@ -43,9 +41,6 @@ public class MenuXmlImpl implements Cloneable, Menu {
 
 	@XStreamImplicit(itemFieldName = "menu")
 	private List<MenuXmlImpl> childMenus; // 子菜单(如果没有子菜单,则为叶子节点)
-
-	@XStreamOmitField
-	private boolean canOutputHtml; // 是否输出html代码(此字段一般作用权限控制时,控制是否输出此菜单html代码)
 
 	@Override
 	public String getId() {
@@ -103,11 +98,14 @@ public class MenuXmlImpl implements Cloneable, Menu {
 
 	@Override
 	public List<Menu> getChilds() {
-		List<Menu> ll = new ArrayList<Menu>();
-		for (Menu menu : childMenus) {
-			ll.add(menu);
+		if (CollectionUtils.isNotEmpty(childMenus)) {
+			List<Menu> ms = new ArrayList<Menu>();
+			for (Menu menu : childMenus) {
+				ms.add(menu);
+			}
+			return ms;
 		}
-		return ll;
+		return null;
 	}
 
 	public List<MenuXmlImpl> getChildMenus() {
@@ -116,50 +114,6 @@ public class MenuXmlImpl implements Cloneable, Menu {
 
 	public void setChildMenus(List<MenuXmlImpl> childMenus) {
 		this.childMenus = childMenus;
-	}
-
-	@Override
-	public boolean isCanOutputHtml() {
-		return canOutputHtml;
-	}
-
-	public void setCanOutputHtml(boolean canOutputHtml) {
-		this.canOutputHtml = canOutputHtml;
-	}
-
-	/** 更新重构能够输出html代码的菜单 */
-	@Override
-	public void updateCanOutput(String[] canOutputMenuIds) {
-
-		if (ArrayUtils.isEmpty(canOutputMenuIds) || ArrayUtils.contains(canOutputMenuIds, this.id)) {
-			this.canOutputHtml = true;
-		} else {
-			this.canOutputHtml = false;
-		}
-
-		if (CollectionUtils.isNotEmpty(this.childMenus)) {
-			for (MenuXmlImpl m : this.childMenus) {
-				m.updateCanOutput(canOutputMenuIds);
-			}
-		}
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		MenuXmlImpl menu = (MenuXmlImpl) super.clone();
-
-		// 处理List和自身变量的浅拷贝
-		// menu.parentMenu = null; // 清空父级关联
-		if (CollectionUtils.isNotEmpty(this.childMenus)) {
-			menu.setChildMenus(new ArrayList<MenuXmlImpl>());
-
-			for (MenuXmlImpl m : this.childMenus) {
-				MenuXmlImpl m2 = (MenuXmlImpl) m.clone();
-				// m2.parentMenu = menu;
-				menu.childMenus.add(m2);
-			}
-		}
-		return menu;
 	}
 
 	@Override

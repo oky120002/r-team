@@ -9,6 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
+import com.r.component.menu.MenuDescription;
 
 /**
  * 菜单配置文件

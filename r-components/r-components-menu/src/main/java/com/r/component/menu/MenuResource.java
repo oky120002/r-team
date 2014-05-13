@@ -1,9 +1,8 @@
 /**
  * 
  */
-package com.r.component.menu.context;
+package com.r.component.menu;
 
-import com.r.component.menu.Menu;
 
 /**
  * 菜单资源
