@@ -27,5 +27,6 @@
 
 	<modules>
 		<module>r-components-menu</module>
+		<module>r-components-messagecenter</module>
 	</modules>
 </project>

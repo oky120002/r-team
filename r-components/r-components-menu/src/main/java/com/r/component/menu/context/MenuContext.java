@@ -15,7 +15,6 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
-import com.r.component.menu.Menu;
 import com.r.component.menu.MenuDescription;
 import com.r.component.menu.MenuImpl;
 import com.r.core.exceptions.CloneErrorException;
