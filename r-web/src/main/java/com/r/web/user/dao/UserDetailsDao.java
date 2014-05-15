@@ -4,7 +4,7 @@
  * 修改时间:  2013-4-7
  * <修改描述:>
  */
-package com.r.web.authority.dao;
+package com.r.web.user.dao;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,7 +16,7 @@ import com.r.web.user.model.User;
  * 
  * @author rain
  */
-public interface AutUserDetailsDao extends AbstractDao<User> {
+public interface UserDetailsDao extends AbstractDao<User> {
 
 	/**
 	 * 

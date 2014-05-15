@@ -64,8 +64,7 @@
 		class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
 	<!-- 用户获取器 -->
-	<beans:bean id="userDetailsService"
-		class="com.r.web.authority.service.AutUserDetailsService" />
+	<beans:bean id="userDetailsService" class="com.r.web.user.service.UserDetailsService" />
 
 	<!-- 权限提供器 -->
 	<beans:bean id="authenticationProvider"

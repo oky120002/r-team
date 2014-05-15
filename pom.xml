@@ -74,6 +74,16 @@
 				<artifactId>r-components-menu</artifactId>
 				<version>${r-version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-authority</artifactId>
+				<version>${r-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-messagecenter</artifactId>
+				<version>${r-version}</version>
+			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -529,8 +539,8 @@
 							${project.build.sourceEncoding}. -->
 						<encoding>UTF-8</encoding>
 						<!-- Set to true to show compilation warnings. Default value is: false. -->
-						<!--<showWarnings>true</showWarnings> -->
-						<!--<showDeprecation>true</showDeprecation> -->
+						<!-- <showWarnings>true</showWarnings> -->
+						<!-- <showDeprecation>true</showDeprecation> -->
 						<!-- 发出编译警告和错误时是否停止 -->
 						<!-- <failOnError>false</failOnError> -->
 						<compilerArguments>
@@ -669,61 +679,74 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.3.2</version>
 					<inherited>true</inherited>
-					<configuration>
-
-					</configuration>
 				</plugin>
 
 				<!-- mvn source:jar -->
-				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
-					<version>2.1.2</version> <inherited>true</inherited> <configuration> <attach>true</attach> 
-					<encoding>UTF-8</encoding> <excludes> <exclude>**/*Test.java</exclude> </excludes> 
-					</configuration> <executions> <execution> <phase>compile</phase> <goals> 
-					<goal>jar</goal> </goals> </execution> </executions> </plugin> -->
-
-				<!-- javadoc -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1.2</version>
 					<inherited>true</inherited>
 					<configuration>
+						<attach>true</attach>
 						<encoding>UTF-8</encoding>
+						<excludes>
+							<exclude>**/*Test.java</exclude>
+						</excludes>
 					</configuration>
 					<executions>
 						<execution>
 							<phase>compile</phase>
-						</execution>
-					</executions>
-				</plugin>
-
-				<!-- deploy -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<inherited>true</inherited>
-					<configuration>
-						<skip>false</skip>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>install</phase>
 							<goals>
-								<goal>deploy</goal>
+								<goal>jar</goal>
 							</goals>
 						</execution>
 					</executions>
 				</plugin>
 
+				<!-- javadoc -->
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+				<!-- <inherited>true</inherited> -->
+				<!-- <configuration> -->
+				<!-- <encoding>UTF-8</encoding> -->
+				<!-- </configuration> -->
+				<!-- <executions> -->
+				<!-- <execution> -->
+				<!-- <phase>compile</phase> -->
+				<!-- </execution> -->
+				<!-- </executions> -->
+				<!-- </plugin> -->
+
+				<!-- deploy -->
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-deploy-plugin</artifactId> -->
+				<!-- <inherited>true</inherited> -->
+				<!-- <configuration> -->
+				<!-- <skip>false</skip> -->
+				<!-- </configuration> -->
+				<!-- <executions> -->
+				<!-- <execution> -->
+				<!-- <phase>install</phase> -->
+				<!-- <goals> -->
+				<!-- <goal>deploy</goal> -->
+				<!-- </goals> -->
+				<!-- </execution> -->
+				<!-- </executions> -->
+				<!-- </plugin> -->
+
 				<!-- mvn ejb:ejb -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>2.3</version>
-					<inherited>true</inherited>
-					<configuration>
-						<ejbVersion>3.0</ejbVersion>
-					</configuration>
-				</plugin>
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-ejb-plugin</artifactId> -->
+				<!-- <version>2.3</version> -->
+				<!-- <inherited>true</inherited> -->
+				<!-- <configuration> -->
+				<!-- <ejbVersion>3.0</ejbVersion> -->
+				<!-- </configuration> -->
+				<!-- </plugin> -->
 
 				<!-- deploy -->
 				<plugin>
@@ -764,6 +787,7 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
 				<!-- sonar -->
 				<plugin>
 					<groupId>org.codehaus.sonar</groupId>
@@ -785,25 +809,40 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-jar-plugin</artifactId> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-source-plugin</artifactId> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-deploy-plugin</artifactId> -->
+			<!-- </plugin> -->
 		</plugins>
 	</build>
 
+
+	<!-- <distributionManagement> -->
+	<!-- <repository> -->
+	<!-- <id>releases</id> -->
+	<!-- <url>http://lenovo-pc-10:8081/nexus/content/repositories/releases</url> -->
+	<!-- </repository> -->
+	<!-- <snapshotRepository> -->
+	<!-- <id>snapshots</id> -->
+	<!-- <url>http://lenovo-pc-10:8081/nexus/content/repositories/snapshots</url> -->
+	<!-- </snapshotRepository> -->
+	<!-- </distributionManagement> -->
 
 	<modules>
 		<module>r-core</module>

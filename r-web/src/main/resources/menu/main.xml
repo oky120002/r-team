@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="mymenu">
+	<name>我的菜单</name>
+	<!-- <url></url> -->
+	<execjs>my_menu_js</execjs>
+	<attrid>mymenuid</attrid>
+	<!-- <otherAttribute> -->
+	<!-- <property key="" value="" /> -->
+	<!-- </otherAttribute> -->
+	<menu id="mymenu.task">
+		<name>任务中心</name>
+		<url>http://www.baidu.com</url>
+	</menu>
+	<menu id="mymenu.proess">
+		<name>发起流程</name>
+		<url>http://www.qq.com</url>
+	</menu>
+	<menu id="mymenu.query">
+		<name>单据查询</name>
+		<url>http://www.163.com</url>
+		<attrid>queryid</attrid>
+	</menu>
+</menu>

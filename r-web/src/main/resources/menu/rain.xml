@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="main">
+	<name>xxx</name>
+	<url>fdsfurl</url>
+	<execjs>fdsfjs</execjs>
+<!-- 	<attrid>id</attrid> -->
+<!-- 	<attrclass>class</attrclass> -->
+	<otherAttribute>
+		<property key="css" value="css" />
+		<property key="title" value="fdsafsda" />
+	</otherAttribute>
+	<menu id="main.one1">
+		<name>fsdfsd</name>
+	</menu>
+	<menu id="main.one2">
+		<name>abasdfdsa</name>
+	</menu>
+</menu>

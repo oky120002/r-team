@@ -19,6 +19,10 @@ public class LoggerFactory {
 	private static final LoggerFactory loggerFacotry = new LoggerFactory();
 	private static final Map<String, Logger> map = new HashMap<String, Logger>();
 	private static String DEFAULT_PRE = ""; // 默认的前缀
+	
+	private LoggerFactory() {
+		super();
+	}
 
 	/** 设置全局默认前缀 */
 	public static final void setDefaultPre(String defaultPre) {

@@ -26,12 +26,9 @@
 	</context:component-scan>
 
 	<!-- 添加mvc拦截器 -->
-	<!-- <mvc:interceptors> -->
-	<!-- <bean class="com.hiyouyu.webapp.app.rain.sys.global.interceptor.GlobalParameterInterceptor" 
-		/> -->
-	<!-- <bean class="com.hiyouyu.webapp.app.rain.admin.jumpurl.interceptor.JumpUrlInterceptor" 
-		/> -->
-	<!-- </mvc:interceptors> -->
+	<mvc:interceptors>
+		<bean id="checkAuthInterceptor" class="com.r.web.interceptor.TestHandlerInterceptorAdapter"></bean>
+	</mvc:interceptors>
 
 	<!-- 注解式参数自动装配 -->
 <!-- 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->

@@ -20,10 +20,9 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.helpers.MessageFormatter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.r.web.authority.bean.AutGrantedAuthority;
+import com.r.web.user.bean.GrantedAuthority;
 
 /**
  * 用户信息
@@ -114,8 +113,8 @@ public class User implements UserDetails {
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singletonList(AutGrantedAuthority.USER);
+	public Collection<? extends org.springframework.security.core.GrantedAuthority> getAuthorities() {
+		return Collections.singletonList(GrantedAuthority.USER);
 	}
 
 	/** 获取密码 */

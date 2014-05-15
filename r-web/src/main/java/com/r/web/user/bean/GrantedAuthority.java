@@ -1,9 +1,7 @@
 /**
  * 
  */
-package com.r.web.authority.bean;
-
-import org.springframework.security.core.GrantedAuthority;
+package com.r.web.user.bean;
 
 /**
  * spring
@@ -11,19 +9,19 @@ import org.springframework.security.core.GrantedAuthority;
  * @author oky
  * 
  */
-public class AutGrantedAuthority implements GrantedAuthority {
+public class GrantedAuthority implements org.springframework.security.core.GrantedAuthority {
 	private static final long serialVersionUID = -811813633934700132L;
 
 	/** 用户 */
-	public static final AutGrantedAuthority USER = new AutGrantedAuthority("USER");
+	public static final GrantedAuthority USER = new GrantedAuthority("USER");
 
 	private String authority;
 
-	public AutGrantedAuthority() {
+	public GrantedAuthority() {
 		this.authority = "USER";
 	}
 
-	public AutGrantedAuthority(String authority) {
+	public GrantedAuthority(String authority) {
 		super();
 		this.authority = authority;
 	}
@@ -49,7 +47,7 @@ public class AutGrantedAuthority implements GrantedAuthority {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AutGrantedAuthority other = (AutGrantedAuthority) obj;
+		GrantedAuthority other = (GrantedAuthority) obj;
 		if (authority == null) {
 			if (other.authority != null)
 				return false;

@@ -4,7 +4,7 @@
  * 修改时间:  2013-4-3
  * <修改描述:>
  */
-package com.r.web.authority.dao;
+package com.r.web.user.dao;
 
 import java.util.List;
 
@@ -26,12 +26,12 @@ import com.r.web.user.model.User;
  * 
  * @author rain
  */
-@Repository("authority.autUserDetailsDao")
-public class AutUserDetailsDaoImpl extends AbstractDaoImpl<User> implements AutUserDetailsDao {
+@Repository("user.autUserDetailsDao")
+public class UserDetailsDaoImpl extends AbstractDaoImpl<User> implements UserDetailsDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(AutUserDetailsDaoImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserDetailsDaoImpl.class);
 
-	public AutUserDetailsDaoImpl() {
+	public UserDetailsDaoImpl() {
 		super(User.class);
 		logger.info("Instance AutUserDetailsDaoImpl............................");
 	}
