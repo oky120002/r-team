@@ -11,11 +11,11 @@
 					<property name="menuLocation" value="classpath:/menu/main.xml" />
 					<property name="templateLocation" value="classpath:/menu/main.ftl" />
 				</bean>
-				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml">
-					<property name="name" value="RainMenu" />
-					<property name="menuLocation" value="classpath:/menu/rain.xml" />
-					<property name="templateLocation" value="classpath:/menu/rain.ftl" />
-				</bean>
+<!-- 				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml"> -->
+<!-- 					<property name="name" value="RainMenu" /> -->
+<!-- 					<property name="menuLocation" value="classpath:/menu/rain.xml" /> -->
+<!-- 					<property name="templateLocation" value="classpath:/menu/rain.ftl" /> -->
+<!-- 				</bean> -->
 			</list>
 		</property> 
 	</bean>
