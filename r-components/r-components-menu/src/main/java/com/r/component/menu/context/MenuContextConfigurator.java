@@ -9,7 +9,6 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
-import com.r.component.menu.MenuDescription;
 
 /**
  * 菜单配置文件
@@ -22,20 +21,20 @@ public class MenuContextConfigurator implements InitializingBean {
 	/** 日志 */
 	private static final Logger logger = LoggerFactory.getLogger(MenuContextConfigurator.class);
 
-	/** 菜单描述 */
-	protected List<MenuDescription> menuDescriptions;
+	/** 菜单执行器 */
+	protected List<MenuExecutor> menuExecutors;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.debug("加载菜单文件完成");
+		logger.debug("afterPropertiesSet MenuContextConfigurator....................................");
 	}
 
-	public List<MenuDescription> getMenuDescriptions() {
-		return menuDescriptions;
+	public List<MenuExecutor> getMenuExecutors() {
+		return menuExecutors;
 	}
 
-	public void setMenuDescriptions(List<MenuDescription> menuDescriptions) {
-		this.menuDescriptions = menuDescriptions;
+	public void setMenuExecutors(List<MenuExecutor> menuExecutors) {
+		this.menuExecutors = menuExecutors;
 	}
 
 }

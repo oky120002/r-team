@@ -1,7 +1,9 @@
 /**
  * 
  */
-package com.r.component.menu;
+package com.r.component.menu.context;
+
+import com.r.component.menu.Menu;
 
 
 /**
@@ -10,7 +12,7 @@ package com.r.component.menu;
  * @author oky
  * 
  */
-public interface MenuDescription {
+public interface MenuExecutor {
 	/** 获取菜单名称 */
 	String getMenuName();
 

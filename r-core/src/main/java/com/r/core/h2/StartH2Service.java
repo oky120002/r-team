@@ -12,13 +12,14 @@ import java.sql.Statement;
 import org.h2.tools.Server;
 
 /**
+ * http://localhost:8082
+ * 
  * @author oky
- *
  */
 public class StartH2Service {
 	private static Server tcpServer;
 	private String port = "9094";
-	private String dbDir = "./h2db/lover";
+	private String dbDir = "D:/rainteam/sts-3.5.1.RELEASE/h2db/loverlover";
 	private String user = "heyu";
 	private String password = "heyulovelian1990";
 
@@ -27,7 +28,7 @@ public class StartH2Service {
 			System.out.println("正在启动h2..tcp..");
 			tcpServer = Server.createTcpServer(new String[] { "-tcpPort", port }).start();
 			System.out.println("正在启动h2..web..");
-			Server.createWebServer(new String[] { "-webAllowOthers"}).start();
+			Server.createWebServer(new String[] { "-webAllowOthers" }).start();
 		} catch (SQLException e) {
 			System.out.println("启动h2出错：" + e.toString());
 			e.printStackTrace();
@@ -69,8 +70,8 @@ public class StartH2Service {
 	public static void main(String[] args) {
 		StartH2Service h2 = new StartH2Service();
 		h2.startServer();
-//		h2.useH2();
-//		h2.stopServer();
-//		System.out.println("==END==");
+		// h2.useH2();
+		// h2.stopServer();
+		// System.out.println("==END==");
 	}
 }

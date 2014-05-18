@@ -21,5 +21,6 @@
 		<module>r-components-menu</module>
 		<module>r-components-messagecenter</module>
 		<module>r-components-authority</module>
+		<module>r-components-basicdata</module>
 	</modules>
 </project>

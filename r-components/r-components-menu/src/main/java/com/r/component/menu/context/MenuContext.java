@@ -15,7 +15,6 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
-import com.r.component.menu.MenuDescription;
 import com.r.component.menu.MenuImpl;
 import com.r.core.exceptions.CloneErrorException;
 import com.r.core.exceptions.io.IOReadErrorException;
@@ -59,16 +58,16 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 		menus = new HashMap<String, MenuImpl>();
 		freemarkerConfiguration = new Configuration();
 
-		// 获取menu资源文件
-		if (CollectionUtils.isNotEmpty(super.menuDescriptions)) {
+		// 获取menu执行器
+		if (CollectionUtils.isNotEmpty(super.menuExecutors)) {
 			StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();// 字符串模板加载器
-			for (MenuDescription menuDescription : super.menuDescriptions) {
+			for (MenuExecutor menuExecutor : super.menuExecutors) {
 				// 校验菜单是否重复
-				if (menus.containsKey(menuDescription.getMenuName())) {
-					throw new IOReadErrorException("菜单重复 : {}", menuDescription.getMenuName());
+				if (menus.containsKey(menuExecutor.getMenuName())) {
+					throw new IOReadErrorException("菜单重复 : {}", menuExecutor.getMenuName());
 				}
-				stringTemplateLoader.putTemplate(menuDescription.getMenuName(), menuDescription.getMenuTemplate());
-				menus.put(menuDescription.getMenuName(), new MenuImpl(menuDescription.getMenu()));
+				stringTemplateLoader.putTemplate(menuExecutor.getMenuName(), menuExecutor.getMenuTemplate());
+				menus.put(menuExecutor.getMenuName(), new MenuImpl(menuExecutor.getMenu()));
 			}
 			freemarkerConfiguration.setTemplateLoader(stringTemplateLoader);
 			freemarkerConfiguration.setObjectWrapper(new DefaultObjectWrapper());

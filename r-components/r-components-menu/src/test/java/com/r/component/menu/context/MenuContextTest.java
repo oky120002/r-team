@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.r.component.menu.Menu;
-import com.r.component.menu.context.xml.MenuXmlImpl;
+import com.r.component.menu.executor.xml.XmlMenu;
 import com.r.core.util.XStreamUtil;
 
 /**
@@ -38,16 +38,16 @@ public class MenuContextTest {
 
 	// @Test
 	public void saveMenuTest() throws Exception {
-		MenuXmlImpl menu = new MenuXmlImpl();
+		XmlMenu menu = new XmlMenu();
 		menu.setExecjs("execjs");
 		menu.setId("root");
 		menu.setName("testmenu");
 		// menu.setOtherAttribute(otherAttribute);
 		menu.setUrl("url");
 
-		List<MenuXmlImpl> childs = new ArrayList<MenuXmlImpl>();
-		MenuXmlImpl menu2 = new MenuXmlImpl();
-		MenuXmlImpl menu3 = new MenuXmlImpl();
+		List<XmlMenu> childs = new ArrayList<XmlMenu>();
+		XmlMenu menu2 = new XmlMenu();
+		XmlMenu menu3 = new XmlMenu();
 		menu2.setId("22222");
 		menu2.setName("222222");
 		menu3.setId("3333");
@@ -68,7 +68,7 @@ public class MenuContextTest {
 	// @Test
 	public void loadMenuTest() throws Exception {
 		String xml = "<menu id=\"root\">  <otherAttribute>	    <property key=\"abcd\" value=\"efgh\"/>	    <property key=\"css\" value=\"css\"/>	  </otherAttribute>  <name>testmenu</name>  <url>url</url>  <execjs>execjs</execjs>  <menu id=\"22222\">    <name>222222</name>   </menu>  <menu id=\"3333\">    <name>333333</name> </menu></menu>";
-		Menu fromXML = XStreamUtil.fromXML(MenuXmlImpl.class, xml);
+		Menu fromXML = XStreamUtil.fromXML(XmlMenu.class, xml);
 
 		System.out.println(XStreamUtil.toXml(fromXML));
 	}

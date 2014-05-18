@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.component.menu.context.xml;
+package com.r.component.menu.executor.xml;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  * 
  */
 @XStreamAlias("menu")
-public class MenuXmlImpl implements Cloneable, Menu {
+public class XmlMenu implements Cloneable, Menu {
 
 	@XStreamAsAttribute
 	private String id; // 菜单唯一id
@@ -40,7 +40,7 @@ public class MenuXmlImpl implements Cloneable, Menu {
 	private Map<String, String> otherAttribute; // 菜单其它的自定义属性
 
 	@XStreamImplicit(itemFieldName = "menu")
-	private List<MenuXmlImpl> childMenus; // 子菜单(如果没有子菜单,则为叶子节点)
+	private List<XmlMenu> childMenus; // 子菜单(如果没有子菜单,则为叶子节点)
 
 	@Override
 	public String getId() {
@@ -108,11 +108,11 @@ public class MenuXmlImpl implements Cloneable, Menu {
 		return null;
 	}
 
-	public List<MenuXmlImpl> getChildMenus() {
+	public List<XmlMenu> getChildMenus() {
 		return childMenus;
 	}
 
-	public void setChildMenus(List<MenuXmlImpl> childMenus) {
+	public void setChildMenus(List<XmlMenu> childMenus) {
 		this.childMenus = childMenus;
 	}
 

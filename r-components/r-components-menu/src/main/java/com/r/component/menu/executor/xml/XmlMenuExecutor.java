@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.component.menu.context.xml;
+package com.r.component.menu.executor.xml;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.r.component.menu.Menu;
-import com.r.component.menu.MenuDescription;
+import com.r.component.menu.context.MenuExecutor;
 import com.r.core.exceptions.io.IOReadErrorException;
 import com.r.core.util.XStreamUtil;
 
@@ -21,7 +21,7 @@ import com.r.core.util.XStreamUtil;
  * @author oky
  * 
  */
-public class MenuDescriptionByXml implements MenuDescription {
+public class XmlMenuExecutor implements MenuExecutor {
 
 	private String name; // 菜单名称
 	private String menuLocation; // 菜单文件位置
@@ -51,9 +51,9 @@ public class MenuDescriptionByXml implements MenuDescription {
 	 * 
 	 * @param resource
 	 */
-	private MenuXmlImpl resolverMenuFromeResource(Resource resource) {
+	private XmlMenu resolverMenuFromeResource(Resource resource) {
 		String menuXml = null;
-		MenuXmlImpl menu = null;
+		XmlMenu menu = null;
 		// 获得菜单xml
 		try {
 			menuXml = IOUtils.toString(resource.getInputStream());
@@ -62,7 +62,7 @@ public class MenuDescriptionByXml implements MenuDescription {
 		}
 		// 解析菜单
 		try {
-			menu = XStreamUtil.fromXML(MenuXmlImpl.class, menuXml);
+			menu = XStreamUtil.fromXML(XmlMenu.class, menuXml);
 		} catch (Exception e) {
 			String errorMessage = MessageFormatter.format("解析菜单XML失败 : {}", name).getMessage();
 			throw new IOReadErrorException(errorMessage, e);

@@ -4,19 +4,20 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="menuContext" class="com.r.component.menu.context.MenuFactory">
-		<property name="menuDescriptions">
+		<property name="menuExecutors">
 			<list>
-				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml">
+				<bean class="com.r.component.menu.executor.xml.XmlMenuExecutor">
 					<property name="name" value="MainMenu" />
 					<property name="menuLocation" value="classpath:/menu/main.xml" />
 					<property name="templateLocation" value="classpath:/menu/main.ftl" />
 				</bean>
-<!-- 				<bean class="com.r.component.menu.context.xml.MenuDescriptionByXml"> -->
-<!-- 					<property name="name" value="RainMenu" /> -->
-<!-- 					<property name="menuLocation" value="classpath:/menu/rain.xml" /> -->
-<!-- 					<property name="templateLocation" value="classpath:/menu/rain.ftl" /> -->
-<!-- 				</bean> -->
+				<!-- <bean class="com.r.component.menu.executor.xml.XmlMenuExecutor"> -->
+				<!-- <property name="name" value="RainMenu" /> -->
+				<!-- <property name="menuLocation" value="classpath:/menu/rain.xml" /> -->
+				<!-- <property name="templateLocation" value="classpath:/menu/rain.ftl" 
+					/> -->
+				<!-- </bean> -->
 			</list>
-		</property> 
+		</property>
 	</bean>
 </beans>
