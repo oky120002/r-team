@@ -13,9 +13,6 @@ public interface Basicdata {
 	/** 获得基础数据唯一ID */
 	String getId();
 
-	/** 获得基础数据类型 */
-	String getType();
-
 	/** 获得基础数据名称 */
 	String getName();
 
@@ -25,9 +22,12 @@ public interface Basicdata {
 	/** 获得基础数据描述 */
 	String getDescription();
 
-	/** 获得基础数据额外的参数 */
-	Map<String, String> getOtherParameters();
+	/** 获得基础数据额外的 */
+	Map<String, String> getOtherDatas();
 
+	/**此基础数据能否展现到页面列表上*/
+	boolean isCanShowListPage();
+	
 	/** 此基础数据能否编辑 */
 	boolean isCanEdit();
 

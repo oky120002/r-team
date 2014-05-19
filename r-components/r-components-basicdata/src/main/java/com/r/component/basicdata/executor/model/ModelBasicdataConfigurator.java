@@ -3,21 +3,33 @@
  */
 package com.r.component.basicdata.executor.model;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import com.r.common.log.Logger;
+import com.r.common.log.LoggerFactory;
 
 /**
  * @author Administrator
- *
+ * 
  */
 public class ModelBasicdataConfigurator implements InitializingBean {
+	/** 日志 */
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	/* (non-Javadoc)
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	/** 数据源 */
+	private DataSource dataSource;
+
+	/** 事务处理器 */
+	private PlatformTransactionManager platformTransactionManager;
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
+		logger.debug("ModelBasicdataConfigurator afterPropertiesSet..........");
 
 	}
 
+	
 }

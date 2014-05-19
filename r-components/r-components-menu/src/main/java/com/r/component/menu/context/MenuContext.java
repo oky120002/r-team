@@ -7,14 +7,13 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
 import com.r.component.menu.MenuImpl;
 import com.r.core.exceptions.CloneErrorException;
 import com.r.core.exceptions.io.IOReadErrorException;
@@ -32,10 +31,6 @@ import freemarker.template.TemplateException;
  * 
  */
 public class MenuContext extends MenuContextConfigurator implements InitializingBean {
-
-	/** 日志 */
-	private static final Logger logger = LoggerFactory.getLogger(MenuContext.class);
-
 	/** 菜单Context的唯一实例 */
 	private static MenuContext context = null; // 对自身的引用
 
@@ -53,15 +48,15 @@ public class MenuContext extends MenuContextConfigurator implements Initializing
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
-		logger.info("Init MenuContext");
 		context = this;
 		menus = new HashMap<String, MenuImpl>();
 		freemarkerConfiguration = new Configuration();
 
 		// 获取menu执行器
-		if (CollectionUtils.isNotEmpty(super.menuExecutors)) {
+		List<MenuExecutor> menuExecutors = getMenuExecutors();
+		if (CollectionUtils.isNotEmpty(menuExecutors)) {
 			StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();// 字符串模板加载器
-			for (MenuExecutor menuExecutor : super.menuExecutors) {
+			for (MenuExecutor menuExecutor : menuExecutors) {
 				// 校验菜单是否重复
 				if (menus.containsKey(menuExecutor.getMenuName())) {
 					throw new IOReadErrorException("菜单重复 : {}", menuExecutor.getMenuName());

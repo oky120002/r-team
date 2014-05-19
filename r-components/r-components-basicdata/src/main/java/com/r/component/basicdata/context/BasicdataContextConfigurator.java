@@ -5,10 +5,12 @@ package com.r.component.basicdata.context;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.r.common.log.Logger;
 import com.r.common.log.LoggerFactory;
+import com.r.core.exceptions.initialization.SpringConfiguratorErrorException;
 
 /**
  * 基础数据配置文件
@@ -19,14 +21,19 @@ import com.r.common.log.LoggerFactory;
 public class BasicdataContextConfigurator implements InitializingBean {
 
 	/** 日志 */
-	private static final Logger logger = LoggerFactory.getLogger(BasicdataContextConfigurator.class);
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/** 基础数据执行器 */
-	protected List<BasicdataExecutor> basicdataExecutors;
+	private List<BasicdataExecutor> basicdataExecutors;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.debug("加载基础数据配置文件文成....");
+		logger.debug("BasicdataContextConfigurator afterPropertiesSet..........");
+
+		if (CollectionUtils.isEmpty(basicdataExecutors)) {
+			// XXX r-components-basicdata 需要修改,如果不提供,就使用默认执行器
+			throw new SpringConfiguratorErrorException("请至少添加一个基础数据执行器");
+		}
 	}
 
 	public List<BasicdataExecutor> getBasicdataExecutors() {

@@ -69,16 +69,31 @@
 				<artifactId>r-components</artifactId>
 				<version>${r-version}</version>
 			</dependency>
-			<dependency>
-				<groupId>com.rain</groupId>
-				<artifactId>r-components-menu</artifactId>
-				<version>${r-version}</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.rain</groupId>
 				<artifactId>r-components-authority</artifactId>
 				<version>${r-version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-basicdata</artifactId>
+				<version>${r-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-logsystem</artifactId>
+				<version>${r-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-components-menu</artifactId>
+				<version>${r-version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.rain</groupId>
 				<artifactId>r-components-messagecenter</artifactId>

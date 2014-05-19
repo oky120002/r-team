@@ -4,6 +4,7 @@
 package com.r.component.messagecenter.context;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,6 +13,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.r.component.messagecenter.Message;
+import com.r.component.messagecenter.MessageInterceptor;
 import com.r.component.messagecenter.MessageParser;
 import com.r.component.messagecenter.exception.ErrorMessageException;
 import com.r.component.messagecenter.exception.ErrorMessageParserException;
@@ -43,10 +45,10 @@ public class MessageCenterContext extends MessageCenterContextConfigurator imple
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
-		logger.info("Init MessageCenterContext");
 		context = this;
 
 		// 设置消息解析器缓存
+		List<MessageParser> messagesParsers = getMessagesParsers();
 		if (messagesParsers == null) {
 			logger.info("message parser is empty!");
 		} else {
@@ -60,6 +62,7 @@ public class MessageCenterContext extends MessageCenterContextConfigurator imple
 		}
 
 		// 设置消息Bean缓存
+		List<Message> messages = getMessages();
 		if (messages == null) {
 			// 程序不会走到此处,在super.afterPropertiesSet()中,有给此map设置默认值
 			throw new ErrorMessageException("MessageBean is empty!");
@@ -74,7 +77,9 @@ public class MessageCenterContext extends MessageCenterContextConfigurator imple
 		}
 
 		// 设置线程池
+		boolean asynchronous = isAsynchronous();
 		if (asynchronous) { // 如果开启异步发送消息则初始化线程池
+			int maxThreads = getMaxThreads();
 			if (maxThreads > 0) {
 				executorService = Executors.newFixedThreadPool(maxThreads);
 			} else {
@@ -108,6 +113,7 @@ public class MessageCenterContext extends MessageCenterContextConfigurator imple
 		message.setProtocol(protocol.substring(MessageCenterContextConfigurator.MESSAGE_PROTOCOL_PREFIX.length()));
 		message.setContent(objects);
 
+		boolean asynchronous = isAsynchronous();
 		if (asynchronous) {
 			sendMessageByAsynchronous(message);
 		} else {
@@ -158,6 +164,7 @@ public class MessageCenterContext extends MessageCenterContextConfigurator imple
 	private void sendMessage(final Message message) {
 		String messageType = message.getMessageType();
 
+		MessageInterceptor messageInterceptor = getMessageInterceptor();
 		if (messageInterceptor != null) {
 			messageInterceptor.beforeMessageSend(message);
 		}

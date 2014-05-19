@@ -18,9 +18,10 @@
 	</properties>
 
 	<modules>
-		<module>r-components-menu</module>
-		<module>r-components-messagecenter</module>
 		<module>r-components-authority</module>
 		<module>r-components-basicdata</module>
+		<module>r-components-logsystem</module>
+		<module>r-components-menu</module>
+		<module>r-components-messagecenter</module>
 	</modules>
 </project>

@@ -16,9 +16,6 @@ import com.r.common.log.LoggerFactory;
  */
 public class BasicdataContext extends BasicdataContextConfigurator implements InitializingBean {
 
-	/** 日志 */
-	private static final Logger logger = LoggerFactory.getLogger(BasicdataContext.class);
-
 	/** 菜单Context的唯一实例 */
 	private static BasicdataContext context = null; // 对自身的引用
 
@@ -26,13 +23,14 @@ public class BasicdataContext extends BasicdataContextConfigurator implements In
 	public static BasicdataContext getContext() {
 		return context;
 	}
-
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
-		logger.info("Init BasicdataContext................");
 		context = this;
 
 	}
 
+	
+	
 }

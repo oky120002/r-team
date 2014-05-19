@@ -19,14 +19,15 @@ import com.r.common.log.LoggerFactory;
 public class MenuContextConfigurator implements InitializingBean {
 
 	/** 日志 */
-	private static final Logger logger = LoggerFactory.getLogger(MenuContextConfigurator.class);
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/** 菜单执行器 */
-	protected List<MenuExecutor> menuExecutors;
+	private List<MenuExecutor> menuExecutors;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.debug("afterPropertiesSet MenuContextConfigurator....................................");
+		logger.debug("MenuContextConfigurator afterPropertiesSet..........");
+		
 	}
 
 	public List<MenuExecutor> getMenuExecutors() {
