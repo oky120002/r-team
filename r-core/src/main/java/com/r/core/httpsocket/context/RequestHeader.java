@@ -103,7 +103,7 @@ public class RequestHeader implements Serializable {
 	 * @param httpProxy
 	 *            代理设置
 	 * @param encoding
-	 *            post的转换编码
+	 *            post的转换编码,如果为空,则不进行任何的编码转换
 	 * @return
 	 */
 	public static RequestHeader newRequestHeaderByPost(HttpUrl httpUrl, String post, String encoding, HttpProxy httpProxy) {

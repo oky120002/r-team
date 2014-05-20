@@ -2,13 +2,16 @@ package com.r.core.httpsocket;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
+import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.context.Cookie;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.HttpUrl;
@@ -56,39 +59,84 @@ public class HttpSocket implements Serializable {
 
 	// **-----------about send functions-----------**//
 
-	/** 发送请求 */
-	public ResponseHeader send(String httpUrl) throws IOException {
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
+	 */
+	public ResponseHeader send(String httpUrl) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()));
 	}
 
-	/** 发送请求 */
-	public ResponseHeader send(String httpUrl, String post, String encoding) throws IOException {
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @param post
+	 * @param encoding
+	 *            post的转换编码,如果为空,则不进行任何的编码转换
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
+	 */
+	public ResponseHeader send(String httpUrl, String post, String encoding) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, encoding, requestHeader.getHttpProxy()));
 	}
 
-	/** 发送请求 */
-	public ResponseHeader send(String httpUrl, Map<String, Cookie> cookies, Map<String, String> headers) throws IOException {
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @param cookies
+	 * @param headers
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
+	 */
+	public ResponseHeader send(String httpUrl, Map<String, Cookie> cookies, Map<String, String> headers) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()).putCookies(cookies).putAllHeader(headers));
 	}
 
-	/** 发送请求 */
-	public ResponseHeader send(String httpUrl, String post, String encoding, Map<String, Cookie> cookies, Map<String, String> headers) throws IOException {
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @param post
+	 * @param encoding
+	 * @param cookies
+	 * @param headers
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
+	 */
+	public ResponseHeader send(String httpUrl, String post, String encoding, Map<String, Cookie> cookies, Map<String, String> headers) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, encoding, requestHeader.getHttpProxy()).putCookies(cookies).putAllHeader(headers));
 	}
 
 	/**
 	 * 上传文件<br />
 	 * 部分实现 RFC1867协议
+	 * 
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
+	 * @throws IOException
+	 *             文件IO读取错误
 	 */
-	public ResponseHeader send(String httpUrl, File file, Map<String, String> pars, String parName, String fileName) throws IOException {
+	public ResponseHeader send(String httpUrl, File file, Map<String, String> pars, String parName, String fileName) throws NetworkIOReadErrorException, IOException {
 		return send(RequestHeader.newRequestHeaderByUpFile(HttpUrl.newInstance(httpUrl), file, requestHeader.getHttpProxy(), pars, parName, fileName));
 	}
 
 	/**
 	 * 发送请求<br />
 	 * 如果调用地方法来发送请求,请自己处理代理设置
+	 * 
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
 	 */
-	public synchronized ResponseHeader send(RequestHeader requestHeader) throws IOException {
+	public synchronized ResponseHeader send(RequestHeader requestHeader) throws NetworkIOReadErrorException {
 		this.requestHeader = requestHeader;
 		return send();
 	}
@@ -97,13 +145,14 @@ public class HttpSocket implements Serializable {
 	 * 发送请求(此方法是阻塞式方法)
 	 * 
 	 * @return 返回报文头
-	 * @throws IOException
-	 *             IO异常
+	 * @throws NetworkIOReadErrorException
+	 *             网络IO读取错误
 	 */
-	public synchronized ResponseHeader send() throws IOException {
+	public synchronized ResponseHeader send() throws NetworkIOReadErrorException {
 		this.isConnectionFree = false;
 		ResponseHeader responseHeader = ResponseHeader.newResponseHeaderByEmpty();
 		Socket socket = null;
+		InputStream inputStream = null;
 		try {
 			// 开始发送数据
 			// 如果保持cookies,则添加保持着的cookies
@@ -115,16 +164,20 @@ public class HttpSocket implements Serializable {
 			socket = this.requestHeader.send(this.timeout);
 
 			// 解析返回的报文
-			responseHeader.resolveResponse(socket.getInputStream());
+			inputStream = socket.getInputStream();
+			responseHeader.resolveResponse(inputStream);
 
 			// 如果保持cookies,则从返回头中提取出cookies保存起来
 			if (this.isHoldCookies) {
 				this.cookies.putAll(responseHeader.getCookies());
 			}
+		} catch (SocketTimeoutException ste) {
+			throw new NetworkIOReadErrorException("获取数据超时!", ste);
 		} catch (IOException e) {
-			throw e;
+			throw new NetworkIOReadErrorException("网络错误!", e);
 		} finally {
 			// 已经发送完成
+			IOUtils.closeQuietly(inputStream);
 			IOUtils.closeQuietly(socket);
 			this.isConnectionFree = true;
 		}
@@ -187,8 +240,10 @@ public class HttpSocket implements Serializable {
 	}
 
 	/**
+	 * 默认5*1000毫秒
+	 * 
 	 * @param timeout
-	 *            the timeout to set
+	 *            the timeout to set(单位 毫秒)
 	 */
 	public HttpSocket setTimeout(int timeout) {
 		this.timeout = timeout;

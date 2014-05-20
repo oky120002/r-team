@@ -89,12 +89,10 @@ public abstract class TaskUtil {
 	 * 
 	 * @param runnable
 	 *            任务执行接口
-	 * @param name
-	 *            触发器名称
 	 * @param repeatConunt
 	 *            重复次数(-1为无限重复)
 	 * @param repeatInterval
-	 *            重复的间隔时间
+	 *            重复的间隔时间(单位 : 秒)
 	 * @param startTime
 	 *            触发器开始执行时间
 	 * @param endTime

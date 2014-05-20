@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 import com.r.web.user.dao.UserDetailsDao;
 
 /**

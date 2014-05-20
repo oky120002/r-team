@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * @author oky

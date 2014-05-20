@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 import com.r.web.user.service.UserService;
 
 /**

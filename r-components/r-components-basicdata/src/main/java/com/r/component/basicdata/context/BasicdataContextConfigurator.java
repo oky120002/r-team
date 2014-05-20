@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
 import com.r.core.exceptions.initialization.SpringConfiguratorErrorException;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * 基础数据配置文件

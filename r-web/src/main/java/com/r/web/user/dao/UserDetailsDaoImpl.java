@@ -15,10 +15,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
-import com.r.core.hibernate.AbstractDaoImpl;
-import com.r.core.hibernate.KeyValue;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
+import com.r.web.core.hibernate.AbstractDaoImpl;
+import com.r.web.core.hibernate.KeyValue;
 import com.r.web.user.model.User;
 
 /**

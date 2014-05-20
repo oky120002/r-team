@@ -9,8 +9,8 @@ package com.r.core.util;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.naming.NameCoder;
 import com.thoughtworks.xstream.io.xml.Xpp3DomDriver;

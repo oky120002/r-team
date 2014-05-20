@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * 菜单配置文件

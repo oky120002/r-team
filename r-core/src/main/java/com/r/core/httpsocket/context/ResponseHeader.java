@@ -160,12 +160,10 @@ public class ResponseHeader implements Serializable {
 	 * 获取返回的文本,自动根据返回的编码类型解码,如果没有设置编码类型,则自动按照gb2312来解码
 	 * 
 	 * @return Response 返回的字符串
-	 * @throws ContentTypeErrorException
-	 *             返回类和当前需要获取的返回类型不匹配时抛出此异常
 	 * @throws IOException
 	 *             获取response字符串失败时 or 获取response字符串是突然断开链接时
 	 */
-	public String bodyToString() throws ContentTypeErrorException, IOException {
+	public String bodyToString() throws IOException {
 		return bodyToString(null);
 	}
 
@@ -178,12 +176,10 @@ public class ResponseHeader implements Serializable {
 	 *            如果为空且Content-Type中有编码则取Content-Type中的编码<br>
 	 *            如果不为空则强制指定传入的编码<br>
 	 * @return response 返回的字符串
-	 * @throws ContentTypeErrorException
-	 *             返回类和当前需要获取的返回类型不匹配时抛出此异常
 	 * @throws IOException
 	 *             获取response字符串失败时 or 获取response字符串是突然断开链接时
 	 */
-	public String bodyToString(String encoding) throws ContentTypeErrorException, IOException {
+	public String bodyToString(String encoding) throws IOException {
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();
 		ResponseContentType contentType = getContentType(encoding);
@@ -210,12 +206,10 @@ public class ResponseHeader implements Serializable {
 	 * 获得Response返回的图片
 	 * 
 	 * @return BufferedImage 图片
-	 * @throws ContentTypeErrorException
-	 *             返回类和当前需要获取的返回类型不匹配时抛出此异常
 	 * @throws IOException
 	 *             获取图片失败时 or 获取图片是突然断开链接时
 	 */
-	public BufferedImage bodyToImage() throws ContentTypeErrorException, IOException {
+	public BufferedImage bodyToImage() throws IOException {
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();
 		ResponseContentType contentType = getContentType(null);
@@ -242,12 +236,10 @@ public class ResponseHeader implements Serializable {
 	 * 获得Response返回的文件
 	 * 
 	 * @return File 文件
-	 * @throws ContentTypeErrorException
-	 *             返回类和当前需要获取的返回类型不匹配时抛出此异常
 	 * @throws IOException
 	 *             获取文件失败时 or 获取文件是突然断开链接时
 	 */
-	public File bodyToFile(String fileName) throws ContentTypeErrorException, IOException {
+	public File bodyToFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();

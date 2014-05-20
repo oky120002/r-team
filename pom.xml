@@ -863,5 +863,6 @@
 		<module>r-core</module>
 		<module>r-components</module>
 		<module>r-web</module>
+		<module>r-app</module>
 	</modules>
 </project>

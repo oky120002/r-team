@@ -8,9 +8,9 @@ package com.r.web.user.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
-import com.r.core.hibernate.AbstractDaoImpl;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
+import com.r.web.core.hibernate.AbstractDaoImpl;
 import com.r.web.user.model.User;
 
 /**

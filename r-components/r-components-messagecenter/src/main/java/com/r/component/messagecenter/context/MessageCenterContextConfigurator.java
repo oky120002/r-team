@@ -8,14 +8,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 
-import com.r.common.log.Logger;
-import com.r.common.log.LoggerFactory;
 import com.r.component.messagecenter.Message;
 import com.r.component.messagecenter.MessageDefaultImpl;
 import com.r.component.messagecenter.MessageInterceptor;
 import com.r.component.messagecenter.MessageParser;
 import com.r.component.messagecenter.MessageParserConfigurator;
 import com.r.component.messagecenter.exception.ErrorMessageParserException;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * 消息中心基础配置<br/>
