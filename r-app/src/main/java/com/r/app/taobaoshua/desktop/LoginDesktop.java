@@ -27,6 +27,7 @@ import com.r.core.desktop.ctrl.HBaseDialog;
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.desktop.ctrl.impl.label.HClickLabel;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel;
+import com.r.core.exceptions.CaptchaErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -36,7 +37,7 @@ import com.r.core.util.TaskUtil;
  * 登陆窗口
  * 
  * @author Administrator
- *
+ * 
  */
 public class LoginDesktop extends HBaseDialog implements ActionListener {
 	private static final long serialVersionUID = -957767869361688549L;
@@ -78,17 +79,18 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 	}
 
 	private void initStyle() {
-		setSize(new Dimension(350, 140));// 设置窗口大小
+		setSize(new Dimension(350, 160));// 设置窗口大小
 		setResizable(false);
 		setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
-		setUndecorated(true); // 隐藏关闭按钮的方法
+		// setUndecorated(true); // 隐藏关闭按钮的方法
 
-		// 默认值.临时的
-		accountTextField.setText("oky120002");
-		accountPasswordTextField.setText("yuyu0619@qq.com");
 	}
 
 	private void initComponents() {
+		// 默认值.临时的
+		accountTextField.setText("oky120002");
+		accountPasswordTextField.setText("yuyu0619@qq.com");
+
 		// 数据录入区
 		HBaseBox northBox = HBaseBox.createHorizontalBaseBox();
 		northBox.setBorder(BorderFactory.createTitledBorder("登陆")); // 设置箱子组件内边距
@@ -185,9 +187,15 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 				try {
 					app.getAction().login(account, accountPassword, captcha);
 					setVisible(false);
-				} catch (IOException e) {
+				} catch (CaptchaErrorException e) {
+					doCaptchaImage();
 					HAlert.showErrorTips(e.getMessage(), LoginDesktop.this, e);
 					loginButton.setEnabled(true);
+				} catch (IOException e) {
+					doCaptchaImage();
+					HAlert.showErrorTips(e.getMessage(), LoginDesktop.this, e);
+					loginButton.setEnabled(true);
+
 				}
 			}
 		});

@@ -11,12 +11,13 @@ import java.util.Date;
  * 淘宝来路流量区数据模型
  * 
  * @author Administrator
- *
+ * 
  */
 public class PV implements Comparable<PV> {
 
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+	// 列表字段
 	private String id; // 任务编号
 	private String publisher; // 任务发布者
 	private String sumFlow; // 总访问流量
@@ -27,7 +28,9 @@ public class PV implements Comparable<PV> {
 
 	private boolean isStayFor5Minutes = false; // 是否停留5分钟
 	private boolean isIntoStoreAndSearch = false; // 是否进店再搜索
+	private boolean isTmall = false; // 是否天猫店搜索
 
+	// 临时字段
 	private Date tempReleaseTime; // 发布时间
 
 	public String getId() {
@@ -103,6 +106,14 @@ public class PV implements Comparable<PV> {
 		return isIntoStoreAndSearch;
 	}
 
+	public boolean isTmall() {
+		return isTmall;
+	}
+
+	public void setTmall(boolean isTmall) {
+		this.isTmall = isTmall;
+	}
+
 	public void setIntoStoreAndSearch(boolean isIntoStoreAndSearch) {
 		this.isIntoStoreAndSearch = isIntoStoreAndSearch;
 	}
@@ -113,6 +124,25 @@ public class PV implements Comparable<PV> {
 
 	public void setTempReleaseTime(Date tempReleaseTime) {
 		this.tempReleaseTime = tempReleaseTime;
+	}
+
+	/** 获取特殊条件字符串 */
+	public String getSpecialConditions() {
+		StringBuilder sb = new StringBuilder();
+		if (isStayFor5Minutes || isIntoStoreAndSearch) {
+			sb.append('(');
+			if (isStayFor5Minutes) {
+				sb.append("停留5分钟");
+			}
+			if (isIntoStoreAndSearch) {
+				sb.append(" , ").append("进店再搜索");
+			}
+			if (isTmall) {
+				sb.append(" , ").append("天猫");
+			}
+			sb.append(')');
+		}
+		return sb.toString();
 	}
 
 	@Override
@@ -143,20 +173,12 @@ public class PV implements Comparable<PV> {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("PV").append("\r\n");
 		sb.append("任务编号 : ").append(this.id).append("\r\n");
 		sb.append("任务发布者 : ").append(this.publisher).append("\r\n");
 		sb.append("访问次数/流量 : ").append(this.sumFlow).append('/').append(this.surplusFlow).append("\r\n");
 		sb.append("发布时间 : ").append(this.releaseTime);
-		if (isStayFor5Minutes || isIntoStoreAndSearch) {
-			sb.append('(');
-			if (isStayFor5Minutes) {
-				sb.append("停留5分钟");
-			}
-			if (isIntoStoreAndSearch) {
-				sb.append(" , ").append("进店再搜索");
-			}
-			sb.append(')');
-		}
+		sb.append(getSpecialConditions());
 		sb.append("\r\n");
 		sb.append("商品数 : ").append(this.commodityNumber).append("\r\n");
 		sb.append("接收url : ").append(this.url).append("\r\n");
@@ -167,5 +189,4 @@ public class PV implements Comparable<PV> {
 	public int compareTo(PV o) {
 		return this.tempReleaseTime.compareTo(o.getTempReleaseTime());
 	}
-
 }

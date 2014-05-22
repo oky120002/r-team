@@ -3,10 +3,14 @@
  */
 package com.r.app.taobaoshua;
 
+import java.net.Proxy.Type;
+
 import com.r.app.taobaoshua.action.Action;
+import com.r.app.taobaoshua.data.DataContext;
 import com.r.app.taobaoshua.desktop.Desktop;
 import com.r.core.desktop.ctrl.HCtrlInit;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -14,7 +18,7 @@ import com.r.core.log.LoggerFactory;
  * 淘宝刷友保来路流量
  * 
  * @author Administrator
- *
+ * 
  */
 public class TaobaoShuaApp {
 	private static final Logger logger = LoggerFactory.getLogger(TaobaoShuaApp.class);
@@ -23,6 +27,7 @@ public class TaobaoShuaApp {
 	private static TaobaoShuaApp app; // 应用程序
 
 	private Action action; // 游戏执行器
+	private DataContext dataContext;;
 	private HttpSocket youbaoSocket; // 针对友保的套接字
 	private HttpSocket taobaoSocket; // 针对淘宝的套接字
 	private Desktop desktop; // 桌面主体
@@ -40,6 +45,11 @@ public class TaobaoShuaApp {
 	/** 获得执行器 */
 	public Action getAction() {
 		return action;
+	}
+
+	/** 获得数据容器 */
+	public DataContext getDataContext() {
+		return dataContext;
 	}
 
 	/** 获得桌面窗口管理器 */
@@ -69,10 +79,15 @@ public class TaobaoShuaApp {
 		HCtrlInit.initWindowsStyleByWindows(null);
 
 		TaobaoShuaApp.app = new TaobaoShuaApp();
+		TaobaoShuaApp.app.dataContext = new DataContext();
 		TaobaoShuaApp.app.action = new Action();
 		TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true, null);
+		// TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true,
+		// HttpProxy.newInstance(true, Type.HTTP, "127.0.0.1", 8087));
 		TaobaoShuaApp.app.youbaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true, null);
+		// TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true,
+		// HttpProxy.newInstance(true, Type.HTTP, "127.0.0.1", 8087));
 		TaobaoShuaApp.app.taobaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.desktop = new Desktop();
 
