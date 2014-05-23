@@ -34,4 +34,8 @@ public class ContentTypeErrorException extends SException {
 		super(message);
 	}
 
+	public ContentTypeErrorException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

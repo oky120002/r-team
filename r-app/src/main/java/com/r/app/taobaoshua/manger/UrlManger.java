@@ -16,6 +16,7 @@ import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.ResponseHeader;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.TaskUtil;
 
 public class UrlManger {
 	private static final Logger logger = LoggerFactory.getLogger(UrlManger.class);
@@ -32,10 +33,8 @@ public class UrlManger {
 	 * 
 	 * @throws NetworkIOReadErrorException
 	 *             网络IO读取错误
-	 * @throws IOException
-	 *             图片流IO读取错误
 	 */
-	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException, IOException {
+	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/checkcode.php?id=");
 		return responseHeader.bodyToImage();
@@ -50,23 +49,41 @@ public class UrlManger {
 	 *            友保密码
 	 * @param captcha
 	 *            验证码
+	 * @param question
+	 *            密保问题
+	 * @param answer
+	 *            密保答案
 	 * @return 登陆成功后的body
 	 * @throws IOException
 	 */
-	public String login(String account, String accountPassword, String captcha) throws IOException {
+	public String login(String account, String accountPassword, String captcha, String question, String answer) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		StringBuilder post = new StringBuilder();
-		post.append("username=");
-		post.append(account);
-		post.append("&password=");
 		try {
-			post.append(URLEncoder.encode(accountPassword, "utf-8"));
+			account = URLEncoder.encode(account, "utf-8");
 		} catch (UnsupportedEncodingException e) {
-			post.append(accountPassword);
 		}
-		post.append("&checkcodestr=");
-		post.append(captcha);
-		post.append("&dosubmit=1&forward=http%3A%2F%2Fyuuboo.net%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
+		post.append("username=").append(account);
+		try {
+			accountPassword = URLEncoder.encode(accountPassword, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+		}
+		post.append("&password=").append(accountPassword);
+		post.append("&checkcodestr=").append(captcha);
+		if (StringUtils.isNotBlank(answer) && StringUtils.isNotBlank(question)) {
+			try {
+				answer = URLEncoder.encode(answer, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+			}
+			post.append("&answer=").append(answer);
+
+			try {
+				question = URLEncoder.encode(question, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+			}
+			post.append("&question=").append(question);
+		}
+		post.append("&dosubmit=1&forward=http%3A%2F%2Fdx.yuuboo.com%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/login.php", post.toString(), null);
 		return responseHeader.bodyToString();
 	}
@@ -80,7 +97,7 @@ public class UrlManger {
 	 * @return
 	 * @throws IOException
 	 */
-	public String getPVList(int page) throws IOException {
+	public String getPVList(int page) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/quest.php?type=pv&page=" + page);
 		return responseHeader.bodyToString();
@@ -95,7 +112,7 @@ public class UrlManger {
 	 * @return
 	 * @throws IOException
 	 */
-	public String getPVQuestList(int page) throws IOException {
+	public String getPVQuestList(int page) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/doquest.php?type=pv&status=2&page=" + page);
 		return responseHeader.bodyToString();
@@ -106,7 +123,7 @@ public class UrlManger {
 	 * 
 	 * @throws IOException
 	 */
-	public String showQuest(PVQuest pvQuest) throws IOException {
+	public String showQuest(PVQuest pvQuest) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid());
 		return responseHeader.bodyToString();
@@ -121,7 +138,7 @@ public class UrlManger {
 	 * @throws YouBaoException
 	 *             不支持完成某种特殊条件的任务时,抛出此异常
 	 */
-	public boolean takeTask(PV pv) throws IOException, YouBaoException {
+	public boolean takeTask(PV pv) throws NetworkIOReadErrorException, YouBaoException {
 		if (pv.isIntoStoreAndSearch()) {
 			// FIXME r-app:taobaoshua 添加此支持"进店后再次搜索"
 			throw new YouBaoException("暂时不支持\"进店后再次搜索\"任务");
@@ -156,11 +173,23 @@ public class UrlManger {
 	 *            宝贝id
 	 * @throws IOException
 	 */
-	public boolean checkTaskUrl(PVQuest pvQuest, String itemid) throws IOException, YouBaoException {
+	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException, YouBaoException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("你已经获得发布点")) {
+			// 验证成功后,进入相映itemid的宝贝页面,给别个增加一个流量....虽然刷,但是还是不要太过分了.
+			TaskUtil.executeSequenceTask(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						HttpSocket taobaoSocket = app.getTaobaoSocket();
+						taobaoSocket.send("http://item.taobao.com/item.htm?id=" + itemid);
+					} catch (Exception e) {
+						throw new NetworkIOReadErrorException("进入淘宝宝贝详情页失败!", e);
+					}
+				}
+			});
 			return true;
 		}
 		return false;
@@ -173,15 +202,15 @@ public class UrlManger {
 	 * 
 	 * @throws IOException
 	 */
-	public boolean cancelTask(PVQuest pvQuest) throws IOException {
+	public boolean cancelTask(PVQuest pvQuest) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=remove");
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("撤销接手成功")) {
-			logger.debug("成功撤销搜索关键字为[{}]的宝贝的流量任务!", pvQuest.getSearchKey());
+			logger.info("成功撤销搜索关键字为[{}]的宝贝的流量任务!", pvQuest.getSearchKey());
 			return true;
 		} else {
-			logger.debug("--撤销搜索关键字为[{}]的宝贝的流量任务失败!", pvQuest.getSearchKey());
+			logger.info("--撤销搜索关键字为[{}]的宝贝的流量任务失败!", pvQuest.getSearchKey());
 			return false;
 		}
 	}
@@ -197,7 +226,7 @@ public class UrlManger {
 	 * @return
 	 * @throws IOException
 	 */
-	public String search(PVQuest pvQuest, int page) throws IOException {
+	public String search(PVQuest pvQuest, int page) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getTaobaoSocket();
 		ResponseHeader responseHeader = httpSocket.send(pvQuest.getTaobaoSearchAddr(page));
 		return responseHeader.bodyToString();
@@ -208,38 +237,43 @@ public class UrlManger {
 	 * 
 	 * @throws IOException
 	 */
-	public void searchLoc(PVQuest pvQuest) throws IOException {
+	public void searchLoc(PVQuest pvQuest) throws NetworkIOReadErrorException {
 		String location = pvQuest.getLocation();
-		logger.debug("校验关键字为[{}]的宝贝的预置地址是否正确 : {}", pvQuest.getSearchKey(), location);
+		logger.info("questid : {}  搜索预置所在地[{}]的真实所在地!", pvQuest.getQuestid(), location);
+		if (PVQuest.checkLoc(location)) {
+			logger.info("questid : {}  经过预置的\"所在地\"词典校验，关键字为[{}]，售价区间为[{},{}]的宝贝的真实所在地 : {} 正确无误，可以使用。", pvQuest.getQuestid(), pvQuest.getSearchKeyCut(15), pvQuest.getPriceMin(), pvQuest.getPriceMax(), location);
+			return;
+		}
 		if (StringUtils.isNotBlank(location) && 2 <= location.length()) {
 			HttpSocket httpSocket = app.getTaobaoSocket();
 			ResponseHeader responseHeader = null;
+			String html = null;
+			String loc = null;
 			int right = 2;
-			String html = "点击返回上一步";
 
 			while (true) {
-				String loc = StringUtils.right(location, right++);
-				//
-				responseHeader = httpSocket.send(pvQuest.getTaobaoSearchAddr(1));
+				loc = StringUtils.right(location, right++);
+				pvQuest.setLocation(loc);
+				responseHeader = httpSocket.send(pvQuest.checkSearchAddr());
 				html = responseHeader.bodyToString();
 
-				if (0 <= html.indexOf("点击返回上一步")) { // 截取出的所在地不存在
+				if (html.contains("点击返回上一步")) { // 截取出的所在地不存在
 					if (loc.equals(location)) { // 截取出的所在地和原所在地相等,则设置成通用所在地"all"后返回
 						pvQuest.setLocation("all");
-						logger.debug("搜索到关键字为[{}]的宝贝的真实所在地不存在,所以设置成通用所在地 : all", pvQuest.getSearchKey());
+						logger.info("questid : {}  搜索到关键字为[{}]，售价区间为[{},{}]的宝贝的真实所在地不存在,所以设置成通用所在地 : all", pvQuest.getQuestid(), pvQuest.getSearchKeyCut(15), pvQuest.getPriceMin(), pvQuest.getPriceMax());
 						return;
 					} else { // 截取出的所在地和原所在地不相等,则继续截取
 
 					}
 				} else { // 截取出的所在地存在,则直接设置此所在地后跳出
 					pvQuest.setLocation(loc);
-					logger.debug("成功搜索到关键字为[{}]的宝贝的真实所在地 : {}", pvQuest.getSearchKey(), loc);
+					logger.info("questid : {}  成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝的真实所在地 : {}", pvQuest.getQuestid(), pvQuest.getSearchKeyCut(15), pvQuest.getPriceMin(), pvQuest.getPriceMax(), loc);
 					return;
 				}
 			}
 		} else {
 			pvQuest.setLocation("all");
-			logger.debug("成功搜索到关键字为[{}]的宝贝的真实所在地 : {}", pvQuest.getSearchKey(), "all");
+			logger.info("3 : questid : {}  成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝的真实所在地 : {}", pvQuest.getQuestid(), pvQuest.getSearchKeyCut(15), pvQuest.getPriceMin(), pvQuest.getPriceMax(), "all");
 		}
 	}
 }

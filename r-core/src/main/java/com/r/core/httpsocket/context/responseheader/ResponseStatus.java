@@ -17,7 +17,9 @@ public enum ResponseStatus {
 	s403("403", "Forbidden", "服务器收到请求，但是拒绝提供服务"), // 403
 	s404("404", "Not Found", "没有找到资源"), // 404
 	s500("500", "Internal Server Error", "服务器发生不可预期的错误"), // 500
-	s503("503", "Server Unavailable", "服务器当前不能处理客户端的请求，一段时间后可能恢复正常"), // 503
+	s502("502", "Bad Gateway", "服务器作为网关或代理，从上游服务器收到无效响应。 "), // 502
+	s503("503", "Server Unavailable", "服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。"), // 503
+	s504("504", "Timeout Gateway", "服务器作为网关或代理，但是没有及时从上游服务器收到请求。"), // 504
 	;
 
 	/** 状态编码 */
@@ -54,5 +56,10 @@ public enum ResponseStatus {
 			}
 		}
 		throw new ArgIllegalException("传入了未知的返回状态:[" + status + "]");
+	}
+
+	@Override
+	public String toString() {
+		return this.title + " : " + this.caption;
 	}
 }

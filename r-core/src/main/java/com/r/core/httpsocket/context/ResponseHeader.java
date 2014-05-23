@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.r.core.exceptions.SwitchPathException;
+import com.r.core.exceptions.io.IOReadErrorException;
 import com.r.core.httpsocket.context.responseheader.ResponseContentEncoding;
 import com.r.core.httpsocket.context.responseheader.ResponseContentType;
 import com.r.core.httpsocket.context.responseheader.ResponseDataType;
@@ -163,7 +164,7 @@ public class ResponseHeader implements Serializable {
 	 * @throws IOException
 	 *             获取response字符串失败时 or 获取response字符串是突然断开链接时
 	 */
-	public String bodyToString() throws IOException {
+	public String bodyToString() {
 		return bodyToString(null);
 	}
 
@@ -176,27 +177,30 @@ public class ResponseHeader implements Serializable {
 	 *            如果为空且Content-Type中有编码则取Content-Type中的编码<br>
 	 *            如果不为空则强制指定传入的编码<br>
 	 * @return response 返回的字符串
-	 * @throws IOException
-	 *             获取response字符串失败时 or 获取response字符串是突然断开链接时
 	 */
-	public String bodyToString(String encoding) throws IOException {
+	public String bodyToString(String encoding) {
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();
 		ResponseContentType contentType = getContentType(encoding);
 		ResponseDataType responseDataType = contentType.getResponseContentTypeCode().getResponseDataType();
 		if (!ResponseDataType.文本.equals(responseDataType)) {
-			throw new ContentTypeErrorException("Response的返回Body不是[" + ResponseDataType.文本.name() + "]类型,是[" + responseDataType.name() + "]");
+			throw new ContentTypeErrorException("返回状态 : {}  Response返回的Body体不是[{}]类型,是[{}]类型", getStatus().toString(), ResponseDataType.文本.name(), responseDataType.name());
 		}
 		try {
 			in = new ByteArrayInputStream(getBody());
-			switch (contentEncoding) {
-			case gzip:
-				return IOUtils.toString(new GZIPInputStream(in), contentType.getEncoding());
-			case deflate:
-				return IOUtils.toString(in, contentType.getEncoding());
-			default:
-				throw new SwitchPathException("不能识别未知的压缩类型");
+			try {
+				switch (contentEncoding) {
+				case gzip:
+					return IOUtils.toString(new GZIPInputStream(in), contentType.getEncoding());
+				case deflate:
+					return IOUtils.toString(in, contentType.getEncoding());
+				default:
+					throw new SwitchPathException("不能识别未知的压缩类型");
+				}
+			} catch (IOException e) {
+				throw new IOReadErrorException("从Response返回的body流转换成字符串时流IO转换错误", e);
 			}
+
 		} finally {
 			IOUtils.closeQuietly(in);
 		}
@@ -209,23 +213,27 @@ public class ResponseHeader implements Serializable {
 	 * @throws IOException
 	 *             获取图片失败时 or 获取图片是突然断开链接时
 	 */
-	public BufferedImage bodyToImage() throws IOException {
+	public BufferedImage bodyToImage() {
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();
 		ResponseContentType contentType = getContentType(null);
 		ResponseDataType responseDataType = contentType.getResponseContentTypeCode().getResponseDataType();
 		if (!ResponseDataType.图片.equals(responseDataType) && !ResponseDataType.二进制流.equals(responseDataType)) {
-			throw new ContentTypeErrorException("Response的返回Body是[" + responseDataType.name() + "]");
+			throw new ContentTypeErrorException("返回状态 : {}  Response返回的Body体是[{}]类型", getStatus().toString(), responseDataType.name());
 		}
 		try {
 			in = new ByteArrayInputStream(getBody());
-			switch (contentEncoding) {
-			case gzip:
-				return ImageIO.read(new GZIPInputStream(in));
-			case deflate:
-				return ImageIO.read(in);
-			default:
-				throw new SwitchPathException("不能识别未知的压缩类型");
+			try {
+				switch (contentEncoding) {
+				case gzip:
+					return ImageIO.read(new GZIPInputStream(in));
+				case deflate:
+					return ImageIO.read(in);
+				default:
+					throw new SwitchPathException("不能识别未知的压缩类型");
+				}
+			} catch (IOException e) {
+				throw new IOReadErrorException("从Response返回的body流转换成图片时流IO转换错误", e);
 			}
 		} finally {
 			IOUtils.closeQuietly(in);
@@ -239,26 +247,30 @@ public class ResponseHeader implements Serializable {
 	 * @throws IOException
 	 *             获取文件失败时 or 获取文件是突然断开链接时
 	 */
-	public File bodyToFile(String fileName) throws IOException {
+	public File bodyToFile(String fileName) {
 		File file = new File(fileName);
 		ByteArrayInputStream in = null;
 		ResponseContentEncoding contentEncoding = getContentEncoding();
 		ResponseContentType contentType = getContentType(null);
 		ResponseDataType responseDataType = contentType.getResponseContentTypeCode().getResponseDataType();
 		if (!ResponseDataType.文件.equals(responseDataType) && !ResponseDataType.二进制流.equals(responseDataType)) {
-			throw new ContentTypeErrorException("Response的返回Body是[" + responseDataType.name() + "]");
+			throw new ContentTypeErrorException("返回状态 : {}  Response的返回Body是[{}]", getStatus().toString(), responseDataType.name());
 		}
 		try {
 			in = new ByteArrayInputStream(getBody());
-			switch (contentEncoding) {
-			case gzip:
-				IOUtil.inputstreamToFile(new GZIPInputStream(in), file);
-				break;
-			case deflate:
-				IOUtil.inputstreamToFile(in, file);
-				break;
-			default:
-				throw new SwitchPathException("不能识别未知的压缩类型");
+			try {
+				switch (contentEncoding) {
+				case gzip:
+					IOUtil.inputstreamToFile(new GZIPInputStream(in), file);
+					break;
+				case deflate:
+					IOUtil.inputstreamToFile(in, file);
+					break;
+				default:
+					throw new SwitchPathException("不能识别未知的压缩类型");
+				}
+			} catch (IOException e) {
+				throw new IOReadErrorException("从Response返回的body流转换成文件时流IO转换错误", e);
 			}
 		} finally {
 			IOUtils.closeQuietly(in);
@@ -350,6 +362,9 @@ public class ResponseHeader implements Serializable {
 	 * 解析返回的报文.解析完毕会自动关闭传入的输入流
 	 * 
 	 * @param is
+	 *            请求返回的输入流
+	 * @param isNeedBody
+	 *            是否需要获取返回的body
 	 * @throws IOException
 	 *             其它IO异常
 	 */
@@ -384,19 +399,10 @@ public class ResponseHeader implements Serializable {
 			header.flush();
 			resolveResponseHeader(header.toByteArray());
 			int length = 0;
-			// if (isTransferEncoding()) {
-			// // int length = 0;
-			// while ((length = readTransferEncodingLine(bis)) != 0) {
-			// byte[] buf = new byte[length];
-			// bis.read(buf);
-			// body.write(buf);
-			// }
-			// } else {
 			byte[] buf = new byte[512];
 			while ((length = bis.read(buf)) > 0) {
 				body.write(buf, 0, length);
 			}
-			// }
 			body.flush();
 			setBody(body.toByteArray());
 		} finally {
@@ -469,33 +475,6 @@ public class ResponseHeader implements Serializable {
 				break;
 			}
 		}
-		// System.out.println(new String(content.array(), 0, content.limit()));
 		return content.array();
 	}
-
-	// /** 如果返回的分段后的内容,则去掉分段长度字符.同时返回分段长度 */
-	// private int readTransferEncodingLine(InputStream is) throws IOException {
-	// ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	// try {
-	// byte[] byt = new byte[1];
-	// while (is.read(byt) > 0) {
-	// if (byt[0] == '\r') {
-	// is.read(byt);
-	// if (byt[0] == '\n') {
-	// break;
-	// }
-	// }
-	// baos.write(byt[0]);
-	// }
-	// baos.flush();
-	// String value = baos.toString(); // 获取出来的数值是16进制的数,返回时需要转换成10进制
-	// if (StringUtils.isBlank(value)) {
-	// return 0;
-	// } else {
-	// return Integer.valueOf(value, 16);
-	// }
-	// } finally {
-	// IOUtil.close(baos);
-	// }
-	// }
 }

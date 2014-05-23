@@ -35,6 +35,9 @@ public class SException extends RuntimeException {
 	/** 错误信息 */
 	private String errorMessage = "";
 
+	/** 自定义标记,提供额外的标记信息 */
+	private int mark = -1;
+
 	/**
 	 * 获得错误编码
 	 * <ul>
@@ -54,7 +57,7 @@ public class SException extends RuntimeException {
 	/**
 	 * 获得错误信息
 	 * <ul>
-	 * 系统内部错误
+	 * 系统内部错误信息
 	 * <li>errorMessage用于异常抛送到页面后，为用户显示错误</li>
 	 * <li>因具体的系统使用者不用太过关心message(详细错误信息,默认为简体中文)</li>
 	 * <li>如果为简体中文系统，则可以通过errorMessage得到一个错误信息</li>
@@ -65,6 +68,20 @@ public class SException extends RuntimeException {
 	 */
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+
+	/**
+	 * 获得额外的信息标记
+	 * <ul>
+	 * 系统内部错误的额外信息标记
+	 * <li>提供一种用以分别不同细微差异的信息标记</li>
+	 * <li>提供一种自定义的信息传递标记</li>
+	 * </ul>
+	 * 
+	 * @return
+	 */
+	public int getErrorMark() {
+		return this.mark;
 	}
 
 	/**
@@ -117,6 +134,13 @@ public class SException extends RuntimeException {
 		this.errorMessage = doGetErrorMessage();
 	}
 
+	public SException(String message, int mark) {
+		super(message);
+		this.errorCode = doGetErrorCode();
+		this.errorMessage = doGetErrorMessage();
+		this.mark = mark;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -124,6 +148,7 @@ public class SException extends RuntimeException {
 		sb.append("   errorCode: ").append(this.errorCode).append("\n");
 		sb.append("   errorMessage: ").append(this.errorMessage).append("\n");
 		sb.append("   message: ").append(super.getMessage()).append("\n");
+		sb.append("   mark: ").append(this.mark).append("\n");
 		sb.append("   Exception toString: ").append(super.toString());
 		return sb.toString();
 	}

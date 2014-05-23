@@ -36,4 +36,9 @@ public class ErrorMessageException extends MessageCenterException {
 	public ErrorMessageException(String message) {
 		super(message);
 	}
+
+	public ErrorMessageException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

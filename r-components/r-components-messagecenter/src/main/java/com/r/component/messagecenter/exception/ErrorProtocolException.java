@@ -36,4 +36,9 @@ public class ErrorProtocolException extends MessageCenterException {
 	public ErrorProtocolException(String message) {
 		super(message);
 	}
+
+	public ErrorProtocolException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

@@ -48,7 +48,11 @@ public class HAlert {
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.ERROR_MESSAGE);
+	}
 
+	/** 弹出错误信息,系统级错误,弹出错误信息后不会退出系统 */
+	public static void showErrorTips(String errorMessage, Component parentComponent) {
+		JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.ERROR_MESSAGE);
 	}
 
 	/** 弹出错误信息,系统级错误,弹出错误信息后会自动退出系统 */

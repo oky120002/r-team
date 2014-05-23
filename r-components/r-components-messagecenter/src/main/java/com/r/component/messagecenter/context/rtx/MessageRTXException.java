@@ -39,4 +39,7 @@ public class MessageRTXException extends MessageCenterException {
 		super(message);
 	}
 
+	public MessageRTXException(String message, int mark) {
+		super(message, mark);
+	}
 }

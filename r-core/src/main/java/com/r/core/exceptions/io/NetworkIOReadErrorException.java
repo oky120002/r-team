@@ -22,6 +22,10 @@ public class NetworkIOReadErrorException extends IOReadErrorException {
 		super(message);
 	}
 
+	public NetworkIOReadErrorException(String message, int mark) {
+		super(message, mark);
+	}
+
 	@Override
 	protected String doGetErrorCode() {
 		return "NETWORK_IO_READ_ERROR";

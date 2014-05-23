@@ -7,6 +7,7 @@ import com.r.core.exceptions.SException;
 
 /**
  * SpringBean属性配置错误
+ * 
  * @author oky
  * 
  */
@@ -33,6 +34,10 @@ public class SpringConfiguratorErrorException extends SException {
 
 	public SpringConfiguratorErrorException(String message) {
 		super(message);
+	}
+
+	public SpringConfiguratorErrorException(String message, int mark) {
+		super(message, mark);
 	}
 
 }

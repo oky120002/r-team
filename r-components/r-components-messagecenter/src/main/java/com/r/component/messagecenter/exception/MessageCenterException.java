@@ -39,4 +39,8 @@ public class MessageCenterException extends SException {
 		super(message);
 	}
 
+	public MessageCenterException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

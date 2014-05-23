@@ -37,4 +37,7 @@ public class SwitchPathException extends SException {
 		super(message);
 	}
 
+	public SwitchPathException(String message, int mark) {
+		super(message, mark);
+	}
 }

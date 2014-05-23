@@ -16,6 +16,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.core.exceptions.arg.ArgIllegalException;
+import com.r.core.exceptions.io.IOReadErrorException;
 import com.r.core.httpsocket.context.responseheader.RequestUrlType;
 import com.r.core.httpsocket.context.responseheader.ResponseContentTypeCode;
 import com.r.core.util.AssertUtil;
@@ -129,7 +130,7 @@ public class RequestHeader implements Serializable {
 	 * @throws IOException
 	 *             读取文件失败时抛出此异常
 	 */
-	public static RequestHeader newRequestHeaderByUpFile(HttpUrl httpUrl, File upFile, HttpProxy httpProxy, Map<String, String> upFilePars, String parName, String fileName) throws IOException {
+	public static RequestHeader newRequestHeaderByUpFile(HttpUrl httpUrl, File upFile, HttpProxy httpProxy, Map<String, String> upFilePars, String parName, String fileName) {
 		return RequestHeader.newRequestHeaderByEmpty().setUpFile(httpUrl, upFile, upFilePars, parName, fileName).setHttpProxy(httpProxy);
 	}
 
@@ -151,7 +152,7 @@ public class RequestHeader implements Serializable {
 	 * @throws IOException
 	 *             读取文件失败时抛出此异常
 	 */
-	public RequestHeader setUpFile(HttpUrl httpUrl, File upFile, Map<String, String> upFilePars, String parName, String fileName) throws IOException {
+	public RequestHeader setUpFile(HttpUrl httpUrl, File upFile, Map<String, String> upFilePars, String parName, String fileName) {
 		this.httpUrl = httpUrl;
 		this.urlType = RequestUrlType.POST;
 		this.post = createContentDisposition(upFile, upFilePars, parName, fileName);
@@ -382,10 +383,6 @@ public class RequestHeader implements Serializable {
 		}
 
 		outputStream.flush();
-		// BufferedWriter wr = new BufferedWriter(new
-		// OutputStreamWriter(outputStream, "UTF8"));
-		// wr.write(getRequest());
-		// wr.flush();
 		return socket;
 	}
 
@@ -417,7 +414,7 @@ public class RequestHeader implements Serializable {
 	 * @throws IOException
 	 *             读取文件失败时抛出此异常
 	 */
-	private byte[] createContentDisposition(File file, Map<String, String> upFilePars, String parName, String fileName) throws IOException {
+	private byte[] createContentDisposition(File file, Map<String, String> upFilePars, String parName, String fileName) {
 		StringBuilder sb = new StringBuilder();
 		if (MapUtils.isNotEmpty(upFilePars)) {
 			for (Map.Entry<String, String> entry : upFilePars.entrySet()) {
@@ -437,10 +434,14 @@ public class RequestHeader implements Serializable {
 		sb.append("Content-Disposition: form-data; name=\"").append(parName).append("\"; filename=\"").append(fileName).append("\"").append("\r\n");
 		sb.append("Content-Type: ").append(ResponseContentTypeCode.application_octet_stream.getContentTypeCode()).append("\r\n");
 		sb.append("\r\n");
-		byte[] pre = sb.toString().getBytes();
-		byte[] files = FileUtils.readFileToByteArray(file);
-		byte[] last = ("\r\n--" + RequestHeader.BOUNDARY + "--\r\n").getBytes();
-		return ArrayUtils.addAll(ArrayUtils.addAll(pre, files), last);
+		try {
+			byte[] pre = sb.toString().getBytes();
+			byte[] files = FileUtils.readFileToByteArray(file);
+			byte[] last = ("\r\n--" + RequestHeader.BOUNDARY + "--\r\n").getBytes();
+			return ArrayUtils.addAll(ArrayUtils.addAll(pre, files), last);
+		} catch (IOException e) {
+			throw new IOReadErrorException("上传文件读取异常!", e);
+		}
 	}
 
 	/**

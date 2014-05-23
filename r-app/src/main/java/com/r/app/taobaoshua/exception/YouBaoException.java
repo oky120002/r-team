@@ -36,4 +36,7 @@ public class YouBaoException extends SException {
 		return "友保相关异常";
 	}
 
+	public YouBaoException(String message, int mark) {
+		super(message, mark);
+	}
 }

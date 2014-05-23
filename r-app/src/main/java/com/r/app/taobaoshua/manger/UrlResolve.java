@@ -10,8 +10,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.r.app.taobaoshua.model.PV;
 import com.r.app.taobaoshua.model.PVQuest;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 public class UrlResolve {
+	private static final Logger logger = LoggerFactory.getLogger(UrlResolve.class);
 
 	/**
 	 * 从PV列表页面解析出PV数据集
@@ -22,6 +25,7 @@ public class UrlResolve {
 	public List<PV> resolvePV(String pvbody) {
 		List<PV> pvs = new ArrayList<PV>();
 		int curPos = 0;
+
 		while ((curPos = pvbody.indexOf("任务编号：")) != -1) {
 			PV pv = new PV();
 
@@ -116,7 +120,12 @@ public class UrlResolve {
 
 		// 店主
 		curPos = pvQuestDetailBody.indexOf("掌柜名称");
-		pvQuestDetailBody = pvQuestDetailBody.substring(curPos);
+		try {
+			pvQuestDetailBody = pvQuestDetailBody.substring(curPos);
+		} catch (Exception e) {
+			logger.error("----错误的PVQuest，查询关键字[{}]。错误信息：\r\n {}", pvQuest.getSearchKey(), e.getMessage());
+		}
+
 		pvQuest.setShopKeeper(StringUtils.substringBetween(pvQuestDetailBody, "\"blue\">", "</strong>"));
 
 		// 接手时间
@@ -135,26 +144,29 @@ public class UrlResolve {
 		String tip = StringUtils.substringBetween(pvQuestDetailBody, "readonly>", "</textarea>");
 		String[] tips = tip.split("，");
 		String money = tips[1]; // 钱
+		int min = -1;
+		int max = -1;
 		try {
-			pvQuest.setPriceMin(Integer.valueOf(money.substring(0, money.indexOf('-'))).intValue()); // 最小价格
+			min = Integer.valueOf(money.substring(0, money.indexOf('-'))).intValue(); // 最小价格
 		} catch (NumberFormatException e) {
-			pvQuest.setPriceMin(0);
+			min = 0;
 		}
 		try {
-			pvQuest.setPriceMax(Integer.valueOf(money.substring(money.indexOf('-') + 1, money.length() - 1))); // 最小价格
+			max = Integer.valueOf(money.substring(money.indexOf('-') + 1, money.length() - 1)); // 最小价格
 		} catch (NumberFormatException e) {
-			pvQuest.setPriceMax(9999);
+			max = 9999;
 		}
+		pvQuest.setPrice(min, max);
 		pvQuest.setLocation(tips[2].substring(3)); // 所在地
 
 		// 特殊条件
-		if (0 < pvQuestDetailBody.indexOf("mission_pvshopin.png")) { // 进店再搜索
+		if (pvQuestDetailBody.contains("mission_pvshopin.png")) { // 进店再搜索
 			pvQuest.setIntoStoreAndSearch(true);
 		}
-		if (0 < pvQuestDetailBody.indexOf("mission_pvwait.gif")) { // 停留5分钟
+		if (pvQuestDetailBody.contains("mission_pvwait.gif")) { // 停留5分钟
 			pvQuest.setStayFor5Minutes(true);
 		}
-		if (0 < pvQuestDetailBody.indexOf("mission_tmall.png")) { // 天猫店
+		if (pvQuestDetailBody.contains("mission_tmall.png")) { // 天猫店
 			pvQuest.setTmall(true);
 		}
 	}

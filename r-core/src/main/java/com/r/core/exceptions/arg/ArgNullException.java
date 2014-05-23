@@ -38,4 +38,9 @@ public class ArgNullException extends SException {
 	public ArgNullException(String message) {
 		super(message);
 	}
+
+	public ArgNullException(String message, int mark) {
+		super(message, mark);
+	}
+	
 }

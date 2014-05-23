@@ -39,4 +39,8 @@ public class InitializationErrorException extends SException {
 		super(message);
 	}
 
+	public InitializationErrorException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

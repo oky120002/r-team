@@ -37,4 +37,8 @@ public class ErrorMessageParserException extends MessageCenterException {
 		super(message);
 	}
 
+	public ErrorMessageParserException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

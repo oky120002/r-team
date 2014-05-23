@@ -80,11 +80,11 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.action = new Action();
 		TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true, null);
 		// TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true,
-		// HttpProxy.newInstance(true, Type.HTTP, "127.0.0.1", 8087));
+		// HttpProxy.newInstance(true, Type.HTTP, "202.109.163.75", 8085));
 		TaobaoShuaApp.app.youbaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true, null);
 		// TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true,
-		// HttpProxy.newInstance(true, Type.HTTP, "127.0.0.1", 8087));
+		// HttpProxy.newInstance(true, Type.HTTP, "202.109.163.75", 8085));
 		TaobaoShuaApp.app.taobaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.desktop = new Desktop();
 

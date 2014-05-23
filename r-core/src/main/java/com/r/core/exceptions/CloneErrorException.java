@@ -37,4 +37,8 @@ public class CloneErrorException extends SException {
 		super(message);
 	}
 
+	public CloneErrorException(String message, int mark) {
+		super(message, mark);
+	}
+
 }

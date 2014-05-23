@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,8 +65,6 @@ public class HttpSocket implements Serializable {
 	 * 
 	 * @param httpUrl
 	 * @return
-	 * @throws NetworkIOReadErrorException
-	 *             网络IO读取错误
 	 */
 	public ResponseHeader send(String httpUrl) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()));
@@ -79,8 +78,6 @@ public class HttpSocket implements Serializable {
 	 * @param encoding
 	 *            post的转换编码,如果为空,则不进行任何的编码转换
 	 * @return
-	 * @throws NetworkIOReadErrorException
-	 *             网络IO读取错误
 	 */
 	public ResponseHeader send(String httpUrl, String post, String encoding) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, encoding, requestHeader.getHttpProxy()));
@@ -93,8 +90,6 @@ public class HttpSocket implements Serializable {
 	 * @param cookies
 	 * @param headers
 	 * @return
-	 * @throws NetworkIOReadErrorException
-	 *             网络IO读取错误
 	 */
 	public ResponseHeader send(String httpUrl, Map<String, Cookie> cookies, Map<String, String> headers) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()).putCookies(cookies).putAllHeader(headers));
@@ -125,7 +120,7 @@ public class HttpSocket implements Serializable {
 	 * @throws IOException
 	 *             文件IO读取错误
 	 */
-	public ResponseHeader send(String httpUrl, File file, Map<String, String> pars, String parName, String fileName) throws NetworkIOReadErrorException, IOException {
+	public ResponseHeader send(String httpUrl, File file, Map<String, String> pars, String parName, String fileName) throws NetworkIOReadErrorException {
 		return send(RequestHeader.newRequestHeaderByUpFile(HttpUrl.newInstance(httpUrl), file, requestHeader.getHttpProxy(), pars, parName, fileName));
 	}
 
@@ -173,8 +168,10 @@ public class HttpSocket implements Serializable {
 			}
 		} catch (SocketTimeoutException ste) {
 			throw new NetworkIOReadErrorException("获取数据超时!", ste);
+		} catch (UnknownHostException uhe) {
+			throw new NetworkIOReadErrorException("不可识别的主机地址 : " + this.requestHeader.getHost(), uhe);
 		} catch (IOException e) {
-			throw new NetworkIOReadErrorException("网络错误!", e);
+			throw new NetworkIOReadErrorException("未知的网络错误!  当前request请求头 : \r\n" + this.requestHeader.getRequest(), e);
 		} finally {
 			// 已经发送完成
 			IOUtils.closeQuietly(inputStream);
@@ -276,7 +273,7 @@ public class HttpSocket implements Serializable {
 		return isConnectionFree;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		HttpSocket hs = null;
 
 		// System.out.println("-------------保存返回的图片-----------------");

@@ -14,7 +14,7 @@ import com.r.app.taobaoshua.manger.UrlManger;
 import com.r.app.taobaoshua.manger.UrlResolve;
 import com.r.app.taobaoshua.model.PV;
 import com.r.app.taobaoshua.model.PVQuest;
-import com.r.core.exceptions.CaptchaErrorException;
+import com.r.core.exceptions.LogginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -44,7 +44,7 @@ public class Action {
 	 * @throws IOException
 	 *             图片流IO读取错误
 	 */
-	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException, IOException {
+	public Image getLoginCaptchaImage() {
 		return urlManger.getLoginCaptchaImage();
 	}
 
@@ -54,19 +54,21 @@ public class Action {
 	 * @param account
 	 * @param accountPassword
 	 * @param captcha
+	 * @param question
+	 * @param answer
 	 * @throws IOException
-	 * @throws CaptchaErrorException
+	 * @throws LogginErrorException
 	 *             验证码错误
 	 */
-	public void login(String account, String accountPassword, String captcha) throws IOException, CaptchaErrorException {
-		String login = urlManger.login(account, accountPassword, captcha);
+	public void login(String account, String accountPassword, String captcha, String question, String answer) throws LogginErrorException {
+		String login = urlManger.login(account, accountPassword, captcha, question, answer);
+		logger.debug("登陆成功后的body文本 : {}", login);
 		if (0 <= login.indexOf("验证码不正确")) {
-			throw new CaptchaErrorException("验证码错误,请重新登陆");
+			throw new LogginErrorException("验证码错误,请重新登陆", 1);
 		}
 		if (0 <= login.indexOf("为确认你的身份")) {
-			throw new CaptchaErrorException("为确认你的身份，登陆时需要进行安全验证.请到网站进行安全认证后,再操作.谢谢!");
+			throw new LogginErrorException("为确认你的身份,请登陆网站进行身份认证", 2);
 		}
-		logger.debug("登陆成功后的body文本 : {}", login);
 	}
 
 	/**
@@ -80,26 +82,21 @@ public class Action {
 			return;
 		}
 		isPVListRefreshExecuting = true;
-		logger.debug("开启PV自动获取列表功能,每{}秒获取一次............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
+		logger.debug("开启PV自动获取列表功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
-			private int curPage = 1;
+			private int curPage = 4;
 
 			@Override
 			public void run() {
-				TaskUtil.sleep(RandomUtil.randomInteger(5000)); // 休眠[0,2}秒
-				List<PV> pvList = null;
-				try {
+				TaskUtil.sleep(RandomUtil.randomInteger(5_000));// 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
+				List<PV> pvList = resolve.resolvePV(urlManger.getPVList(curPage++));
+				if (CollectionUtils.isEmpty(pvList)) {
+					curPage = 1; // 重置页数到第一页
 					pvList = resolve.resolvePV(urlManger.getPVList(curPage++));
-					if (CollectionUtils.isEmpty(pvList)) {
-						curPage = 1; // 重置页数到第一页
-						pvList = resolve.resolvePV(urlManger.getPVList(curPage++));
-					}
-					if (CollectionUtils.isNotEmpty(pvList)) {
-						dataContext.addPVs(pvList);
-					}
-				} catch (IOException e) {
-					logger.debug(e.getMessage(), e);
+				}
+				if (CollectionUtils.isNotEmpty(pvList)) {
+					dataContext.addPVs(pvList);
 				}
 			}
 		}, -1, dataContext.getPVListRefreshInterval(), null, null);
@@ -116,32 +113,26 @@ public class Action {
 			return;
 		}
 		isPVQuestListRefreshExecuting = true;
-		logger.debug("开启PV任务自动获取列表功能,每{}秒获取一次............ ", String.valueOf(dataContext.getPVQuestListRefreshInterval()));
+		logger.debug("开启PV任务自动获取列表功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVQuestListRefreshInterval()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			private int curPage = 1;
 
 			@Override
 			public void run() {
-				TaskUtil.sleep(RandomUtil.randomInteger(5000)); // 休眠[0,2}秒
-				List<PVQuest> pvQuestList = null;
-				try {
+				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
+				List<PVQuest> pvQuestList = resolve.resolvePVQuest(urlManger.getPVQuestList(curPage++));
+				if (CollectionUtils.isEmpty(pvQuestList)) {
+					curPage = 1; // 重置页数到第一页
 					pvQuestList = resolve.resolvePVQuest(urlManger.getPVQuestList(curPage++));
-					if (CollectionUtils.isEmpty(pvQuestList)) {
-						curPage = 1; // 重置页数到第一页
-						pvQuestList = resolve.resolvePVQuest(urlManger.getPVQuestList(curPage++));
-					}
-					if (CollectionUtils.isNotEmpty(pvQuestList)) {
-						for (PVQuest pvQuest : pvQuestList) {
-							if (!dataContext.containsPVQuest(pvQuest)) {
-								resolve.resolvePVQuestDetaileInfo(pvQuest, urlManger.showQuest(pvQuest));
-								dataContext.addPVQuests(pvQuest);
-							}
+				}
+				if (CollectionUtils.isNotEmpty(pvQuestList)) {
+					for (PVQuest pvQuest : pvQuestList) {
+						if (!dataContext.containsPVQuest(pvQuest)) {
+							resolve.resolvePVQuestDetaileInfo(pvQuest, urlManger.showQuest(pvQuest));
+							dataContext.addPVQuests(pvQuest);
 						}
 					}
-
-				} catch (IOException e) {
-					logger.debug(e.getMessage(), e);
 				}
 			}
 		}, -1, dataContext.getPVQuestListRefreshInterval(), null, null);
@@ -161,11 +152,12 @@ public class Action {
 			return;
 		}
 		isAutoTakeTaskCommanding = true;
-		logger.debug("开启自动接手任务功能............ ", String.valueOf(dataContext.getPVTakeTaskIntervalTime()));
+		logger.debug("开启自动接手任务功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVTakeTaskIntervalTime()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
+				TaskUtil.sleep(RandomUtil.randomInteger(10_000)); // 随机延迟0到10_000毫秒,主要规避友保的防刷任务机制
 				while (!takeTask())
 					;
 			}
@@ -178,8 +170,6 @@ public class Action {
 							return true;
 						}
 					} catch (YouBaoException e) {
-						logger.debug(e.getMessage(), e);
-					} catch (IOException e) {
 						logger.debug(e.getMessage(), e);
 					}
 					dataContext.addPVFailTaskId(pollPV.getId());
@@ -201,38 +191,35 @@ public class Action {
 			return;
 		}
 		isStartExecCommanding = true;
-		logger.debug("开启刷流量功能............ ", String.valueOf(dataContext.getPVQuestTakeTaskIntervalTime()));
+		logger.debug("开启刷流量功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVQuestTakeTaskIntervalTime()));
 
 		// 每5秒就校验一个商品,最大查找页数为5页
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
+				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
 				PVQuest pollPVQuest = dataContext.pollPVQuest();
 				if (pollPVQuest != null) {
-					try {
-						int page = 1;
-
-						// 确定查询条件中的"所在地"
-						// 利用"所在地"最后两个字开始,递增查询淘宝,如果出宝贝信息,则说明此所在地存在,则使用,直到所在地全部查询完成
-						urlManger.searchLoc(pollPVQuest);
-						while (page <= dataContext.getExecSearchTaobaoPageNumberCommand()) {
-							String baobeipage = urlManger.search(pollPVQuest, page);
-							List<String> itemids = resolve.resolveBaoBeiUrl(pollPVQuest, baobeipage);
-							for (String itemid : itemids) {
-								if (urlManger.checkTaskUrl(pollPVQuest, itemid)) {
-									logger.debug("在第{}页成功搜索到关键字为[{}]的宝贝,并且验证通过,恭喜您增加了  [发布点]", page, pollPVQuest.getSearchKey());
-									return;
-								} else {
-									logger.debug("在第{}页成功搜索到关键字为[{}]的宝贝,但验证失败", page, pollPVQuest.getSearchKey());
-								}
+					logger.info("questid : {}  开始搜索关键字为[{}]，售价区间为[{},{}]，预置所在地为[{}]和店主为[{}]的淘宝宝贝", pollPVQuest.getQuestid(), pollPVQuest.getSearchKey(), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax(), pollPVQuest.getLocation(), pollPVQuest.getShopKeeper());
+					int page = 1;
+					// 确定查询条件中的"所在地"
+					// 利用"所在地"最后两个字开始,递增查询淘宝,如果出宝贝信息,则说明此所在地存在,则使用,直到所在地全部查询完成
+					urlManger.searchLoc(pollPVQuest);
+					while (page <= dataContext.getExecSearchTaobaoPageNumberCommand()) {
+						String baobeipage = urlManger.search(pollPVQuest, page);
+						List<String> itemids = resolve.resolveBaoBeiUrl(pollPVQuest, baobeipage);
+						for (String itemid : itemids) {
+							if (urlManger.checkTaskUrl(pollPVQuest, itemid)) {
+								logger.info("questid : {}  在第{}页成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝,并且验证通过,恭喜您增加了  [发布点]", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax());
+								return;
+							} else {
+								logger.info("questid : {}  在第{}页成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝,但验证失败", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMax());
 							}
-							logger.debug("在第{}页没有搜索到关键字为[{}]的宝贝.", page, pollPVQuest.getSearchKey());
-							page++;
 						}
-						urlManger.cancelTask(pollPVQuest);
-					} catch (IOException e) {
-						logger.debug(e.getMessage(), e);
+						logger.info("questid : {}  在第{}页没有搜索到关键字为[{}]，售价区间为[{},{}]的宝贝.", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax());
+						page++;
 					}
+					urlManger.cancelTask(pollPVQuest);
 					dataContext.addPVFailTaskId(pollPVQuest.getId());
 				}
 			}

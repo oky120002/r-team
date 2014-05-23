@@ -36,4 +36,9 @@ public class AssertException extends SException {
 	public AssertException(String message) {
 		super(message);
 	}
+
+	public AssertException(String message, int mark) {
+		super(message, mark);
+	}
+	
 }

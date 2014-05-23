@@ -70,31 +70,27 @@ public class DataContext {
 
 	/** 返回来路PV列表刷新间隔(单位 秒) */
 	public int getPVListRefreshInterval() {
-		// FIXME r-app:taobaoshua 每15秒获取一次PV列表修改成可以配置这个时间
 		return 30;
 	}
 
 	/** 返回来路PV任务列表刷新间隔(单位 秒) */
 	public int getPVQuestListRefreshInterval() {
-		// FIXME r-app:taobaoshua 每15秒获取一次PV列表修改成可以配置这个时间
 		return 15;
 	}
 
 	/** 返回做每个任务的间隔时间 */
 	public int getPVQuestTakeTaskIntervalTime() {
-		// FIXME r-app:taobaoshua 可以配置这个次数
 		return 30;
 	}
 
 	/** 返回接手任务间隔时间 */
 	public int getPVTakeTaskIntervalTime() {
-		// FIXME r-app:taobaoshua 可以配置这个次数
 		return 40;
 	}
 
 	/** 返回在淘宝搜索宝贝时,最大检索的页数 */
 	public int getExecSearchTaobaoPageNumberCommand() {
-		return 10;
+		return 50;
 	}
 
 	// ---------------
@@ -129,7 +125,7 @@ public class DataContext {
 	/** 添加PV任务集 */
 	public void addPVQuests(PVQuest... pvQuestLists) {
 		for (PVQuest pvQuest : pvQuestLists) {
-			if (!pvQuests.contains(pvQuest)) {
+			if (!pvQuests.contains(pvQuest) && !pvFailTaskIds.contains(pvQuest.getId())) {
 				pvQuests.add(pvQuest);
 			}
 		}
@@ -137,7 +133,7 @@ public class DataContext {
 	}
 
 	/**
-	 * 检查pvQuest任务是否已经解析过
+	 * 检查pvQuest任务是否已存在
 	 * 
 	 * @return
 	 */

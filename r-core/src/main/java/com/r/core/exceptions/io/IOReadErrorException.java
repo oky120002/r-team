@@ -39,4 +39,8 @@ public class IOReadErrorException extends SException {
 		super(message);
 	}
 
+	public IOReadErrorException(String message, int mark) {
+		super(message, mark);
+	}
+
 }
