@@ -68,6 +68,14 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
+		<!-- 中文分词 -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.8.0</version>
+		</dependency>
+
+
 		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>

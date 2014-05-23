@@ -135,8 +135,16 @@ public class UrlResolve {
 		String tip = StringUtils.substringBetween(pvQuestDetailBody, "readonly>", "</textarea>");
 		String[] tips = tip.split("，");
 		String money = tips[1]; // 钱
-		pvQuest.setPriceMin(money.substring(0, money.indexOf('-'))); // 最小价格
-		pvQuest.setPriceMax(money.substring(money.indexOf('-') + 1, money.length() - 1)); // 最小价格
+		try {
+			pvQuest.setPriceMin(Integer.valueOf(money.substring(0, money.indexOf('-'))).intValue()); // 最小价格
+		} catch (NumberFormatException e) {
+			pvQuest.setPriceMin(0);
+		}
+		try {
+			pvQuest.setPriceMax(Integer.valueOf(money.substring(money.indexOf('-') + 1, money.length() - 1))); // 最小价格
+		} catch (NumberFormatException e) {
+			pvQuest.setPriceMax(9999);
+		}
 		pvQuest.setLocation(tips[2].substring(3)); // 所在地
 
 		// 特殊条件

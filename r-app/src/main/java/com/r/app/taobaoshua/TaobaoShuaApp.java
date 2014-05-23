@@ -3,14 +3,11 @@
  */
 package com.r.app.taobaoshua;
 
-import java.net.Proxy.Type;
-
 import com.r.app.taobaoshua.action.Action;
 import com.r.app.taobaoshua.data.DataContext;
 import com.r.app.taobaoshua.desktop.Desktop;
-import com.r.core.desktop.ctrl.HCtrlInit;
+import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.httpsocket.HttpSocket;
-import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -74,9 +71,9 @@ public class TaobaoShuaApp {
 	}
 
 	public static void main(String[] args) {
-		HCtrlInit.initNoSpot();
-		HCtrlInit.initUIFont(null);
-		HCtrlInit.initWindowsStyleByWindows(null);
+		HCtrlUtil.setNoSpot();
+		HCtrlUtil.setUIFont(null);
+		HCtrlUtil.setWindowsStyleByWindows(null);
 
 		TaobaoShuaApp.app = new TaobaoShuaApp();
 		TaobaoShuaApp.app.dataContext = new DataContext();

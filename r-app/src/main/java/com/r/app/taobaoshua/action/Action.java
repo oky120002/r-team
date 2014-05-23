@@ -99,7 +99,7 @@ public class Action {
 						dataContext.addPVs(pvList);
 					}
 				} catch (IOException e) {
-
+					logger.debug(e.getMessage(), e);
 				}
 			}
 		}, -1, dataContext.getPVListRefreshInterval(), null, null);
@@ -116,7 +116,7 @@ public class Action {
 			return;
 		}
 		isPVQuestListRefreshExecuting = true;
-		logger.debug("开启PV任务自动获取列表功能,每{}秒获取一次............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
+		logger.debug("开启PV任务自动获取列表功能,每{}秒获取一次............ ", String.valueOf(dataContext.getPVQuestListRefreshInterval()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			private int curPage = 1;
@@ -141,7 +141,7 @@ public class Action {
 					}
 
 				} catch (IOException e) {
-
+					logger.debug(e.getMessage(), e);
 				}
 			}
 		}, -1, dataContext.getPVQuestListRefreshInterval(), null, null);
@@ -161,7 +161,7 @@ public class Action {
 			return;
 		}
 		isAutoTakeTaskCommanding = true;
-		logger.debug("开启自动接手任务功能............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
+		logger.debug("开启自动接手任务功能............ ", String.valueOf(dataContext.getPVTakeTaskIntervalTime()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
@@ -174,7 +174,7 @@ public class Action {
 				PV pollPV = dataContext.pollPV();
 				if (pollPV != null) {
 					try {
-						if (urlManger.takeTask(dataContext.pollPV())) {
+						if (urlManger.takeTask(pollPV)) {
 							return true;
 						}
 					} catch (YouBaoException e) {
@@ -201,31 +201,38 @@ public class Action {
 			return;
 		}
 		isStartExecCommanding = true;
-		logger.debug("开启刷流量功能............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
+		logger.debug("开启刷流量功能............ ", String.valueOf(dataContext.getPVQuestTakeTaskIntervalTime()));
 
 		// 每5秒就校验一个商品,最大查找页数为5页
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
 				PVQuest pollPVQuest = dataContext.pollPVQuest();
-				try {
-					int page = 1;
-					if (pollPVQuest != null) {
-						while (page <= 5) {
-							String baobeipage = urlManger.search(pollPVQuest, page++);
+				if (pollPVQuest != null) {
+					try {
+						int page = 1;
+
+						// 确定查询条件中的"所在地"
+						// 利用"所在地"最后两个字开始,递增查询淘宝,如果出宝贝信息,则说明此所在地存在,则使用,直到所在地全部查询完成
+						urlManger.searchLoc(pollPVQuest);
+						while (page <= dataContext.getExecSearchTaobaoPageNumberCommand()) {
+							String baobeipage = urlManger.search(pollPVQuest, page);
 							List<String> itemids = resolve.resolveBaoBeiUrl(pollPVQuest, baobeipage);
 							for (String itemid : itemids) {
 								if (urlManger.checkTaskUrl(pollPVQuest, itemid)) {
+									logger.debug("在第{}页成功搜索到关键字为[{}]的宝贝,并且验证通过,恭喜您增加了  [发布点]", page, pollPVQuest.getSearchKey());
 									return;
+								} else {
+									logger.debug("在第{}页成功搜索到关键字为[{}]的宝贝,但验证失败", page, pollPVQuest.getSearchKey());
 								}
 							}
+							logger.debug("在第{}页没有搜索到关键字为[{}]的宝贝.", page, pollPVQuest.getSearchKey());
+							page++;
 						}
 						urlManger.cancelTask(pollPVQuest);
-						dataContext.addPVFailTaskId(pollPVQuest.getId());
+					} catch (IOException e) {
+						logger.debug(e.getMessage(), e);
 					}
-				} catch (IOException e) {
-				} catch (YouBaoException ybe) {
-					logger.error("撤销任务失败!", ybe);
 					dataContext.addPVFailTaskId(pollPVQuest.getId());
 				}
 			}

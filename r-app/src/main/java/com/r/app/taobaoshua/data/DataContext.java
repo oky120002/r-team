@@ -71,13 +71,13 @@ public class DataContext {
 	/** 返回来路PV列表刷新间隔(单位 秒) */
 	public int getPVListRefreshInterval() {
 		// FIXME r-app:taobaoshua 每15秒获取一次PV列表修改成可以配置这个时间
-		return 60;
+		return 30;
 	}
 
 	/** 返回来路PV任务列表刷新间隔(单位 秒) */
 	public int getPVQuestListRefreshInterval() {
 		// FIXME r-app:taobaoshua 每15秒获取一次PV列表修改成可以配置这个时间
-		return 30;
+		return 15;
 	}
 
 	/** 返回做每个任务的间隔时间 */
@@ -89,7 +89,12 @@ public class DataContext {
 	/** 返回接手任务间隔时间 */
 	public int getPVTakeTaskIntervalTime() {
 		// FIXME r-app:taobaoshua 可以配置这个次数
-		return 30;
+		return 40;
+	}
+
+	/** 返回在淘宝搜索宝贝时,最大检索的页数 */
+	public int getExecSearchTaobaoPageNumberCommand() {
+		return 10;
 	}
 
 	// ---------------

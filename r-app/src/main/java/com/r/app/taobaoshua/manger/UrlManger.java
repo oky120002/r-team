@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.r.app.taobaoshua.TaobaoShuaApp;
 import com.r.app.taobaoshua.exception.YouBaoException;
 import com.r.app.taobaoshua.model.PV;
@@ -155,15 +157,12 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public boolean checkTaskUrl(PVQuest pvQuest, String itemid) throws IOException, YouBaoException {
-		logger.debug("checkTaskUrl 淘宝宝贝id : {}", itemid);
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("你已经获得发布点")) {
-			logger.debug("任务完成,获得发布点!");
 			return true;
 		}
-		logger.debug("checkTaskUrl 校验失败  淘宝宝贝id : ", itemid);
 		return false;
 	}
 
@@ -173,17 +172,17 @@ public class UrlManger {
 	 * @param pvQuest
 	 * 
 	 * @throws IOException
-	 * @throws YouBaoException
-	 *             撤销任务失败时抛出此异常
 	 */
-	public void cancelTask(PVQuest pvQuest) throws IOException, YouBaoException {
+	public boolean cancelTask(PVQuest pvQuest) throws IOException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=remove");
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("撤销接手成功")) {
-			logger.debug("撤销接手任务成功 : {}", pvQuest);
+			logger.debug("成功撤销搜索关键字为[{}]的宝贝的流量任务!", pvQuest.getSearchKey());
+			return true;
 		} else {
-			throw new YouBaoException("撤销任务失败 : " + pvQuest);
+			logger.debug("--撤销搜索关键字为[{}]的宝贝的流量任务失败!", pvQuest.getSearchKey());
+			return false;
 		}
 	}
 
@@ -202,5 +201,45 @@ public class UrlManger {
 		HttpSocket httpSocket = app.getTaobaoSocket();
 		ResponseHeader responseHeader = httpSocket.send(pvQuest.getTaobaoSearchAddr(page));
 		return responseHeader.bodyToString();
+	}
+
+	/**
+	 * 查询宝贝的真实"所在地"
+	 * 
+	 * @throws IOException
+	 */
+	public void searchLoc(PVQuest pvQuest) throws IOException {
+		String location = pvQuest.getLocation();
+		logger.debug("校验关键字为[{}]的宝贝的预置地址是否正确 : {}", pvQuest.getSearchKey(), location);
+		if (StringUtils.isNotBlank(location) && 2 <= location.length()) {
+			HttpSocket httpSocket = app.getTaobaoSocket();
+			ResponseHeader responseHeader = null;
+			int right = 2;
+			String html = "点击返回上一步";
+
+			while (true) {
+				String loc = StringUtils.right(location, right++);
+				//
+				responseHeader = httpSocket.send(pvQuest.getTaobaoSearchAddr(1));
+				html = responseHeader.bodyToString();
+
+				if (0 <= html.indexOf("点击返回上一步")) { // 截取出的所在地不存在
+					if (loc.equals(location)) { // 截取出的所在地和原所在地相等,则设置成通用所在地"all"后返回
+						pvQuest.setLocation("all");
+						logger.debug("搜索到关键字为[{}]的宝贝的真实所在地不存在,所以设置成通用所在地 : all", pvQuest.getSearchKey());
+						return;
+					} else { // 截取出的所在地和原所在地不相等,则继续截取
+
+					}
+				} else { // 截取出的所在地存在,则直接设置此所在地后跳出
+					pvQuest.setLocation(loc);
+					logger.debug("成功搜索到关键字为[{}]的宝贝的真实所在地 : {}", pvQuest.getSearchKey(), loc);
+					return;
+				}
+			}
+		} else {
+			pvQuest.setLocation("all");
+			logger.debug("成功搜索到关键字为[{}]的宝贝的真实所在地 : {}", pvQuest.getSearchKey(), "all");
+		}
 	}
 }

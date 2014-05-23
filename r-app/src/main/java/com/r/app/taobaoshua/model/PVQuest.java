@@ -10,20 +10,21 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author oky
  * 
  */
 public class PVQuest {
-
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 	private String id; // 任务编号
 	private String publisher; // 任务发布者
 	private String questid; // 任务id
 	private String searchKey; // 搜索关键字
-	private String priceMin; // 搜索最小价格
-	private String priceMax; // 搜索最大价格
+	private int priceMin; // 搜索最小价格
+	private int priceMax; // 搜索最大价格
 	private String location; // 搜索所在地 -- 因为是手动填写,可能出现不可识别的情况.要进行处理
 	private String shopKeeper; // 店主
 	private String boardTime; // 接手时间
@@ -82,7 +83,7 @@ public class PVQuest {
 	 * @return the searchKey
 	 */
 	public String getSearchKey() {
-		return searchKey;
+		return searchKey.split("\r\n")[0];
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class PVQuest {
 	/**
 	 * @return the priceMin
 	 */
-	public String getPriceMin() {
+	public int getPriceMin() {
 		return priceMin;
 	}
 
@@ -104,14 +105,14 @@ public class PVQuest {
 	 * @param priceMin
 	 *            the priceMin to set
 	 */
-	public void setPriceMin(String priceMin) {
+	public void setPriceMin(int priceMin) {
 		this.priceMin = priceMin;
 	}
 
 	/**
 	 * @return the priceMax
 	 */
-	public String getPriceMax() {
+	public int getPriceMax() {
 		return priceMax;
 	}
 
@@ -119,7 +120,7 @@ public class PVQuest {
 	 * @param priceMax
 	 *            the priceMax to set
 	 */
-	public void setPriceMax(String priceMax) {
+	public void setPriceMax(int priceMax) {
 		this.priceMax = priceMax;
 	}
 
@@ -135,7 +136,7 @@ public class PVQuest {
 	 *            the location to set
 	 */
 	public void setLocation(String location) {
-		this.location = location;
+		this.location = StringUtils.isBlank(location) ? "all" : location.trim();
 	}
 
 	/**
@@ -264,8 +265,17 @@ public class PVQuest {
 		}
 		StringBuilder url = new StringBuilder();
 		String loc = convertLocation(this.location);
-		String minPrice = this.priceMin;
-		String maxPrice = "0".equals(this.priceMax) ? "9999" : this.priceMax;
+		int minPrice = this.priceMin > this.priceMax ? this.priceMax : this.priceMin;
+		int maxPrice = this.priceMin > this.priceMax ? this.priceMin : this.priceMax;
+		if (minPrice == maxPrice) {
+			if (maxPrice == 0) { // 如果minPrice == maxPrice == 0
+				maxPrice = 1;
+			} else {
+				minPrice--;
+				maxPrice++;
+			}
+		}
+
 		String key = this.searchKey;
 		try {
 			key = URLEncoder.encode(key, "gbk");
@@ -284,17 +294,6 @@ public class PVQuest {
 
 	/** 转换所在地 */
 	private String convertLocation(String loc) {
-		loc = loc.trim();
-		if (0 <= loc.indexOf("深圳")) {
-			loc = "深圳";
-		}
-		if (0 <= loc.indexOf("佛山")) {
-			loc = "佛山";
-		}
-		if (0 <= loc.indexOf("宁波")) {
-			loc = "宁波";
-		}
-		
 		switch (loc) {
 		case "江沪浙":
 			loc = "江苏,浙江,上海";
@@ -380,5 +379,11 @@ public class PVQuest {
 			Matcher matcher = pattern.matcher(this.shopKeeper);
 			return matcher.replaceFirst(".{" + length + "}");
 		}
+	}
+
+	public static void main(String[] args) {
+		String sss = "babcd";
+
+		System.out.println(sss.split("b.a")[0]);
 	}
 }

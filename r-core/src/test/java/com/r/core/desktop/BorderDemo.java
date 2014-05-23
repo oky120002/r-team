@@ -13,11 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import com.r.core.desktop.ctrl.HCtrlInit;
+import com.r.core.desktop.ctrl.HCtrlUtil;
 
 public class BorderDemo {
 	public static void main(String[] args) {
-		HCtrlInit.init();
+		HCtrlUtil.init();
 		JFrame frame = new JFrame("边框演示");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();

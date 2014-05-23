@@ -7,20 +7,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
-import org.apache.commons.io.FileUtils;
 import org.quartz.SchedulerException;
 
 import com.r.app.taobaoshua.TaobaoShuaApp;
@@ -41,10 +33,10 @@ import com.r.core.log.LoggerFactory;
 public class Desktop extends HBaseFrame implements DataChangerListener, ActionListener {
 	private static final long serialVersionUID = 4683581855428200977L;
 	private static final Logger logger = LoggerFactory.getLogger(Desktop.class);
-	private static final String COMMAND_START_TASK = "command_start_task"; // 命令_启动刷任务命令
+	private static final String COMMAND_START_TASK = "COMMAND_START_TASK"; // 命令_启动刷任务命令
 	private static final TaobaoShuaApp app = TaobaoShuaApp.getInstance();
 	private LoginDesktop loginDesktop = null;
-	private JButton startButton = new JButton("刷流量");
+	private JButton startButton = new JButton("xxx");
 
 	private JTable pvTable; // pvs列表
 	private PVListTableModel pvTableModel; // pvs列表数据源
@@ -69,24 +61,17 @@ public class Desktop extends HBaseFrame implements DataChangerListener, ActionLi
 		String actionCommand = e.getActionCommand();
 
 		if (COMMAND_START_TASK.equals(actionCommand)) { // 执行耍来路流量命令
-			try {
-				app.getAction().startExecCommand();
-			} catch (SchedulerException e1) {
-			}
-			return;
 		}
 	}
 
 	@Override
 	public void changePVList() {
 		pvTable.updateUI();
-//		fitTableColumns(pvTable);
 	}
 
 	@Override
 	public void changePVQuestList() {
 		pvQuestTable.updateUI();
-//		fitTableColumns(pvQuestTable);
 	}
 
 	/** 初始化窗口样式 */
@@ -124,6 +109,7 @@ public class Desktop extends HBaseFrame implements DataChangerListener, ActionLi
 		centerBox.add(pvQuestTableBox);
 		add(centerBox, BorderLayout.CENTER);
 
+		startButton.setEnabled(false);
 		HBaseBox buttomBox = HBaseBox.createHorizontalBaseBox();
 		buttomBox.add(HBaseBox.createHorizontalGlue());
 		buttomBox.add(startButton);
@@ -133,25 +119,6 @@ public class Desktop extends HBaseFrame implements DataChangerListener, ActionLi
 	private void initListeners() {
 		startButton.setActionCommand(COMMAND_START_TASK);
 		startButton.addActionListener(this);
-	}
-
-	/** 自动根据单元格内容调整列宽 */
-	private void fitTableColumns(JTable myTable) {
-		JTableHeader header = myTable.getTableHeader();
-		int rowCount = myTable.getRowCount();
-
-		Enumeration<TableColumn> columns = myTable.getColumnModel().getColumns();
-		while (columns.hasMoreElements()) {
-			TableColumn column = (TableColumn) columns.nextElement();
-			int col = header.getColumnModel().getColumnIndex(column.getIdentifier());
-			int width = (int) myTable.getTableHeader().getDefaultRenderer().getTableCellRendererComponent(myTable, column.getIdentifier(), false, false, -1, col).getPreferredSize().getWidth();
-			for (int row = 0; row < rowCount; row++) {
-				int preferedWidth = (int) myTable.getCellRenderer(row, col).getTableCellRendererComponent(myTable, myTable.getValueAt(row, col), false, false, row, col).getPreferredSize().getWidth();
-				width = Math.max(width, preferedWidth);
-			}
-			header.setResizingColumn(column); // 此行很重要
-			column.setWidth(width + myTable.getIntercellSpacing().width);
-		}
 	}
 
 	/** 启动pv列表命令 */
@@ -173,16 +140,12 @@ public class Desktop extends HBaseFrame implements DataChangerListener, ActionLi
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动[接手PV]功能失效,请手动获取同时联系开发者说明情况.", Desktop.this, e);
 		}
-	}
 
-	public static void main(String[] args) throws IOException {
-		String readFileToString = FileUtils.readFileToString(new File("C:\\Documents and Settings\\oky\\桌面\\1.txt"), "gbk");
-		// System.out.println(readFileToString);
-		// wuzeling2009
-		Pattern pattern = Pattern.compile("如实描述");
-		Matcher matcher = pattern.matcher(readFileToString);
-		System.out.println(matcher.find());
-		System.out.println(matcher.group());
-		System.out.println(matcher.start());
+		try {
+			app.getAction().startExecCommand();
+		} catch (SchedulerException e) {
+			HAlert.showErrorTips("自动[完成淘宝搜索]功能失效,请手动获取同时联系开发者说明情况.", Desktop.this, e);
+		}
+
 	}
 }
