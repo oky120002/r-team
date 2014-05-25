@@ -5,8 +5,7 @@
 	<property name="logPath" value="D:/logs/r-app/taobaoshua" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
-	<property name="commonPattern"
-		value="%-4relative [%thread] %-5level %logger{200} - %msg%n" />
+	<property name="commonPattern" value="%-4relative [%thread] %-5level %logger{200} - %msg%n" />
 	<timestamp key="date" datePattern="yyyy-MM-dd HH:mm:ss" />
 
 	<contextName>${appName}</contextName>
@@ -14,7 +13,7 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>${appName} - ${date}${commonPattern}</pattern>
+			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
 		</encoder>
 	</appender>
 
@@ -31,7 +30,7 @@
 			<maxFileSize>${maxLogFileSize}</maxFileSize>
 		</triggeringPolicy>
 		<encoder>
-			<pattern>${appName} - ${date}${commonPattern}</pattern>
+			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
 		</encoder>
 	</appender>
 
@@ -39,7 +38,7 @@
 		<file>${logPath}${appName}.sql.log</file>
 		<append>false</append>
 		<encoder>
-			<pattern>${appName} - ${date}${commonPattern}</pattern>
+			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
 		</encoder>
 	</appender>
 

@@ -81,7 +81,7 @@ public class SException extends RuntimeException {
 	 * @return
 	 */
 	public int getErrorMark() {
-		return this.mark;
+		return mark;
 	}
 
 	/**

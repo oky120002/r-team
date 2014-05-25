@@ -98,7 +98,7 @@ public class PVQuest {
 	 * @return the searchKey
 	 */
 	public String getSearchKey() {
-		return searchKey.split("\r\n")[0];
+		return StringUtils.isBlank(searchKey) ? "" : searchKey.split("\r\n")[0];
 	}
 
 	/** 截取搜索的关键字,以cutNumber长度输出 */
@@ -301,13 +301,17 @@ public class PVQuest {
 		} catch (UnsupportedEncodingException e) {
 		}
 
-		url.append("http://s.taobao.com/search?tab=all");
+		url.append("http://s.taobao.com/search?");
+		url.append("tab=").append(this.isTmall ? "mall" : "all");
 		url.append("&q=").append(key); // 必须存在
 		url.append("&loc=").append(convertLocation(this.location));
-		url.append("&filter=reserve_price[").append(this.priceMin).append(',').append(this.priceMax).append(']');
+		// 增加一个判断.就是发布任务的可能就是要人不输入价格.填写价格 0 0(我这个0 1是set时做了处理)
+		if (!(this.priceMin == 0 && this.priceMax == 1)) {
+			url.append("&filter=reserve_price[").append(this.priceMin).append(',').append(this.priceMax).append(']');
+		}
 		url.append("&filterFineness=2&promote=0");
-		url.append("&s=").append((page - 1) * 40);
 		url.append("&fs=0&stats_click=search_radio_all%3A1&initiative_id=staobaoz_").append(sdf.format(new Date()));
+		url.append("&s=").append((page - 1) * 40).append("#J_relative");
 		return url.toString();
 	}
 
@@ -325,7 +329,8 @@ public class PVQuest {
 	// http://s.taobao.com/search?tab=all&fs=0&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20140524&q=%C5%B7%C9%AF%B1%B4%B6%F9&filterFineness=2
 	public String checkSearchAddr() {
 		StringBuilder url = new StringBuilder();
-		url.append("http://s.taobao.com/search?tab=all&loc=").append(convertLocation(this.location));
+		url.append("http://s.taobao.com/search?tab=").append(this.isTmall ? "mall" : "all");
+		url.append("&loc=").append(convertLocation(this.location));
 		url.append("&fs=0&stats_click=search_radio_all%3A1&initiative_id=staobaoz_").append(sdf.format(new Date()));
 		url.append("&q=").append(convertSearchKey(this.searchKey)).append("&filterFineness=2");
 		return url.toString();

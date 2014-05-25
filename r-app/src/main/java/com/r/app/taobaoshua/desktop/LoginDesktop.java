@@ -17,7 +17,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +32,7 @@ import com.r.core.desktop.ctrl.impl.label.HClickLabel;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel;
 import com.r.core.exceptions.LogginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.TaskUtil;
@@ -46,6 +49,7 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 	private static final int CTRL_STRUT = 5; // 控件之间的间隔
 	private static final String COMMAND_LOGIN = "command_login"; // 命令_登陆
 	private static final String COMMAND_EXIT = "command_exit"; // 命令_退出
+	private static final String COMMAND_AUTOPROXY = "command_autoproxy"; // 命令_自动代理
 	private static final TaobaoShuaApp app = TaobaoShuaApp.getInstance();
 
 	private JTextField accountTextField = new JTextField(); // 友保账号
@@ -55,6 +59,8 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 	private JTextField answerTextField = new JTextField(); // 密保答案
 	private HImagePanel captchaImagePanel = new HImagePanel(new Dimension(70, 20), null); // 验证码图片
 	private HClickLabel reacquireCaptchaLabel = new HClickLabel("重新获取", Color.RED, null); // 重新获取验证码
+	private JCheckBox checkBox = new JCheckBox("启用代理");
+	private JList proxyList = new JList();
 	private JButton loginButton = new JButton("登陆");
 	private JButton exitButton = new JButton("取消");
 
@@ -70,14 +76,16 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 
-		if (COMMAND_LOGIN.equals(actionCommand)) { // 登陆
+		switch (actionCommand) {
+		case COMMAND_LOGIN: // 登陆
 			doLogin();
-			return;
-		}
-
-		if (COMMAND_EXIT.equals(actionCommand)) { // 退出
+			break;
+		case COMMAND_EXIT: // 退出
 			System.exit(0);
-			return;
+			break;
+		case COMMAND_AUTOPROXY: // 自动代理
+			proxy();
+			break;
 		}
 	}
 
@@ -152,6 +160,7 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 		// 下边
 		HBaseBox southBox = HBaseBox.createHorizontalBaseBox();
 		southBox.setBorder(BorderFactory.createEmptyBorder(CTRL_STRUT, CTRL_STRUT, CTRL_STRUT, CTRL_STRUT)); // 设置箱子组件内边距
+		southBox.add(checkBox);
 		southBox.add(HBaseBox.createHorizontalGlue());
 		southBox.add(loginButton).requestFocus();
 		southBox.add(HBaseBox.createHorizontalStrut(CTRL_STRUT));
@@ -166,6 +175,8 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 		loginButton.addActionListener(this);
 		exitButton.setActionCommand(COMMAND_EXIT);
 		exitButton.addActionListener(this);
+		checkBox.setActionCommand(COMMAND_AUTOPROXY);
+		checkBox.addActionListener(this);
 
 		captchaTextField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -246,5 +257,14 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 				LoginDesktop.this.captchaImagePanel.setImage(captcha);
 			}
 		});
+	}
+
+	/** 启动自动代理 */
+	private void proxy() {
+		if (checkBox.isSelected()) {
+			app.setProxy(HttpProxy.newInstance(true, java.net.Proxy.Type.HTTP, "61.174.9.96", 8080));
+		} else {
+			app.setProxy(null);
+		}
 	}
 }

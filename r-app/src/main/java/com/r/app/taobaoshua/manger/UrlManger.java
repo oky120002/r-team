@@ -8,7 +8,6 @@ import java.net.URLEncoder;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.TaobaoShuaApp;
-import com.r.app.taobaoshua.exception.YouBaoException;
 import com.r.app.taobaoshua.model.PV;
 import com.r.app.taobaoshua.model.PVQuest;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
@@ -138,31 +137,31 @@ public class UrlManger {
 	 * @throws YouBaoException
 	 *             不支持完成某种特殊条件的任务时,抛出此异常
 	 */
-	public boolean takeTask(PV pv) throws NetworkIOReadErrorException, YouBaoException {
-		if (pv.isIntoStoreAndSearch()) {
-			// FIXME r-app:taobaoshua 添加此支持"进店后再次搜索"
-			throw new YouBaoException("暂时不支持\"进店后再次搜索\"任务");
-		}
-		if (pv.isStayFor5Minutes()) {
-			// FIXME r-app:taobaoshua 添加此支持"停留5分钟"
-			throw new YouBaoException("暂时不支持\"停留5分钟\"任务");
-		}
-
-		if (pv.isTmall()) {
-			// FIXME r-app:taobaoshua 添加此支持"天猫"
-			throw new YouBaoException("暂时不支持\"天猫\"任务");
-		}
-
+	public boolean takeTask(PV pv) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send(pv.getUrl());
 		String body = responseHeader.bodyToString();
 
-		if (0 <= body.indexOf("接手任务成功")) {
-			return true;
+		String substringBetween = StringUtils.substringBetween(body, "alert('", "')");
+		logger.debug(substringBetween);
+		if (StringUtils.isNotBlank(substringBetween)) {
+			if (substringBetween.contains("接手任务成功")) {
+				return true;
+			}
+			if (substringBetween.contains("同一IP一天只能接手30个来路流量任务")) {
+				return true;
+			}
+			if (substringBetween.contains("一个平台号一天只能接手同一个流量地址1次")) {
+				return false;
+			}
+			if (substringBetween.contains("请重新接手其他任务")) {
+				return false;
+			}
 		} else {
 			logger.debug(body);
-			return false;
 		}
+
+		return false;
 	}
 
 	/**
@@ -173,7 +172,7 @@ public class UrlManger {
 	 *            宝贝id
 	 * @throws IOException
 	 */
-	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException, YouBaoException {
+	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
 		String body = responseHeader.bodyToString();

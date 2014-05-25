@@ -147,5 +147,11 @@ public class Desktop extends HBaseFrame implements DataChangerListener, ActionLi
 			HAlert.showErrorTips("自动[完成淘宝搜索]功能失效,请手动获取同时联系开发者说明情况.", Desktop.this, e);
 		}
 
+		try {
+			app.getAction().startAutoSaveDatas();
+		} catch (SchedulerException e) {
+			HAlert.showErrorTips("自动[保存数据]功能失效,请手动获取同时联系开发者说明情况.", Desktop.this, e);
+		}
+
 	}
 }

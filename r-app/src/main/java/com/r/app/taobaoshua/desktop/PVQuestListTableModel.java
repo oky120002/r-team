@@ -51,7 +51,7 @@ public class PVQuestListTableModel extends AbstractTableModel implements TableMo
 		PVQuest pvQuest = null;
 		try {
 			pvQuest = pvQuests[rowIndex];
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch (Exception e) {
 			return "";
 		}
 

@@ -51,8 +51,8 @@ public class PVListTableModel extends AbstractTableModel implements TableModel {
 		PV pv = null;
 		try {
 			pv = pvs[rowIndex];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return new PV();
+		} catch (Exception e) {
+			return "";
 		}
 
 		String value = null;

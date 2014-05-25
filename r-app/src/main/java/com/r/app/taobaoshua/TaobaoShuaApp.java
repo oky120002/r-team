@@ -3,11 +3,14 @@
  */
 package com.r.app.taobaoshua;
 
+import java.net.Proxy.Type;
+
 import com.r.app.taobaoshua.action.Action;
 import com.r.app.taobaoshua.data.DataContext;
 import com.r.app.taobaoshua.desktop.Desktop;
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -64,6 +67,12 @@ public class TaobaoShuaApp {
 		return taobaoSocket;
 	}
 
+	/** 设置代理 */
+	public void setProxy(HttpProxy httpProxy) {
+		this.taobaoSocket = HttpSocket.newHttpSocket(true, httpProxy);
+		this.youbaoSocket = HttpSocket.newHttpSocket(true, httpProxy);
+	}
+
 	/** 启动 */
 	private void standup() {
 		logger.info("Standup TaobaoShuaApp...........");
@@ -79,12 +88,8 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.dataContext = new DataContext();
 		TaobaoShuaApp.app.action = new Action();
 		TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true, null);
-		// TaobaoShuaApp.app.youbaoSocket = HttpSocket.newHttpSocket(true,
-		// HttpProxy.newInstance(true, Type.HTTP, "202.109.163.75", 8085));
 		TaobaoShuaApp.app.youbaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true, null);
-		// TaobaoShuaApp.app.taobaoSocket = HttpSocket.newHttpSocket(true,
-		// HttpProxy.newInstance(true, Type.HTTP, "202.109.163.75", 8085));
 		TaobaoShuaApp.app.taobaoSocket.setTimeout(TIMEOUT);
 		TaobaoShuaApp.app.desktop = new Desktop();
 

@@ -4,9 +4,14 @@
 package com.r.app.taobaoshua.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import org.apache.commons.collections.SetUtils;
 
 import com.r.app.taobaoshua.model.PV;
 import com.r.app.taobaoshua.model.PVQuest;
@@ -21,9 +26,11 @@ public class DataContext {
 	private static final String FIRE_METHOD_NAME_PV_QUEST = "PVQUEST";
 	private List<DataChangerListener> changerListener = new ArrayList<DataChangerListener>();
 
+	// XXX r-app:taobaoshua 这个如果不设置成"获取"方法不同步的话..在JTableModel里面则有线程安全问题,所以,经常会抛出null异常
 	private Queue<PV> pvs = new ConcurrentLinkedQueue<PV>(); // PV
 	private Queue<PVQuest> pvQuests = new ConcurrentLinkedQueue<PVQuest>(); // PV任务
-	private Queue<String> pvFailTaskIds = new ConcurrentLinkedQueue<String>(); // 校验失败的PV
+	@SuppressWarnings("unchecked")
+	private Set<String> pvFailTaskIds = SetUtils.synchronizedSet(new HashSet<String>()); // 校验失败的PV
 
 	// ------------
 	/** 添加PV集 */
@@ -31,7 +38,7 @@ public class DataContext {
 		for (PV pv : pvlist) {
 			if (!pvs.contains(pv) && !pvFailTaskIds.contains(pv.getId())) {
 				// FIXME r-app:taobaoshua 这里需要支持三种特殊情况的查询
-				if (pv.isIntoStoreAndSearch() || pv.isStayFor5Minutes() || pv.isTmall()) {
+				if (pv.isIntoStoreAndSearch()) {
 					continue;
 				}
 				pvs.add(pv);
@@ -64,6 +71,16 @@ public class DataContext {
 	/** 添加失败的PV任务ID */
 	public void addPVFailTaskId(String id) {
 		pvFailTaskIds.add(id);
+	}
+
+	/** 返回任务失败ID */
+	public Collection<String> getPvFailTaskIds() {
+		return this.pvFailTaskIds;
+	}
+
+	/** 批量添加失败的PV任务ID */
+	public void addPVFailTaskIds(Collection<String> lines) {
+		pvFailTaskIds.addAll(lines);
 	}
 
 	// --------------

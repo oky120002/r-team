@@ -3,7 +3,7 @@ package com.r.core.httpsocket.context;
 import java.net.Proxy;
 import java.net.Proxy.Type;
 
-public class HttpProxy implements HProxy {
+public class HttpProxy {
 	/** 代理类型,如果为null则不设置代理 */
 	private Proxy.Type proxyType = null;
 	/** 是否启用代理 */
@@ -40,20 +40,21 @@ public class HttpProxy implements HProxy {
 		return httpProxy;
 	}
 
-	@Override
+	public String getProxyName() {
+		return this.proxyHostName + ":" + this.proxyPort;
+	}
+
 	public void setEnable(boolean isEnable) {
 		this.isEnable = isEnable;
 	}
 
-	@Override
-	public boolean isEnable() {
+	public boolean isProxyEnable() {
 		return isEnable;
 	}
 
 	/**
 	 * @return the proxyType
 	 */
-	@Override
 	public Proxy.Type getProxyType() {
 		return proxyType;
 	}
@@ -62,7 +63,6 @@ public class HttpProxy implements HProxy {
 	 * @param proxyType
 	 *            the proxyType to set
 	 */
-	@Override
 	public void setProxyType(Proxy.Type proxyType) {
 		this.proxyType = proxyType;
 	}
@@ -70,7 +70,6 @@ public class HttpProxy implements HProxy {
 	/**
 	 * @return the proxyHostName
 	 */
-	@Override
 	public String getProxyHostName() {
 		return proxyHostName;
 	}
@@ -79,7 +78,6 @@ public class HttpProxy implements HProxy {
 	 * @param proxyHostName
 	 *            the proxyHostName to set
 	 */
-	@Override
 	public void setProxyHostName(String proxyHostName) {
 		this.proxyHostName = proxyHostName;
 	}
@@ -87,7 +85,6 @@ public class HttpProxy implements HProxy {
 	/**
 	 * @return the proxyPort
 	 */
-	@Override
 	public int getProxyPort() {
 		return proxyPort;
 	}
@@ -96,16 +93,10 @@ public class HttpProxy implements HProxy {
 	 * @param proxyPort
 	 *            the proxyPort to set
 	 */
-	@Override
 	public void setProxyPort(int proxyPort) {
 		this.proxyPort = proxyPort;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "[" + (proxyType == null ? "null" : proxyType.name()) + ":" + proxyHostName + ":" + proxyPort + "]";
