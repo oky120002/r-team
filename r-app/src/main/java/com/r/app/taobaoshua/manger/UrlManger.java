@@ -35,7 +35,7 @@ public class UrlManger {
 	 */
 	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/checkcode.php?id=");
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/checkcode.php?id=");
 		return responseHeader.bodyToImage();
 	}
 
@@ -82,8 +82,8 @@ public class UrlManger {
 			}
 			post.append("&question=").append(question);
 		}
-		post.append("&dosubmit=1&forward=http%3A%2F%2Fdx.yuuboo.com%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/login.php", post.toString(), null);
+		post.append("&dosubmit=1&forward=http%3A%2F%2Fwww.yuuboo.net%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/login.php", post.toString(), null);
 		return responseHeader.bodyToString();
 	}
 
@@ -98,7 +98,7 @@ public class UrlManger {
 	 */
 	public String getPVList(int page) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/quest.php?type=pv&page=" + page);
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/quest.php?type=pv&page=" + page);
 		return responseHeader.bodyToString();
 	}
 
@@ -113,7 +113,7 @@ public class UrlManger {
 	 */
 	public String getPVQuestList(int page) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/doquest.php?type=pv&status=2&page=" + page);
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/doquest.php?type=pv&status=2&page=" + page);
 		return responseHeader.bodyToString();
 	}
 
@@ -124,7 +124,7 @@ public class UrlManger {
 	 */
 	public String showQuest(PVQuest pvQuest) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid());
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid());
 		return responseHeader.bodyToString();
 	}
 
@@ -174,7 +174,7 @@ public class UrlManger {
 	 */
 	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("你已经获得发布点")) {
 			// 验证成功后,进入相映itemid的宝贝页面,给别个增加一个流量....虽然刷,但是还是不要太过分了.
@@ -203,7 +203,7 @@ public class UrlManger {
 	 */
 	public boolean cancelTask(PVQuest pvQuest) throws NetworkIOReadErrorException {
 		HttpSocket httpSocket = app.getYoubaoSocket();
-		ResponseHeader responseHeader = httpSocket.send("http://dx.yuuboo.com/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=remove");
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=remove");
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("撤销接手成功")) {
 			logger.info("成功撤销搜索关键字为[{}]的宝贝的流量任务!", pvQuest.getSearchKey());

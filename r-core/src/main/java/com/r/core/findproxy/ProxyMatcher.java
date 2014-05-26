@@ -3,18 +3,15 @@
  */
 package com.r.core.findproxy;
 
-import java.net.Proxy;
-import java.util.List;
-
 /**
  * @author Administrator
- *
+ * 
  */
 public interface ProxyMatcher {
 
-	/** 启动匹配器开始工作 */
-	void start();
+	/** 启动匹配器开始工作一次 */
+	ProxyMatcher exec();
 
-	/** 获取所有的代理 */
-	List<Proxy> getProxys();
+	/** 添加匹配器监听器 */
+	ProxyMatcher addMatcherListener(ProxyMatcherListener matcherListener);
 }

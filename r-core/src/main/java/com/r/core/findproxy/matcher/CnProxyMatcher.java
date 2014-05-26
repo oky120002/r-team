@@ -6,40 +6,74 @@ package com.r.core.findproxy.matcher;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Proxy.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.core.findproxy.ProxyMatcher;
+import com.r.core.findproxy.ProxyMatcherListener;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * @author Administrator
- *
+ * 
  */
 public class CnProxyMatcher implements ProxyMatcher {
-	private static final int TIMEOUT = 3; // 3秒
-	private static final String URL = "http://cn-proxy.com"; // 代理页面url
-	private static final String PROXY_TEST_URL = "http://www.baidu.com"; // 代理链接测试地址
-	private List<Proxy> proxys = new ArrayList<Proxy>();
+	private static final Logger logger = LoggerFactory.getLogger(CnProxyMatcher.class);
+	private static final String FIRE_MATCHER_LISTENER_ADDPROXY = "addproxy"; // fire_增加代理
+	private static final String PROXY_PAGE_URL = "http://cn-proxy.com"; // 代理页面url
+	private static final int PROXY_PAGE_TIMEOUT = 30_000; // 代理页面超时
+	private ProxyMatcherListener matcherListener = null; // 代理匹配器监听器
 
-	@Override
-	public void start() {
-		String html = getHtml();
-		resloveHtml(html);
-		checkProxys(TIMEOUT);
+	public CnProxyMatcher() {
+		super();
+	}
+
+	public CnProxyMatcher(ProxyMatcherListener matcherListener) {
+		super();
+		this.matcherListener = matcherListener;
 	}
 
 	@Override
-	public List<Proxy> getProxys() {
-		return proxys;
+	public ProxyMatcher exec() {
+		logger.debug("开始进行代理获取匹配...........");
+		String html = getHtml();
+		if (StringUtils.isBlank(html)) {
+			return this;
+		}
+		resloveHtml(html);
+		return this;
+	}
+
+	@Override
+	public ProxyMatcher addMatcherListener(ProxyMatcherListener matcherListener) {
+		this.matcherListener = matcherListener;
+		return this;
+	}
+
+	/** 执行监听器 */
+	private void fireListener(String fire, Object... objects) {
+		if (matcherListener != null && StringUtils.isNotBlank(fire)) {
+			switch (fire) {
+			case FIRE_MATCHER_LISTENER_ADDPROXY:
+				this.matcherListener.matcherAddProxy((Proxy) objects[0]);
+				break;
+			}
+		}
+
 	}
 
 	/** 获取代理页面的html代码 */
 	private String getHtml() {
-		return HttpSocket.newHttpSocket(false, null).send(URL).bodyToString();
+		HttpSocket newHttpSocket = HttpSocket.newHttpSocket(false, null);
+		newHttpSocket.setTimeout(PROXY_PAGE_TIMEOUT);
+		try {
+			return newHttpSocket.send(PROXY_PAGE_URL).bodyToString();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	/** 从代理发布页面解析出代理 */
@@ -82,23 +116,12 @@ public class CnProxyMatcher implements ProxyMatcher {
 				port = td;
 				break;
 			case 2:
-				proxys.add(new Proxy(Type.HTTP, InetSocketAddress.createUnresolved(ip, Integer.valueOf(port).intValue())));
+				Proxy proxy = new Proxy(Type.HTTP, InetSocketAddress.createUnresolved(ip, Integer.valueOf(port).intValue()));
+				fireListener(FIRE_MATCHER_LISTENER_ADDPROXY, proxy);
 				break;
 			}
 			index++;
 		}
 
-	}
-
-	/**
-	 * 检查哪些代理可以使用
-	 * 
-	 * @param timeout
-	 *            超时(秒/单位)
-	 */
-	private void checkProxys(int timeout) {
-		for (Proxy proxy : proxys) {
-
-		}
 	}
 }

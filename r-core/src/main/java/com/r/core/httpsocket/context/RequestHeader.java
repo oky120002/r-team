@@ -405,7 +405,7 @@ public class RequestHeader implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RequestHeader [urlType=" + urlType + ", url=" + httpUrl.getUrl() + "]";
+		return "RequestHeader [urlType=" + urlType + ", url=" + (httpUrl == null ? "" : httpUrl.getUrl()) + "]";
 	}
 
 	/**

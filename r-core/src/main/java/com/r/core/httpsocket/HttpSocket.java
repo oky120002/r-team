@@ -32,7 +32,7 @@ public class HttpSocket implements Serializable {
 	/** http发送头信息 */
 	private RequestHeader requestHeader = null;
 	/** 连接超时时间,默认5秒 */
-	private int timeout = 5 * 1000; //
+	private int timeout = 5_000; //
 	/** 链接是否空闲中 */
 	private boolean isConnectionFree = true;
 
@@ -167,11 +167,11 @@ public class HttpSocket implements Serializable {
 				this.cookies.putAll(responseHeader.getCookies());
 			}
 		} catch (SocketTimeoutException ste) {
-			throw new NetworkIOReadErrorException("获取数据超时!", ste);
+			throw new NetworkIOReadErrorException("获取数据超时!", 1);
 		} catch (UnknownHostException uhe) {
-			throw new NetworkIOReadErrorException("不可识别的主机地址 : " + this.requestHeader.getHost(), uhe);
+			throw new NetworkIOReadErrorException("不可识别的主机地址 : " + this.requestHeader.getHost(), 2);
 		} catch (IOException e) {
-			throw new NetworkIOReadErrorException("未知的网络错误!  当前request请求头 : \r\n" + this.requestHeader.getRequest(), e);
+			throw new NetworkIOReadErrorException("未知的网络错误!  当前request请求头 : \r\n" + this.requestHeader.getRequest(), 3);
 		} finally {
 			// 已经发送完成
 			IOUtils.closeQuietly(inputStream);
@@ -271,6 +271,11 @@ public class HttpSocket implements Serializable {
 	/** 链接是否空闲 */
 	public boolean isConnectionFree() {
 		return isConnectionFree;
+	}
+
+	@Override
+	public String toString() {
+		return "HttpSocket [requestHeader=" + requestHeader + ", isHoldCookies=" + isHoldCookies + "]";
 	}
 
 	public static void main(String[] args) {

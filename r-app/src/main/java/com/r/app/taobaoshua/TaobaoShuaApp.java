@@ -3,8 +3,6 @@
  */
 package com.r.app.taobaoshua;
 
-import java.net.Proxy.Type;
-
 import com.r.app.taobaoshua.action.Action;
 import com.r.app.taobaoshua.data.DataContext;
 import com.r.app.taobaoshua.desktop.Desktop;

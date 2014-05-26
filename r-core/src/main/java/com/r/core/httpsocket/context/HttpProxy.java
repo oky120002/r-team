@@ -1,5 +1,6 @@
 package com.r.core.httpsocket.context;
 
+import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Proxy.Type;
 
@@ -37,6 +38,29 @@ public class HttpProxy {
 		httpProxy.setProxyType(proxyType);
 		httpProxy.setProxyHostName(proxyHostName);
 		httpProxy.setProxyPort(proxyPort);
+		return httpProxy;
+	}
+
+	/**
+	 * 根据传入的代理设置实例化一个HttpProxy
+	 * 
+	 * @param isEnable
+	 *            是否启用
+	 * @param proxyType
+	 *            代理类型
+	 * @param proxyHostName
+	 *            代理主机
+	 * @param proxyPort
+	 *            代理端口
+	 * @return
+	 */
+	public static HttpProxy newInstance(boolean isEnable, Proxy proxy) {
+		HttpProxy httpProxy = new HttpProxy();
+		httpProxy.setEnable(isEnable);
+		httpProxy.setProxyType(proxy.type());
+		InetSocketAddress address = (InetSocketAddress) proxy.address();
+		httpProxy.setProxyHostName(address.getHostString());
+		httpProxy.setProxyPort(address.getPort());
 		return httpProxy;
 	}
 
