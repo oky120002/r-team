@@ -262,7 +262,7 @@ public class LoginDesktop extends HBaseDialog implements ActionListener {
 	/** 启动自动代理 */
 	private void proxy() {
 		if (checkBox.isSelected()) {
-			app.setProxy(HttpProxy.newInstance(true, java.net.Proxy.Type.HTTP, "122.96.59.106", 843));
+			app.setProxy(HttpProxy.newInstance(true, java.net.Proxy.Type.HTTP, "122.96.59.102", 80));
 		} else {
 			app.setProxy(null);
 		}
