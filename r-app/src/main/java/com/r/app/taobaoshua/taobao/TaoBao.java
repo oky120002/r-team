@@ -3,6 +3,7 @@
  */
 package com.r.app.taobaoshua.taobao;
 
+import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
@@ -12,7 +13,7 @@ import com.r.core.log.LoggerFactory;
  * @author oky
  * 
  */
-public class TaoBao {
+public class TaoBao implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(YuuBoo.class);
 
 	private static TaoBao taoBao = null;
@@ -21,13 +22,13 @@ public class TaoBao {
 
 	public TaoBao() {
 		super();
-		this.taoBao = this;
+		TaoBao.taoBao = this;
 		this.taoBaoSocket = HttpSocket.newHttpSocket(true, null);
 		this.newTaoBaoSocket = HttpSocket.newHttpSocket(false, null);
 	}
 
 	public static TaoBao getInstance() {
-		return taoBao;
+		return TaoBao.taoBao;
 	}
 
 	public HttpSocket getNewTaoBaoSocket() {
@@ -36,5 +37,10 @@ public class TaoBao {
 
 	public HttpSocket getTaoBaoSocket() {
 		return taoBaoSocket;
+	}
+
+	@Override
+	public void start() {
+
 	}
 }

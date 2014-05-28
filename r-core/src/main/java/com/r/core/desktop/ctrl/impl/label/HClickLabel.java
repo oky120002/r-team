@@ -1,30 +1,24 @@
-/**
- * 
- */
 package com.r.core.desktop.ctrl.impl.label;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.core.desktop.ctrl.HBaseLabel;
-import com.r.core.util.TaskUtil;
 
 /**
  * 点击的标签<br />
  * label.getFontMetrics(label.getFont()).stringWidth(label.getText()) // 获取内容宽度
- * 
+ *
  * @author Administrator
- * 
+ *
  */
 public class HClickLabel extends HBaseLabel implements MouseListener {
 	private static final long serialVersionUID = -7146370829730685268L;
 
-	private MouseAdapter mouseAdapter;
 	private Color color; // 字体颜色
 	private Color mouseinColor; // 鼠标悬浮时的颜色
 	private String text; // 文本
@@ -56,7 +50,7 @@ public class HClickLabel extends HBaseLabel implements MouseListener {
 
 	/**
 	 * 初始化控件
-	 * 
+	 *
 	 * @param runnable
 	 * @param color
 	 * @param text
@@ -71,9 +65,6 @@ public class HClickLabel extends HBaseLabel implements MouseListener {
 			setForeground(this.color);
 		} else {
 			this.color = getForeground();
-		}
-		if (mouseAdapter != null) {
-			this.addMouseListener(this.mouseAdapter);
 		}
 	}
 
@@ -115,26 +106,47 @@ public class HClickLabel extends HBaseLabel implements MouseListener {
 		this.mouseinColor = mouseinColor;
 	}
 
-	/** 设置鼠标点击事件 */
-	public void setClickAdapter(Runnable runnable, boolean startThread) {
-		this.removeMouseListener(this.mouseAdapter);
-		this.mouseAdapter = getClickMouseAdapter(runnable, startThread);
-		addMouseListener(this.mouseAdapter);
+	@Override
+	public synchronized void addMouseListener(MouseListener mouseListener) {
+		super.addMouseListener(getClickMouseAdapter(mouseListener));
 	}
 
-	/** 根据Runnable设置鼠标点击响应Adapter */
-	private MouseAdapter getClickMouseAdapter(final Runnable runnable, final boolean startThread) {
-		return new MouseAdapter() {
+	private MouseListener getClickMouseAdapter(final MouseListener mouseListener) {
+		return new MouseListener() {
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (HClickLabel.this.isEnabled()) {
-					if (startThread) {
-						TaskUtil.executeTask(runnable);
-						return;
-					}
-					runnable.run();
+					mouseListener.mouseClicked(e);
 				}
-				super.mouseClicked(e);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (HClickLabel.this.isEnabled()) {
+					mouseListener.mousePressed(e);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (HClickLabel.this.isEnabled()) {
+					mouseListener.mouseReleased(e);
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (HClickLabel.this.isEnabled()) {
+					mouseListener.mouseEntered(e);
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (HClickLabel.this.isEnabled()) {
+					mouseListener.mouseExited(e);
+				}
 			}
 		};
 	}

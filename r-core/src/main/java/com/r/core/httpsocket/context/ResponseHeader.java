@@ -219,7 +219,7 @@ public class ResponseHeader implements Serializable {
 		ResponseContentType contentType = getContentType(null);
 		ResponseDataType responseDataType = contentType.getResponseContentTypeCode().getResponseDataType();
 		if (!ResponseDataType.图片.equals(responseDataType) && !ResponseDataType.二进制流.equals(responseDataType)) {
-			throw new ContentTypeErrorException("返回状态 : {}  Response返回的Body体是[{}]类型", getStatus().toString(), responseDataType.name());
+			throw new ContentTypeErrorException(" {}  Response返回的Body体是[{}]类型", getStatus().toString(), responseDataType.name());
 		}
 		try {
 			in = new ByteArrayInputStream(getBody());

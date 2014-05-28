@@ -1,5 +1,8 @@
 package com.r.core.httpsocket.context.responseheader;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.helpers.MessageFormatter;
+
 import com.r.core.exceptions.arg.ArgIllegalException;
 import com.r.core.util.AssertUtil;
 
@@ -60,6 +63,6 @@ public enum ResponseStatus {
 
 	@Override
 	public String toString() {
-		return this.title + " : " + this.caption;
+		return MessageFormatter.arrayFormat(" {} - {}({})", new String[] { this.code, this.title, StringUtils.abbreviate(this.caption, 10) }).getMessage();
 	}
 }

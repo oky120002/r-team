@@ -3,6 +3,7 @@
  */
 package com.r.app.taobaoshua.yuuboo;
 
+import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.TaobaoShuaApp;
 import com.r.app.taobaoshua.yuuboo.data.YuuBooDataContext;
 import com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop;
@@ -14,7 +15,7 @@ import com.r.core.log.LoggerFactory;
  * @author oky
  * 
  */
-public class YuuBoo {
+public class YuuBoo implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(YuuBoo.class);
 
 	private static YuuBoo yuuBoo = null;
@@ -27,11 +28,7 @@ public class YuuBoo {
 
 	public YuuBoo() {
 		super();
-		yuuBooDataContext = new YuuBooDataContext();
-		yuuBooAction = new YuuBooAction();
-		yuuBooManger = new YuuBooManger();
-		yuuBooResolve = new YuuBooResolve();
-		yuuBooSocket = HttpSocket.newHttpSocket(true, null);
+		logger.info("YuuBoo newInstance................");
 		YuuBoo.yuuBoo = this;
 	}
 
@@ -63,7 +60,26 @@ public class YuuBoo {
 		return yuuBooSocket;
 	}
 
+	@Override
 	public void start() {
-		
+		if (yuuBooSocket == null) {
+			yuuBooSocket = HttpSocket.newHttpSocket(true, TaobaoShuaApp.getInstance().getNextProxy());
+		}
+		if (yuuBooDataContext == null) {
+			yuuBooDataContext = new YuuBooDataContext();
+		}
+		if (yuuBooManger == null) {
+			yuuBooManger = new YuuBooManger();
+		}
+		if (yuuBooResolve == null) {
+			yuuBooResolve = new YuuBooResolve();
+		}
+		if (yuuBooAction == null) {
+			yuuBooAction = new YuuBooAction();
+		}
+		if (yuuBoodesktop == null) {
+			yuuBoodesktop = new YuuBooDesktop(TaobaoShuaApp.getInstance().getMainDesktop());
+		}
+		yuuBoodesktop.setVisible(true);
 	}
 }

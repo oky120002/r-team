@@ -26,7 +26,7 @@ public class YuuBooManger {
 
 	public YuuBooManger() {
 		super();
-		logger.debug("Init UrlManger.......");
+		logger.debug("YuuBooManger   newInstance  ................");
 	}
 
 	// 优保部分

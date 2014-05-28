@@ -124,8 +124,8 @@ public class SException extends RuntimeException {
 
 	public SException(String message, Object... objects) {
 		super((objects == null || objects.length == 0) ? message : MessageFormatter.arrayFormat(message, objects).getMessage());
-		this.errorCode = getErrorCode();
-		this.errorMessage = getErrorMessage();
+		this.errorCode = doGetErrorCode();
+		this.errorMessage = doGetErrorMessage();
 	}
 
 	public SException(String message, Throwable cause) {

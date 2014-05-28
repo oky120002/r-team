@@ -5,13 +5,10 @@ package com.r.app.taobaoshua.yuuboo.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Queue;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.apache.commons.collections.SetUtils;
 
 import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
@@ -26,11 +23,10 @@ public class YuuBooDataContext {
 	private static final String FIRE_METHOD_NAME_PV_QUEST = "PVQUEST";
 	private List<DataChangerListener> changerListener = new ArrayList<DataChangerListener>();
 
-	// XXX r-app:taobaoshua 这个如果不设置成"获取"方法不同步的话..在JTableModel里面则有线程安全问题,所以,经常会抛出null异常
-	private Queue<PV> pvs = new ConcurrentLinkedQueue<PV>(); // PV
-	private Queue<PVQuest> pvQuests = new ConcurrentLinkedQueue<PVQuest>(); // PV任务
-	@SuppressWarnings("unchecked")
-	private Set<String> pvFailTaskIds = SetUtils.synchronizedSet(new HashSet<String>()); // 校验失败的PV
+	private String account = null; // 账号
+	private List<PV> pvs = Collections.synchronizedList(new ArrayList<PV>()); // PV
+	private List<PVQuest> pvQuests = Collections.synchronizedList(new ArrayList<PVQuest>()); // PV任务
+	private Set<String> pvFailTaskIds = Collections.synchronizedSet(new HashSet<String>()); // 校验失败的PV
 
 	// ------------
 	/** 添加PV集 */
@@ -52,7 +48,7 @@ public class YuuBooDataContext {
 		if (pvs.size() == 0) {
 			return null;
 		}
-		PV pv = pvs.poll();
+		PV pv = pvs.remove(0);
 		fireListener(FIRE_NAME_CHANGER_LISTENER, FIRE_METHOD_NAME_PV);
 		return pv;
 	}
@@ -110,8 +106,17 @@ public class YuuBooDataContext {
 		return 50;
 	}
 
-	// ---------------
+	/** 获得当前登陆的账号 */
+	public String getAccount() {
+		return account;
+	}
 
+	/** 设置当前登陆的账号 */
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	// ---------------
 	/** 添加数据变动监听器 */
 	public void addChangerListener(DataChangerListener changerListener) {
 		this.changerListener.add(changerListener);
@@ -172,8 +177,10 @@ public class YuuBooDataContext {
 		if (pvQuests.size() == 0) {
 			return null;
 		}
-		PVQuest pvQuest = pvQuests.poll();
+
+		PVQuest pvQuest = pvQuests.remove(0);
 		fireListener(FIRE_NAME_CHANGER_LISTENER, FIRE_METHOD_NAME_PV_QUEST);
 		return pvQuest;
 	}
+
 }
