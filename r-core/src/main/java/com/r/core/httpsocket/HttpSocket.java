@@ -273,6 +273,11 @@ public class HttpSocket implements Serializable {
 		return isConnectionFree;
 	}
 
+	/** 清空cookies */
+	public void clearCookies() {
+		this.cookies.clear();
+	}
+
 	@Override
 	public String toString() {
 		return "HttpSocket [requestHeader=" + requestHeader + ", isHoldCookies=" + isHoldCookies + "]";

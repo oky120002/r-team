@@ -1,27 +1,30 @@
-package com.r.app.taobaoshua.manger;
+package com.r.app.taobaoshua.yuuboo;
 
 import java.awt.Image;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.Proxy;
 import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.app.taobaoshua.TaobaoShuaApp;
-import com.r.app.taobaoshua.model.PV;
-import com.r.app.taobaoshua.model.PVQuest;
+import com.r.app.taobaoshua.taobao.TaoBao;
+import com.r.app.taobaoshua.yuuboo.model.PV;
+import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.ResponseHeader;
+import com.r.core.httpsocket.context.responseheader.ResponseStatus;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.TaskUtil;
 
-public class UrlManger {
-	private static final Logger logger = LoggerFactory.getLogger(UrlManger.class);
-	private static TaobaoShuaApp app = TaobaoShuaApp.getInstance();
+public class YuuBooManger {
+	private static final Logger logger = LoggerFactory.getLogger(YuuBooManger.class);
+	private static YuuBoo yuuBoo = YuuBoo.getInstance();
 
-	public UrlManger() {
+	public YuuBooManger() {
 		super();
 		logger.debug("Init UrlManger.......");
 	}
@@ -34,7 +37,7 @@ public class UrlManger {
 	 *             网络IO读取错误
 	 */
 	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/checkcode.php?id=");
 		return responseHeader.bodyToImage();
 	}
@@ -56,7 +59,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public String login(String account, String accountPassword, String captcha, String question, String answer) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		StringBuilder post = new StringBuilder();
 		try {
 			account = URLEncoder.encode(account, "utf-8");
@@ -97,7 +100,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public String getPVList(int page) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/quest.php?type=pv&page=" + page);
 		return responseHeader.bodyToString();
 	}
@@ -112,7 +115,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public String getPVQuestList(int page) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/doquest.php?type=pv&status=2&page=" + page);
 		return responseHeader.bodyToString();
 	}
@@ -123,7 +126,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public String showQuest(PVQuest pvQuest) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid());
 		return responseHeader.bodyToString();
 	}
@@ -138,7 +141,7 @@ public class UrlManger {
 	 *             不支持完成某种特殊条件的任务时,抛出此异常
 	 */
 	public boolean takeTask(PV pv) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send(pv.getUrl());
 		String body = responseHeader.bodyToString();
 
@@ -173,7 +176,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("你已经获得发布点")) {
@@ -182,7 +185,7 @@ public class UrlManger {
 				@Override
 				public void run() {
 					try {
-						HttpSocket taobaoSocket = app.getTaobaoSocket();
+						HttpSocket taobaoSocket = yuuBoo.getYuuBooSocket();
 						taobaoSocket.send("http://item.taobao.com/item.htm?id=" + itemid);
 					} catch (Exception e) {
 						throw new NetworkIOReadErrorException("进入淘宝宝贝详情页失败!", e);
@@ -202,7 +205,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public boolean cancelTask(PVQuest pvQuest) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getYoubaoSocket();
+		HttpSocket httpSocket = yuuBoo.getYuuBooSocket();
 		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=remove");
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("撤销接手成功")) {
@@ -226,7 +229,7 @@ public class UrlManger {
 	 * @throws IOException
 	 */
 	public String search(PVQuest pvQuest, int page) throws NetworkIOReadErrorException {
-		HttpSocket httpSocket = app.getTaobaoSocket();
+		HttpSocket httpSocket = TaoBao.getInstance().getNewTaoBaoSocket();
 		ResponseHeader responseHeader = httpSocket.send(pvQuest.getTaobaoSearchAddr(page));
 		return responseHeader.bodyToString();
 	}
@@ -244,7 +247,7 @@ public class UrlManger {
 			return;
 		}
 		if (StringUtils.isNotBlank(location) && 2 <= location.length()) {
-			HttpSocket httpSocket = app.getTaobaoSocket();
+			HttpSocket httpSocket = TaoBao.getInstance().getNewTaoBaoSocket();
 			ResponseHeader responseHeader = null;
 			String html = null;
 			String loc = null;
@@ -274,5 +277,15 @@ public class UrlManger {
 			pvQuest.setLocation("all");
 			logger.info("3 : questid : {}  成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝的真实所在地 : {}", pvQuest.getQuestid(), pvQuest.getSearchKeyCut(15), pvQuest.getPriceMin(), pvQuest.getPriceMax(), "all");
 		}
+	}
+
+	/** 校验能否通过代理进入友保 */
+	public String checkYuuBoo(Proxy proxy) {
+		HttpSocket httpSocket = HttpSocket.newHttpSocket(false, HttpProxy.newInstance(true, proxy));
+		ResponseHeader responseHeader = httpSocket.send("http://www.yuuboo.net/member/login.php");
+		if (ResponseStatus.s200.equals(responseHeader.getStatus())) {
+			return responseHeader.bodyToString();
+		}
+		return null;
 	}
 }

@@ -9,8 +9,8 @@ import java.net.Proxy.Type;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.core.findproxy.ProxyMatcher;
-import com.r.core.findproxy.ProxyMatcherListener;
+import com.r.core.findproxy.FindProxyMatcher;
+import com.r.core.findproxy.FindProxyMatcherListener;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -19,24 +19,24 @@ import com.r.core.log.LoggerFactory;
  * @author Administrator
  * 
  */
-public class CnProxyMatcher implements ProxyMatcher {
+public class CnProxyMatcher implements FindProxyMatcher {
 	private static final Logger logger = LoggerFactory.getLogger(CnProxyMatcher.class);
 	private static final String FIRE_MATCHER_LISTENER_ADDPROXY = "addproxy"; // fire_增加代理
 	private static final String PROXY_PAGE_URL = "http://cn-proxy.com"; // 代理页面url
 	private static final int PROXY_PAGE_TIMEOUT = 30_000; // 代理页面超时
-	private ProxyMatcherListener matcherListener = null; // 代理匹配器监听器
+	private FindProxyMatcherListener matcherListener = null; // 代理匹配器监听器
 
 	public CnProxyMatcher() {
 		super();
 	}
 
-	public CnProxyMatcher(ProxyMatcherListener matcherListener) {
+	public CnProxyMatcher(FindProxyMatcherListener matcherListener) {
 		super();
 		this.matcherListener = matcherListener;
 	}
 
 	@Override
-	public ProxyMatcher exec() {
+	public FindProxyMatcher exec() {
 		logger.debug("开始进行代理获取匹配...........");
 		String html = getHtml();
 		if (StringUtils.isBlank(html)) {
@@ -47,7 +47,7 @@ public class CnProxyMatcher implements ProxyMatcher {
 	}
 
 	@Override
-	public ProxyMatcher addMatcherListener(ProxyMatcherListener matcherListener) {
+	public FindProxyMatcher addMatcherListener(FindProxyMatcherListener matcherListener) {
 		this.matcherListener = matcherListener;
 		return this;
 	}

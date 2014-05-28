@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.app.taobaoshua.data;
+package com.r.app.taobaoshua.yuuboo.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,14 +13,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.collections.SetUtils;
 
-import com.r.app.taobaoshua.model.PV;
-import com.r.app.taobaoshua.model.PVQuest;
+import com.r.app.taobaoshua.yuuboo.model.PV;
+import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 
 /**
  * @author oky
  * 
  */
-public class DataContext {
+public class YuuBooDataContext {
 	private static final String FIRE_NAME_CHANGER_LISTENER = "DataChangerListener";
 	private static final String FIRE_METHOD_NAME_PV = "PV";
 	private static final String FIRE_METHOD_NAME_PV_QUEST = "PVQUEST";

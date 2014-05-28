@@ -11,7 +11,7 @@ import java.net.Proxy;
  * @author oky
  * 
  */
-public interface ProxyMatcherListener {
+public interface FindProxyMatcherListener {
 	/**
 	 * 匹配器实时增加代理<br />
 	 * 

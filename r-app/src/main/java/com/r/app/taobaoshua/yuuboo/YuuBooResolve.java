@@ -1,4 +1,4 @@
-package com.r.app.taobaoshua.manger;
+package com.r.app.taobaoshua.yuuboo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.r.app.taobaoshua.model.PV;
-import com.r.app.taobaoshua.model.PVQuest;
+import com.r.app.taobaoshua.yuuboo.model.PV;
+import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
-public class UrlResolve {
-	private static final Logger logger = LoggerFactory.getLogger(UrlResolve.class);
+public class YuuBooResolve {
+	private static final Logger logger = LoggerFactory.getLogger(YuuBooResolve.class);
 
 	/**
 	 * 从PV列表页面解析出PV数据集

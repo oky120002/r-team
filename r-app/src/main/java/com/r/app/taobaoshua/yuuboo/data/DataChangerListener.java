@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.app.taobaoshua.data;
+package com.r.app.taobaoshua.yuuboo.data;
 
 /**
  * 数据改变监听器

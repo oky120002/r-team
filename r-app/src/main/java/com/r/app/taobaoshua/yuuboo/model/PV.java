@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.app.taobaoshua.model;
+package com.r.app.taobaoshua.yuuboo.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

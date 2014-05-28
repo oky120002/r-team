@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.r.app.taobaoshua.desktop;
+package com.r.app.taobaoshua.yuuboo.desktop.tablemodel;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import com.r.app.taobaoshua.data.DataContext;
-import com.r.app.taobaoshua.model.PVQuest;
+import com.r.app.taobaoshua.yuuboo.data.YuuBooDataContext;
+import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.SwitchPathException;
 
 /**
@@ -19,9 +19,9 @@ import com.r.core.exceptions.SwitchPathException;
 public class PVQuestListTableModel extends AbstractTableModel implements TableModel {
 	private static final long serialVersionUID = -154657428132471147L;
 	private static final String[] COLS = new String[] { "编号", "发布者", "接手时间", "店主", "价格", "所在地", "搜索关键字", };
-	private DataContext dataContext;
+	private YuuBooDataContext dataContext;
 
-	public PVQuestListTableModel(DataContext dataContext) {
+	public PVQuestListTableModel(YuuBooDataContext dataContext) {
 		super();
 		this.dataContext = dataContext;
 	}

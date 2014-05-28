@@ -1,8 +1,9 @@
-package com.r.app.taobaoshua.action;
+package com.r.app.taobaoshua.yuuboo;
 
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.net.Proxy;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -10,14 +11,11 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 
-import com.r.app.taobaoshua.TaobaoShuaApp;
-import com.r.app.taobaoshua.data.DataContext;
-import com.r.app.taobaoshua.manger.UrlManger;
-import com.r.app.taobaoshua.manger.UrlResolve;
-import com.r.app.taobaoshua.model.PV;
-import com.r.app.taobaoshua.model.PVQuest;
+import com.r.app.taobaoshua.yuuboo.model.PV;
+import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.LogginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.log.Logger;
@@ -25,37 +23,37 @@ import com.r.core.log.LoggerFactory;
 import com.r.core.util.RandomUtil;
 import com.r.core.util.TaskUtil;
 
-public class Action {
-	private static final Logger logger = LoggerFactory.getLogger(Action.class); // 日志
+public class YuuBooAction {
+	private static final Logger logger = LoggerFactory.getLogger(YuuBooAction.class); // 日志
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	private static final DataContext dataContext = TaobaoShuaApp.getInstance().getDataContext();
-	private UrlManger urlManger = new UrlManger(); // Url管理器
-	private UrlResolve resolve = new UrlResolve(); // Url解析器
+	private static final YuuBoo yuuBoo = YuuBoo.getInstance();
+	private YuuBooManger urlManger = new YuuBooManger(); // Url管理器
+	private YuuBooResolve resolve = new YuuBooResolve(); // Url解析器
 	private boolean isPVListRefreshExecuting = false; // pvlist刷新是否正在执行中
 	private boolean isPVQuestListRefreshExecuting = false; // pv任务list刷新是否正在执行中
 	private boolean isStartExecCommanding = false; // 是否正在执行流量任务
 	private boolean isAutoTakeTaskCommanding = false; // 是否自动接手任务
 	private boolean isAutoSaveDatas = false; // 是否自动保存数据
 
-	public Action() {
+	public YuuBooAction() {
 		super();
 		logger.info("Init Action ..........");
 	}
 
 	/**
-	 * 获取登陆验证码图片
+	 * 获取登陆友保的验证码图片
 	 * 
 	 * @throws NetworkIOReadErrorException
 	 *             网络IO读取错误
 	 * @throws IOException
 	 *             图片流IO读取错误
 	 */
-	public Image getLoginCaptchaImage() {
+	public Image getLoginYuuBooCaptchaImage() {
 		return urlManger.getLoginCaptchaImage();
 	}
 
 	/**
-	 * 登陆
+	 * 登陆友保
 	 * 
 	 * @param account
 	 * @param accountPassword
@@ -66,7 +64,7 @@ public class Action {
 	 * @throws LogginErrorException
 	 *             验证码错误
 	 */
-	public void login(String account, String accountPassword, String captcha, String question, String answer) throws LogginErrorException {
+	public void loginYuuBoo(String account, String accountPassword, String captcha, String question, String answer) throws LogginErrorException {
 		String login = urlManger.login(account, accountPassword, captcha, question, answer);
 		logger.debug("登陆成功后的body文本 : {}", login);
 		if (0 <= login.indexOf("验证码不正确")) {
@@ -88,7 +86,7 @@ public class Action {
 			return;
 		}
 		isPVListRefreshExecuting = true;
-		logger.debug("开启PV自动获取列表功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVListRefreshInterval()));
+		logger.debug("开启PV自动获取列表功能，每{}秒获取一次............ ", String.valueOf(yuuBoo.getYuuBooDataContext().getPVListRefreshInterval()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			private int curPage = 1;
@@ -96,16 +94,17 @@ public class Action {
 			@Override
 			public void run() {
 				TaskUtil.sleep(RandomUtil.randomInteger(5_000));// 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
+				logger.debug("获取PV列表.............");
 				List<PV> pvList = resolve.resolvePV(urlManger.getPVList(curPage++));
 				if (CollectionUtils.isEmpty(pvList)) {
 					curPage = 1; // 重置页数到第一页
 					pvList = resolve.resolvePV(urlManger.getPVList(curPage++));
 				}
 				if (CollectionUtils.isNotEmpty(pvList)) {
-					dataContext.addPVs(pvList);
+					yuuBoo.getYuuBooDataContext().addPVs(pvList);
 				}
 			}
-		}, -1, dataContext.getPVListRefreshInterval(), null, null);
+		}, -1, yuuBoo.getYuuBooDataContext().getPVListRefreshInterval(), null, null);
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class Action {
 			return;
 		}
 		isPVQuestListRefreshExecuting = true;
-		logger.debug("开启PV任务自动获取列表功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVQuestListRefreshInterval()));
+		logger.debug("开启PV任务自动获取列表功能，每{}秒获取一次............ ", String.valueOf(yuuBoo.getYuuBooDataContext().getPVQuestListRefreshInterval()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			private int curPage = 1;
@@ -127,6 +126,7 @@ public class Action {
 			@Override
 			public void run() {
 				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
+				logger.debug("获取PVQuest列表.............");
 				List<PVQuest> pvQuestList = resolve.resolvePVQuest(urlManger.getPVQuestList(curPage++));
 				if (CollectionUtils.isEmpty(pvQuestList)) {
 					curPage = 1; // 重置页数到第一页
@@ -134,14 +134,14 @@ public class Action {
 				}
 				if (CollectionUtils.isNotEmpty(pvQuestList)) {
 					for (PVQuest pvQuest : pvQuestList) {
-						if (!dataContext.containsPVQuest(pvQuest)) {
+						if (!yuuBoo.getYuuBooDataContext().containsPVQuest(pvQuest)) {
 							resolve.resolvePVQuestDetaileInfo(pvQuest, urlManger.showQuest(pvQuest));
-							dataContext.addPVQuests(pvQuest);
+							yuuBoo.getYuuBooDataContext().addPVQuests(pvQuest);
 						}
 					}
 				}
 			}
-		}, -1, dataContext.getPVQuestListRefreshInterval(), null, null);
+		}, -1, yuuBoo.getYuuBooDataContext().getPVQuestListRefreshInterval(), null, null);
 	}
 
 	/**
@@ -158,29 +158,30 @@ public class Action {
 			return;
 		}
 		isAutoTakeTaskCommanding = true;
-		logger.debug("开启自动接手任务功能，每{}秒获取一次............ ", String.valueOf(dataContext.getPVTakeTaskIntervalTime()));
+		logger.debug("开启自动接手任务功能，每{}秒获取一次............ ", String.valueOf(yuuBoo.getYuuBooDataContext().getPVTakeTaskIntervalTime()));
 
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
 				TaskUtil.sleep(RandomUtil.randomInteger(10_000)); // 随机延迟0到10_000毫秒,主要规避友保的防刷任务机制
+				logger.debug("自动接手PV任务.............");
 				while (!takeTask())
 					;
 			}
 
 			private boolean takeTask() {
-				PV pollPV = dataContext.pollPV();
+				PV pollPV = yuuBoo.getYuuBooDataContext().pollPV();
 				if (pollPV != null) {
 					if (urlManger.takeTask(pollPV)) {
 						return true;
 					}
-					dataContext.addPVFailTaskId(pollPV.getId());
+					yuuBoo.getYuuBooDataContext().addPVFailTaskId(pollPV.getId());
 					TaskUtil.sleep(500);
 					return false;
 				}
 				return true;
 			}
-		}, -1, dataContext.getPVTakeTaskIntervalTime(), null, null);
+		}, -1, yuuBoo.getYuuBooDataContext().getPVTakeTaskIntervalTime(), null, null);
 	}
 
 	/**
@@ -193,17 +194,18 @@ public class Action {
 			return;
 		}
 		isStartExecCommanding = true;
-		final int execSearchTaobaoPageNumberCommand = dataContext.getExecSearchTaobaoPageNumberCommand();
-		logger.debug("开启刷流量功能，每{}秒获取一次..在淘宝搜索匹配宝贝时,仅仅匹配前{}页中的宝贝,在前{}页中没有找到.则自动停止搜索匹配,撤销接手任务.......... ", dataContext.getPVQuestTakeTaskIntervalTime(), execSearchTaobaoPageNumberCommand, execSearchTaobaoPageNumberCommand);
+		final int execSearchTaobaoPageNumberCommand = yuuBoo.getYuuBooDataContext().getExecSearchTaobaoPageNumberCommand();
+		logger.debug("开启刷流量功能，每{}秒获取一次..在淘宝搜索匹配宝贝时,仅仅匹配前{}页中的宝贝,在前{}页中没有找到.则自动停止搜索匹配,撤销接手任务.......... ", yuuBoo.getYuuBooDataContext().getPVQuestTakeTaskIntervalTime(), execSearchTaobaoPageNumberCommand, execSearchTaobaoPageNumberCommand);
 
 		// 每5秒就校验一个商品,最大查找页数为5页
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
 				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
-				PVQuest pollPVQuest = dataContext.pollPVQuest();
+				logger.debug("执行PV的淘宝搜索任务.............");
+				PVQuest pollPVQuest = yuuBoo.getYuuBooDataContext().pollPVQuest();
 				if (pollPVQuest != null) {
-					dataContext.addPVFailTaskId(pollPVQuest.getId());
+					yuuBoo.getYuuBooDataContext().addPVFailTaskId(pollPVQuest.getId());
 					logger.info("questid : {}  开始搜索关键字为[{}]，售价区间为[{},{}]，预置所在地为[{}]和店主为[{}]的淘宝宝贝", pollPVQuest.getQuestid(), pollPVQuest.getSearchKey(), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax(), pollPVQuest.getLocation(), pollPVQuest.getShopKeeper());
 					int page = 1;
 					// 确定查询条件中的"所在地"
@@ -230,7 +232,7 @@ public class Action {
 					urlManger.cancelTask(pollPVQuest);
 				}
 			}
-		}, -1, dataContext.getPVQuestTakeTaskIntervalTime(), null, null);
+		}, -1, yuuBoo.getYuuBooDataContext().getPVQuestTakeTaskIntervalTime(), null, null);
 	}
 
 	/** 启动自动保存数据功能 */
@@ -247,7 +249,7 @@ public class Action {
 			try {
 				List<String> readLines = FileUtils.readLines(pvFailsFile);
 				if (CollectionUtils.isNotEmpty(readLines)) {
-					dataContext.addPVFailTaskIds(readLines);
+					yuuBoo.getYuuBooDataContext().addPVFailTaskIds(readLines);
 				}
 			} catch (IOException e) {
 				logger.error("读取PVFail文件失败!", e);
@@ -257,8 +259,8 @@ public class Action {
 		TaskUtil.executeScheduleTask(new Runnable() {
 			@Override
 			public void run() {
-				Collection<String> pvFailTaskIds = dataContext.getPvFailTaskIds();
-
+				logger.debug("保存PVQuestid一次.............");
+				Collection<String> pvFailTaskIds = yuuBoo.getYuuBooDataContext().getPvFailTaskIds();
 				if (CollectionUtils.isNotEmpty(pvFailTaskIds)) {
 					try {
 						FileUtils.writeLines(pvFailsFile, pvFailTaskIds);
@@ -268,5 +270,19 @@ public class Action {
 				}
 			}
 		}, -1, time, null, null);
+	}
+
+	/** 校验能否通过代理进入友保 */
+	public boolean checkYuuBoo(Proxy proxy) {
+		String yuuBooLoginHtml = null;
+		try {
+			yuuBooLoginHtml = urlManger.checkYuuBoo(proxy);
+		} catch (Exception e) {
+			yuuBooLoginHtml = null;
+		}
+		if (StringUtils.isBlank(yuuBooLoginHtml)) {
+			return false;
+		}
+		return yuuBooLoginHtml.contains("我的优保");
 	}
 }
