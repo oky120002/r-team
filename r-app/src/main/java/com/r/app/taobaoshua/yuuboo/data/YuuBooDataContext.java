@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.r.app.taobaoshua.taobao.TaoBaoItemSearch;
 import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 
@@ -159,7 +160,7 @@ public class YuuBooDataContext {
 	 * 
 	 * @return
 	 */
-	public boolean containsPVQuest(PVQuest pvQuest) {
+	public boolean containsPVQuest(TaoBaoItemSearch pvQuest) {
 		return pvQuests.contains(pvQuest);
 	}
 

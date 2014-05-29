@@ -22,11 +22,9 @@ public class TaobaoShuaApp {
 	private static final Logger logger = LoggerFactory.getLogger(TaobaoShuaApp.class);
 
 	private static TaobaoShuaApp app = null; // 应用程序
-	private TaobaoShuaDesktop desktop = null;
-
-	// 组件
-	private TaoBaoShuaStartup yuuBoo = new YuuBoo(); // 优保
-	private TaoBaoShuaStartup taoBao = new TaoBao(); // 淘宝
+	private TaobaoShuaDesktop desktop;
+	private YuuBoo yuuBoo;
+	private TaoBao taoBao;
 
 	private TaobaoShuaApp() {
 		super();
@@ -39,34 +37,38 @@ public class TaobaoShuaApp {
 	}
 
 	public YuuBoo getYuuBoo() {
-		return (YuuBoo) this.yuuBoo;
+		return this.yuuBoo;
 	}
 
 	public TaoBao getTaoBao() {
-		return (TaoBao) this.taoBao;
+		return this.taoBao;
 	}
 
 	public TaobaoShuaDesktop getMainDesktop() {
 		return desktop;
 	}
 
+	/** 返回众多代理中的下一个,出现过的代理不在返回 */
+	public HttpProxy getNextProxy() {
+		return HttpProxy.newInstance(true, Type.HTTP, "122.96.59.99", 82);
+	}
+
 	/** 启动 */
-	private static void standup() {
-		logger.info("Standup TaobaoShuaApp...........");
+	public static void startup() {
 		TaobaoShuaApp.app = new TaobaoShuaApp();
-		TaobaoShuaApp.app.desktop = new TaobaoShuaDesktop("淘宝刷...");
-		TaobaoShuaApp.app.desktop.setVisible(true);
+		TaobaoShuaApp.app.yuuBoo = new YuuBoo();
+		TaobaoShuaApp.app.taoBao = new TaoBao();
+		TaobaoShuaApp.app.desktop = new TaobaoShuaDesktop("淘宝刷.....");
+		TaobaoShuaApp.app.getTaoBao().init();
+		TaobaoShuaApp.app.getYuuBoo().init();
+		app.getMainDesktop().setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		HCtrlUtil.setNoSpot();
 		HCtrlUtil.setUIFont(null);
 		HCtrlUtil.setWindowsStyleByWindows(null);
-		TaobaoShuaApp.standup(); // 启动
+		TaobaoShuaApp.startup(); // 启动
 	}
 
-	/** 返回众多代理中的下一个,出现过的代理不在返回 */
-	public HttpProxy getNextProxy() {
-		return HttpProxy.newInstance(true, Type.HTTP, "122.96.59.99", 82);
-	}
 }

@@ -15,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 import org.slf4j.helpers.MessageFormatter;
 
+import com.r.app.taobaoshua.taobao.TaoBao;
+import com.r.app.taobaoshua.taobao.TaoBaoAction;
 import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.LogginErrorException;
@@ -36,7 +38,7 @@ public class YuuBooAction {
 
 	public YuuBooAction() {
 		super();
-		logger.info("Init Action ..........");
+		logger.info("YuuBooAction newInstance ..........");
 	}
 
 	/**
@@ -206,40 +208,89 @@ public class YuuBooAction {
 		final int execSearchTaobaoPageNumberCommand = yuuBoo.getYuuBooDataContext().getExecSearchTaobaoPageNumberCommand();
 		logger.debug("开启刷流量功能，每{}秒获取一次..在淘宝搜索匹配宝贝时,仅仅匹配前{}页中的宝贝,在前{}页中没有找到.则自动停止搜索匹配,撤销接手任务.......... ", yuuBoo.getYuuBooDataContext().getPVQuestTakeTaskIntervalTime(), execSearchTaobaoPageNumberCommand, execSearchTaobaoPageNumberCommand);
 
-		// 每5秒就校验一个商品,最大查找页数为5页
+		// 每5秒就校验一个商品,最大查找页数为50页
 		TaskUtil.executeScheduleTask(new Runnable() {
+
 			@Override
 			public void run() {
 				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
 				logger.debug("执行PV的淘宝搜索任务.............");
 				PVQuest pollPVQuest = yuuBoo.getYuuBooDataContext().pollPVQuest();
 				if (pollPVQuest != null) {
-					yuuBoo.getYuuBooDataContext().addPVFailTaskId(pollPVQuest.getId());
-					logger.info("questid : {}  开始搜索关键字为[{}]，售价区间为[{},{}]，预置所在地为[{}]和店主为[{}]的淘宝宝贝", pollPVQuest.getQuestid(), pollPVQuest.getSearchKey(), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax(), pollPVQuest.getLocation(), pollPVQuest.getShopKeeper());
-					int page = 1;
-					// 确定查询条件中的"所在地"
+					yuuBoo.getYuuBooDataContext().addPVFailTaskId(pollPVQuest.getId()); // 过滤掉已经搜索过的任务
+					String location = pollPVQuest.getLocation();
+					String key = StringUtils.abbreviate(pollPVQuest.getSearchKey(), 15);
+					String shopKeeper = pollPVQuest.getShopKeeper();
+					int priceMin = pollPVQuest.getPriceMin();
+					int priceMax = pollPVQuest.getPriceMax();
+					long threadid = Thread.currentThread().getId();
+
+					logger.info("currentThread : {}  开始搜索[{}]店主所在[{}]的[{},{}]元的[{}]宝贝", threadid, shopKeeper, location, priceMin, priceMax, key);
+
+					final TaoBaoAction taoBaoAction = TaoBao.getInstance().getTaoBaoAction();
 					// 利用"所在地"最后两个字开始,递增查询淘宝,如果出宝贝信息,则说明此所在地存在,则使用,直到所在地全部查询完成
-					yuuBoo.getYuuBooManger().searchLoc(pollPVQuest);
+					if (taoBaoAction.checkLoc(location)) {
+						logger.info("currentThread : {}  经过预置的\"所在地\"词典检索，可以使用[{}]店主的[{},{}]元的[{}]宝贝的真实所在地 : [{}]。", threadid, shopKeeper, priceMin, priceMax, key, location);
+					} else {
+						// 确定查询条件中的"所在地"
+						pollPVQuest.setLocation(taoBaoAction.searchItmeLoc(pollPVQuest));
+					}
+
+					int page = 1; // 搜索到的页数
 					while (page <= execSearchTaobaoPageNumberCommand) {
-						String baobeipage = yuuBoo.getYuuBooManger().search(pollPVQuest, page);
-						if (baobeipage.contains("点击返回上一步")) {
-							logger.info("questid : {}  在第{}页已经没有任何宝贝可以搜索匹配!  搜索结束!", pollPVQuest.getQuestid(), page);
+						int result = searchItemList(pollPVQuest, page++);
+						if (result == -1) { // 所有搜索失败
 							break;
+						} else if (result == 0) { // 当前页搜索失败,可以继续搜索下一页
+						} else { // 搜索成功
+							return;
 						}
-						List<String> itemids = yuuBoo.getYuuBooResolve().resolveBaoBeiUrl(pollPVQuest, baobeipage);
-						for (String itemid : itemids) {
-							if (yuuBoo.getYuuBooManger().checkTaskUrl(pollPVQuest, itemid)) {
-								logger.info("questid : {}  在第{}页成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝,并且验证通过,恭喜您增加了  [发布点]", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax());
-								return;
-							} else {
-								logger.info("questid : {}  在第{}页成功搜索到关键字为[{}]，售价区间为[{},{}]的宝贝,但验证失败", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax());
-							}
-						}
-						logger.info("questid : {}  在第{}页没有搜索到关键字为[{}]，售价区间为[{},{}]的宝贝.", pollPVQuest.getQuestid(), page, pollPVQuest.getSearchKeyCut(15), pollPVQuest.getPriceMin(), pollPVQuest.getPriceMax());
-						page++;
 					}
 					yuuBoo.getYuuBooManger().cancelTask(pollPVQuest);
 				}
+			}
+
+			/**
+			 * 
+			 * 搜索淘宝查询列表
+			 * 
+			 * @param pvQuest
+			 *            需要搜索的任务
+			 * @param page
+			 *            查询的页数
+			 * @return -1:所有搜索失败 0:当前页搜索失败,可以继续搜索下一页 1:搜索成功
+			 */
+			private int searchItemList(PVQuest pvQuest, int page) {
+				String location = pvQuest.getLocation();
+				String key = StringUtils.abbreviate(pvQuest.getSearchKey(), 15);
+				String shopKeeper = pvQuest.getShopKeeper();
+				int priceMin = pvQuest.getPriceMin();
+				int priceMax = pvQuest.getPriceMax();
+				long threadid = Thread.currentThread().getId();
+				final TaoBaoAction taoBaoAction = TaoBao.getInstance().getTaoBaoAction();
+				String baobeipage = taoBaoAction.searchItemList(pvQuest, page);
+				if (baobeipage.contains("点击返回上一步")) {
+					logger.info("currentThread : {}  在第{}页已经没有任何宝贝可以搜索匹配!  搜索结束!", threadid, page);
+					return -1;
+				}
+				List<String> itemids = yuuBoo.getYuuBooResolve().resolveBaoBeiUrl(pvQuest, baobeipage);
+				for (final String itemid : itemids) {
+					if (yuuBoo.getYuuBooManger().checkTaskUrl(pvQuest, itemid)) {
+						logger.info("currentThread : {}  在第{}页成功搜索到[{}]店主所在[{}]的[{},{}]元的[{}]宝贝,并且验证通过,恭喜您增加了  [发布点]", threadid, page, shopKeeper, location, priceMin, priceMax, key);
+						// 验证成功后,进入相映itemid的宝贝页面,给别个增加一个流量....虽然刷,但是还是不要太过分了.
+						TaskUtil.executeSequenceTask(new Runnable() {
+							@Override
+							public void run() {
+								taoBaoAction.goinTaobaoItem(itemid);
+							}
+						});
+						return 1;
+					} else {
+						logger.info("currentThread : {}  在第{}页成功搜索到[{}]店主所在[{}]的[{},{}]元的[{}]宝贝,但验证失败", threadid, page, shopKeeper, location, priceMin, priceMax, key);
+					}
+				}
+				logger.info("currentThread : {}  在第{}页没有搜索到[{}]店主所在[{}]的[{},{}]元的[{}]宝贝", threadid, page, shopKeeper, location, priceMin, priceMax, key);
+				return 0;
 			}
 		}, -1, yuuBoo.getYuuBooDataContext().getPVQuestTakeTaskIntervalTime(), null, null);
 	}

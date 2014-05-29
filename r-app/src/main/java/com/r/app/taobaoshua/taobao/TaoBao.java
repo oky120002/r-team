@@ -5,7 +5,6 @@ package com.r.app.taobaoshua.taobao;
 
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
-import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -16,31 +15,36 @@ import com.r.core.log.LoggerFactory;
 public class TaoBao implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(YuuBoo.class);
 
-	private static TaoBao taoBao = null;
-	private HttpSocket taoBaoSocket = null;
-	private HttpSocket newTaoBaoSocket = null;
+	private static TaoBao taoBao;
+	private TaoBaoManger taoBaoManger;
+	private TaoBaoAction taoBaoAction;
 
 	public TaoBao() {
 		super();
-		TaoBao.taoBao = this;
-		this.taoBaoSocket = HttpSocket.newHttpSocket(true, null);
-		this.newTaoBaoSocket = HttpSocket.newHttpSocket(false, null);
+		logger.debug("TaoBao newInstance..........");
 	}
 
 	public static TaoBao getInstance() {
 		return TaoBao.taoBao;
 	}
 
-	public HttpSocket getNewTaoBaoSocket() {
-		return newTaoBaoSocket;
+	public TaoBaoAction getTaoBaoAction() {
+		return taoBaoAction;
 	}
 
-	public HttpSocket getTaoBaoSocket() {
-		return taoBaoSocket;
+	public TaoBaoManger getTaoBaoManger() {
+		return taoBaoManger;
 	}
 
 	@Override
-	public void start() {
+	public void init() {
+		TaoBao.taoBao = this;
+		taoBaoAction = new TaoBaoAction();
+		taoBaoManger = new TaoBaoManger();
+	}
+
+	@Override
+	public void startup() {
 
 	}
 }

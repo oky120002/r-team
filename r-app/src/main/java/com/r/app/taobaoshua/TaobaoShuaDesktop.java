@@ -57,7 +57,7 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 		case COMMAND_AUTOPROXY: // 自动代理
 			break;
 		case COMMAND_YUUBOO: // 友保
-			YuuBoo.getInstance().start();
+			YuuBoo.getInstance().startup();
 			break;
 		}
 	}

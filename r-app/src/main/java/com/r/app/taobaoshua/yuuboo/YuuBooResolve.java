@@ -1,5 +1,7 @@
 package com.r.app.taobaoshua.yuuboo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -174,17 +176,31 @@ public class YuuBooResolve {
 	/** 从商品页面解析出宝贝id集 */
 	public List<String> resolveBaoBeiUrl(PVQuest pollPVQuest, String baobeipage) {
 		List<String> itemids = new ArrayList<String>();
-		Pattern pattern = Pattern.compile(pollPVQuest.getShopKeeperPattern());
+		Pattern pattern = Pattern.compile("\">" + pollPVQuest.getShopKeeperPattern() + "</a>");
 		Matcher matcher = pattern.matcher(baobeipage);
 		while (matcher.find()) { // 找个一个匹配的
-			int curPos = matcher.start();
-			int start = baobeipage.indexOf("<div", curPos);
-			int end = baobeipage.indexOf("</div>", start);
-			String itemid = StringUtils.substringBetween(baobeipage.substring(start, end), "data-item=\"", "\" data-icon");
+			int start = matcher.start();
+			int end = baobeipage.indexOf("data-icon", start);
+			String itemid = StringUtils.substringBetween(baobeipage.substring(start, end), "data-item=\"", "\"");
 			if (StringUtils.isNotBlank(itemid) && NumberUtils.isNumber(itemid)) {
 				itemids.add(itemid);
 			}
 		}
 		return itemids;
+	}
+	
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		System.out.println(URLEncoder.encode("*", "gbk"));
+//		Pattern pattern = Pattern.compile("\\*+");
+//		Matcher matcher = pattern.matcher(this.shopKeeper);
+//		return matcher.replaceFirst(".{" + length + "}");
+		
+		
+		String sss = "<span class=\"J_WangWang\" data-nick=\">%E4%BA%abcd1234%E5%88\" data-display=\"inline\" data-item=\"38711056514\"";
+		Pattern pattern = Pattern.compile("data-nick=\">%E4%BA%.{8}%E5%88\"");
+		Matcher matcher = pattern.matcher(sss);
+		System.out.println(matcher.find());
+		System.out.println(matcher.start());
+		
 	}
 }
