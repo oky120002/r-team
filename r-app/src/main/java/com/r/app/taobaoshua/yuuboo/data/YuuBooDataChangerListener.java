@@ -9,7 +9,7 @@ package com.r.app.taobaoshua.yuuboo.data;
  * @author oky
  * 
  */
-public interface DataChangerListener {
+public interface YuuBooDataChangerListener {
 	void changePVList();
 
 	void changePVQuestList();

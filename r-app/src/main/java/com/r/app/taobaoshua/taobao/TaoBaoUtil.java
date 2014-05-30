@@ -69,7 +69,6 @@ public class TaoBaoUtil {
 		}
 		return key;
 	}
-
 	/** 转换所在地 */
 	private static String convertLocation(String loc) {
 		if (StringUtils.isBlank(loc)) {

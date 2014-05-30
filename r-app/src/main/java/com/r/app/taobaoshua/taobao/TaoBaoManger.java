@@ -28,7 +28,7 @@ public class TaoBaoManger {
 	}
 
 	/** 设置当前链接的代理 */
-	public void setYuuBooSocketProxy(HttpProxy proxy) {
+	public void setSocketProxy(HttpProxy proxy) {
 		this.taoBaoHttpSocket.setProxy(proxy);
 	}
 

@@ -21,6 +21,7 @@ import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.LogginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.RandomUtil;
@@ -39,6 +40,11 @@ public class YuuBooAction {
 	public YuuBooAction() {
 		super();
 		logger.info("YuuBooAction newInstance ..........");
+	}
+
+	/** 设置当前链接的代理 */
+	public void setSocketProxy(HttpProxy proxy) {
+		yuuBoo.getYuuBooManger().setSocketProxy(proxy);
 	}
 
 	/**

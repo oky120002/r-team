@@ -16,6 +16,7 @@ public class TaoBao implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(YuuBoo.class);
 
 	private static TaoBao taoBao;
+	private boolean isRunning;
 	private TaoBaoManger taoBaoManger;
 	private TaoBaoAction taoBaoAction;
 
@@ -45,6 +46,11 @@ public class TaoBao implements TaoBaoShuaStartup {
 
 	@Override
 	public void startup() {
+		isRunning = true;
+	}
 
+	@Override
+	public boolean isRunning() {
+		return isRunning;
 	}
 }

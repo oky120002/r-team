@@ -22,7 +22,7 @@ public class YuuBooDataContext {
 	private static final String FIRE_NAME_CHANGER_LISTENER = "DataChangerListener";
 	private static final String FIRE_METHOD_NAME_PV = "PV";
 	private static final String FIRE_METHOD_NAME_PV_QUEST = "PVQUEST";
-	private List<DataChangerListener> changerListener = new ArrayList<DataChangerListener>();
+	private List<YuuBooDataChangerListener> changerListener = new ArrayList<YuuBooDataChangerListener>();
 
 	private String account = null; // 账号
 	private List<PV> pvs = Collections.synchronizedList(new ArrayList<PV>()); // PV
@@ -119,7 +119,7 @@ public class YuuBooDataContext {
 
 	// ---------------
 	/** 添加数据变动监听器 */
-	public void addChangerListener(DataChangerListener changerListener) {
+	public void addChangerListener(YuuBooDataChangerListener changerListener) {
 		this.changerListener.add(changerListener);
 	}
 
@@ -129,12 +129,12 @@ public class YuuBooDataContext {
 		case FIRE_NAME_CHANGER_LISTENER:
 			switch (methodName) {
 			case FIRE_METHOD_NAME_PV:
-				for (DataChangerListener listener : changerListener) {
+				for (YuuBooDataChangerListener listener : changerListener) {
 					listener.changePVList();
 				}
 				break;
 			case FIRE_METHOD_NAME_PV_QUEST:
-				for (DataChangerListener listener : changerListener) {
+				for (YuuBooDataChangerListener listener : changerListener) {
 					listener.changePVQuestList();
 				}
 				break;

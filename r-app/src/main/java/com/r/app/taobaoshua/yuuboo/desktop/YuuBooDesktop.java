@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
-import com.r.app.taobaoshua.yuuboo.data.DataChangerListener;
+import com.r.app.taobaoshua.yuuboo.data.YuuBooDataChangerListener;
 import com.r.app.taobaoshua.yuuboo.desktop.tablemodel.PVListTableModel;
 import com.r.app.taobaoshua.yuuboo.desktop.tablemodel.PVQuestListTableModel;
 import com.r.core.desktop.ctrl.HBaseBox;
@@ -48,7 +48,7 @@ import com.r.core.util.TaskUtil;
  * @author oky
  * 
  */
-public class YuuBooDesktop extends HBaseDialog implements DataChangerListener, ActionListener {
+public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListener, ActionListener {
 	private static final long serialVersionUID = 4683581855428200977L;
 	private static final int CTRL_STRUT = 5;
 	private static final String COMMOND_LOGIN = "commond_login"; // 命令_登陆

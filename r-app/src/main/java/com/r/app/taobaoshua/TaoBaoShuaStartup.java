@@ -7,5 +7,8 @@ public interface TaoBaoShuaStartup {
 
 	/** 启动组件 */
 	void startup();
+	
+	/**是否运行中*/
+	boolean isRunning();
 
 }

@@ -18,6 +18,7 @@ public class YuuBoo implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(YuuBoo.class);
 
 	private static YuuBoo yuuBoo;
+	private boolean isRunning;
 	private YuuBooDesktop yuuBoodesktop;
 	private YuuBooDataContext yuuBooDataContext;
 	private YuuBooAction yuuBooAction;
@@ -33,7 +34,7 @@ public class YuuBoo implements TaoBaoShuaStartup {
 		return YuuBoo.yuuBoo;
 	}
 
-	public YuuBooDesktop getYuuBoodesktop() {
+	public YuuBooDesktop getYuuBooDesktop() {
 		return yuuBoodesktop;
 	}
 
@@ -65,6 +66,12 @@ public class YuuBoo implements TaoBaoShuaStartup {
 
 	@Override
 	public void startup() {
+		isRunning = true;
 		yuuBoodesktop.setVisible(true);
+	}
+
+	@Override
+	public boolean isRunning() {
+		return isRunning;
 	}
 }
