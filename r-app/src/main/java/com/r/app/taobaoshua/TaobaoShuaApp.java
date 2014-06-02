@@ -7,9 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.Proxy.Type;
-import java.nio.charset.Charset;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,7 +16,6 @@ import com.r.app.taobaoshua.core.Core;
 import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.app.taobaoshua.taobao.TaoBao;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
-import com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop;
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
@@ -36,6 +33,7 @@ public class TaobaoShuaApp {
 	private static final String COMMAND_TRAY_YUUBOO_INIT = "command_tray_yuuboo_init";
 	private static final String COMMAND_TRAY_EXIT = "command_tray_exit";
 	// private static final String COMMAND_TAOBAO_INIT = "command_taobao_init";
+	private static final String COMMAND_TRAY_CORE_INIT = "command_core_init";
 
 	private static TaobaoShuaApp app = null; // 应用程序
 	private TaobaoShuaDesktop desktop;
@@ -71,6 +69,7 @@ public class TaobaoShuaApp {
 
 	/** 返回众多代理中的下一个,出现过的代理不在返回 */
 	public HttpProxy getNextProxy() {
+		// return null;
 		return HttpProxy.newInstance(true, Type.HTTP, "122.96.59.102", 83);
 	}
 
@@ -81,6 +80,8 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.yuuBoo = new YuuBoo();
 		TaobaoShuaApp.app.taoBao = new TaoBao();
 		TaobaoShuaApp.app.core.init();
+		LoggerFactory.addLoggerListener(TaobaoShuaApp.app.core);
+		TaobaoShuaApp.app.core.startup();
 		TaobaoShuaApp.app.taoBao.init();
 		TaobaoShuaApp.app.yuuBoo.init();
 		TaobaoShuaApp.app.taoBao.getTaoBaoAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
@@ -113,6 +114,7 @@ public class TaobaoShuaApp {
 		} catch (IOException ioe) {
 			logger.warn("托盘图标加载失败", ioe);
 		}
+		// 淘宝
 		TrayUtil.addTrayMenuItem(COMMAND_TRAY_YUUBOO_INIT, "start yuuboo  (中文)", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -121,7 +123,18 @@ public class TaobaoShuaApp {
 				}
 			}
 		});
+		// 核心组件
+		TrayUtil.addTrayMenuItem(COMMAND_TRAY_CORE_INIT, "start core", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (TaobaoShuaApp.app.core != null && TaobaoShuaApp.app.core.isRunning()) {
+					TaobaoShuaApp.app.core.getInfoDialog().setVisible(true);
+				}
+			}
+		});
+		// 分隔符
 		TrayUtil.addSeparator();
+		// 退出
 		TrayUtil.addTrayMenuItem(COMMAND_TRAY_EXIT, "exit", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

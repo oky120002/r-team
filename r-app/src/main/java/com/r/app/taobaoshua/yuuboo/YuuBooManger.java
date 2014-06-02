@@ -29,6 +29,7 @@ public class YuuBooManger {
 	
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
+		logger.debug("在yuuBooHttpSocket中设置代理:{}", proxy);
 		this.yuuBooHttpSocket.setProxy(proxy);
 	}
 

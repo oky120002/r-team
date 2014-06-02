@@ -3,7 +3,6 @@ package com.r.app.taobaoshua.yuuboo;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.net.Proxy;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -339,17 +338,17 @@ public class YuuBooAction {
 		}, -1, time, null, null);
 	}
 
-	/** 校验能否通过代理进入友保 */
-	public boolean checkYuuBoo(Proxy proxy) {
-		String yuuBooLoginHtml = null;
-		try {
-			yuuBooLoginHtml = yuuBoo.getYuuBooManger().checkYuuBoo(proxy);
-		} catch (Exception e) {
-			yuuBooLoginHtml = null;
-		}
-		if (StringUtils.isBlank(yuuBooLoginHtml)) {
-			return false;
-		}
-		return yuuBooLoginHtml.contains("我的优保");
-	}
+	// /** 校验能否通过代理进入友保 */
+	// public boolean checkYuuBoo(Proxy proxy) {
+	// String yuuBooLoginHtml = null;
+	// try {
+	// yuuBooLoginHtml = yuuBoo.getYuuBooManger().checkYuuBoo(proxy);
+	// } catch (Exception e) {
+	// yuuBooLoginHtml = null;
+	// }
+	// if (StringUtils.isBlank(yuuBooLoginHtml)) {
+	// return false;
+	// }
+	// return yuuBooLoginHtml.contains("我的优保");
+	// }
 }

@@ -29,6 +29,7 @@ public class TaoBaoManger {
 
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
+		logger.debug("在taoBaoHttpSocket中设置代理:{}", proxy);
 		this.taoBaoHttpSocket.setProxy(proxy);
 	}
 

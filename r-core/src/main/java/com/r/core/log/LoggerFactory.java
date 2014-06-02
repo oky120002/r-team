@@ -3,7 +3,11 @@
  */
 package com.r.core.log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,16 +21,17 @@ import org.apache.commons.lang3.StringUtils;
 public class LoggerFactory {
 
 	private static final LoggerFactory loggerFacotry = new LoggerFactory();
-	private static final Map<String, Logger> map = new HashMap<String, Logger>();
-	private static String DEFAULT_PRE = ""; // 默认的前缀
-	
+	private Map<String, Logger> map = new HashMap<String, Logger>();
+	private List<LoggerListener> loggerListeners = new ArrayList<LoggerListener>();
+	private String DEFAULT_PRE = ""; // 默认的前缀
+
 	private LoggerFactory() {
 		super();
 	}
 
 	/** 设置全局默认前缀 */
 	public static final void setDefaultPre(String defaultPre) {
-		LoggerFactory.DEFAULT_PRE = defaultPre;
+		LoggerFactory.loggerFacotry.DEFAULT_PRE = defaultPre;
 	}
 
 	/** 获取日志 */
@@ -41,15 +46,24 @@ public class LoggerFactory {
 
 	/** 返回默认前缀 */
 	public static final String getDefaultPre() {
-		return LoggerFactory.DEFAULT_PRE;
+		return LoggerFactory.loggerFacotry.DEFAULT_PRE;
+	}
+
+	/** 添加日志监听器 */
+	public static final void addLoggerListener(LoggerListener... loggerListeners) {
+		LoggerFactory.loggerFacotry.loggerListeners.addAll(Arrays.asList(loggerListeners));
+	}
+
+	public Collection<LoggerListener> getLoggerListeners() {
+		return LoggerFactory.loggerFacotry.loggerListeners;
 	}
 
 	/** 获取日志 */
 	protected Logger logger(Class<?> clazz, String pre) {
-		pre = (StringUtils.isBlank(pre) ? LoggerFactory.DEFAULT_PRE : pre);
+		pre = (StringUtils.isBlank(pre) ? LoggerFactory.loggerFacotry.DEFAULT_PRE : pre);
 		String loggerKey = LoggerFactory.getLoggerKey(clazz, pre);
 		if (!map.containsKey(loggerKey)) {
-			map.put(loggerKey, new Logger(clazz, pre));
+			map.put(loggerKey, new Logger(this, clazz, pre));
 		}
 		return map.get(loggerKey);
 	}
