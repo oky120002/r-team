@@ -45,18 +45,6 @@ public class YuuBooManger {
 		return responseHeader.bodyToImage();
 	}
 
-	/** 校验验证码是否正确 */
-	public boolean isCheckCaptcha(String captcha) {
-		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/register.php?action=checkcode&value=" + captcha);
-
-		String body = responseHeader.bodyToString();
-		if (0 <= body.indexOf("验证码正确")) {
-			return true;
-		}
-		logger.debug("验证码校验失败 : " + body);
-		return false;
-	}
-
 	/**
 	 * 登陆
 	 * 

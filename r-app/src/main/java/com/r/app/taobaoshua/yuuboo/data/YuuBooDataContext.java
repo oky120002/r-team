@@ -29,6 +29,44 @@ public class YuuBooDataContext {
 	private List<PVQuest> pvQuests = Collections.synchronizedList(new ArrayList<PVQuest>()); // PV任务
 	private Set<String> pvFailTaskIds = Collections.synchronizedSet(new HashSet<String>()); // 校验失败的PV
 
+
+	/** 返回来路PV列表刷新间隔(单位 秒) */
+	public int getPVListRefreshInterval() {
+		return 30;
+	}
+
+	/** 返回来路PV任务列表刷新间隔(单位 秒) */
+	public int getPVQuestListRefreshInterval() {
+		return 15;
+	}
+
+	/** 返回做每个任务的间隔时间 */
+	public int getPVQuestTakeTaskIntervalTime() {
+		return 30;
+	}
+
+	/** 返回接手任务间隔时间 */
+	public int getPVTakeTaskIntervalTime() {
+		return 10;
+	}
+
+	/** 返回在淘宝搜索宝贝时,最大检索的页数 */
+	public int getExecSearchTaobaoPageNumberCommand() {
+		return 50;
+	}
+
+	/** 获得当前登陆的账号 */
+	public String getAccount() {
+		return account;
+	}
+
+	/** 设置当前登陆的账号 */
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	// ---------------	
+	
 	// ------------
 	/** 添加PV集 */
 	public void addPVs(List<PV> pvlist) {
@@ -82,42 +120,6 @@ public class YuuBooDataContext {
 
 	// --------------
 
-	/** 返回来路PV列表刷新间隔(单位 秒) */
-	public int getPVListRefreshInterval() {
-		return 30;
-	}
-
-	/** 返回来路PV任务列表刷新间隔(单位 秒) */
-	public int getPVQuestListRefreshInterval() {
-		return 15;
-	}
-
-	/** 返回做每个任务的间隔时间 */
-	public int getPVQuestTakeTaskIntervalTime() {
-		return 30;
-	}
-
-	/** 返回接手任务间隔时间 */
-	public int getPVTakeTaskIntervalTime() {
-		return 40;
-	}
-
-	/** 返回在淘宝搜索宝贝时,最大检索的页数 */
-	public int getExecSearchTaobaoPageNumberCommand() {
-		return 50;
-	}
-
-	/** 获得当前登陆的账号 */
-	public String getAccount() {
-		return account;
-	}
-
-	/** 设置当前登陆的账号 */
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	// ---------------
 	/** 添加数据变动监听器 */
 	public void addChangerListener(YuuBooDataChangerListener changerListener) {
 		this.changerListener.add(changerListener);

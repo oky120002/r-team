@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -55,10 +54,11 @@ public class YuuBooCaptchaDialog extends HBaseDialog implements ActionListener {
 	}
 
 	public String getCaptcha() {
+		captchaTextField.setText("");
+		doCaptchaImage();
+		TaskUtil.sleep(1000);
 		setVisible(true);
 		setAlwaysOnTop(true);
-		TaskUtil.sleep(200);
-		doCaptchaImage();
 		return captcha;
 	}
 
