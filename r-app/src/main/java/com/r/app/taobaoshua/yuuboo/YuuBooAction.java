@@ -33,6 +33,7 @@ public class YuuBooAction {
 	private boolean isPVListRefreshExecuting = false; // pvlist刷新是否正在执行中
 	private boolean isPVQuestListRefreshExecuting = false; // pv任务list刷新是否正在执行中
 	private boolean isStartExecCommanding = false; // 是否正在执行流量任务
+	private boolean isStartExecCommandPause = false; // 执行流量任务是否暂停
 	private boolean isAutoTakeTaskCommanding = false; // 是否自动接手任务
 	private boolean isAutoSaveDatas = false; // 是否自动保存数据
 
@@ -56,6 +57,11 @@ public class YuuBooAction {
 	 */
 	public Image getLoginYuuBooCaptchaImage() {
 		return yuuBoo.getYuuBooManger().getLoginCaptchaImage();
+	}
+
+	/** 检查验证码是否正确 */
+	public boolean isCheckCaptcha(String captcha) {
+		return yuuBoo.getYuuBooManger().isCheckCaptcha(captcha);
 	}
 
 	/**
@@ -200,6 +206,16 @@ public class YuuBooAction {
 		}, -1, yuuBoo.getYuuBooDataContext().getPVTakeTaskIntervalTime(), null, null);
 	}
 
+	/***
+	 * 是否暂停执行流量任务
+	 * 
+	 * @param pause
+	 *            true:暂停|false:继续
+	 */
+	public void setExecCommandPause(boolean pause) {
+		this.isStartExecCommandPause = pause;
+	}
+
 	/**
 	 * 启动执行任务的命令
 	 * 
@@ -218,6 +234,10 @@ public class YuuBooAction {
 
 			@Override
 			public void run() {
+				if (isStartExecCommandPause) {
+					return;
+				}
+
 				TaskUtil.sleep(RandomUtil.randomInteger(5_000)); // 随机延迟0到5_000毫秒,主要规避友保的防刷任务机制
 				logger.debug("执行PV的淘宝搜索任务.............");
 				PVQuest pollPVQuest = yuuBoo.getYuuBooDataContext().pollPVQuest();
@@ -253,6 +273,7 @@ public class YuuBooAction {
 					}
 					yuuBoo.getYuuBooManger().cancelTask(pollPVQuest);
 				}
+
 			}
 
 			/**
@@ -280,7 +301,10 @@ public class YuuBooAction {
 				}
 				List<String> itemids = yuuBoo.getYuuBooResolve().resolveBaoBeiUrl(pvQuest, baobeipage);
 				for (final String itemid : itemids) {
-					if (yuuBoo.getYuuBooManger().checkTaskUrl(pvQuest, itemid)) {
+					isStartExecCommandPause = true;
+					String captcha = yuuBoo.getCaptcha();
+					isStartExecCommandPause = false;
+					if (yuuBoo.getYuuBooManger().checkTaskUrl(pvQuest, itemid, captcha)) {
 						logger.info("currentThread : {}  在第{}页成功搜索到[{}]店主所在[{}]的[{},{}]元的[{}]宝贝,并且验证通过,恭喜您增加了  [发布点]", threadid, page, shopKeeper, location, priceMin, priceMax, key);
 						// 验证成功后,进入相映itemid的宝贝页面,给别个增加一个流量....虽然刷,但是还是不要太过分了.
 						TaskUtil.executeSequenceTask(new Runnable() {

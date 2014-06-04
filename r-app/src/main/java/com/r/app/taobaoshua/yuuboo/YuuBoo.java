@@ -6,6 +6,7 @@ package com.r.app.taobaoshua.yuuboo;
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.TaobaoShuaApp;
 import com.r.app.taobaoshua.yuuboo.data.YuuBooDataContext;
+import com.r.app.taobaoshua.yuuboo.desktop.YuuBooCaptchaDialog;
 import com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -20,6 +21,7 @@ public class YuuBoo implements TaoBaoShuaStartup {
 	private static YuuBoo yuuBoo;
 	private boolean isRunning;
 	private YuuBooDesktop yuuBoodesktop;
+	private YuuBooCaptchaDialog yuuBooCaptcha;
 	private YuuBooDataContext yuuBooDataContext;
 	private YuuBooAction yuuBooAction;
 	private YuuBooManger yuuBooManger;
@@ -61,6 +63,7 @@ public class YuuBoo implements TaoBaoShuaStartup {
 		yuuBooAction = new YuuBooAction();
 		yuuBooManger = new YuuBooManger();
 		yuuBooResolve = new YuuBooResolve();
+		yuuBooCaptcha = new YuuBooCaptchaDialog();
 		yuuBoodesktop = new YuuBooDesktop(TaobaoShuaApp.getInstance().getMainDesktop());
 	}
 
@@ -73,5 +76,9 @@ public class YuuBoo implements TaoBaoShuaStartup {
 	@Override
 	public boolean isRunning() {
 		return isRunning;
+	}
+
+	public String getCaptcha() {
+		return yuuBooCaptcha.getCaptcha();
 	}
 }

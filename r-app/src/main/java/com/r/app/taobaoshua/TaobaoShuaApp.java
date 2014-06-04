@@ -69,8 +69,8 @@ public class TaobaoShuaApp {
 
 	/** 返回众多代理中的下一个,出现过的代理不在返回 */
 	public HttpProxy getNextProxy() {
-		// return null;
-		return HttpProxy.newInstance(true, Type.HTTP, "122.96.59.102", 83);
+		 return null;
+//		return HttpProxy.newInstance(true, Type.HTTP, "122.96.59.102", 83);
 	}
 
 	/** 启动 */

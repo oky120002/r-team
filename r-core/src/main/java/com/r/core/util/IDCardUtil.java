@@ -428,5 +428,10 @@ public abstract class IDCardUtil {
             }
             return 0;
         }
+
+		@Override
+		public String toString() {
+			return "IDCard []";
+		}
     }
 }

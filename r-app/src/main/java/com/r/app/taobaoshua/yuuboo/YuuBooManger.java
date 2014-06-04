@@ -26,7 +26,7 @@ public class YuuBooManger {
 		super();
 		logger.debug("YuuBooManger newInstance  ................");
 	}
-	
+
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
 		logger.debug("在yuuBooHttpSocket中设置代理:{}", proxy);
@@ -43,6 +43,18 @@ public class YuuBooManger {
 	public Image getLoginCaptchaImage() throws NetworkIOReadErrorException {
 		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/checkcode.php?id=");
 		return responseHeader.bodyToImage();
+	}
+
+	/** 校验验证码是否正确 */
+	public boolean isCheckCaptcha(String captcha) {
+		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/register.php?action=checkcode&value=" + captcha);
+
+		String body = responseHeader.bodyToString();
+		if (0 <= body.indexOf("验证码正确")) {
+			return true;
+		}
+		logger.debug("验证码校验失败 : " + body);
+		return false;
 	}
 
 	/**
@@ -172,14 +184,16 @@ public class YuuBooManger {
 	 * @param pvQuest
 	 * @param itemid
 	 *            宝贝id
+	 * @param captcha
 	 * @throws IOException
 	 */
-	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid) throws NetworkIOReadErrorException {
-		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid);
+	public boolean checkTaskUrl(PVQuest pvQuest, final String itemid, String captcha) throws NetworkIOReadErrorException {
+		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/questinfo.php?questid=" + pvQuest.getQuestid() + "&type=pv&act=isend&idd=" + itemid + "&checkcodestr=" + captcha);
 		String body = responseHeader.bodyToString();
 		if (0 <= body.indexOf("你已经获得发布点")) {
 			return true;
 		}
+		logger.debug("校验宝贝失败 : " + body);
 		return false;
 	}
 

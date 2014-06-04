@@ -32,9 +32,15 @@ public class FindProxyContext implements FindProxyMatcherListener {
 	private Set<Proxy> proxys = Collections.synchronizedSet(new HashSet<Proxy>()); // 所有的代理信息
 	private Set<Proxy> proxyFialds = Collections.synchronizedSet(new HashSet<Proxy>()); // 被舍弃的代理
 
+	public FindProxyContext() {
+		super();
+		logger.debug("FindProxyContext newInstance..........");
+	}
+
 	// XXX r-core:findproxy 这里暂时就这样调用.以后根据不同项目再进行更进步封装吧
 	/** 初始化Proxy容器 */
 	public void init() {
+		logger.debug("FindProxyContext init..........");
 		addProxyMatcher(new CnProxyMatcher(this));
 	}
 

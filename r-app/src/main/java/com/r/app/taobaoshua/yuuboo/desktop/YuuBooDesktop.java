@@ -49,11 +49,11 @@ import com.r.core.util.TaskUtil;
  * 
  */
 public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListener, ActionListener {
+	private static final Logger logger = LoggerFactory.getLogger(YuuBooDesktop.class);
+	private static final YuuBoo yuuBoo = YuuBoo.getInstance();
 	private static final long serialVersionUID = 4683581855428200977L;
 	private static final int CTRL_STRUT = 5;
 	private static final String COMMOND_LOGIN = "commond_login"; // 命令_登陆
-	private static final Logger logger = LoggerFactory.getLogger(YuuBooDesktop.class);
-	private static final YuuBoo yuuBoo = YuuBoo.getInstance();
 
 	private JButton loginYuuBooButton = new JButton("登陆");
 	private HBaseBox accountBox = null; // 账号区域

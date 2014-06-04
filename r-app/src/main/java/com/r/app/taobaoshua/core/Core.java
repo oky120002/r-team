@@ -59,6 +59,7 @@ public class Core implements TaoBaoShuaStartup, LoggerListener {
 	@Override
 	public void startup() {
 		isRunning = true;
+		
 	}
 
 	@Override

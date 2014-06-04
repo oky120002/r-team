@@ -67,4 +67,6 @@ public class TaoBaoAction {
 	public String searchItemList(TaoBaoItemSearch taoBaoitemSearch, int page) {
 		return taoBao.getTaoBaoManger().searchItem(taoBaoitemSearch, page);
 	}
+	
+	
 }

@@ -1,0 +1,3053 @@
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- 防止IE8,7进入怪异模式 -->
+    <meta charset="gbk">
+    <meta name="spm-id" content="a230r.1" />
+    <script>
+
+        var beaconQueue = [],g_config={
+            appId: 3,
+            toolbar: false,
+            webww: true,
+            ap_mods: {
+                jstracker:[ 0.0001 ]
+            }
+        },g_hb_monitor_st=+new Date;
+
+        
+        window.SRP = window.SRP || {};
+        window.SRP.version ="";
+
+        window.givenByFE = {"currentPage":"mainsrp","suggest11":"off","importStyle":[],"P4PConfig":{"keyword":"%E7%89%9B%E4%BB%94%E4%B8%83%E5%88%86%E8%A3%A4%E5%A5%B3+%E5%A4%8F%E8%96%84%E6%AC%BE%E7%99%BE%E6%90%AD","keywordGBK":"%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE","catid":"","propertyid":"","ip":"123.147.195.2","frontcatid":"","loc":"%D6%A3%D6%DD","gprice":"49.00,61.00","sort":"","sbid":"17,22,50","q2cused":0,"s":"","pageNum":1,"p4pbottom_up":false,"b2b_show":false,"etao_wanke":false,"etao_effect":false,"offset":0,"refpid":"","source":""}};
+        window.givenByFEOld = {
+            currentPage: "mainsrp",
+                        suggest11: "off",
+            //有些模块出现在首屏但是却是在特殊情况才出现，需要加上模块的名称
+            importStyle: [
+                            ]
+        }
+    </script>
+
+    <!-- S GLOBAL CSS -->
+<link rel="stylesheet" href="http://g.tbcdn.cn/tb/global/2.7.5/global-min.css">
+<!-- E GLOBAL CSS --><!-- S GLOBAL JS -->
+<script src="http://g.tbcdn.cn/??kissy/k/1.4.2/seed-min.js,tb/global/2.7.5/global-min.js"></script>
+<!-- E GLOBAL JS -->    <link rel="stylesheet" href="http://g.tbcdn.cn/tb/??bsrp/0.6.2/publish/global.css,srpbase/0.5.0/index.css,bsrp/0.6.2/publish/srp.css">
+        <title>牛仔七分裤女 夏薄款百搭_淘宝搜索</title>
+    <!--    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js?t=20130711" data-config="{combine:true}"></script>-->
+    <script bx-config="{autoPagelet:true}" src="http://a.tbcdn.cn/apps/e/brix/1.0/brix-min.js?t=20130718"></script>
+    <script src="http://g.tbcdn.cn/tb/??bsrp/0.6.2/publish/init.js,srpbase/0.5.0/index.js,bsrp/0.6.2/publish/srp.js"  charset="utf-8">
+    </script>
+
+    <link rel="search" type="application/opensearchdescription+xml" title="淘宝搜索" href="/opensearch.xml">
+    <script>
+
+        window.__SafeUrl__ = 'http://s.taobao.com/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&bcoffset=&tab=all&loc=%D6%A3%D6%DD&sort=&globalbuy=&source=&style=&bucket_id=&filter=reserve_price%5B49%2C61%5D&cat=&sortn=&sort2=&fs=1&rsclick=&stats_click=&initiative_id=tbindexz_20140604';
+        window.PFORP = window.PFORP || {};
+        window.PFORP.DiscountFlag = true;
+                window.PFORP.TextLinkFlag = true;
+        window.Responsive = window.Responsive || {};
+        window.Responsive.cookie = false;
+        window.Responsive.status = true;
+        window.Responsive.method = 'screen';
+
+        window.SRP.Global = {
+            q: '%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE',
+            encode_q: '%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE',
+            loc : '郑州',
+            cat: '',
+            catLevelOne: '0',
+            ppath: '',
+            s: '1',
+            tnk: '草莓pay派',
+            bucketid: '10',
+            multi_bucket: '10_17_2_0_0_0_0_0',
+            bucketcell: '8',
+            exWideScreen: true,
+            style: 'grid',
+            initiative_id: 'tbindexz_20140604',
+            etao_wanke:false,
+            p4pbottom_up:false,
+            etao_effect:false            
+        };
+
+        SEARCH.config('adConfig', {"p4pItems":"http:\/\/tmatch.simba.taobao.com\/?name=tbuad&count=5&q2cused=0&p4p=__p4p_sidebar__%2C__p4p_bottom__&keyword=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&pid=420434_1006%2C420435_1006&loc=%25D6%25A3%25D6%25DD&sort=&gprice=49.00%2C61.00&ip=123.147.195.2&offset=0&rct=11&propertyid=&sbid=17%2C22%2C50&o=j","p4pShop":"http:\/\/tmatch.simba.taobao.com\/?name=dpad&count=3&q2cused=0&p4p=__p4p_sidebar_shop__&keyword=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&pid=420930_1006&loc=%25D6%25A3%25D6%25DD&sort=&gprice=49.00%2C61.00&ip=123.147.195.2&offset=0&rct=0&propertyid=&sbid=17%2C22%2C50&o=j&elemtid=7&layouttid=234&otsdk=1","etaorecommend":"http:\/\/s.etao.com\/search.php?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&v=auction&format=json&tbpm=t&callback=__p4p_etao_sidebar__&n=9&from=tb_main&offset=0&_cat=50023720%252C50023719%252C50023722%252C50023719%252C50023721%252C50023718&cat=0","p4pdiscount":"http:\/\/show.re.taobao.com\/feature_v1.htm?feature_names=promoName,promoPrice,promoOtherNeed,coinTips,dsrDescribe,dsrService,dsrDeliver,dsrDescribeGap,dsrServiceGap,dsrDeliverGap&from=taobao_search","b2bkeeper":"","p4plink":"http:\/\/xtextlink.simba.taobao.com\/lk?pid=419110_1006&reqtype=s"});
+                window.SRP.Icon = {
+            data: [{"innerText":"\u62a2\u9650\u91cf\u4f18\u60e0\u5238\uff0c66\u4eab\u6298\u4e0a\u6298\uff01","title":"\u62a2\u9650\u91cf\u4f18\u60e0\u5238\uff0c66\u4eab\u6298\u4e0a\u6298\uff01","url":"http:\/\/www.taobao.com\/market\/66\/index_warmup.php","class":"icon-supple-66dacu-beta"},{"innerText":"\u590f\u65e5\u51b0\u70b9\u4ef7\u5305\u90ae\uff0c\u4ec5\u6b641\u5929","title":"\u590f\u65e5\u51b0\u70b9\u4ef7\u5305\u90ae\uff0c\u4ec5\u6b641\u5929","url":"http:\/\/www.taobao.com\/market\/66\/index.php","class":"icon-supple-66dacu"},{"innerText":"\u638c\u67dc\u70ed\u5356\u5b9d\u8d1d","title":"\u638c\u67dc\u70ed\u5356\u5b9d\u8d1d","url":"http:\/\/re.taobao.com\/search?keyword={q}&refpid=420432_1006&frcatid={cat}{extUrl}","class":"icon-service-remai"},{"innerText":"\u5f53\u5b63\u65b0\u54c1\u5b9d\u8d1d","title":"\u5f53\u5b63\u65b0\u54c1\u5b9d\u8d1d","url":"http:\/\/service.taobao.com\/support\/knowledge-1138476.htm","class":"icon-service-new"},{"innerText":"\u5929\u732b\u5b9d\u8d1d","title":"\u5929\u732b\u5b9d\u8d1d\u3002\u4e0a\u5929\u732b\uff0c\u5c31\u8d2d\u4e86~","url":"http:\/\/www.tmall.com\/","class":"icon-service-tianmao"},{"innerText":"\u5168\u7403\u8d2d\u8ba4\u8bc1\u5546\u6237\u5b9d\u8d1d","title":"\u5168\u7403\u8d2d\u8ba4\u8bc1\u5546\u6237\u5b9d\u8d1d\u3002\u8db3\u4e0d\u51fa\u6237\uff0c\u6dd8\u904d\u5168\u7403~","url":"http:\/\/global.taobao.com\/","class":"icon-service-rzsh"},{"innerText":"\u751f\u6001\u519c\u4e1a\u5b9d\u8d1d","title":"\u751f\u6001\u519c\u4e1a\u5b9d\u8d1d\u3002\u65e0\u519c\u836f\u3001\u65e0\u5316\u80a5\u3001\u65e0\u6dfb\u52a0\u5242\uff01","url":"http:\/\/ny.taobao.com\/","class":"icon-service-youjinongye"},{"innerText":"\u5929\u732b\u56fd\u9645\u5b9d\u8d1d","title":"\u5929\u732b\u56fd\u9645\u5b9d\u8d1d\u3002\u6211\u4eec\u7684\u5546\u5bb6\u5728\u6d77\u5916~","url":"http:\/\/www.tmall.hk\/","class":"icon-service-tianmaoguoji"},{"innerText":"\u5168\u7403\u8d2d\u4e13\u4e1a\u4e70\u624b\u5b9d\u8d1d","title":"\u5168\u7403\u8d2d\u4e13\u4e1a\u4e70\u624b\u5b9d\u8d1d\u3002\u8db3\u4e0d\u51fa\u6237\uff0c\u6dd8\u904d\u5168\u7403~","url":"http:\/\/global.taobao.com\/","class":"icon-service-zyms"},{"innerText":"\u6dd8\u5b9d\u65c5\u884c\u5b9d\u8d1d","title":"\u6dd8\u5b9d\u65c5\u884c\u5b9d\u8d1d\u3002\u7231\u68a6\u60f3\uff0c\u53bb\u65c5\u884c~","url":"http:\/\/trip.taobao.com\/","class":"icon-service-lvxing"},{"innerText":"\u91d1\u724c\u5356\u5bb6","title":"\u91d1\u724c\u5356\u5bb6","url":"","class":"icon-service-jinpaimaijia"},{"innerText":"\u516c\u76ca\u5b9d\u8d1d","title":"\u516c\u76ca\u5b9d\u8d1d\u3002\u4e00\u7b14\u4ea4\u6613\uff0c\u4e00\u6b21\u516c\u76ca~","url":"http:\/\/www.taobao.com\/go\/act\/public\/gybb.php?spm=0.0.0.0.rhPE9M&TBG=20960.18622.4","class":"icon-service-gongyibaobei"},{"innerText":"\u7535\u5b50\u51ed\u8bc1","title":"\u7535\u5b50\u51ed\u8bc1","url":"http:\/\/www.taobao.com\/go\/act\/315\/dzpz.php","class":"icon-service-dianzipingzheng"},{"innerText":"\u6b63\u54c1\u4fdd\u969c","title":"\u6b63\u54c1\u4fdd\u969c","url":"http:\/\/www.tmall.com\/go\/chn\/mall2010\/promise.php?#ZPBZ","class":"icon-service-zhengpin"},{"innerText":"\u54c1\u724c\u6388\u6743","title":"\u5356\u5bb6\u627f\u8bfa\uff1a\u5b9d\u8d1d\u7531\u54c1\u724c\u5382\u5546\u76f4\u63a5\u53d1\u8d27\uff0c\u54c1\u724c\u5382\u5546\u6388\u6743\u9500\u552e\uff01","url":"http:\/\/www.taobao.com\/go\/act\/sale\/ppsqfx.php","class":"icon-service-shouquan"},{"innerText":"\u5bc4\u552e\u4ea4\u6613","title":"\u5bc4\u552e\u4ea4\u6613","url":"http:\/\/service.taobao.com\/support\/knowledge-847890.htm","class":"icon-service-jishou"},{"innerText":"\u65e0\u8d27\u8d54\u4ed8","title":"\u65e0\u8d27\u8d54\u4ed8","url":"http:\/\/service.taobao.com\/support\/knowledge-1109109.htm","class":"icon-service-peifu"},{"innerText":"\u62c5\u4fdd\u4ea4\u6613","title":"\u62c5\u4fdd\u4ea4\u6613","url":"http:\/\/service.taobao.com\/support\/knowledge-847887.htm","class":"icon-service-danbao"},{"innerText":"\u81ea\u52a8\u5145\u503c","title":"\u81ea\u52a8\u5145\u503c","url":"http:\/\/service.taobao.com\/support\/knowledge-1120859.htm","class":"icon-service-zidongchongzhi"},{"innerText":"\u5e73\u53f0\u4ee3\u5145","title":"\u5e73\u53f0\u4ee3\u5145","url":"http:\/\/chongzhi.taobao.com\/","class":"icon-service-daichong"},{"innerText":"\u81ea\u52a8\u53d1\u8d27","title":"\u81ea\u52a8\u53d1\u8d27","url":"http:\/\/service.taobao.com\/support\/knowledge-1119683.htm","class":"icon-service-zidongfahuo"},{"innerText":"\u5b9e\u4ef7\u6709\u623f","title":"\u5356\u5bb6\u627f\u8bfa\u4ef7\u683c\u771f\u5b9e\uff0c\u4fdd\u8bc1\u6709\u623f\uff0c\u65e0\u623f\u8d54\u4ed8","url":"http:\/\/service.taobao.com\/support\/knowledge-5074991.htm","class":"icon-service-shijiayoufang"},{"innerText":"\u94c1\u5b9a\u51fa\u6e38","title":"\u5356\u5bb6\u627f\u8bfa\u94c1\u5b9a\u51fa\u6e38\uff0c\u82e5\u66f4\u6539\u6216\u53d6\u6d88\u884c\u7a0b\uff0c\u65e0\u6761\u4ef6\u5168\u989d\u9000\u6b3e\u5e76\u989d\u5916\u8d54\u4ed8","url":"http:\/\/service.tmall.com\/support\/tmall\/knowledge-5442595.htm","class":"icon-service-tiedingchuyou"},{"innerText":"\u7834\u635f\u8865\u5bc4","title":"\u7834\u635f\u8865\u5bc4","url":"http:\/\/www.taobao.com\/go\/act\/xb2\/index.php?service=7&ad_id=&am_id=&cm_id=14005851957409f914c1&pm_id=","class":"icon-service-posunbuji"},{"innerText":"\u54c1\u8d28\u627f\u8bfa","title":"\u54c1\u8d28\u627f\u8bfa","url":"http:\/\/www.taobao.com\/go\/act\/xb2\/index.php?service=6&ad_id=&am_id=&cm_id=1400585192c5bff49b5c&pm_id=","class":"icon-service-pinzhichengnuo"},{"innerText":"\u539f\u4ea7\u5730\u4fdd\u969c","title":"\u539f\u4ea7\u5730\u4fdd\u969c","url":"http:\/\/www.taobao.com\/market\/food\/foodorigin.php?ad_id=&am_id=13010790297c37e113a6&cm_id=&pm_id=","class":"icon-service-ycdbz"},{"innerText":"\u8d28\u91cf\u8ba4\u8bc1","title":"\u8d28\u91cf\u8ba4\u8bc1","url":"http:\/\/service.taobao.com\/support\/knowledge-1120082.htm","class":"icon-service-qs"},{"innerText":"\u7acb\u5373\u8bd5\u7528","title":"\u70b9\u51fb\u7acb\u5373\u8bd5\u7528\u3002\u8bd5\uff0c\u662f\u4e00\u79cd\u751f\u6d3b\u6001\u5ea6\uff01","url":"http:\/\/try.taobao.com\/go_item.htm?shop_item_id={nid}","class":"icon-service-shiyong"},{"innerText":"\u7acb\u5373\u8bd5\u8bfb","title":"\u70b9\u51fb\u7acb\u5373\u8bd5\u8bfb\u3002\u6175\u61d2\u7684\u9633\u5149\uff0c\u4e00\u676f\u8336\uff0c\u4e00\u6bb5\u9605\u8bfb\u597d\u65f6\u5149~","url":"http:\/\/shuzi.taobao.com\/play\/itemPlay.htm?id={nid}&from=tb_search","class":"icon-supple-shidu"},{"innerText":"7\u5929\u9000\u6362","title":"7\u5929\u9000\u6362","url":"http:\/\/www.tmall.com\/go\/chn\/mall2010\/promise.php?#QTTH","class":"icon-service-qitiantuihuan"},{"innerText":"7\u5929\u9000\u8d27","title":"7\u5929\u9000\u8d27","url":"http:\/\/service.taobao.com\/support\/knowledge-5701303.htm","class":"icon-service-qitiantuihuo"},{"innerText":"{contract_time}\u5929\u9000\u8d27","title":"{contract_time}\u5929\u9000\u8d27","url":"http:\/\/service.taobao.com\/support\/knowledge-5575087.htm","class":"icon-service-7tianjia"},{"innerText":"\u6d88\u8d39\u8005\u4fdd\u969c","title":"\u6d88\u8d39\u8005\u4fdd\u969c","url":"http:\/\/www.taobao.com\/go\/act\/315\/xfzbz_rsms.php","class":"icon-service-xiaobao"},{"innerText":"\u652f\u6301\u4fe1\u7528\u5361","title":"\u652f\u6301\u4fe1\u7528\u5361\u652f\u4ed8","url":"http:\/\/www.taobao.com\/go\/act\/sale\/kadepay.php?ad_id=&am_id=&cm_id=14001249574b437a411d&pm_id=","class":"icon-service-xinyongka"},{"innerText":"\u652f\u6301\u8d27\u5230\u4ed8\u6b3e","title":"\u652f\u6301\u8d27\u5230\u4ed8\u6b3e","url":"http:\/\/www.taobao.com\/go\/act\/sale\/cod2.php","class":"icon-service-huodaofukuan"}],
+            dynamic: {"37341933824":{"nid":"37341933824"},"37968284481":{"nid":"37968284481"},"38932766861":{"nid":"38932766861"},"39146017660":{"nid":"39146017660"},"39081090712":{"nid":"39081090712"}}        }
+    </script>
+        <script src="/js/tracerulebts.js?t=2014051502"></script>
+    </head>
+<body><script>
+with(document)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("exparams","category=&userid=723482280&aplus&yunid=",id="tb-beacon-aplus",src=(location>"https"?"//s":"//a")+".tbcdn.cn/s/aplus_v2.js")
+</script>
+
+<script>
+        SEARCH.config('screenWidth', false);
+    SEARCH.config('exWideScreen', false);
+    SEARCH.run('initResponsive');
+
+</script>
+
+
+<!-- global 3.2 -->
+<!-- S GLOBAL HTML -->
+<div id="J_SiteNav" class="site-nav">
+    <div id="J_SiteNavBd" class="site-nav-bd">
+        <ul id="J_SiteNavBdL" class="site-nav-bd-l"></ul>
+        <ul id="J_SiteNavBdR" class="site-nav-bd-r"></ul>
+    </div>
+</div>
+<!-- --><!-- 全网顶通 --><!-- E GLOBAL HTML --><script>
+    SEARCH.run('BODY_TOP')
+</script>
+
+<div id="page" class=" newsrp">
+    <div class="tb-wrapper">
+    <div class="tb-wrapper-main">
+        <div class="tb-header" bx-path="components/srpbase/header/" bx-name="header">
+
+            <div class="tb-logo">
+                <a class="icon-btn-logo" href="http://www.taobao.com/" target="_top">淘宝网</a>
+
+                <div class="more-button">
+                    <div class="more-label"><span>更多市场</span><b class="icon-btn-arrow-2-h"></b></div>
+                </div>
+            </div>
+            <div class="tb-search">
+                <div class="search-box">
+                    <!-- 这是一个tab组件 -->
+                    <div class="search-triggers">
+                        <ul class="ks-switchable-nav" id="J_SearchTab">
+                            <li class="selected" data-action="/search" data-defaultpage="nogo" data-searchtype="item"><a
+                                    class="search-site-link" href="">宝贝</a></li>
+                            <li class="" data-action="http://shopsearch.taobao.com/search" data-searchtype="shop">
+                                <a class="search-site-link" href="/search?app=shopsearch">店铺</a>
+                            </li>
+                        </ul>
+                        <s class="icon-btn-arrow-2-h"></s>
+                    </div>
+                    <div class="search-panel search-srp-panel ks-switchable-content">
+                        <form id="J_SearchForm" action="/search" method="get" data-defaultpage="nogo">
+                            <input type="hidden" value="牛仔七分裤女 夏薄款百搭"
+                                   id="q_value">
+                            <input type="hidden"
+                                   value="staobaoz_20140604"
+                                   name="initiative_id">
+                                                            <input type="hidden"
+                                       name="js"
+                                       value="1"
+                                    />
+                                                            <input type="hidden"
+                                       name="stats_click"
+                                       value="search_radio_all%3A1"
+                                    />
+                            
+                            <div class="search-panel-fields search-srp-panel-fields search-common-panel">
+                                <div class="search-button">
+                                    <button class="icon-btn-search" type="submit">搜 索</button>
+                                </div>
+
+                                <div class="input-auto" id="combobox">
+                                    <input aria-haspopup="true"
+                                           aria-combobox="list" role="combobox" combobox="off"
+                                           class="ks-combobox-input" tabindex="0"
+                                           id="q" name="q"
+                                           value="牛仔七分裤女 夏薄款百搭"
+                                           placeholder="请输入要搜索的词"
+                                           _default="请输入要搜索的词" lang="zh-CN"
+                                           autocomplete="off"
+                                        />
+                                </div>
+                            </div>
+                                                    </form>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="tb-container ">
+    <div class="tb-wrapper">
+        <div class="tb-wrapper-main">
+                            <div class="tb-navi ">
+                    <div class="widget-tabpage-el new-tabpage-el">
+                        <ul class="elem-nav tab-n clearfix" id="J_filter" bx-name="newsrp/tabpage" bx-path="components/newsrp/tabpage/">
+        <li class="tab-n-1 active " >
+    <a class="elem-nav-i" id="tabFilterAll" trace="tabClickCommon" data-tabName="all" href="/search?initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&apassall=1">所有宝贝</a>
+    </li>
+        <li class="tab-n-1 " >
+    <a class="elem-nav-i" id="tabFilterMall" trace="tabClickCommon" data-tabName="mall" href="/search?initiative_id=tbindexz_20140604&tab=mall&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE">天猫</a>
+    </li>
+        <li class="tab-n-1 " >
+    <a class="elem-nav-i" id="tabFilterOld" trace="tabClickCommon" data-tabName="old" href="/search?initiative_id=tbindexz_20140604&tab=old&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE">二手</a>
+    </li>
+        <li class="tab-n-1 " >
+    <a class="elem-nav-i" id="tabFilterPromotion" trace="tabClickCommon" data-tabName="promotion" href="/search?initiative_id=tbindexz_20140604&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&isdefault=1&tab=promotion">值得买</a>
+    </li>
+    </ul>
+<div class="elem-line-wrap"></div>
+
+                    </div><!--筛选区 -->
+                                                                                                    <div class="tb-combobar">
+    <div bx-path="components/combobar-noquery/" bx-name="combobar-noquery"  class="nav combobar-noquery">
+        <ul class="clearfix">
+            <li>“牛仔七分裤女 夏薄款百搭”搜索结果较少，尝试下:
+                                    <a trace="littleAuction" href='/search?q=%C5%A3%D7%D0+%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%B0%D9%B4%EE&from=rewq'>“牛仔 七分裤 女 夏 百搭”</a>
+                    、                                    <a trace="littleAuction" href='/search?q=%C5%A3%D7%D0+%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%B1%A1%BF%EE&from=rewq'>“牛仔 七分裤 女 夏 薄款”</a>
+                    、                                    <a trace="littleAuction" href='/search?q=%C5%A3%D7%D0+%C6%DF%B7%D6%BF%E3+%C5%AE+%B1%A1%BF%EE&from=rewq'>“牛仔 七分裤 女 薄款”</a>
+                                                </li>
+        </ul>
+    </div>
+</div>
+                                                            
+                                                            
+                                            <!--产品系列-->
+                    
+                                                                                            <!-- sc end -->
+                                        <!-- sc start -->
+                                            <div class="tb-combo">
+                                                    </div>
+                                                                                                                                                                    <!-- navigator start -->
+<div class="tb-navigation" data-spm="a230r.1.3">
+        <div class="navigation "
+        bx-name="navigation"
+        bx-config="{'navoff':'1','param':{'url':'http://s.taobao.com/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&bcoffset=&tab=all&loc=%D6%A3%D6%DD&sort=&globalbuy=&source=&style=&bucket_id=&filter=reserve_price%5B49%2C61%5D&sortn=&sort2=&fs=1&rsclick=&stats_click=&initiative_id=tbindexz_20140604&cps=yes','cat':null,'bucketid':'17','ppath':null}}"
+        bx-path="components/newsrp/navigation/">
+
+        <a class="nav-switch J_Switch" href="" >
+            <span class="icon-btn-arrow-up-3" trace="navHideButton" title="收起导航">
+            </span>
+        </a>
+
+        <div class="nav-container">
+            <div class="nav-topbar nav-category-group clearfix" data-group="nav-topbar">
+                <div class="nav-topbar-content">
+                    <!-- 为了占位，宝贝数量移动到面包屑的上方 -->
+                    <div class="nav-crumb-item" >
+    <span class="crumbs-items">共 <span class="h">5</span> 件宝贝</span>
+</div>
+                    <ul>
+                                                                        <!--
+                        <li class="has-arrow">
+                            <div class="nav-category">
+                                <h4>所有分类<span>:</span></h4>
+                                <a class="nav-more J_More" href="javascript:void(0)">
+                                    更多
+                                    <span class="arrow arrow-bottom"></span>
+                                </a>
+                            </div>
+                            <span class="nav-topbar-arror"></span>
+                        </li>
+                                -->
+                                                                        <li class="has-arrow">
+                             所有分类<span class="nav-topbar-arror icon-supple-arrow-right"></span>
+                        </li>
+                                                                    
+                        
+
+
+                        <li>
+                            <span class="topbar-search J_TopbarSearch">
+                                <input class="search-input input-placeholder" _default="在该条件下查找" placeholder="在该条件下查找" class="search-input" accesskey="s">
+                                <span class="topbar-submit icon-btn-search-icon"></span>
+                            </span>
+                        </li>
+                    </ul>
+
+                </div>
+
+                                <div class="nav-category-panel"> </div>
+            </div>
+            <div class="nav-content">
+            <!-- 推荐属性-->
+<div class="nav-category-group type-line" data-group="type-line">
+</div>
+<div class="nav-category-group type-block four-box" style="display:none" data-group="type-block">
+</div>
+<!--高级属性导航 -->
+    <div class="nav-category-group type-min" data-group="type-mine" style="display:none" >
+        <h4 class="nav-category-title">筛选条件<span>：</span></h4>
+        <div class="nav-category-container">
+                       </div>
+       <div class="nav-category-panel" data-origin-index="3"> </div>
+</div>
+            </div>
+
+        </div>
+    </div>
+</div><!-- end for navigator -->
+                                    </div>
+                                        <!-- 产品系列combo -->
+                                                <!--面包屑 -->
+            
+                                    <dl class="supplement-relate">
+    <dt>您是不是想找：</dt>
+    <dd>
+                    <a trace="relatedSearch" href="/search?q=%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0%B1%A1%BF%EE&rs=up&rsclick=1">七分裤女夏牛仔薄款</a>
+                    <a trace="relatedSearch" href="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%CF%D4%CA%DD&rs=up&rsclick=2">牛仔七分裤女夏显瘦</a>
+                    <a trace="relatedSearch" href="/search?q=%B4%F3%C2%EB%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4&rs=up&rsclick=3">大码牛仔七分裤女夏</a>
+                    <a trace="relatedSearch" href="/search?q=%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0+%BF%ED%CB%C9&rs=up&rsclick=4">七分裤女夏牛仔宽松</a>
+                    <a trace="relatedSearch" href="/search?q=%B1%B3%B4%F8%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0&rs=up&rsclick=5">背带七分裤女夏牛仔</a>
+                    <a trace="relatedSearch" href="/search?q=%B8%DF%D1%FC%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4&rs=up&rsclick=6">高腰牛仔七分裤女夏</a>
+                    <a trace="relatedSearch" href="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE%CF%C4%B1%A1&rs=up&rsclick=7">牛仔七分裤女夏薄</a>
+                    <a trace="relatedSearch" href="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%BC%BE&rs=up&rsclick=8">牛仔七分裤女夏季</a>
+                    <a trace="relatedSearch" href="/search?q=%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0%B9%FE%C2%D7&rs=up&rsclick=9">七分裤女夏牛仔哈伦</a>
+                    <a trace="relatedSearch" href="/search?q=%CB%C9%BD%F4%D1%FC%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE&rs=up&rsclick=10">松紧腰牛仔七分裤女</a>
+                    <a trace="relatedSearch" href="/search?q=%C6%DF%B7%D6%BF%E3%C5%AE%CF%C4%C5%A3%D7%D0%D6%D0%BF%E3&rs=up&rsclick=11">七分裤女夏牛仔中裤</a>
+                    <a trace="relatedSearch" href="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE%BA%AB%B0%E6&rs=up&rsclick=12">牛仔七分裤女韩版</a>
+                    <a trace="relatedSearch" href="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%D0%A1%BD%C5&rs=up&rsclick=13">牛仔七分裤女夏小脚</a>
+                    <a trace="relatedSearch" href="/search?q=%C6%DF%B7%D6%C5%A3%D7%D0%BF%E3+%C5%AE+%D0%A1%BD%C5%BF%E3&rs=up&rsclick=14">七分牛仔裤女小脚裤</a>
+            </dd>
+</dl>                            <div class="tb-sortbar" id="J_relative"  data-spm="a230r.1.8">
+                    <div class="row sortbar" bx-name="newsrp/sortbar" bx-path="components/newsrp/sortbar/" bx-config="{param:{loc:'郑州'}}" >
+    <div class="col">
+        <ul class="nav nav-pills sorting-btns">
+            <li class="active"  ><a trace="sortDefault" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=default&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" title="综合排序">综合<span class="sorting-bg"></span></a></li>
+                        <li  ><a trace="sortRenqiDesc" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=renqi-desc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" title="人气从高到低">人气<span class="sorting-bg"></span></a></li>
+            
+            <li  ><a trace="sortSaleDesc" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=sale-desc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" title="销量从高到低">销量<span class="sorting-bg"></span></a></li>
+
+
+            
+            <li bx-name="dropdown" bx-path="components/srpbase/dropdown/" bx-config="{zIndex: 200}" class="dropdown ">
+                <a trace="sortPrice" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=price-asc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" class="active " hidefocus="true" title="价格从低到高">
+                    价格                    <span class="icon-todo-trend-top">
+                    价格从低到高</span>
+                    <s class="icon-btn-arrow-2-h"></s>
+                </a>
+
+                <ul class="dropdown-list">
+                    <li ><a href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=price-asc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" hidefocus="true">价格从低到高</a></li>
+                                        <li><a trace="sortPrice" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=price-desc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE#J_relative" hidefocus="true" >价格从高到低</a></li>
+
+                                        <li><a trace="sortPrice" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=total-asc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE" hidefocus="true" >总价从低到高</a></li>
+
+                                        <li><a trace="sortPrice" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&sort=total-desc&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE" hidefocus="true" >总价从高到低</a></li>
+
+                                    </ul>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="col">
+                <div id="rank-priceform">
+                    <div class="fm-price">
+                <p>
+                    <input placeholder="￥" type="text" value="49.00" class="txt" name="start_price" title="按价格区间筛选 最低价">
+                    <span>-</span>
+                    <input placeholder="￥" type="text" value="61.00" class="txt" name="end_price" title="按价格区间筛选 最高价">
+                </p>
+                <div class="ctrl-panel">
+                    <div class="btns clearfix">
+                        <span class="btn"><button class="i" type="submit">确定</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="J_RankLike" class="price-range-like">
+            <ul>
+                            </ul>
+        </div>
+    </div>
+    <div class="col end">
+                <ul class="nav clearfix switch-btns">
+            
+            <li class="">
+                <a class="icon-btn-switch-wrap  icon-hover" trace="gridBtn" trace-lazy="true" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&style=grid" title="切换到大图视图" stat="">
+                    <span class="icon-btn-switch-grid">大图</span>
+                </a>
+            </li>
+            <li class="last">
+                <a class="icon-btn-switch-wrap " trace="listBtn" trace-lazy="true" href="/search?promote=0&loc=%D6%A3%D6%DD&filter=reserve_price%5B49%2C61%5D&fs=1&initiative_id=tbindexz_20140604&tab=all&q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&style=list" title="切换到列表视图" stat="">
+                    <span class="icon-btn-switch-list">列表</span>
+                </a>
+            </li>
+                        <li class="pagi">
+                <div class="pagination">
+                    <div class="page-top">
+                        <span class="page-info"><strong class="h">1</strong>/1</span> <a href="javascript:;" class="page-prev"><span class="icon-btn-prev-2-disable"></span>  </a><a href="javascript:;" class="page-next"><span class="icon-btn-next-2-disable"></span>  </a>                    </div>
+                </div>
+            </li>
+        </ul>
+            </div>
+        <div class="col end">
+                <div id="sel-loc" data-param='{"location":"郑州","loc":"郑州","guess":"重庆"}'>
+        </div>
+    </div>
+        <a title="取消浮动跟随" class="icon-todo-cancel icon-btn-x-round" href="javascript:;" ></a>
+</div>
+
+<div class="sortbar-holder"></div>
+                </div><!--排序区-->
+                <div class="tb-filter" data-spm="a230r.1.7">
+                    <div class="tb-filter-box narrow">
+    <form  bx-config="{toggle:true,isClear:true}" bx-path="components/newsrp/filter/" bx-name="newsrp/filter" action="/search" method="get" id = "J_filterForm">
+        <input type="hidden" name="q" value="牛仔七分裤女 夏薄款百搭">
+        <input type="hidden" name="bcoffset" value="">
+        <input type="hidden" name="tab" value="all">
+        <input type="hidden" name="loc" value="郑州" >
+        <input type="hidden" name="sort" value="" >
+        <input type="hidden" name="globalbuy" value="" >
+        <input type="hidden" name="source" value="" >
+        <input type="hidden" name="style" value="" >
+        <input type="hidden" name="bucket_id" value="" >
+        <input type="hidden" name="filter" id="filter" value="reserve_price[49,61]" >
+        <input type="hidden" name="cat" id="cat" value="" >
+		
+        <input type="hidden" name="sortn" id="sortn" value="" >
+        <input type="hidden" name="sort2" id="sort2" value="" >
+        <input type="hidden" name="fs" value="1">
+		
+		
+                                                                
+        
+        
+                
+        
+
+        
+                        <input type="hidden" name="rsclick" value="" >
+                <input type="hidden" name="stats_click" value="" >
+        
+                <input type="hidden" value="tbindexz_20140604" name="initiative_id">
+                
+        
+        <div class="section">
+
+                        <div class="bd">
+                <ul class="nav J_FilterCheckList clearfix">
+                                        <li><label for="filterQuanmin"  class="refine-important">
+                            <input class="icon-btn-check-big" type="checkbox" name="all66high" value="1" trace="filterbox" data-filterid="all66high_1" id="filterQuanmin" >
+                        66全民嗨购</label>
+                    </li>
+                                        <li><label for="filterProtectionQuality" >
+                            <input class="icon-btn-check-big" type="checkbox" name="user_type" value="1" trace="filterbox" data-filterid="user_type_1" id="filterProtectionQuality" >
+                        正品保障</label>
+                    </li>
+                                        <li><label for="filterServiceOversea" >
+                            <input class="icon-btn-check-big" type="checkbox" name="promote" value="2097152" trace="filterbox" data-filterid="promote_2097152" id="filterServiceOversea" >
+                        海外商品</label>
+                    </li>
+                                        <li><label for="filterServiceWWOnline" >
+                            <input class="icon-btn-check-big" type="checkbox" name="olu" value="yes" trace="filterbox" data-filterid="olu_yes" id="filterServiceWWOnline" >
+                        旺旺在线</label>
+                    </li>
+                                        <li><label for="filterServiceCOD" >
+                            <input class="icon-btn-check-big" type="checkbox" name="support_cod" value="1" trace="filterbox" data-filterid="support_cod_1" id="filterServiceCOD" >
+                        支持货到付款</label>
+                    </li>
+                                        <li><label for="support_xcard" >
+                            <input class="icon-btn-check-big" type="checkbox" name="support_xcard" value="1" trace="filterbox" data-filterid="support_xcard_1" id="support_xcard" >
+                        支持信用卡支付</label>
+                    </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    </form>
+</div>
+                </div><!--筛选区 -->
+                <!-- 去除二维排序 -->            
+            <noscript>
+                <style>.ad {
+                        display: none
+                    }</style>
+                <div class="search-noresult">
+                    <p><b>图片无法查看？点此<a href="http://bangpai.taobao.com/group/thread/400769-7367089.htm" target="_blank">查看解决方法</a></b><img
+                            src="http://img.tongji.linezing.com/1663546/tongji.gif"></p>
+                </div>
+            </noscript>
+                            <!--整合提示条combo区域-->
+                                                                                <!--整合提示条combo区域结束-->
+                                <!--个性化披露-->
+                
+                <!--结果内容区-->
+                <div class="tb-content" data-spm="a230r.1.14">
+                    <div class="row grid-view newsrp-gridcontent-el" bx-name="newsrp/gridcontent" bx-path="components/newsrp/gridcontent/">
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37341933824&ns=1&_u=4lhutl817c2#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i2/T1rVUNFJNXXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&auction_num_id=37341933824&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="/search?type=samestyle&app=i2i&rec_type=&uniqpid=-1525837647&nid=37341933824" target="_blank" class="" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1525837647&nid=37341933824" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >32人付款</div>
+            <div class="col price"><i>￥</i>59.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37341933824&ns=1&_u=4lhutl817c2#detail" target="_blank" title="韩版牛仔七分裤女 夏季薄款显瘦弹力拉链纯棉中腰牛仔7分裤 百搭" trace="auction" tracenum="2">
+                韩版<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span> <span class=H>夏</span>季<span class=H>薄款</span>显瘦弹力拉链纯棉中腰<span class=H>牛仔</span>7分<span class=H>裤</span> <span class=H>百搭</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[469,-1,123],'service':[480,0,0],'delivery':[473,-1,128],'safeUid':'UOmkbOmxSOF8L','sellerCredit':7,'totalRate':9644}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=895869956">zhongping淘</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="zhongping%E6%B7%98" data-display="inline" data-item="37341933824"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37968284481&ns=1&_u=4lhutl87e89#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i4/T1oV2pFzJcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&auction_num_id=37968284481&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="/search?type=samestyle&app=i2i&rec_type=&uniqpid=-401935582&nid=37968284481" target="_blank" class="" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=17&uniqpid=-401935582&nid=37968284481" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >15人付款</div>
+            <div class="col price"><i>￥</i>49.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37968284481&ns=1&_u=4lhutl87e89#detail" target="_blank" title="新款七分牛仔裤女浅色薄款包邮韩版百搭流行特价加肥加大夏季女" trace="auction" tracenum="2">
+                新款<span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>浅色<span class=H>薄款</span>包邮韩版<span class=H>百搭</span>流行特价加肥加大<span class=H>夏</span>季<span class=H>女</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[473,0,0],'service':[472,-1,199],'delivery':[474,-1,92],'safeUid':'UOmvLvCI0MFkL','sellerCredit':5,'totalRate':9784}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=836224596">keji6789</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="keji6789" data-display="inline" data-item="37968284481"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38932766861&ns=1&_u=4lhutl80e3b#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i2/T1rzvDFQhbXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&auction_num_id=38932766861&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="/search?type=samestyle&app=i2i&rec_type=&uniqpid=-1658925882&nid=38932766861" target="_blank" class="" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=17&uniqpid=-1658925882&nid=38932766861" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >3人付款</div>
+            <div class="col price"><i>￥</i>55.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38932766861&ns=1&_u=4lhutl80e3b#detail" target="_blank" title="学生薄款七分裤女夏牛仔7分裤百搭小脚裤八分nzk牛仔裤韩版修身潮" trace="auction" tracenum="2">
+                学生<span class=H>薄款</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span><span class=H>牛仔</span>7分<span class=H>裤</span><span class=H>百搭</span>小脚<span class=H>裤</span>八分nzk<span class=H>牛仔</span><span class=H>裤</span>韩版修身潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[484,1,3501],'service':[488,1,3304],'delivery':[488,1,4427],'safeUid':'UvGvSvGxSOmIY','sellerCredit':3,'totalRate':9838}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=339369821">缘溪想念梦</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%BC%98%E6%BA%AA%E6%83%B3%E5%BF%B5%E6%A2%A6" data-display="inline" data-item="38932766861"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=39146017660&ns=1&_u=4lhutl80c1e#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i1/T1_V52FO0fXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&auction_num_id=39146017660&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="/search?type=samestyle&app=i2i&rec_type=&uniqpid=-970908722&nid=39146017660" target="_blank" class="" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=1&uniqpid=-970908722&nid=39146017660" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >0人付款</div>
+            <div class="col price"><i>￥</i>59.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=39146017660&ns=1&_u=4lhutl80c1e#detail" target="_blank" title="春夏新款时尚百搭休闲学生糖果色多色薄款七分裤修身显瘦牛仔女" trace="auction" tracenum="2">
+                春<span class=H>夏</span>新款时尚<span class=H>百搭</span>休闲学生糖果色多色<span class=H>薄款</span><span class=H>七分</span><span class=H>裤</span>修身显瘦<span class=H>牛仔</span><span class=H>女</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[469,-1,124],'service':[490,1,4296],'delivery':[483,1,2104],'safeUid':'UOFH4MGk4MCk0','sellerCredit':4,'totalRate':9850}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=918798694">wangyumei1992</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="wangyumei1992" data-display="inline" data-item="39146017660"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=39081090712&ns=1&_u=4lhutl8f847#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i1/T1cD.EFzFiXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&auction_num_id=39081090712&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="/search?type=samestyle&app=i2i&rec_type=&uniqpid=-1576961201&nid=39081090712" target="_blank" class="" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=1&uniqpid=-1576961201&nid=39081090712" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >0人付款</div>
+            <div class="col price"><i>￥</i>59.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=39081090712&ns=1&_u=4lhutl8f847#detail" target="_blank" title="夏季薄款七分牛仔哈伦裤女 韩版时尚弹力柔软简约百搭休闲马裤潮" trace="auction" tracenum="2">
+                <span class=H>夏</span>季<span class=H>薄款</span><span class=H>七分</span><span class=H>牛仔</span>哈伦<span class=H>裤</span><span class=H>女</span> 韩版时尚弹力柔软简约<span class=H>百搭</span>休闲马<span class=H>裤</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[470,-1,104],'service':[484,1,1253],'delivery':[482,1,1342],'safeUid':'UvGg0vmNuOmNy','sellerCredit':9,'totalRate':9739}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=384007802">和为旺</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%92%8C%E4%B8%BA%E6%97%BA" data-display="inline" data-item="39081090712"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+                </div>
+                <!--少结果内容补足区-->
+                <div class="tb-combobar">
+    <div bx-path="components/combobar-noquery/" bx-name="combobar-noquery"  class="nav combobar-noquery">
+        <ul class="clearfix">
+            <li>根据上面的商品结果，为你推荐的相似商品。</li>
+        </ul>
+    </div>
+</div>
+<div class="tb-content"><div class="row grid-view newsrp-gridcontent-el" bx-name="newsrp/gridcontent" bx-path="components/newsrp/gridcontent/">
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=26862996760&ns=1&_u=4lhutl8ad79#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i2/T1DJn7FL8XXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=26862996760&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-2095468909&nid=26862996760" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >5812人付款</div>
+            <div class="col price"><i>￥</i>39.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=26862996760&ns=1&_u=4lhutl8ad79#detail" target="_blank" title="韩版女士七分裤松紧腰牛仔裤女式夏装哈伦裤宽松中裤显瘦小脚裤子" trace="auction" tracenum="2">
+                韩版<span class=H>女</span>士<span class=H>七分</span><span class=H>裤</span>松紧腰<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>式<span class=H>夏</span>装哈伦<span class=H>裤</span>宽松中<span class=H>裤</span>显瘦小脚<span class=H>裤</span>子            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[455,-1,420],'service':[466,-1,322],'delivery':[459,-1,384],'safeUid':'UOmcuOFNyvGkW','sellerCredit':13,'totalRate':9671}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=877902390">旺城科技</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%97%BA%E5%9F%8E%E7%A7%91%E6%8A%80" data-display="inline" data-item="26862996760"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38661300111&ns=1&_u=4lhutl85f13#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i4/T1Fex0FRFaXXXXXXXX_!!1-item_pic.gif_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38661300111&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-837307501&nid=38661300111" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >787人付款</div>
+            <div class="col price"><i>￥</i>98.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38661300111&ns=1&_u=4lhutl85f13#detail" target="_blank" title="牛仔七分裤女夏高腰弹力显瘦修身小脚铅笔中裤子薄款大码女装韩版" trace="auction" tracenum="2">
+                <span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span>高腰弹力显瘦修身小脚铅笔中<span class=H>裤</span>子<span class=H>薄款</span>大码<span class=H>女</span>装韩版            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[488,1,5677],'service':[492,1,5734],'delivery':[490,1,5096],'safeUid':'UvFNSMmkuvFIuMgTT','sellerCredit':7,'totalRate':9969}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1094971276">独霸韩服</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%8B%AC%E9%9C%B8%E9%9F%A9%E6%9C%8D" data-display="inline" data-item="38661300111"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38907595921&ns=1&_u=4lhutl80fde#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i1/T1ljKSFF0hXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38907595921&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-737960996&nid=38907595921" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >503人付款</div>
+            <div class="col price"><i>￥</i>48.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38907595921&ns=1&_u=4lhutl80fde#detail" target="_blank" title="九分裤子女夏季薄款牛仔铅笔裤 修身显瘦镶钻小脚七分裤紧身9分裤" trace="auction" tracenum="2">
+                九分<span class=H>裤</span>子<span class=H>女</span><span class=H>夏</span>季<span class=H>薄款</span><span class=H>牛仔</span>铅笔<span class=H>裤</span> 修身显瘦镶钻小脚<span class=H>七分</span><span class=H>裤</span>紧身9分<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[478,1,1387],'service':[486,1,2330],'delivery':[480,1,1027],'safeUid':'UMCvbvFx4OmH0','sellerCredit':11,'totalRate':9862}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=635168814">尚品前沿lin</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%B0%9A%E5%93%81%E5%89%8D%E6%B2%BFlin" data-display="inline" data-item="38907595921"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-supple-66dacu-beta"></span>
+                                                                                                <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38971353611&ns=1&_u=4lhutl8f4b3#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i4/TB10WnUFFXXXXcQXVXXXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38971353611&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-116025685&nid=38971353611" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >261人付款</div>
+            <div class="col price"><i>￥</i>46.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38971353611&ns=1&_u=4lhutl8f4b3#detail" target="_blank" title="韩版潮7分裤女夏加肥加大码显瘦胖mm七分牛仔裤马裤小脚女裤薄款" trace="auction" tracenum="2">
+                韩版潮7分<span class=H>裤</span><span class=H>女</span><span class=H>夏</span>加肥加大码显瘦胖mm<span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span>马<span class=H>裤</span>小脚<span class=H>女</span><span class=H>裤</span><span class=H>薄款</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[482,1,2853],'service':[488,1,3732],'delivery':[487,1,3911],'safeUid':'UvFHGvmHYMmNWvNTT','sellerCredit':7,'totalRate':9892}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1130114000">四方达2013</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%9B%9B%E6%96%B9%E8%BE%BE2013" data-display="inline" data-item="38971353611"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38255934114&ns=1&_u=4lhutl8f1ed#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i2/T1RcUyFwVcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38255934114&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-64410953&nid=38255934114" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >2283人付款</div>
+            <div class="col price"><i>￥</i>29.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38255934114&ns=1&_u=4lhutl8f1ed#detail" target="_blank" title="2014春夏装显瘦七分裤女小脚牛仔裤女蕾丝五分修身中裤短裤韩版潮" trace="auction" tracenum="2">
+                2014春<span class=H>夏</span>装显瘦<span class=H>七分</span><span class=H>裤</span><span class=H>女</span>小脚<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>蕾丝五分修身中<span class=H>裤</span>短<span class=H>裤</span>韩版潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[454,-1,439],'service':[466,-1,331],'delivery':[463,-1,331],'safeUid':'UOmk4vmI4vFv4','sellerCredit':11,'totalRate':9817}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=898028138">伊特商城yt</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 东莞</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E4%BC%8A%E7%89%B9%E5%95%86%E5%9F%8Eyt" data-display="inline" data-item="38255934114"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38992728568&ns=1&_u=4lhutl80756#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i3/T1E61XFT8bXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38992728568&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-937568199&nid=38992728568" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >305人付款</div>
+            <div class="col price"><i>￥</i>52.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38992728568&ns=1&_u=4lhutl80756#detail" target="_blank" title="夏装新款牛仔裤女 七分裤哈伦裤垮裤 松紧腰马裤 休闲短裤显瘦潮" trace="auction" tracenum="2">
+                <span class=H>夏</span>装新款<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span> <span class=H>七分</span><span class=H>裤</span>哈伦<span class=H>裤</span>垮<span class=H>裤</span> 松紧腰马<span class=H>裤</span> 休闲短<span class=H>裤</span>显瘦潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[469,-1,126],'service':[484,1,1520],'delivery':[475,-1,76],'safeUid':'UvCNuvGIYMCvSMQTT','sellerCredit':4,'totalRate':9788}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=2073216395">杨果儿掌柜</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%9D%A8%E6%9E%9C%E5%84%BF%E6%8E%8C%E6%9F%9C" data-display="inline" data-item="38992728568"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38164375254&ns=1&_u=4lhutl8226a#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i2/T1r5qWFzxbXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38164375254&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1425619416&nid=38164375254" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >8353人付款</div>
+            <div class="col price"><i>￥</i>49.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38164375254&ns=1&_u=4lhutl8226a#detail" target="_blank" title="夏装新款弹力宽松大码七分裤女牛仔裤哈伦裤女装薄修身显瘦韩版潮" trace="auction" tracenum="2">
+                <span class=H>夏</span>装新款弹力宽松大码<span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>牛仔</span><span class=H>裤</span>哈伦<span class=H>裤</span><span class=H>女</span>装薄修身显瘦韩版潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[478,1,1354],'service':[483,1,802],'delivery':[480,1,823],'safeUid':'UvFk0OFH4MmgWMNTT','sellerCredit':11,'totalRate':9721}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1949184804">新颖品牌店</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%96%B0%E9%A2%96%E5%93%81%E7%89%8C%E5%BA%97" data-display="inline" data-item="38164375254"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38547872007&ns=1&_u=4lhutl8aabe#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://gtu-c01.m.alicdn.com/1/1/61203153/13153025743389272/T2is7GXipaXXXXXXXX_!!61203153.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38547872007&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1071264568&nid=38547872007" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >261人付款</div>
+            <div class="col price"><i>￥</i>78.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38547872007&ns=1&_u=4lhutl8aabe#detail" target="_blank" title="2014夏季新款韩版哈伦裤大码女装中裤修身显瘦小脚裤七分牛仔裤女" trace="auction" tracenum="2">
+                2014<span class=H>夏</span>季新款韩版哈伦<span class=H>裤</span>大码<span class=H>女</span>装中<span class=H>裤</span>修身显瘦小脚<span class=H>裤</span><span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[484,1,3802],'service':[490,1,4269],'delivery':[486,1,3453],'safeUid':'UMCHyvmvYMFvT','sellerCredit':11,'totalRate':9872}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=61203153">raoping1984819</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="raoping1984819" data-display="inline" data-item="38547872007"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37854566959&ns=1&_u=4lhutl84f6c#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i2/T1sZJbFNNcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37854566959&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1239799832&nid=37854566959" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >183人付款</div>
+            <div class="col price"><i>￥</i>59.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37854566959&ns=1&_u=4lhutl84f6c#detail" target="_blank" title="新款森马牛仔七分裤女夏 韩版哈伦小脚裤7分短裤显瘦薄款中裤马裤" trace="auction" tracenum="2">
+                新款森马<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span> 韩版哈伦小脚<span class=H>裤</span>7分短<span class=H>裤</span>显瘦<span class=H>薄款</span>中<span class=H>裤</span>马<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[467,-1,176],'service':[480,0,0],'delivery':[478,0,0],'safeUid':'UvFNYvFkSvm8G','sellerCredit':9,'totalRate':9612}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=101199053">爱的孤独_2008</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%88%B1%E7%9A%84%E5%AD%A4%E7%8B%AC_2008" data-display="inline" data-item="37854566959"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=14910546743&ns=1&_u=4lhutl85514#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i1/T1XFbKFBJjXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=14910546743&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1675064902&nid=14910546743" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >892人付款</div>
+            <div class="col price"><i>￥</i>39.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=14910546743&ns=1&_u=4lhutl85514#detail" target="_blank" title="2014夏季新款牛仔短裤女韩版潮宽松卷边磨破洞大码热裤 复古浅色" trace="auction" tracenum="2">
+                2014<span class=H>夏</span>季新款<span class=H>牛仔</span>短<span class=H>裤</span><span class=H>女</span>韩版潮宽松卷边磨破洞大码热<span class=H>裤</span> 复古浅色            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[475,0,0],'service':[483,1,536],'delivery':[480,1,933],'safeUid':'UvGcyvCHbvCIy','sellerCredit':14,'totalRate':9890}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=372215222">城市部落01</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">福建 福州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%9F%8E%E5%B8%82%E9%83%A8%E8%90%BD01" data-display="inline" data-item="14910546743"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37863198034&ns=1&_u=4lhutl862cc#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i3/T1R0rFFEldXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37863198034&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-821790784&nid=37863198034" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >613人付款</div>
+            <div class="col price"><i>￥</i>48.50            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37863198034&ns=1&_u=4lhutl862cc#detail" target="_blank" title="2014夏季七分哈伦牛仔裤 女 夏显瘦小脚哈伦女裤中裤修身短裤女潮" trace="auction" tracenum="2">
+                2014<span class=H>夏</span>季<span class=H>七分</span>哈伦<span class=H>牛仔</span><span class=H>裤</span> <span class=H>女</span> <span class=H>夏</span>显瘦小脚哈伦<span class=H>女</span><span class=H>裤</span>中<span class=H>裤</span>修身短<span class=H>裤</span><span class=H>女</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[463,-1,239],'service':[480,0,0],'delivery':[476,0,0],'safeUid':'UvFxSMGQYOmguONTT','sellerCredit':10,'totalRate':9839}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1697418878">爱尚牛仔shop</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%88%B1%E5%B0%9A%E7%89%9B%E4%BB%94shop" data-display="inline" data-item="37863198034"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=25790468096&ns=1&_u=4lhutl863be#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i4/14422036211968074/T1W3hgFi8aXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=25790468096&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1994707316&nid=25790468096" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >439人付款</div>
+            <div class="col price"><i>￥</i>69.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=25790468096&ns=1&_u=4lhutl863be#detail" target="_blank" title="新款胖mm加肥加大码韩版宽松休闲七分裤女夏溥牛仔中裤显瘦哈伦裤" trace="auction" tracenum="2">
+                新款胖mm加肥加大码韩版宽松休闲<span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span>溥<span class=H>牛仔</span>中<span class=H>裤</span>显瘦哈伦<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[478,1,1022],'service':[484,1,1646],'delivery':[483,1,2272],'safeUid':'UMCvbvCQ0MmIy','sellerCredit':12,'totalRate':9851}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=635244422">依楼思梦1127</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">浙江 宁波</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E4%BE%9D%E6%A5%BC%E6%80%9D%E6%A2%A61127" data-display="inline" data-item="25790468096"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38202038516&ns=1&_u=4lhutl8e115#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i3/T1c.kJFG4XXXXXXXXX_!!2-item_pic.png_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38202038516&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1726951462&nid=38202038516" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >288人付款</div>
+            <div class="col price"><i>￥</i>48.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38202038516&ns=1&_u=4lhutl8e115#detail" target="_blank" title="牛仔裤女7七分中裤夏薄款宽松翻边加肥加大码显瘦破洞胖mm马裤潮" trace="auction" tracenum="2">
+                <span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>7<span class=H>七分</span>中<span class=H>裤</span><span class=H>夏</span><span class=H>薄款</span>宽松翻边加肥加大码显瘦破洞胖mm马<span class=H>裤</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[478,1,1362],'service':[488,1,3245],'delivery':[484,1,3040],'safeUid':'UvGvuMmxbvFky','sellerCredit':9,'totalRate':9861}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=337465192">liu阿伦</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="liu%E9%98%BF%E4%BC%A6" data-display="inline" data-item="38202038516"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-supple-66dacu-beta"></span>
+                                                                                                <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38773875841&ns=1&_u=4lhutl86d1f#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i3/T1MVaOFFxaXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38773875841&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-651579211&nid=38773875841" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >164人付款</div>
+            <div class="col price"><i>￥</i>58.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38773875841&ns=1&_u=4lhutl86d1f#detail" target="_blank" title="夏季新款女士牛仔七分裤 中腰热裤夏 显瘦中裤时尚弹力女士七分裤" trace="auction" tracenum="2">
+                <span class=H>夏</span>季新款<span class=H>女</span>士<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span> 中腰热<span class=H>裤</span><span class=H>夏</span> 显瘦中<span class=H>裤</span>时尚弹力<span class=H>女</span>士<span class=H>七分</span><span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[493,1,7338],'service':[496,1,7744],'delivery':[496,1,8127],'safeUid':'UMmc4MCQyvFcY','sellerCredit':4,'totalRate':10000}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=478642171">15882815221yu</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="15882815221yu" data-display="inline" data-item="38773875841"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=25656144329&ns=1&_u=4lhutl820d7#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i2/T1pd2cFI0bXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=25656144329&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1123935194&nid=25656144329" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >396人付款</div>
+            <div class="col price"><i>￥</i>78.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=25656144329&ns=1&_u=4lhutl820d7#detail" target="_blank" title="新款包邮春夏女显瘦七分胖mm加肥加大码破洞女裤显瘦牛仔7分裤潮" trace="auction" tracenum="2">
+                新款包邮春<span class=H>夏</span><span class=H>女</span>显瘦<span class=H>七分</span>胖mm加肥加大码破洞<span class=H>女</span><span class=H>裤</span>显瘦<span class=H>牛仔</span>7分<span class=H>裤</span>潮 <span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[479,1,1720],'service':[488,1,3358],'delivery':[484,1,2659],'safeUid':'UOmgbvFvGvFgb','sellerCredit':12,'totalRate':9907}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=885133185">亲亲爱牛仔</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">天津</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E4%BA%B2%E4%BA%B2%E7%88%B1%E7%89%9B%E4%BB%94" data-display="inline" data-item="25656144329"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-jinpaimaijia"></span>
+                                                                                                <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37651530931&ns=1&_u=4lhutl85d43#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i1/T1221tFBdXXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37651530931&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-32085183&nid=37651530931" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >348人付款</div>
+            <div class="col price"><i>￥</i>55.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37651530931&ns=1&_u=4lhutl85d43#detail" target="_blank" title="包邮七分牛仔裤女修身显瘦拉链小脚八分裤 女中裤短裤春夏季新款" trace="auction" tracenum="2">
+                包邮<span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>修身显瘦拉链小脚八分<span class=H>裤</span> <span class=H>女</span>中<span class=H>裤</span>短<span class=H>裤</span>春<span class=H>夏</span>季新款            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[474,0,0],'service':[484,1,1664],'delivery':[483,1,2085],'safeUid':'UvFk4MGv4OFgyvgTT','sellerCredit':6,'totalRate':9800}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1987389822">逛逛网61</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E9%80%9B%E9%80%9B%E7%BD%9161" data-display="inline" data-item="37651530931"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37567339988&ns=1&_u=4lhutl89343#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i1/T1a0kaFK0cXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37567339988&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-367689909&nid=37567339988" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >773人付款</div>
+            <div class="col price"><i>￥</i>27.90            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37567339988&ns=1&_u=4lhutl89343#detail" target="_blank" title="春季女装新款2014 浅色薄款弹力牛仔裤女士中腰 小脚牛仔裤女显瘦" trace="auction" tracenum="2">
+                春季<span class=H>女</span>装新款2014 浅色<span class=H>薄款</span>弹力<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>士中腰 小脚<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>显瘦            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[471,-1,84],'service':[479,0,0],'delivery':[480,1,712],'safeUid':'UOmkLvCxbMmNG','sellerCredit':8,'totalRate':9689}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=896265403">shunxinniuzink</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 中山</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="shunxinniuzink" data-display="inline" data-item="37567339988"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37697123375&ns=1&_u=4lhutl8b99b#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i2/T1WRiTXptcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37697123375&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-821790784&nid=37697123375" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >165人付款</div>
+            <div class="col price"><i>￥</i>49.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37697123375&ns=1&_u=4lhutl8b99b#detail" target="_blank" title="大码哈伦七分裤女 夏 新款休闲7分马裤浅色中腰显瘦牛仔短裤女潮" trace="auction" tracenum="2">
+                大码哈伦<span class=H>七分</span><span class=H>裤</span><span class=H>女</span> <span class=H>夏</span> 新款休闲7分马<span class=H>裤</span>浅色中腰显瘦<span class=H>牛仔</span>短<span class=H>裤</span><span class=H>女</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[467,-1,164],'service':[480,0,0],'delivery':[476,-1,51],'safeUid':'UOFvyvmx0MFgW','sellerCredit':9,'totalRate':9860}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=932064580">顽强小犀牛</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E9%A1%BD%E5%BC%BA%E5%B0%8F%E7%8A%80%E7%89%9B" data-display="inline" data-item="37697123375"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38037584682&ns=1&_u=4lhutl8f715#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i3/T1hX1fFrtiXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38037584682&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-401935582&nid=38037584682" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >184人付款</div>
+            <div class="col price"><i>￥</i>56.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38037584682&ns=1&_u=4lhutl8f715#detail" target="_blank" title="新款哈伦牛仔七分裤女夏薄修身显瘦休闲时尚7分裤女大码宽松韩版" trace="auction" tracenum="2">
+                新款哈伦<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span>薄修身显瘦休闲时尚7分<span class=H>裤</span><span class=H>女</span>大码宽松韩版            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[467,-1,176],'service':[478,-1,77],'delivery':[476,-1,65],'safeUid':'UMCkGvCk4vmHS','sellerCredit':8,'totalRate':9737}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=693298019">missu1990</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="missu1990" data-display="inline" data-item="38037584682"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=35822144412&ns=1&_u=4lhutl8132a#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i3/T1JCp.FsXcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=35822144412&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-821238968&nid=35822144412" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >276人付款</div>
+            <div class="col price"><i>￥</i>39.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=35822144412&ns=1&_u=4lhutl8132a#detail" target="_blank" title="2014夏季新款 韩版哈伦裤七分牛仔裤女裤子 弹力修身 小脚铅笔裤" trace="auction" tracenum="2">
+                2014<span class=H>夏</span>季新款 韩版哈伦<span class=H>裤</span><span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span><span class=H>裤</span>子 弹力修身 小脚铅笔<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[449,-1,541],'service':[462,-1,418],'delivery':[459,-1,387],'safeUid':'UvGguvFHGOFgW','sellerCredit':8,'totalRate':9356}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=387113980">自you舞步</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E8%87%AAyou%E8%88%9E%E6%AD%A5" data-display="inline" data-item="35822144412"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38819295492&ns=1&_u=4lhutl84bf8#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i2/T1q0e6FH0aXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38819295492&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1610315223&nid=38819295492" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >71人付款</div>
+            <div class="col price"><i>￥</i>76.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38819295492&ns=1&_u=4lhutl84bf8#detail" target="_blank" title="2014女夏新款修身九分牛仔裤女小脚裤显瘦弹力七分裤夏薄款韩版潮" trace="auction" tracenum="2">
+                2014<span class=H>女</span><span class=H>夏</span>新款修身九分<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>小脚<span class=H>裤</span>显瘦弹力<span class=H>七分</span><span class=H>裤</span><span class=H>夏</span><span class=H>薄款</span>韩版潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[479,1,1788],'service':[484,1,1900],'delivery':[484,1,3078],'safeUid':'UvFHYMmxyMmkYMWTT','sellerCredit':7,'totalRate':9940}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1114624917">大小姐牛仔屋</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%A4%A7%E5%B0%8F%E5%A7%90%E7%89%9B%E4%BB%94%E5%B1%8B" data-display="inline" data-item="38819295492"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-supple-66dacu-beta"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=37904283735&ns=1&_u=4lhutl89593#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i4/T1hY7AFqVfXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=37904283735&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-821238968&nid=37904283735" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >83人付款</div>
+            <div class="col price"><i>￥</i>49.50            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=37904283735&ns=1&_u=4lhutl89593#detail" target="_blank" title="韩版学生休闲哈伦七分裤女 夏 新款宽松7分裤薄 加肥加大牛仔短裤" trace="auction" tracenum="2">
+                韩版学生休闲哈伦<span class=H>七分</span><span class=H>裤</span><span class=H>女</span> <span class=H>夏</span> 新款宽松7分<span class=H>裤</span>薄 加肥加大<span class=H>牛仔</span>短<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[471,-1,76],'service':[484,1,1089],'delivery':[484,1,2405],'safeUid':'UMGgbvCHyMGIy','sellerCredit':7,'totalRate':9824}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=785212722">很凉快11</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%BE%88%E5%87%89%E5%BF%AB11" data-display="inline" data-item="37904283735"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=26391336283&ns=1&_u=4lhutl820ec#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i2/15420025171772664/T1rKFFFb4fXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=26391336283&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1224485304&nid=26391336283" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >107人付款</div>
+            <div class="col price"><i>￥</i>59.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=26391336283&ns=1&_u=4lhutl820ec#detail" target="_blank" title="韩版新款带骷髅头七分牛仔裤女夏哈伦乞丐裤破洞磨破宽松小脚裤潮" trace="auction" tracenum="2">
+                韩版新款带骷髅头<span class=H>七分</span><span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span>哈伦乞丐<span class=H>裤</span>破洞磨破宽松小脚<span class=H>裤</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[476,1,649],'service':[486,1,2157],'delivery':[483,1,1837],'safeUid':'UvFcyMmNLMFQyvNTT','sellerCredit':8,'totalRate':9935}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1724065420">淘其乐16899</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%B7%98%E5%85%B6%E4%B9%9016899" data-display="inline" data-item="26391336283"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=20317831611&ns=1&_u=4lhutl8939a#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i1/T1DR7mFx0hXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=20317831611&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-570320011&nid=20317831611" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >150人付款</div>
+            <div class="col price"><i>￥</i>45.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=20317831611&ns=1&_u=4lhutl8939a#detail" target="_blank" title="夏季新款韩版宽松大码牛仔哈伦裤显瘦牛仔七分裤女裤子中裤潮马裤" trace="auction" tracenum="2">
+                <span class=H>夏</span>季新款韩版宽松大码<span class=H>牛仔</span>哈伦<span class=H>裤</span>显瘦<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>裤</span>子中<span class=H>裤</span>潮马<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[461,-1,289],'service':[472,-1,203],'delivery':[474,-1,95],'safeUid':'UOm84MCvLvFgW','sellerCredit':9,'totalRate':9387}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=858636180">zhujiaxuanzhujiaxuan</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="zhujiaxuanzhujiaxuan" data-display="inline" data-item="20317831611"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38526790745&ns=1&_u=4lhutl8e3a7#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i1/T1sRtmFLRcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38526790745&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1071318053&nid=38526790745" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >151人付款</div>
+            <div class="col price"><i>￥</i>119.40            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38526790745&ns=1&_u=4lhutl8e3a7#detail" target="_blank" title="七分裤女夏哈伦牛仔2014夏季新款个性潮弹力哈伦牛仔七分裤子女" trace="auction" tracenum="2">
+                <span class=H>七分</span><span class=H>裤</span><span class=H>女</span><span class=H>夏</span>哈伦<span class=H>牛仔</span>2014<span class=H>夏</span>季新款个性潮弹力哈伦<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span>子<span class=H>女</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[474,0,0],'service':[482,1,321],'delivery':[480,1,661],'safeUid':'UMmkLMmkGvGHT','sellerCredit':15,'totalRate':9858}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=49649331">megan811021</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="megan811021" data-display="inline" data-item="38526790745"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38769723998&ns=1&_u=4lhutl80a5b#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i3/T1sUASFRVXXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38769723998&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=17&uniqpid=-1021499336&nid=38769723998" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >37人付款</div>
+            <div class="col price"><i>￥</i>158.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38769723998&ns=1&_u=4lhutl80a5b#detail" target="_blank" title="2014夏季新款 Lee女士牛仔裤七分裤 韩版潮显瘦正品薄款大码短裤" trace="auction" tracenum="2">
+                2014<span class=H>夏</span>季新款 Lee<span class=H>女</span>士<span class=H>牛仔</span><span class=H>裤</span><span class=H>七分</span><span class=H>裤</span> 韩版潮显瘦正品<span class=H>薄款</span>大码短<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[483,1,3314],'service':[488,1,3845],'delivery':[487,1,3904],'safeUid':'UvGNSMGIuOmxb','sellerCredit':11,'totalRate':9946}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=309727865">lovexiaolei214</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">北京</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="lovexiaolei214" data-display="inline" data-item="38769723998"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=15867523544&ns=1&_u=4lhutl85e09#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i1/17637025072433925/T1l4XMFeRbXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=15867523544&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=17&uniqpid=-434029023&nid=15867523544" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >136人付款</div>
+            <div class="col price"><i>￥</i>99.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=15867523544&ns=1&_u=4lhutl85e09#detail" target="_blank" title="加肥加大码200斤胖mm夏装2014大码女装胖妹妹特大码牛仔裤七分裤" trace="auction" tracenum="2">
+                加肥加大码200斤胖mm<span class=H>夏</span>装2014大码<span class=H>女</span>装胖妹妹特大码<span class=H>牛仔</span><span class=H>裤</span><span class=H>七分</span><span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[476,1,613],'service':[486,1,2514],'delivery':[484,1,2315],'safeUid':'UvFvLOmcLvGcT','sellerCredit':14,'totalRate':9900}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=13687637">等雪0911</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 东莞</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%AD%89%E9%9B%AA0911" data-display="inline" data-item="15867523544"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38864469631&ns=1&_u=4lhutl88cab#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i4/T1BzYXFUFaXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38864469631&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-820041851&nid=38864469631" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >41人付款</div>
+            <div class="col price"><i>￥</i>39.96            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38864469631&ns=1&_u=4lhutl88cab#detail" target="_blank" title="休闲七分裤女2014夏装新款韩版糖果色大码显瘦哈伦7分学生中裤 裤" trace="auction" tracenum="2">
+                休闲<span class=H>七分</span><span class=H>裤</span><span class=H>女</span>2014<span class=H>夏</span>装新款韩版糖果色大码显瘦哈伦7分学生中<span class=H>裤</span> <span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[461,-1,283],'service':[480,0,0],'delivery':[484,1,2530],'safeUid':'UvCNyvG8bvmIbMNTT','sellerCredit':5,'totalRate':9709}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=2023550254">淘华时尚店</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%B7%98%E5%8D%8E%E6%97%B6%E5%B0%9A%E5%BA%97" data-display="inline" data-item="38864469631"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38167906181&ns=1&_u=4lhutl8a146#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i4/T1c_H6FuleXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38167906181&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1626404566&nid=38167906181" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >328人付款</div>
+            <div class="col price"><i>￥</i>119.00            </div>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38167906181&ns=1&_u=4lhutl8a146#detail" target="_blank" title="春夏新款糖果色个性洗水磨白拼接7分哈伦裤吊档牛仔裤cc皇后家E41" trace="auction" tracenum="2">
+                春<span class=H>夏</span>新款糖果色个性洗水磨白拼接7分哈伦<span class=H>裤</span>吊档<span class=H>牛仔</span><span class=H>裤</span>cc皇后家E41            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[474,0,0],'service':[483,1,890],'delivery':[483,1,1984],'safeUid':'UvGkuvFkWOFHu','sellerCredit':15,'totalRate':9887}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=397190917">cc_皇后</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">重庆</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="cc_%E7%9A%87%E5%90%8E" data-display="inline" data-item="38167906181"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-supple-66dacu-beta"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38172636215&ns=1&_u=4lhutl80e0d#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i1/T1hSl3FDBpXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38172636215&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1725700189&nid=38172636215" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >81人付款</div>
+            <div class="col price"><i>￥</i>39.90            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38172636215&ns=1&_u=4lhutl80e0d#detail" target="_blank" title="春夏新款九分牛仔裤女 韩版潮卷边破洞宽松9分哈伦裤垮裤 学生裤" trace="auction" tracenum="2">
+                春<span class=H>夏</span>新款九分<span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span> 韩版潮卷边破洞宽松9分哈伦<span class=H>裤</span>垮<span class=H>裤</span> 学生<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[463,-1,227],'service':[479,-1,55],'delivery':[475,-1,81],'safeUid':'UOmvSMFcyvCxL','sellerCredit':6,'totalRate':9589}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=839572266">世界之痕v加油</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E4%B8%96%E7%95%8C%E4%B9%8B%E7%97%95v%E5%8A%A0%E6%B2%B9" data-display="inline" data-item="38172636215"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://detail.tmall.com/item.htm?id=38668266756&_u=4lhutl82058" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i4/T1Mg44FNhbXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38668266756&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1775622824&nid=38668266756" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >61人付款</div>
+            <div class="col price"><i>￥</i>79.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://detail.tmall.com/item.htm?id=38668266756&_u=4lhutl82058" target="_blank" title="牛仔7分裤 女夏季民族风中裤修身显瘦小脚铅笔裤性感潮流学生女裤" trace="auction" tracenum="2">
+                <span class=H>牛仔</span>7分<span class=H>裤</span> <span class=H>女</span><span class=H>夏</span>季民族风中<span class=H>裤</span>修身显瘦小脚铅笔<span class=H>裤</span>性感潮流学生<span class=H>女</span><span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':1,'description':[484,1,2774],'service':[487,1,4109],'delivery':[488,1,5265],'safeUid':'UvCNLMGgbvmkbvNTT'}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=2067850950">鹿媚儿旗舰店</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E9%B9%BF%E5%AA%9A%E5%84%BF%E6%97%97%E8%88%B0%E5%BA%97" data-display="inline" data-item="38668266756"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-tianmao"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=18459278710&ns=1&_u=4lhutl8a22f#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i1/T1bmWTFABbXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=18459278710&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1107235261&nid=18459278710" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >142人付款</div>
+            <div class="col price"><i>￥</i>49.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=18459278710&ns=1&_u=4lhutl8a22f#detail" target="_blank" title="浅色 牛仔裤女小脚 浅蓝白色 女式小脚牛仔裤 韩版显瘦弹力 春夏" trace="auction" tracenum="2">
+                浅色 <span class=H>牛仔</span><span class=H>裤</span><span class=H>女</span>小脚 浅蓝白色 <span class=H>女</span>式小脚<span class=H>牛仔</span><span class=H>裤</span> 韩版显瘦弹力 春<span class=H>夏</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[475,0,0],'service':[482,1,89],'delivery':[480,1,426],'safeUid':'UvFN4vCg0Om8SMWTT','sellerCredit':10,'totalRate':9759}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1082848597">犀牛记</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%8A%80%E7%89%9B%E8%AE%B0" data-display="inline" data-item="18459278710"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38998810936&ns=1&_u=4lhutl81769#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search3.alicdn.com/img/bao/uploaded/i4/i2/T1sNv2FJNcXXXXXXXX_!!2-item_pic.png_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38998810936&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-820194562&nid=38998810936" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >24人付款</div>
+            <div class="col price"><i>￥</i>39.80            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38998810936&ns=1&_u=4lhutl81769#detail" target="_blank" title="牛仔七分裤女显瘦中裤夏装韩版小脚裤九分裤薄款弹力7分裤马裤潮" trace="auction" tracenum="2">
+                <span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span><span class=H>女</span>显瘦中<span class=H>裤</span><span class=H>夏</span>装韩版小脚<span class=H>裤</span>九分<span class=H>裤</span><span class=H>薄款</span>弹力7分<span class=H>裤</span>马<span class=H>裤</span>潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[451,-1,498],'service':[465,-1,357],'delivery':[462,-1,346],'safeUid':'UvCNuMmvWvGQ0vNTT','sellerCredit':4,'totalRate':9833}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=2074303440">权地球爱志龙</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">广东 广州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E6%9D%83%E5%9C%B0%E7%90%83%E7%88%B1%E5%BF%97%E9%BE%99" data-display="inline" data-item="38998810936"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38688225379&ns=1&_u=4lhutl82cd1#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search.alicdn.com/img/bao/uploaded/i4/i2/T10xh0FM4dXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38688225379&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=17&uniqpid=-1542246053&nid=38688225379" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >44人付款</div>
+            <div class="col price"><i>￥</i>49.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38688225379&ns=1&_u=4lhutl82cd1#detail" target="_blank" title="夏装显瘦5分中裤韩版短裤女装休闲大码五分裤马裤 女夏宽松牛仔裤" trace="auction" tracenum="2">
+                <span class=H>夏</span>装显瘦5分中<span class=H>裤</span>韩版短<span class=H>裤</span><span class=H>女</span>装休闲大码五分<span class=H>裤</span>马<span class=H>裤</span> <span class=H>女</span><span class=H>夏</span>宽松<span class=H>牛仔</span><span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[475,1,186],'service':[484,1,1034],'delivery':[480,1,641],'safeUid':'UMGkYMCQuOmNY','sellerCredit':12,'totalRate':9838}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=791647801">纳薇朵朵儿</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E7%BA%B3%E8%96%87%E6%9C%B5%E6%9C%B5%E5%84%BF" data-display="inline" data-item="38688225379"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-supple-66dacu-beta"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=39009280205&ns=1&_u=4lhutl8fdd5#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search1.alicdn.com/img/bao/uploaded/i4/i4/TB19GyQFXXXXXa8aVXXXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=39009280205&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-1979567719&nid=39009280205" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >21人付款</div>
+            <div class="col price"><i>￥</i>52.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=39009280205&ns=1&_u=4lhutl8fdd5#detail" target="_blank" title="包邮新品夏款 女式韩版牛仔七分裤 中腰弹力哈伦小脚裤 显瘦潮" trace="auction" tracenum="2">
+                包邮新品<span class=H>夏</span>款 <span class=H>女</span>式韩版<span class=H>牛仔</span><span class=H>七分</span><span class=H>裤</span> 中腰弹力哈伦小脚<span class=H>裤</span> 显瘦潮            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[495,1,7898],'service':[493,1,6079],'delivery':[500,1,10000],'safeUid':'UvFkLvFkYOmkyOQTT','sellerCredit':5,'totalRate':10000}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1961918929">你要往哪儿飞</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">湖北 武汉</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E4%BD%A0%E8%A6%81%E5%BE%80%E5%93%AA%E5%84%BF%E9%A3%9E" data-display="inline" data-item="39009280205"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col item st-item icon-datalink " nid="">
+    <!--断档提示-->
+
+
+    <!--普通的宝贝结果栅格-->
+    <div class="item-box st-itembox">
+		 <div class="pic">
+            <p class="pic-box">
+                <a href="http://item.taobao.com/item.htm?id=38066336530&ns=1&_u=4lhutl85620#detail" target="_blank" class="s220" trace="auction" tracenum="2">
+						<span>
+							<img data-ks-lazyload="http://g.search2.alicdn.com/img/bao/uploaded/i4/i4/T1xxHuFvtcXXXXXXXX_!!0-item_pic.jpg_210x210.jpg" src="http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/spaceball.gif" resy-img="220x220.jpg" />
+						</span>
+                </a>
+            </p>
+
+            <div class="quick-btns">
+                <a href="http://archer.taobao.com/myservice/report/entry.htm?Query=&auction_num_id=38066336530&fromSource=search&Category=0&sort=all&display_type=3" class="antispam" target="_blank" title="举报该宝贝">
+                    <span class="icon-btn-report">举报</span>
+                </a>
+            </div>
+
+            <div class="similar-btns">
+                <span class="devide-line"></span>
+                <a target="_blank" href="javascript:void(0);" target="_blank" class=" disabled" title="同款宝贝" data-spm-anchor-id="a230r.1.0.0">
+                    <span>找同款</span><s></s></a>
+                <a target="_blank" href="/search?type=similar&app=i2i&rec_type=21&uniqpid=-603346663&nid=38066336530" class="end " title="相似宝贝">
+                    <span>找相似</span><s></s></a>
+            </div>
+        </div>
+                <div class="row row-focus">
+            <div class="col end dealing" >33人付款</div>
+            <div class="col price"><i>￥</i>69.00            </div>
+                            <span class="icon-service-free"></span>
+                    </div>
+        <h3 class="summary">
+            <!-- 促销折扣视图<span class="rate-type">[限时打折]</span> -->
+            <a href="http://item.taobao.com/item.htm?id=38066336530&ns=1&_u=4lhutl85620#detail" target="_blank" title="新款女牛仔7分裤七分裤休闲中裤女式春夏大码宽松显瘦松紧腰马裤" trace="auction" tracenum="2">
+                新款<span class=H>女</span><span class=H>牛仔</span>7分<span class=H>裤</span><span class=H>七分</span><span class=H>裤</span>休闲中<span class=H>裤</span><span class=H>女</span>式春<span class=H>夏</span>大码宽松显瘦松紧腰马<span class=H>裤</span>            </a>
+        </h3>
+        <div class="row" >
+                        <div class="col seller feature-dsc-tgr" data-param="{'isTmall':0,'description':[484,1,4000],'service':[491,1,5304],'delivery':[486,1,3629],'safeUid':'UvFNSvGcuvmIGMQTT','sellerCredit':5,'totalRate':9732}"><a target="_blank" href="http://store.taobao.com/shop/view_shop.htm?user_number_id=1093770235">天天燚燚</a></div>
+                        <!--<div class="col end shopinfo" dataurl="/ninja/interface/shopinfo.php"><span class="icon-service-mingxinpian">明信片</span></div>-->
+                        <div class="col end loc">河南 郑州</div>
+                    </div>
+        <div class="row service-box">
+
+            <div class="col end">
+                                    <span class="J_WangWang" data-nick="%E5%A4%A9%E5%A4%A9%E7%87%9A%E7%87%9A" data-display="inline" data-item="38066336530"
+                          data-icon="small" data-encode="true"></span>
+                            </div>
+            <div class="service-btns feature-icon">
+                                                                                        <span class="icon-pit icon-service-gongyibaobei"></span>
+                                                                        </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>                                <!--少结果内容改写补足区-->
+                                <!--底部推荐模块区-->
+                                                                <div class="tb-supplement tb-supplement-tbalink" bx-name="supple-tbalink"
+                     bx-path="components/newsrp/supplement-tbalink/" data-spm="a230r.1.15">
+                    <div class="tbalink">
+    <ul class="nav clearfix nav-tbalink">
+                    <li>
+                <a class="tbaLink-ad" href="http://wenda.taobao.com/guanfang/gonggao3.htm?&entry=t8.tbzswzl&tb_lm_id=t_sousuo4&hint_q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE" target="_blank"
+                   title="疯狂兑换淘公仔"><span class="icon-supple-zhinan"></span>疯狂兑换淘公仔</a>
+            </li>
+            <li class="divide"></li>
+                <li>
+            <a href=" http://top.taobao.com/redirect.php?cat=162205&up=false&from=search_result_bottom" target="_blank"><span
+                    class="icon-supple-rank"></span>经典热销TOP，尽在热门牛仔裤榜</a>
+        </li>
+                    <li class="divide"></li>
+            <li>
+                <a trace="wanke" href=" http://wanke.etao.com/product/600000000003466.html" target="_blank" ><span class="icon-supple-wanke"></span>女神示范，秋冬连衣裙潮搭</a>
+            </li>
+            </ul>
+</div>
+                </div>
+                <!--辅助导航-->
+                                                <!--分页-->
+                                <!--底部搜索框-->
+            
+        </div>
+    </div>
+
+    <div class="tb-wrapper-sub" data-spm="a230r.1.17">
+    </div>
+</div>
+<div class="tb-bottom">
+</div>
+<!--辅助导航-->
+<div class="tb-supplement search-panel search-srp-panel search-panel-bottom" bx-config="{}" bx-path="components/newsrp/supplement-suggest/"
+     bx-name="supple-suggest" data-spm="a230r.1.1">
+
+        <form action="search" method="get" id="J_minsearch">
+        <input type="hidden" name="initiative_id" value="staobaoz_20120803">
+        <input type="hidden" value="grid" id="style" name="style">
+                    <div class="search-panel-fields search-srp-panel-fields search-common-panel">
+            <div class="input-auto">
+                <input accesskey="s" name="q" maxlength="60" autocomplete="off" value="牛仔七分裤女 夏薄款百搭" id="title" placeholder="请输入要搜索的词"  x-webkit-grammar="builtin:translate" lang="zh-CN"/>
+            </div>
+
+            <div class="search-button">
+                <button class="icon-btn-search" type="submit">搜索</button>
+            </div>
+        </div>
+    </form>
+    
+
+</div><!--辅助导航-->
+<!--底部内容-->
+<div class="tb-footer" data-spm="a230r.1.19">
+    
+<div class="footer" data-spm="1997523009">
+    <div class="footer-hd">
+        <p>
+            <a href="//page.1688.com/shtml/about/ali_group1.shtml">阿里巴巴集团</a>
+            <b>|</b>
+            <a href="//www.alibaba.com">阿里巴巴国际站</a>
+            <b>|</b>
+            <a href="//www.1688.com">阿里巴巴中国站</a>
+            <b>|</b>
+            <a href="//www.aliexpress.com">全球速卖通</a>
+            <b>|</b>
+            <a href="//www.taobao.com">淘宝网</a>
+            <b>|</b>
+            <a href="//www.tmall.com">天猫</a>
+            <b>|</b>
+            <a href="//ju.taobao.com">聚划算</a>
+            <b>|</b>
+            <a href="//www.etao.com">一淘</a>
+            <b>|</b>
+            <a href="//www.alimama.com">阿里妈妈</a>
+            <b>|</b>
+            <a href="//trip.taobao.com">淘宝旅行</a>
+            <b>|</b>
+            <a href="//www.xiami.com">虾米</a>
+            <b>|</b>
+            <a href="//www.aliyun.com">阿里云计算</a>
+            <b>|</b>
+            <a href="//www.yunos.com">云OS</a>
+            <b>|</b>
+            <a href="//www.net.cn">万网</a>
+            <b>|</b>
+            <a href="//www.alipay.com">支付宝</a>
+            <b>|</b>
+            <a href="//www.laiwang.com/">来往</a>
+        </p>
+    </div>
+    <div class="footer-bd">
+        <p>
+            <a href="//www.taobao.com/about">关于淘宝</a>
+            <a href="//www.taobao.com/about/partners.php">合作伙伴</a>
+            <a href="//pro.taobao.com">营销中心</a>
+            <a href="mailto:lianzheng@taobao.com" title="lianzheng@taobao.com" target="_self">廉正举报</a>
+            <a href="//service.taobao.com/support/main/service_route.htm">联系客服</a>
+            <a href="//open.taobao.com">开放平台</a>
+            <a href="//www.taobao.com/about/join.php">诚征英才</a>
+            <a href="//www.taobao.com/about/contact.php">联系我们</a>
+            <a href="//www.taobao.com/sitemap.php">网站地图</a>
+            <a href="//www.taobao.com/about/copyright.php">法律声明</a>
+            <em>&copy; 2014 Taobao.com 版权所有</em>
+              <span style="color:#fff;">
+            s006227.cm6        </span>
+        </p>
+        <p>
+            <span>网络文化经营许可证：<a href="//img04.taobaocdn.com/tps/i4/T1ysdvXtNeXXcPpEkQ-972-636.jpg">文网文[2010]040号</a></span>
+            <b>|</b>
+            <span>增值电信业务经营许可证：浙B2-20080224-1</span>
+            <b>|</b>
+            <span>信息网络传播视听节目许可证：1109364号</span>
+        </p>
+    </div>
+    <div class="footer-ft">
+        <a href="//www.pingpinganan.gov.cn/web/index.aspx?file=index.aspx"><img width="36" height="36" src="//img01.taobaocdn.com/tps/i1/T1FeW3XXNfXXXXXXXX-36-36.gif"></a>
+        <a href="//idinfo.zjaic.gov.cn/bscx.do?method=hddoc&id=33018400000067" class="mod mod-a"></a>
+        <a href="//idinfo.zjaic.gov.cn/bscx.do?&method=hddoc&id=33018400000067" class="mod mod-b"></a>
+        <a href="//www.theclimategroup.org.cn/about/friend" class="mod mod-c"></a>
+        <a href="https://ss.cnnic.cn/verifyseal.dll?&sn=2010062300100001357&pa=20100701" class="mod mod-d"></a>
+        <a href="//www.ppaaol.com/verifySite.do?id=1051" class="mod mod-e"></a>
+    </div>
+</div></div><!--页脚内容-->
+
+    </div>
+
+<div class="tb-side" bx-name="sidebar" bx-path="components/srpbase/sidebar/">
+    <ul>
+        <li class="gotop">
+            <a trace="toolBarTohead" href="javascript:void(0)">
+                <span class="icon-btn-top">回到顶部</span>
+            </a>
+        </li>
+        <li class="advice advise-side-suggest" _source="/search?app=api&m=postfeedback&url=http%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3D%25C5%25A3%25D7%25D0%25C6%25DF%25B7%25D6%25BF%25E3%25C5%25AE%2B%25CF%25C4%25B1%25A1%25BF%25EE%25B0%25D9%25B4%25EE%26bcoffset%3D%26tab%3Dall%26loc%3D%25D6%25A3%25D6%25DD%26sort%3D%26globalbuy%3D%26source%3D%26style%3D%26bucket_id%3D%26filter%3Dreserve_price%255B49%252C61%255D%26cat%3D%26sortn%3D%26sort2%3D%26fs%3D1%26rsclick%3D%26stats_click%3D%26initiative_id%3Dtbindexz_20140604">
+            <a trace="toobarFeedback" href="javascript:;" target="_blank" class="">
+                <span class="icon-btn-feedback">用户反馈</span>
+            </a>
+        </li>
+        <li class="help">
+            <a trace="toolbarSearchhelp" target="_blank" href="http://s.taobao.com/faq.php?spm=a230r.1.2.3.RgGkQB">
+                <span class="icon-btn-help">搜索帮助</span>
+            </a>
+        </li>
+        <li class="history">
+            <a trace="toolbarHistory" target="_blank" href="http://lu.taobao.com/newMyPath.htm?scm=12307.3.0.0 " data-spm-anchor-id="0.0.0.0">
+                <span class="icon-btn-history">搜索历史</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="dialog-box" id="J_dialog_adviseForm" >
+    <div class="dialog-shim" >
+        <div class="dialog-body">
+            <div class="dialog-hd">
+                <h4>说说我使用搜索的感受</h4>
+                <span class="sitelink"><a href="http://bangpai.taobao.com/group/400769.htm" target="_blank">搜索官方论坛</a> | <a href="/faq.html" target="_blank">了解新版搜索</a></span>
+            </div>
+            <div class="dialog-content">
+                <div id="J_adviseForm" class="advise tdg-advise search-popup-window" aria-label="注意：弹窗, 按下 Esc 键关闭" >
+                    <iframe src="about:blank" name="feedback"></iframe>
+                    <form action="http://search.feedback.taobao.com/talkers/add_feedback.php" target="feedback" method="post">
+                        <div class="search-popup-window-wrapper">
+                            <div class="bd">
+                                <input type="hidden" name="sourceid" value="28">
+                                <input type="hidden" name="userip" value="123.147.195.2">
+                                <input type="hidden" name="fromurl" value="/search?q=%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%B1%A1%BF%EE%B0%D9%B4%EE&bcoffset=&tab=all&loc=%D6%A3%D6%DD&sort=&globalbuy=&source=&style=&bucket_id=&filter=reserve_price%5B49%2C61%5D&cat=&sortn=&sort2=&fs=1&rsclick=&stats_click=&initiative_id=tbindexz_20140604">
+                                <input type="hidden" name="surveyid" value="55">
+                                <input type="hidden" name="query" value="牛仔七分裤女 夏薄款百搭">
+                                <input type="hidden" name="categoryid" value="0">
+                                <input type="hidden" name="userid">
+                                <input type="hidden" name="bucket_id" value="10">
+                                <input type="hidden" name="machine" value="s006227.cm6">
+                                <div id="J_adviseCont">
+                                    <div class="models">
+                                        <dl class="firstmodel">
+                                            <dt>不满意：</dt>
+                                            <dd>
+                                                <ul class="advise-options">
+                                                    <li><label><input type="checkbox" name="causes[]" value="201"> 通过搜索找不到想要的宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="202"> 宝贝排序不合理</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="203"> 商品分类不能帮我快速找到宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="204"> 筛选功能不方便我筛选宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="205"> 一行四图不方便我查看宝贝</label></li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>满意：</dt>
+                                            <dd>
+                                                <ul class="advise-options">
+                                                    <li><label><input type="checkbox" name="causes[]" value="206"> 通过搜索找到了想要的宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="207"> 宝贝排序合理</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="208"> 商品分类能帮我快速找到宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="209"> 筛选功能方便我筛选宝贝</label></li>
+                                                    <li><label><input type="checkbox" name="causes[]" value="210"> 一行四图方便我查看宝贝</label></li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="advise-more">
+                                        <p>将您对淘宝搜索的建议或者想法告诉我们吧，我们将随时倾听您的感受：）</p>
+                                        <textarea name="content" id="J_AdviseInput" rows="6" cols="80" class="init"></textarea>
+                                        <button type="submit"> 提交 </button>
+                                        <span class="inputTips"><em id="J_inputTip">0</em> / <span id="J_maxLength">1000</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.maidian = "searchurl=1"+"&cat="+"&direct_cat=0"+"&at_lflog=2-1-0-0-{p4p_isOK}-5-0-|&at_bucketid=17&multi_bucket=10_17_2_0_0_0_0_0&at_colo=cm6&at_host=s006227.cm6&at_alitrackid=trade.taobao.com&last_alitrackid=www.taobao.com"+"&stats_show=synonym_flag%3A1%3Brewq_flag%3A1%3Bqsqforecast_flag%3A1%3Bmaxentclassifier_flag%3A1%3Bs%3Amainsearch%3Buser_group%3Asexaffectsort%3A%3Bpriceaffectsort%3A1_0_1_4_5_4%3Bpricerangeaffectsort%3A%3Bpricemodelaffectsort%3A%3Busertypeaffectsort%3A1%3Bmd_CatIntention%3A%3Bmd_WomenClothing%3A%3Bmd_WomenShoe%3A%3Bmd_QueryIntentionType%3A%3Bmd_rqit%3Abuy%3Btab_type%3Aall%3Bsn_hide%3A0%3Brs%3Apv%3Bfew_words%3A3%3Brewrite%3A5%3Bwanke%3A1%3Bapass%3A0%3Bless_recom%3A2%3B%3Brewrite%3A5%3Bnew_rewrite%3A2%3Bpersonal_sc%3A0%3Bfew_query%3A1%3Brewrite_flag%3A5%3Bfew_results_flag%3A1"+"&rn=7dce0bf9e38434591d00000416d0397e&nick=%B2%DD%DD%AEpay%C5%C9&multivariate=alg_bts%3A18";    window.SRP.stat = {
+        data: {"auctionReturnNum":5,"doufuAuctionNum":0,"doufuAuctionNumClick":0,"if_rs":1,"if_shop":0,"if_tank":0,"show_compass":2,"totalHits":5,"iframe_show":"","statsShow":"synonym_flag%3A1%3Brewq_flag%3A1%3Bqsqforecast_flag%3A1%3Bmaxentclassifier_flag%3A1%3Bs%3Amainsearch%3Buser_group%3Asexaffectsort%3A%3Bpriceaffectsort%3A1_0_1_4_5_4%3Bpricerangeaffectsort%3A%3Bpricemodelaffectsort%3A%3Busertypeaffectsort%3A1%3Bmd_CatIntention%3A%3Bmd_WomenClothing%3A%3Bmd_WomenShoe%3A%3Bmd_QueryIntentionType%3A%3Bmd_rqit%3Abuy%3Btab_type%3Aall%3Bsn_hide%3A0%3Brs%3Apv%3Bfew_words%3A3%3Brewrite%3A5%3Bwanke%3A1%3Bapass%3A0%3Bless_recom%3A2%3B%3Brewrite%3A5%3Bnew_rewrite%3A2%3Bpersonal_sc%3A0%3Bfew_query%3A1%3Brewrite_flag%3A5%3Bfew_results_flag%3A1","vertical":"","auctionNids":["37341933824","37968284481","38932766861","39146017660","39081090712"],"auctionPrices":["59.00","49.00","55.00","59.00","59.00"],"ifDoufuAuction":[0,0,0,0,0],"priceSorts":["price-asc","price-desc","total-asc","total-desc"],"remoteip":"123.147.195.2","hostname":"s006227.cm6","colo":"cm6","multi_bucket":"10_17_2_0_0_0_0_0","rn":"7dce0bf9e38434591d00000416d0397e","bucketId":17,"nick":"%B2%DD%DD%AEpay%C5%C9","sort":"","sort2":"","alitrackid":"trade.taobao.com","lastAlitrackid":"www.taobao.com","frontCatId":"","cat":"","catLevelOne":0,"catdirect":0,"cps":"","userGroup":"user_group:sexaffectsort:;priceaffectsort:1_0_1_4_5_4;pricerangeaffectsort:;pricemodelaffectsort:;usertypeaffectsort:1;md_CatIntention:;md_WomenClothing:;md_WomenShoe:;md_QueryIntentionType:;md_rqit:buy","tabType":"tab_type:all","fromPos":"","birthday_trace":"","nav_properties":null,"nav_click":null,"nav_cateclick":null,"nav_categories":null,"NavHideBtnClick":"sn_hide_button:1","NavHideClick":"sn_hide:0","rsshop":"","rs":"rs:pv","rsPositions":["rs:1;rs_query:%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0%B1%A1%BF%EE","rs:2;rs_query:%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%CF%D4%CA%DD","rs:3;rs_query:%B4%F3%C2%EB%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4","rs:4;rs_query:%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0+%BF%ED%CB%C9","rs:5;rs_query:%B1%B3%B4%F8%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0","rs:6;rs_query:%B8%DF%D1%FC%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4","rs:7;rs_query:%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE%CF%C4%B1%A1","rs:8;rs_query:%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE+%CF%C4%BC%BE","rs:9;rs_query:%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%C5%A3%D7%D0%B9%FE%C2%D7","rs:10;rs_query:%CB%C9%BD%F4%D1%FC%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE","rs:11;rs_query:%C6%DF%B7%D6%BF%E3%C5%AE%CF%C4%C5%A3%D7%D0%D6%D0%BF%E3","rs:12;rs_query:%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3%C5%AE%BA%AB%B0%E6","rs:13;rs_query:%C5%A3%D7%D0%C6%DF%B7%D6%BF%E3+%C5%AE+%CF%C4+%D0%A1%BD%C5","rs:14;rs_query:%C6%DF%B7%D6%C5%A3%D7%D0%BF%E3+%C5%AE+%D0%A1%BD%C5%BF%E3"],"fewWords":[1,1,1],"fewWords_pv":"few_words:3","fewWords_rw":"rewrite:5","wanke":"wanke:1","sp_seller_types":["0","0","0","0","0"],"apass":"apass:0","lessgraphNids":["26862996760","38661300111","38907595921","38971353611","38255934114","38992728568","38164375254","38547872007","37854566959","14910546743","37863198034","25790468096","38202038516","38773875841","25656144329","37651530931","37567339988","37697123375","38037584682","35822144412","38819295492","37904283735","26391336283","20317831611","38526790745","38769723998","15867523544","38864469631","38167906181","38172636215","38668266756","18459278710","38998810936","38688225379","39009280205","38066336530"],"lessgraphPrices":["39.00","98.00","48.00","46.00","29.00","52.00","49.00","78.00","59.00","39.00","48.50","69.00","48.00","58.00","78.00","55.00","27.90","49.00","56.00","39.00","76.00","49.50","59.00","45.00","119.40","158.00","99.00","39.96","119.00","39.90","79.00","49.00","39.80","49.00","52.00","69.00"],"lessgraphReturnNum":36,"less_recom":"less_recom:2;","lessRewrite":"rewrite:5","new_rewrite":"new_rewrite:2","personal_sc":"personal_sc:0","auctionNicks":["zhongping%CC%D4","keji6789","%D4%B5%CF%AA%CF%EB%C4%EE%C3%CE","wangyumei1992","%BA%CD%CE%AA%CD%FA"],"auctionIconServices":["icon-service-gongyibaobei","icon-service-gongyibaobei"],"few_query":"few_query:1","statsClick":"synonym_flag%3A1%3Brewq_flag%3A1%3Bqsqforecast_flag%3A1%3Bmaxentclassifier_flag%3A1%3Bs%3Amainsearch%3Buser_group%3Asexaffectsort%3A%3Bpriceaffectsort%3A1_0_1_4_5_4%3Bpricerangeaffectsort%3A%3Bpricemodelaffectsort%3A%3Busertypeaffectsort%3A1%3Bmd_CatIntention%3A%3Bmd_WomenClothing%3A%3Bmd_WomenShoe%3A%3Bmd_QueryIntentionType%3A%3Bmd_rqit%3Abuy%3Btab_type%3Aall%3Bsn_hide%3A0%3Bapass%3A0%3Bless_recom%3A2%3B%3Brewrite%3A5%3Bnew_rewrite%3A2%3Bfew_query%3A1%3Brewrite_flag%3A5%3Bfew_results_flag%3A1","multivariate":"alg_bts%3A18"}    };
+    SEARCH.config('iframeTrace', '');
+</script>
+<script type="text/template" id="J_Tiptool_tpl">
+    <div class="grid-c">
+     
+     
+<div class="module">
+
+
+
+<div class="tiptool-box" _stamp="tiptool-img-1401848100" _now="1401848100"
+        
+		 _bucketid="all" _cat="all" _cookie="true"
+        	
+	
+		 _trigger=".btn-search" _close="" _know="" _offsetx="116" _offsety="37"
+        	
+        
+		 _start="2013/10/15 10:00:00" _end="2014/5/22 23:59:00" _continue="600000" 
+        	
+        
+		 style="height:38px; width:100px;" 
+        	 
+ _pit>
+     
+               <a href="http://trip.taobao.com/go/chn/baihuo/trip/actyure.php?spm=1.578955.a2145tl.1&ad_id=&am_id=1301099211715386ae0e&cm_id=&pm_id=&mengfei"  target="_blank"  >
+          <img src="http://gtms02.alicdn.com/tps/i2/T1orO3FKlfXXbSyb.3-100-37.gif" alt="" />
+          </a>
+               	
+</div>
+
+</div>
+
+</div></script>
+<script>
+    SEARCH.run('BODY_BOTTOM');
+</script>
+</body>
+</html>
+
+
