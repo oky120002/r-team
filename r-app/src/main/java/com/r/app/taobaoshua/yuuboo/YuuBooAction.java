@@ -59,11 +59,6 @@ public class YuuBooAction {
 		return yuuBoo.getYuuBooManger().getLoginCaptchaImage();
 	}
 
-	/** 检查验证码是否正确 */
-	public boolean isCheckCaptcha(String captcha) {
-		return yuuBoo.getYuuBooManger().isCheckCaptcha(captcha);
-	}
-
 	/**
 	 * 登陆友保
 	 * 
