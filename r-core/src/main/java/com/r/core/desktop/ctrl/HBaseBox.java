@@ -151,8 +151,8 @@ public class HBaseBox extends Box implements EventShow {
 	}
 
 	/** 创建一个居中显示的 Box ,此组件始终把传入的组件上下左右居中显示 */
-	public static Component createCenterBox(HBaseBox box) {
-		return createHorizontalCenter(createVerticalCenter(box));
+	public static Component createCenterBox(Component component) {
+		return createHorizontalCenter(createVerticalCenter(component));
 	}
 
 	/** 显示/隐藏组件 */

@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
 import com.r.core.desktop.ctrl.HBaseBox;
@@ -32,9 +33,11 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 	private static final String COMMAND_EXIT = "command_exit"; // 命令_退出
 	private static final String COMMAND_AUTOPROXY = "command_autoproxy"; // 命令_自动代理
 	private static final String COMMAND_YUUBOO = "command_yuuboo"; // 进入友保系统
+	private static final String COMMAND_BLUESKY = "command_bluesky"; // 进入蓝天数据平台分析系统
 
 	private JLabel ipLabel = new JLabel();
 	private JButton yuuBooButton = new JButton("友保");
+	private JButton blueskyButton = new JButton("蓝天");
 
 	public TaobaoShuaDesktop(String title) {
 		super(title);
@@ -57,6 +60,9 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 		case COMMAND_YUUBOO: // 友保
 			YuuBoo.getInstance().startup();
 			break;
+		case COMMAND_BLUESKY: // 蓝天
+			BlueSky.getInstance().startup();
+			break;
 		}
 	}
 
@@ -75,6 +81,8 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 		northBox.setBorder(BorderFactory.createTitledBorder("功能区")); // 设置箱子组件内边距
 
 		northBox.add(this.yuuBooButton);
+		northBox.add(HBaseBox.createHorizontalStrut(50));
+		northBox.add(this.blueskyButton);
 
 		add(northBox, BorderLayout.CENTER);
 
@@ -97,5 +105,24 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 	private void initListeners() {
 		yuuBooButton.addActionListener(this);
 		yuuBooButton.setActionCommand(COMMAND_YUUBOO);
+		blueskyButton.addActionListener(this);
+		blueskyButton.setActionCommand(COMMAND_BLUESKY);
 	}
 }
+
+
+	
+// 155 S 150~154
+// 160 M 153~158
+// 165 L 158~164
+// 170 XL 162~167
+// 175 XXL 165~170
+// 180 XXXL 168~175
+// 所有尺码根据身高和体重，胸围等有上下浮动.
+
+
+
+
+
+
+

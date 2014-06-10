@@ -45,7 +45,7 @@ public class HBasePanel extends JPanel implements EventShow {
 	}
 
 	public HBasePanel(JComponent... components) {
-		this();
+		eventContainer = new EventContainer(this.getClass());
 		if (ArrayUtils.isNotEmpty(components)) {
 			for (JComponent jComponent : components) {
 				add(jComponent);
