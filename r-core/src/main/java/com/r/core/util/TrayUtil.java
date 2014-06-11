@@ -1,15 +1,12 @@
 package com.r.core.util;
 
 import java.awt.AWTException;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.MenuItem;
-import java.awt.MenuShortcut;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionListener;
-import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -197,36 +194,4 @@ public class TrayUtil {
 		/** 是否分隔符 */
 		public boolean isSeparator();
 	}
-
-//	public static class MenuItemABCD extends MenuItem {
-//		private static final long serialVersionUID = -5810296748350501692L;
-//
-//		public MenuItemABCD() throws HeadlessException {
-//			super();
-//		}
-//
-//		public MenuItemABCD(String label, MenuShortcut s) throws HeadlessException {
-//			super(label, s);
-//		}
-//
-//		public MenuItemABCD(String label) throws HeadlessException {
-//			super(label);
-//		}
-//
-//		@Override
-//		public String getLabel() {
-//			String label = super.getLabel();
-//			byte[] bs = label.getBytes();
-//			// 用新的字符编码生成字符串
-//			try {
-//				return new String(bs, "iso-8859-1");
-//			} catch (UnsupportedEncodingException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			return null;
-//		}
-//
-//	}
-
 }

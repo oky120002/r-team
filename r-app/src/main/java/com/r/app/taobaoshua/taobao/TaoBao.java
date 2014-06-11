@@ -19,8 +19,8 @@ public class TaoBao implements TaoBaoShuaStartup {
 	private boolean isRunning;
 	private TaoBaoManger taoBaoManger;
 	private TaoBaoAction taoBaoAction;
-	
-	private TaoBaoLiuLiang liuliang;
+
+	// private TaoBaoLiuLiang liuliang;
 
 	public TaoBao() {
 		super();
@@ -31,11 +31,11 @@ public class TaoBao implements TaoBaoShuaStartup {
 		return TaoBao.taoBao;
 	}
 
-	public TaoBaoAction getTaoBaoAction() {
+	public TaoBaoAction getAction() {
 		return taoBaoAction;
 	}
 
-	public TaoBaoManger getTaoBaoManger() {
+	public TaoBaoManger getManger() {
 		return taoBaoManger;
 	}
 
@@ -44,14 +44,14 @@ public class TaoBao implements TaoBaoShuaStartup {
 		TaoBao.taoBao = this;
 		taoBaoAction = new TaoBaoAction();
 		taoBaoManger = new TaoBaoManger();
-		liuliang = new TaoBaoLiuLiang();
+		// liuliang = new TaoBaoLiuLiang();
 	}
 
 	@Override
 	public void startup() {
 		isRunning = true;
-		if(!isRunning){
-//			liuliang.startup();
+		if (!isRunning) {
+			// liuliang.startup();
 		}
 	}
 

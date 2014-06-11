@@ -84,6 +84,18 @@ public class HttpSocket implements Serializable {
 	}
 
 	/**
+	 * 发送请求地址
+	 * 
+	 * @param httpUrl
+	 * @param headers
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 */
+	public ResponseHeader send(String httpUrl, Map<String, String> headers) throws NetworkIOReadErrorException {
+		return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()).putAllHeader(headers));
+	}
+
+	/**
 	 * 发送请求
 	 * 
 	 * @param httpUrl

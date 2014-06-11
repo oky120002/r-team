@@ -36,23 +36,23 @@ public class YuuBoo implements TaoBaoShuaStartup {
 		return YuuBoo.yuuBoo;
 	}
 
-	public YuuBooDesktop getYuuBooDesktop() {
+	public YuuBooDesktop getDesktop() {
 		return yuuBoodesktop;
 	}
 
-	public YuuBooDataContext getYuuBooDataContext() {
+	public YuuBooDataContext getDataContext() {
 		return yuuBooDataContext;
 	}
 
-	public YuuBooAction getYuuBooAction() {
+	public YuuBooAction getAction() {
 		return yuuBooAction;
 	}
 
-	public YuuBooManger getYuuBooManger() {
+	public YuuBooManger getManger() {
 		return yuuBooManger;
 	}
 
-	public YuuBooResolve getYuuBooResolve() {
+	public YuuBooResolve getResolve() {
 		return yuuBooResolve;
 	}
 

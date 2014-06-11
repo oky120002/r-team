@@ -31,11 +31,11 @@ public class Core implements TaoBaoShuaStartup, LoggerListener {
 		return Core.core;
 	}
 
-	public CoreAction getCoreAction() {
+	public CoreAction getAction() {
 		return coreAction;
 	}
 
-	public CoreManger getCoreManger() {
+	public CoreManger getManger() {
 		return coreManger;
 	}
 

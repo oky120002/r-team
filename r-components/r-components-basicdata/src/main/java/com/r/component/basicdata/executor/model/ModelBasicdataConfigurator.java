@@ -3,10 +3,7 @@
  */
 package com.r.component.basicdata.executor.model;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -20,10 +17,10 @@ public class ModelBasicdataConfigurator implements InitializingBean {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/** 数据源 */
-	private DataSource dataSource;
+//	private DataSource dataSource;
 
 	/** 事务处理器 */
-	private PlatformTransactionManager platformTransactionManager;
+//	private PlatformTransactionManager platformTransactionManager;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

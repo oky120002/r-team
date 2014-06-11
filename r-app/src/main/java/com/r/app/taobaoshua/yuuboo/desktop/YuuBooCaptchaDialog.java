@@ -162,7 +162,7 @@ public class YuuBooCaptchaDialog extends HBaseDialog implements ActionListener {
 			public void run() {
 				Image captcha = null;
 				try {
-					captcha = YuuBoo.getInstance().getYuuBooAction().getLoginYuuBooCaptchaImage();
+					captcha = YuuBoo.getInstance().getAction().getLoginYuuBooCaptchaImage();
 				} catch (NetworkIOReadErrorException e) {
 					HAlert.showErrorTips(e.getMessage(), YuuBooCaptchaDialog.this, e);
 				}

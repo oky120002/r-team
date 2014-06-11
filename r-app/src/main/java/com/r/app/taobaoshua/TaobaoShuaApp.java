@@ -91,9 +91,9 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.taoBao.init();
 		TaobaoShuaApp.app.yuuBoo.init();
 		TaobaoShuaApp.app.blueSky.init();
-		TaobaoShuaApp.app.taoBao.getTaoBaoAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
-		TaobaoShuaApp.app.yuuBoo.getYuuBooAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
-		TaobaoShuaApp.app.blueSky.getBlueSkyAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
+		TaobaoShuaApp.app.taoBao.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
+		TaobaoShuaApp.app.yuuBoo.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
+		TaobaoShuaApp.app.blueSky.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
 		TaobaoShuaApp.app.desktop = new TaobaoShuaDesktop("淘宝刷.....");
 		TaobaoShuaApp.app.desktop.setVisible(true);
 
@@ -127,7 +127,7 @@ public class TaobaoShuaApp {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (TaobaoShuaApp.app.yuuBoo != null && TaobaoShuaApp.app.yuuBoo.isRunning()) {
-					TaobaoShuaApp.app.yuuBoo.getYuuBooDesktop().setVisible(true);
+					TaobaoShuaApp.app.yuuBoo.getDesktop().setVisible(true);
 				}
 			}
 		});

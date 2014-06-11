@@ -95,7 +95,7 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 
 			@Override
 			public void run() {
-				ipLabel.setText(TaobaoShuaApp.getInstance().getCore().getCoreAction().getNetWorkIp());
+				ipLabel.setText(TaobaoShuaApp.getInstance().getCore().getAction().getNetWorkIp());
 			}
 		});
 		add(southBox, BorderLayout.SOUTH);

@@ -205,6 +205,13 @@ public class ResponseHeader implements Serializable {
 			IOUtils.closeQuietly(in);
 		}
 	}
+	
+	public static void main(String[] args) {
+		String[] names = ImageIO.getWriterMIMETypes();
+		for (String string : names) {
+			System.out.println(string);
+		}
+	}
 
 	/**
 	 * 获得Response返回的图片

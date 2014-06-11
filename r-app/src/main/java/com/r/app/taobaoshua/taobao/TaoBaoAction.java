@@ -37,12 +37,12 @@ public class TaoBaoAction {
 
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
-		taoBao.getTaoBaoManger().setSocketProxy(proxy);
+		taoBao.getManger().setSocketProxy(proxy);
 	}
 
 	/** 进入淘宝宝贝详情页面 */
 	public void goinTaobaoItem(String itemid) {
-		taoBao.getTaoBaoManger().goinTaobaoItem(itemid);
+		taoBao.getManger().goinTaobaoItem(itemid);
 	}
 
 	/** 通过此检查的宝贝所在地,检查宝贝所在地址是否是默认的正确地址 */
@@ -52,7 +52,7 @@ public class TaoBaoAction {
 
 	/** 查询宝贝的真实"所在地" */
 	public String searchItmeLoc(TaoBaoItemSearch taoBaoitemSearch) {
-		return taoBao.getTaoBaoManger().searchItmeLoc(taoBaoitemSearch);
+		return taoBao.getManger().searchItmeLoc(taoBaoitemSearch);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class TaoBaoAction {
 	 * @throws IOException
 	 */
 	public String searchItemList(TaoBaoItemSearch taoBaoitemSearch, int page) {
-		return taoBao.getTaoBaoManger().searchItem(taoBaoitemSearch, page);
+		return taoBao.getManger().searchItem(taoBaoitemSearch, page);
 	}
 	
 	

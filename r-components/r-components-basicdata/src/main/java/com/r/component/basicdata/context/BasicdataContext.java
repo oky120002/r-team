@@ -5,9 +5,6 @@ package com.r.component.basicdata.context;
 
 import org.springframework.beans.factory.InitializingBean;
 
-import com.r.core.log.Logger;
-import com.r.core.log.LoggerFactory;
-
 /**
  * 基础数据Context
  * 
@@ -30,7 +27,4 @@ public class BasicdataContext extends BasicdataContextConfigurator implements In
 		context = this;
 
 	}
-
-	
-	
 }

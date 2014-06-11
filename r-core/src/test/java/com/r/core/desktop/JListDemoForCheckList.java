@@ -41,6 +41,7 @@ import javax.swing.plaf.metal.MetalIconFactory;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class JListDemoForCheckList extends JFrame {
 	private static final long serialVersionUID = -8438020016195507991L;
 
@@ -48,7 +49,7 @@ public class JListDemoForCheckList extends JFrame {
 		super("CheckList Example");
 		String[] strs = { "swing", "home", "basic", "metal", "JList" };
 
-		final JList list = new JList(createData(strs));
+		final JList<?> list = new JList(createData(strs));
 
 		// set "home" icon
 		Icon icon = MetalIconFactory.getFileChooserHomeFolderIcon();

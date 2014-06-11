@@ -5,7 +5,6 @@ package com.r.app.taobaoshua.bluesky;
 
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.bluesky.desktop.BlueSkyDialog;
-import com.r.core.desktop.ctrl.HBaseDialog;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -50,15 +49,15 @@ public class BlueSky implements TaoBaoShuaStartup {
 		return isRunning;
 	}
 
-	public BlueSkyManger getBlueSkyManger() {
+	public BlueSkyManger getManger() {
 		return blueSkyManger;
 	}
 
-	public BlueSkyAction getBlueSkyAction() {
+	public BlueSkyAction getAction() {
 		return blueSkyAction;
 	}
 
-	public BlueSkyDialog getBlueSkyDialog() {
+	public BlueSkyDialog getDialog() {
 		return blueSkyDialog;
 	}
 }

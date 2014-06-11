@@ -13,15 +13,16 @@ import com.r.core.log.LoggerFactory;
  * @author oky
  * 
  */
-public class BlueSkyDialog extends HBaseFrame {
+public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListener{
 	private static final long serialVersionUID = -2203297079049245614L;
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyDialog.class);
 	
-	private BlueSkyLoginPanle blueSkyPanel = new BlueSkyLoginPanle();
+	private BlueSkyLoginPanle blueSkyPanel = null;
 
 	public BlueSkyDialog() {
 		super("蓝天数据平台分析系统...");
 		logger.debug("BlueSkyDialog newInstance..........");
+		blueSkyPanel = new BlueSkyLoginPanle(this);
 		initStyle();
 		initComponents();
 		initListeners();
@@ -41,4 +42,8 @@ public class BlueSkyDialog extends HBaseFrame {
 
 	}
 
+	@Override
+	public void loginFinsh() {
+		blueSkyPanel.setVisible(false);
+	}
 }

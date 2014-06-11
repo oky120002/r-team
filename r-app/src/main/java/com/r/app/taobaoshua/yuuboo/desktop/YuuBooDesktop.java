@@ -75,7 +75,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 	public YuuBooDesktop(Frame owner) {
 		super(owner, "优保任务刷工具", false);
 		logger.info("YuuBooDesktop newInstance...................");
-		yuuBoo.getYuuBooDataContext().addChangerListener(this);
+		yuuBoo.getDataContext().addChangerListener(this);
 		initStyle();
 		initComponents();
 		initListeners();
@@ -137,31 +137,31 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 	/** 启动各种自动执行的命令 */
 	public void startCommand() {
 		try {
-			yuuBoo.getYuuBooAction().startPVListCommand();
+			yuuBoo.getAction().startPVListCommand();
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动获取[PV]列表功能失效,请手动获取同时联系开发者说明情况.", YuuBooDesktop.this, e);
 		}
 
 		try {
-			yuuBoo.getYuuBooAction().startPVQuestListCommand();
+			yuuBoo.getAction().startPVQuestListCommand();
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动获取[PV任务]列表功能失效,请手动获取同时联系开发者说明情况.", YuuBooDesktop.this, e);
 		}
 
 		try {
-			yuuBoo.getYuuBooAction().startAutoTakeTask();
+			yuuBoo.getAction().startAutoTakeTask();
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动[接手PV]功能失效,请手动获取同时联系开发者说明情况.", YuuBooDesktop.this, e);
 		}
 
 		try {
-			yuuBoo.getYuuBooAction().startExecCommand();
+			yuuBoo.getAction().startExecCommand();
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动[完成淘宝搜索]功能失效,请手动获取同时联系开发者说明情况.", YuuBooDesktop.this, e);
 		}
 
 		try {
-			yuuBoo.getYuuBooAction().startAutoSaveDatas();
+			yuuBoo.getAction().startAutoSaveDatas();
 		} catch (SchedulerException e) {
 			HAlert.showErrorTips("自动[保存数据]功能失效,请手动获取同时联系开发者说明情况.", YuuBooDesktop.this, e);
 		}
@@ -224,7 +224,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 
 		// PV和PV任务列表
 		HBaseBox centerBox = HBaseBox.createVerticalBaseBox();
-		pvTableModel = new PVListTableModel(yuuBoo.getYuuBooDataContext());
+		pvTableModel = new PVListTableModel(yuuBoo.getDataContext());
 		pvTable = new JTable(pvTableModel);
 		pvTable.setPreferredScrollableViewportSize(new Dimension(600, 150));
 		pvTable.setFillsViewportHeight(true);
@@ -234,7 +234,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 		pvTableBox.setBorder(BorderFactory.createTitledBorder("PV列表"));
 		pvTableBox.add(new HBaseScrollPane(pvTable));
 		centerBox.add(pvTableBox);
-		pvQuestTableModel = new PVQuestListTableModel(yuuBoo.getYuuBooDataContext());
+		pvQuestTableModel = new PVQuestListTableModel(yuuBoo.getDataContext());
 		pvQuestTable = new JTable(pvQuestTableModel);
 		pvQuestTable.setPreferredScrollableViewportSize(new Dimension(600, 150));
 		pvQuestTable.setFillsViewportHeight(true);
@@ -278,8 +278,8 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 
 					loginYuuBooButton.setEnabled(false);
 
-					yuuBoo.getYuuBooAction().loginYuuBoo(account, accountPassword, captcha, question, answer);
-					yuuBoo.getYuuBooDataContext().setAccount(account); // 设置账号
+					yuuBoo.getAction().loginYuuBoo(account, accountPassword, captcha, question, answer);
+					yuuBoo.getDataContext().setAccount(account); // 设置账号
 					startCommand();
 				} catch (LogginErrorException lee) {
 					doCaptchaImage();
@@ -361,7 +361,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 			public void run() {
 				Image captcha = null;
 				try {
-					captcha = yuuBoo.getYuuBooAction().getLoginYuuBooCaptchaImage();
+					captcha = yuuBoo.getAction().getLoginYuuBooCaptchaImage();
 				} catch (NetworkIOReadErrorException e) {
 					HAlert.showErrorTips(e.getMessage(), YuuBooDesktop.this, e);
 				}

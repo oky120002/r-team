@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="Rain" version="3.0">
 
-	<!-- 项目名-竞技场 -->
+	<!-- 项目名 -->
 	<display-name>Rain's Web</display-name>
 
 	<!-- 默认页面 -->

@@ -11,7 +11,7 @@
 	<artifactId>r-components</artifactId>
 	<packaging>pom</packaging>
 	<name>r-components</name>
-	<description>tx-components</description>
+	<description>r-components</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
