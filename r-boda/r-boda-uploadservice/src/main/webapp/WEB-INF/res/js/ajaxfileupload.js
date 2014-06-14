@@ -6,6 +6,7 @@ jQuery.extend({
 	{
 			//create frame
             var frameId = 'jUploadFrame' + id;
+            var io;
             
             if(window.ActiveXObject) {
                 var io = document.createElement('<iframe id="' + frameId + '" name="' + frameId + '" />');
@@ -27,7 +28,7 @@ jQuery.extend({
 
             document.body.appendChild(io);
 
-            return io			
+            return io;
     },
     createUploadForm: function(id, fileElementId)
 	{
@@ -35,11 +36,20 @@ jQuery.extend({
 		var formId = 'jUploadForm' + id;
 		var fileId = 'jUploadFile' + id;
 		var form = $('<form  action="" method="POST" name="' + formId + '" id="' + formId + '" enctype="multipart/form-data"></form>');	
-		var oldElement = $('#' + fileElementId);
-		var newElement = $(oldElement).clone();
-		$(oldElement).attr('id', fileId);
-		$(oldElement).before(newElement);
-		$(oldElement).appendTo(form);
+		
+		if(typeof(fileElementId) == 'string'){  
+	       fileElementId = [fileElementId];
+	    }
+	    for(var i in fileElementId){  
+	           //按name取值  
+	           var oldElement = jQuery("input[name="+fileElementId[i]+"]");  
+	           oldElement.each(function() {  
+	               var newElement = jQuery($(this)).clone();  
+	               jQuery(oldElement).attr('id', fileId);  
+	               jQuery(oldElement).before(newElement);  
+	               jQuery(oldElement).appendTo(form);  
+	           });  
+	     }  
 		//set attributes
 		$(form).css('position', 'absolute');
 		$(form).css('top', '-1200px');

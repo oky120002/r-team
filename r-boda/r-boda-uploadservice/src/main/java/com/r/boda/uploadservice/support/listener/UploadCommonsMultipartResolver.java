@@ -1,8 +1,6 @@
 package com.r.boda.uploadservice.support.listener;
-
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItem;
@@ -20,15 +18,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  */
 public class UploadCommonsMultipartResolver extends CommonsMultipartResolver {
 
-	@Resource(name = "fileUploasListener")
-	private FileUploasListener listener;
-
 	@Override
 	protected MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {
 		String encoding = determineEncoding(request);
 		FileUpload fileUpload = prepareFileUpload(encoding);
-		listener.setSession(request.getSession());
-		fileUpload.setProgressListener(listener);
+		fileUpload.setProgressListener(new FileUploasListener(request.getSession()));
 		try {
 			List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
 			return parseFileItems(fileItems, encoding);

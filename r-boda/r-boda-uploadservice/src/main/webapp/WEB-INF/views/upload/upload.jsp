@@ -14,6 +14,39 @@
 		$.ajax({
 			type : "post",
 			url : "/boda/upload/fileUploadStatus",//响应文件上传进度的servlet  
+<<<<<<< HEAD
+			dataType: 'json',
+			success : function(data) {
+				document.getElementById("span").innerHTML = "已上传第"
+						+ data.itemNumber + "个文件,总进度 : " + data.percent + "%";//显示读取百分比  
+				document.getElementById("table").width = (data.percent * 10);//通过表格宽度 实现进度条  
+			}
+		})
+	}
+
+	function callUpload() {
+		$.ajaxFileUpload({
+			url : '/boda/upload/up',
+			secureuri : false,
+			fileElementId : 'file',
+			success : function(data, status) {
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			}
+		});
+	}
+</script>
+
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="ceeditRating_add" action="/boda/upload/up" method="post" enctype="multipart/form-data" target="_parent" name="form">
+		 <input type="file" name="file" >
+		 <input type="file" name="file" >
+		 <input type="file" name="file" >
+		 <input type="button" onclick="callUpload();" value="提交">
+		 <input type="button" onclick='window.setInterval("callback();", 500);' value="进度条1">
+=======
 			success : function(msg) {
 				document.getElementById("span").innerHTML = "已上传：" + msg;//显示读取百分比  
 				document.getElementById("table").width = msg;//通过表格宽度 实现进度条  
@@ -43,6 +76,7 @@
 		<input type="file" name="file" id="file">
 		<input type="button" onclick="callUpload();" value="提交">
 		<input type="button" onclick='window.setInterval("callback()", 500);' value="进度条1">
+>>>>>>> refs/remotes/origin/master
 	</form>
 
 	<span id="span">已上传: 0</span>

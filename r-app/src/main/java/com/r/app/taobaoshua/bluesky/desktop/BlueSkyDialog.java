@@ -18,11 +18,11 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyDialog.class);
 	
 	private BlueSkyLoginPanle blueSkyPanel = null;
+	private BlueSkyMainPanel mainPanel = null;
 
 	public BlueSkyDialog() {
 		super("蓝天数据平台分析系统...");
 		logger.debug("BlueSkyDialog newInstance..........");
-		blueSkyPanel = new BlueSkyLoginPanle(this);
 		initStyle();
 		initComponents();
 		initListeners();
@@ -35,6 +35,7 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 	}
 
 	private void initComponents() {
+		blueSkyPanel = new BlueSkyLoginPanle(this);
 		setContentPane(blueSkyPanel);
 	}
 
@@ -45,5 +46,9 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 	@Override
 	public void loginFinsh() {
 		blueSkyPanel.setVisible(false);
+		
+		mainPanel = new BlueSkyMainPanel();
+		mainPanel.setVisible(true);
+		setContentPane(mainPanel);
 	}
 }

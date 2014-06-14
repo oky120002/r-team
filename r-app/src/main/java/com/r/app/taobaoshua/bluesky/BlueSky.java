@@ -3,8 +3,13 @@
  */
 package com.r.app.taobaoshua.bluesky;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.bluesky.desktop.BlueSkyDialog;
+import com.r.app.taobaoshua.bluesky.websource.BlueSkyAction;
+import com.r.app.taobaoshua.bluesky.websource.BlueSkyManger;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -20,6 +25,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	private BlueSkyManger blueSkyManger;
 	private BlueSkyAction blueSkyAction;
 	private BlueSkyDialog blueSkyDialog;
+	private ApplicationContext applicationContext;
 
 	public BlueSky() {
 		super();
@@ -33,6 +39,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	@Override
 	public void init() {
 		BlueSky.bluesky = this;
+		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		blueSkyManger = new BlueSkyManger();
 		blueSkyAction = new BlueSkyAction();
 		blueSkyDialog = new BlueSkyDialog();
@@ -59,5 +66,9 @@ public class BlueSky implements TaoBaoShuaStartup {
 
 	public BlueSkyDialog getDialog() {
 		return blueSkyDialog;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
 	}
 }

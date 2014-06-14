@@ -64,7 +64,7 @@ public class TaobaoShuaApp {
 		return this.taoBao;
 	}
 
-	public BlueSky getBuleSky() {
+	public BlueSky getBlueSky() {
 		return blueSky;
 	}
 
@@ -85,9 +85,15 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.yuuBoo = new YuuBoo();
 		TaobaoShuaApp.app.taoBao = new TaoBao();
 		TaobaoShuaApp.app.blueSky = new BlueSky();
+		try {
+			TaobaoShuaApp.app.init();
+		} catch (Exception e) {
+			TaobaoShuaApp.app.desktop.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		}
 		TaobaoShuaApp.app.core.init();
 		LoggerFactory.addLoggerListener(TaobaoShuaApp.app.core);
 		TaobaoShuaApp.app.core.startup();
+		
 		TaobaoShuaApp.app.taoBao.init();
 		TaobaoShuaApp.app.yuuBoo.init();
 		TaobaoShuaApp.app.blueSky.init();
@@ -96,12 +102,6 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.blueSky.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
 		TaobaoShuaApp.app.desktop = new TaobaoShuaDesktop("淘宝刷.....");
 		TaobaoShuaApp.app.desktop.setVisible(true);
-
-		try {
-			TaobaoShuaApp.app.init();
-		} catch (Exception e) {
-			TaobaoShuaApp.app.desktop.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		}
 	}
 
 	/** 创建托盘图标 */

@@ -869,6 +869,6 @@
 		<module>r-components</module>
 		<module>r-web</module>
 		<module>r-app</module>
-		<module>r-boda-uploadservice</module>
+		<module>r-boda</module>
 	</modules>
 </project>
