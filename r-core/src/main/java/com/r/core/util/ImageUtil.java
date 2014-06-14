@@ -25,7 +25,7 @@ import com.r.core.exceptions.io.IOReadErrorException;
  */
 public abstract class ImageUtil {
 	/** 图片缓存 */
-	private static Map<String, BufferedImage> imageMap = new HashMap<String, BufferedImage>();
+	private static Map<String, Image> imageMap = new HashMap<String, Image>();
 
 	/** 图片读取接口 */
 	private static Map<String, ReadImage> readImages = new HashMap<String, ReadImage>();
@@ -47,7 +47,7 @@ public abstract class ImageUtil {
 	 *            如果为空,则报错
 	 * @return 图片
 	 */
-	public static BufferedImage getImage(String key, String imageKey) {
+	public static Image getImage(String key, String imageKey) {
 		return ImageUtil.getImage(key, imageKey, ImageReadMode.Read);
 	}
 
@@ -64,7 +64,7 @@ public abstract class ImageUtil {
 	 *            图片的读取模式,如果为空,则取默认读取模式ImageReadMode.Read
 	 * @return
 	 */
-	public static BufferedImage getImage(String key, String imageKey, ImageReadMode imageReadModel) {
+	public static Image getImage(String key, String imageKey, ImageReadMode imageReadModel) {
 		String imageMapKey = key + "." + imageKey;
 		if (imageKey == null) {
 			throw new NullPointerException("传入的imageKey不能为空");
@@ -77,7 +77,7 @@ public abstract class ImageUtil {
 		}
 
 		ReadImage readImage = ImageUtil.readImages.get(key);
-		BufferedImage image = null;
+		Image image = null;
 		switch (imageReadModel) {
 		case Read:
 			image = imageMap.get(imageMapKey);
@@ -176,7 +176,7 @@ public abstract class ImageUtil {
 	 * @return 返回图标
 	 * @see javax.swing.ImageIcon.ImageIcon
 	 */
-	public static Icon readIconFromImage(BufferedImage image) {
+	public static Icon readIconFromImage(Image image) {
 		return new ImageIcon(image);
 	}
 
@@ -192,7 +192,7 @@ public abstract class ImageUtil {
 
 	public static interface ReadImage {
 		/** 根据传入的imageKey来读取图片,imageKey可以是图片全路径,也可单纯的是图片名称,也可以是自定义的字符串 */
-		public BufferedImage readImage(String imageKey) throws IOReadErrorException;
+		public Image readImage(String imageKey) throws IOReadErrorException;
 	}
 
 	/**

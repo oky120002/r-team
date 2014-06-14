@@ -3,32 +3,35 @@
  */
 package com.r.app.taobaoshua.bluesky.desktop.tablemodel;
 
+import java.awt.Image;
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import com.r.app.taobaoshua.yuuboo.data.YuuBooDataContext;
-import com.r.app.taobaoshua.yuuboo.model.PV;
+import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enums.TaskType;
 import com.r.core.exceptions.SwitchPathException;
+import com.r.core.util.ImageUtil;
 
 /**
- * PV列表数据模型
+ * 等待接手任务列表
  * 
  * @author oky
  * 
  */
 public class TaskListTableModel extends AbstractTableModel implements TableModel {
 	private static final long serialVersionUID = -154657428132471147L;
-	private static final String[] COLS = new String[] { "编号", "发布者", "发布时间", "特殊条件", "数量" };
-	private YuuBooDataContext dataContext;
+	private static final String[] COLS = new String[] { "任务类型" };
+	private List<Task> tasks = null;
 
-	public TaskListTableModel(YuuBooDataContext dataContext) {
-		super();
-		this.dataContext = dataContext;
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 	@Override
 	public int getRowCount() {
-		return dataContext.getPVSize();
+		return tasks.size();
 	}
 
 	@Override
@@ -41,41 +44,37 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		return COLS[col];
 	}
 
+	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return String.class;
+		return this.getValueAt(0, columnIndex).getClass();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		PV[] pvs = dataContext.getPVs();
-		PV pv = null;
-		try {
-			pv = pvs[rowIndex];
-		} catch (Exception e) {
-			return "";
-		}
-
-		String value = null;
+		Task task = tasks.get(rowIndex);
 
 		switch (columnIndex) {
 		case 0:
-			value = pv.getId();
-			break;
-		case 1:
-			value = pv.getPublisher();
-			break;
-		case 2:
-			value = pv.getReleaseTime();
-			break;
-		case 3:
-			value = pv.getSpecialConditions();
-			break;
-		case 4:
-			value = pv.getCommodityNumber() + "个";
-			break;
+			TaskType taskType = task.getTaskType();
+			Image image = null;
+			switch (taskType) {
+			case 实物:
+				image = ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/realobject.gif");
+				break;
+			case 实购:
+				image = ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/realobject_shop.gif");
+				break;
+			case 虚拟:
+				image = ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/virtual.gif");
+				break;
+			case 虚购:
+				image = ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/virtual_shop.gif");
+				break;
+			}
+			return image;
 		default:
 			throw new SwitchPathException("列表列越界");
 		}
-		return value;
 	}
+
 }

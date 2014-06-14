@@ -39,6 +39,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -68,7 +69,7 @@ public class TableDemo extends JPanel {
 	class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = -8960756502707560730L;
 		private String[] columnNames = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
-		private Object[][] data = { { "Mary", "Campione", "Snowboarding", new Integer(5), new Boolean(false) }, { "Alison", "Huml", "Rowing", new Integer(3), new Boolean(true) }, { "Kathy", "Walrath", "Knitting", new Integer(2), new Boolean(false) }, { "Sharon", "Zakhour", "Speed reading", new Integer(20), new Boolean(true) }, { "Philip", "Milne", "Pool", new Integer(10), new Boolean(false) }, { "Isaac", "Rabinovitch", "Nitpicking", new Integer(1000), new Boolean(false) } };
+		private Object[][] data = { { new JLabel("何雨"), "Campione", "Snowboarding", new Integer(5), new Boolean(false) }, { "Alison", "Huml", "Rowing", new Integer(3), new Boolean(true) }, { "Kathy", "Walrath", "Knitting", new Integer(2), new Boolean(false) }, { "Sharon", "Zakhour", "Speed reading", new Integer(20), new Boolean(true) }, { "Philip", "Milne", "Pool", new Integer(10), new Boolean(false) }, { "Isaac", "Rabinovitch", "Nitpicking", new Integer(1000), new Boolean(false) } };
 
 		public int getColumnCount() {
 			return columnNames.length;

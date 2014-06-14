@@ -8,8 +8,8 @@ package com.r.core.desktop.ctrl.impl.panle;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -39,7 +39,7 @@ public class HWindowTitlePanle extends HBasePanel {
 	static {
 		ImageUtil.init(HWindowTitlePanle.READIMAGE, new ReadImage() {
 			@Override
-			public BufferedImage readImage(String imageKey) throws IOReadErrorException {
+			public Image readImage(String imageKey) throws IOReadErrorException {
 				String imagepath = "com/hiyouyu/images/" + imageKey;
 				InputStream ins = ClassLoader.getSystemResourceAsStream(imagepath);
 				try {
