@@ -4,8 +4,13 @@
 package com.r.app.taobaoshua.bluesky.websource;
 
 import java.awt.Image;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
+import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.context.HttpProxy;
 
 /**
@@ -41,5 +46,16 @@ public class BlueSkyAction {
 	 */
 	public void login(String account, String accountPassword, String captcha, String question, String answer) {
 		blueSky.getManger().login(account, accountPassword, captcha, question, answer);
+	}
+
+	/** 获取任务列表的html代码 */
+	public Collection<Task> getTaskList() {
+		BlueSkyResolve resolve = blueSky.getResolve();
+		Set<Task> tasks = new HashSet<Task>();
+		for (int page = 1; page <= 10; page++) {
+			String html = blueSky.getManger().getTaskListHtml(page);
+			tasks.addAll(resolve.resolveTaskListHtml(html));
+		}
+		return tasks;
 	}
 }

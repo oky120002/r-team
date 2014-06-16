@@ -8,8 +8,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.bluesky.desktop.BlueSkyDialog;
+import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.bluesky.websource.BlueSkyAction;
+import com.r.app.taobaoshua.bluesky.websource.BlueSkyBackgroundTask;
 import com.r.app.taobaoshua.bluesky.websource.BlueSkyManger;
+import com.r.app.taobaoshua.bluesky.websource.BlueSkyResolve;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -24,7 +27,9 @@ public class BlueSky implements TaoBaoShuaStartup {
 	private boolean isRunning;
 	private BlueSkyManger blueSkyManger;
 	private BlueSkyAction blueSkyAction;
+	private BlueSkyResolve blueSkyResolve;
 	private BlueSkyDialog blueSkyDialog;
+	private BlueSkyBackgroundTask backgroundTask; // 后台任务
 	private ApplicationContext applicationContext;
 
 	public BlueSky() {
@@ -40,6 +45,8 @@ public class BlueSky implements TaoBaoShuaStartup {
 	public void init() {
 		BlueSky.bluesky = this;
 		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+		backgroundTask = new BlueSkyBackgroundTask();
+		blueSkyResolve = new BlueSkyResolve();
 		blueSkyManger = new BlueSkyManger();
 		blueSkyAction = new BlueSkyAction();
 		blueSkyDialog = new BlueSkyDialog();
@@ -49,6 +56,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	public void startup() {
 		isRunning = true;
 		blueSkyDialog.setVisible(true);
+		backgroundTask.startAll();
 	}
 
 	@Override
@@ -64,11 +72,19 @@ public class BlueSky implements TaoBaoShuaStartup {
 		return blueSkyAction;
 	}
 
+	public BlueSkyResolve getResolve() {
+		return blueSkyResolve;
+	}
+
 	public BlueSkyDialog getDialog() {
 		return blueSkyDialog;
 	}
 
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
+	}
+
+	public TaskService getService() {
+		return applicationContext.getBean(TaskService.class);
 	}
 }

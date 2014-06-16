@@ -1,0 +1,1589 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>淘宝信誉大厅-蓝天店主网</title>
+<meta name="keywords" content="淘宝信誉大厅" />
+<meta name="description" content="每个会员淘宝信誉大厅发布任务获得信誉，接手任务获得佣金。 " />
+<meta name="author" content="淘宝信誉大厅—蓝天店主网" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+<link href="/style/css/task.css" type="text/css" rel="stylesheet"/>
+<link href="/style/css/top_bar.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="/ks_inc/jquery.js"></script>
+<script type="text/javascript" src="/ks_inc/kesion.box.js"></script>
+<script type="text/javascript" src="/ks_inc/common.js"></script>
+<script type="text/javascript" src="/style/js/common_def.js"></script>
+</head>
+<body>
+<SCRIPT type=text/javascript>
+$(function(){
+	<!-- 鼠标滑动特效start --> 
+	var SDmodel = new scrollDoor();
+	SDmodel.sd(["gg_m1","gg_m2"],["gg_d1","gg_d2"],"currently","''");
+	SDmodel.sd(["bbs_m1","bbs_m2","bbs_m3"],["bbs_d1","bbs_d2","bbs_d3"],"title1","title2");
+	
+	$(".menber_tab .dianji").click(function(){
+	$("div.options").slideToggle("fast");
+	$(this).toggleClass("collapsed_yes");
+	if(document.getElementById("dianji").className!="dianji"){
+		SetCookie_current("div_options", "none");
+		$("#notice").show();
+		}
+	else{
+		SetCookie_current("div_options", "block");
+		$("#notice").hide();
+		}
+	})
+})
+//写cookies函数 
+function SetCookie_current(name,value){ 
+var Days = 30; 	//30天
+var exp = new Date(); 
+exp.setTime(exp.getTime() + Days*24*60*60*1000);
+document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+}
+//取cookies函数 
+function getCookie_current(name) { 
+var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)")); 
+if(arr != null) return unescape(arr[2]); return null; 
+}
+
+function GetPage(){
+	var obj=getObj("list_tbl");
+		obj.innerHTML = '<div class="submiting">任 务 加 载 中 .....</div>';
+	$.ajax({type:"get",url:"?0-0-0--1anticache=" + Math.floor(Math.random()*1000) + "Ajax",dataType:"html",success:function(d){var s=unescape(d); obj.innerHTML=s;}
+		   });
+}
+function TaskAutoRefresh() {
+	var AutoRefresh = getObj('AutoRefresh');
+		if (AutoRefresh && AutoRefresh.checked) {
+		    getObj('list_tbl').innerHTML = '<div class="submiting">任 务 加 载 中 .....</div>';
+			GetPage();
+		}
+		window.setTimeout(TaskAutoRefresh,10000);
+}
+window.setTimeout(TaskAutoRefresh,5000);
+</SCRIPT>
+
+<!-- topbar start -->
+<div id="top_bar">
+	<div id="top_bar_c">
+		<div id="userinfo">
+	<!--弹窗式登录代码--->
+	 <span id="showuserlogin"><img src="/images/loading.gif" align="absmiddle" alt=""/>加载中...</span>
+	 <script type="text/javascript">
+	 function ShowPopLogin()
+	 { 	  
+	   	var p=new KesionPopup();
+		p.MsgBorder=1;
+		p.ShowBackground=false;
+		p.BgColor='#fff';
+		p.TitleCss="font-size:14px;background:#1B76B7;color:#fff;height:22px;";
+	    p.popup("<img src='/user/images/icon18.png' align='absmiddle'>会员登录","<form action='/user/checkuserlogin.asp' method='post' name='myform'><div id='showloginform' style='background:url(/user/images/loginbg.png) repeat-x;'>加载中...</div></form>",450);
+		  jQuery.getScript("/user/userlogin.asp?action=PoploginStr",function(){
+		    jQuery("#showloginform").html(userpop.str);
+		  });
+	 }
+	function getCode(){
+	 document.getElementById('showVerify').innerHTML='<IMG style="cursor:pointer" src="/plus/verifycode.asp" onClick="this.src=\'/plus/verifycode.asp?n=\'+ Math.random();" align="absmiddle">';
+	}
+
+	var seccodefocus=0; 
+	function getverifycode() { 
+	var obj=document.getElementById("vcodetext_menu"); 
+	obj.style.top = (-parseInt(obj.style.height)) + 'px'; 
+	obj.style.left = '0px'; 
+	obj.style.display = ''; 
+	document.getElementById('vcodeimg').src =document.getElementById('vcodeimg').src.split('?')[0]+'?time=' + Math.random(); 
+	$("#vcodetext_menu").fadeOut('fast').fadeIn('fast'); 
+	}
+	
+	function CheckLoginForm(){
+		var username=document.myform.Username.value;
+		var pass=document.myform.Password.value;
+		if (username==''){
+		  alert('请输入用户名');
+		  document.myform.Username.focus();
+		  return false;}
+		if (pass==''){
+		  alert('请输入登录密码');
+		  document.myform.Password.focus();
+		  return false;
+		 }
+		  return true;
+	} 
+	function GetUserLoginStr(){
+		  jQuery.getScript("/user/userlogin.asp?action=checklogin&s=1",function(){
+		    jQuery("#showuserlogin").html(user.loginstr);
+		  });
+	  }
+	GetUserLoginStr();
+	 </script>
+	 <!--登录结束--->
+	</div>
+		<div id="toolsbar">
+			<ul><a href="AddTask.asp">发布任务</a></ul>
+			<ul class="line"><u></u></ul>
+			<ul><a href="/Task/">接手任务</a></ul>
+			<ul class="line"><u></u></ul>
+			<ul><a href="/Desktop.asp" title="把本站网址放到您电脑桌面，方便下次浏览！">加入桌面</a></ul>
+			<ul class="line"><u></u></ul>
+			<ul><a href="#" onclick="javascript:window.external.addFavorite('http://'+location.hostname+(location.port!=''?':':'')+location.port,'蓝天店主网平台');">加入收藏</a></ul>
+			<ul class="line"><u></u></ul>
+			<ul><script src="/KS_Inc/language.js" type="text/javascript"></script></ul>
+			<ul class="line"><u></u></ul>
+		</div>
+	</div>
+</div>
+<!-- topbar end -->
+
+<!-- header start -->
+<div class="nav_Logo clearfix">
+  <div class="logo_img">
+    <h1> </h1>
+    <div style="float:right; width:356px;">
+    <div class="right_box">
+    <a href="/User/User_PayOnline.asp" target="_blank">账号充值</a>|<a href="/User/User_TiXian.asp" target="_blank">申请提现</a>|<a href="/User/User_Exchange.asp?Action=Money" target="_blank">我要兑换</a>|<a href="/User/User_Card.asp" target="_blank"><span class="orange">点卡中心</span></a>|<a href="/html/help/" target="_blank">帮助中心</a>
+    <div class="clear"></div>
+    <div class="tl_b"></div><div class="tr_b"></div><div class="bl_b"></div><div class="br_b"></div>
+    </div>
+  </div>    
+</div>
+
+<!-- nav start -->
+<div class="v4_nav clearfix">
+<div style="width:920px; margin:0 auto">
+    <ul class="nav_content">
+        <li><a href="/" title="网站首页"><span>首页</span></a></li>
+        <li class="current"><a href="?0-0-1-0-0"><span>淘宝任务</span></a></li><li><a href="?0-0-2-0-0"><span>拍拍任务</span></a></li>
+        <li><a href="/Task/CollectTask.asp" title="淘宝收藏"><span>淘宝收藏</span></a></li>
+        <li><a href="/Task/FlowTask.asp" title="淘宝流量"><span>淘宝流量</span></a></li>
+        <li><a href="/user/User_EarnScore.asp" title="推广赚钱"><span>推广赚钱</span></a></li>
+        <li><a href="/html/help/xszn.html" title="新手教程" style="color:#fff571"><span>新手教程</span></a></li>
+        <li><a href="/User/User_Card.asp" title="买发布点" style="color:#fff571"><span>买发布点</span></a></li>
+    </ul>
+</div>
+</div>
+<!-- nav end -->
+<style type="text/css">
+
+img{ border:0;}
+
+#online_server{ width:960px; overflow:hidden; margin: 10px auto 0 auto;background-color:#eefffe;}
+
+#online_server ul{ list-style:none; padding:0; margin:0;}
+
+#online_server li{ float:left;display:block; width:120px; font-size:12px; color:#666; padding:6px 0;}
+
+#online_server li a{font-size:12px; color:#666; text-decoration:none; cursor:pointer;}
+
+</style>
+<script type="text/javascript" language="javascript" src="\Style\js\online_server.js">
+
+</script>
+</div>
+
+<!-- header script>
+
+
+
+
+<!-- 会员信息 start -->
+<div class="clear"></div>
+<div class="menber_tab">
+<div class="dh">
+<span class="top">你在这里能看到什么？</span>
+<span class="center" id="notice">
+<ul>
+	 
+<li><a href="/html/ptgg/4242.html" target="_blank" title="蓝天店主网怎么样？可靠吗？安全吗？"><strong><span style="color:#FF0000">蓝天店主网怎么样？可靠吗？安全吗？</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4200.html" target="_blank" title="公司做活动，买发布点送发布点和快递单"><strong><span style="color:#0000FF">公司做活动，买发布点送发布点和快递单</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4190.html" target="_blank" title="拥有1钻月入万，继续奔皇冠！"><strong><span style="color:#990000">[推荐]</span><span style="color:#FF0033">拥有1钻月入万，继续奔皇冠！</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4183.html" target="_blank" title="接任务狂赚，月入6000到一万！"><strong><span style="color:#990000">[推荐]</span><span style="color:#0033FF">接任务狂赚，月入6000到一万！</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4178.html" target="_blank" title="长期免费赠送当天快递单"><strong><span style="color:#990000">[推荐]</span><span style="color:#FF0000">长期免费赠送当天快递单</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4123.html" target="_blank" title="遇到骗子维权怎么办，教你办法"><strong><span style="color:blue">[公告]</span><span style="color:#0000FF">遇到骗子维权怎么办，教你办法</span></strong></a></li>
+
+     
+<li><a href="/html/help/xszn/4077.html" target="_blank" title="提升店铺信誉怎么操作，新手第一步"><strong><span style="color:#0033FF">提升店铺信誉怎么操作，新手第一步</span></strong></a></li>
+ 
+<li><a href="/html/help/xszn/4004.html" target="_blank" title="蓝天店主平台发布任务和接任务教程">蓝天店主平台发布任务和接任务教程</a></li>
+ 
+<li><a href="/html/help/xszn/3974.html" target="_blank" title="蓝天店主平台常见的几个名词解释">蓝天店主平台常见的几个名词解释</a></li>
+ 
+<li><a href="/html/help/xszn/3955.html" target="_blank" title="什么是蓝天店主平台担保金？">什么是蓝天店主平台担保金？</a></li>
+ 
+<li><a href="/html/help/xszn/3951.html" target="_blank" title="什么是存款？什么是发布点？如何获得?">什么是存款？什么是发布点？如何获得?</a></li>
+ 
+<li><a href="/html/help/xszn/3859.html" target="_blank" title="淘宝封店规则">淘宝封店规则</a></li>
+
+     
+<li><a href="/html/help/FAQ/3984.html" title="蓝天店主平台常见问题与解答" target="_blank">蓝天店主平台常见问题与解答</a></li>
+ 
+<li><a href="/html/help/FAQ/3966.html" title="积分说明和如何获得积分" target="_blank">积分说明和如何获得积分</a></li>
+ 
+<li><a href="/html/help/FAQ/3965.html" title="普通会员与VIP会员特权对比(VIP会员好处)" target="_blank">普通会员与VIP会员特权对比(VIP会员好处)</a></li>
+ 
+<li><a href="/html/help/FAQ/3852.html" title="什么是安全密码？" target="_blank">什么是安全密码？</a></li>
+ 
+<li><a href="/html/help/FAQ/3846.html" title="用支付宝怎样转账给平台账号充值？" target="_blank">用支付宝怎样转账给平台账号充值？</a></li>
+ 
+<li><a href="/html/help/FAQ/3844.html" title="提升实物好还是虚拟好？" target="_blank">提升实物好还是虚拟好？</a></li>
+
+<!-- 为了减轻查询负荷暂时不显示   <li>淘宝区任务总条数：<span class="orange">{--@--search.TotalTaskNum}</span> 条，未完成任务数：<span class="orange">{--@--search.TotalTaskNo} </span>条，已成功打造<span class="orange"> {--@--search.TotalZuan} </span>颗信誉钻石</li> -->
+</ul>
+</span>
+<span id="dianji" class="dianji"><a href="javascript:void(0);"><img src="/style/images/manber_bg7.gif" /><img src="/style/images/manber_bg8.gif" class="showpic" /></a></span>
+</div>
+<script type="text/javascript">
+if (document.getElementById('notice')) {
+	/* noticeMSG */
+	var sl_ii = $("#notice ul li").length;
+	var sl_i = sl_ii + 1;
+	$("#notice ul li").hide();
+	$("#notice ul li").eq(0).show();
+	var sI = setInterval("sl()", 5000);
+	function sl(sl_q) {
+		if (sI) { clearInterval(sI); }
+		sI = setInterval("sl()", 5000);
+		if (sl_q == null) { 
+			sl_j = sl_i % sl_ii; 
+		} else { 
+			sl_i = sl_q + sl_ii + 1;
+			sl_j = sl_i % sl_ii; 
+		}
+		$("#notice ul li").hide();
+		$("#notice ul li").eq(sl_j).show("slow");
+		sl_i++;
+	}
+}
+</script>
+ 
+<div class="clear"></div>
+<div class="options">
+<script language="javascript">
+if(getCookie_current('div_options')!="block"){
+	document.getElementById("dianji").className="dianji collapsed_yes";
+	$("div.options").hide();
+	$("#notice").show();
+}
+</script>
+<div class="left">
+<div class="d2h">尊敬的<span class="orange">oky120002</span>，欢迎您回来！</div>
+<div class="nr">
+  <p>账户余额：<span class="orange">838.49</span> 元 &nbsp; 发布点：<span class="orange">148.72</span> 点</p>
+  <p>可用积分：<span class="orange">550</span> <img src='/style/images/score_1.gif' align='absmiddle' alt='经验积分：50' />&nbsp; <img src='/style/images/mobile_1.gif' alt="已通过手机验证" /> &nbsp;<img src="/style/images/ShangBao.gif" title="已加入商保服务" align="absmiddle">&nbsp; <img src='/style/images/vip.gif' alt='尊贵VIP会员' /></p>
+<p class="one">接手方：待支付任务 <a href="TaskJieShou.asp?Tid=0&Status=3" class="orange">0 </a> 条 待收货好评任务 <a href="TaskJieShou.asp?Tid=0&Status=5" class="orange">14 </a> 条</p>
+<p class="one">发布方：待发货任务 <a href="TaskFaBu.asp?Tid=0&Status=5" class="orange">0 </a> 条 待确认审核任务 <a href="TaskFaBu.asp?Tid=0&Status=7" class="orange">0</a> 条</p>
+<p class="one">注意项：待处理申诉 <a href="/user/user_feedback.asp?status=2" target="_blank" class="orange">0</a> 条 我被拉入黑名单 <span class="orange">0</span> 人</p>
+</div>
+</div>
+
+<div class="right">
+<div class="we"><span id="bbs_m1" class="title1">平台公告</span><span id="bbs_m2" class="title2">买家教程</span><span id="bbs_m3" class="title2">卖家教程</span></div>
+
+<div class="clear"></div>
+<div id="bbs_d1" class="bbsbox">
+  <ul>
+    
+<li><a href="/html/ptgg/4242.html" target="_blank" title="蓝天店主网怎么样？可靠吗？安全吗？"><strong><span style="color:#FF0000">蓝天店主网怎么样？可靠吗？安全吗？</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4200.html" target="_blank" title="公司做活动，买发布点送发布点和快递单"><strong><span style="color:#0000FF">公司做活动，买发布点送发布点和快递单</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4190.html" target="_blank" title="拥有1钻月入万，继续奔皇冠！"><strong><span style="color:#990000">[推荐]</span><span style="color:#FF0033">拥有1钻月入万，继续奔皇冠！</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4183.html" target="_blank" title="接任务狂赚，月入6000到一万！"><strong><span style="color:#990000">[推荐]</span><span style="color:#0033FF">接任务狂赚，月入6000到一万！</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4178.html" target="_blank" title="长期免费赠送当天快递单"><strong><span style="color:#990000">[推荐]</span><span style="color:#FF0000">长期免费赠送当天快递单</span></strong></a></li>
+ 
+<li><a href="/html/ptgg/4123.html" target="_blank" title="遇到骗子维权怎么办，教你办法"><strong><span style="color:blue">[公告]</span><span style="color:#0000FF">遇到骗子维权怎么办，教你办法</span></strong></a></li>
+
+  </ul>
+</div>
+            
+<div id="bbs_d2" class="bbsbox" style="display:none;">
+  <ul>
+    
+<li><a href="/html/help/wsmj/4189.html" target="_blank" title="接任务狂赚，月入6000不是梦">接任务狂赚，月入6000不是梦</a></li>
+ 
+<li><a href="/html/help/wsmj/4179.html" target="_blank" title="什么是红包支付">什么是红包支付</a></li>
+ 
+<li><a href="/html/help/wsmj/4079.html" target="_blank" title="最新注册淘宝小号不用新手机的方法：">最新注册淘宝小号不用新手机的方法：</a></li>
+ 
+<li><a href="/html/help/wsmj/4050.html" target="_blank" title="蓝天店长平台接手会员如何赚取佣金？">蓝天店长平台接手会员如何赚取佣金？</a></li>
+ 
+<li><a href="/html/help/wsmj/3943.html" target="_blank" title="接任务适当要清除IE缓存和Cookie">接任务适当要清除IE缓存和Cookie</a></li>
+ 
+<li><a href="/html/help/wsmj/3937.html" target="_blank" title="接手任务之前需要准备什么">接手任务之前需要准备什么</a></li>
+
+  </ul>
+</div>
+
+<div id="bbs_d3" class="bbsbox" style="display:none;">
+  <ul>
+    
+<li><a href="/html/help/wsmj2/4191.html" target="_blank" title="拥有1钻月入万，继续奔皇冠！">拥有1钻月入万，继续奔皇冠！</a></li>
+ 
+<li><a href="/html/help/wsmj2/4119.html" target="_blank" title="提升店铺信誉解密诀窍">提升店铺信誉解密诀窍</a></li>
+ 
+<li><a href="/html/help/wsmj2/3952.html" target="_blank" title="新手入门常见问题！如何改价,如何发货,如何好评！">新手入门常见问题！如何改价,如何发货,如何</a></li>
+ 
+<li><a href="/html/help/wsmj2/3944.html" target="_blank" title="教你保证店铺安全怎么提升">教你保证店铺安全怎么提升</a></li>
+ 
+<li><a href="/html/help/wsmj2/3942.html" target="_blank" title="新手提升实物商品注意了">新手提升实物商品注意了</a></li>
+ 
+<li><a href="/html/help/wsmj2/3935.html" target="_blank" title="想绕开稽查，真正安全上冠!">想绕开稽查，真正安全上冠!</a></li>
+
+  </ul>
+</div>  
+
+</div>
+
+<div class="right2">
+    <div class="gg_box_2">
+            <div class="menu">		
+                <ul>				
+                    <li id="gg_m1" class="currently"><span>新手帮助</span></li>
+                    <li id="gg_m2"><span>常见问题</span></li>					
+                </ul>	
+            </div>
+            <div class="tabcon1">
+            <ul id="gg_d1" style="padding:6px 0px 5px 10px;">
+                 
+<li><a href="/html/help/xszn/4077.html" target="_blank" title="提升店铺信誉怎么操作，新手第一步"><strong><span style="color:#0033FF">提升店铺信誉怎么操作，新手第一步</span></strong></a></li>
+ 
+<li><a href="/html/help/xszn/4004.html" target="_blank" title="蓝天店主平台发布任务和接任务教程">蓝天店主平台发布任务和接任务教程</a></li>
+ 
+<li><a href="/html/help/xszn/3974.html" target="_blank" title="蓝天店主平台常见的几个名词解释">蓝天店主平台常见的几个名词解释</a></li>
+ 
+<li><a href="/html/help/xszn/3955.html" target="_blank" title="什么是蓝天店主平台担保金？">什么是蓝天店主平台担保金？</a></li>
+ 
+<li><a href="/html/help/xszn/3951.html" target="_blank" title="什么是存款？什么是发布点？如何获得?">什么是存款？什么是发布点？如何获得?</a></li>
+ 
+<li><a href="/html/help/xszn/3859.html" target="_blank" title="淘宝封店规则">淘宝封店规则</a></li>
+
+            </ul>
+            <ul id="gg_d2" style="display:none;padding:7px 0 7px 10px;">
+                 
+<li><a href="/html/help/FAQ/3984.html" title="蓝天店主平台常见问题与解答" target="_blank">蓝天店主平台常见问题与解答</a></li>
+ 
+<li><a href="/html/help/FAQ/3966.html" title="积分说明和如何获得积分" target="_blank">积分说明和如何获得积分</a></li>
+ 
+<li><a href="/html/help/FAQ/3965.html" title="普通会员与VIP会员特权对比(VIP会员好处)" target="_blank">普通会员与VIP会员特权对比(VIP会员好处)</a></li>
+ 
+<li><a href="/html/help/FAQ/3852.html" title="什么是安全密码？" target="_blank">什么是安全密码？</a></li>
+ 
+<li><a href="/html/help/FAQ/3846.html" title="用支付宝怎样转账给平台账号充值？" target="_blank">用支付宝怎样转账给平台账号充值？</a></li>
+ 
+<li><a href="/html/help/FAQ/3844.html" title="提升实物好还是虚拟好？" target="_blank">提升实物好还是虚拟好？</a></li>
+
+            </ul>
+            </div>
+    </div>
+</div>
+
+<!-- op end -->
+</div>
+        <div class="clear"></div>
+        <div class="tl_b"></div><div class="tr_b"></div><div class="bl_b"></div><div class="br_b"></div>
+</div>
+
+<!-- 任务列表 start -->
+<div class="clear"></div>
+  <div class="task_content"> 
+	<!-- 任务列表 -->
+	<div class="taskHall">
+	  <ul class="task_tab">
+        <li id="tab_m1" class="current"><a href="javascript:void(0);"><span>淘宝任务区</span></a></li>
+        <li><a href="AddTask.asp"><span>发布任务</span></a></li>
+        <li><a href="TaskFaBu.asp"><span>已发布任务</span></a></li>
+        <li><a href="TaskJieShou.asp"><span>已接手任务</span></a></li>
+        <li id="tab_m1"><a href="BinDing.asp"><span>绑定买卖号</span></a></li>
+        <li><a href="TaskTemplate.asp"><span>任务模板</span></a></li>
+        <li><a href="/html/ptgg/4178.html" target="_blank""><span>赠送快递单</span></a></li>
+        <li class="empty"></li>
+        <p class="task_refresh_button"><span>
+        <label title="勾上每隔10秒自动刷新"><input id="AutoRefresh" type="checkbox" name="AutoRefresh">自动刷新页面</label>&nbsp; 
+        <img src="/style/images/task_reflesh.gif" align="absmiddle" style="cursor:pointer;" onclick="GetPage();">
+        </span></p>
+      </ul>
+        <div class="clear"></div>
+        <ul class="screening">
+        <li>筛选方式：
+		<select name="orderby" style="MARGIN-Right: 10px; VERTICAL-ALIGN: middle;" onchange="javascript:if(this.value)window.location.href=this.value"> 
+		<option selected value='?0-0-0-0-1'>默认排序</option>
+<option value='?0-1-0-0-1'>担保金额从高到低</option>
+<option value='?0-2-0-0-1'>担保金额从低到高</option>
+<option value='?0-3-0-0-1'>任务发布点从高到低</option>
+<option value='?0-4-0-0-1'>任务发布点从低到高</option>
+
+		</select>
+        <span class="orderSub">
+        <a class="active" href="?1-0-0-0-1">所有任务</a><a href="?2-0-0-0-1">等待接手</a><a href="?3-0-0-0-1">【虚拟】</a><a href="?4-0-0-0-1">【实物】</a><a href="?5-0-0-0-1">【套餐】</a><a href="?6-0-0-0-1">立即</a><a href="?7-0-0-0-1">30分</a><a href="?8-0-0-0-1">1天</a><a href="?9-0-0-0-1">2天</a><a href="?10-0-0-0-1">3天</a><a href="?11-0-0-0-1">4天</a><a href="?12-0-0-0-1">5天</a><a href="?13-0-0-0-1">6天</a><a href="?14-0-0-0-1">7天</a>
+        </span>
+        </li>
+        </ul>
+
+		<div class="clear"></div>
+		<!-- 列表内容 -->
+		<div class="t_list">
+		<table style="border-bottom:1px solid #ACDAFF; margin-bottom:6px;" border="0" cellSpacing="0" cellPadding="4" height="30" width="100%">
+        <tr>
+        <th width="163">任务编号</th>
+        <th width="145">发布人</th>
+        <th width="104" align="left">任务价格</th>
+        <th width="70" align="left">&nbsp; 发布点</th>
+        <th width="140">发布时间</th>
+        <th width="80">好评时限</th>
+        <th width="164">任务备注</th>
+        <th width="72">操作</th>
+        </tr>
+        </table>
+        <div  id="list_tbl">
+		<table class="list_tbl" border="0" cellSpacing="0" cellPadding="4" width="100%">
+        	
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143449233</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:34:49</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643893">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143409521</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:34:09</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643892">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143304868</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:33:04</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643888">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143240113</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:32:40</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643887">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143221564</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:32:21</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643885">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143104680</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:31:04</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643880">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143033501</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:30:33</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643878">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616142637552</td>
+			  <td width="145" align="center"><span class="red">rongda_888</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：15342' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">279</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;19 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:26:37</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643867">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154200165</td>
+			  <td width="145" align="center"><span class="red">王平</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：11415' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">498</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;26.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:42:00</td>
+              <td width="80" align="center"><span title="5天后确认收货带字好评和店评5分">5天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644027">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616152243069</td>
+			  <td width="145" align="center"><span class="red">btzjb158</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4970' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">100</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;13.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:22:43</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="Q说你接任务，不然会当真实交易，收货时必须wangwang上面说“已经收到货”，不然不审核">Q说你接任务，不然会当真</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643986">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143806869</td>
+			  <td width="145" align="center"><span class="red">13807838807</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_3.gif' align='absmiddle' alt='经验积分：115' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">138</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;15.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:38:06</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">加Q联系,我保证加Q后没有</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643898">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616115328442</td>
+			  <td width="145" align="center"><span class="red">shuashua008</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1496' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">1080</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;15.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 11:53:28</td>
+              <td width="80" align="center"><span title="立即确认收货带字好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="Q说你接任务，不然会当真实交易">Q说你接任务，不然会当真</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643390">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014615152727516</td>
+			  <td width="145" align="center"><span class="red">taobaozhuanmai</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4865' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">380</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;18.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 15:27:27</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来，真实发货（空包），填写真实地址，需要签收,否则不放款">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642206">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154748003</td>
+			  <td width="145" align="center"><span class="red">小小姑娘大大店铺</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4925' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">169</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;20 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:47:48</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644055">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154518168</td>
+			  <td width="145" align="center"><span class="red">小小姑娘大大店铺</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4925' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">169</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;20 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:45:18</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="Q说你接任务，不然会当真实交易">Q说你接任务，不然会当真</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644039">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616150723511</td>
+			  <td width="145" align="center"><span class="red">taobaozhuanmai</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4865' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">280</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;17.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:07:23</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643969">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616150650148</td>
+			  <td width="145" align="center"><span class="red">taobaozhuanmai</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4865' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">280</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;17.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:06:50</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643964">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616150613796</td>
+			  <td width="145" align="center"><span class="red">taobaozhuanmai</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4865' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">280</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;17.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:06:13</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643961">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616141946029</td>
+			  <td width="145" align="center"><span class="red">xcz123</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：10079' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">90</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:19:46</td>
+              <td width="80" align="center"><span title="1天后确认收货带字好评和店评5分">1天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643844">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616122911456</td>
+			  <td width="145" align="center"><span class="red">18635019099</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：9393' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">80</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;16.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:29:11</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643463">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616122603809</td>
+			  <td width="145" align="center"><span class="red">18635019099</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：9393' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">88</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;17.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:26:03</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643458">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616122256992</td>
+			  <td width="145" align="center"><span class="red">18635019099</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：9393' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">88</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;18.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:22:56</td>
+              <td width="80" align="center"><span title="4天后确认收货好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643454">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616122148254</td>
+			  <td width="145" align="center"><span class="red">18635019099</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_10.gif' align='absmiddle' alt='经验积分：9393' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">80</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;15.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:21:48</td>
+              <td width="80" align="center"><span title="2天后确认收货好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643452">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 201461694236659</td>
+			  <td width="145" align="center"><span class="red">嘿嘿yu</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4711' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">368</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;15.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 9:42:36</td>
+              <td width="80" align="center"><span title="2天后确认收货带字好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">加Q联系,我保证加Q后没有</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643115">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014615160228497</td>
+			  <td width="145" align="center"><span class="red">嘿嘿yu</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4711' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">300</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;15.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 16:02:28</td>
+              <td width="80" align="center"><span title="2天后确认收货带字好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="加Q联系,我保证加Q后没有违规要求.如果我无理要求,你投诉我后，我将被禁止发布任务.">加Q联系,我保证加Q后没有</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642284">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616152331039</td>
+			  <td width="145" align="center"><span class="red">suhuabin</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1544' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">300</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;14.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:43:31</td>
+              <td width="80" align="center"><span title="4天后确认收货好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，收货时必须wangwang上面说“已经收到货”，不然不审核">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643996">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616152308331</td>
+			  <td width="145" align="center"><span class="red">suhuabin</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1544' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">300</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;14.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:43:08</td>
+              <td width="80" align="center"><span title="4天后确认收货好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，收货时必须wangwang上面说“已经收到货”，不然不审核">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643991">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616152331514</td>
+			  <td width="145" align="center"><span class="red">suhuabin</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1544' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">300</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;14.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:33:31</td>
+              <td width="80" align="center"><span title="4天后确认收货好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，收货时必须wangwang上面说“已经收到货”，不然不审核">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643995">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616152308768</td>
+			  <td width="145" align="center"><span class="red">suhuabin</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1544' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">300</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;14.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:33:08</td>
+              <td width="80" align="center"><span title="4天后确认收货好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，收货时必须wangwang上面说“已经收到货”，不然不审核">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643990">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 201461625938203</td>
+			  <td width="145" align="center"><span class="red">412389112</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2419' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">10</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 3:19:38</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642892">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 201461625938156</td>
+			  <td width="145" align="center"><span class="red">412389112</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2419' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">10</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 3:09:38</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642891">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 201461625938297</td>
+			  <td width="145" align="center"><span class="red">412389112</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2419' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">10</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 2:59:38</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642890">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014613132825120</td>
+			  <td width="145" align="center"><span class="red">caiha</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：4386' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">245.1</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;15 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-13 13:28:25</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=637819">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154725761</td>
+			  <td width="145" align="center"><span class="red">kubywen</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2192' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">39.9</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;6 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:47:25</td>
+              <td width="80" align="center"><span title="2天后确认收货好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /><br><span class="blue" title="拍下后请按我指定的收货地址修改，请根据商品酌情带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核">拍下后请按我指定的收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644047">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154434998</td>
+			  <td width="145" align="center"><span class="red">kubywen</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2192' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">63.2</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;6 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:44:34</td>
+              <td width="80" align="center"><span title="1天后确认收货带字好评和店评5分">1天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /><br><span class="blue" title="拍下后请按我指定的收货地址修改，接过任务的不要再来接谢谢，收货后请wangwang通知已经到货。">拍下后请按我指定的收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644036">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853546</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:18:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643630">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853528</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:08:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643629">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853898</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:58:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643628">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853510</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:48:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643627">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853033</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:38:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643626">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131853308</td>
+			  <td width="145" align="center"><span class="red">gaowei3075776</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_6.gif' align='absmiddle' alt='经验积分：863' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">59.9</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;9.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:18:53</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643624">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 201461694920640</td>
+			  <td width="145" align="center"><span class="red">yongwen121</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3862' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">61.6</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 9:49:20</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643135">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014615221701834</td>
+			  <td width="145" align="center"><span class="red">mancinism_12</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5291' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">977</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;24 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 22:17:01</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642764">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014615143609440</td>
+			  <td width="145" align="center"><span class="red">yongwen121</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3862' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">61.6</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 14:36:09</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="接手方淘宝收货好评后，必须要求买家wangwang说“货已经收到，款已经支付给你了，不错，下次会再来">接手方淘宝收货好评后，必</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642094">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616153533218</td>
+			  <td width="145" align="center"><span class="red">wjwmtf</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2804' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">35</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:35:33</td>
+              <td width="80" align="center"><span title="1天后确认收货好评和店评5分">1天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644019">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120947845</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:47</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639599">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120939777</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:39</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639598">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120930518</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:30</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639597">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120921775</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:21</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639596">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120913371</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:13</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639595">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120904079</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:09:05</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639594">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120856121</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:08:56</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639593">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120835596</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:08:35</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639591">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120826837</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:08:26</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639589">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014614120815847</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-14 12:08:15</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=639587">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014611123043893</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-11 12:30:43</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=633325">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014611122947637</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-11 12:29:47</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=633319">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014611122858833</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-11 12:28:58</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=633308">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014611122759018</td>
+			  <td width="145" align="center"><span class="red">38723296</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5321' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">20</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-11 12:27:59</td>
+              <td width="80" align="center"><span title="立即确认收货好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！ 如果我无理要求,你投诉我后，我将被禁止发布任务.">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=633302">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154831805</td>
+			  <td width="145" align="center"><span class="red">pan_6352</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3819' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">89.6</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:48:31</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须全五分带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核，Q说你接任务，不然会当真实交易">必须全五分带字好评，收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644064">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154410470</td>
+			  <td width="145" align="center"><span class="red">pan_6352</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3819' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">92.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:44:10</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须全五分带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核，Q说你接任务，不然会当真实交易">必须全五分带字好评，收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644035">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154352422</td>
+			  <td width="145" align="center"><span class="red">sara2258</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1187' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">79</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 15:43:52</td>
+              <td width="80" align="center"><span title="1天后确认收货带字好评和店评5分">1天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /><br><span class="blue" title="收货时必须wangwang上面说“已经收到货”，不然不审核">收货时必须wangwang上面</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644034">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143232619</td>
+			  <td width="145" align="center"><span class="red">方晨曦520</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5991' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">69</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;7.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:32:32</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评，Q说你接任务，不然会当真实交易">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643886">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616143151250</td>
+			  <td width="145" align="center"><span class="red">方晨曦520</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5991' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">69</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;7.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:31:51</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评，Q说你接任务，不然会当真实交易">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643882">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616142826853</td>
+			  <td width="145" align="center"><span class="red">方晨曦520</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5991' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">69</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;7.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:28:26</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评，Q说你接任务，不然会当真实交易">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643872">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616142727704</td>
+			  <td width="145" align="center"><span class="red">方晨曦520</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：5991' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">69</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;7.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:27:27</td>
+              <td width="80" align="center"><span title="4天后确认收货带字好评和店评5分">4天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款，必须全五分带字好评，Q说你接任务，不然会当真实交易">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643869">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616141340568</td>
+			  <td width="145" align="center"><span class="red">zsknx520_</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2217' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:13:40</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643836">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616141252210</td>
+			  <td width="145" align="center"><span class="red">liguang86</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1674' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">39.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;8.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:12:52</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="Q说你接任务，不然会当真实交易，真实发货（空包），填写真实地址，需要签收,否则不放款">Q说你接任务，不然会当真</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643832">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616141219602</td>
+			  <td width="145" align="center"><span class="red">zsknx520_</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2217' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">32</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:12:19</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643826">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616140940418</td>
+			  <td width="145" align="center"><span class="red">zsknx520_</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2217' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">32</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:09:40</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643823">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616140900903</td>
+			  <td width="145" align="center"><span class="red">zsknx520_</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2217' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">32</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:09:00</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643821">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616140724657</td>
+			  <td width="145" align="center"><span class="red">zsknx520_</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2217' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">32</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.7 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 14:07:24</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="必须先加我QQ,严格按照我的要求去操作！">必须先加我QQ,严格按照我</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643817">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856485</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:48:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643447">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856832</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:38:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643446">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616132934885</td>
+			  <td width="145" align="center"><span class="red">shuashua008</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1496' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">360</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;8 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:29:34</td>
+              <td width="80" align="center"><span title="立即确认收货带字好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="Q说你接任务，不然会当真实交易">Q说你接任务，不然会当真</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643655">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856920</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:28:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643445">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130042</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:20:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643583">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131417389</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;11.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:20:17</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643602">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130625</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:19:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643582">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856822</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:18:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643444">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130087</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:18:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643581">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131417118</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;11.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:17:17</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643599">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131417775</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;11.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:16:17</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643598">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130364</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:15:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643578">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131417718</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;11.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:15:17</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643597">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130759</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:14:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643577">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131417157</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">28.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;11.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:14:17</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643596">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616131130990</td>
+			  <td width="145" align="center"><span class="red">1662518888</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3936' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">48.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;12.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:12:30</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/ShiMing.gif" height="18" align="absmiddle" title="买号通过支付宝实名认证才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="自由填写好评内容，必须全五分带字好评">自由填写好评内容，必须全</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643575">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856223</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 13:08:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643443">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616124025968</td>
+			  <td width="145" align="center"><span class="red">帅帅112100</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1242' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">29</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:40:25</td>
+              <td width="80" align="center"><span title="2天后确认收货带字好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643493">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual.gif" align="absmiddle" title="该任务为虚拟商品" /> 2014616121856282</td>
+			  <td width="145" align="center"><span class="red">soulcupid1</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_4.gif' align='absmiddle' alt='经验积分：216' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">4</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;2.4 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:38:56</td>
+              <td width="80" align="center"><span title="30分钟后确认收货好评和店评5分">30分钟好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="拍下的时候,必须在买家留言的地方留下一个邮箱,淘宝上坚决不许提">拍下的时候,必须在买家留</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643440">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616123352491</td>
+			  <td width="145" align="center"><span class="red">帅帅112100</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1242' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">49</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:33:52</td>
+              <td width="80" align="center"><span title="2天后确认收货带字好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643479">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616123222609</td>
+			  <td width="145" align="center"><span class="red">帅帅112100</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1242' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">49</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:32:23</td>
+              <td width="80" align="center"><span title="2天后确认收货好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643475">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616123103137</td>
+			  <td width="145" align="center"><span class="red">pan_6352</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3819' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">108.8</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:31:03</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须全五分带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核，Q说你接任务，不然会当真实交易">必须全五分带字好评，收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643466">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616123051024</td>
+			  <td width="145" align="center"><span class="red">帅帅112100</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_7.gif' align='absmiddle' alt='经验积分：1242' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">49</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 12:30:51</td>
+              <td width="80" align="center"><span title="2天后确认收货带字好评和店评5分">2天好评</span></td>
+			  <td width="164" align="center"><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643465">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616100256795</td>
+			  <td width="145" align="center"><span class="red">qw008</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_9.gif' align='absmiddle' alt='经验积分：7280' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">88</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;8 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 10:02:56</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /><br><span class="blue" title="真实发货（空包），填写真实地址，需要签收,否则不放款">真实发货（空包），填写真实</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643147">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 201461694030516</td>
+			  <td width="145" align="center"><span class="red">pan_6352</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3819' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">100</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;10.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 9:40:31</td>
+              <td width="80" align="center"><span title="3天后确认收货带字好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/ShenHe.gif" height="18" align="absmiddle" title="接手任务后，发布方需审核接手人" /><br><span class="blue" title="必须全五分带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核，Q说你接任务，不然会当真实交易">必须全五分带字好评，收货</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=643111">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 201461600059754</td>
+			  <td width="145" align="center"><span class="red">小兵张嘎</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：3014' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">36</span> 元 <br><span class="orange" style="padding-left:10px">需改价</span></td>
+              <td width="70">&nbsp; &nbsp;5.2 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-16 0:00:59</td>
+              <td width="80" align="center"><span title="3天后确认收货好评和店评5分">3天好评</span></td>
+			  <td width="164" align="center"><img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"><br><span class="blue" title="不允许用淘宝客或者返利网接任务，否则不审核放款，不准用信用卡支付，不然不发货，不审核，接过的请不要再接">不允许用淘宝客或者返利</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642842">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual_shop.gif" align="absmiddle" title="该任务为虚拟商品,购物车任务" /> 2014615183524796</td>
+			  <td width="145" align="center"><span class="red">heeroxxoabc</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_5.gif' align='absmiddle' alt='经验积分：415' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">12</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 18:35:24</td>
+              <td width="80" align="center"><span title="立即确认收货带字好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="自由填写好评内容">自由填写好评内容</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642456">接手任务</a></td>
+			</tr>
+            
+			<tr>
+			  <td width="163">&nbsp;<img src="/style/images/virtual_shop.gif" align="absmiddle" title="该任务为虚拟商品,购物车任务" /> 2014615183505744</td>
+			  <td width="145" align="center"><span class="red">heeroxxoabc</span> <img src="/user/images/notonline.gif" align="absmiddle" title="该用户不在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_5.gif' align='absmiddle' alt='经验积分：415' /></td>
+			  <td width="104">&nbsp; <span class="dm_gold">12</span> 元 </td>
+              <td width="70">&nbsp; &nbsp;3.5 点</td>
+              <td width="140" align="center"><img src="/style/images/time.gif" align="absmiddle" /> 2014-6-15 18:35:06</td>
+              <td width="80" align="center"><span title="立即确认收货带字好评和店评5分">立即确认</span></td>
+			  <td width="164" align="center"><img src="/style/images/ShouCang.gif" height="18" align="absmiddle" title="要求收藏该店铺和宝贝" /><br><span class="blue" title="自由填写好评内容">自由填写好评内容</span><br><span id="isFilter"></span></td>
+			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=642454">接手任务</a></td>
+			</tr>
+            
+		</table><div class="multipage"><div id='fenye' class='fenye'><table border="0" align="right"><tr><td valign="bottom">为了提升性能,只显示前10页</td><td>
+<a href="?0-0-0-0-2" class="next">下一页</a><a href="?0-0-0-0-1" class="prev">首 页</a> <a href="#" class="curr"><font color=red>1</font></a> <a class="num" href="?0-0-0-0-2">2</a> <a class="num" href="?0-0-0-0-3">3</a> <a class="num" href="?0-0-0-0-4">4</a> <a class="num" href="?0-0-0-0-5">5</a> <a class="num" href="?0-0-0-0-6">6</a> <a class="num" href="?0-0-0-0-7">7</a> <a class="num" href="?0-0-0-0-8">8</a> <a class="num" href="?0-0-0-0-9">9</a> <a class="num" href="?0-0-0-0-10">10</a><a href="?0-0-0-0-10" class="prev">末页</a></td></tr></table></div></div>
+        </div>
+       </div>
+    </div>
+
+<!-- 任务列表结束,ad开始 -->
+
+<div align="center" style="clear:both;margin-top:10px; border:1px solid #ACDAFF;">
+	<img src="/style/images/liuchengtu.gif" width="958" height="100" />
+</div>
+
+</div>
+
+<!-- foot start -->
+<div id="foot">
+<!-- copyright start -->
+<div class="footer_copyright">
+<hr width="850" style="height:1px; color:#EEE; margin:0 auto;" />
+<p>
+<a href="/html/help/about.html">关于我们</a> | 
+<a href="http://kefu.kuaishang.cn/bs/im.htm?cas=3451___18696&fi=3952">联系方式</a> | 
+<a href="/html/help/payment.html">支付方式</a> | 
+<a href="/html/Service.html">合作专区</a> | 
+<a href="/html/SelfService.html">自助服务</a> | 
+<a href="/html/help/help.html">帮助中心</a> | 
+<a href="http://kefu.kuaishang.cn/bs/im.htm?cas=3451___18696&fi=3952">客服中心</a> <br />
+Copyright Reserved 2010-2019&copy; <a href="/" class="link">蓝天店主网</a><br />
+搜索本站关键字：<a href="/" class="link">蓝天店主平台</a>|<a href="/" class="link">蓝天店主网</a>|<a href="/" class="link">蓝天店长平台</a>|<a href="/" class="link">蓝天平台</a>|<a href="/" class="link">店长平台</a>|<a href="/" class="link">蓝天店长网</a><br />
+<a href="http://webscan.360.cn/index/checkwebsite/url/" name="83395396adc75ac0031c6682373c2ccc" >360网站安全检测平台</a>
+</p>
+</div>
+<!-- copyright end -->
+<script type="text/javascript" src="http://kefu.kuaishang.cn/bs/ks.j?cI=18696&fI=3952" charset="utf-8"></script>
+<!-- foot end -->
+</div>
+<script type="text/javascript" src="/style/js/ServiceQQ.js"></script>
+</body>
+</html>
+<script src="/ks_inc/ajax.js" type="text/javascript"></script>

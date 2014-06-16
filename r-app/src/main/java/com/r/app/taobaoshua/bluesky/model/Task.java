@@ -30,11 +30,13 @@ public class Task {
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid")
 	private String id;
 	@Column
-	private String account; // 蓝天账号
+	private String account; // 发布任务者账号
 	@Column
-	private Boolean isVip = Boolean.FALSE; // 蓝天账号是否VIP
+	private Boolean isAccountVip = Boolean.FALSE; // 发布任务者是否VIP
 	@Column
-	private Integer accountLevel = 0; // 蓝天账号等级
+	private Integer accountExe = 0; // 发布任务者账号经验值
+	@Column
+	private Boolean isAccountOnLine = Boolean.FALSE; // 发布任务者是否在线
 	@Column
 	private String shopkeeper; // 店掌柜
 	@Column
@@ -153,33 +155,48 @@ public class Task {
 	}
 
 	/**
-	 * @return the isVip
+	 * @return the isAccountVip
 	 */
-	public Boolean getIsVip() {
-		return isVip;
+	public Boolean getIsAccountVip() {
+		return isAccountVip;
 	}
 
 	/**
-	 * @param isVip
-	 *            the isVip to set
+	 * @param isAccountVip
+	 *            the isAccountVip to set
 	 */
-	public void setIsVip(Boolean isVip) {
-		this.isVip = isVip;
+	public void setIsAccountVip(Boolean isAccountVip) {
+		this.isAccountVip = isAccountVip;
 	}
 
 	/**
-	 * @return the accountLevel
+	 * @return the accountExe
 	 */
-	public Integer getAccountLevel() {
-		return accountLevel;
+	public Integer getAccountExe() {
+		return accountExe;
 	}
 
 	/**
-	 * @param accountLevel
-	 *            the accountLevel to set
+	 * @param accountExe
+	 *            the accountExe to set
 	 */
-	public void setAccountLevel(Integer accountLevel) {
-		this.accountLevel = accountLevel;
+	public void setAccountExe(Integer accountExe) {
+		this.accountExe = accountExe;
+	}
+
+	/**
+	 * @return the isAccountOnLine
+	 */
+	public Boolean getIsAccountOnLine() {
+		return isAccountOnLine;
+	}
+
+	/**
+	 * @param isAccountOnLine
+	 *            the isAccountOnLine to set
+	 */
+	public void setIsAccountOnLine(Boolean isAccountOnLine) {
+		this.isAccountOnLine = isAccountOnLine;
 	}
 
 	/**
@@ -707,4 +724,28 @@ public class Task {
 		this.status = status;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

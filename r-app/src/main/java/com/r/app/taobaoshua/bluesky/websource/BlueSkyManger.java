@@ -41,6 +41,18 @@ public class BlueSkyManger {
 	}
 
 	public void login(String account, String accountPassword, String captcha, String question, String answer) {
-		
+
+	}
+
+	/** 获取任务列表html */
+	public String getTaskListHtml(int page) {
+		if(page > 9){
+			page = 10;
+		}
+		if(page < 1){
+			page = 1;
+		}
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/?0-0-0-0-" + page);
+		return responseHeader.bodyToString();
 	}
 }
