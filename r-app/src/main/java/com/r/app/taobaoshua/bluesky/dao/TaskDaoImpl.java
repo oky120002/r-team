@@ -77,14 +77,16 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 
 	/** 获取任务列表html */
 	@Override
-	public String getTaskListHtml(int page) {
-		if (page > 9) {
-			page = 10;
-		}
-		if (page < 1) {
-			page = 1;
-		}
-		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/?0-0-1-0-" + page);
+	public String getTaskListHtml(int page, int type, int order) {
+		page = 10 < page ? 10 : page;
+		page = page < 1 ? 1 : page;
+		type = 14 < type ? 2 : type;
+		type = type < 0 ? 2 : type;
+		order = 4 < order ? 3 : order;
+		order = order < 0 ? 3 : order;
+
+		// 第三个数字 1:淘宝任务,2:拍拍任务
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/?" + type + "-" + order + "-1-0-" + page);
 		return responseHeader.bodyToString("gb2312");
 	}
 

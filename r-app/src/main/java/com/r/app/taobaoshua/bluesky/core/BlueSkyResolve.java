@@ -109,18 +109,24 @@ public class BlueSkyResolve {
 		task.setAccount(auxiliaryCondition);
 
 		// 是否在线
-		if (0 < td.indexOf("online.gif")) {
+		if (0 < td.indexOf("/online.gif")) {
 			task.setIsAccountOnLine(Boolean.TRUE);
+		} else {
+			task.setIsAccountOnLine(Boolean.FALSE);
 		}
 
 		// 是否VIP
 		if (0 < td.indexOf("vip.gif")) {
 			task.setIsAccountVip(Boolean.TRUE);
+		} else {
+			task.setIsAccountVip(Boolean.FALSE);
 		}
 
 		// 是否新人
 		if (0 < td.indexOf("new.gif")) {
 			task.setIsNew(Boolean.TRUE);
+		} else {
+			task.setIsNew(Boolean.FALSE);
 		}
 
 		// 等级
@@ -140,6 +146,8 @@ public class BlueSkyResolve {
 		task.setSecurityPrice(Double.valueOf(StringUtils.substringBetween(td, "dm_gold\">", "</span>").trim()));
 		if (0 < td.indexOf("需改价")) { // 需改价
 			task.setIsUpdatePrice(Boolean.TRUE);
+		} else {
+			task.setIsUpdatePrice(Boolean.FALSE);
 		}
 	}
 
@@ -161,24 +169,38 @@ public class BlueSkyResolve {
 	private void resolveTaskRestrictiveCondition(Task task, String td) {
 		if (0 < td.indexOf("ShangBao.gif")) { // 商保任务
 			task.setIsSincerity(Boolean.TRUE);
+		} else {
+			task.setIsSincerity(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("ShiMing.gif")) { // 实名认证
 			task.setIsIDCard(Boolean.TRUE);
+		} else {
+			task.setIsIDCard(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("SouSuo.gif")) { // 宝贝需要搜索
 			task.setIsSearch(Boolean.TRUE);
+		} else {
+			task.setIsSearch(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("ShouCang.gif")) { // 双收藏
 			task.setIsCollect(Boolean.TRUE);
+		} else {
+			task.setIsCollect(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("WangLiao.gif")) { // 需要旺聊
 			task.setIsWangWang(Boolean.TRUE);
+		} else {
+			task.setIsWangWang(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("ShenHe.gif")) { // 需要审核
 			task.setIsReview(Boolean.TRUE);
+		} else {
+			task.setIsReview(Boolean.FALSE);
 		}
 		if (0 < td.indexOf("ShenHe.gif")) { // 需要审核
 			task.setIsReview(Boolean.TRUE);
+		} else {
+			task.setIsReview(Boolean.FALSE);
 		}
 
 		// 限制条件

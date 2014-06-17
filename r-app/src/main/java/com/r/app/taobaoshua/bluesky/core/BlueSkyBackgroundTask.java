@@ -39,7 +39,7 @@ public class BlueSkyBackgroundTask {
 				service.updateTaskList(tasks);
 			}
 
-		}, -1, 30, null, null);
+		}, -1, 60, null, null);
 	}
 
 	/**

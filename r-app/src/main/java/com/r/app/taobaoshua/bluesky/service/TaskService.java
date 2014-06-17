@@ -88,7 +88,7 @@ public class TaskService {
 		BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
 		List<Task> tasks = new ArrayList<Task>();
 		for (int page = startPage; page <= endPage; page++) {
-			String html = taskDao.getTaskListHtml(page);
+			String html = taskDao.getTaskListHtml(page, 2, 3);
 			tasks.addAll(resolve.resolveTaskListHtml(html));
 		}
 		return tasks;
