@@ -5,6 +5,8 @@ package com.r.app.taobaoshua.bluesky.desktop;
 
 import java.awt.Dimension;
 
+import com.r.app.taobaoshua.bluesky.BlueSky;
+import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -13,12 +15,12 @@ import com.r.core.log.LoggerFactory;
  * @author oky
  * 
  */
-public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListener{
+public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListener {
 	private static final long serialVersionUID = -2203297079049245614L;
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyDialog.class);
-	
-	private BlueSkyLoginPanle blueSkyPanel = null;
-	private BlueSkyMainPanel mainPanel = null;
+
+	private BlueSkyLoginPanle blueSkyPanel = new BlueSkyLoginPanle(this);
+	private BlueSkyMainPanel mainPanel = new BlueSkyMainPanel();
 
 	public BlueSkyDialog() {
 		super("蓝天数据平台分析系统...");
@@ -29,13 +31,16 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 	}
 
 	private void initStyle() {
-		setSize(new Dimension(600, 480));// 设置窗口大小
+		setSize(new Dimension(800, 480));// 设置窗口大小
 		setResizable(false);
 		setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
+		try {
+			setIconImage(CoreUtil.getDefaultIco());
+		} catch (Exception e) {
+		}
 	}
 
 	private void initComponents() {
-		blueSkyPanel = new BlueSkyLoginPanle(this);
 		setContentPane(blueSkyPanel);
 	}
 
@@ -45,10 +50,15 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 
 	@Override
 	public void loginFinsh() {
-		blueSkyPanel.setVisible(false);
-		
-		mainPanel = new BlueSkyMainPanel();
-		mainPanel.setVisible(true);
+		BlueSky.getInstance().setLogin(true);
 		setContentPane(mainPanel);
+		validate();
+	}
+
+	@Override
+	public void loginSkip() {
+		BlueSky.getInstance().setLogin(false);
+		setContentPane(mainPanel);
+		validate();
 	}
 }

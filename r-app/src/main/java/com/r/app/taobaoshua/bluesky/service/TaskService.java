@@ -6,20 +6,26 @@
  */
 package com.r.app.taobaoshua.bluesky.service;
 
+import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hibernate.criterion.Order;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.r.app.taobaoshua.bluesky.BlueSky;
+import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
 import com.r.app.taobaoshua.bluesky.dao.TaskDao;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
+import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -39,6 +45,55 @@ public class TaskService {
 	@Resource(name = "taskDao")
 	private TaskDao taskDao;
 
+	/** 设置当前链接的代理 */
+	public void setSocketProxy(HttpProxy proxy) {
+		taskDao.setSocketProxy(proxy);
+	}
+
+	/** 获取验证码 */
+	public Image getLoginBlueSkyCaptchaImage() {
+		return taskDao.getLoginCaptchaImage();
+	}
+
+	/**
+	 * 登陆
+	 * 
+	 * @param account
+	 *            账户
+	 * @param accountPassword
+	 *            账户密码
+	 * @param captcha
+	 *            验证码
+	 * @param question
+	 *            密保问题
+	 * @param answer
+	 *            密保答案
+	 */
+	public void login(String account, String accountPassword, String captcha, String question, String answer) {
+		taskDao.login(account, accountPassword, captcha, question, answer);
+	}
+
+	/** 获取任务列表的html代码,只能取[1,10] */
+	public Collection<Task> getTaskList(int startPage, int endPage) {
+		if (startPage > endPage) {
+			int temp = endPage;
+			endPage = startPage;
+			startPage = temp;
+		}
+		startPage = startPage < 1 ? 1 : startPage;
+		startPage = 10 < startPage ? 10 : startPage;
+		endPage = endPage < 1 ? 1 : endPage;
+		endPage = 10 < endPage ? 10 : endPage;
+
+		BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
+		List<Task> tasks = new ArrayList<Task>();
+		for (int page = startPage; page <= endPage; page++) {
+			String html = taskDao.getTaskListHtml(page);
+			tasks.addAll(resolve.resolveTaskListHtml(html));
+		}
+		return tasks;
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void addTasks(Task... tasks) {
 		taskDao.creates(tasks);
@@ -54,6 +109,33 @@ public class TaskService {
 		return taskDao.queryAll();
 	}
 
+	/**
+	 * 
+	 * @param status
+	 *            任务状态
+	 * @param order
+	 *            排序 1:发布点从高到低,其它:不排序
+	 * @param firstResult
+	 *            起始结果条数,-1则不设置起始条数
+	 * @param maxResults
+	 *            最大结果条数,-1则不设置最大条数
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public List<Task> query(TaskStatus status, int order, int firstResult, int maxResults) {
+		Task task = new Task();
+		if (status != null) {
+			task.setStatus(status);
+		}
+
+		Order[] orders = new Order[3];
+		if (order == 1) {
+			orders[0] = Order.desc("publishingPoint");
+		}
+
+		return taskDao.queryByExample(task, firstResult, maxResults, orders);
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void update(Task task) {
 		taskDao.update(task);
@@ -62,6 +144,24 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public int update(String hql) {
 		return taskDao.updateOrDeleteByHql(hql);
+	}
+
+	/**
+	 * 根据任务编号查询任务实体
+	 * 
+	 * @param number
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public Task queryByNumber(String number) {
+		Task task = new Task();
+		task.setNumber(number);
+		List<Task> tasks = taskDao.queryByExample(task);
+		if (CollectionUtils.isEmpty(tasks)) {
+			return null;
+		} else {
+			return tasks.get(0);
+		}
 	}
 
 	/**
@@ -79,7 +179,7 @@ public class TaskService {
 			// 循环最新的任务
 			// 判断此任务是否已经存在,存在则更改任务状态.不存在则插入数据库中
 			for (Task task : tasks) {
-				Task findTask = taskDao.find(task.getId());
+				Task findTask = queryByNumber(task.getNumber());
 				if (findTask == null) {
 					taskDao.create(task);
 				} else {
@@ -88,6 +188,11 @@ public class TaskService {
 				}
 			}
 		}
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public long queryAllSize() {
+		return taskDao.queryAllSize();
 	}
 
 }

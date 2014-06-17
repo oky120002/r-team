@@ -93,13 +93,13 @@ public class TaobaoShuaApp {
 		TaobaoShuaApp.app.core.init();
 		LoggerFactory.addLoggerListener(TaobaoShuaApp.app.core);
 		TaobaoShuaApp.app.core.startup();
-		
+
 		TaobaoShuaApp.app.taoBao.init();
 		TaobaoShuaApp.app.yuuBoo.init();
 		TaobaoShuaApp.app.blueSky.init();
 		TaobaoShuaApp.app.taoBao.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
 		TaobaoShuaApp.app.yuuBoo.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
-		TaobaoShuaApp.app.blueSky.getAction().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
+		TaobaoShuaApp.app.blueSky.getService().setSocketProxy(TaobaoShuaApp.app.getNextProxy());
 		TaobaoShuaApp.app.desktop = new TaobaoShuaDesktop("淘宝刷.....");
 		TaobaoShuaApp.app.desktop.setVisible(true);
 	}

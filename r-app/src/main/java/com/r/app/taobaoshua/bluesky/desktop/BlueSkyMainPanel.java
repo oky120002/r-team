@@ -4,18 +4,25 @@
 package com.r.app.taobaoshua.bluesky.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.desktop.tablemodel.TaskListTableModel;
+import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBasePanel;
-import com.r.core.desktop.ctrl.HBaseScrollPane;
 import com.r.core.desktop.support.ImageCellRenderer;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -57,7 +64,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	}
 
 	private void initStyle() {
-
+		setLayout(new BorderLayout());
 	}
 
 	private void initComponents() {
@@ -65,19 +72,17 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		HBaseBox centerBox = HBaseBox.createVerticalBaseBox();
 		taskListTableModel = new TaskListTableModel();
 		taskListTable = new JTable(taskListTableModel);
-		taskListTable.setDefaultRenderer(Object.class, new ImageCellRenderer());
+		taskListTable.setDefaultRenderer(Image.class, new ImageCellRenderer());
 		taskListTable.setFillsViewportHeight(true);
 		taskListTable.setDragEnabled(false);
 		taskListTable.doLayout();
-		centerBox.add(new HBaseScrollPane(taskListTable));
+		centerBox.add(new JScrollPane(taskListTable));
 		add(centerBox, BorderLayout.CENTER);
 
 		// 按钮区域
 		HBaseBox buttomBox = HBaseBox.createHorizontalBaseBox();
-		buttomBox.add(HBaseBox.createHorizontalGlue());
 		buttomBox.add(taskInfosButton);
 		add(buttomBox, BorderLayout.SOUTH);
-
 	}
 
 	private void initListeners() {
@@ -92,10 +97,31 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 			public void run() {
 				taskInfosButton.setEnabled(false);
 				taskInfosButton.setText("获取中...");
+				List<Task> tasks = blueSky.getService().query(TaskStatus.未接手, 1, 1, 50);
+				taskListTableModel.setTasks(tasks);
 				taskListTable.updateUI();
+				FitTableColumns(taskListTable);
 				taskInfosButton.setText("获取任务信息");
 				taskInfosButton.setEnabled(true);
 			}
 		});
+	}
+
+	public void FitTableColumns(JTable myTable) {
+		JTableHeader header = myTable.getTableHeader();
+		int rowCount = myTable.getRowCount();
+
+		Enumeration columns = myTable.getColumnModel().getColumns();
+		while (columns.hasMoreElements()) {
+			TableColumn column = (TableColumn) columns.nextElement();
+			int col = header.getColumnModel().getColumnIndex(column.getIdentifier());
+			int width = (int) myTable.getTableHeader().getDefaultRenderer().getTableCellRendererComponent(myTable, column.getIdentifier(), false, false, -1, col).getPreferredSize().getWidth();
+			for (int row = 0; row < rowCount; row++) {
+				int preferedWidth = (int) myTable.getCellRenderer(row, col).getTableCellRendererComponent(myTable, myTable.getValueAt(row, col), false, false, row, col).getPreferredSize().getWidth();
+				width = Math.max(width, preferedWidth);
+			}
+			header.setResizingColumn(column); // 此行很重要
+			column.setWidth(width + myTable.getIntercellSpacing().width);
+		}
 	}
 }

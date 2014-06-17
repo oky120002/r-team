@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -216,6 +215,14 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
+	public long queryAllSize() {
+		StringBuilder hql = new StringBuilder();
+		hql.append("select count(t) from ").append(this.modelClass.getName()).append(" t ");
+		Query query = getSession().createQuery(hql.toString());
+		return ((Long) query.uniqueResult()).longValue();
+	}
+
+	@Override
 	public final List<T> queryAll() {
 		return query(-1, -1);
 	}
@@ -223,13 +230,16 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public final List<T> query(int firstResult, int maxResults, Order... orders) {
-		String hql = "from " + this.modelClass.getName();
+		StringBuilder hql = new StringBuilder();
+		hql.append("from ").append(this.modelClass.getName());
 		if (ArrayUtils.isNotEmpty(orders)) {
-			hql += " order";
+			hql.append(" order");
 			for (Order order : orders) {
-				hql = " " + hql + order.toString() + ",";
+				if (order != null) {
+					hql.append(' ').append(hql).append(order.toString()).append(",");
+				}
 			}
-			hql = StringUtils.left(hql, hql.length() - 1);
+			hql.deleteCharAt(hql.length() - 1);
 		}
 		Query query = getSession().createQuery(hql.toString());
 
@@ -255,7 +265,9 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 		criteria.add(Example.create(model).ignoreCase());
 		if (ArrayUtils.isNotEmpty(orders)) {
 			for (Order order : orders) {
-				criteria.addOrder(order);
+				if (order != null) {
+					criteria.addOrder(order);
+				}
 			}
 		}
 		if (firstResult > 0) {
@@ -295,24 +307,20 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@Override
 	public final List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
-
+		StringBuilder sb = new StringBuilder();
+		sb.append(hql);
 		if (ArrayUtils.isNotEmpty(orders)) {
-			hql += " order";
+			sb.append(" order");
 			for (Order order : orders) {
-				hql = " " + hql + order.toString() + ",";
-			}
-			hql = StringUtils.left(hql, hql.length() - 1);
-		}
-		Query query = getSession().createQuery(hql);
-		if (MapUtils.isNotEmpty(pars)) {
-			for (Map.Entry<String, Object> entry : pars.entrySet()) {
-				Object value = entry.getValue();
-				if (value != null && value.getClass().isArray()) {
-					query.setParameterList(entry.getKey(), (Object[]) entry.getValue());
-				} else {
-					query.setParameter(entry.getKey(), entry.getValue());
+				if (order != null) {
+					sb.append(' ').append(sb).append(order.toString()).append(",");
 				}
 			}
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		Query query = getSession().createQuery(sb.toString());
+		if (MapUtils.isNotEmpty(pars)) {
+			query.setProperties(pars);
 		}
 		if (firstResult > 0) {
 			query.setFirstResult(firstResult);
@@ -350,24 +358,21 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	@Override
 	public final List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		AssertUtil.isNotBlank("根据Sql语句查询时，Sql语句不能为空。", sql);
+		StringBuilder sb = new StringBuilder();
+		sb.append(sql);
 		if (ArrayUtils.isNotEmpty(orders)) {
-			sql += " order";
+			sb.append(" order");
 			for (Order order : orders) {
-				sql = " " + sql + order.toString() + ",";
-			}
-			sql = StringUtils.left(sql, sql.length() - 1);
-		}
-
-		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
-		if (MapUtils.isNotEmpty(pars)) {
-			for (Map.Entry<String, Object> entry : pars.entrySet()) {
-				Object value = entry.getValue();
-				if (value != null && value.getClass().isArray()) {
-					sqlQuery.setParameterList(entry.getKey(), (Object[]) entry.getValue());
-				} else {
-					sqlQuery.setParameter(entry.getKey(), entry.getValue());
+				if (order != null) {
+					sb.append(' ').append(sb).append(order.toString()).append(",");
 				}
 			}
+			sb.deleteCharAt(sb.length() - 1);
+		}
+
+		SQLQuery sqlQuery = getSession().createSQLQuery(sb.toString());
+		if (MapUtils.isNotEmpty(pars)) {
+			sqlQuery.setProperties(pars);
 		}
 		if (firstResult > 0) {
 			sqlQuery.setFirstResult(firstResult);

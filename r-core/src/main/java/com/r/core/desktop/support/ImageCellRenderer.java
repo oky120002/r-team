@@ -20,11 +20,12 @@ public class ImageCellRenderer extends DefaultTableCellRenderer {
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		if (value instanceof Image) {
+		if (value != null && value instanceof Image) {
 			setIcon(ImageUtil.readIconFromImage((Image) value));
-			return this;
+		} else {
+			setIcon(null);
 		}
-		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		return this;
 	}
 
 }

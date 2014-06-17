@@ -30,67 +30,75 @@ public class Task {
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid")
 	private String id;
 	@Column
+	private String number; // 任务编号
+	@Column
 	private String account; // 发布任务者账号
 	@Column
-	private Boolean isAccountVip = Boolean.FALSE; // 发布任务者是否VIP
+	private Boolean isAccountVip; // 发布任务者是否VIP
 	@Column
-	private Integer accountExe = 0; // 发布任务者账号经验值
+	private Integer accountExe; // 发布任务者账号经验值
 	@Column
-	private Boolean isAccountOnLine = Boolean.FALSE; // 发布任务者是否在线
+	private String accountLevel; // 发布者等级(等级图标名)
+	@Column
+	private Boolean isAccountOnLine; // 发布任务者是否在线
+	@Column
+	private Boolean isNew; // 发布者是否是新手
 	@Column
 	private String shopkeeper; // 店掌柜
 	@Column
-	private String number; // 任务编号
+	private String taskId; // 接手任务的id
 	@Column
 	@Enumerated(EnumType.STRING)
-	private TaskAddr type = TaskAddr.淘宝任务区; // 任务区
+	private TaskAddr type; // 任务区
 	@Column
 	private String itemId; // 商品id
 	@Column
 	private String itemTitle; // 商品标题
 	@Column
-	private Boolean isUseSearchLoc = Boolean.FALSE; // 是否使用搜索来路
+	private Boolean isUseSearchLoc; // 是否使用搜索来路
 	@Column
 	@Enumerated(EnumType.STRING)
-	private PaymentType paymentType = PaymentType.接手方支付; // 支付方式
+	private PaymentType paymentType; // 支付方式
 	@Column
 	private Number securityPrice; // 任务担保金额,这里金额不大所以使用Double.如果发现有大金额可以改为BigDecimal
 	@Column
 	private Number publishingPoint; // 发布点
 	@Column
-	private Boolean isUpdatePrice = Boolean.FALSE; // 是否改了价
+	private Boolean isUpdatePrice; // 是否改了价
 	@Column
 	@Enumerated(EnumType.STRING)
-	private TaskType taskType = TaskType.实物; // 任务类型
+	private TaskType taskType; // 任务类型
 	@Column
 	private Number timeLimit; // 任务时限(分钟)
 	@Column
 	@Enumerated(EnumType.STRING)
-	private ShopScore shopScore = ShopScore.全5分; // 商铺动态平分
+	private ShopScore shopScore; // 商铺动态平分
 	@Column
 	private String praise; // 好评内容
-	@Column
-	private String message; // 留言
 	@Column
 	private String qq; // 发布方QQ号码
 
 	@Column
-	private Boolean isCollect = Boolean.FALSE; // 是否收藏
+	private Boolean isSearch; // 是否需要搜索
 	@Column
-	private Boolean isIDCard = Boolean.FALSE;// 是否实名认证
+	private Boolean isCollect; // 是否收藏
 	@Column
-	private Boolean isSincerity = Boolean.FALSE; // 诚信商家
+	private Boolean isIDCard;// 是否实名认证
+	@Column
+	private Boolean isSincerity; // 诚信商家
+	@Column
+	private Boolean isWangWang; // 是否旺聊
+	@Column
+	private Boolean isReview; // 是否需要审核
+	@Column
+	private String auxiliaryCondition; // 附加条件
+
+	@Column
+	private String tasker; // 任务接手人
 	@Column
 	private String addr; // 收货地址
 	@Column
 	private String loc; // 指定地区
-	@Column
-	private Boolean isWangWang = Boolean.FALSE; // 是否旺聊
-	@Column
-	private Boolean isReview = Boolean.FALSE; // 是否需要审核
-	@Column
-	private String tasker; // 任务接手人
-
 	@Column
 	private String taskerAccount; // 接手人账号
 	@Column
@@ -122,7 +130,7 @@ public class Task {
 
 	@Column
 	@Enumerated(EnumType.STRING)
-	private TaskStatus status = TaskStatus.未接手; // 当前任务状态
+	private TaskStatus status; // 当前任务状态
 
 	/**
 	 * @return the id
@@ -137,6 +145,21 @@ public class Task {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the number
+	 */
+	public String getNumber() {
+		return number;
+	}
+
+	/**
+	 * @param number
+	 *            the number to set
+	 */
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	/**
@@ -185,6 +208,21 @@ public class Task {
 	}
 
 	/**
+	 * @return the accountLevel
+	 */
+	public String getAccountLevel() {
+		return accountLevel;
+	}
+
+	/**
+	 * @param accountLevel
+	 *            the accountLevel to set
+	 */
+	public void setAccountLevel(String accountLevel) {
+		this.accountLevel = accountLevel;
+	}
+
+	/**
 	 * @return the isAccountOnLine
 	 */
 	public Boolean getIsAccountOnLine() {
@@ -197,6 +235,21 @@ public class Task {
 	 */
 	public void setIsAccountOnLine(Boolean isAccountOnLine) {
 		this.isAccountOnLine = isAccountOnLine;
+	}
+
+	/**
+	 * @return the isNew
+	 */
+	public Boolean getIsNew() {
+		return isNew;
+	}
+
+	/**
+	 * @param isNew
+	 *            the isNew to set
+	 */
+	public void setIsNew(Boolean isNew) {
+		this.isNew = isNew;
 	}
 
 	/**
@@ -215,18 +268,18 @@ public class Task {
 	}
 
 	/**
-	 * @return the number
+	 * @return the taskId
 	 */
-	public String getNumber() {
-		return number;
+	public String getTaskId() {
+		return taskId;
 	}
 
 	/**
-	 * @param number
-	 *            the number to set
+	 * @param taskId
+	 *            the taskId to set
 	 */
-	public void setNumber(String number) {
-		this.number = number;
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
 	}
 
 	/**
@@ -410,21 +463,6 @@ public class Task {
 	}
 
 	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * @param message
-	 *            the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	/**
 	 * @return the qq
 	 */
 	public String getQq() {
@@ -437,6 +475,21 @@ public class Task {
 	 */
 	public void setQq(String qq) {
 		this.qq = qq;
+	}
+
+	/**
+	 * @return the isSearch
+	 */
+	public Boolean getIsSearch() {
+		return isSearch;
+	}
+
+	/**
+	 * @param isSearch
+	 *            the isSearch to set
+	 */
+	public void setIsSearch(Boolean isSearch) {
+		this.isSearch = isSearch;
 	}
 
 	/**
@@ -485,36 +538,6 @@ public class Task {
 	}
 
 	/**
-	 * @return the addr
-	 */
-	public String getAddr() {
-		return addr;
-	}
-
-	/**
-	 * @param addr
-	 *            the addr to set
-	 */
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
-
-	/**
-	 * @return the loc
-	 */
-	public String getLoc() {
-		return loc;
-	}
-
-	/**
-	 * @param loc
-	 *            the loc to set
-	 */
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
-
-	/**
 	 * @return the isWangWang
 	 */
 	public Boolean getIsWangWang() {
@@ -545,6 +568,21 @@ public class Task {
 	}
 
 	/**
+	 * @return the auxiliaryCondition
+	 */
+	public String getAuxiliaryCondition() {
+		return auxiliaryCondition;
+	}
+
+	/**
+	 * @param auxiliaryCondition
+	 *            the auxiliaryCondition to set
+	 */
+	public void setAuxiliaryCondition(String auxiliaryCondition) {
+		this.auxiliaryCondition = auxiliaryCondition;
+	}
+
+	/**
 	 * @return the tasker
 	 */
 	public String getTasker() {
@@ -557,6 +595,36 @@ public class Task {
 	 */
 	public void setTasker(String tasker) {
 		this.tasker = tasker;
+	}
+
+	/**
+	 * @return the addr
+	 */
+	public String getAddr() {
+		return addr;
+	}
+
+	/**
+	 * @param addr
+	 *            the addr to set
+	 */
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	/**
+	 * @return the loc
+	 */
+	public String getLoc() {
+		return loc;
+	}
+
+	/**
+	 * @param loc
+	 *            the loc to set
+	 */
+	public void setLoc(String loc) {
+		this.loc = loc;
 	}
 
 	/**
@@ -722,30 +790,5 @@ public class Task {
 	 */
 	public void setStatus(TaskStatus status) {
 		this.status = status;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 }

@@ -820,7 +820,7 @@ if(getCookie_current('div_options')!="block"){
 			  <td width="164" align="center"><img src="/style/images/ShangBao.gif" height="20" align="absmiddle" title="商保任务，只有加入【商家保障】的会员才可以接手" /> <img src="/style/images/SouSuo.gif" height="18" align="absmiddle" title="需到淘宝首页搜索店铺或宝贝关键字进入完成交易"> <img src="/style/images/WangLiao.gif" height="18" align="absmiddle" title="拍下宝贝之前需登录旺旺聊几句作为凭据" /> <img src="/style/images/DiZhi.gif" height="18" align="absmiddle" title="拍下宝贝时需按发布方指定的收货地址信息填写" /><br><span class="blue" title="拍下后请按我指定的收货地址修改，请根据商品酌情带字好评，收货时必须wangwang上面说“已经收到货”，不然不审核">拍下后请按我指定的收货</span><br><span id="isFilter"></span></td>
 			  <td width="72" align="center"><a class="link_t" href="TaskJieShou.asp?Action=Jie&ID=644047">接手任务</a></td>
 			</tr>
-            
+			
 			<tr>
 			  <td width="163">&nbsp;<img src="/style/images/realobject.gif" align="absmiddle" title="该任务为实物商品" /> 2014616154434998</td>
 			  <td width="145" align="center"><span class="red">kubywen</span> <img src="/user/images/online.gif" align="absmiddle" title="该用户在线"> <img src="/style/images/vip.gif" align="absmiddle" title="尊贵VIP会员" /> <img src='/style/images/score_8.gif' align='absmiddle' alt='经验积分：2192' /></td>

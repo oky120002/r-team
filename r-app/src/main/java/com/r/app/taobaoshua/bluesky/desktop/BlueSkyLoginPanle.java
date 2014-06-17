@@ -41,11 +41,13 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 	private static final long serialVersionUID = 284808707142803494L;
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyLoginPanle.class);
 	private static final BlueSky blueSky = BlueSky.getInstance();
-	private static final String COMMOND_LOGIN = "commond_login"; // 命令_登陆
+	private static final String COMMAND_LOGIN = "command_login"; // 命令_登陆
+	private static final String COMMAND_SKIP = "command_skip"; // 命令_跳过
 
 	private BlueSkyLoginPanleListener listener;
 
 	private JButton loginButton = new JButton("登陆");
+	private JButton skipButton = new JButton("跳过");
 	private JTextField accountTextField = new JTextField(); // 友保账号
 	private JTextField accountPasswordTextField = new JPasswordField(); // 友保妖精账号密码
 	private JTextField captchaTextField = new JTextField(); // 验证码
@@ -66,8 +68,13 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		switch (actionCommand) {
-		case COMMOND_LOGIN:
+		case COMMAND_LOGIN:
 			doLogin();
+			break;
+		case COMMAND_SKIP:
+			if (this.listener != null) {
+				this.listener.loginSkip();
+			}
 			break;
 		}
 	}
@@ -79,7 +86,7 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 			public void run() {
 				Image captcha = null;
 				try {
-					captcha = blueSky.getAction().getLoginBlueSkyCaptchaImage();
+					captcha = blueSky.getService().getLoginBlueSkyCaptchaImage();
 				} catch (NetworkIOReadErrorException e) {
 					HAlert.showErrorTips(e.getMessage(), BlueSkyLoginPanle.this, e);
 				}
@@ -120,9 +127,8 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 
 					loginButton.setEnabled(false);
 
-					blueSky.getAction().login(account, accountPassword, captcha, question, answer);
+					blueSky.getService().login(account, accountPassword, captcha, question, answer);
 					BlueSkyLoginPanle.this.listener.loginFinsh();
-
 				} catch (Exception niree) {
 					logger.error("登陆错误", niree);
 				}
@@ -165,14 +171,20 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 		centerBox.add(reacquireCaptchaLabel);
 
 		// 登陆按钮
-		centerBox.add(loginButton);
+		HBaseBox buttonBox = HBaseBox.createHorizontalBaseBox();
+		buttonBox.add(skipButton);
+		buttonBox.add(HBaseBox.createHorizontalStrut(5));
+		buttonBox.add(loginButton);
+		centerBox.add(buttonBox);
 
 		add(centerBox, BorderLayout.NORTH);
 	}
 
 	private void initListeners() {
 		loginButton.addActionListener(this);
-		loginButton.setActionCommand(COMMOND_LOGIN);
+		loginButton.setActionCommand(COMMAND_LOGIN);
+		skipButton.addActionListener(this);
+		skipButton.setActionCommand(COMMAND_SKIP);
 
 		captchaTextField.addKeyListener(new KeyAdapter() {
 			@Override

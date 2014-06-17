@@ -2,24 +2,36 @@ package com.r.app.taobaoshua.bluesky.websource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
+import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.service.TaskService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring.xml" })
 public class BlueSkyResolveTest {
+
+	@Resource(name = "taskService")
+	private TaskService taskService;
 
 	@Test
 	public void test() throws IOException {
-//		String html = FileUtils.readFileToString(new File("./page/tasklist.txt"));
-		
-		
-//		System.out.println(html);
-	}
-	
-	@Test
-	public void test2(){
-		String   str = "abcd/>dcba";
-		System.out.println(str.split("/>")[1]);
+		String html = FileUtils.readFileToString(new File("./page/tasklist.txt"));
+		BlueSkyResolve r = new BlueSkyResolve();
+		Collection<Task> tasks = r.resolveTaskListHtml(html);
+		for (Task task : tasks) {
+			System.out.println(task.getNumber());
+		}
+		taskService.updateTaskList(tasks);
 	}
 
 }

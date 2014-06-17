@@ -20,8 +20,9 @@ import javax.swing.JLabel;
 import com.r.core.desktop.ctrl.HBasePanel;
 import com.r.core.desktop.ctrl.impl.button.HIconButton;
 import com.r.core.exceptions.io.IOReadErrorException;
+import com.r.core.util.ImageCacheUtil;
+import com.r.core.util.ImageCacheUtil.ReadImage;
 import com.r.core.util.ImageUtil;
-import com.r.core.util.ImageUtil.ReadImage;
 
 /**
  * 抽屉
@@ -37,7 +38,7 @@ public class HWindowTitlePanle extends HBasePanel {
 
 	// 初始化图片读取接口
 	static {
-		ImageUtil.init(HWindowTitlePanle.READIMAGE, new ReadImage() {
+		ImageCacheUtil.init(HWindowTitlePanle.READIMAGE, new ReadImage() {
 			@Override
 			public Image readImage(String imageKey) throws IOReadErrorException {
 				String imagepath = "com/hiyouyu/images/" + imageKey;
@@ -133,19 +134,19 @@ public class HWindowTitlePanle extends HBasePanel {
 
 	/** 读取默认图片 */
 	private void initImage() {
-		Icon closeIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "close.png"));
-		Icon closeRolloverIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "close_rollover.png"));
-		Icon closePressedIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "close_pressed.png"));
+		Icon closeIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "close.png"));
+		Icon closeRolloverIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "close_rollover.png"));
+		Icon closePressedIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "close_pressed.png"));
 		closeButton = new HIconButton("关闭", closeIcon, closeRolloverIcon, closePressedIcon);
 
-		Icon minIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "min.png"));
-		Icon minRolloverIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "min_rollover.png"));
-		Icon minPressedIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "min_pressed.png"));
+		Icon minIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "min.png"));
+		Icon minRolloverIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "min_rollover.png"));
+		Icon minPressedIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "min_pressed.png"));
 		minButton = new HIconButton("最小化", minIcon, minRolloverIcon, minPressedIcon);
 
-		Icon aWayTopIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop.png"));
-		Icon aWayTopRolloverIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop_rollover.png"));
-		Icon aWayTopPressedIcon = ImageUtil.readIconFromImage(ImageUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop_pressed.png"));
+		Icon aWayTopIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop.png"));
+		Icon aWayTopRolloverIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop_rollover.png"));
+		Icon aWayTopPressedIcon = ImageUtil.readIconFromImage(ImageCacheUtil.getImage(HWindowTitlePanle.READIMAGE, "aWayTop_pressed.png"));
 		aWayTopButton = new HIconButton("置顶", aWayTopIcon, aWayTopRolloverIcon, aWayTopPressedIcon);
 	}
 

@@ -251,6 +251,15 @@ public interface AbstractDao<T> {
 
 	/**
 	 * 
+	 * 查询全部实体的条数
+	 * 
+	 * @return int 实体条数
+	 * @author rain
+	 */
+	public long queryAllSize();
+
+	/**
+	 * 
 	 * 查询全部实体
 	 * 
 	 * @param <T>
@@ -268,9 +277,9 @@ public interface AbstractDao<T> {
 	 * @param <T>
 	 *            实体类型
 	 * @param firstResult
-	 *            起始结果条数
+	 *            起始结果条数,-1则不设置起始条数
 	 * @param maxResults
-	 *            最大结果条数
+	 *            最大结果条数,-1则不设置最大条数
 	 * @param orders
 	 *            排序
 	 * 
@@ -306,9 +315,9 @@ public interface AbstractDao<T> {
 	 * @param models
 	 *            实体
 	 * @param firstResult
-	 *            起始结果条数
+	 *            起始结果条数,-1则不设置起始条数
 	 * @param maxResults
-	 *            最大结果条数
+	 *            最大结果条数,-1则不设置最大条数
 	 * @param orders
 	 *            排序
 	 * 
@@ -375,9 +384,9 @@ public interface AbstractDao<T> {
 	 * @param pars
 	 *            参数
 	 * @param firstResult
-	 *            起始结果条数
+	 *            起始结果条数,-1则不设置起始条数
 	 * @param maxResults
-	 *            最大结果条数
+	 *            最大结果条数,-1则不设置最大条数
 	 * @param orders
 	 *            排序
 	 * 
@@ -444,9 +453,9 @@ public interface AbstractDao<T> {
 	 * @param pars
 	 *            参数
 	 * @param firstResult
-	 *            起始结果条数
+	 *            起始结果条数,-1则不设置起始条数
 	 * @param maxResults
-	 *            最大结果条数
+	 *            最大结果条数,-1则不设置最大条数
 	 * @param orders
 	 *            排序
 	 * 

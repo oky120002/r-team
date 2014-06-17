@@ -8,5 +8,9 @@ package com.r.app.taobaoshua.bluesky.desktop;
  * 
  */
 public interface BlueSkyLoginPanleListener {
+	/** 登陆 */
 	void loginFinsh();
+
+	/** 跳过 */
+	void loginSkip();
 }
