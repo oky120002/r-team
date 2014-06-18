@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enums.ShopScore;
 import com.r.app.taobaoshua.bluesky.model.enums.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
 import com.r.app.taobaoshua.bluesky.model.enums.TaskType;
@@ -75,6 +76,9 @@ public class BlueSkyResolve {
 			html = html.substring(curPos);
 			task.setTaskId(StringUtils.substringBetween(html, "ID=", "\">").trim());
 
+			// 计算统计值
+			task.calStatistics();
+
 			tasks.add(task);
 		}
 
@@ -105,8 +109,13 @@ public class BlueSkyResolve {
 	/** 解析发布者信息 */
 	private void resolveTaskPublishing(Task task, String td) {
 		// 发布者平台账号
-		String auxiliaryCondition = StringUtils.substringBetween(td, "<span class=\"red\">", "</span>").trim();
-		task.setAccount(auxiliaryCondition);
+		String account = StringUtils.substringBetween(td, "center\">", "<img").trim();
+		String temp = StringUtils.substringBetween(account, "<span class=\"red\">", "</span>");
+		if (StringUtils.isBlank(temp)) {
+			task.setAccount(account);
+		} else {
+			task.setAccount(temp);
+		}
 
 		// 是否在线
 		if (0 < td.indexOf("/online.gif")) {
@@ -136,9 +145,10 @@ public class BlueSkyResolve {
 		}
 
 		// 经验值
-		String accountExe = StringUtils.substringBetween(td, "经验积分：", "' />").trim();
-		task.setAccountExe(Integer.valueOf(accountExe));
-
+		if (0 < td.indexOf("经验积分")) {
+			String accountExe = StringUtils.substringBetween(td, "经验积分：", "' />").trim(); // 新手是没得经验积分的
+			task.setAccountExe(Integer.valueOf(accountExe));
+		}
 	}
 
 	/** 解析商品抵押金 */
@@ -153,6 +163,12 @@ public class BlueSkyResolve {
 
 	/** 解析好评期限 */
 	private void resolveTaskTimeLimit(Task task, String td) {
+		if (0 < td.indexOf("店评5分")) { // 店评5分
+			task.setShopScore(ShopScore.全5分);
+		} else {
+			task.setShopScore(null);
+		}
+
 		if (0 < td.indexOf("立即确认")) { // 立即好评
 			task.setTimeLimit(0);
 			return;
@@ -162,7 +178,8 @@ public class BlueSkyResolve {
 			return;
 		}
 
-		task.setTimeLimit(Integer.valueOf(StringUtils.substringBetween(td, "5分\">", "天好评").trim()) * 24 * 60);
+		task.setTimeLimit(Integer.valueOf(StringUtils.substringBetween(td, "title=\"", "天后确认收").trim()) * 24 * 60);
+
 	}
 
 	/** 解析商品限制条件 */

@@ -74,23 +74,14 @@ public class TaskService {
 	}
 
 	/** 获取任务列表的html代码,只能取[1,10] */
-	public Collection<Task> getTaskList(int startPage, int endPage) {
-		if (startPage > endPage) {
-			int temp = endPage;
-			endPage = startPage;
-			startPage = temp;
-		}
-		startPage = startPage < 1 ? 1 : startPage;
-		startPage = 10 < startPage ? 10 : startPage;
-		endPage = endPage < 1 ? 1 : endPage;
-		endPage = 10 < endPage ? 10 : endPage;
+	public Collection<Task> getTaskList(int page) {
+		page = page < 1 ? 1 : page;
+		page = 10 < page ? 10 : page;
 
 		BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
 		List<Task> tasks = new ArrayList<Task>();
-		for (int page = startPage; page <= endPage; page++) {
-			String html = taskDao.getTaskListHtml(page, 2, 3);
-			tasks.addAll(resolve.resolveTaskListHtml(html));
-		}
+		String html = taskDao.getTaskListHtml(page, 2, 3);
+		tasks.addAll(resolve.resolveTaskListHtml(html));
 		return tasks;
 	}
 
@@ -172,6 +163,7 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void updateTaskList(Collection<Task> tasks) {
 		if (CollectionUtils.isNotEmpty(tasks)) {
+			// FIXME r-app:taobaoshua 这里处理有问题,不能这样全部变更状态.一定要有个变更状态的条件才行
 			// 把历史任务状态(未接手)全部更改为已接手
 			String hql = MessageFormatter.format(" update Task set status = '{}' where status = '{}' ", TaskStatus.别人已经接手.name(), TaskStatus.未接手.name()).getMessage();
 			taskDao.updateOrDeleteByHql(hql);

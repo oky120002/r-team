@@ -3,6 +3,7 @@
  */
 package com.r.app.taobaoshua;
 
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -157,7 +158,11 @@ public class TaobaoShuaApp {
 		HCtrlUtil.setNoSpot();
 		HCtrlUtil.setUIFont(null);
 		HCtrlUtil.setWindowsStyleByWindows(null);
-		TaobaoShuaApp.startup(); // 启动
+		EventQueue.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				TaobaoShuaApp.startup(); // 启动
+			}
+		});
 	}
-
 }

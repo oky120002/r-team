@@ -1,5 +1,6 @@
 package com.r.app.taobaoshua.bluesky.model;
 
+import java.text.NumberFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -131,6 +132,35 @@ public class Task {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TaskStatus status; // 当前任务状态
+
+	@Column
+	private Number publishingPointOneDay;
+	@Column
+	private Number securityPriceOneDayOnePPoint;
+
+	public void calStatistics() {
+		publishingPointOneDay = null;
+		securityPriceOneDayOnePPoint = null;
+
+		// 计算一天可以赚取的发布点数
+		if (publishingPoint != null && timeLimit != null) {
+			double p = publishingPoint.doubleValue(); // 默认赚取全部的发布点,立即完成
+			NumberFormat numberFormat = NumberFormat.getNumberInstance();
+			numberFormat.setMaximumFractionDigits(2); // 允许最大的小数位数
+
+			if (timeLimit.intValue() > 1) {
+				p = p / (timeLimit.doubleValue() / 60 / 24);
+			}
+			publishingPointOneDay = Double.valueOf(p);
+		}
+
+		// 计算一天一发布点需要的担保金投入
+		if (securityPrice != null && publishingPointOneDay != null) {
+			NumberFormat numberFormat = NumberFormat.getNumberInstance();
+			numberFormat.setMaximumFractionDigits(2); // 允许最大的小数位数
+			securityPriceOneDayOnePPoint = Double.valueOf(securityPrice.doubleValue() / publishingPointOneDay.doubleValue());
+		}
+	}
 
 	/**
 	 * @return the id
@@ -790,5 +820,35 @@ public class Task {
 	 */
 	public void setStatus(TaskStatus status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the publishingPointOneDay
+	 */
+	public Number getPublishingPointOneDay() {
+		return publishingPointOneDay;
+	}
+
+	/**
+	 * @param publishingPointOneDay
+	 *            the publishingPointOneDay to set
+	 */
+	public void setPublishingPointOneDay(Number publishingPointOneDay) {
+		this.publishingPointOneDay = publishingPointOneDay;
+	}
+
+	/**
+	 * @return the securityPriceOneDayOnePPoint
+	 */
+	public Number getSecurityPriceOneDayOnePPoint() {
+		return securityPriceOneDayOnePPoint;
+	}
+
+	/**
+	 * @param securityPriceOneDayOnePPoint
+	 *            the securityPriceOneDayOnePPoint to set
+	 */
+	public void setSecurityPriceOneDayOnePPoint(Number securityPriceOneDayOnePPoint) {
+		this.securityPriceOneDayOnePPoint = securityPriceOneDayOnePPoint;
 	}
 }

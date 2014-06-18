@@ -72,7 +72,8 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		HBaseBox centerBox = HBaseBox.createVerticalBaseBox();
 		taskListTableModel = new TaskListTableModel();
 		taskListTable = new JTable(taskListTableModel);
-		taskListTable.setDefaultRenderer(Image.class, new ImageCellRenderer());
+		taskListTable.setDefaultRenderer(Image.class, new ImageCellRenderer()); // 支持渲染图片
+		// taskListTable.add
 		taskListTable.setFillsViewportHeight(true);
 		taskListTable.setDragEnabled(false);
 		taskListTable.doLayout();
@@ -111,7 +112,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		JTableHeader header = myTable.getTableHeader();
 		int rowCount = myTable.getRowCount();
 
-		Enumeration columns = myTable.getColumnModel().getColumns();
+		Enumeration<?> columns = myTable.getColumnModel().getColumns();
 		while (columns.hasMoreElements()) {
 			TableColumn column = (TableColumn) columns.nextElement();
 			int col = header.getColumnModel().getColumnIndex(column.getIdentifier());

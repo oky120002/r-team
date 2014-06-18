@@ -35,11 +35,15 @@ public class BlueSkyBackgroundTask {
 			@Override
 			public void run() {
 				TaskService service = blueSky.getService();
-				Collection<Task> tasks = service.getTaskList(1, 3); // 就取前三页
-				service.updateTaskList(tasks);
+				for (int page = 1; page < 11; page++) {
+					Collection<Task> tasks = service.getTaskList(page); // 就取前三页
+					service.updateTaskList(tasks);
+					TaskUtil.sleep(5_000);
+				}
+
 			}
 
-		}, -1, 60, null, null);
+		}, -1, 5 * 10 + 30, null, null);
 	}
 
 	/**
