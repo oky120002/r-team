@@ -21,6 +21,7 @@ import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.desktop.tablemodel.TaskListTableModel;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
+import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBasePanel;
 import com.r.core.desktop.support.ImageCellRenderer;
@@ -96,9 +97,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		TaskUtil.executeTask(new Runnable() {
 			@Override
 			public void run() {
+				TaskService service = blueSky.getService();
+				System.out.println(service.getTaskDetail("648521"));
+
 				taskInfosButton.setEnabled(false);
 				taskInfosButton.setText("获取中...");
-				List<Task> tasks = blueSky.getService().query(TaskStatus.未接手, 1, 1, 50);
+				List<Task> tasks = service.query(TaskStatus.未接手, 1, 1, 50);
 				taskListTableModel.setTasks(tasks);
 				taskListTable.updateUI();
 				FitTableColumns(taskListTable);

@@ -69,4 +69,6 @@ public interface TaskDao extends AbstractDao<Task> {
 	 */
 	String getTaskListHtml(int page, int type, int order);
 
+	/** 获取任务详细信息 */
+	String getTaskDetail(String taskid);
 }

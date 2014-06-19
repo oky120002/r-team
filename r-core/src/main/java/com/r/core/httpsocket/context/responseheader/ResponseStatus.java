@@ -15,6 +15,7 @@ import com.r.core.util.AssertUtil;
 public enum ResponseStatus {
 	s200("200", "OK", "客户端请求成功，正常返回"), // 200
 	s304("304", "Not Modified", "没有修改,缓存中"), // 304
+	s302("302", "Moved Temporatily", "被请求的资源暂时转移"), // 302
 	s400("400", "Bad Request", "客户端请求有语法错误，不能被服务器所理解"), // 400
 	s401("401", "Unauthorized", "请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 "), // 401
 	s403("403", "Forbidden", "服务器收到请求，但是拒绝提供服务"), // 403

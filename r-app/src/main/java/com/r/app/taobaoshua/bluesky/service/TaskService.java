@@ -50,6 +50,8 @@ public class TaskService {
 		taskDao.setSocketProxy(proxy);
 	}
 
+	// /-------------------------网络-----------------------//
+
 	/** 获取验证码 */
 	public Image getLoginBlueSkyCaptchaImage() {
 		return taskDao.getLoginCaptchaImage();
@@ -84,6 +86,13 @@ public class TaskService {
 		tasks.addAll(resolve.resolveTaskListHtml(html));
 		return tasks;
 	}
+
+	/** 获取任务详细信息 */
+	public String getTaskDetail(String taskid) {
+		return taskDao.getTaskDetail(taskid);
+	}
+
+	// /-------------------------数据-----------------------//
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void addTasks(Task... tasks) {
@@ -186,5 +195,4 @@ public class TaskService {
 	public long queryAllSize() {
 		return taskDao.queryAllSize();
 	}
-
 }

@@ -166,6 +166,6 @@ public final class Cookie implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cookie [" + toCookie() + "]";
+		return toCookie();
 	}
 }

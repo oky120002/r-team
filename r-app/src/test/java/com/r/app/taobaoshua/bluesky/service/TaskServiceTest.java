@@ -18,8 +18,14 @@ public class TaskServiceTest {
 
 	@Resource(name = "taskService")
 	private TaskService taskService;
+	
+	@Test
+	public void getTaskDetail(){
+		String taskDetail = taskService.getTaskDetail("648521");
+		System.out.println(taskDetail);
+	}
 
-	 @Test
+//	 @Test
 	public void queryOneTask() {
 		Task task = taskService.queryByNumber("2014616100256795");
 		System.out.println(task.getAccount());

@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Repository;
 
 import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
@@ -31,20 +32,17 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 	private static final Logger logger = LoggerFactory.getLogger(TaskDaoImpl.class); // 日志
 
 	private HttpSocket httpSocket = HttpSocket.newHttpSocket(true, null);
-	private HttpSocket noCookHttpSocket = HttpSocket.newHttpSocket(false, null);
 
 	public TaskDaoImpl() {
 		super(Task.class);
 		logger.info("TaskDaoImpl Instance............................");
 		httpSocket.setTimeout(60_000); // 1分钟超时
-		noCookHttpSocket.setTimeout(60_000); // 1分钟超时
 	}
 
 	/** 设置当前链接的代理 */
 	@Override
 	public void setSocketProxy(HttpProxy httpProxy) {
 		this.httpSocket.setProxy(httpProxy);
-		this.noCookHttpSocket.setProxy(httpProxy);
 	}
 
 	/** 获取验证码图片 */
@@ -88,6 +86,20 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		// 第三个数字 1:淘宝任务,2:拍拍任务
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/?" + type + "-" + order + "-1-0-" + page);
 		return responseHeader.bodyToString("gb2312");
+	}
+
+	@Override
+	public String getTaskDetail(String taskid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		map.put("Accept-Encoding", "gzip,deflate");
+		map.put("Accept-Language", "zh-CN,zh;q=0.8");
+		map.put("Host", "www2.88sxy.com");
+		map.put("Referer", "http://www2.88sxy.com/task/TaskJieShou.asp");
+		map.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36");
+		MapUtils.debugPrint(System.out, "Cookes", httpSocket.getCookies());
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/TaskDetail.asp?ID=" + taskid, map);
+		return responseHeader.bodyToString();
 	}
 
 }
