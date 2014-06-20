@@ -110,8 +110,6 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 	}
 }
 
-
-	
 // 155 S 150~154
 // 160 M 153~158
 // 165 L 158~164
@@ -119,10 +117,4 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 // 175 XXL 165~170
 // 180 XXXL 168~175
 // 所有尺码根据身高和体重，胸围等有上下浮动.
-
-
-
-
-
-
 

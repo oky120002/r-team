@@ -28,6 +28,7 @@ import com.r.core.desktop.ctrl.HBasePanel;
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.desktop.ctrl.impl.label.HClickLabel;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel;
+import com.r.core.exceptions.LoginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -117,20 +118,26 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 				try {
 					accountTextField.setEnabled(false);
 					accountPasswordTextField.setEnabled(false);
-
 					captchaTextField.setEnabled(false);
 					captchaImagePanel.setEnabled(false);
 					reacquireCaptchaLabel.setEnabled(false);
-
 					questionTextField.setEnabled(false);
 					answerTextField.setEnabled(false);
-
 					loginButton.setEnabled(false);
 
 					blueSky.getService().login(account, accountPassword, captcha, question, answer);
 					BlueSkyLoginPanle.this.listener.loginFinsh();
-				} catch (Exception niree) {
-					logger.error("登陆错误", niree);
+				} catch (LoginErrorException e) {
+					HAlert.showWarnTips(e.getMessage(), BlueSkyLoginPanle.this);
+				} finally {
+					accountTextField.setEnabled(true);
+					accountPasswordTextField.setEnabled(true);
+					captchaTextField.setEnabled(true);
+					captchaImagePanel.setEnabled(true);
+					reacquireCaptchaLabel.setEnabled(true);
+					questionTextField.setEnabled(true);
+					answerTextField.setEnabled(true);
+					loginButton.setEnabled(true);
 				}
 			}
 		});

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.app.taobaoshua.bluesky.model.enums;
+package com.r.app.taobaoshua.bluesky.model.enumtask;
 
 /**
  * @author oky

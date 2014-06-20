@@ -9,7 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -17,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.Task;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskType;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 import com.r.core.exceptions.SwitchPathException;
 
 /**
@@ -131,7 +134,7 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 			int time = task.getTimeLimit().intValue();
 			if (time < 30) { // 立即
 				return "立即确认";
-			} else if (30 < time && time < 60) {
+			} else if (0 < time && time < 60) {
 				return "30分钟确认";
 			} else {
 				return ((time + 1) / 60 / 24) + "天";
@@ -139,33 +142,76 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		case 10: // 任务状态
 			return task.getStatus().name();
 		case 11:
-			return numberFormat.format(task.getPublishingPointOneDay().doubleValue());
+			double ppod = task.getPublishingPointOneDay().doubleValue();
+			double money = ppod * 0.8 * 0.4;
+			return numberFormat.format(ppod) + "点|" + numberFormat.format(money) + "元";
 		case 12:
-			return numberFormat.format(task.getSecurityPriceOneDayOnePPoint().doubleValue());
+			return numberFormat.format(task.getSecurityPriceOneDayOnePPoint().doubleValue()) + "元";
+		case 13: // 商保
+			return task.isSincerity() ? blueSky.getImage("ShangBao.gif") : null;
+		case 14: // 实名
+			return task.isIDCard() ? blueSky.getImage("ShiMing.gif") : null;
+		case 15: // 搜索
+			return task.isSearch() ? blueSky.getImage("SouSuo.gif") : null;
+		case 16: // 搜藏
+			return task.isCollect() ? blueSky.getImage("ShouCang.gif") : null;
+		case 17: // 旺聊
+			return task.getIsWangWang() ? blueSky.getImage("WangLiao.gif") : null;
+		case 18: // 审核
+			return task.isReview() ? blueSky.getImage("ShenHe.gif") : null;
+		case 19: // 条件
+			return task.getAuxiliaryCondition();
+		case 20: // 是否有QQ参与
+			if (task.isUseQQ()) {
+				return "QQ";
+			} else {
+				return null;
+			}
 		default:
 			throw new SwitchPathException("列表列越界");
 		}
 	}
 
+	/** 设置列宽 */
+	public void setColWidth(JTable jTable) {
+		TableColumnModel columns = jTable.getColumnModel();
+		Col[] values = Col.values();
+		for (int i = 0; i < values.length; i++) {
+			TableColumn column = columns.getColumn(i);
+			if (0 < values[i].getColWidth()) {
+				column.setPreferredWidth(values[i].getColWidth());
+			}
+		}
+	}
+
 	// 列表头按照枚举排列顺序来排列
 	private enum Col {
-		任务编号("任务编号", String.class, 0), //
-		任务类型("任务类型", Image.class, 1), //
-		发布价格("发布价格", String.class, 2), //
-		发布点数("发布点数", String.class, 3), //
-		发布点天("发布点/天", String.class, 11), //
-		元发布点天("元/1发布点1天", String.class, 12), //
-		发布人("发布人", String.class, 4), //
-		是否在线("在线", Image.class, 5), //
-		是否VIP("VIP", Image.class, 6), //
-		等级("等级图标", Image.class, 7), //
-		发布时间("发布时间", String.class, 8), //
-		好评时限("好评时限", String.class, 9), //
-		任务状态("任务状态", String.class, 10), //
+		任务编号("任务编号", String.class, 80, 0), //
+		任务类型("任务类型", Image.class, 45, 1), //
+		发布价格("发布价格", String.class, -1, 2), //
+		发布点数("发布点数", String.class, -1, 3), //
+		发布点天("发布点/天", String.class, 145, 11), //
+		元发布点天("元/1发布点1天", String.class, 90, 12), //
+		好评时限("好评时限", String.class, 45, 9), //
+		商保("商保", Image.class, 25, 13), //
+		实名("实名", Image.class, 45, 14), //
+		搜索("搜索", Image.class, 40, 15), //
+		收藏("收藏", Image.class, 40, 16), //
+		旺聊("旺聊", Image.class, 40, 17), //
+		审核("审核", Image.class, 40, 18), //
+		QQ("QQ", String.class, 30, 20), //
+		条件("条件", String.class, 250, 19), //
+		发布人("发布人", String.class, 100, 4), //
+		是否在线("在线", Image.class, -1, 5), //
+		是否VIP("VIP", Image.class, -1, 6), //
+		等级("等级图标", Image.class, -1, 7), //
+		发布时间("发布时间", String.class, -1, 8), //
+		任务状态("任务状态", String.class, 80, 10), //
 		;
 
 		private String colName;
 		private Class<?> clazz;
+		private int colWidth;
 		private int index;
 
 		public String getColName() {
@@ -176,13 +222,18 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 			return clazz;
 		}
 
+		public int getColWidth() {
+			return colWidth;
+		}
+
 		public int getIndex() {
 			return index;
 		}
 
-		Col(String colName, Class<?> clazz, int index) {
+		Col(String colName, Class<?> clazz, int width, int index) {
 			this.colName = colName;
 			this.clazz = clazz;
+			this.colWidth = width;
 			this.index = index;
 		}
 	}

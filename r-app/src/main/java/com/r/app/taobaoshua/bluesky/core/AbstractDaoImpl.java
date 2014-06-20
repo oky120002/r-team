@@ -51,7 +51,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	 * @return Session
 	 * @author rain
 	 */
-	protected final Session getSession() {
+	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 

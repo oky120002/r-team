@@ -35,7 +35,7 @@ import com.r.core.desktop.ctrl.HBaseScrollPane;
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.desktop.ctrl.impl.label.HClickLabel;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel;
-import com.r.core.exceptions.LogginErrorException;
+import com.r.core.exceptions.LoginErrorException;
 import com.r.core.exceptions.SwitchPathException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.log.Logger;
@@ -281,7 +281,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 					yuuBoo.getAction().loginYuuBoo(account, accountPassword, captcha, question, answer);
 					yuuBoo.getDataContext().setAccount(account); // 设置账号
 					startCommand();
-				} catch (LogginErrorException lee) {
+				} catch (LoginErrorException lee) {
 					doCaptchaImage();
 					captchaTextField.setText("");
 					captchaTextField.setEnabled(true);

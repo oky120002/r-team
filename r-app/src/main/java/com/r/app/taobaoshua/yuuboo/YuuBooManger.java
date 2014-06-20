@@ -2,9 +2,7 @@ package com.r.app.taobaoshua.yuuboo;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
-import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,6 +10,7 @@ import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpPost;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.ResponseHeader;
 import com.r.core.httpsocket.context.responseheader.ResponseStatus;
@@ -63,33 +62,15 @@ public class YuuBooManger {
 	 */
 	public String login(String account, String accountPassword, String captcha, String question, String answer) throws NetworkIOReadErrorException {
 
-		StringBuilder post = new StringBuilder();
-		try {
-			account = URLEncoder.encode(account, "utf-8");
-		} catch (UnsupportedEncodingException e) {
-		}
-		post.append("username=").append(account);
-		try {
-			accountPassword = URLEncoder.encode(accountPassword, "utf-8");
-		} catch (UnsupportedEncodingException e) {
-		}
-		post.append("&password=").append(accountPassword);
-		post.append("&checkcodestr=").append(captcha);
-		if (StringUtils.isNotBlank(answer) && StringUtils.isNotBlank(question)) {
-			try {
-				answer = URLEncoder.encode(answer, "utf-8");
-			} catch (UnsupportedEncodingException e) {
-			}
-			post.append("&answer=").append(answer);
+		HttpPost post = new HttpPost("utf-8");
+		post.add("username", account);
+		post.add("password", accountPassword);
+		post.add("checkcodestr", captcha);
+		post.add("answer", answer);
+		post.add("question", question);
+		post.add("&dosubmit=1&forward=http%3A%2F%2Fwww.yuuboo.net%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
 
-			try {
-				question = URLEncoder.encode(question, "utf-8");
-			} catch (UnsupportedEncodingException e) {
-			}
-			post.append("&question=").append(question);
-		}
-		post.append("&dosubmit=1&forward=http%3A%2F%2Fwww.yuuboo.net%2Fmember%2Findex.php&btnSubmit.x=82&btnSubmit.y=13");
-		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/login.php", post.toString(), null);
+		ResponseHeader responseHeader = yuuBooHttpSocket.send("http://www.yuuboo.net/member/login.php", post);
 		return responseHeader.bodyToString();
 	}
 

@@ -3,6 +3,7 @@ package com.r.app.taobaoshua.bluesky.core;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
 /**
@@ -12,6 +13,7 @@ import org.hibernate.criterion.Order;
  * @author rain
  */
 public interface AbstractDao<T> {
+
 	/**
 	 * 
 	 * 新增实体

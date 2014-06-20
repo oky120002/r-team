@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Proxy;
 import java.net.Socket;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,25 +89,8 @@ public class RequestHeader implements Serializable {
 	 * 
 	 * @return
 	 */
-	public static RequestHeader newRequestHeaderByPost(HttpUrl httpUrl, String post, HttpProxy httpProxy) {
-		return RequestHeader.newRequestHeaderByEmpty().setPost(httpUrl, post, null).setHttpProxy(httpProxy);
-	}
-
-	/**
-	 * 新建一个使用POST提交的RequestHeader<br>
-	 * 
-	 * @param httpUrl
-	 *            请求路径
-	 * @param post
-	 *            提交的数据
-	 * @param httpProxy
-	 *            代理设置
-	 * @param encoding
-	 *            post的转换编码,如果为空,则不进行任何的编码转换
-	 * @return
-	 */
-	public static RequestHeader newRequestHeaderByPost(HttpUrl httpUrl, String post, String encoding, HttpProxy httpProxy) {
-		return RequestHeader.newRequestHeaderByEmpty().setPost(httpUrl, post, encoding).setHttpProxy(httpProxy);
+	public static RequestHeader newRequestHeaderByPost(HttpUrl httpUrl, HttpPost post, HttpProxy httpProxy) {
+		return RequestHeader.newRequestHeaderByEmpty().setPost(httpUrl, post).setHttpProxy(httpProxy);
 	}
 
 	/**
@@ -200,18 +182,9 @@ public class RequestHeader implements Serializable {
 	 *            请求路径
 	 * @param post
 	 *            post数据
-	 * @param encoding
-	 *            post的转换编码,如果为空则不进行任何的编码转换
 	 */
-	public RequestHeader setPost(HttpUrl httpUrl, String post, String encoding) {
-		if (StringUtils.isNotBlank(encoding)) {
-			try {
-				post = URLEncoder.encode(post, encoding);
-			} catch (Exception e) {
-			}
-		}
-
-		setPost(httpUrl, post.getBytes(), null);
+	public RequestHeader setPost(HttpUrl httpUrl, HttpPost post) {
+		setPost(httpUrl, post.getPost().getBytes(), null);
 		return this;
 	}
 

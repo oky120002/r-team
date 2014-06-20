@@ -8,6 +8,8 @@ package com.r.app.taobaoshua.bluesky.dao;
 
 import java.awt.Image;
 
+import org.hibernate.Session;
+
 import com.r.app.taobaoshua.bluesky.core.AbstractDao;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.context.HttpProxy;
@@ -18,6 +20,9 @@ import com.r.core.httpsocket.context.HttpProxy;
  * @author rain
  */
 public interface TaskDao extends AbstractDao<Task> {
+	
+	/** 获取当前数据库链接Session */
+	public Session getSession();
 
 	/** 设置当前链接的代理 */
 	void setSocketProxy(HttpProxy httpProxy);
@@ -31,7 +36,7 @@ public interface TaskDao extends AbstractDao<Task> {
 	 * @param question
 	 * @param answer
 	 */
-	void login(String account, String accountPassword, String captcha, String question, String answer);
+	String login(String account, String accountPassword, String captcha, String question, String answer);
 
 	/** 获取验证码图片 */
 	Image getLoginCaptchaImage();

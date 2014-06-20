@@ -49,11 +49,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	@Override
 	public void init() {
 		BlueSky.bluesky = this;
-		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-		backgroundTask = new BlueSkyBackgroundTask();
-		blueSkyResolve = new BlueSkyResolve();
-		blueSkyDialog = new BlueSkyDialog();
-
+		
 		// 实现图片缓存接口
 		ImageCacheUtil.init(IMAGE_CACHE_KEY, new ReadImage() {
 			@Override
@@ -61,17 +57,24 @@ public class BlueSky implements TaoBaoShuaStartup {
 				return ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/" + imageKey);
 			}
 		});
+		
+		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+		backgroundTask = new BlueSkyBackgroundTask();
+		blueSkyResolve = new BlueSkyResolve();
+		blueSkyDialog = new BlueSkyDialog();
 	}
 
 	@Override
 	public void startup() {
-		isRunning = true;
-		blueSkyDialog.setVisible(true);
-		try {
-			backgroundTask.startAll();
-		} catch (SchedulerException e) {
-			logger.warn("后台计划任务启动失败", e);
+		if (!isRunning) {
+			try {
+				backgroundTask.startAll();
+			} catch (SchedulerException e) {
+				logger.warn("后台计划任务启动失败", e);
+			}
 		}
+		blueSkyDialog.setVisible(true);
+		isRunning = true;
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.r.app.taobaoshua.bluesky.desktop;
 
-import java.awt.EventQueue;
-
 import org.junit.Test;
 
 import com.r.app.taobaoshua.TaobaoShuaApp;
@@ -18,6 +16,7 @@ public class BlueSkyDialogTest {
 		TaobaoShuaApp.startup(); // 启动
 
 		BlueSky blueSky = TaobaoShuaApp.getInstance().getBlueSky();
+		blueSky.startup();
 		blueSky.getDialog().setVisible(true);
 		
 		while(true);

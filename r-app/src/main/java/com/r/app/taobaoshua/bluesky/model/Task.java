@@ -15,18 +15,18 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.r.app.taobaoshua.bluesky.model.enums.PaymentType;
-import com.r.app.taobaoshua.bluesky.model.enums.ShopScore;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskAddr;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskType;
+import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
+import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 
 @Entity
 @Table(name = "task")
 public class Task {
 
 	@Id
-	@Column(name = "id")
+	@Column
 	@GeneratedValue(generator = "sys_uuid")
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid")
 	private String id;
@@ -92,6 +92,8 @@ public class Task {
 	@Column
 	private Boolean isReview; // 是否需要审核
 	@Column
+	private Boolean isUseQQ; // 是否使用QQ
+	@Column
 	private String auxiliaryCondition; // 附加条件
 
 	@Column
@@ -134,9 +136,9 @@ public class Task {
 	private TaskStatus status; // 当前任务状态
 
 	@Column
-	private Number publishingPointOneDay;
+	private Number publishingPointOneDay; // 一天可以赚取的发布点数
 	@Column
-	private Number securityPriceOneDayOnePPoint;
+	private Number securityPriceOneDayOnePPoint; // 一天一发布点需要的担保金投入
 
 	public void calStatistics() {
 		publishingPointOneDay = null;
@@ -147,11 +149,8 @@ public class Task {
 			double p = publishingPoint.doubleValue(); // 默认赚取全部的发布点,立即完成
 			NumberFormat numberFormat = NumberFormat.getNumberInstance();
 			numberFormat.setMaximumFractionDigits(2); // 允许最大的小数位数
-
-			if (timeLimit.intValue() > 1) {
-				p = p / (timeLimit.doubleValue() / 60 / 24);
-			}
-			publishingPointOneDay = Double.valueOf(p);
+			int day = (int) (timeLimit.doubleValue() / 60 / 24);
+			publishingPointOneDay = Double.valueOf(p / (day < 1 ? 1 : day));
 		}
 
 		// 计算一天一发布点需要的担保金投入
@@ -514,6 +513,10 @@ public class Task {
 		return isSearch;
 	}
 
+	public boolean isSearch() {
+		return isSearch == null ? false : isSearch.booleanValue();
+	}
+
 	/**
 	 * @param isSearch
 	 *            the isSearch to set
@@ -527,6 +530,10 @@ public class Task {
 	 */
 	public Boolean getIsCollect() {
 		return isCollect;
+	}
+
+	public boolean isCollect() {
+		return isCollect == null ? false : isCollect.booleanValue();
 	}
 
 	/**
@@ -544,6 +551,10 @@ public class Task {
 		return isIDCard;
 	}
 
+	public boolean isIDCard() {
+		return isIDCard == null ? false : isIDCard.booleanValue();
+	}
+
 	/**
 	 * @param isIDCard
 	 *            the isIDCard to set
@@ -557,6 +568,10 @@ public class Task {
 	 */
 	public Boolean getIsSincerity() {
 		return isSincerity;
+	}
+
+	public boolean isSincerity() {
+		return isSincerity == null ? false : isSincerity.booleanValue();
 	}
 
 	/**
@@ -574,6 +589,10 @@ public class Task {
 		return isWangWang;
 	}
 
+	public boolean isWangWang() {
+		return isWangWang == null ? false : isWangWang.booleanValue();
+	}
+
 	/**
 	 * @param isWangWang
 	 *            the isWangWang to set
@@ -589,12 +608,35 @@ public class Task {
 		return isReview;
 	}
 
+	public boolean isReview() {
+		return isReview == null ? false : isReview.booleanValue();
+	}
+
 	/**
 	 * @param isReview
 	 *            the isReview to set
 	 */
 	public void setIsReview(Boolean isReview) {
 		this.isReview = isReview;
+	}
+
+	/**
+	 * @return the isUseQQ
+	 */
+	public Boolean getIsUseQQ() {
+		return isUseQQ;
+	}
+
+	public boolean isUseQQ() {
+		return isUseQQ == null ? false : isUseQQ.booleanValue();
+	}
+
+	/**
+	 * @param isUseQQ
+	 *            the isUseQQ to set
+	 */
+	public void setIsUseQQ(Boolean isUseQQ) {
+		this.isUseQQ = isUseQQ;
 	}
 
 	/**

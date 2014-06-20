@@ -14,17 +14,20 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.hibernate.criterion.Order;
-import org.slf4j.helpers.MessageFormatter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
+import com.r.app.taobaoshua.bluesky.dao.SysParDao;
 import com.r.app.taobaoshua.bluesky.dao.TaskDao;
 import com.r.app.taobaoshua.bluesky.model.Task;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.service.command.QueryCommand;
+import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
+import com.r.core.exceptions.LoginErrorException;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -45,10 +48,15 @@ public class TaskService {
 	@Resource(name = "taskDao")
 	private TaskDao taskDao;
 
+	@Resource(name = "syaparDao")
+	private SysParDao sysParDal;
+
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
 		taskDao.setSocketProxy(proxy);
 	}
+
+	// /---------------------系统参数------------//
 
 	// /-------------------------网络-----------------------//
 
@@ -58,6 +66,7 @@ public class TaskService {
 	}
 
 	/**
+	 * 
 	 * 登陆
 	 * 
 	 * @param account
@@ -70,9 +79,16 @@ public class TaskService {
 	 *            密保问题
 	 * @param answer
 	 *            密保答案
+	 * @throws LoginErrorException
+	 *             登陆错误时,抛出此错误
 	 */
-	public void login(String account, String accountPassword, String captcha, String question, String answer) {
-		taskDao.login(account, accountPassword, captcha, question, answer);
+	public void login(String account, String accountPassword, String captcha, String question, String answer) throws LoginErrorException {
+		String login = taskDao.login(account, accountPassword, captcha, question, answer);
+		if (0 < login.indexOf("alert")) { // 登陆错误
+			String error = StringUtils.substringBetween(login, "alert('", "')");
+			throw new LoginErrorException(error);
+		}
+		logger.debug(login);
 	}
 
 	/** 获取任务列表的html代码,只能取[1,10] */
@@ -107,33 +123,6 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
 	public List<Task> queryAll() {
 		return taskDao.queryAll();
-	}
-
-	/**
-	 * 
-	 * @param status
-	 *            任务状态
-	 * @param order
-	 *            排序 1:发布点从高到低,其它:不排序
-	 * @param firstResult
-	 *            起始结果条数,-1则不设置起始条数
-	 * @param maxResults
-	 *            最大结果条数,-1则不设置最大条数
-	 * @return
-	 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-	public List<Task> query(TaskStatus status, int order, int firstResult, int maxResults) {
-		Task task = new Task();
-		if (status != null) {
-			task.setStatus(status);
-		}
-
-		Order[] orders = new Order[3];
-		if (order == 1) {
-			orders[0] = Order.desc("publishingPoint");
-		}
-
-		return taskDao.queryByExample(task, firstResult, maxResults, orders);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -172,27 +161,36 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void updateTaskList(Collection<Task> tasks) {
 		if (CollectionUtils.isNotEmpty(tasks)) {
-			// FIXME r-app:taobaoshua 这里处理有问题,不能这样全部变更状态.一定要有个变更状态的条件才行
-			// 把历史任务状态(未接手)全部更改为已接手
-			String hql = MessageFormatter.format(" update Task set status = '{}' where status = '{}' ", TaskStatus.别人已经接手.name(), TaskStatus.未接手.name()).getMessage();
-			taskDao.updateOrDeleteByHql(hql);
-
 			// 循环最新的任务
-			// 判断此任务是否已经存在,存在则更改任务状态.不存在则插入数据库中
+			// 判断此任务是否已经存在,存在则跳过,不存在则插入数据库中
 			for (Task task : tasks) {
 				Task findTask = queryByNumber(task.getNumber());
 				if (findTask == null) {
 					taskDao.create(task);
-				} else {
-					findTask.setStatus(TaskStatus.未接手);
-					taskDao.update(findTask);
 				}
 			}
 		}
 	}
 
+	/**
+	 * 更新列表中任务的任务状态
+	 * 
+	 * @param task
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void updateTaskStatus(Task task) {
+		if (task != null && TaskStatus.等待接手.equals(task.getStatus())) {
+			String taskDetail = getTaskDetail(task.getTaskId());
+			if (0 < taskDetail.indexOf("alert")) { // 有异常
+				task.setStatus(TaskStatus.已关闭);
+				taskDao.update(task);
+			}
+		}
+	}
+
+	/** 执行查询命令 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-	public long queryAllSize() {
-		return taskDao.queryAllSize();
+	public List<Task> execQueryCommand(QueryCommand<Task> query) {
+		return query.queryCollection(taskDao.getSession());
 	}
 }

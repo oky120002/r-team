@@ -10,12 +10,13 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.MapUtils;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpPost;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.ResponseHeader;
 import com.r.core.log.Logger;
@@ -28,8 +29,8 @@ import com.r.core.log.LoggerFactory;
  */
 @Repository("taskDao")
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
-
 	private static final Logger logger = LoggerFactory.getLogger(TaskDaoImpl.class); // 日志
+	private static final String BODY_ENCODE = "gb2312";
 
 	private HttpSocket httpSocket = HttpSocket.newHttpSocket(true, null);
 
@@ -37,6 +38,11 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		super(Task.class);
 		logger.info("TaskDaoImpl Instance............................");
 		httpSocket.setTimeout(60_000); // 1分钟超时
+	}
+
+	@Override
+	public Session getSession() {
+		return super.getSession();
 	}
 
 	/** 设置当前链接的代理 */
@@ -49,12 +55,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 	@Override
 	public Image getLoginCaptchaImage() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("Accept", "image/webp,*/*;q=0.8");
-		map.put("Accept-Encoding", "gzip,deflate");
-		map.put("Accept-Language", "zh-CN,zh;q=0.8");
-		map.put("Host", "www2.88sxy.com");
 		map.put("Referer", "http://www2.88sxy.com/user/login/");
-		map.put("User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36");
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/plus/verifycode.asp?n=", map);
 		return responseHeader.bodyToImage();
 	}
@@ -69,8 +70,20 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 	 * @param answer
 	 */
 	@Override
-	public void login(String account, String accountPassword, String captcha, String question, String answer) {
+	public String login(String account, String accountPassword, String captcha, String question, String answer) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Referer", "http://www2.88sxy.com/user/login/");
 
+		HttpPost post = new HttpPost("gb2312");
+		post.add("Username", account);
+		post.add("Password", accountPassword);
+		post.add("Question", question);
+		post.add("Answer", answer);
+		post.add("Verifycode", captcha);
+		post.add("u1", null);
+
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/user/CheckUserLogin.asp", post, map);
+		return responseHeader.bodyToString(BODY_ENCODE);
 	}
 
 	/** 获取任务列表html */
@@ -85,21 +98,15 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 
 		// 第三个数字 1:淘宝任务,2:拍拍任务
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/?" + type + "-" + order + "-1-0-" + page);
-		return responseHeader.bodyToString("gb2312");
+		return responseHeader.bodyToString(BODY_ENCODE);
 	}
 
 	@Override
 	public String getTaskDetail(String taskid) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-		map.put("Accept-Encoding", "gzip,deflate");
-		map.put("Accept-Language", "zh-CN,zh;q=0.8");
-		map.put("Host", "www2.88sxy.com");
 		map.put("Referer", "http://www2.88sxy.com/task/TaskJieShou.asp");
-		map.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36");
-		MapUtils.debugPrint(System.out, "Cookes", httpSocket.getCookies());
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/TaskDetail.asp?ID=" + taskid, map);
-		return responseHeader.bodyToString();
+		return responseHeader.bodyToString(BODY_ENCODE);
 	}
 
 }

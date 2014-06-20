@@ -36,7 +36,7 @@ public class BlueSkyBackgroundTask {
 			public void run() {
 				TaskService service = blueSky.getService();
 				for (int page = 1; page < 11; page++) {
-					Collection<Task> tasks = service.getTaskList(page); // 就取前三页
+					Collection<Task> tasks = service.getTaskList(page);
 					service.updateTaskList(tasks);
 					TaskUtil.sleep(5_000);
 				}

@@ -67,7 +67,7 @@ public class ImageCacheUtil {
 			throw new NullPointerException("传入的imageKey不能为空");
 		}
 		if (!ImageCacheUtil.readImages.containsKey(key)) {
-			throw new InitializationErrorException("请调用ImageUtil.init(String, ReadImage)方法初始化ImageUtil的图片读取功能");
+			throw new InitializationErrorException("请调用ImageCacheUtil.init(String, ReadImage)方法初始化ImageUtil的图片读取功能");
 		}
 		if (imageReadModel == null) {
 			imageReadModel = ImageReadMode.Read;

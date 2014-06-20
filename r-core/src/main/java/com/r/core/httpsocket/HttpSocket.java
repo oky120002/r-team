@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.context.Cookie;
+import com.r.core.httpsocket.context.HttpPost;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.HttpUrl;
 import com.r.core.httpsocket.context.RequestHeader;
@@ -71,19 +72,6 @@ public class HttpSocket implements Serializable {
 	}
 
 	/**
-	 * 发送请求
-	 * 
-	 * @param httpUrl
-	 * @param post
-	 * @param encoding
-	 *            post的转换编码,如果为空,则不进行任何的编码转换
-	 * @return
-	 */
-	public ResponseHeader send(String httpUrl, String post, String encoding) throws NetworkIOReadErrorException {
-		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, encoding, requestHeader.getHttpProxy()));
-	}
-
-	/**
 	 * 发送请求地址
 	 * 
 	 * @param httpUrl
@@ -112,20 +100,50 @@ public class HttpSocket implements Serializable {
 	 * 
 	 * @param httpUrl
 	 * @param post
-	 * @param encoding
+	 * @return
+	 */
+	public ResponseHeader send(String httpUrl, HttpPost post) throws NetworkIOReadErrorException {
+		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, requestHeader.getHttpProxy()));
+	}
+
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @param post
+	 * @param headers
+	 * @return
+	 * @throws NetworkIOReadErrorException
+	 */
+	public ResponseHeader send(String httpUrl, HttpPost post, Map<String, String> headers) throws NetworkIOReadErrorException {
+		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, requestHeader.getHttpProxy()).putAllHeader(headers));
+	}
+
+	/**
+	 * 发送请求
+	 * 
+	 * @param httpUrl
+	 * @param post
 	 * @param cookies
 	 * @param headers
 	 * @return
 	 * @throws NetworkIOReadErrorException
 	 *             网络IO读取错误
 	 */
-	public ResponseHeader send(String httpUrl, String post, String encoding, Map<String, Cookie> cookies, Map<String, String> headers) throws NetworkIOReadErrorException {
-		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, encoding, requestHeader.getHttpProxy()).putCookies(cookies).putAllHeader(headers));
+	public ResponseHeader send(String httpUrl, HttpPost post, Map<String, Cookie> cookies, Map<String, String> headers) throws NetworkIOReadErrorException {
+		return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, requestHeader.getHttpProxy()).putCookies(cookies).putAllHeader(headers));
 	}
 
 	/**
 	 * 上传文件<br />
 	 * 部分实现 RFC1867协议
+	 * 
+	 * @param upFilePars
+	 *            参数
+	 * @param parName
+	 *            上传时确定文件的参数名,如果为null,则自动取文件名
+	 * @param fileName
+	 *            上传时确定文件的文件名,如果为null,则自动取文件路径
 	 * 
 	 * @throws NetworkIOReadErrorException
 	 *             网络IO读取错误

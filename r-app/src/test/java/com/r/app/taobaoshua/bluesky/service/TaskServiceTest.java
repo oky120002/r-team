@@ -29,7 +29,7 @@ public class TaskServiceTest {
 	public void queryOneTask() {
 		Task task = taskService.queryByNumber("2014616100256795");
 		System.out.println(task.getAccount());
-		System.out.println("一共 : " + taskService.queryAllSize() + " 条记录");
+//		System.out.println("一共 : " + taskService.queryAllSize() + " 条记录");
 	}
 
 //	@Test

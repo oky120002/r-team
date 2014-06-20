@@ -9,10 +9,10 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.model.Task;
-import com.r.app.taobaoshua.bluesky.model.enums.ShopScore;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskAddr;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskStatus;
-import com.r.app.taobaoshua.bluesky.model.enums.TaskType;
+import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 
 public class BlueSkyResolve {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm:ss");
@@ -35,7 +35,7 @@ public class BlueSkyResolve {
 			html = html.substring(curPos);
 			Task task = new Task();
 			task.setType(TaskAddr.淘宝任务区);
-			task.setStatus(TaskStatus.未接手);
+			task.setStatus(TaskStatus.等待接手);
 
 			// 商品类型和编号
 			String td = StringUtils.substringBetween(html, "<td width=\"163\"", "</td>");
@@ -224,6 +224,13 @@ public class BlueSkyResolve {
 		if (0 < td.indexOf("class=\"blue\"")) {
 			String auxiliaryCondition = StringUtils.substringBetween(td, "class=\"blue\" title=\"", "\">").trim();
 			task.setAuxiliaryCondition(auxiliaryCondition);
+
+			// 只能判断是否需要QQ的参与
+			if (0 < td.indexOf("Q")) {
+				task.setIsUseQQ(Boolean.TRUE);
+			} else {
+				task.setIsUseQQ(Boolean.FALSE);
+			}
 		}
 	}
 }

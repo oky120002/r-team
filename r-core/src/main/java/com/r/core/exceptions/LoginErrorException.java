@@ -9,22 +9,22 @@ package com.r.core.exceptions;
  * @author oky
  * 
  */
-public class LogginErrorException extends SException {
+public class LoginErrorException extends SException {
 	private static final long serialVersionUID = 712032820330054128L;
 
-	public LogginErrorException(String message, Object... objects) {
+	public LoginErrorException(String message, Object... objects) {
 		super(message, objects);
 	}
 
-	public LogginErrorException(String message, Throwable cause) {
+	public LoginErrorException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public LogginErrorException(String message) {
+	public LoginErrorException(String message) {
 		super(message);
 	}
 	
-	public LogginErrorException(String message, int mark) {
+	public LoginErrorException(String message, int mark) {
 		super(message, mark);
 	}
 

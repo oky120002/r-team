@@ -31,7 +31,7 @@ public class BlueSkyDialog extends HBaseFrame implements BlueSkyLoginPanleListen
 	}
 
 	private void initStyle() {
-		setSize(new Dimension(1000, 480));// 设置窗口大小
+		setSize(new Dimension(1000, 680));// 设置窗口大小
 		setResizable(false);
 		setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
 		try {

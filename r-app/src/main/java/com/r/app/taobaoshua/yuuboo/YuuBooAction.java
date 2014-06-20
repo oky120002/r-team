@@ -18,7 +18,7 @@ import com.r.app.taobaoshua.taobao.TaoBao;
 import com.r.app.taobaoshua.taobao.TaoBaoAction;
 import com.r.app.taobaoshua.yuuboo.model.PV;
 import com.r.app.taobaoshua.yuuboo.model.PVQuest;
-import com.r.core.exceptions.LogginErrorException;
+import com.r.core.exceptions.LoginErrorException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
@@ -68,26 +68,26 @@ public class YuuBooAction {
 	 * @param question
 	 * @param answer
 	 * @throws IOException
-	 * @throws LogginErrorException
+	 * @throws LoginErrorException
 	 *             验证码错误
 	 */
-	public void loginYuuBoo(String account, String accountPassword, String captcha, String question, String answer) throws LogginErrorException {
+	public void loginYuuBoo(String account, String accountPassword, String captcha, String question, String answer) throws LoginErrorException {
 		String login = yuuBoo.getManger().login(account, accountPassword, captcha, question, answer);
 		logger.debug("登陆成功后的body文本 : {}", login);
 		if (0 <= login.indexOf("验证码不正确")) {
-			throw new LogginErrorException("验证码错误，请重新登陆！", 1);
+			throw new LoginErrorException("验证码错误，请重新登陆！", 1);
 		}
 		if (0 <= login.indexOf("为确认你的身份")) {
-			throw new LogginErrorException("为确认你的身份，请登陆网站进行身份认证！", 2);
+			throw new LoginErrorException("为确认你的身份，请登陆网站进行身份认证！", 2);
 		}
 		if (0 <= login.indexOf("安全问题回答错误")) {
-			throw new LogginErrorException("安全问题回答错误，请重新认证！", 3);
+			throw new LoginErrorException("安全问题回答错误，请重新认证！", 3);
 		}
 		if (0 <= login.indexOf("密码不正确")) {
-			throw new LogginErrorException("密码不正确，请重新登陆！", 4);
+			throw new LoginErrorException("密码不正确，请重新登陆！", 4);
 		}
 		if (0 <= login.indexOf("你已经连续5次登录失败")) {
-			throw new LogginErrorException("连续5次登录失败，请1小时后再登录！", 5);
+			throw new LoginErrorException("连续5次登录失败，请1小时后再登录！", 5);
 		}
 
 	}
