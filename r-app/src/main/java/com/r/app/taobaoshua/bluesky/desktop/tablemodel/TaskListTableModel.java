@@ -192,7 +192,7 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		发布点数("发布点数", String.class, -1, 3), //
 		发布点天("发布点/天", String.class, 145, 11), //
 		元发布点天("元/1发布点1天", String.class, 90, 12), //
-		好评时限("好评时限", String.class, 45, 9), //
+		好评时限("好评时限", String.class, 65, 9), //
 		商保("商保", Image.class, 25, 13), //
 		实名("实名", Image.class, 45, 14), //
 		搜索("搜索", Image.class, 40, 15), //
