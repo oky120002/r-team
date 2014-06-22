@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,7 +19,7 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
  * 
  */
 public class TaskQueryCommand implements QueryCommand<Task> {
-	private TaskStatus status = null; // 任务状态
+	private TaskStatus[] status = null; // 任务状态
 	private int order = -1; // 排序 1:发布点从高到低 , 2: 一天可以赚取的发布点数从高到低 , 其它:不排序
 	private int firstResult = -1; // 查询起始条数
 	private int maxResults = -1; // 查询最大条数
@@ -30,6 +31,8 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	private Boolean isWangWang = null; // 是否旺聊
 	private Boolean isReview = null; // 是否需要审核
 	private Boolean isUseQQ = null; // 是否有QQ参数
+	private Boolean isUpdatePrice = null; // 是否改价
+	private Boolean isUpdateTaskDetail = null; // 是否已经获取过任务详细信息
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -39,9 +42,8 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		hql.append(" from ").append(Task.class.getName()).append(" t where 1=1 ");
 
 		// 条件
-		if (status != null) { // 任务状态
-			hql.append(" and t.status = :status ");
-			pars.put("status", status);
+		if (ArrayUtils.isNotEmpty(status)) { // 任务状态
+			hql.append(" and t.status in (:status) ");
 		}
 
 		if (isSearch != null) { // 是否需要搜索
@@ -73,6 +75,15 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 			pars.put("isUseQQ", isUseQQ);
 		}
 
+		if (isUpdatePrice != null) { // 是否改价
+			hql.append(" and t.isUpdatePrice = :isUpdatePrice ");
+			pars.put("isUpdatePrice", isUpdatePrice);
+		}
+		if (isUpdateTaskDetail != null) { // 是否已经获取过任务详细信息
+			hql.append(" and t.isUpdateTaskDetail = :isUpdateTaskDetail ");
+			pars.put("isUpdateTaskDetail", isUpdateTaskDetail);
+		}
+
 		// 排序
 		if (-1 < order) {
 			switch (order) {
@@ -87,6 +98,9 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 
 		// 开始查询
 		Query query = session.createQuery(hql.toString());
+		if (ArrayUtils.isNotEmpty(status)) { // 任务状态
+			query.setParameterList("status", status);
+		}
 		query.setProperties(pars);
 		if (0 <= this.firstResult && 0 < this.maxResults && this.firstResult <= this.maxResults) {
 			query.setFirstResult(firstResult);
@@ -98,7 +112,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	/**
 	 * @return the status
 	 */
-	public TaskStatus getStatus() {
+	public TaskStatus[] getStatus() {
 		return status;
 	}
 
@@ -106,7 +120,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	 * @param status
 	 *            the status to set
 	 */
-	public void setStatus(TaskStatus status) {
+	public void setStatus(TaskStatus... status) {
 		this.status = status;
 	}
 
@@ -247,6 +261,29 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	 */
 	public void setIsUseQQ(Boolean isUseQQ) {
 		this.isUseQQ = isUseQQ;
+	}
+
+	public Boolean getIsUpdatePrice() {
+		return isUpdatePrice;
+	}
+
+	public void setIsUpdatePrice(Boolean isUpdatePrice) {
+		this.isUpdatePrice = isUpdatePrice;
+	}
+
+	/**
+	 * @return the isUpdateTaskDetail
+	 */
+	public Boolean getIsUpdateTaskDetail() {
+		return isUpdateTaskDetail;
+	}
+
+	/**
+	 * @param isUpdateTaskDetail
+	 *            the isUpdateTaskDetail to set
+	 */
+	public void setIsUpdateTaskDetail(Boolean isUpdateTaskDetail) {
+		this.isUpdateTaskDetail = isUpdateTaskDetail;
 	}
 
 }

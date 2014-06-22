@@ -56,7 +56,7 @@ public class YuuBooCaptchaDialog extends HBaseDialog implements ActionListener {
 	public String getCaptcha() {
 		captchaTextField.setText("");
 		doCaptchaImage();
-		TaskUtil.sleep(1000);
+		TaskUtil.sleep(1_000);
 		setVisible(true);
 		setAlwaysOnTop(true);
 		return captcha;

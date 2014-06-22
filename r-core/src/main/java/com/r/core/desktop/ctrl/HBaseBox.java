@@ -42,6 +42,17 @@ public class HBaseBox extends Box implements EventShow {
 		return new HBaseBox(BoxLayout.X_AXIS);
 	}
 
+	/** 批量添加组件 */
+	public void adds(Component... components) {
+		if (ArrayUtils.isNotEmpty(components)) {
+			for (Component component : components) {
+				if (component != null) {
+					this.add(component);
+				}
+			}
+		}
+	}
+
 	/** 创建一个从左到右显示其组件的 Box */
 	public static HBaseBox createHorizontalBaseBox(Component... components) {
 		HBaseBox box = createHorizontalBaseBox();

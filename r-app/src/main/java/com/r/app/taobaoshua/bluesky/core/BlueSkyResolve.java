@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
-import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 
@@ -34,8 +34,6 @@ public class BlueSkyResolve {
 		while ((curPos = html.indexOf("<tr>")) != -1) {
 			html = html.substring(curPos);
 			Task task = new Task();
-			task.setType(TaskAddr.淘宝任务区);
-			task.setStatus(TaskStatus.等待接手);
 
 			// 商品类型和编号
 			String td = StringUtils.substringBetween(html, "<td width=\"163\"", "</td>");
@@ -83,6 +81,115 @@ public class BlueSkyResolve {
 		}
 
 		return tasks;
+	}
+
+	/** 解析任务详细信息 */
+	public void resolveTaskDetail(Task task, String taskDetail) {
+		if (0 < taskDetail.indexOf("任务编号")) { // 有异常,例如:传送的ID有误或该任务已被删除
+			String[] substringsBetween = StringUtils.substringsBetween(taskDetail, " class=\"tdbg\"", "</tr>");
+			for (String tr : substringsBetween) {
+				if (0 < tr.indexOf("掌柜名称")) {
+					task.setShopkeeper(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
+				}
+
+				if (0 < tr.indexOf("商品标题")) {
+					task.setItemTitle(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
+				}
+
+				if (0 < tr.indexOf("商品地址")) {
+					task.setItemAddr(StringUtils.substringBetween(tr, "http://", "</td>"));
+				}
+
+				if (0 < tr.indexOf("支付方式")) {
+					task.setPaymentType(PaymentType.valueOf(StringUtils.substringBetween(tr, "&nbsp;", "</td>").trim()));
+				}
+
+				if (0 < tr.indexOf("商品标题")) {
+					task.setItemTitle(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
+				}
+
+				if (0 < tr.indexOf("指定好评内容")) {
+					task.setPraise(StringUtils.substringBetween(tr, "KS_HaoPingContent\">", "</textarea>"));
+				}
+
+				if (0 < tr.indexOf("任务发布时间")) {
+					try {
+						task.setTaskPublishingTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+
+				if (0 < tr.indexOf("任务接手时间")) {
+					try {
+						task.setTaskedTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", " &nbsp;")));
+					} catch (Exception e) {
+					}
+
+					if (0 < tr.indexOf("target=\"_blank\">")) {
+						task.setTaskerAccount(StringUtils.substringBetween(tr, "target=\"_blank\">", "</a>"));
+					}
+
+					if (0 < tr.indexOf("接手买号")) {
+						task.setTaskerBuyAccount(StringUtils.substringBetween(tr, "接手买号：", "</td>"));
+					}
+				}
+
+				if (0 < tr.indexOf("任务支付时间")) {
+					try {
+						task.setTaskPaymentTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+
+				if (0 < tr.indexOf("任务发货时间")) {
+					try {
+						task.setTaskShippingTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+				if (0 < tr.indexOf("任务收货好评时间")) {
+					try {
+						task.setTaskReceiptTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+				if (0 < tr.indexOf("任务确认审核时间")) {
+					try {
+						task.setTaskConfirmedReviewTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+				if (0 < tr.indexOf("发布方平台评价时间")) {
+					try {
+						task.setTaskPublishingEvaluationTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+				if (0 < tr.indexOf("接手方平台评价时间")) {
+					try {
+						task.setTaskerEvaluationTime(sdf.parse(StringUtils.substringBetween(tr, "&nbsp;", "</td>")));
+					} catch (Exception e) {
+					}
+				}
+
+				if (0 < tr.indexOf("任务当前状态")) {
+					TaskStatus status = null;
+					try {
+						status = TaskStatus.valueOf(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
+					} catch (IllegalArgumentException e) {
+						// 找不到此枚举
+						if (0 < tr.indexOf("等待发布方平台评价")) {
+							status = TaskStatus.已完成_等待发布方平台评价;
+						} else {
+							status = TaskStatus.异常;
+						}
+					}
+					task.setStatus(status);
+				}
+			}
+		} else {
+			task.setStatus(TaskStatus.未知状态);
+		}
 	}
 
 	/** 解析商品类型和编号 */
@@ -230,6 +337,10 @@ public class BlueSkyResolve {
 				task.setIsUseQQ(Boolean.TRUE);
 			} else {
 				task.setIsUseQQ(Boolean.FALSE);
+			}
+
+			if (0 < td.indexOf("改价")) {
+				task.setIsUpdatePrice(Boolean.TRUE);
 			}
 		}
 	}

@@ -24,9 +24,9 @@ import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
 import com.r.app.taobaoshua.bluesky.dao.SysParDao;
 import com.r.app.taobaoshua.bluesky.dao.TaskDao;
 import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.command.QueryCommand;
-import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
 import com.r.core.exceptions.LoginErrorException;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
@@ -61,7 +61,7 @@ public class TaskService {
 	// /-------------------------网络-----------------------//
 
 	/** 获取验证码 */
-	public Image getLoginBlueSkyCaptchaImage() {
+	public Image webGetLoginBlueSkyCaptchaImage() {
 		return taskDao.getLoginCaptchaImage();
 	}
 
@@ -82,7 +82,7 @@ public class TaskService {
 	 * @throws LoginErrorException
 	 *             登陆错误时,抛出此错误
 	 */
-	public void login(String account, String accountPassword, String captcha, String question, String answer) throws LoginErrorException {
+	public void webDoLogin(String account, String accountPassword, String captcha, String question, String answer) throws LoginErrorException {
 		String login = taskDao.login(account, accountPassword, captcha, question, answer);
 		if (0 < login.indexOf("alert")) { // 登陆错误
 			String error = StringUtils.substringBetween(login, "alert('", "')");
@@ -92,7 +92,7 @@ public class TaskService {
 	}
 
 	/** 获取任务列表的html代码,只能取[1,10] */
-	public Collection<Task> getTaskList(int page) {
+	public Collection<Task> webGetTaskList(int page) {
 		page = page < 1 ? 1 : page;
 		page = 10 < page ? 10 : page;
 
@@ -101,11 +101,6 @@ public class TaskService {
 		String html = taskDao.getTaskListHtml(page, 2, 3);
 		tasks.addAll(resolve.resolveTaskListHtml(html));
 		return tasks;
-	}
-
-	/** 获取任务详细信息 */
-	public String getTaskDetail(String taskid) {
-		return taskDao.getTaskDetail(taskid);
 	}
 
 	// /-------------------------数据-----------------------//
@@ -136,6 +131,55 @@ public class TaskService {
 	}
 
 	/**
+	 * 更新可接任务列表
+	 * 
+	 * @param tasks
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void updateTaskList(Collection<Task> tasks) {
+		if (CollectionUtils.isNotEmpty(tasks)) {
+			// 循环最新的任务
+			// 判断此任务是否已经存在,存在则跳过,不存在则插入数据库中
+			for (Task task : tasks) {
+				Task findTask = queryByNumber(task.getNumber());
+				if (findTask == null) {
+					// 添加一些默认值
+					task.setType(TaskAddr.淘宝任务区);
+					task.setStatus(TaskStatus.等待接手);
+					task.setIsUpdateTaskDetail(false);
+					taskDao.create(task);
+				}
+			}
+		}
+	}
+
+	/** 设置所有任务是否被检查过详细信息 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void setTaskDetailUpdated(boolean b) {
+		if (b) {
+			update("update Task set isUpdateTaskDetail = true");
+		} else {
+			update("update Task set isUpdateTaskDetail = false");
+		}
+	}
+
+	/**
+	 * 更新列表中任务的任务状态
+	 * 
+	 * @param task
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void updateTaskDetail(Task task) {
+		if (task != null) {
+			String taskDetail = taskDao.getTaskDetail(task.getTaskId());
+			BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
+			resolve.resolveTaskDetail(task, taskDetail);
+			task.setIsUpdateTaskDetail(true);
+			taskDao.update(task);
+		}
+	}
+
+	/**
 	 * 根据任务编号查询任务实体
 	 * 
 	 * @param number
@@ -150,41 +194,6 @@ public class TaskService {
 			return null;
 		} else {
 			return tasks.get(0);
-		}
-	}
-
-	/**
-	 * 更新可接任务列表
-	 * 
-	 * @param tasks
-	 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public void updateTaskList(Collection<Task> tasks) {
-		if (CollectionUtils.isNotEmpty(tasks)) {
-			// 循环最新的任务
-			// 判断此任务是否已经存在,存在则跳过,不存在则插入数据库中
-			for (Task task : tasks) {
-				Task findTask = queryByNumber(task.getNumber());
-				if (findTask == null) {
-					taskDao.create(task);
-				}
-			}
-		}
-	}
-
-	/**
-	 * 更新列表中任务的任务状态
-	 * 
-	 * @param task
-	 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public void updateTaskStatus(Task task) {
-		if (task != null && TaskStatus.等待接手.equals(task.getStatus())) {
-			String taskDetail = getTaskDetail(task.getTaskId());
-			if (0 < taskDetail.indexOf("alert")) { // 有异常
-				task.setStatus(TaskStatus.已关闭);
-				taskDao.update(task);
-			}
 		}
 	}
 

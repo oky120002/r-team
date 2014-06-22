@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.app.taobaoshua.bluesky.dao.TaskDao;
 import com.r.app.taobaoshua.bluesky.model.Task;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,21 +19,24 @@ public class TaskServiceTest {
 
 	@Resource(name = "taskService")
 	private TaskService taskService;
-	
+
+	@Resource(name = "taskDao")
+	private TaskDao taskDao;
+
 	@Test
-	public void getTaskDetail(){
-		String taskDetail = taskService.getTaskDetail("648521");
+	public void getTaskDetail() {
+		String taskDetail = taskDao.getTaskDetail("548521");
 		System.out.println(taskDetail);
 	}
 
-//	 @Test
+	// @Test
 	public void queryOneTask() {
 		Task task = taskService.queryByNumber("2014616100256795");
 		System.out.println(task.getAccount());
-//		System.out.println("一共 : " + taskService.queryAllSize() + " 条记录");
+		// System.out.println("一共 : " + taskService.queryAllSize() + " 条记录");
 	}
 
-//	@Test
+	// @Test
 	public void test() throws IOException {
 
 		// String html = FileUtils.readFileToString(new

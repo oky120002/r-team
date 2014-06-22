@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.swing.Icon;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
@@ -55,6 +57,8 @@ public class Task {
 	private String itemId; // 商品id
 	@Column
 	private String itemTitle; // 商品标题
+	@Column(length = 2048)
+	private String itemAddr; // 商品地址
 	@Column
 	private Boolean isUseSearchLoc; // 是否使用搜索来路
 	@Column
@@ -64,8 +68,6 @@ public class Task {
 	private Number securityPrice; // 任务担保金额,这里金额不大所以使用Double.如果发现有大金额可以改为BigDecimal
 	@Column
 	private Number publishingPoint; // 发布点
-	@Column
-	private Boolean isUpdatePrice; // 是否改了价
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TaskType taskType; // 任务类型
@@ -94,10 +96,10 @@ public class Task {
 	@Column
 	private Boolean isUseQQ; // 是否使用QQ
 	@Column
+	private Boolean isUpdatePrice; // 是否改价
+	@Column
 	private String auxiliaryCondition; // 附加条件
 
-	@Column
-	private String tasker; // 任务接手人
 	@Column
 	private String addr; // 收货地址
 	@Column
@@ -134,6 +136,9 @@ public class Task {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TaskStatus status; // 当前任务状态
+
+	@Column
+	private Boolean isUpdateTaskDetail; // 是否已经更新过详细信息
 
 	@Column
 	private Number publishingPointOneDay; // 一天可以赚取的发布点数
@@ -357,6 +362,21 @@ public class Task {
 	}
 
 	/**
+	 * @return the itemAddr
+	 */
+	public String getItemAddr() {
+		return itemAddr;
+	}
+
+	/**
+	 * @param itemAddr
+	 *            the itemAddr to set
+	 */
+	public void setItemAddr(String itemAddr) {
+		this.itemAddr = itemAddr;
+	}
+
+	/**
 	 * @return the isUseSearchLoc
 	 */
 	public Boolean getIsUseSearchLoc() {
@@ -423,6 +443,10 @@ public class Task {
 		return isUpdatePrice;
 	}
 
+	public boolean isUpdatePrice() {
+		return isUpdatePrice == null ? false : isUpdatePrice.booleanValue();
+	}
+
 	/**
 	 * @param isUpdatePrice
 	 *            the isUpdatePrice to set
@@ -436,6 +460,33 @@ public class Task {
 	 */
 	public TaskType getTaskType() {
 		return taskType;
+	}
+
+	/** 获取任务类型图标 */
+	public Icon getTaskTypeIcon() {
+		BlueSky blueSky = BlueSky.getInstance();
+		Icon icon = null;
+		switch (taskType) {
+		case 实物:
+			icon = blueSky.getIcon("realobject.gif");
+			break;
+		case 实购:
+			icon = blueSky.getIcon("realobject_shop.gif");
+			break;
+		case 虚拟:
+			icon = blueSky.getIcon("virtual.gif");
+			break;
+		case 虚购:
+			icon = blueSky.getIcon("virtual_shop.gif");
+			break;
+		case 搭配:
+			icon = blueSky.getIcon("dapei.gif");
+			break;
+		case 其它:
+		default:
+			return null;
+		}
+		return icon;
 	}
 
 	/**
@@ -655,21 +706,6 @@ public class Task {
 	}
 
 	/**
-	 * @return the tasker
-	 */
-	public String getTasker() {
-		return tasker;
-	}
-
-	/**
-	 * @param tasker
-	 *            the tasker to set
-	 */
-	public void setTasker(String tasker) {
-		this.tasker = tasker;
-	}
-
-	/**
 	 * @return the addr
 	 */
 	public String getAddr() {
@@ -862,6 +898,25 @@ public class Task {
 	 */
 	public void setStatus(TaskStatus status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the isUpdateTaskDetail
+	 */
+	public Boolean getIsUpdateTaskDetail() {
+		return isUpdateTaskDetail;
+	}
+
+	public boolean isUpdateTaskDetail() {
+		return isUpdateTaskDetail == null ? false : isUpdateTaskDetail.booleanValue();
+	}
+
+	/**
+	 * @param isUpdateTaskDetail
+	 *            the isUpdateTaskDetail to set
+	 */
+	public void setIsUpdateTaskDetail(Boolean isUpdateTaskDetail) {
+		this.isUpdateTaskDetail = isUpdateTaskDetail;
 	}
 
 	/**

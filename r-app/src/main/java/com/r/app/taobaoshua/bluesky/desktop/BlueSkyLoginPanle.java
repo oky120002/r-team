@@ -87,7 +87,7 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 			public void run() {
 				Image captcha = null;
 				try {
-					captcha = blueSky.getService().getLoginBlueSkyCaptchaImage();
+					captcha = blueSky.getService().webGetLoginBlueSkyCaptchaImage();
 				} catch (NetworkIOReadErrorException e) {
 					HAlert.showErrorTips(e.getMessage(), BlueSkyLoginPanle.this, e);
 				}
@@ -125,7 +125,7 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 					answerTextField.setEnabled(false);
 					loginButton.setEnabled(false);
 
-					blueSky.getService().login(account, accountPassword, captcha, question, answer);
+					blueSky.getService().webDoLogin(account, accountPassword, captcha, question, answer);
 					BlueSkyLoginPanle.this.listener.loginFinsh();
 				} catch (LoginErrorException e) {
 					HAlert.showWarnTips(e.getMessage(), BlueSkyLoginPanle.this);

@@ -4,6 +4,10 @@
 package com.r.app.taobaoshua.bluesky;
 
 import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.Icon;
 
 import org.quartz.SchedulerException;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.r.app.taobaoshua.TaoBaoShuaStartup;
 import com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask;
 import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
-import com.r.app.taobaoshua.bluesky.desktop.BlueSkyDialog;
+import com.r.app.taobaoshua.bluesky.desktop.BlueSkyFrame;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.core.exceptions.io.IOReadErrorException;
 import com.r.core.log.Logger;
@@ -29,11 +33,12 @@ public class BlueSky implements TaoBaoShuaStartup {
 	private static final Logger logger = LoggerFactory.getLogger(BlueSky.class);
 	private static final String IMAGE_CACHE_KEY = BlueSky.class.getName();
 
+	private static Map<String, Icon> icons;
 	private static BlueSky bluesky;
 	private boolean isRunning;
 	private boolean isLogin;
 	private BlueSkyResolve blueSkyResolve;
-	private BlueSkyDialog blueSkyDialog;
+	private BlueSkyFrame blueSkyDialog;
 	private BlueSkyBackgroundTask backgroundTask; // 后台任务
 	private ApplicationContext applicationContext;
 
@@ -49,7 +54,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	@Override
 	public void init() {
 		BlueSky.bluesky = this;
-		
+
 		// 实现图片缓存接口
 		ImageCacheUtil.init(IMAGE_CACHE_KEY, new ReadImage() {
 			@Override
@@ -57,11 +62,11 @@ public class BlueSky implements TaoBaoShuaStartup {
 				return ImageUtil.readImageFromIO("com/r/app/taobaoshua/bluesky/image/" + imageKey);
 			}
 		});
-		
+
 		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		backgroundTask = new BlueSkyBackgroundTask();
 		blueSkyResolve = new BlueSkyResolve();
-		blueSkyDialog = new BlueSkyDialog();
+		blueSkyDialog = new BlueSkyFrame();
 	}
 
 	@Override
@@ -73,6 +78,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 				logger.warn("后台计划任务启动失败", e);
 			}
 		}
+		icons = new HashMap<String, Icon>();
 		blueSkyDialog.setVisible(true);
 		isRunning = true;
 	}
@@ -95,7 +101,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 		return blueSkyResolve;
 	}
 
-	public BlueSkyDialog getDialog() {
+	public BlueSkyFrame getDialog() {
 		return blueSkyDialog;
 	}
 
@@ -107,4 +113,12 @@ public class BlueSky implements TaoBaoShuaStartup {
 	public Image getImage(String imageName) {
 		return ImageCacheUtil.getImage(IMAGE_CACHE_KEY, imageName);
 	}
+
+	public Icon getIcon(String name) {
+		if (!icons.containsKey(name)) {
+			icons.put(name, ImageUtil.readIconFromImage(getImage(name)));
+		}
+		return icons.get(name);
+	}
+
 }

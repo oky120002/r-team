@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds">
 
-	<property name="appName" value="r-web" />
+	<property name="appName" value="r_app:taobaoshua" />
 	<property name="logPath" value="D:/logs/r-app/taobaoshua" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
