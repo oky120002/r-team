@@ -202,4 +202,10 @@ public class TaskService {
 	public List<Task> execQueryCommand(QueryCommand<Task> query) {
 		return query.queryCollection(taskDao.getSession());
 	}
+
+	/** 接手任务 */
+	public boolean acceptTask(Task task) {
+		
+		return false;
+	}
 }

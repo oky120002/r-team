@@ -132,7 +132,6 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		case COMMAN_LIST_UPDATEPRICE_ALL:
 		case COMMAN_LIST_UPDATEPRICE_INCLUDE:
 		case COMMAN_LIST_UPDATEPRICE_EXCLUDE:
-
 			doTaskInfos();
 			break;
 		case COMMAND_CHECK_TASKSTATUS: // 校验任务状态

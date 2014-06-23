@@ -17,9 +17,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
-import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.exceptions.SwitchPathException;
 
@@ -33,7 +31,6 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 	private static final long serialVersionUID = -154657428132471147L;
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final NumberFormat numberFormat = NumberFormat.getNumberInstance();
-	private static final BlueSky blueSky = BlueSky.getInstance();
 	private static final List<Task> EMPTY = new ArrayList<Task>();
 	private List<Task> tasks = EMPTY;
 
@@ -86,37 +83,15 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		case 4: // 发布人
 			return task.getAccount();
 		case 5: // 是否在线
-			if (task.getIsAccountOnLine()) {
-				return blueSky.getIcon("online.gif");
-			} else {
-				return blueSky.getIcon("notonline.gif");
-			}
+			return task.getIsAccountOnLineIcon();
 		case 6: // 是否VIP
-			if (task.getIsAccountVip()) {
-				return blueSky.getIcon("vip.gif");
-			} else {
-				return null;
-			}
+			return task.getIsAccountVipIcon();
 		case 7: // 等级图标
-			String accountLevel = task.getAccountLevel();
-			if (StringUtils.isNotBlank(accountLevel)) {
-				return blueSky.getIcon(accountLevel);
-			} else if (task.getIsNew()) {
-				return blueSky.getIcon("new.gif");
-			} else {
-				return null;
-			}
+			return task.getAccountLevelIcon();
 		case 8: // 发布时间
 			return sdf.format(task.getTaskPublishingTime());
 		case 9: // 好评时限
-			int time = task.getTimeLimit().intValue();
-			if (time < 30) { // 立即
-				return "立即确认";
-			} else if (0 < time && time < 60) {
-				return "30分钟确认";
-			} else {
-				return ((time + 1) / 60 / 24) + "天";
-			}
+			return task.getTimeLimitString();
 		case 10: // 任务状态
 			return task.getStatus().name();
 		case 11:
@@ -126,23 +101,23 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		case 12:
 			return numberFormat.format(task.getSecurityPriceOneDayOnePPoint().doubleValue()) + "元";
 		case 13: // 商保
-			return task.isSincerity() ? blueSky.getIcon("ShangBao.gif") : null;
+			return task.getIsSincerityIcon();
 		case 14: // 实名
-			return task.isIDCard() ? blueSky.getIcon("ShiMing.gif") : null;
+			return task.getIsIDCardIcon();
 		case 15: // 搜索
-			return task.isSearch() ? blueSky.getIcon("SouSuo.gif") : null;
+			return task.getIsSearchIcon();
 		case 16: // 搜藏
-			return task.isCollect() ? blueSky.getIcon("ShouCang.gif") : null;
+			return task.getIsCollectIcon();
 		case 17: // 旺聊
-			return task.getIsWangWang() ? blueSky.getIcon("WangLiao.gif") : null;
+			return task.getIsWangWangIcon();
 		case 18: // 审核
-			return task.isReview() ? blueSky.getIcon("ShenHe.gif") : null;
+			return task.getIsReviewIcon();
 		case 19: // 条件
 			return task.getAuxiliaryCondition();
 		case 20: // 是否有QQ参与
-			return task.isUseQQ() ? blueSky.getIcon("qq.gif") : null;
+			return task.getIsUseQQIcon();
 		case 21: // 是否改价
-			return task.isUpdatePrice() ? blueSky.getIcon("gai.gif") : null;
+			return task.getIsUpdatePriceIcon();
 		default:
 			throw new SwitchPathException("列表列越界");
 		}

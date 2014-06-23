@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.swing.Icon;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
@@ -26,6 +27,8 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 @Entity
 @Table(name = "task")
 public class Task {
+
+	private static final BlueSky blueSky = BlueSky.getInstance();
 
 	@Id
 	@Column
@@ -219,6 +222,21 @@ public class Task {
 	}
 
 	/**
+	 * @return the isAccountOnLine
+	 */
+	public boolean isAccountVip() {
+		return isAccountVip == null ? false : isAccountVip.booleanValue();
+	}
+
+	public Icon getIsAccountVipIcon() {
+		if (isAccountVip()) {
+			return blueSky.getIcon("vip.gif");
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * @param isAccountVip
 	 *            the isAccountVip to set
 	 */
@@ -249,6 +267,20 @@ public class Task {
 	}
 
 	/**
+	 * @return the accountLevel
+	 */
+	public Icon getAccountLevelIcon() {
+		String accountLevel = getAccountLevel();
+		if (StringUtils.isNotBlank(accountLevel)) {
+			return blueSky.getIcon(accountLevel);
+		} else if (getIsNew()) {
+			return blueSky.getIcon("new.gif");
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * @param accountLevel
 	 *            the accountLevel to set
 	 */
@@ -261,6 +293,21 @@ public class Task {
 	 */
 	public Boolean getIsAccountOnLine() {
 		return isAccountOnLine;
+	}
+
+	/**
+	 * @return the isAccountOnLine
+	 */
+	public boolean isAccountOnLine() {
+		return isAccountOnLine == null ? false : isAccountOnLine.booleanValue();
+	}
+
+	public Icon getIsAccountOnLineIcon() {
+		if (isAccountOnLine()) {
+			return blueSky.getIcon("online.gif");
+		} else {
+			return blueSky.getIcon("notonline.gif");
+		}
 	}
 
 	/**
@@ -443,6 +490,10 @@ public class Task {
 		return isUpdatePrice;
 	}
 
+	public Icon getIsUpdatePriceIcon() {
+		return isUpdatePrice() ? blueSky.getIcon("gai.gif") : null;
+	}
+
 	public boolean isUpdatePrice() {
 		return isUpdatePrice == null ? false : isUpdatePrice.booleanValue();
 	}
@@ -464,7 +515,6 @@ public class Task {
 
 	/** 获取任务类型图标 */
 	public Icon getTaskTypeIcon() {
-		BlueSky blueSky = BlueSky.getInstance();
 		Icon icon = null;
 		switch (taskType) {
 		case 实物:
@@ -502,6 +552,17 @@ public class Task {
 	 */
 	public Number getTimeLimit() {
 		return timeLimit;
+	}
+
+	public String getTimeLimitString() {
+		int time = getTimeLimit().intValue();
+		if (time < 30) { // 立即
+			return "立即确认";
+		} else if (0 < time && time < 60) {
+			return "30分钟确认";
+		} else {
+			return ((time + 1) / 60 / 24) + "天";
+		}
 	}
 
 	/**
@@ -568,6 +629,10 @@ public class Task {
 		return isSearch == null ? false : isSearch.booleanValue();
 	}
 
+	public Icon getIsSearchIcon() {
+		return isSearch() ? blueSky.getIcon("SouSuo.gif") : null;
+	}
+
 	/**
 	 * @param isSearch
 	 *            the isSearch to set
@@ -585,6 +650,10 @@ public class Task {
 
 	public boolean isCollect() {
 		return isCollect == null ? false : isCollect.booleanValue();
+	}
+
+	public Icon getIsCollectIcon() {
+		return isCollect() ? blueSky.getIcon("ShouCang.gif") : null;
 	}
 
 	/**
@@ -606,6 +675,10 @@ public class Task {
 		return isIDCard == null ? false : isIDCard.booleanValue();
 	}
 
+	public Icon getIsIDCardIcon() {
+		return isIDCard() ? blueSky.getIcon("ShiMing.gif") : null;
+	}
+
 	/**
 	 * @param isIDCard
 	 *            the isIDCard to set
@@ -625,6 +698,10 @@ public class Task {
 		return isSincerity == null ? false : isSincerity.booleanValue();
 	}
 
+	public Icon getIsSincerityIcon() {
+		return isSincerity() ? blueSky.getIcon("ShangBao.gif") : null;
+	}
+
 	/**
 	 * @param isSincerity
 	 *            the isSincerity to set
@@ -638,6 +715,10 @@ public class Task {
 	 */
 	public Boolean getIsWangWang() {
 		return isWangWang;
+	}
+
+	public Icon getIsWangWangIcon() {
+		return isWangWang() ? blueSky.getIcon("WangLiao.gif") : null;
 	}
 
 	public boolean isWangWang() {
@@ -659,6 +740,10 @@ public class Task {
 		return isReview;
 	}
 
+	public Icon getIsReviewIcon() {
+		return isReview() ? blueSky.getIcon("ShenHe.gif") : null;
+	}
+
 	public boolean isReview() {
 		return isReview == null ? false : isReview.booleanValue();
 	}
@@ -676,6 +761,10 @@ public class Task {
 	 */
 	public Boolean getIsUseQQ() {
 		return isUseQQ;
+	}
+
+	public Icon getIsUseQQIcon() {
+		return isUseQQ() ? blueSky.getIcon("qq.gif") : null;
 	}
 
 	public boolean isUseQQ() {
