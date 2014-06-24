@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +31,10 @@ import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.TaskUtil;
 
+// 已经支付
+// /task/TaskJieShou.asp?Tid=0&Status=3
+// Referer: http://www2.88sxy.com/task/TaskJieShou.asp?Action=Pay&ID=659090
+
 /**
  * @author Administrator
  * 
@@ -42,6 +47,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private static final BlueSky blueSky = BlueSky.getInstance();
 	private static final String COMMAND_ACCEPT_TASK = "command_accept_task"; // 命令_接手任务
 	private static final String COMMAND_DISCARD_TASK = "command_discard_task"; // 命令_放弃任务
+	private static final String COMMAND_DO_GOOD_PRAISE = "command_do_good_praise"; // 命令_已经好评
 	private Task task = new Task(); // 任务
 
 	private JLabel numberLabel = new JLabel(); // 任务编号
@@ -55,9 +61,12 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private JLabel isSincerityLabel = new JLabel(); // 商保
 	private JLabel isCollectLabel = new JLabel(); // 收藏
 	private JLabel taskStatusLabel = new JLabel(); // 状态
+	private JLabel taskerAccountLabel = new JLabel(); // 接收人账号
+	private JTextField praiseTextField = new JTextField(); // 好评内容
 
 	private JButton acceptTaskButton = new JButton("接手任务"); // 接手任务
 	private JButton discardTaskButton = new JButton("放弃任务");// 放弃任务
+	private JButton doGoodPraiseButton = new JButton("已经好评"); // 好评
 
 	public BlueSkyeTaskDetailDialog() {
 		super((Frame) null, "任务详细信息", true);
@@ -77,12 +86,17 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		String actionCommand = e.getActionCommand();
 		acceptTaskButton.setEnabled(false);
 		discardTaskButton.setEnabled(false);
+		doGoodPraiseButton.setEnabled(false);
+
 		switch (actionCommand) {
 		case COMMAND_ACCEPT_TASK:
 			doAcceptTask();
 			break;
 		case COMMAND_DISCARD_TASK:
 			doDiscardTask();
+			break;
+		case COMMAND_DO_GOOD_PRAISE:
+			doGoodPraise();
 			break;
 		}
 
@@ -101,6 +115,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private void initComponents() {
 		paymentTypeLabel.setForeground(Color.RED);
 		taskStatusLabel.setForeground(Color.RED);
+		taskerAccountLabel.setForeground(Color.BLUE);
 		acceptTaskButton.addActionListener(this);
 		acceptTaskButton.setActionCommand(COMMAND_ACCEPT_TASK);
 		discardTaskButton.addActionListener(this);
@@ -116,13 +131,17 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		box.adds(HBaseBox.createHorizontalLeft(new JLabel("支付方式 : "), paymentTypeLabel));
 		box.adds(HBaseBox.createHorizontalLeft(new JLabel("担保金额 : "), securityPriceLabel));
 		box.adds(HBaseBox.createHorizontalLeft(new JLabel("发布点数 : "), publishingPointLabel));
-		box.adds(HBaseBox.createHorizontalLeft(new JLabel("条     件 : "), isSincerityLabel, isCollectLabel, isUpdatePriceLabel));
+		box.adds(HBaseBox.createHorizontalLeft(new JLabel("条    件 : "), isSincerityLabel, isCollectLabel, isUpdatePriceLabel));
 		box.adds(HBaseBox.createHorizontalLeft(new JLabel("任务状态 : "), taskStatusLabel));
+		box.adds(HBaseBox.createHorizontalLeft(new JLabel("接 收 人 : "), taskerAccountLabel));
+		box.adds(HBaseBox.createHorizontalLeft(new JLabel("好评内容 : "), praiseTextField));
+
+		box.add(HBaseBox.createVerticalGlue());
 		add(box, BorderLayout.CENTER);
 
 		HBaseBox bottonBox = HBaseBox.createVerticalBaseBox();
 		bottonBox.setBorder(BorderFactory.createTitledBorder(""));
-		bottonBox.add(HBaseBox.createHorizontalRight(discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton));
+		bottonBox.add(HBaseBox.createHorizontalRight(discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton, HBaseBox.EmptyHorizontal, doGoodPraiseButton));
 
 		add(bottonBox, BorderLayout.SOUTH);
 	}
@@ -184,6 +203,11 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		}, GROPU);
 	}
 
+	// 已经好评
+	private void doGoodPraise() {
+
+	}
+
 	private void _doGetTaskDetail() {
 		TaskService service = blueSky.getService();
 		service.updateTaskDetail(task);
@@ -201,21 +225,28 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		isCollectLabel.setIcon(task.getIsCollectIcon());
 		isSincerityLabel.setIcon(task.getIsSincerityIcon());
 		taskStatusLabel.setText(task.getStatus().name());
+		taskerAccountLabel.setText(task.getTaskerAccount());
+		praiseTextField.setText(task.getPraise());
 	}
 
 	private void refreshTaskButton() {
-		// 根据任务信息设置控件状态
-		if (TaskStatus.等待绑定买号.equals(task.getStatus()) && StringUtils.equals(blueSky.getLoginAccount(), task.getTaskerAccount())) {
-			discardTaskButton.setEnabled(true);
-		} else {
-			discardTaskButton.setEnabled(false);
+		discardTaskButton.setEnabled(false);
+		doGoodPraiseButton.setEnabled(false);
+		acceptTaskButton.setEnabled(false);
+
+		if (StringUtils.equals(blueSky.getLoginAccount(), task.getTaskerAccount())) {
+			// 根据任务信息设置控件状态
+			if (TaskStatus.等待绑定买号.equals(task.getStatus())) {
+				discardTaskButton.setEnabled(true);
+			}
+			if (TaskStatus.等待收货.equals(task.getStatus())) {
+				doGoodPraiseButton.setEnabled(true);
+			}
 		}
 
 		// 根据任务信息设置控件状态
 		if (TaskStatus.等待接手.equals(task.getStatus())) {
 			acceptTaskButton.setEnabled(true);
-		} else {
-			acceptTaskButton.setEnabled(false);
 		}
 	}
 }

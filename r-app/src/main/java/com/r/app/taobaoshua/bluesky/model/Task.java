@@ -592,7 +592,7 @@ public class Task {
 	 * @return the praise
 	 */
 	public String getPraise() {
-		return praise;
+		return praise == null ? "" : praise;
 	}
 
 	/**

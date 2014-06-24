@@ -88,12 +88,14 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		if (-1 < order) {
 			switch (order) {
 			case 1:
-				hql.append(" order by t.publishingPoint desc ");
+				hql.append(" order by t.publishingPoint desc, t.number asc ");
 				break;
 			case 2:
-				hql.append(" order by t.publishingPointOneDay desc ");
+				hql.append(" order by t.publishingPointOneDay desc, t.number asc ");
 				break;
 			}
+		} else {
+			hql.append(" order by t.number asc ");
 		}
 
 		// 开始查询
