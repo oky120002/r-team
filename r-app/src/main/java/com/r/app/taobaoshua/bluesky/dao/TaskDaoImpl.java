@@ -109,4 +109,20 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		return responseHeader.bodyToString(BODY_ENCODE);
 	}
 
+	@Override
+	public String acceptTask(Task task) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Referer", "http://www2.88sxy.com/task/");
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/TaskJieShou.asp?Action=Jie&ID=" + task.getTaskId(), map);
+		return responseHeader.bodyToString(BODY_ENCODE);
+	}
+
+	@Override
+	public String discardTask(Task task) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Referer", "http://www2.88sxy.com/task/TaskJieShou.asp");
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/TaskJieShou.asp?Action=Quit&ID=" + task.getTaskId(), map);
+		return responseHeader.bodyToString(BODY_ENCODE);
+	}
+
 }

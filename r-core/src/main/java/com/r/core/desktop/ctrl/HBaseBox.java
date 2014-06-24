@@ -29,6 +29,11 @@ import com.r.core.desktop.eventpropagation.EventSign;
 public class HBaseBox extends Box implements EventShow {
 	private static final long serialVersionUID = 3526805066963571568L;
 
+	/** 一个固定高度5的不可见组件 */
+	public static final Component EmptyVertical = HBaseBox.createVerticalStrut(5);
+	/** 一个固定宽度5的不可见组件 */
+	public static final Component EmptyHorizontal = HBaseBox.createHorizontalStrut(5);
+
 	/** 事件容器 */
 	private EventContainer eventContainer = null;
 

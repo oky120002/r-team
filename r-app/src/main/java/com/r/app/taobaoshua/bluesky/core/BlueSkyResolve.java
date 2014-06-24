@@ -13,9 +13,12 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 public class BlueSkyResolve {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm:ss");
+	private static final Logger logger = LoggerFactory.getLogger(BlueSkyResolve.class); // 日志
 
 	/**
 	 * 解析任务列表
@@ -178,17 +181,30 @@ public class BlueSkyResolve {
 						status = TaskStatus.valueOf(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
 					} catch (IllegalArgumentException e) {
 						// 找不到此枚举
-						if (0 < tr.indexOf("等待发布方平台评价")) {
+						if (0 < tr.indexOf("等待双方平台评价")) {
+							status = TaskStatus.已完成_等待双方平台评价;
+						} else if (0 < tr.indexOf("等待发布方平台评价")) {
 							status = TaskStatus.已完成_等待发布方平台评价;
+						} else if (0 < tr.indexOf("等待接手方平台评价")) {
+							status = TaskStatus.已完成_等待接手方平台评价;
+						} else if (0 < tr.indexOf("等待接手") && 0 < tr.indexOf("已暂停")) {
+							status = TaskStatus.等待接手_已暂停;
 						} else {
 							status = TaskStatus.异常;
+							logger.warn("解析当前任务状态异常 : " + tr);
 						}
 					}
 					task.setStatus(status);
 				}
 			}
 		} else {
-			task.setStatus(TaskStatus.未知状态);
+			if (0 < taskDetail.indexOf("该任务已被删除")) {
+				task.setStatus(TaskStatus.任务已删除);
+			} else {
+				logger.warn("获取任务详细信息异常 : " + taskDetail);
+				task.setStatus(TaskStatus.未知状态);
+			}
+
 		}
 	}
 

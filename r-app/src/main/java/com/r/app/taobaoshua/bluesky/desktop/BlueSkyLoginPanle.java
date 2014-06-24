@@ -126,19 +126,18 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 					loginButton.setEnabled(false);
 
 					blueSky.getService().webDoLogin(account, accountPassword, captcha, question, answer);
-					BlueSkyLoginPanle.this.listener.loginFinsh();
+					BlueSkyLoginPanle.this.listener.loginFinsh(account);
 				} catch (LoginErrorException e) {
 					HAlert.showWarnTips(e.getMessage(), BlueSkyLoginPanle.this);
-				} finally {
-					accountTextField.setEnabled(true);
-					accountPasswordTextField.setEnabled(true);
-					captchaTextField.setEnabled(true);
-					captchaImagePanel.setEnabled(true);
-					reacquireCaptchaLabel.setEnabled(true);
-					questionTextField.setEnabled(true);
-					answerTextField.setEnabled(true);
-					loginButton.setEnabled(true);
 				}
+				accountTextField.setEnabled(true);
+				accountPasswordTextField.setEnabled(true);
+				captchaTextField.setEnabled(true);
+				captchaImagePanel.setEnabled(true);
+				reacquireCaptchaLabel.setEnabled(true);
+				questionTextField.setEnabled(true);
+				answerTextField.setEnabled(true);
+				loginButton.setEnabled(true);
 			}
 		});
 	}

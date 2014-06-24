@@ -38,6 +38,7 @@ public class BlueSkyBackgroundTask {
 			@Override
 			public void run() {
 				TaskService service = blueSky.getService();
+				
 				for (int page = 1; page < 11; page++) {
 					Collection<Task> tasks = service.webGetTaskList(page);
 					service.updateTaskList(tasks);
@@ -69,7 +70,6 @@ public class BlueSkyBackgroundTask {
 					}
 					Task task = list.get(0);
 					service.updateTaskDetail(task);
-					org.slf4j.LoggerFactory.getLogger(BlueSkyBackgroundTask.class).debug("abcd");
 					logger.debug("自动更新任务详细信息 --- {} : {} : {}", task.getNumber(), task.getTaskerAccount(), task.getStatus().name());
 				}
 			}

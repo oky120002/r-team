@@ -20,7 +20,7 @@ import com.r.core.httpsocket.context.HttpProxy;
  * @author rain
  */
 public interface TaskDao extends AbstractDao<Task> {
-	
+
 	/** 获取当前数据库链接Session */
 	public Session getSession();
 
@@ -76,4 +76,10 @@ public interface TaskDao extends AbstractDao<Task> {
 
 	/** 获取任务详细信息 */
 	String getTaskDetail(String taskid);
+
+	/** 接手任务 */
+	String acceptTask(Task task);
+
+	/** 退出任务 */
+	String discardTask(Task task);
 }

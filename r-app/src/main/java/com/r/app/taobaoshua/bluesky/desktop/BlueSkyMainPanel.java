@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -46,30 +47,31 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyMainPanel.class);
 	private static final String COMMAND_TASKINFO = "command_taskinfo"; // 命令_获取任务信息
 	private static final String COMMAND_CHECK_TASKSTATUS = "command_check_taskstatus";// 命令_校验任务状态
-	private static final String COMMAN_LIST_SINCERITY_ALL = "comman_list_sincerity_all"; // 命令
-	private static final String COMMAN_LIST_SINCERITY_INCLUDE = "comman_list_sincerity_include"; // 命令
-	private static final String COMMAN_LIST_SINCERITY_EXCLUDE = "comman_list_sincerity_exclude"; // 命令
-	private static final String COMMAN_LIST_IDCARD_ALL = "comman_list_idcard_all"; // 命令
-	private static final String COMMAN_LIST_IDCARD_INCLUDE = "comman_list_idcard_include"; // 命令
-	private static final String COMMAN_LIST_IDCARD_EXCLUDE = "comman_list_idcard_exclude"; // 命令
-	private static final String COMMAN_LIST_SEARCH_ALL = "comman_list_search_all"; // 命令
-	private static final String COMMAN_LIST_SEARCH_INCLUDE = "comman_list_search_include"; // 命令
-	private static final String COMMAN_LIST_SEARCH_EXCLUDE = "comman_list_search_exclude"; // 命令
-	private static final String COMMAN_LIST_COLLECT_ALL = "comman_list_collect_all"; // 命令
-	private static final String COMMAN_LIST_COLLECT_INCLUDE = "comman_list_collect_include"; // 命令
-	private static final String COMMAN_LIST_COLLECT_EXCLUDE = "comman_list_collect_exclude"; // 命令
-	private static final String COMMAN_LIST_WANGWANG_ALL = "comman_list_wangwang_all"; // 命令
-	private static final String COMMAN_LIST_WANGWANG_INCLUDE = "comman_list_wangwang_include"; // 命令
-	private static final String COMMAN_LIST_WANGWANG_EXCLUDE = "comman_list_wangwang_exclude"; // 命令
-	private static final String COMMAN_LIST_REVIEW_ALL = "comman_list_review_all"; // 命令
-	private static final String COMMAN_LIST_REVIEW_INCLUDE = "comman_list_review_include"; // 命令
-	private static final String COMMAN_LIST_REVIEW_EXCLUDE = "comman_list_review_exclude"; // 命令
-	private static final String COMMAN_LIST_QQ_ALL = "comman_list_qq_all"; // 命令
-	private static final String COMMAN_LIST_QQ_INCLUDE = "comman_list_qq_include"; // 命令
-	private static final String COMMAN_LIST_QQ_EXCLUDE = "comman_list_qq_exclude"; // 命令
-	private static final String COMMAN_LIST_UPDATEPRICE_ALL = "comman_list_updateprice_all"; // 命令
-	private static final String COMMAN_LIST_UPDATEPRICE_INCLUDE = "comman_list_updateprice_include"; // 命令
-	private static final String COMMAN_LIST_UPDATEPRICE_EXCLUDE = "comman_list_updateprice_exclude"; // 命令
+	private static final String COMMAND_LIST_TASKSTATUS = "command_list_taskstatus"; // 命令
+	private static final String COMMAND_LIST_SINCERITY_ALL = "command_list_sincerity_all"; // 命令
+	private static final String COMMAND_LIST_SINCERITY_INCLUDE = "command_list_sincerity_include"; // 命令
+	private static final String COMMAND_LIST_SINCERITY_EXCLUDE = "command_list_sincerity_exclude"; // 命令
+	private static final String COMMAND_LIST_IDCARD_ALL = "command_list_idcard_all"; // 命令
+	private static final String COMMAND_LIST_IDCARD_INCLUDE = "command_list_idcard_include"; // 命令
+	private static final String COMMAND_LIST_IDCARD_EXCLUDE = "command_list_idcard_exclude"; // 命令
+	private static final String COMMAND_LIST_SEARCH_ALL = "command_list_search_all"; // 命令
+	private static final String COMMAND_LIST_SEARCH_INCLUDE = "command_list_search_include"; // 命令
+	private static final String COMMAND_LIST_SEARCH_EXCLUDE = "command_list_search_exclude"; // 命令
+	private static final String COMMAND_LIST_COLLECT_ALL = "command_list_collect_all"; // 命令
+	private static final String COMMAND_LIST_COLLECT_INCLUDE = "command_list_collect_include"; // 命令
+	private static final String COMMAND_LIST_COLLECT_EXCLUDE = "command_list_collect_exclude"; // 命令
+	private static final String COMMAND_LIST_WANGWANG_ALL = "command_list_wangwang_all"; // 命令
+	private static final String COMMAND_LIST_WANGWANG_INCLUDE = "command_list_wangwang_include"; // 命令
+	private static final String COMMAND_LIST_WANGWANG_EXCLUDE = "command_list_wangwang_exclude"; // 命令
+	private static final String COMMAND_LIST_REVIEW_ALL = "command_list_review_all"; // 命令
+	private static final String COMMAND_LIST_REVIEW_INCLUDE = "command_list_review_include"; // 命令
+	private static final String COMMAND_LIST_REVIEW_EXCLUDE = "command_list_review_exclude"; // 命令
+	private static final String COMMAND_LIST_QQ_ALL = "command_list_qq_all"; // 命令
+	private static final String COMMAND_LIST_QQ_INCLUDE = "command_list_qq_include"; // 命令
+	private static final String COMMAND_LIST_QQ_EXCLUDE = "command_list_qq_exclude"; // 命令
+	private static final String COMMAND_LIST_UPDATEPRICE_ALL = "command_list_updateprice_all"; // 命令
+	private static final String COMMAND_LIST_UPDATEPRICE_INCLUDE = "command_list_updateprice_include"; // 命令
+	private static final String COMMAND_LIST_UPDATEPRICE_EXCLUDE = "command_list_updateprice_exclude"; // 命令
 
 	private static final BlueSky blueSky = BlueSky.getInstance();
 
@@ -82,6 +84,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private ButtonGroup reviewGroup = new ButtonGroup();
 	private ButtonGroup qqGroup = new ButtonGroup();
 	private ButtonGroup updatepriceGroup = new ButtonGroup();
+	private JComboBox<TaskStatus> taskStatusComboBox = new JComboBox<TaskStatus>(TaskStatus.values());
 
 	// 列表
 	private JTable taskListTable; // 任务列表
@@ -108,30 +111,31 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 
 		switch (actionCommand) {
 		case COMMAND_TASKINFO:
-		case COMMAN_LIST_SINCERITY_ALL:
-		case COMMAN_LIST_SINCERITY_INCLUDE:
-		case COMMAN_LIST_SINCERITY_EXCLUDE:
-		case COMMAN_LIST_IDCARD_ALL:
-		case COMMAN_LIST_IDCARD_INCLUDE:
-		case COMMAN_LIST_IDCARD_EXCLUDE:
-		case COMMAN_LIST_SEARCH_ALL:
-		case COMMAN_LIST_SEARCH_INCLUDE:
-		case COMMAN_LIST_SEARCH_EXCLUDE:
-		case COMMAN_LIST_COLLECT_ALL:
-		case COMMAN_LIST_COLLECT_INCLUDE:
-		case COMMAN_LIST_COLLECT_EXCLUDE:
-		case COMMAN_LIST_WANGWANG_ALL:
-		case COMMAN_LIST_WANGWANG_INCLUDE:
-		case COMMAN_LIST_WANGWANG_EXCLUDE:
-		case COMMAN_LIST_REVIEW_ALL:
-		case COMMAN_LIST_REVIEW_INCLUDE:
-		case COMMAN_LIST_REVIEW_EXCLUDE:
-		case COMMAN_LIST_QQ_ALL:
-		case COMMAN_LIST_QQ_INCLUDE:
-		case COMMAN_LIST_QQ_EXCLUDE:
-		case COMMAN_LIST_UPDATEPRICE_ALL:
-		case COMMAN_LIST_UPDATEPRICE_INCLUDE:
-		case COMMAN_LIST_UPDATEPRICE_EXCLUDE:
+		case COMMAND_LIST_TASKSTATUS:
+		case COMMAND_LIST_SINCERITY_ALL:
+		case COMMAND_LIST_SINCERITY_INCLUDE:
+		case COMMAND_LIST_SINCERITY_EXCLUDE:
+		case COMMAND_LIST_IDCARD_ALL:
+		case COMMAND_LIST_IDCARD_INCLUDE:
+		case COMMAND_LIST_IDCARD_EXCLUDE:
+		case COMMAND_LIST_SEARCH_ALL:
+		case COMMAND_LIST_SEARCH_INCLUDE:
+		case COMMAND_LIST_SEARCH_EXCLUDE:
+		case COMMAND_LIST_COLLECT_ALL:
+		case COMMAND_LIST_COLLECT_INCLUDE:
+		case COMMAND_LIST_COLLECT_EXCLUDE:
+		case COMMAND_LIST_WANGWANG_ALL:
+		case COMMAND_LIST_WANGWANG_INCLUDE:
+		case COMMAND_LIST_WANGWANG_EXCLUDE:
+		case COMMAND_LIST_REVIEW_ALL:
+		case COMMAND_LIST_REVIEW_INCLUDE:
+		case COMMAND_LIST_REVIEW_EXCLUDE:
+		case COMMAND_LIST_QQ_ALL:
+		case COMMAND_LIST_QQ_INCLUDE:
+		case COMMAND_LIST_QQ_EXCLUDE:
+		case COMMAND_LIST_UPDATEPRICE_ALL:
+		case COMMAND_LIST_UPDATEPRICE_INCLUDE:
+		case COMMAND_LIST_UPDATEPRICE_EXCLUDE:
 			doTaskInfos();
 			break;
 		case COMMAND_CHECK_TASKSTATUS: // 校验任务状态
@@ -186,12 +190,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	/** 返回限制条件项第一行 */
 	private Component getTaskListByOne() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
+		initTaskStatusBox(box); // 任务状态
 		initSincerityBox(box); // 商保
 		initIDCardBox(box); // 认证
 		initSearchBox(box); // 搜索
 		initCollectBox(box); // 收藏
 		initWangWangBox(box); // 旺聊
-		initReviewBox(box); // 审核
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -199,10 +203,23 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	/** 返回限制条件项第一行 */
 	private Component getTaskListByTwo() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
+		initReviewBox(box); // 审核
 		initUpdatePriceBox(box); // 是否需要改价
 		initQQBox(box);// QQ
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
+	}
+
+	/** 任务状态 */
+	private void initTaskStatusBox(HBaseBox box) {
+		taskStatusComboBox.setSelectedItem(TaskStatus.等待接手);
+		taskStatusComboBox.addActionListener(this);
+		taskStatusComboBox.setActionCommand(COMMAND_LIST_TASKSTATUS);
+		taskStatusComboBox.setFocusable(false);
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("任务状态"));
+		b.add(taskStatusComboBox);
+		box.add(b);
 	}
 
 	// 商保
@@ -216,9 +233,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_SINCERITY_ALL);
-		radio2.setActionCommand(COMMAN_LIST_SINCERITY_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_SINCERITY_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_SINCERITY_ALL);
+		radio2.setActionCommand(COMMAND_LIST_SINCERITY_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_SINCERITY_EXCLUDE);
 		radio1.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("商保"));
@@ -239,9 +256,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_IDCARD_ALL);
-		radio2.setActionCommand(COMMAN_LIST_IDCARD_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_IDCARD_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_IDCARD_ALL);
+		radio2.setActionCommand(COMMAND_LIST_IDCARD_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_IDCARD_EXCLUDE);
 		radio1.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("认证"));
@@ -262,9 +279,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_SEARCH_ALL);
-		radio2.setActionCommand(COMMAN_LIST_SEARCH_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_SEARCH_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_SEARCH_ALL);
+		radio2.setActionCommand(COMMAND_LIST_SEARCH_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_SEARCH_EXCLUDE);
 		radio1.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("搜索"));
@@ -285,9 +302,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_COLLECT_ALL);
-		radio2.setActionCommand(COMMAN_LIST_COLLECT_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_COLLECT_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_COLLECT_ALL);
+		radio2.setActionCommand(COMMAND_LIST_COLLECT_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_COLLECT_EXCLUDE);
 		radio1.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("收藏"));
@@ -308,9 +325,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_WANGWANG_ALL);
-		radio2.setActionCommand(COMMAN_LIST_WANGWANG_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_WANGWANG_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_WANGWANG_ALL);
+		radio2.setActionCommand(COMMAND_LIST_WANGWANG_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_WANGWANG_EXCLUDE);
 		radio1.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("旺聊"));
@@ -331,9 +348,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_REVIEW_ALL);
-		radio2.setActionCommand(COMMAN_LIST_REVIEW_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_REVIEW_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_REVIEW_ALL);
+		radio2.setActionCommand(COMMAND_LIST_REVIEW_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_REVIEW_EXCLUDE);
 		radio3.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("审核"));
@@ -354,9 +371,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_QQ_ALL);
-		radio2.setActionCommand(COMMAN_LIST_QQ_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_QQ_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_QQ_ALL);
+		radio2.setActionCommand(COMMAND_LIST_QQ_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_QQ_EXCLUDE);
 		radio3.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("QQ"));
@@ -377,9 +394,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
-		radio1.setActionCommand(COMMAN_LIST_UPDATEPRICE_ALL);
-		radio2.setActionCommand(COMMAN_LIST_UPDATEPRICE_INCLUDE);
-		radio3.setActionCommand(COMMAN_LIST_UPDATEPRICE_EXCLUDE);
+		radio1.setActionCommand(COMMAND_LIST_UPDATEPRICE_ALL);
+		radio2.setActionCommand(COMMAND_LIST_UPDATEPRICE_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_UPDATEPRICE_EXCLUDE);
 		radio3.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("改价"));
@@ -395,7 +412,6 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 			@Override
 			public void run() {
 				taskInfosButton.setEnabled(false);
-				taskInfosButton.setText("获取中...");
 				try {
 					TaskQueryCommand query = new TaskQueryCommand();
 					query.setStatus(TaskStatus.等待接手);
@@ -410,22 +426,23 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.debug(e.getMessage());
-				} finally {
-					taskInfosButton.setText("获取任务信息");
-					taskInfosButton.setEnabled(true);
 				}
+				taskInfosButton.setEnabled(true);
 			}
 
 			private void select(TaskQueryCommand query) {
+				// 任务状态
+				query.setStatus((TaskStatus) taskStatusComboBox.getSelectedItem());
+
 				// 商保
 				ButtonModel selection = sincerityGroup.getSelection();
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_SINCERITY_INCLUDE:
+					case COMMAND_LIST_SINCERITY_INCLUDE:
 						query.setIsSincerity(true);
 						break;
-					case COMMAN_LIST_SINCERITY_EXCLUDE:
+					case COMMAND_LIST_SINCERITY_EXCLUDE:
 						query.setIsSincerity(false);
 						break;
 					}
@@ -436,10 +453,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_IDCARD_INCLUDE:
+					case COMMAND_LIST_IDCARD_INCLUDE:
 						query.setIsIDCard(true);
 						break;
-					case COMMAN_LIST_IDCARD_EXCLUDE:
+					case COMMAND_LIST_IDCARD_EXCLUDE:
 						query.setIsIDCard(false);
 						break;
 					}
@@ -450,10 +467,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_SEARCH_INCLUDE:
+					case COMMAND_LIST_SEARCH_INCLUDE:
 						query.setIsSearch(true);
 						break;
-					case COMMAN_LIST_SEARCH_EXCLUDE:
+					case COMMAND_LIST_SEARCH_EXCLUDE:
 						query.setIsSearch(false);
 						break;
 					}
@@ -464,10 +481,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_COLLECT_INCLUDE:
+					case COMMAND_LIST_COLLECT_INCLUDE:
 						query.setIsCollect(true);
 						break;
-					case COMMAN_LIST_COLLECT_EXCLUDE:
+					case COMMAND_LIST_COLLECT_EXCLUDE:
 						query.setIsCollect(false);
 						break;
 					}
@@ -478,10 +495,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_WANGWANG_INCLUDE:
+					case COMMAND_LIST_WANGWANG_INCLUDE:
 						query.setIsWangWang(true);
 						break;
-					case COMMAN_LIST_WANGWANG_EXCLUDE:
+					case COMMAND_LIST_WANGWANG_EXCLUDE:
 						query.setIsWangWang(false);
 						break;
 					}
@@ -492,10 +509,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_REVIEW_INCLUDE:
+					case COMMAND_LIST_REVIEW_INCLUDE:
 						query.setIsReview(true);
 						break;
-					case COMMAN_LIST_REVIEW_EXCLUDE:
+					case COMMAND_LIST_REVIEW_EXCLUDE:
 						query.setIsReview(false);
 						break;
 					}
@@ -506,10 +523,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_QQ_INCLUDE:
+					case COMMAND_LIST_QQ_INCLUDE:
 						query.setIsUseQQ(true);
 						break;
-					case COMMAN_LIST_QQ_EXCLUDE:
+					case COMMAND_LIST_QQ_EXCLUDE:
 						query.setIsUseQQ(false);
 						break;
 					}
@@ -520,10 +537,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
-					case COMMAN_LIST_UPDATEPRICE_INCLUDE:
+					case COMMAND_LIST_UPDATEPRICE_INCLUDE:
 						query.setIsUpdatePrice(true);
 						break;
-					case COMMAN_LIST_UPDATEPRICE_EXCLUDE:
+					case COMMAND_LIST_UPDATEPRICE_EXCLUDE:
 						query.setIsUpdatePrice(false);
 						break;
 					}
@@ -541,14 +558,15 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 			@Override
 			public void run() {
 				checkTaskStatusButton.setEnabled(false);
-				checkTaskStatusButton.setText("状态检验中");
 				try {
 					int[] rowIndexs = taskListTable.getSelectedRows();
+					taskListTable.clearSelection();
 					if (ArrayUtils.isNotEmpty(rowIndexs)) {
 						TaskService service = blueSky.getService();
 						Collection<Task> tasks = taskListTableModel.getRowTask(rowIndexs);
 						for (Task task : tasks) {
 							if (task != null) {
+								checkTaskStatusButton.setEnabled(false);
 								service.updateTaskDetail(task);
 								TaskUtil.sleep(1_000);
 								logger.debug("更新任务{}的详细信息 --- 任务状态 : {}", task.getNumber(), task.getStatus().name());
@@ -559,10 +577,8 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.debug(e.getMessage());
-				} finally {
-					checkTaskStatusButton.setEnabled(true);
-					checkTaskStatusButton.setText("校验任务状态");
 				}
+				checkTaskStatusButton.setEnabled(true);
 			}
 		});
 	}

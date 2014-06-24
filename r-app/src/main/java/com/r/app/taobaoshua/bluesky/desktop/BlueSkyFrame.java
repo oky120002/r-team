@@ -49,15 +49,16 @@ public class BlueSkyFrame extends HBaseFrame implements BlueSkyLoginPanleListene
 	}
 
 	@Override
-	public void loginFinsh() {
-		BlueSky.getInstance().setLogin(true);
+	public void loginFinsh(String account) {
+		BlueSky.getInstance().setLogin(true, account);
 		setContentPane(mainPanel);
+
 		validate();
 	}
 
 	@Override
 	public void loginSkip() {
-		BlueSky.getInstance().setLogin(false);
+		BlueSky.getInstance().setLogin(false, null);
 		setContentPane(mainPanel);
 		validate();
 	}

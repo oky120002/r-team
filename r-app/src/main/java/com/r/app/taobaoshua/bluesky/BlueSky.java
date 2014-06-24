@@ -37,6 +37,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 	private static BlueSky bluesky;
 	private boolean isRunning;
 	private boolean isLogin;
+	private String loginAccount;
 	private BlueSkyResolve blueSkyResolve;
 	private BlueSkyFrame blueSkyDialog;
 	private BlueSkyBackgroundTask backgroundTask; // 后台任务
@@ -93,8 +94,13 @@ public class BlueSky implements TaoBaoShuaStartup {
 		return isLogin;
 	}
 
-	public void setLogin(boolean isLogin) {
+	public void setLogin(boolean isLogin, String loginAccount) {
 		this.isLogin = isLogin;
+		if (isLogin) {
+			this.loginAccount = loginAccount;
+		} else {
+			this.loginAccount = null;
+		}
 	}
 
 	public BlueSkyResolve getResolve() {
@@ -121,4 +127,8 @@ public class BlueSky implements TaoBaoShuaStartup {
 		return icons.get(name);
 	}
 
+	/** 获取登陆用户名 */
+	public String getLoginAccount() {
+		return loginAccount;
+	}
 }

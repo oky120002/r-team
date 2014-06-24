@@ -27,6 +27,7 @@ import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.command.QueryCommand;
+import com.r.core.callback.SuccessAndFailureCallBack;
 import com.r.core.exceptions.LoginErrorException;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.log.Logger;
@@ -101,6 +102,26 @@ public class TaskService {
 		String html = taskDao.getTaskListHtml(page, 2, 3);
 		tasks.addAll(resolve.resolveTaskListHtml(html));
 		return tasks;
+	}
+
+	/** 接手任务 */
+	public void acceptTask(Task task, SuccessAndFailureCallBack callback) {
+		String html = taskDao.acceptTask(task);
+		if (0 < html.indexOf("history.back(-1)")) { // 发生异常
+			callback.failure(StringUtils.substringBetween(html, "alert('", "');history"), null);
+		} else {
+			callback.success("接手任务成功", null);
+		}
+	}
+
+	/** 退出任务 */
+	public void discardTask(Task task, SuccessAndFailureCallBack callback) {
+		String html = taskDao.discardTask(task);
+		if (0 < html.indexOf("退出任务成功")) { // 发生异常
+			callback.success("退出任务成功", null);
+		} else {
+			callback.failure(StringUtils.substringBetween(html, "alert('", "');location"), null);
+		}
 	}
 
 	// /-------------------------数据-----------------------//
@@ -201,11 +222,5 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
 	public List<Task> execQueryCommand(QueryCommand<Task> query) {
 		return query.queryCollection(taskDao.getSession());
-	}
-
-	/** 接手任务 */
-	public boolean acceptTask(Task task) {
-		
-		return false;
 	}
 }
