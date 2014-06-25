@@ -407,11 +407,11 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	}
 
 	/** 获取任务信息 */
-	private void doTaskInfos() {
+	private synchronized void doTaskInfos() {
+		taskInfosButton.setEnabled(false);
 		TaskUtil.executeTask(new Runnable() {
 			@Override
 			public void run() {
-				taskInfosButton.setEnabled(false);
 				try {
 					TaskQueryCommand query = new TaskQueryCommand();
 					query.setStatus(TaskStatus.等待接手);
@@ -550,14 +550,15 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	}
 
 	/** 校验任务状态 */
-	private void doCheckTaskStatus() {
+	private synchronized void doCheckTaskStatus() {
 		if (!blueSky.isLogin()) {
 			HAlert.showWarnTips("此功能只能登陆后才能使用", this);
+			return;
 		}
+		checkTaskStatusButton.setEnabled(false);
 		TaskUtil.executeTask(new Runnable() {
 			@Override
 			public void run() {
-				checkTaskStatusButton.setEnabled(false);
 				try {
 					int[] rowIndexs = taskListTable.getSelectedRows();
 					taskListTable.clearSelection();

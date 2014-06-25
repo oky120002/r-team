@@ -2,15 +2,15 @@ package com.r.app.taobaoshua.bluesky.core;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 import com.r.core.log.Logger;
@@ -26,10 +26,8 @@ public class BlueSkyResolve {
 	 * @param html
 	 * @return
 	 */
-	public Collection<Task> resolveTaskListHtml(String html) {
-		List<Task> tasks = new ArrayList<Task>();
+	public void resolveTaskListHtml(Collection<Task> tasks, String html) {
 		int curPos = 0;
-
 		int start = html.indexOf("class=\"list_tbl\"");
 		int end = html.indexOf("</table>", start);
 		html = html.substring(start, end);
@@ -82,8 +80,6 @@ public class BlueSkyResolve {
 
 			tasks.add(task);
 		}
-
-		return tasks;
 	}
 
 	/** 解析任务详细信息 */
@@ -204,7 +200,54 @@ public class BlueSkyResolve {
 				logger.warn("获取任务详细信息异常 : " + taskDetail);
 				task.setStatus(TaskStatus.未知状态);
 			}
+		}
+	}
 
+	/** 解析买号页面 */
+	public void resolveTaoBaoAccount(Collection<BuyAccount> buyAccounts, String html) {
+		html = html.substring(html.indexOf("list_Mai"));
+		html = StringUtils.substringBetween(html, "list_tbl", "</table>");
+
+		String[] trs = StringUtils.substringsBetween(html, "<tr>", "</tr>");
+		for (String tr : trs) {
+			BuyAccount buy = new BuyAccount();
+			String[] tds = StringUtils.substringsBetween(tr, "<td", "</td>");
+
+			// 买号区域
+			if (0 < tds[0].indexOf("淘宝任务")) {
+				buy.setType(TaskAddr.淘宝任务区);
+			}
+
+			// 买号
+			String td1 = tds[1];
+			if (0 < td1.indexOf("实名认证")) {
+				buy.setIsIDCard(true);
+				buy.setBuyAccount(StringUtils.substringBetween(td1, "center\">", "<img").trim());
+			} else {
+				buy.setIsIDCard(false);
+				buy.setBuyAccount(StringUtils.substringAfter(td1, "center\">").trim());
+			}
+
+			// 买号信誉
+			String xinyu = StringUtils.substringBetween(tds[2], "orange\">", "</span>").trim();
+			buy.setBuyPrestige(Integer.valueOf(xinyu));
+
+			// 今日接任务数
+			String day = StringUtils.substringAfter(tds[4], "center\">").trim();
+			buy.setTakeTaskByDay(Integer.valueOf(day));
+
+			// 本周接任务数
+			String week = StringUtils.substringAfter(tds[5], "center\">").trim();
+			buy.setTakeTaskByWeek(Integer.valueOf(week));
+
+			// 是否启用
+			if (0 < tds[7].indexOf("Status=4")) { // 启用中
+				buy.setIsEnable(true);
+			} else { // status=0 则是停用中
+				buy.setIsEnable(false);
+			}
+
+			buyAccounts.add(buy);
 		}
 	}
 

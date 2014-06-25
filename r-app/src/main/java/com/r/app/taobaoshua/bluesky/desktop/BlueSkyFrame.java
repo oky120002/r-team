@@ -4,12 +4,17 @@
 package com.r.app.taobaoshua.bluesky.desktop;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
+import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.TaskUtil;
 
 /**
  * @author oky
@@ -50,10 +55,22 @@ public class BlueSkyFrame extends HBaseFrame implements BlueSkyLoginPanleListene
 
 	@Override
 	public void loginFinsh(String account) {
-		BlueSky.getInstance().setLogin(true, account);
+		final BlueSky blueSky = BlueSky.getInstance();
+		blueSky.setLogin(true, account);
 		setContentPane(mainPanel);
-
 		validate();
+
+		// 获取绑定的买号
+		TaskUtil.executeTask(new Runnable() {
+			@Override
+			public void run() {
+				TaskService service = blueSky.getService();
+				List<BuyAccount> buys = new ArrayList<BuyAccount>();
+				service.webGetBuyAccount(buys);
+				service.updateBuyAccount(buys);
+				logger.debug("获取绑定的买号完成.......");
+			}
+		});
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.r.app.taobaoshua.bluesky.service;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.r.app.taobaoshua.bluesky.dao.TaskDao;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +27,12 @@ public class TaskServiceTest {
 	private TaskDao taskDao;
 
 	@Test
+	public void testBuyAccount() {
+		Collection<BuyAccount> queryByEnable = taskService.queryByEnable(true);
+		System.out.println(Arrays.toString(queryByEnable.toArray()));
+	}
+
+	// @Test
 	public void getTaskDetail() {
 		String taskDetail = taskDao.getTaskDetail("548521");
 		System.out.println(taskDetail);
@@ -31,7 +40,7 @@ public class TaskServiceTest {
 
 	// @Test
 	public void queryOneTask() {
-		Task task = taskService.queryByNumber("2014616100256795");
+		Task task = taskService.findByNumber("2014616100256795");
 		System.out.println(task.getAccount());
 		// System.out.println("一共 : " + taskService.queryAllSize() + " 条记录");
 	}

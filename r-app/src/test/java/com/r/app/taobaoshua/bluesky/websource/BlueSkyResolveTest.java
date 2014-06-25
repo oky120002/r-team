@@ -2,7 +2,8 @@ package com.r.app.taobaoshua.bluesky.websource;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -27,7 +28,8 @@ public class BlueSkyResolveTest {
 	public void test() throws IOException {
 		String html = FileUtils.readFileToString(new File("./page/tasklist.txt"));
 		BlueSkyResolve r = new BlueSkyResolve();
-		Collection<Task> tasks = r.resolveTaskListHtml(html);
+		List<Task> tasks = new ArrayList<Task>();
+		r.resolveTaskListHtml(tasks, html);
 		for (Task task : tasks) {
 			System.out.println(task.getNumber());
 		}

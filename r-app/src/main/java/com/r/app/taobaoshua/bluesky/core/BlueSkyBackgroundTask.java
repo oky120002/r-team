@@ -3,7 +3,7 @@
  */
 package com.r.app.taobaoshua.bluesky.core;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -38,9 +38,10 @@ public class BlueSkyBackgroundTask {
 			@Override
 			public void run() {
 				TaskService service = blueSky.getService();
-				
+
 				for (int page = 1; page < 11; page++) {
-					Collection<Task> tasks = service.webGetTaskList(page);
+					List<Task> tasks = new ArrayList<Task>();
+					service.webGetTaskList(tasks, page);
 					service.updateTaskList(tasks);
 					TaskUtil.sleep(5_000);
 				}

@@ -82,4 +82,7 @@ public interface TaskDao extends AbstractDao<Task> {
 
 	/** 退出任务 */
 	String discardTask(Task task);
+
+	/**获取绑定的买号*/
+	String getTaoBaoAccount();
 }

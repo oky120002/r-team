@@ -7,7 +7,6 @@
 package com.r.app.taobaoshua.bluesky.service;
 
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,8 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.core.BlueSkyResolve;
+import com.r.app.taobaoshua.bluesky.dao.BuyAccountDao;
 import com.r.app.taobaoshua.bluesky.dao.SysParDao;
 import com.r.app.taobaoshua.bluesky.dao.TaskDao;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
@@ -51,6 +52,9 @@ public class TaskService {
 
 	@Resource(name = "syaparDao")
 	private SysParDao sysParDal;
+
+	@Resource(name = "buyAccountDao")
+	private BuyAccountDao buyAccountDao;
 
 	/** 设置当前链接的代理 */
 	public void setSocketProxy(HttpProxy proxy) {
@@ -93,19 +97,17 @@ public class TaskService {
 	}
 
 	/** 获取任务列表的html代码,只能取[1,10] */
-	public Collection<Task> webGetTaskList(int page) {
+	public void webGetTaskList(Collection<Task> tasks, int page) {
 		page = page < 1 ? 1 : page;
 		page = 10 < page ? 10 : page;
 
 		BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
-		List<Task> tasks = new ArrayList<Task>();
 		String html = taskDao.getTaskListHtml(page, 2, 3);
-		tasks.addAll(resolve.resolveTaskListHtml(html));
-		return tasks;
+		resolve.resolveTaskListHtml(tasks, html);
 	}
 
 	/** 接手任务 */
-	public void acceptTask(Task task, SuccessAndFailureCallBack callback) {
+	public void webAcceptTask(Task task, SuccessAndFailureCallBack callback) {
 		String html = taskDao.acceptTask(task);
 		if (0 < html.indexOf("history.back(-1)")) { // 发生异常
 			callback.failure(StringUtils.substringBetween(html, "alert('", "');history"), null);
@@ -115,7 +117,7 @@ public class TaskService {
 	}
 
 	/** 退出任务 */
-	public void discardTask(Task task, SuccessAndFailureCallBack callback) {
+	public void webDiscardTask(Task task, SuccessAndFailureCallBack callback) {
 		String html = taskDao.discardTask(task);
 		if (0 < html.indexOf("退出任务成功")) { // 发生异常
 			callback.success("退出任务成功", null);
@@ -124,7 +126,16 @@ public class TaskService {
 		}
 	}
 
-	// /-------------------------数据-----------------------//
+	/** 返回绑定的买号 */
+	public void webGetBuyAccount(Collection<BuyAccount> buys) {
+		BlueSky blueSky = BlueSky.getInstance();
+		if (!blueSky.isLogin()) {
+			return;
+		}
+		blueSky.getResolve().resolveTaoBaoAccount(buys, taskDao.getTaoBaoAccount());
+	}
+
+	// /-------------------------数据----Task-------------------//
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void addTasks(Task... tasks) {
@@ -162,7 +173,7 @@ public class TaskService {
 			// 循环最新的任务
 			// 判断此任务是否已经存在,存在则跳过,不存在则插入数据库中
 			for (Task task : tasks) {
-				Task findTask = queryByNumber(task.getNumber());
+				Task findTask = findByNumber(task.getNumber());
 				if (findTask == null) {
 					// 添加一些默认值
 					task.setType(TaskAddr.淘宝任务区);
@@ -171,16 +182,6 @@ public class TaskService {
 					taskDao.create(task);
 				}
 			}
-		}
-	}
-
-	/** 设置所有任务是否被检查过详细信息 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public void setTaskDetailUpdated(boolean b) {
-		if (b) {
-			update("update Task set isUpdateTaskDetail = true");
-		} else {
-			update("update Task set isUpdateTaskDetail = false");
 		}
 	}
 
@@ -200,6 +201,16 @@ public class TaskService {
 		}
 	}
 
+	/** 设置所有任务是否被检查过详细信息 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void setTaskDetailUpdated(boolean b) {
+		if (b) {
+			update("update " + Task.class.getName() + " set isUpdateTaskDetail = true");
+		} else {
+			update("update " + Task.class.getName() + " set isUpdateTaskDetail = false");
+		}
+	}
+
 	/**
 	 * 根据任务编号查询任务实体
 	 * 
@@ -207,7 +218,7 @@ public class TaskService {
 	 * @return
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-	public Task queryByNumber(String number) {
+	public Task findByNumber(String number) {
 		Task task = new Task();
 		task.setNumber(number);
 		List<Task> tasks = taskDao.queryByExample(task);
@@ -223,4 +234,59 @@ public class TaskService {
 	public List<Task> execQueryCommand(QueryCommand<Task> query) {
 		return query.queryCollection(taskDao.getSession());
 	}
+
+	// /-------------------------数据----BuyAccount-------------------//
+
+	/**
+	 * 根据买号账号名查询任务实体
+	 * 
+	 * @param buyAccount
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public BuyAccount findByBuyAccount(String buyAccount) {
+		BuyAccount buy = new BuyAccount();
+		buy.setBuyAccount(buyAccount);
+		List<BuyAccount> buys = buyAccountDao.queryByExample(buy);
+		if (CollectionUtils.isEmpty(buys)) {
+			return null;
+		} else {
+			return buys.get(0);
+		}
+	}
+
+	/**
+	 * 更新可接任务列表
+	 * 
+	 * @param tasks
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void updateBuyAccount(Collection<BuyAccount> buys) {
+		buyAccountDao.updateOrDeleteByHql("update " + BuyAccount.class.getName() + " set isEnable = false");
+		if (CollectionUtils.isNotEmpty(buys)) {
+			for (BuyAccount buy : buys) {
+				BuyAccount b = findByBuyAccount(buy.getBuyAccount());
+				if (b == null) {
+					buyAccountDao.create(buy);
+				} else {
+					buyAccountDao.update(buy);
+				}
+			}
+		}
+	}
+
+	/**
+	 * 根据是否启用查询绑定的买号
+	 * 
+	 * @param isEnable
+	 *            null:查询全部|true:查询启用|false:查询禁用
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public Collection<BuyAccount> queryByEnable(Boolean isEnable) {
+		BuyAccount buy = new BuyAccount();
+		buy.setIsEnable(isEnable);
+		return buyAccountDao.queryByExample(buy);
+	}
+
 }

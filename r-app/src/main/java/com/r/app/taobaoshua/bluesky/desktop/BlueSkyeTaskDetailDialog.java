@@ -10,15 +10,20 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
@@ -67,6 +72,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private JButton acceptTaskButton = new JButton("接手任务"); // 接手任务
 	private JButton discardTaskButton = new JButton("放弃任务");// 放弃任务
 	private JButton doGoodPraiseButton = new JButton("已经好评"); // 好评
+	private JComboBox<BuyAccount> buyAccountComboBox = new JComboBox<BuyAccount>();
 
 	public BlueSkyeTaskDetailDialog() {
 		super((Frame) null, "任务详细信息", true);
@@ -79,6 +85,18 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	public void setTask(Task task) {
 		this.task = task;
 		doGetTaskDetail();
+		List<BuyAccount> buyList = new ArrayList<BuyAccount>();
+		buyList.add(BuyAccount.EMPTY);
+		buyList.addAll(blueSky.getService().queryByEnable(true));
+		buyAccountComboBox.setModel(new DefaultComboBoxModel<BuyAccount>(buyList.toArray(new BuyAccount[] {})));
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		acceptTaskButton.setEnabled(false);
+		discardTaskButton.setEnabled(false);
+		doGoodPraiseButton.setEnabled(false);
+		super.setVisible(b);
 	}
 
 	@Override
@@ -120,6 +138,12 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		acceptTaskButton.setActionCommand(COMMAND_ACCEPT_TASK);
 		discardTaskButton.addActionListener(this);
 		discardTaskButton.setActionCommand(COMMAND_DISCARD_TASK);
+		BuyAccount buy = blueSky.getService().findByBuyAccount(task.getTaskerBuyAccount());
+		if (buy == null) {
+			buyAccountComboBox.setSelectedItem(BuyAccount.EMPTY);
+		} else {
+			buyAccountComboBox.setSelectedItem(buy);
+		}
 
 		HBaseBox box = HBaseBox.createVerticalBaseBox();
 		box.setBorder(BorderFactory.createTitledBorder("任务详细信息"));
@@ -141,7 +165,8 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 
 		HBaseBox bottonBox = HBaseBox.createVerticalBaseBox();
 		bottonBox.setBorder(BorderFactory.createTitledBorder(""));
-		bottonBox.add(HBaseBox.createHorizontalRight(discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton, HBaseBox.EmptyHorizontal, doGoodPraiseButton));
+		box.adds(HBaseBox.createHorizontalLeft(new JLabel("绑定买号: "), buyAccountComboBox));
+		bottonBox.add(HBaseBox.createHorizontalRight(HBaseBox.EmptyHorizontal, discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton, HBaseBox.EmptyHorizontal, doGoodPraiseButton));
 
 		add(bottonBox, BorderLayout.SOUTH);
 	}
@@ -164,7 +189,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 			@Override
 			public void run() {
 				TaskService service = blueSky.getService();
-				service.acceptTask(task, new SuccessAndFailureCallBack() {
+				service.webAcceptTask(task, new SuccessAndFailureCallBack() {
 					@Override
 					public void success(String success, Object object) {
 						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
@@ -186,7 +211,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 			@Override
 			public void run() {
 				TaskService service = blueSky.getService();
-				service.discardTask(task, new SuccessAndFailureCallBack() {
+				service.webDiscardTask(task, new SuccessAndFailureCallBack() {
 
 					@Override
 					public void success(String success, Object object) {
