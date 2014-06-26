@@ -63,6 +63,7 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 		initStyle();
 		initComponents();
 		initListeners();
+		doCaptchaImage();
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 		}
 	}
 
-	protected void doCaptchaImage() {
+	private void doCaptchaImage() {
 		logger.debug("蓝天数据平台获得验证码图片.......");
 		TaskUtil.executeSequenceTask(new Runnable() {
 			@Override
@@ -96,10 +97,8 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 		});
 	}
 
-	protected void doLogin() {
-
+	private void doLogin() {
 		logger.debug("登陆...........");
-
 		TaskUtil.executeSequenceTask(new Runnable() {
 			@Override
 			public void run() {
@@ -217,7 +216,5 @@ public class BlueSkyLoginPanle extends HBasePanel implements ActionListener {
 				BlueSkyLoginPanle.this.doCaptchaImage();
 			}
 		});
-
 	}
-
 }

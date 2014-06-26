@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.core.exceptions.SwitchPathException;
 
 /**
  * @author oky
@@ -20,7 +22,7 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
  */
 public class TaskQueryCommand implements QueryCommand<Task> {
 	private TaskStatus[] status = null; // 任务状态
-	private int order = -1; // 排序 1:发布点从高到低 , 2: 一天可以赚取的发布点数从高到低 , 其它:不排序
+	private TaskListOrder order = null; // 排序
 	private int firstResult = -1; // 查询起始条数
 	private int maxResults = -1; // 查询最大条数
 
@@ -33,6 +35,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	private Boolean isUseQQ = null; // 是否有QQ参数
 	private Boolean isUpdatePrice = null; // 是否改价
 	private Boolean isUpdateTaskDetail = null; // 是否已经获取过任务详细信息
+	private String taskerAccount = null; // 接手人账号
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -74,7 +77,6 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 			hql.append(" and t.isUseQQ = :isUseQQ ");
 			pars.put("isUseQQ", isUseQQ);
 		}
-
 		if (isUpdatePrice != null) { // 是否改价
 			hql.append(" and t.isUpdatePrice = :isUpdatePrice ");
 			pars.put("isUpdatePrice", isUpdatePrice);
@@ -83,16 +85,23 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 			hql.append(" and t.isUpdateTaskDetail = :isUpdateTaskDetail ");
 			pars.put("isUpdateTaskDetail", isUpdateTaskDetail);
 		}
+		if (StringUtils.isNotBlank(taskerAccount)) { // 接手人
+			hql.append(" and (t.taskerAccount = :taskerAccount or t.taskerAccount is null) ");
+			pars.put("taskerAccount", taskerAccount);
+		}
 
 		// 排序
-		if (-1 < order) {
+		if (order != null) {
 			switch (order) {
-			case 1:
-				hql.append(" order by t.publishingPoint desc, t.number asc ");
+			case 发布点从高到低:
+			case 每天发布点从高到低:
+				hql.append(" order by t." + order.getFieldName() + " desc, t.number asc ");
 				break;
-			case 2:
-				hql.append(" order by t.publishingPointOneDay desc, t.number asc ");
+			case 默认:
+				hql.append(" order by t.number asc ");
 				break;
+			default:
+				throw new SwitchPathException("排序Switch跳转到未知的分支");
 			}
 		} else {
 			hql.append(" order by t.number asc ");
@@ -129,15 +138,15 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	/**
 	 * @return the order
 	 */
-	public int getOrder() {
+	public TaskListOrder getOrder() {
 		return order;
 	}
 
 	/**
 	 * @param order
-	 *            排序 1:发布点从高到低 , 2: 一天可以赚取的发布点数从高到低 , 其它:不排序
+	 *            the order to set
 	 */
-	public void setOrder(int order) {
+	public void setOrder(TaskListOrder order) {
 		this.order = order;
 	}
 
@@ -288,4 +297,47 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		this.isUpdateTaskDetail = isUpdateTaskDetail;
 	}
 
+	/**
+	 * @return the taskerAccount
+	 */
+	public String getTaskerAccount() {
+		return taskerAccount;
+	}
+
+	/**
+	 * @param taskerAccount
+	 *            the taskerAccount to set
+	 */
+	public void setTaskerAccount(String taskerAccount) {
+		this.taskerAccount = taskerAccount;
+	}
+
+	/** 排序枚举 */
+	public static enum TaskListOrder {
+		默认(null, null), //
+		发布点从高到低("publishingPoint", "desc"), //
+		每天发布点从高到低("publishingPointOneDay", "desc"), //
+		;
+		private String fieldName;
+		private String esc;
+
+		/**
+		 * @return the fieldName
+		 */
+		public String getFieldName() {
+			return fieldName;
+		}
+
+		/**
+		 * @return the esc
+		 */
+		public String getEsc() {
+			return esc;
+		}
+
+		TaskListOrder(String fieldName, String esc) {
+			this.fieldName = fieldName;
+			this.esc = esc;
+		}
+	}
 }

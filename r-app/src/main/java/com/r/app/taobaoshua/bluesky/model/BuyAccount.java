@@ -41,11 +41,11 @@ public class BuyAccount {
 	@Column
 	private String buyAccount; // 买号
 	@Column
-	private Number buyPrestige; // 买号信誉
+	private Integer buyPrestige; // 买号信誉
 	@Column
-	private Number takeTaskByDay; // 今日接任务数
+	private Integer takeTaskByDay; // 今日接任务数
 	@Column
-	private Number takeTaskByWeek; // 本周接任务数
+	private Integer takeTaskByWeek; // 本周接任务数
 	@Column
 	private Boolean isIDCard;// 是否实名认证
 	@Column
@@ -108,7 +108,7 @@ public class BuyAccount {
 	/**
 	 * @return the buyPrestige
 	 */
-	public Number getBuyPrestige() {
+	public Integer getBuyPrestige() {
 		return buyPrestige;
 	}
 
@@ -116,29 +116,14 @@ public class BuyAccount {
 	 * @param buyPrestige
 	 *            the buyPrestige to set
 	 */
-	public void setBuyPrestige(Number buyPrestige) {
+	public void setBuyPrestige(Integer buyPrestige) {
 		this.buyPrestige = buyPrestige;
-	}
-
-	/**
-	 * @return the takeTaskByDay
-	 */
-	public Number getTakeTaskByDay() {
-		return takeTaskByDay;
-	}
-
-	/**
-	 * @param takeTaskByDay
-	 *            the takeTaskByDay to set
-	 */
-	public void setTakeTaskByDay(Number takeTaskByDay) {
-		this.takeTaskByDay = takeTaskByDay;
 	}
 
 	/**
 	 * @return the takeTaskByWeek
 	 */
-	public Number getTakeTaskByWeek() {
+	public Integer getTakeTaskByWeek() {
 		return takeTaskByWeek;
 	}
 
@@ -146,8 +131,23 @@ public class BuyAccount {
 	 * @param takeTaskByWeek
 	 *            the takeTaskByWeek to set
 	 */
-	public void setTakeTaskByWeek(Number takeTaskByWeek) {
+	public void setTakeTaskByWeek(Integer takeTaskByWeek) {
 		this.takeTaskByWeek = takeTaskByWeek;
+	}
+
+	/**
+	 * @return the takeTaskByDay
+	 */
+	public Integer getTakeTaskByDay() {
+		return takeTaskByDay;
+	}
+
+	/**
+	 * @param takeTaskByDay
+	 *            the takeTaskByDay to set
+	 */
+	public void setTakeTaskByDay(Integer takeTaskByDay) {
+		this.takeTaskByDay = takeTaskByDay;
 	}
 
 	/**

@@ -19,9 +19,9 @@ import org.h2.tools.Server;
 public class StartH2Service {
 	private static Server tcpServer;
 	private String port = "9094";
-	private String dbDir = "D:/rainteam/sts-3.5.1.RELEASE/h2db/loverlover";
-	private String user = "heyu";
-	private String password = "heyulovelian1990";
+	private String dbDir = "E:/workspace-sts/r-team/r-app/h2db/lantian";
+	private String user = "oky120002";
+	private String password = "oky120002";
 
 	public void startServer() {
 		try {

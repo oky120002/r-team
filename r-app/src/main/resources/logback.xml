@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds">
-
-	<property name="appName" value="r_app:taobaoshua" />
-	<property name="logPath" value="D:/logs/r-app/taobaoshua" />
+	<property name="contentName" value="taobaoshua" />
+	<property name="commonPattern" value="%date %-6relative |-%-5level in %logger{50} - %msg%n" />
+	<property name="logfile" value="D:/logs/r-app/" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
-	<property name="commonPattern" value="%-4relative [%thread] %-5level %logger{200} - %msg%n" />
-	<timestamp key="date" datePattern="yyyy-MM-dd HH:mm:ss" />
 
-	<contextName>${appName}</contextName>
+	<contextName>${contentName}</contextName>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
+			<pattern>${commonPattern}</pattern>
 		</encoder>
 	</appender>
-
+	
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logPath}${appName}.log</file>
+		<file>${logfile}${contentName}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${logPath}${appName}.%i.log.zip</fileNamePattern>
+			<fileNamePattern>${logfile}.%i.log.zip</fileNamePattern>
 			<minIndex>1</minIndex>
 			<maxIndex>${maxLogFileNum}</maxIndex>
 		</rollingPolicy>
@@ -30,57 +28,45 @@
 			<maxFileSize>${maxLogFileSize}</maxFileSize>
 		</triggeringPolicy>
 		<encoder>
-			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
+			<pattern>${commonPattern}</pattern>
 		</encoder>
 	</appender>
-
-	<appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${logPath}${appName}.sql.log</file>
-		<append>false</append>
-		<encoder>
-			<pattern>${appName} - ${date} - ${commonPattern}</pattern>
-		</encoder>
-	</appender>
-
+	
+	<appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">  
+	    <file>${logfile}${contentName}.sql.log</file>  
+	    <append>false</append>  
+	    <encoder>  
+	      <pattern>${commonPattern}</pattern>  
+	    </encoder>  
+	</appender>  
+	
 	<!-- spring框架打印日志级别 -->
-	<logger name="org.springframework" level="INFO" />
-	<logger name="org.springframework.web.servlet.mvc.annotation"
-		level="WARN" />
-	<logger name="org.springframework.web.servlet.view.JstlView"
-		level="WARN" />
-	<logger
-		name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
-		level="WARN" />
-	<logger name="org.springframework.web.servlet.DispatcherServlet"
-		level="WARN" />
-	<logger
-		name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker"
-		level="WARN" />
-
+	<logger name="org.springframework" level="INFO"/>
+	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN"/>
+	<logger name="org.springframework.web.servlet.view.JstlView" level="WARN"/>
+	<logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="WARN"/>
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN"/>
+	<logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="WARN"/>
 	<!-- springMVC答应日志级别 -->
-	<!-- <logger name="org.springframework.aop" level="ERROR" /> -->
-	<!-- <logger name="org.springframework.web" level="DEBUG" /> -->
-	<!-- <logger name="org.springframework.beans" level="ERROR" /> -->
-
+	<logger name="org.springframework.aop" level="ERROR" />
+	<logger name="org.springframework.web" level="DEBUG" />
+	<logger name="org.springframework.beans" level="ERROR" />
+	<!-- 任务计划 -->
+	<logger name="org.quartz" level="ERROR" />
 	<!-- hibernate -->
 	<logger name="org.hibernate" level="WARN" />
-
 	<!-- cxf日志级别 -->
-	<!-- <logger name="org.apache.cxf" level="WARN" /> -->
-
+	<logger name="org.apache.cxf" level="WARN" />
 	<!-- ehcache日志级别 -->
-	<!-- <logger name="net.sf.ehcache" level="WARN" /> -->
-
+	<logger name="net.sf.ehcache" level="WARN" />
 	<!-- mybatis日志级别 -->
-	<!-- <logger name="org.apache.ibatis" level="WARN" /> -->
-	<!-- <logger name="org.mybais" level="WARN" /> -->
-
+	<logger name="org.apache.ibatis" level="WARN" />
+	<logger name="org.mybais" level="WARN" />
 	<!-- sql日志级别 -->
-	<!-- <logger name="java.sql.Connection" level="ERROR"> -->
-	<!-- <appender-ref ref="SQL_FILE" /> -->
-	<!-- </logger> -->
-
-	<logger name="org.quartz" level="ERROR" />
+	<logger name="java.sql.Connection" level="ERROR">
+		<appender-ref ref="SQL_FILE"/>
+	</logger>
+	
 	<logger name="com.r.core.httpsocket" level="ERROR" />
 	<logger name="com.r" level="DEBUG" />
 

@@ -13,6 +13,7 @@ import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
+import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand.TaskListOrder;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.TaskUtil;
@@ -52,7 +53,13 @@ public class BlueSkyBackgroundTask {
 
 	public void startAutoUpdateTaskDetail() throws SchedulerException {
 		final TaskService service = blueSky.getService();
-		service.setTaskDetailUpdated(false);
+
+		TaskUtil.executeTask(new Runnable() {
+			@Override
+			public void run() {
+				service.setTaskDetailUpdated(false);
+			}
+		});
 
 		logger.debug("启动后台任务 : 自动更新任务详细信息........");
 		TaskUtil.executeScheduleTask(new Runnable() {
@@ -62,7 +69,7 @@ public class BlueSkyBackgroundTask {
 
 					TaskQueryCommand query = new TaskQueryCommand();
 					query.setIsUpdateTaskDetail(false);
-					query.setOrder(2);
+					query.setOrder(TaskListOrder.每天发布点从高到低);
 					query.setPage(0, 1);
 					List<Task> list = service.execQueryCommand(query);
 					if (CollectionUtils.isEmpty(list)) {

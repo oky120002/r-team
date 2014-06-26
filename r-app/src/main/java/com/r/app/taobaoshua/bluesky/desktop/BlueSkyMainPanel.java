@@ -30,6 +30,7 @@ import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
+import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand.TaskListOrder;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBasePanel;
 import com.r.core.desktop.ctrl.alert.HAlert;
@@ -72,6 +73,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private static final String COMMAND_LIST_UPDATEPRICE_ALL = "command_list_updateprice_all"; // 命令
 	private static final String COMMAND_LIST_UPDATEPRICE_INCLUDE = "command_list_updateprice_include"; // 命令
 	private static final String COMMAND_LIST_UPDATEPRICE_EXCLUDE = "command_list_updateprice_exclude"; // 命令
+	private static final String COMMAND_LIST_TAKER_ALL = "command_list_taker_all"; // 命令
+	private static final String COMMAND_LIST_TAKER_SELF = "command_list_taker_self"; // 命令
+	private static final String COMMAND_LIST_TASKLISTORDER = "command_list_tasklistorder"; // 命令
 
 	private static final BlueSky blueSky = BlueSky.getInstance();
 
@@ -84,7 +88,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private ButtonGroup reviewGroup = new ButtonGroup();
 	private ButtonGroup qqGroup = new ButtonGroup();
 	private ButtonGroup updatepriceGroup = new ButtonGroup();
+	private ButtonGroup taskerGroup = new ButtonGroup();
 	private JComboBox<TaskStatus> taskStatusComboBox = new JComboBox<TaskStatus>(TaskStatus.values());
+	private JComboBox<TaskListOrder> taskListOrderComboBox = new JComboBox<TaskListOrder>(TaskListOrder.values());
 
 	// 列表
 	private JTable taskListTable; // 任务列表
@@ -112,6 +118,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		switch (actionCommand) {
 		case COMMAND_TASKINFO:
 		case COMMAND_LIST_TASKSTATUS:
+		case COMMAND_LIST_TASKLISTORDER:
 		case COMMAND_LIST_SINCERITY_ALL:
 		case COMMAND_LIST_SINCERITY_INCLUDE:
 		case COMMAND_LIST_SINCERITY_EXCLUDE:
@@ -136,6 +143,8 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		case COMMAND_LIST_UPDATEPRICE_ALL:
 		case COMMAND_LIST_UPDATEPRICE_INCLUDE:
 		case COMMAND_LIST_UPDATEPRICE_EXCLUDE:
+		case COMMAND_LIST_TAKER_ALL:
+		case COMMAND_LIST_TAKER_SELF:
 			doTaskInfos();
 			break;
 		case COMMAND_CHECK_TASKSTATUS: // 校验任务状态
@@ -191,11 +200,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private Component getTaskListByOne() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
 		initTaskStatusBox(box); // 任务状态
+		initTaskListOrderBox(box);// 排序
 		initSincerityBox(box); // 商保
 		initIDCardBox(box); // 认证
 		initSearchBox(box); // 搜索
 		initCollectBox(box); // 收藏
-		initWangWangBox(box); // 旺聊
+
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -203,6 +213,8 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	/** 返回限制条件项第一行 */
 	private Component getTaskListByTwo() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
+		initWangWangBox(box); // 旺聊
+		initTakerBox(box); // 任务接手者
 		initReviewBox(box); // 审核
 		initUpdatePriceBox(box); // 是否需要改价
 		initQQBox(box);// QQ
@@ -219,6 +231,18 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("任务状态"));
 		b.add(taskStatusComboBox);
+		box.add(b);
+	}
+
+	// 排序
+	private void initTaskListOrderBox(HBaseBox box) {
+		taskListOrderComboBox.setSelectedItem(TaskListOrder.每天发布点从高到低);
+		taskListOrderComboBox.addActionListener(this);
+		taskListOrderComboBox.setActionCommand(COMMAND_LIST_TASKLISTORDER);
+		taskListOrderComboBox.setFocusable(false);
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("排序"));
+		b.add(taskListOrderComboBox);
 		box.add(b);
 	}
 
@@ -406,6 +430,24 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		box.add(b);
 	}
 
+	/** 任务接手 */
+	private void initTakerBox(HBaseBox box) {
+		JRadioButton radio1 = new JRadioButton("默认");
+		JRadioButton radio2 = new JRadioButton("自己");
+		taskerGroup.add(radio1);
+		taskerGroup.add(radio2);
+		radio1.addActionListener(this);
+		radio2.addActionListener(this);
+		radio1.setActionCommand(COMMAND_LIST_TAKER_ALL);
+		radio2.setActionCommand(COMMAND_LIST_TAKER_SELF);
+		radio2.setSelected(true);
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("接手人"));
+		b.add(radio1);
+		b.add(radio2);
+		box.add(b);
+	}
+
 	/** 获取任务信息 */
 	private synchronized void doTaskInfos() {
 		taskInfosButton.setEnabled(false);
@@ -416,7 +458,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 					TaskQueryCommand query = new TaskQueryCommand();
 					query.setStatus(TaskStatus.等待接手);
 					query.setPage(0, 100);
-					query.setOrder(2);
+					query.setOrder(TaskListOrder.每天发布点从高到低);
 					select(query);
 
 					List<Task> tasks = blueSky.getService().execQueryCommand(query);
@@ -433,6 +475,8 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 			private void select(TaskQueryCommand query) {
 				// 任务状态
 				query.setStatus((TaskStatus) taskStatusComboBox.getSelectedItem());
+				// 排序
+				query.setOrder((TaskListOrder) taskListOrderComboBox.getSelectedItem());
 
 				// 商保
 				ButtonModel selection = sincerityGroup.getSelection();
@@ -542,6 +586,20 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 						break;
 					case COMMAND_LIST_UPDATEPRICE_EXCLUDE:
 						query.setIsUpdatePrice(false);
+						break;
+					}
+				}
+
+				// 任务接手
+				selection = taskerGroup.getSelection();
+				if (selection != null) {
+					String actionCommand = selection.getActionCommand();
+					switch (actionCommand) {
+					case COMMAND_LIST_TAKER_ALL:
+						query.setTaskerAccount(null);
+						break;
+					case COMMAND_LIST_TAKER_SELF:
+						query.setTaskerAccount(blueSky.getLoginAccount());
 						break;
 					}
 				}

@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -266,11 +267,10 @@ public class TaskService {
 		if (CollectionUtils.isNotEmpty(buys)) {
 			for (BuyAccount buy : buys) {
 				BuyAccount b = findByBuyAccount(buy.getBuyAccount());
-				if (b == null) {
-					buyAccountDao.create(buy);
-				} else {
-					buyAccountDao.update(buy);
+				if (b != null) {
+					BeanUtils.copyProperties(b, buy, new String[] { "id" });
 				}
+				buyAccountDao.save(buy);
 			}
 		}
 	}
