@@ -1,6 +1,5 @@
 package com.r.app.taobaoshua.bluesky.model;
 
-import java.text.NumberFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -68,14 +67,14 @@ public class Task {
 	@Enumerated(EnumType.STRING)
 	private PaymentType paymentType; // 支付方式
 	@Column
-	private Number securityPrice; // 任务担保金额,这里金额不大所以使用Double.如果发现有大金额可以改为BigDecimal
+	private Double securityPrice; // 任务担保金额,这里金额不大所以使用Double.如果发现有大金额可以改为BigDecimal
 	@Column
-	private Number publishingPoint; // 发布点
+	private Double publishingPoint; // 发布点
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TaskType taskType; // 任务类型
 	@Column
-	private Number timeLimit; // 任务时限(分钟)
+	private Integer timeLimit; // 任务时限(分钟)
 	@Column
 	@Enumerated(EnumType.STRING)
 	private ShopScore shopScore; // 商铺动态平分
@@ -144,9 +143,9 @@ public class Task {
 	private Boolean isUpdateTaskDetail; // 是否已经更新过详细信息
 
 	@Column
-	private Number publishingPointOneDay; // 一天可以赚取的发布点数
+	private Double publishingPointOneDay; // 一天可以赚取的发布点数
 	@Column
-	private Number securityPriceOneDayOnePPoint; // 一天一发布点需要的担保金投入
+	private Double securityPriceOneDayOnePPoint; // 一天一发布点需要的担保金投入
 
 	public void calStatistics() {
 		publishingPointOneDay = null;
@@ -155,16 +154,12 @@ public class Task {
 		// 计算一天可以赚取的发布点数
 		if (publishingPoint != null && timeLimit != null) {
 			double p = publishingPoint.doubleValue(); // 默认赚取全部的发布点,立即完成
-			NumberFormat numberFormat = NumberFormat.getNumberInstance();
-			numberFormat.setMaximumFractionDigits(2); // 允许最大的小数位数
 			int day = (int) (timeLimit.doubleValue() / 60 / 24);
 			publishingPointOneDay = Double.valueOf(p / (day < 1 ? 1 : day));
 		}
 
 		// 计算一天一发布点需要的担保金投入
 		if (securityPrice != null && publishingPointOneDay != null) {
-			NumberFormat numberFormat = NumberFormat.getNumberInstance();
-			numberFormat.setMaximumFractionDigits(2); // 允许最大的小数位数
 			securityPriceOneDayOnePPoint = Double.valueOf(securityPrice.doubleValue() / publishingPointOneDay.doubleValue());
 		}
 	}
@@ -453,33 +448,19 @@ public class Task {
 		this.paymentType = paymentType;
 	}
 
-	/**
-	 * @return the securityPrice
-	 */
-	public Number getSecurityPrice() {
+	public Double getSecurityPrice() {
 		return securityPrice;
 	}
 
-	/**
-	 * @param securityPrice
-	 *            the securityPrice to set
-	 */
-	public void setSecurityPrice(Number securityPrice) {
+	public void setSecurityPrice(Double securityPrice) {
 		this.securityPrice = securityPrice;
 	}
 
-	/**
-	 * @return the publishingPoint
-	 */
-	public Number getPublishingPoint() {
+	public Double getPublishingPoint() {
 		return publishingPoint;
 	}
 
-	/**
-	 * @param publishingPoint
-	 *            the publishingPoint to set
-	 */
-	public void setPublishingPoint(Number publishingPoint) {
+	public void setPublishingPoint(Double publishingPoint) {
 		this.publishingPoint = publishingPoint;
 	}
 
@@ -547,11 +528,12 @@ public class Task {
 		this.taskType = taskType;
 	}
 
-	/**
-	 * @return the timeLimit
-	 */
-	public Number getTimeLimit() {
+	public Integer getTimeLimit() {
 		return timeLimit;
+	}
+
+	public void setTimeLimit(Integer timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 
 	public String getTimeLimitString() {
@@ -563,14 +545,6 @@ public class Task {
 		} else {
 			return ((time + 1) / 60 / 24) + "天";
 		}
-	}
-
-	/**
-	 * @param timeLimit
-	 *            the timeLimit to set
-	 */
-	public void setTimeLimit(Number timeLimit) {
-		this.timeLimit = timeLimit;
 	}
 
 	/**
@@ -1008,33 +982,20 @@ public class Task {
 		this.isUpdateTaskDetail = isUpdateTaskDetail;
 	}
 
-	/**
-	 * @return the publishingPointOneDay
-	 */
-	public Number getPublishingPointOneDay() {
+	public Double getPublishingPointOneDay() {
 		return publishingPointOneDay;
 	}
 
-	/**
-	 * @param publishingPointOneDay
-	 *            the publishingPointOneDay to set
-	 */
-	public void setPublishingPointOneDay(Number publishingPointOneDay) {
+	public void setPublishingPointOneDay(Double publishingPointOneDay) {
 		this.publishingPointOneDay = publishingPointOneDay;
 	}
 
-	/**
-	 * @return the securityPriceOneDayOnePPoint
-	 */
-	public Number getSecurityPriceOneDayOnePPoint() {
+	public Double getSecurityPriceOneDayOnePPoint() {
 		return securityPriceOneDayOnePPoint;
 	}
 
-	/**
-	 * @param securityPriceOneDayOnePPoint
-	 *            the securityPriceOneDayOnePPoint to set
-	 */
-	public void setSecurityPriceOneDayOnePPoint(Number securityPriceOneDayOnePPoint) {
+	public void setSecurityPriceOneDayOnePPoint(Double securityPriceOneDayOnePPoint) {
 		this.securityPriceOneDayOnePPoint = securityPriceOneDayOnePPoint;
 	}
+
 }
