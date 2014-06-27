@@ -49,6 +49,8 @@ public class BuyAccount {
 	@Column
 	private Boolean isIDCard;// 是否实名认证
 	@Column
+	private String taobaoTid; // 买号所属区域id
+	@Column
 	private Boolean isEnable;// 启用禁用
 
 	public BuyAccount() {
@@ -174,6 +176,21 @@ public class BuyAccount {
 	}
 
 	/**
+	 * @return the taobaoTid
+	 */
+	public String getTaobaoTid() {
+		return taobaoTid;
+	}
+
+	/**
+	 * @param taobaoTid
+	 *            the taobaoTid to set
+	 */
+	public void setTaobaoTid(String taobaoTid) {
+		this.taobaoTid = taobaoTid;
+	}
+
+	/**
 	 * @return the isEnable
 	 */
 	public Boolean getIsEnable() {
@@ -192,15 +209,18 @@ public class BuyAccount {
 		this.isEnable = isEnable;
 	}
 
+	public String getBuyDatas() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(takeTaskByDay == null ? -1 : takeTaskByDay.intValue()).append('|');
+		sb.append(takeTaskByWeek == null ? -1 : takeTaskByWeek.intValue()).append('|');
+		sb.append(buyPrestige == null ? -1 : buyPrestige.intValue());
+		return sb.toString();
+	}
+
 	@Override
 	public String toString() {
 		if (StringUtils.isNotBlank(id)) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(buyAccount).append(':');
-			sb.append(takeTaskByDay).append('|');
-			sb.append(takeTaskByWeek).append('|');
-			sb.append(buyPrestige);
-			return sb.toString();
+			return buyAccount;
 		}
 		return "---请选择---";
 

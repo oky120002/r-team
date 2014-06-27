@@ -100,6 +100,10 @@ public class Task {
 	@Column
 	private Boolean isUpdatePrice; // 是否改价
 	@Column
+	private Boolean isUpdateAddr; // 是否改地址
+	@Column
+	private Boolean isBaoGuo; // 是否真是地址
+	@Column
 	private String auxiliaryCondition; // 附加条件
 
 	@Column
@@ -110,6 +114,8 @@ public class Task {
 	private String taskerAccount; // 接手人账号
 	@Column
 	private String taskerBuyAccount; // 接手人买号
+	@Column
+	private String tid; // 绑定买号时需要的数据
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date taskPublishingTime;// 任务发布时间： 2014-6-5 21:45:59
@@ -488,6 +494,52 @@ public class Task {
 	}
 
 	/**
+	 * @return the isUpdateAddr
+	 */
+	public Boolean getIsUpdateAddr() {
+		return isUpdateAddr;
+	}
+
+	public Icon getIsUpdateAddrIcon() {
+		return isUpdateAddr() ? blueSky.getIcon("DiZhi.gif") : null;
+	}
+
+	public boolean isUpdateAddr() {
+		return isUpdateAddr == null ? false : isUpdateAddr.booleanValue();
+	}
+
+	/**
+	 * @param isUpdateAddr
+	 *            the isUpdateAddr to set
+	 */
+	public void setIsUpdateAddr(Boolean isUpdateAddr) {
+		this.isUpdateAddr = isUpdateAddr;
+	}
+
+	/**
+	 * @return the isBaoGuo
+	 */
+	public Boolean getIsBaoGuo() {
+		return isBaoGuo;
+	}
+
+	public Icon getIsBaoGuoIcon() {
+		return isBaoGuo() ? blueSky.getIcon("BaoGuo.gif") : null;
+	}
+
+	public boolean isBaoGuo() {
+		return isBaoGuo == null ? false : isBaoGuo.booleanValue();
+	}
+
+	/**
+	 * @param isBaoGuo
+	 *            the isBaoGuo to set
+	 */
+	public void setIsBaoGuo(Boolean isBaoGuo) {
+		this.isBaoGuo = isBaoGuo;
+	}
+
+	/**
 	 * @return the taskType
 	 */
 	public TaskType getTaskType() {
@@ -826,6 +878,21 @@ public class Task {
 	 */
 	public void setTaskerBuyAccount(String taskerBuyAccount) {
 		this.taskerBuyAccount = taskerBuyAccount;
+	}
+
+	/**
+	 * @return the tid
+	 */
+	public String getTid() {
+		return tid;
+	}
+
+	/**
+	 * @param tid
+	 *            the tid to set
+	 */
+	public void setTid(String tid) {
+		this.tid = tid;
 	}
 
 	/**

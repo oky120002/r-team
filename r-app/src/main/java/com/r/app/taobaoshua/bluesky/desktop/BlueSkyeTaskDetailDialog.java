@@ -53,6 +53,9 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private static final String COMMAND_ACCEPT_TASK = "command_accept_task"; // 命令_接手任务
 	private static final String COMMAND_DISCARD_TASK = "command_discard_task"; // 命令_放弃任务
 	private static final String COMMAND_DO_GOOD_PRAISE = "command_do_good_praise"; // 命令_已经好评
+	private static final String COMMAND_DO_GOOD_DEGREE = "command_do_good_degree"; // 命令_满意度评价
+	private static final String COMMAND_BINDING_BUYACCOUNT = "command_binding_buyaccount"; // 命令_绑定买号
+	private static final String COMMAND_BUYACCOUNT = "command_buyaccount"; // 绑定买号
 	private Task task = new Task(); // 任务
 
 	private JLabel numberLabel = new JLabel(); // 任务编号
@@ -68,10 +71,13 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	private JLabel taskStatusLabel = new JLabel(); // 状态
 	private JLabel taskerAccountLabel = new JLabel(); // 接收人账号
 	private JTextField praiseTextField = new JTextField(); // 好评内容
+	private JLabel buyAccountCreditLabel = new JLabel(); // 买号信誉
 
 	private JButton acceptTaskButton = new JButton("接手任务"); // 接手任务
 	private JButton discardTaskButton = new JButton("放弃任务");// 放弃任务
 	private JButton doGoodPraiseButton = new JButton("已经好评"); // 好评
+	private JButton doGoodDegreeButton = new JButton("满意度评价"); // 满意度评价
+	private JButton bindingBuyAccountButton = new JButton("绑定买号"); // 绑定买号
 	private JComboBox<BuyAccount> buyAccountComboBox = new JComboBox<BuyAccount>();
 
 	public BlueSkyeTaskDetailDialog() {
@@ -95,7 +101,11 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 	public void setVisible(boolean b) {
 		acceptTaskButton.setEnabled(false);
 		discardTaskButton.setEnabled(false);
-		doGoodPraiseButton.setEnabled(false);
+		doGoodPraiseButton.setVisible(false);
+		doGoodDegreeButton.setVisible(false);
+		bindingBuyAccountButton.setEnabled(false);
+		buyAccountComboBox.setEnabled(false);
+
 		super.setVisible(b);
 	}
 
@@ -105,6 +115,9 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		acceptTaskButton.setEnabled(false);
 		discardTaskButton.setEnabled(false);
 		doGoodPraiseButton.setEnabled(false);
+		doGoodDegreeButton.setEnabled(false);
+		bindingBuyAccountButton.setEnabled(false);
+		buyAccountComboBox.setEnabled(false);
 
 		switch (actionCommand) {
 		case COMMAND_ACCEPT_TASK:
@@ -116,8 +129,15 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		case COMMAND_DO_GOOD_PRAISE:
 			doGoodPraise();
 			break;
+		case COMMAND_DO_GOOD_DEGREE:
+			doGoodDegree();
+		case COMMAND_BINDING_BUYACCOUNT:
+			doBindingBuyAccount();
+		case COMMAND_BUYACCOUNT:
+			doBuyAccount();
+			refreshTaskButton();
+			break;
 		}
-
 	}
 
 	private void initStyle() {
@@ -138,6 +158,15 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		acceptTaskButton.setActionCommand(COMMAND_ACCEPT_TASK);
 		discardTaskButton.addActionListener(this);
 		discardTaskButton.setActionCommand(COMMAND_DISCARD_TASK);
+		doGoodPraiseButton.addActionListener(this);
+		doGoodPraiseButton.setActionCommand(COMMAND_DO_GOOD_PRAISE);
+		doGoodDegreeButton.addActionListener(this);
+		doGoodDegreeButton.setActionCommand(COMMAND_DO_GOOD_DEGREE);
+		bindingBuyAccountButton.addActionListener(this);
+		bindingBuyAccountButton.setActionCommand(COMMAND_BINDING_BUYACCOUNT);
+		buyAccountComboBox.addActionListener(this);
+		buyAccountComboBox.setActionCommand(COMMAND_BUYACCOUNT);
+
 		BuyAccount buy = blueSky.getService().findByBuyAccount(task.getTaskerBuyAccount());
 		if (buy == null) {
 			buyAccountComboBox.setSelectedItem(BuyAccount.EMPTY);
@@ -165,8 +194,8 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 
 		HBaseBox bottonBox = HBaseBox.createVerticalBaseBox();
 		bottonBox.setBorder(BorderFactory.createTitledBorder(""));
-		box.adds(HBaseBox.createHorizontalLeft(new JLabel("绑定买号: "), buyAccountComboBox));
-		bottonBox.add(HBaseBox.createHorizontalRight(HBaseBox.EmptyHorizontal, discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton, HBaseBox.EmptyHorizontal, doGoodPraiseButton));
+		box.adds(HBaseBox.createHorizontalLeft(new JLabel("绑定买号 : "), buyAccountComboBox, HBaseBox.EmptyHorizontal, buyAccountCreditLabel, HBaseBox.EmptyHorizontal, bindingBuyAccountButton));
+		bottonBox.add(HBaseBox.createHorizontalRight(HBaseBox.EmptyHorizontal, discardTaskButton, HBaseBox.EmptyHorizontal, acceptTaskButton, HBaseBox.EmptyHorizontal, doGoodPraiseButton, doGoodDegreeButton));
 
 		add(bottonBox, BorderLayout.SOUTH);
 	}
@@ -230,7 +259,58 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 
 	// 已经好评
 	private void doGoodPraise() {
+		TaskUtil.executeSequenceTask(new Runnable() {
+			@Override
+			public void run() {
+				TaskService service = blueSky.getService();
+				service.webDoGoodPraise(task, new SuccessAndFailureCallBack() {
+					@Override
+					public void success(String success, Object object) {
+						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
+					}
 
+					@Override
+					public void failure(String error, Object object) {
+						HAlert.showWarnTips(error, BlueSkyeTaskDetailDialog.this);
+					}
+				});
+				_doGetTaskDetail();
+			}
+		}, GROPU);
+
+	}
+
+	// 满意度评价
+	private void doGoodDegree() {
+		TaskUtil.executeSequenceTask(new Runnable() {
+			@Override
+			public void run() {
+				TaskService service = blueSky.getService();
+				service.webDoGoodDegree(task, new SuccessAndFailureCallBack() {
+					@Override
+					public void success(String success, Object object) {
+						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
+					}
+
+					@Override
+					public void failure(String error, Object object) {
+						HAlert.showWarnTips(error, BlueSkyeTaskDetailDialog.this);
+					}
+				});
+				_doGetTaskDetail();
+			}
+		}, GROPU);
+	}
+
+	/** 绑定买号 */
+	private void doBindingBuyAccount() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void doBuyAccount() {
+		BuyAccount buyAccount = (BuyAccount) buyAccountComboBox.getSelectedItem();
+		buyAccountCreditLabel.setText(buyAccount.getBuyDatas());
 	}
 
 	private void _doGetTaskDetail() {
@@ -252,20 +332,35 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 		taskStatusLabel.setText(task.getStatus().name());
 		taskerAccountLabel.setText(task.getTaskerAccount());
 		praiseTextField.setText(task.getPraise());
+		doBuyAccount();
 	}
 
 	private void refreshTaskButton() {
 		discardTaskButton.setEnabled(false);
 		doGoodPraiseButton.setEnabled(false);
 		acceptTaskButton.setEnabled(false);
+		doGoodDegreeButton.setEnabled(false);
+		bindingBuyAccountButton.setEnabled(false);
+		buyAccountComboBox.setEnabled(false);
 
 		if (StringUtils.equals(blueSky.getLoginAccount(), task.getTaskerAccount())) {
-			// 根据任务信息设置控件状态
-			if (TaskStatus.等待绑定买号.equals(task.getStatus())) {
-				discardTaskButton.setEnabled(true);
-			}
-			if (TaskStatus.等待收货.equals(task.getStatus())) {
-				doGoodPraiseButton.setEnabled(true);
+			TaskStatus status = task.getStatus();
+			if (status != null) {
+				switch (status) {
+				case 等待绑定买号:
+					discardTaskButton.setEnabled(true);
+					bindingBuyAccountButton.setEnabled(true);
+					buyAccountComboBox.setEnabled(true);
+					break;
+				case 等待收货:
+					// doGoodPraiseButton.setEnabled(true);
+					break;
+				case 已完成_等待双方平台评价:
+				case 已完成_等待发布方平台评价:
+					// doGoodDegreeButton.setEnabled(true);
+				default:
+					break;
+				}
 			}
 		}
 

@@ -76,6 +76,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private static final String COMMAND_LIST_TAKER_ALL = "command_list_taker_all"; // 命令
 	private static final String COMMAND_LIST_TAKER_SELF = "command_list_taker_self"; // 命令
 	private static final String COMMAND_LIST_TASKLISTORDER = "command_list_tasklistorder"; // 命令
+	private static final String COMMAND_LIST_UPDATEADDR_ALL = "command_list_updateaddr_all"; // 命令
+	private static final String COMMAND_LIST_UPDATEADDR_INCLUDE = "command_list_updateaddr_include"; // 命令
+	private static final String COMMAND_LIST_UPDATEADDR_EXCLUDE = "command_list_updateaddr_exclude"; // 命令
+	private static final String COMMAND_LIST_BAOGUO_ALL = "command_list_baoguo_all"; // 命令
+	private static final String COMMAND_LIST_BAOGUO_INCLUDE = "command_list_baoguo_include"; // 命令
+	private static final String COMMAND_LIST_BAOGUO_EXCLUDE = "command_list_baoguo_exclude"; // 命令
 
 	private static final BlueSky blueSky = BlueSky.getInstance();
 
@@ -87,8 +93,10 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private ButtonGroup wangwangGroup = new ButtonGroup();
 	private ButtonGroup reviewGroup = new ButtonGroup();
 	private ButtonGroup qqGroup = new ButtonGroup();
-	private ButtonGroup updatepriceGroup = new ButtonGroup();
+	private ButtonGroup updatePriceGroup = new ButtonGroup();
 	private ButtonGroup taskerGroup = new ButtonGroup();
+	private ButtonGroup updateAddrGroup = new ButtonGroup();
+	private ButtonGroup baoguoGroup = new ButtonGroup();
 	private JComboBox<TaskStatus> taskStatusComboBox = new JComboBox<TaskStatus>(TaskStatus.values());
 	private JComboBox<TaskListOrder> taskListOrderComboBox = new JComboBox<TaskListOrder>(TaskListOrder.values());
 
@@ -145,6 +153,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		case COMMAND_LIST_UPDATEPRICE_EXCLUDE:
 		case COMMAND_LIST_TAKER_ALL:
 		case COMMAND_LIST_TAKER_SELF:
+		case COMMAND_LIST_UPDATEADDR_ALL:
+		case COMMAND_LIST_UPDATEADDR_INCLUDE:
+		case COMMAND_LIST_UPDATEADDR_EXCLUDE:
+		case COMMAND_LIST_BAOGUO_ALL:
+		case COMMAND_LIST_BAOGUO_INCLUDE:
+		case COMMAND_LIST_BAOGUO_EXCLUDE:
 			doTaskInfos();
 			break;
 		case COMMAND_CHECK_TASKSTATUS: // 校验任务状态
@@ -162,8 +176,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		// 列表条件过滤区域
 		HBaseBox topBox = HBaseBox.createVerticalBaseBox();
 		topBox.setBorder(BorderFactory.createTitledBorder("条件过滤"));
-		topBox.add(getTaskListByOne());
-		topBox.add(getTaskListByTwo());
+		topBox.add(getTaskListBy1());
+		topBox.add(getTaskListBy2());
+		topBox.add(getTaskListBy3());
 		add(topBox, BorderLayout.NORTH);
 
 		// PV和PV任务列表
@@ -197,27 +212,35 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	}
 
 	/** 返回限制条件项第一行 */
-	private Component getTaskListByOne() {
+	private Component getTaskListBy1() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
-		initTaskStatusBox(box); // 任务状态
-		initTaskListOrderBox(box);// 排序
 		initSincerityBox(box); // 商保
 		initIDCardBox(box); // 认证
 		initSearchBox(box); // 搜索
 		initCollectBox(box); // 收藏
-
+		initWangWangBox(box); // 旺聊
+		initUpdateAddrBox(box);// 改地址
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
 
-	/** 返回限制条件项第一行 */
-	private Component getTaskListByTwo() {
+	/** 返回限制条件项第二行 */
+	private Component getTaskListBy2() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
-		initWangWangBox(box); // 旺聊
-		initTakerBox(box); // 任务接手者
 		initReviewBox(box); // 审核
 		initUpdatePriceBox(box); // 是否需要改价
 		initQQBox(box);// QQ
+		initBaoGuoBox(box);// 真实空包
+		initTakerBox(box); // 任务接手者
+		box.add(HBaseBox.createHorizontalGlue());
+		return box;
+	}
+	
+	/** 返回限制条件项第三行 */
+	private Component getTaskListBy3() {
+		HBaseBox box = HBaseBox.createHorizontalBaseBox();
+		initTaskStatusBox(box); // 任务状态
+		initTaskListOrderBox(box);// 排序
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -412,9 +435,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		JRadioButton radio1 = new JRadioButton("默认");
 		JRadioButton radio2 = new JRadioButton("包含");
 		JRadioButton radio3 = new JRadioButton("排除");
-		updatepriceGroup.add(radio1);
-		updatepriceGroup.add(radio2);
-		updatepriceGroup.add(radio3);
+		updatePriceGroup.add(radio1);
+		updatePriceGroup.add(radio2);
+		updatePriceGroup.add(radio3);
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 		radio3.addActionListener(this);
@@ -445,6 +468,52 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		b.setBorder(BorderFactory.createTitledBorder("接手人"));
 		b.add(radio1);
 		b.add(radio2);
+		box.add(b);
+	}
+
+	/** 真实空包 */
+	private void initBaoGuoBox(HBaseBox box) {
+		JRadioButton radio1 = new JRadioButton("默认");
+		JRadioButton radio2 = new JRadioButton("包含");
+		JRadioButton radio3 = new JRadioButton("排除");
+		baoguoGroup.add(radio1);
+		baoguoGroup.add(radio2);
+		baoguoGroup.add(radio3);
+		radio1.addActionListener(this);
+		radio2.addActionListener(this);
+		radio3.addActionListener(this);
+		radio1.setActionCommand(COMMAND_LIST_BAOGUO_ALL);
+		radio2.setActionCommand(COMMAND_LIST_BAOGUO_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_BAOGUO_EXCLUDE);
+		radio1.setSelected(true);
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("真实空包"));
+		b.add(radio1);
+		b.add(radio2);
+		b.add(radio3);
+		box.add(b);
+	}
+
+	/** 是否改地址 */
+	private void initUpdateAddrBox(HBaseBox box) {
+		JRadioButton radio1 = new JRadioButton("默认");
+		JRadioButton radio2 = new JRadioButton("包含");
+		JRadioButton radio3 = new JRadioButton("排除");
+		updateAddrGroup.add(radio1);
+		updateAddrGroup.add(radio2);
+		updateAddrGroup.add(radio3);
+		radio1.addActionListener(this);
+		radio2.addActionListener(this);
+		radio3.addActionListener(this);
+		radio1.setActionCommand(COMMAND_LIST_UPDATEADDR_ALL);
+		radio2.setActionCommand(COMMAND_LIST_UPDATEADDR_INCLUDE);
+		radio3.setActionCommand(COMMAND_LIST_UPDATEADDR_EXCLUDE);
+		radio1.setSelected(true);
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("改地址"));
+		b.add(radio1);
+		b.add(radio2);
+		b.add(radio3);
 		box.add(b);
 	}
 
@@ -577,7 +646,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				}
 
 				// QQ
-				selection = updatepriceGroup.getSelection();
+				selection = updatePriceGroup.getSelection();
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
 					switch (actionCommand) {
@@ -600,6 +669,34 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 						break;
 					case COMMAND_LIST_TAKER_SELF:
 						query.setTaskerAccount(blueSky.getLoginAccount());
+						break;
+					}
+				}
+
+				// 改地址
+				selection = updateAddrGroup.getSelection();
+				if (selection != null) {
+					String actionCommand = selection.getActionCommand();
+					switch (actionCommand) {
+					case COMMAND_LIST_UPDATEADDR_INCLUDE:
+						query.setIsUpdateAddr(true);
+						break;
+					case COMMAND_LIST_UPDATEADDR_EXCLUDE:
+						query.setIsUpdateAddr(false);
+						break;
+					}
+				}
+
+				// QQ
+				selection = baoguoGroup.getSelection();
+				if (selection != null) {
+					String actionCommand = selection.getActionCommand();
+					switch (actionCommand) {
+					case COMMAND_LIST_BAOGUO_INCLUDE:
+						query.setIsBaoGuo(true);
+						break;
+					case COMMAND_LIST_BAOGUO_EXCLUDE:
+						query.setIsBaoGuo(false);
 						break;
 					}
 				}

@@ -205,6 +205,10 @@ public class BlueSkyResolve {
 
 	/** 解析买号页面 */
 	public void resolveTaoBaoAccount(Collection<BuyAccount> buyAccounts, String html) {
+		// 解析淘宝Tid
+		html = html.substring(html.indexOf("Name='淘宝'"));
+		String taobaoTid = StringUtils.substringBetween(html, "value='", "'>");
+
 		html = html.substring(html.indexOf("list_Mai"));
 		html = StringUtils.substringBetween(html, "list_tbl", "</table>");
 
@@ -212,6 +216,9 @@ public class BlueSkyResolve {
 		for (String tr : trs) {
 			BuyAccount buy = new BuyAccount();
 			String[] tds = StringUtils.substringsBetween(tr, "<td", "</td>");
+
+			// 买号所属淘宝区域id
+			buy.setTaobaoTid(taobaoTid);
 
 			// 买号区域
 			if (0 < tds[0].indexOf("淘宝任务")) {
@@ -385,6 +392,11 @@ public class BlueSkyResolve {
 		} else {
 			task.setIsReview(Boolean.FALSE);
 		}
+		if (0 < td.indexOf("DiZhi.gif")) { // 改地址
+			task.setIsUpdateAddr(Boolean.TRUE);
+		} else {
+			task.setIsUpdateAddr(Boolean.FALSE);
+		}
 
 		// 限制条件
 		if (0 < td.indexOf("class=\"blue\"")) {
@@ -398,6 +410,14 @@ public class BlueSkyResolve {
 				task.setIsUseQQ(Boolean.FALSE);
 			}
 
+			// 判断是否需要真实地址接空包
+			if (0 < td.indexOf("真实发货")) {
+				task.setIsBaoGuo(Boolean.TRUE);
+			} else {
+				task.setIsBaoGuo(Boolean.FALSE);
+			}
+
+			// 判断改价..不止这里一处
 			if (0 < td.indexOf("改价")) {
 				task.setIsUpdatePrice(Boolean.TRUE);
 			}

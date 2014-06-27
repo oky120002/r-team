@@ -36,6 +36,8 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	private Boolean isUpdatePrice = null; // 是否改价
 	private Boolean isUpdateTaskDetail = null; // 是否已经获取过任务详细信息
 	private String taskerAccount = null; // 接手人账号
+	private Boolean isUpdateAddr = null; // 是否改地址
+	private Boolean isBaoGuo = null; // 是否真实发包
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -88,6 +90,14 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		if (StringUtils.isNotBlank(taskerAccount)) { // 接手人
 			hql.append(" and (t.taskerAccount = :taskerAccount or t.taskerAccount is null) ");
 			pars.put("taskerAccount", taskerAccount);
+		}
+		if (isUpdateAddr != null) { // 是否改地址
+			hql.append(" and t.isUpdateAddr = :isUpdateAddr ");
+			pars.put("isUpdateAddr", isUpdateAddr);
+		}
+		if (isBaoGuo != null) { // 是否真实空包
+			hql.append(" and t.isBaoGuo = :isBaoGuo ");
+			pars.put("isBaoGuo", isBaoGuo);
 		}
 
 		// 排序
@@ -310,6 +320,36 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	 */
 	public void setTaskerAccount(String taskerAccount) {
 		this.taskerAccount = taskerAccount;
+	}
+
+	/**
+	 * @return the isUpdateAddr
+	 */
+	public Boolean getIsUpdateAddr() {
+		return isUpdateAddr;
+	}
+
+	/**
+	 * @param isUpdateAddr
+	 *            the isUpdateAddr to set
+	 */
+	public void setIsUpdateAddr(Boolean isUpdateAddr) {
+		this.isUpdateAddr = isUpdateAddr;
+	}
+
+	/**
+	 * @return the isBaoGuo
+	 */
+	public Boolean getIsBaoGuo() {
+		return isBaoGuo;
+	}
+
+	/**
+	 * @param isBaoGuo
+	 *            the isBaoGuo to set
+	 */
+	public void setIsBaoGuo(Boolean isBaoGuo) {
+		this.isBaoGuo = isBaoGuo;
 	}
 
 	/** 排序枚举 */

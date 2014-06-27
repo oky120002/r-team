@@ -132,5 +132,4 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/BinDing.asp?2-0-0-0-0", map);
 		return responseHeader.bodyToString(BODY_ENCODE);
 	}
-
 }

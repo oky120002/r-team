@@ -196,22 +196,22 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public int updateOrDeleteByHql(String hql) {
+	public int updateOrDeleteByHql(CharSequence hql) {
 		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
-		return getSession().createQuery(hql).executeUpdate();
+		return getSession().createQuery(hql.toString()).executeUpdate();
 	}
 
 	@Override
-	public int updateOrDeleteBySql(String sql) {
+	public int updateOrDeleteBySql(CharSequence sql) {
 		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", sql);
-		return getSession().createSQLQuery(sql).executeUpdate();
+		return getSession().createSQLQuery(sql.toString()).executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public final T find(String id) {
+	public final T find(CharSequence id) {
 		AssertUtil.isNotBlank("根据实体id查询实体时，实体id不能为空。", id);
-		return (T) getSession().get(this.modelClass, id);
+		return (T) getSession().get(this.modelClass, id.toString());
 	}
 
 	@Override
@@ -280,14 +280,14 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public final List<T> queryByHql(String hql) {
+	public final List<T> queryByHql(CharSequence hql) {
 		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
 		return queryByHql(hql, null, -1, -1);
 	}
 
 	@SafeVarargs
 	@Override
-	public final List<T> queryByHql(String hql, KeyValue<String, ?>... keyValues) {
+	public final List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues) {
 		if (ArrayUtils.isEmpty(keyValues)) {
 			return queryByHql(hql, null, -1, -1);
 		}
@@ -299,13 +299,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public final List<T> queryByHql(String hql, Map<String, Object> pars) {
+	public final List<T> queryByHql(CharSequence hql, Map<String, Object> pars) {
 		return queryByHql(hql, pars, -1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public final List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+	public final List<T> queryByHql(CharSequence hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		AssertUtil.isNotBlank("根据Hql语句查询时，Hql语句不能为空。", hql);
 		StringBuilder sb = new StringBuilder();
 		sb.append(hql);
@@ -332,13 +332,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public final List<T> queryBySql(String sql) {
+	public final List<T> queryBySql(CharSequence sql) {
 		return queryBySql(sql, null, -1, -1);
 	}
 
 	@SafeVarargs
 	@Override
-	public final List<T> queryBySql(String sql, KeyValue<String, ?>... keyValues) {
+	public final List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues) {
 		if (ArrayUtils.isEmpty(keyValues)) {
 			return queryBySql(sql, null, -1, -1);
 		}
@@ -350,13 +350,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public final List<T> queryBySql(String sql, Map<String, Object> pars) {
+	public final List<T> queryBySql(CharSequence sql, Map<String, Object> pars) {
 		return queryBySql(sql, pars, -1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public final List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
+	public final List<T> queryBySql(CharSequence sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders) {
 		AssertUtil.isNotBlank("根据Sql语句查询时，Sql语句不能为空。", sql);
 		StringBuilder sb = new StringBuilder();
 		sb.append(sql);

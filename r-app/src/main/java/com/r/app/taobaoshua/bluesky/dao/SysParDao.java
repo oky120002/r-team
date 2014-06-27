@@ -8,6 +8,7 @@ package com.r.app.taobaoshua.bluesky.dao;
 
 import com.r.app.taobaoshua.bluesky.core.AbstractDao;
 import com.r.app.taobaoshua.bluesky.model.SysPar;
+import com.r.app.taobaoshua.bluesky.model.enumsyspar.SysParName;
 
 /**
  * 用户Dao
@@ -15,5 +16,6 @@ import com.r.app.taobaoshua.bluesky.model.SysPar;
  * @author rain
  */
 public interface SysParDao extends AbstractDao<SysPar> {
-
+	/** 根据name查询参数 */
+	SysPar findByName(SysParName name);
 }

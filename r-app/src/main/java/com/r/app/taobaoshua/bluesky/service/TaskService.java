@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -125,6 +124,27 @@ public class TaskService {
 		} else {
 			callback.failure(StringUtils.substringBetween(html, "alert('", "');location"), null);
 		}
+	}
+
+	// 好评
+	public void webDoGoodPraise(Task task, SuccessAndFailureCallBack callBack) {
+//		String html = taskDao.doGoodPraise(task);
+		// if (0 < html.indexOf("成功")) { // 发生异常
+		// callback.success("退出任务成功", null);
+		// } else {
+		// callback.failure(StringUtils.substringBetween(html, "alert('",
+		// "');location"), null);
+		// }
+	}
+
+	// 满意度评价
+	public void webDoGoodDegree(Task task, SuccessAndFailureCallBack callback) {
+//		String html = taskDao.doGoodDegree(task);
+//		if (0 < html.indexOf("评价成功")) { // 发生异常
+//			callback.success("评价成功", null);
+//		} else {
+//			callback.failure(html, null);
+//		}
 	}
 
 	/** 返回绑定的买号 */
@@ -263,20 +283,16 @@ public class TaskService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void updateBuyAccount(Collection<BuyAccount> buys) {
-		buyAccountDao.updateOrDeleteByHql("update " + BuyAccount.class.getName() + " set isEnable = false");
+		buyAccountDao.deleteAll();
 		if (CollectionUtils.isNotEmpty(buys)) {
 			for (BuyAccount buy : buys) {
-				BuyAccount b = findByBuyAccount(buy.getBuyAccount());
-				if (b != null) {
-					BeanUtils.copyProperties(b, buy, new String[] { "id" });
-				}
-				buyAccountDao.save(buy);
+				buyAccountDao.create(buy);
 			}
 		}
 	}
 
 	/**
-	 * 根据是否启用查询绑定的买号
+	 * 根据是否启用查询绑定的买号,并且按照 今日接任务数升序,本周接任务数升序,淘宝信誉值降序排序
 	 * 
 	 * @param isEnable
 	 *            null:查询全部|true:查询启用|false:查询禁用
@@ -284,9 +300,12 @@ public class TaskService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
 	public Collection<BuyAccount> queryByEnable(Boolean isEnable) {
-		BuyAccount buy = new BuyAccount();
-		buy.setIsEnable(isEnable);
-		return buyAccountDao.queryByExample(buy);
+		StringBuilder hql = new StringBuilder();
+		hql.append(" from ").append(BuyAccount.class.getName()).append(' ');
+		if (isEnable != null) {
+			hql.append(" where isEnable = ").append(isEnable.booleanValue()).append(' ');
+		}
+		hql.append(" order by takeTaskByDay asc, takeTaskByWeek asc, buyPrestige asc ");
+		return buyAccountDao.queryByHql(hql);
 	}
-
 }

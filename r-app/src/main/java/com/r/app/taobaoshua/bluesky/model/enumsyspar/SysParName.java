@@ -8,5 +8,7 @@ package com.r.app.taobaoshua.bluesky.model.enumsyspar;
  * 
  */
 public enum SysParName {
-	最后查询任务列表时间, ;
+	买号区域淘宝TID, //
+	最后查询任务列表时间, //
+	;
 }

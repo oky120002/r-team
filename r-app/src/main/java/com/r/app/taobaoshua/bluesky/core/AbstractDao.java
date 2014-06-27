@@ -225,7 +225,7 @@ public interface AbstractDao<T> {
 	 *            Hql语句
 	 * @return 成功实体条数
 	 */
-	public int updateOrDeleteByHql(String hql);
+	public int updateOrDeleteByHql(CharSequence hql);
 
 	/**
 	 * 根据Sql语句更新或者删除实体
@@ -234,7 +234,7 @@ public interface AbstractDao<T> {
 	 *            Sql语句
 	 * @return 成功实体条数
 	 */
-	public int updateOrDeleteBySql(String sql);
+	public int updateOrDeleteBySql(CharSequence sql);
 
 	/**
 	 * 
@@ -248,7 +248,7 @@ public interface AbstractDao<T> {
 	 * @return T 查询到的实体
 	 * @author rain
 	 */
-	public T find(String id);
+	public T find(CharSequence id);
 
 	/**
 	 * 
@@ -339,7 +339,7 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryByHql(String hql);
+	public List<T> queryByHql(CharSequence hql);
 
 	/**
 	 * 
@@ -356,7 +356,7 @@ public interface AbstractDao<T> {
 	 * @author rain
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> queryByHql(String hql, KeyValue<String, ?>... keyValues);
+	public List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues);
 
 	/**
 	 * 
@@ -372,7 +372,7 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryByHql(String hql, Map<String, Object> pars);
+	public List<T> queryByHql(CharSequence hql, Map<String, Object> pars);
 
 	/**
 	 * 
@@ -394,7 +394,7 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryByHql(String hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
+	public List<T> queryByHql(CharSequence hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
 
 	/**
 	 * 
@@ -408,7 +408,7 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryBySql(String sql);
+	public List<T> queryBySql(CharSequence sql);
 
 	/**
 	 * 
@@ -425,7 +425,7 @@ public interface AbstractDao<T> {
 	 * @author rain
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> queryBySql(String sql, KeyValue<String, ?>... keyValues);
+	public List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues);
 
 	/**
 	 * 
@@ -441,7 +441,7 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryBySql(String sql, Map<String, Object> pars);
+	public List<T> queryBySql(CharSequence sql, Map<String, Object> pars);
 
 	/**
 	 * 
@@ -463,5 +463,5 @@ public interface AbstractDao<T> {
 	 * @return List<T> 查询到的实体集
 	 * @author rain
 	 */
-	public List<T> queryBySql(String sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
+	public List<T> queryBySql(CharSequence sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
 }

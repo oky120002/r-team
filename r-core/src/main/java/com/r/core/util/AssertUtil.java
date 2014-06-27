@@ -41,7 +41,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code false}则抛出异常
 	 */
-	public static void isFalse(String message, Boolean expression) {
+	public static void isFalse(CharSequence message, Boolean expression) {
 		if (expression == null || expression) {
 			fail(message);
 		}
@@ -61,7 +61,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code false}则抛出异常
 	 */
-	public static void isFalse(String message, boolean expression) {
+	public static void isFalse(CharSequence message, boolean expression) {
 		if (expression) {
 			fail(message);
 		}
@@ -113,7 +113,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code true}则抛出异常
 	 */
-	public static void isTrue(String message, Boolean expression) {
+	public static void isTrue(CharSequence message, Boolean expression) {
 		if (expression == null || !expression) {
 			fail(message);
 		}
@@ -133,7 +133,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code true}则抛出异常
 	 */
-	public static void isTrue(String message, boolean expression) {
+	public static void isTrue(CharSequence message, boolean expression) {
 		if (!expression) {
 			fail(message);
 		}
@@ -185,7 +185,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象是{@code null}则抛出异常
 	 */
-	public static void isNotNull(String message, Object object) {
+	public static void isNotNull(CharSequence message, Object object) {
 		if (object == null) {
 			fail(message);
 		}
@@ -221,7 +221,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code null}则抛出异常
 	 */
-	public static void isNull(String message, Object object) {
+	public static void isNull(CharSequence message, Object object) {
 		if (object != null) {
 			fail(message);
 		}
@@ -264,7 +264,7 @@ public abstract class AssertUtil {
 	 *             如果对象相等则抛出异常
 	 * 
 	 */
-	public static void isNotEq(String message, Object srcObj, Object tagObj) {
+	public static void isNotEq(CharSequence message, Object srcObj, Object tagObj) {
 		if ((srcObj == null && tagObj == null) || (srcObj != null && tagObj != null && srcObj.equals(tagObj))) {
 			fail(message);
 		}
@@ -314,7 +314,7 @@ public abstract class AssertUtil {
 	 *             如果对象不相等则抛出异常
 	 * 
 	 */
-	public static void isEq(String message, Object srcObj, Object tagObj) {
+	public static void isEq(CharSequence message, Object srcObj, Object tagObj) {
 		if (!((srcObj == null && tagObj == null) || (srcObj != null && tagObj != null && srcObj.equals(tagObj)))) {
 			fail(message);
 		}
@@ -358,7 +358,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1不等于n2,则抛出异常
 	 */
-	public static void isEq(String message, int n1, int n2) {
+	public static void isEq(CharSequence message, int n1, int n2) {
 		if (n1 != n2) {
 			fail(message);
 		}
@@ -396,7 +396,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1等于n2,则抛出异常
 	 */
-	public static void isNotEq(String message, int n1, int n2) {
+	public static void isNotEq(CharSequence message, int n1, int n2) {
 		if (n1 == n2) {
 			fail(message);
 		}
@@ -433,7 +433,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不为{@code Enum}则抛出异常
 	 */
-	public static void isEnum(String message, Object object) {
+	public static void isEnum(CharSequence message, Object object) {
 		if (object == null || !object.getClass().isEnum()) {
 			fail(message);
 		}
@@ -470,7 +470,7 @@ public abstract class AssertUtil {
 	 *             如果对字符串为{@code null}或者长度等于0则抛出异常
 	 * @see StringUtils#isEmpty(CharSequence)
 	 */
-	public static void hasLength(String message, String text) {
+	public static void hasLength(CharSequence message, CharSequence text) {
 		if (StringUtils.isEmpty(text)) {
 			fail(message);
 		}
@@ -489,7 +489,7 @@ public abstract class AssertUtil {
 	 *             如果字符串为{@code null}或者长度等于0则抛出异常
 	 * @see StringUtils#isEmpty(CharSequence)
 	 */
-	public static void hasLength(String text) {
+	public static void hasLength(CharSequence text) {
 		hasLength("[断言失败] - 参数对象必须为字符串; 且字符串不能为null且长度大于0", text);
 	}
 
@@ -508,7 +508,7 @@ public abstract class AssertUtil {
 	 *             如果字符串去掉首尾空格后为{@code null}或者长度等于0则抛出异常
 	 * @see StringUtils#isBlank(String)
 	 */
-	public static void hasText(String message, String text) {
+	public static void hasText(CharSequence message, CharSequence text) {
 		if (StringUtils.isBlank(text)) {
 			fail(message);
 		}
@@ -527,7 +527,7 @@ public abstract class AssertUtil {
 	 *             如果字符串去掉首尾空格后为{@code null}或者长度等于0则抛出异常
 	 * @see StringUtils#isBlank(String)
 	 */
-	public static void hasText(String text) {
+	public static void hasText(CharSequence text) {
 		hasText("[断言失败] - 参数对象必须为字符串; 且字符串在去掉首尾空格后不为{@code null}且长度大于0。", text);
 	}
 
@@ -546,7 +546,7 @@ public abstract class AssertUtil {
 	 *             如果数组为{@code null}或者长度为0则抛出异常
 	 * @see ArrayUtils#isEmpty(Object[])
 	 */
-	public static void isNotEmpty(String message, Object[] array) {
+	public static void isNotEmpty(CharSequence message, Object[] array) {
 		if (ArrayUtils.isEmpty(array)) {
 			fail(message);
 		}
@@ -585,7 +585,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果collection为{@code null}或者长度小于size则抛出异常
 	 */
-	public static void hasSize(String message, Collection<?> collection, int size) {
+	public static void hasSize(CharSequence message, Collection<?> collection, int size) {
 		if (collection == null || collection.size() < size) {
 			fail(message);
 		}
@@ -625,7 +625,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果collection为{@code null}或者长度小于size则抛出异常
 	 */
-	public static void hasSize(String message, Object[] collection, int size) {
+	public static void hasSize(CharSequence message, Object[] collection, int size) {
 		if (collection == null || collection.length < size) {
 			fail(message);
 		}
@@ -664,7 +664,7 @@ public abstract class AssertUtil {
 	 *             如果str为{@code null}或者没有一个可显示的字符则抛出异常
 	 * @see StringUtils#isNotBlank(String)
 	 */
-	public static void isNotBlank(String message, String str) {
+	public static void isNotBlank(CharSequence message, CharSequence str) {
 		if (StringUtils.isBlank(str)) {
 			fail(message);
 		}
@@ -683,7 +683,7 @@ public abstract class AssertUtil {
 	 *             如果str为{@code null}或者没有一个可显示的字符则抛出异常
 	 * @see StringUtils#isNotBlank(String)
 	 */
-	public static void isNotBlank(String str) {
+	public static void isNotBlank(CharSequence str) {
 		isNotBlank("[断言失败] - 参数对象必须为String; 且String不能为null,且必须最少拥有一个可显示字符", str);
 	}
 
@@ -702,7 +702,7 @@ public abstract class AssertUtil {
 	 *             如果collection为{@code null}或者长度为0则抛出异常
 	 * @see CollectionUtils#isEmpty(Collection)
 	 */
-	public static void isNotEmpty(String message, Collection<?> collection) {
+	public static void isNotEmpty(CharSequence message, Collection<?> collection) {
 		if (CollectionUtils.isEmpty(collection)) {
 			fail(message);
 		}
@@ -740,7 +740,7 @@ public abstract class AssertUtil {
 	 *             如果map为{@code null}或者长度为0则抛出异常
 	 * @see MapUtils#isEmpty(Map)
 	 */
-	public static void isNotEmpty(String message, Map<?, ?> map) {
+	public static void isNotEmpty(CharSequence message, Map<?, ?> map) {
 		if (MapUtils.isEmpty(map)) {
 			fail(message);
 		}
@@ -778,7 +778,7 @@ public abstract class AssertUtil {
 	 *             如果不定参数数组为{@code null}，长度为0或者其中一个参数数组为{@code null}或者长度为0则抛出异常
 	 * @see ArrayUtils#isEmpty(Object[])
 	 */
-	public static void isNotEmpty(String message, Object[]... array) {
+	public static void isNotEmpty(CharSequence message, Object[]... array) {
 		if (ArrayUtils.isEmpty(array)) {
 			fail(message);
 		} else {
@@ -822,7 +822,7 @@ public abstract class AssertUtil {
 	 *             如果数组长度大于0且有一个null元素则抛出异常
 	 * @see ArrayUtils#isEmpty(Object[])
 	 */
-	public static void isNoNullElements(String message, Object[] array) {
+	public static void isNoNullElements(CharSequence message, Object[] array) {
 		if (ArrayUtils.isNotEmpty(array)) {
 			for (Object arr : array) {
 				if (arr == null) {
@@ -868,7 +868,7 @@ public abstract class AssertUtil {
 	 *             如果Collection长度大于0且有一个null元素则抛出异常
 	 * @see CollectionUtils#isEmpty(Collection)
 	 */
-	public static void isNoNullElements(String message, Collection<?> collections) {
+	public static void isNoNullElements(CharSequence message, Collection<?> collections) {
 		if (CollectionUtils.isNotEmpty(collections)) {
 			for (Object collection : collections) {
 				if (collection == null) {
@@ -915,7 +915,7 @@ public abstract class AssertUtil {
 	 *             如果对象obj不是对象类型clazz则抛出异常
 	 * @see Class#isInstance(Object)
 	 */
-	public static void isInstanceOf(String message, Object obj, Class<?> clazz) {
+	public static void isInstanceOf(CharSequence message, Object obj, Class<?> clazz) {
 		isNotNull("对象类型type不能为null", clazz);
 		if (!clazz.isInstance(obj)) {
 			fail((StringUtils.isNotBlank(message) ? message + " " : "") + "对象obj的类型 [" + (obj != null ? obj.getClass().getName() : "null") + "] 必须是 [" + clazz.getName() + "]");
@@ -956,7 +956,7 @@ public abstract class AssertUtil {
 	 *             如果对象obj不是对象类型clazz则抛出异常
 	 * @see Class#isInstance(Object)
 	 */
-	public static void isInstanceOf(String message, Object obj, Class<?>... clazzs) {
+	public static void isInstanceOf(CharSequence message, Object obj, Class<?>... clazzs) {
 		if (ArrayUtils.isEmpty(clazzs)) {
 			fail(message);
 		} else {
@@ -984,7 +984,7 @@ public abstract class AssertUtil {
 	 *             如果对象obj不是对象类型clazz则抛出异常
 	 * @see Class#isInstance(Object)
 	 */
-	public static void isInstanceOfs(String message, List<?> objs, Class<?>... clazzs) {
+	public static void isInstanceOfs(CharSequence message, List<?> objs, Class<?>... clazzs) {
 		for (Object obj : objs) {
 			isInstanceOf(message, obj, clazzs);
 		}
@@ -1024,7 +1024,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果类型subType不是类型superType的子类或者实现则抛出异常
 	 */
-	public static void isAssignable(String message, Class<?> superType, Class<?> subType) {
+	public static void isAssignable(CharSequence message, Class<?> superType, Class<?> subType) {
 		isNotNull("对象类型superType不能为空", superType);
 		if (subType == null || !superType.isAssignableFrom(subType)) {
 			fail((StringUtils.isNotBlank(message) ? message + " " : "") + "对象类型subType[" + subType + "]必须是对象类型superType[" + superType + "]的子类或者实现");
@@ -1046,7 +1046,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1小于或者等于n2,则抛出异常
 	 */
-	public static void isGt(String message, int n1, int n2) {
+	public static void isGt(CharSequence message, int n1, int n2) {
 		if (n1 <= n2) {
 			fail(message);
 		}
@@ -1084,7 +1084,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1大于或者等于n2,则抛出异常
 	 */
-	public static void isLt(String message, int n1, int n2) {
+	public static void isLt(CharSequence message, int n1, int n2) {
 		if (n1 >= n2) {
 			fail(message);
 		}
@@ -1122,7 +1122,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1小于n2,则抛出异常
 	 */
-	public static void isGte(String message, int n1, int n2) {
+	public static void isGte(CharSequence message, int n1, int n2) {
 		if (n1 < n2) {
 			fail(message);
 		}
@@ -1160,7 +1160,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果n1大于n2,则抛出异常
 	 */
-	public static void isLte(String message, int n1, int n2) {
+	public static void isLte(CharSequence message, int n1, int n2) {
 		if (n1 > n2) {
 			fail(message);
 		}
@@ -1192,7 +1192,7 @@ public abstract class AssertUtil {
 	 * @throws AssertException
 	 *             如果对象不是{@code null}则抛出异常
 	 */
-	private static void fail(String message) {
-		throw new AssertException(message);
+	private static void fail(CharSequence message) {
+		throw new AssertException(message == null ? "" : message.toString());
 	}
 }
