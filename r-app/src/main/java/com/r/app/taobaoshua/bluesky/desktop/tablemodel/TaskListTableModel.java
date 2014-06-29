@@ -148,6 +148,10 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		return tasks;
 	}
 
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
 	// 列表头按照枚举排列顺序来排列
 	private enum Col {
 		任务编号("任务编号", String.class, 80, 0), //

@@ -4,9 +4,12 @@
 package com.r.app.taobaoshua.bluesky.service.command;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
@@ -14,6 +17,7 @@ import org.hibernate.Session;
 
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskTimeLimit;
 import com.r.core.exceptions.SwitchPathException;
 
 /**
@@ -38,6 +42,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	private String taskerAccount = null; // 接手人账号
 	private Boolean isUpdateAddr = null; // 是否改地址
 	private Boolean isBaoGuo = null; // 是否真实发包
+	private Set<TaskTimeLimit> taskTimeLimits = new HashSet<TaskTimeLimit>();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -98,6 +103,12 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		if (isBaoGuo != null) { // 是否真实空包
 			hql.append(" and t.isBaoGuo = :isBaoGuo ");
 			pars.put("isBaoGuo", isBaoGuo);
+		}
+
+		// 时限
+		if (CollectionUtils.isNotEmpty(taskTimeLimits)) {
+			hql.append(" and t.timeLimit in (:timeLimits) ");
+			pars.put("timeLimits", taskTimeLimits);
 		}
 
 		// 排序
@@ -350,6 +361,26 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	 */
 	public void setIsBaoGuo(Boolean isBaoGuo) {
 		this.isBaoGuo = isBaoGuo;
+	}
+
+	public void addTaskTimeLimits(TaskTimeLimit... taskTimeLimits) {
+		if (ArrayUtils.isNotEmpty(taskTimeLimits)) {
+			for (TaskTimeLimit taskTimeLimit : taskTimeLimits) {
+				if (taskTimeLimit != null) {
+					this.taskTimeLimits.add(taskTimeLimit);
+				}
+			}
+		}
+	}
+
+	public void removeTaskTimeLimits(TaskTimeLimit... taskTimeLimits) {
+		if (ArrayUtils.isNotEmpty(taskTimeLimits)) {
+			for (TaskTimeLimit taskTimeLimit : taskTimeLimits) {
+				if (taskTimeLimit != null) {
+					this.taskTimeLimits.remove(taskTimeLimit);
+				}
+			}
+		}
 	}
 
 	/** 排序枚举 */

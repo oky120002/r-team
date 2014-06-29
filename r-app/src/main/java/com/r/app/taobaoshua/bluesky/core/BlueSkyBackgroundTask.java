@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.quartz.SchedulerException;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
-import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
-import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand.TaskListOrder;
+import com.r.app.taobaoshua.bluesky.service.command.QueryCommand;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.RandomUtil;
 import com.r.core.util.TaskUtil;
 
 /**
@@ -40,15 +42,18 @@ public class BlueSkyBackgroundTask {
 			public void run() {
 				TaskService service = blueSky.getService();
 
-				for (int page = 1; page < 11; page++) {
-					List<Task> tasks = new ArrayList<Task>();
-					service.webGetTaskList(tasks, page);
-					service.updateTaskList(tasks);
-					TaskUtil.sleep(5_000);
+				List<Task> tasks = new ArrayList<Task>();
+				for (int type = 0; type < 15; type++) {
+					for (int page = 1; page < 4; page++) {
+						service.webGetTaskList(tasks, page, type, 3);
+						service.updateTaskList(tasks);
+						tasks.clear();
+						TaskUtil.sleep(RandomUtil.randomInteger(1_000, 4_000));
+					}
 				}
 				logger.debug("自动获取任务信息........");
 			}
-		}, -1, 5 * 10 + 30, null, null);
+		}, -1, 360, null, null);
 	}
 
 	public void startAutoUpdateTaskDetail() throws SchedulerException {
@@ -66,14 +71,24 @@ public class BlueSkyBackgroundTask {
 			@Override
 			public void run() {
 				if (blueSky.isLogin()) {
+					List<Task> list = service.execQueryCommand(new QueryCommand<Task>() {
+						@SuppressWarnings("unchecked")
+						@Override
+						public List<Task> queryCollection(Session session) {
+							StringBuffer hql = new StringBuffer();
+							hql.append(" from ").append(Task.class.getName()).append(' ');
+							hql.append(" where isUpdateTaskDetail = :isUpdateTaskDetail and taskId is not null ");
+							hql.append(" order by publishingPointOneDay desc, number asc ");
+							Query createQuery = session.createQuery(hql.toString());
+							createQuery.setParameter("isUpdateTaskDetail", false);
+							createQuery.setFirstResult(0);
+							createQuery.setMaxResults(1);
+							return createQuery.list();
+						}
+					});
 
-					TaskQueryCommand query = new TaskQueryCommand();
-					query.setIsUpdateTaskDetail(false);
-					query.setOrder(TaskListOrder.每天发布点从高到低);
-					query.setPage(0, 1);
-					List<Task> list = service.execQueryCommand(query);
 					if (CollectionUtils.isEmpty(list)) {
-						service.setTaskDetailUpdated(true);
+						service.setTaskDetailUpdated(false);
 						return;
 					}
 					Task task = list.get(0);

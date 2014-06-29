@@ -96,13 +96,44 @@ public class TaskService {
 		logger.debug(login);
 	}
 
-	/** 获取任务列表的html代码,只能取[1,10] */
-	public void webGetTaskList(Collection<Task> tasks, int page) {
+	/**
+	 * 获取任务列表的html代码
+	 * 
+	 * @param tasks
+	 *            任务列表
+	 * @param page
+	 *            任务列表页码
+	 * @param type
+	 *            列表类型<br />
+	 *            0:默认类型<br />
+	 *            1:所有任务<br />
+	 *            2:等待接手<br />
+	 *            3:虚拟<br />
+	 *            4:实物<br />
+	 *            5:套餐<br />
+	 *            6:立即<br />
+	 *            7:30分<br />
+	 *            8:1天<br />
+	 *            9:2天<br />
+	 *            10:3天<br />
+	 *            11:4天<br />
+	 *            12:5天<br />
+	 *            13:6天<br />
+	 *            14:7天<br />
+	 * @param order
+	 *            搜索排序<br />
+	 *            0:默认排序<br />
+	 *            1:担保金从高到低<br />
+	 *            2:担保金从低到高<br />
+	 *            3:发布点从高到低<br />
+	 *            4:发布点从低到高<br />
+	 */
+	public void webGetTaskList(Collection<Task> tasks, int page, int type, int order) {
 		page = page < 1 ? 1 : page;
 		page = 10 < page ? 10 : page;
 
 		BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
-		String html = taskDao.getTaskListHtml(page, 2, 3);
+		String html = taskDao.getTaskListHtml(page, type, order);
 		resolve.resolveTaskListHtml(tasks, html);
 	}
 
@@ -126,9 +157,15 @@ public class TaskService {
 		}
 	}
 
+	/** 任务绑定买号 */
+	public void webDoBindingBuyAccount(Task task, BuyAccount buyAccount, SuccessAndFailureCallBack successAndFailureCallBack) {
+		// TODO Auto-generated method stub
+
+	}
+
 	// 好评
 	public void webDoGoodPraise(Task task, SuccessAndFailureCallBack callBack) {
-//		String html = taskDao.doGoodPraise(task);
+		// String html = taskDao.doGoodPraise(task);
 		// if (0 < html.indexOf("成功")) { // 发生异常
 		// callback.success("退出任务成功", null);
 		// } else {
@@ -139,12 +176,12 @@ public class TaskService {
 
 	// 满意度评价
 	public void webDoGoodDegree(Task task, SuccessAndFailureCallBack callback) {
-//		String html = taskDao.doGoodDegree(task);
-//		if (0 < html.indexOf("评价成功")) { // 发生异常
-//			callback.success("评价成功", null);
-//		} else {
-//			callback.failure(html, null);
-//		}
+		// String html = taskDao.doGoodDegree(task);
+		// if (0 < html.indexOf("评价成功")) { // 发生异常
+		// callback.success("评价成功", null);
+		// } else {
+		// callback.failure(html, null);
+		// }
 	}
 
 	/** 返回绑定的买号 */
@@ -213,7 +250,7 @@ public class TaskService {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void updateTaskDetail(Task task) {
-		if (task != null) {
+		if (task != null && StringUtils.isNotBlank(task.getTaskId())) {
 			String taskDetail = taskDao.getTaskDetail(task.getTaskId());
 			BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
 			resolve.resolveTaskDetail(task, taskDetail);

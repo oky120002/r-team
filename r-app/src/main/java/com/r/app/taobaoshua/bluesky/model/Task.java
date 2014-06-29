@@ -21,6 +21,7 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskTimeLimit;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 
 @Entity
@@ -74,7 +75,8 @@ public class Task {
 	@Enumerated(EnumType.STRING)
 	private TaskType taskType; // 任务类型
 	@Column
-	private Integer timeLimit; // 任务时限(分钟)
+	@Enumerated(EnumType.STRING)
+	private TaskTimeLimit timeLimit; // 任务时限(分钟)
 	@Column
 	@Enumerated(EnumType.STRING)
 	private ShopScore shopScore; // 商铺动态平分
@@ -160,7 +162,7 @@ public class Task {
 		// 计算一天可以赚取的发布点数
 		if (publishingPoint != null && timeLimit != null) {
 			double p = publishingPoint.doubleValue(); // 默认赚取全部的发布点,立即完成
-			int day = (int) (timeLimit.doubleValue() / 60 / 24);
+			int day = (int) (timeLimit.getTimeLimit() / 60 / 24);
 			publishingPointOneDay = Double.valueOf(p / (day < 1 ? 1 : day));
 		}
 
@@ -580,23 +582,20 @@ public class Task {
 		this.taskType = taskType;
 	}
 
-	public Integer getTimeLimit() {
+	public TaskTimeLimit getTimeLimit() {
 		return timeLimit;
 	}
 
-	public void setTimeLimit(Integer timeLimit) {
+	public void setTimeLimit(TaskTimeLimit timeLimit) {
 		this.timeLimit = timeLimit;
 	}
 
 	public String getTimeLimitString() {
-		int time = getTimeLimit().intValue();
-		if (time < 30) { // 立即
-			return "立即确认";
-		} else if (0 < time && time < 60) {
-			return "30分钟确认";
-		} else {
-			return ((time + 1) / 60 / 24) + "天";
+		TaskTimeLimit tl = getTimeLimit();
+		if (tl == null) {
+			return "NAN";
 		}
+		return tl.getName();
 	}
 
 	/**

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -28,6 +30,7 @@ import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.desktop.tablemodel.TaskListTableModel;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskTimeLimit;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
 import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand.TaskListOrder;
@@ -37,6 +40,7 @@ import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.desktop.support.TitleCellRenderer;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.RandomUtil;
 import com.r.core.util.TaskUtil;
 
 /**
@@ -49,6 +53,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private static final String COMMAND_TASKINFO = "command_taskinfo"; // 命令_获取任务信息
 	private static final String COMMAND_CHECK_TASKSTATUS = "command_check_taskstatus";// 命令_校验任务状态
 	private static final String COMMAND_LIST_TASKSTATUS = "command_list_taskstatus"; // 命令
+	private static final String COMMAND_LIST_TIME_LIMIT = "command_list_time_limit"; // 命令
 	private static final String COMMAND_LIST_SINCERITY_ALL = "command_list_sincerity_all"; // 命令
 	private static final String COMMAND_LIST_SINCERITY_INCLUDE = "command_list_sincerity_include"; // 命令
 	private static final String COMMAND_LIST_SINCERITY_EXCLUDE = "command_list_sincerity_exclude"; // 命令
@@ -99,6 +104,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private ButtonGroup baoguoGroup = new ButtonGroup();
 	private JComboBox<TaskStatus> taskStatusComboBox = new JComboBox<TaskStatus>(TaskStatus.values());
 	private JComboBox<TaskListOrder> taskListOrderComboBox = new JComboBox<TaskListOrder>(TaskListOrder.values());
+	private List<JCheckBox> timeLimitCheckBoxs = new ArrayList<JCheckBox>(); // 好评时限
 
 	// 列表
 	private JTable taskListTable; // 任务列表
@@ -126,6 +132,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		switch (actionCommand) {
 		case COMMAND_TASKINFO:
 		case COMMAND_LIST_TASKSTATUS:
+		case COMMAND_LIST_TIME_LIMIT:
 		case COMMAND_LIST_TASKLISTORDER:
 		case COMMAND_LIST_SINCERITY_ALL:
 		case COMMAND_LIST_SINCERITY_INCLUDE:
@@ -235,12 +242,13 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
-	
+
 	/** 返回限制条件项第三行 */
 	private Component getTaskListBy3() {
 		HBaseBox box = HBaseBox.createHorizontalBaseBox();
 		initTaskStatusBox(box); // 任务状态
 		initTaskListOrderBox(box);// 排序
+		initTimeLimitBox(box); // 任务时限
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -255,6 +263,42 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		b.setBorder(BorderFactory.createTitledBorder("任务状态"));
 		b.add(taskStatusComboBox);
 		box.add(b);
+	}
+
+	// 好评时限
+	private void initTimeLimitBox(HBaseBox box) {
+		JCheckBox checkBox6 = new JCheckBox(TaskTimeLimit.立即.getName());
+		JCheckBox checkBox7 = new JCheckBox(TaskTimeLimit.分钟30.getName());
+		JCheckBox checkBox8 = new JCheckBox(TaskTimeLimit.天1.getName());
+		checkBox8.setSelected(true);
+		JCheckBox checkBox9 = new JCheckBox(TaskTimeLimit.天2.getName());
+		checkBox9.setSelected(true);
+		JCheckBox checkBox10 = new JCheckBox(TaskTimeLimit.天3.getName());
+		checkBox10.setSelected(true);
+		JCheckBox checkBox11 = new JCheckBox(TaskTimeLimit.天4.getName());
+		checkBox11.setSelected(true);
+		JCheckBox checkBox12 = new JCheckBox(TaskTimeLimit.天5.getName());
+		JCheckBox checkBox13 = new JCheckBox(TaskTimeLimit.天6.getName());
+		JCheckBox checkBox14 = new JCheckBox(TaskTimeLimit.天7.getName());
+		timeLimitCheckBoxs.add(checkBox6);
+		timeLimitCheckBoxs.add(checkBox7);
+		timeLimitCheckBoxs.add(checkBox8);
+		timeLimitCheckBoxs.add(checkBox9);
+		timeLimitCheckBoxs.add(checkBox10);
+		timeLimitCheckBoxs.add(checkBox11);
+		timeLimitCheckBoxs.add(checkBox12);
+		timeLimitCheckBoxs.add(checkBox13);
+		timeLimitCheckBoxs.add(checkBox14);
+
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("时限"));
+		box.add(b);
+		for (JCheckBox jCheckBox : timeLimitCheckBoxs) {
+			jCheckBox.addActionListener(this);
+			jCheckBox.setActionCommand(COMMAND_LIST_TIME_LIMIT);
+			b.add(jCheckBox);
+			b.add(HBaseBox.EmptyHorizontal);
+		}
 	}
 
 	// 排序
@@ -700,6 +744,14 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 						break;
 					}
 				}
+
+				// 时限
+				for (JCheckBox jCheckBox : timeLimitCheckBoxs) {
+					String text = jCheckBox.getText();
+					if (jCheckBox.isSelected()) {
+						query.addTaskTimeLimits(TaskTimeLimit.getTaskTimeLimitByName(text));
+					}
+				}
 			}
 		});
 	}
@@ -717,14 +769,20 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				try {
 					int[] rowIndexs = taskListTable.getSelectedRows();
 					taskListTable.clearSelection();
-					if (ArrayUtils.isNotEmpty(rowIndexs)) {
+					Collection<Task> tasks = null;
+					if (ArrayUtils.isNotEmpty(rowIndexs)) { // 检查选中的
+						tasks = taskListTableModel.getRowTask(rowIndexs);
+					} else { // 检查当前页面全部
+						tasks = taskListTableModel.getTasks();
+					}
+
+					if (CollectionUtils.isNotEmpty(tasks)) {
 						TaskService service = blueSky.getService();
-						Collection<Task> tasks = taskListTableModel.getRowTask(rowIndexs);
 						for (Task task : tasks) {
 							if (task != null) {
 								checkTaskStatusButton.setEnabled(false);
 								service.updateTaskDetail(task);
-								TaskUtil.sleep(1_000);
+								TaskUtil.sleep(RandomUtil.randomInteger(100, 2_500));
 								logger.debug("更新任务{}的详细信息 --- 任务状态 : {}", task.getNumber(), task.getStatus().name());
 							}
 						}

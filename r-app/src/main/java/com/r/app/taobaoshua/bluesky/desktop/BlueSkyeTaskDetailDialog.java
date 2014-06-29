@@ -304,8 +304,25 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 
 	/** 绑定买号 */
 	private void doBindingBuyAccount() {
-		// TODO Auto-generated method stub
+		TaskUtil.executeSequenceTask(new Runnable() {
+			@Override
+			public void run() {
+				TaskService service = blueSky.getService();
+				BuyAccount buyAccount = (BuyAccount) buyAccountComboBox.getSelectedItem();
+				service.webDoBindingBuyAccount(task, buyAccount, new SuccessAndFailureCallBack() {
+					@Override
+					public void success(String success, Object object) {
+						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
+					}
 
+					@Override
+					public void failure(String error, Object object) {
+						HAlert.showWarnTips(error, BlueSkyeTaskDetailDialog.this);
+					}
+				});
+				_doGetTaskDetail();
+			}
+		}, GROPU);
 	}
 
 	private void doBuyAccount() {

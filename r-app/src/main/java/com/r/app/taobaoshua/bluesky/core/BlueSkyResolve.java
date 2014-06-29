@@ -12,6 +12,7 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.PaymentType;
 import com.r.app.taobaoshua.bluesky.model.enumtask.ShopScore;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskAddr;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskTimeLimit;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -73,11 +74,15 @@ public class BlueSkyResolve {
 			// 接手任务ID
 			curPos = html.indexOf("width=\"72\"");
 			html = html.substring(curPos);
-			task.setTaskId(StringUtils.substringBetween(html, "ID=", "\">").trim());
+			String taskId = StringUtils.substringBetween(html, "ID=", "\">");
+			if (StringUtils.isNotBlank(taskId)) {
+				task.setTaskId(StringUtils.substringBetween(html, "ID=", "\">").trim());
+			} else { // 此任务已经被接手,或者已经删除,或者已经完成,多数出现在7,6,5天评价中
+				task.setTaskId(null);
+			}
 
 			// 计算统计值
 			task.calStatistics();
-
 			tasks.add(task);
 		}
 	}
@@ -342,17 +347,9 @@ public class BlueSkyResolve {
 			task.setShopScore(null);
 		}
 
-		if (0 < td.indexOf("立即确认")) { // 立即好评
-			task.setTimeLimit(0);
-			return;
-		}
-		if (0 < td.indexOf("30分钟")) { // 30分钟后好评
-			task.setTimeLimit(30);
-			return;
-		}
-
-		task.setTimeLimit(Integer.valueOf(StringUtils.substringBetween(td, "title=\"", "天后确认收").trim()) * 24 * 60);
-
+		String s = td.substring(td.indexOf("title"));
+		String timeLimit = StringUtils.substringBetween(s, "\">", "</span>");
+		task.setTimeLimit(TaskTimeLimit.getTaskTimeLimitByName(timeLimit));
 	}
 
 	/** 解析商品限制条件 */
