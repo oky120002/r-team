@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,12 +20,15 @@ import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.desktop.tablemodel.TaskListTableModel;
@@ -50,6 +54,7 @@ import com.r.core.util.TaskUtil;
 public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private static final long serialVersionUID = -2648127087894579928L;
 	private static final Logger logger = LoggerFactory.getLogger(BlueSkyMainPanel.class);
+	private static final NumberFormat numberFormat = NumberFormat.getIntegerInstance();
 	private static final String COMMAND_TASKINFO = "command_taskinfo"; // 命令_获取任务信息
 	private static final String COMMAND_CHECK_TASKSTATUS = "command_check_taskstatus";// 命令_校验任务状态
 	private static final String COMMAND_LIST_TASKSTATUS = "command_list_taskstatus"; // 命令
@@ -105,6 +110,12 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 	private JComboBox<TaskStatus> taskStatusComboBox = new JComboBox<TaskStatus>(TaskStatus.values());
 	private JComboBox<TaskListOrder> taskListOrderComboBox = new JComboBox<TaskListOrder>(TaskListOrder.values());
 	private List<JCheckBox> timeLimitCheckBoxs = new ArrayList<JCheckBox>(); // 好评时限
+	private JTextField minSecurityPriceTextField = new JTextField(5);
+	private JTextField maxSecurityPriceTextField = new JTextField(5);
+	private JTextField minPublishingPointTextField = new JTextField(5);
+	private JTextField maxPublishingPointTextField = new JTextField(5);
+	private JTextField minPublishingPointOneDayTextField = new JTextField(5);
+	private JTextField maxPublishingPointOneDayTextField = new JTextField(5);
 
 	// 列表
 	private JTable taskListTable; // 任务列表
@@ -227,6 +238,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		initCollectBox(box); // 收藏
 		initWangWangBox(box); // 旺聊
 		initUpdateAddrBox(box);// 改地址
+		initTakerBox(box); // 任务接手者
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -238,7 +250,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		initUpdatePriceBox(box); // 是否需要改价
 		initQQBox(box);// QQ
 		initBaoGuoBox(box);// 真实空包
-		initTakerBox(box); // 任务接手者
+		initTaskDatasBox(box); // 各种数值限制
 		box.add(HBaseBox.createHorizontalGlue());
 		return box;
 	}
@@ -253,7 +265,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		return box;
 	}
 
-	/** 任务状态 */
+	// 任务状态
 	private void initTaskStatusBox(HBaseBox box) {
 		taskStatusComboBox.setSelectedItem(TaskStatus.等待接手);
 		taskStatusComboBox.addActionListener(this);
@@ -262,6 +274,16 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("任务状态"));
 		b.add(taskStatusComboBox);
+		box.add(b);
+	}
+
+	// 各种数值限制
+	private void initTaskDatasBox(HBaseBox box) {
+		HBaseBox b = HBaseBox.createHorizontalBaseBox();
+		b.setBorder(BorderFactory.createTitledBorder("数据限制"));
+		b.adds(new JLabel("抵押金 : "), minSecurityPriceTextField, new JLabel(" - "), maxSecurityPriceTextField, HBaseBox.EmptyHorizontal);
+		b.adds(new JLabel("发布点 : "), minPublishingPointTextField, new JLabel(" - "), maxPublishingPointTextField, HBaseBox.EmptyHorizontal);
+		b.adds(new JLabel("平均发布点 : "), minPublishingPointOneDayTextField, new JLabel(" - "), maxPublishingPointOneDayTextField, HBaseBox.EmptyHorizontal);
 		box.add(b);
 	}
 
@@ -731,7 +753,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 					}
 				}
 
-				// QQ
+				// 真实发包
 				selection = baoguoGroup.getSelection();
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();
@@ -751,6 +773,27 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 					if (jCheckBox.isSelected()) {
 						query.addTaskTimeLimits(TaskTimeLimit.getTaskTimeLimitByName(text));
 					}
+				}
+
+				// 数据限制
+				query.setMinSecurityPrice(getInteger(minSecurityPriceTextField));
+				query.setMaxSecurityPrice(getInteger(maxSecurityPriceTextField));
+				query.setMinPublishingPoint(getInteger(minPublishingPointTextField));
+				query.setMaxPublishingPoint(getInteger(maxPublishingPointTextField));
+				query.setMinPublishingPointOneDay(getInteger(minPublishingPointOneDayTextField));
+				query.setMaxPublishingPointOneDay(getInteger(maxPublishingPointOneDayTextField));
+			}
+
+			private Number getInteger(JTextField textField) {
+				String text = textField.getText();
+				if (StringUtils.isBlank(text)) {
+					return null;
+				}
+				try {
+					return numberFormat.parse(text);
+				} catch (Exception e) {
+					textField.setText("");
+					return null;
 				}
 			}
 		});

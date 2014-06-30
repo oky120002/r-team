@@ -42,7 +42,13 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 	private String taskerAccount = null; // 接手人账号
 	private Boolean isUpdateAddr = null; // 是否改地址
 	private Boolean isBaoGuo = null; // 是否真实发包
-	private Set<TaskTimeLimit> taskTimeLimits = new HashSet<TaskTimeLimit>();
+	private Set<TaskTimeLimit> taskTimeLimits = new HashSet<TaskTimeLimit>(); // 时限
+	private Number minSecurityPrice = null; // 担保金区间-最小
+	private Number maxSecurityPrice = null; // 担保金区间-最大
+	private Number minPublishingPoint = null; // 发布点区间-最小
+	private Number maxPublishingPoint = null;// 发布点区间-最大
+	private Number minPublishingPointOneDay = null; // 每天发布点区间-最小
+	private Number maxPublishingPointOneDay = null; // 每天发布点区间-最大
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,7 +57,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		Map<String, Object> pars = new HashMap<String, Object>();
 		hql.append(" from ").append(Task.class.getName()).append(" t where 1=1 ");
 
-		// 条件
+		// --- 条件 ---//
 		if (ArrayUtils.isNotEmpty(status)) { // 任务状态
 			hql.append(" and t.status in (:status) ");
 		}
@@ -105,10 +111,37 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 			pars.put("isBaoGuo", isBaoGuo);
 		}
 
-		// 时限
-		if (CollectionUtils.isNotEmpty(taskTimeLimits)) {
+		if (CollectionUtils.isNotEmpty(taskTimeLimits)) { // 时限
 			hql.append(" and t.timeLimit in (:timeLimits) ");
 			pars.put("timeLimits", taskTimeLimits);
+		}
+
+		// --- 三个区间 ---//
+		if (minSecurityPrice != null) {
+			hql.append(" and :minSecurityPrice < t.securityPrice ");
+			pars.put("minSecurityPrice", minSecurityPrice.doubleValue());
+		}
+		if (maxSecurityPrice != null) {
+			hql.append(" and t.securityPrice < :maxSecurityPrice ");
+			pars.put("maxSecurityPrice", maxSecurityPrice.doubleValue());
+		}
+
+		if (minPublishingPoint != null) {
+			hql.append(" and :minPublishingPoint < t.publishingPoint ");
+			pars.put("minPublishingPoint", minPublishingPoint.doubleValue());
+		}
+		if (maxPublishingPoint != null) {
+			hql.append(" and t.publishingPoint < :maxPublishingPoint ");
+			pars.put("maxPublishingPoint", maxPublishingPoint.doubleValue());
+		}
+
+		if (minPublishingPointOneDay != null) {
+			hql.append(" and :minPublishingPointOneDay < t.publishingPointOneDay ");
+			pars.put("minPublishingPointOneDay", minPublishingPointOneDay.doubleValue());
+		}
+		if (maxPublishingPointOneDay != null) {
+			hql.append(" and t.publishingPointOneDay < :maxPublishingPointOneDay ");
+			pars.put("maxPublishingPointOneDay", maxPublishingPointOneDay.doubleValue());
 		}
 
 		// 排序
@@ -381,6 +414,104 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @return the minSecurityPrice
+	 */
+	public Number getMinSecurityPrice() {
+		return minSecurityPrice;
+	}
+
+	/**
+	 * @param minSecurityPrice
+	 *            the minSecurityPrice to set
+	 */
+	public void setMinSecurityPrice(Number minSecurityPrice) {
+		this.minSecurityPrice = minSecurityPrice;
+	}
+
+	/**
+	 * @return the maxSecurityPrice
+	 */
+	public Number getMaxSecurityPrice() {
+		return maxSecurityPrice;
+	}
+
+	/**
+	 * @param maxSecurityPrice
+	 *            the maxSecurityPrice to set
+	 */
+	public void setMaxSecurityPrice(Number maxSecurityPrice) {
+		this.maxSecurityPrice = maxSecurityPrice;
+	}
+
+	/**
+	 * @return the minPublishingPoint
+	 */
+	public Number getMinPublishingPoint() {
+		return minPublishingPoint;
+	}
+
+	/**
+	 * @param minPublishingPoint
+	 *            the minPublishingPoint to set
+	 */
+	public void setMinPublishingPoint(Number minPublishingPoint) {
+		this.minPublishingPoint = minPublishingPoint;
+	}
+
+	/**
+	 * @return the maxPublishingPoint
+	 */
+	public Number getMaxPublishingPoint() {
+		return maxPublishingPoint;
+	}
+
+	/**
+	 * @param maxPublishingPoint
+	 *            the maxPublishingPoint to set
+	 */
+	public void setMaxPublishingPoint(Number maxPublishingPoint) {
+		this.maxPublishingPoint = maxPublishingPoint;
+	}
+
+	/**
+	 * @return the minPublishingPointOneDay
+	 */
+	public Number getMinPublishingPointOneDay() {
+		return minPublishingPointOneDay;
+	}
+
+	/**
+	 * @param minPublishingPointOneDay
+	 *            the minPublishingPointOneDay to set
+	 */
+	public void setMinPublishingPointOneDay(Number minPublishingPointOneDay) {
+		this.minPublishingPointOneDay = minPublishingPointOneDay;
+	}
+
+	/**
+	 * @return the maxPublishingPointOneDay
+	 */
+	public Number getMaxPublishingPointOneDay() {
+		return maxPublishingPointOneDay;
+	}
+
+	/**
+	 * @param maxPublishingPointOneDay
+	 *            the maxPublishingPointOneDay to set
+	 */
+	public void setMaxPublishingPointOneDay(Number maxPublishingPointOneDay) {
+		this.maxPublishingPointOneDay = maxPublishingPointOneDay;
+	}
+
+	/**
+	 * @param maxPublishingPointOneDay
+	 *            the maxPublishingPointOneDay to set
+	 */
+	public void setMaxPublishingPointOneDay(Integer maxPublishingPointOneDay) {
+		this.maxPublishingPointOneDay = maxPublishingPointOneDay;
 	}
 
 	/** 排序枚举 */

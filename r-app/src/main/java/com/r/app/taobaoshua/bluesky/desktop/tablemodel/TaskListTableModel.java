@@ -161,16 +161,16 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		发布点天("发布点/天", String.class, 145, 11), //
 		元发布点天("元/1发布点1天", String.class, 90, 12), //
 		好评时限("好评时限", String.class, 65, 9), //
-		商保("商保", Icon.class, 25, 13), //
+		商保("商保", Icon.class, 45, 13), //
 		实名("实名", Icon.class, 45, 14), //
-		搜索("搜索", Icon.class, 40, 15), //
-		收藏("收藏", Icon.class, 40, 16), //
-		旺聊("旺聊", Icon.class, 40, 17), //
-		审核("审核", Icon.class, 40, 18), //
+		搜索("搜索", Icon.class, 45, 15), //
+		收藏("收藏", Icon.class, 45, 16), //
+		旺聊("旺聊", Icon.class, 45, 17), //
+		审核("审核", Icon.class, 45, 18), //
 		QQ("QQ", Icon.class, 30, 20), //
-		改价("改价", Icon.class, 30, 21), //
-		地址("地址", Icon.class, 40, 22), //
-		包裹("空包", Icon.class, 30, 23), //
+		改价("改价", Icon.class, 45, 21), //
+		地址("地址", Icon.class, 45, 22), //
+		包裹("空包", Icon.class, 45, 23), //
 		条件("条件", String.class, 250, 19), //
 		发布人("发布人", String.class, 100, 4), //
 		是否在线("在线", Icon.class, -1, 5), //
