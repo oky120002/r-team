@@ -17,7 +17,6 @@ import com.r.boda.uploadservice.support.listener.FileUploadItem;
 import com.r.boda.uploadservice.upload.service.UploadService;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
-import com.r.core.util.RandomUtil;
 
 /**
  * 支持视图控制器
@@ -43,20 +42,47 @@ public class UploadControl {
 	 * @param model
 	 * @return 页面路径
 	 */
-	@RequestMapping(value = "list")
-	public String queryList(ModelMap model, HttpServletRequest request) {
-		request.getSession().setAttribute("abcd", RandomUtil.getChineseCharacter());
-		return "upload/upload";
+	@RequestMapping(value = "index")
+	public String index(ModelMap model, HttpServletRequest request) {
+		return "index";
 	}
 
-	@RequestMapping(value = "up")
-	public String uploadPage(ModelMap model, MultipartHttpServletRequest request) {
-		for (MultipartFile file : request.getFiles("file")) {
+	/**
+	 * 上传页面
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "uploadpage")
+	public String uploadPage(ModelMap model, HttpServletRequest request) {
+		System.out.println("uploadpage");
+		return "upload/uploadpage";
+	}
+
+	/**
+	 * 上传应答入口
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "uploads")
+	public String uploads(ModelMap model, MultipartHttpServletRequest request) {
+		String uploadname = request.getParameter("uploadname");
+		for (MultipartFile file : request.getFiles(uploadname)) {
 			System.out.println(file.getOriginalFilename());
 		}
-		return "upload/upload";
+		return "upload/uploadpage";
 	}
 
+	/**
+	 * 上传状态(进度条)
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "fileUploadStatus")
 	public @ResponseBody
 	FileUploadItem fileUploadStatus(ModelMap model, HttpServletRequest request) {

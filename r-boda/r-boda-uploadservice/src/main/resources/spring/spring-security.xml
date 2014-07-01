@@ -31,8 +31,7 @@
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 
 		<!-- 配置登陆页面 -->
-		<form-login login-page="/login" default-target-url="/main"
-			always-use-default-target="true" />
+		<form-login login-page="/login" default-target-url="/main" always-use-default-target="true" />
 
 		<!-- 配置登出页面 -->
 		<logout invalidate-session="true" logout-url="/logout"

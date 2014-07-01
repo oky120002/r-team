@@ -22,7 +22,6 @@ public class FileUploasListener implements ProgressListener {
 		this.session = session;
 		this.fileUploadItem = new FileUploadItem();
 		this.session.setAttribute(FILE_UPLOAD_KEY, this.fileUploadItem);
-
 	}
 
 	public void update(long pBytesRead, long pContentLength, int pItems) {
