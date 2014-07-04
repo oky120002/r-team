@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.HttpPost;
@@ -31,6 +32,7 @@ import com.r.core.log.LoggerFactory;
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 	private static final Logger logger = LoggerFactory.getLogger(TaskDaoImpl.class); // 日志
 	private static final String BODY_ENCODE = "gb2312";
+	private static final String POST_ENCODE = "gb2312";
 
 	private HttpSocket httpSocket = HttpSocket.newHttpSocket(true, null);
 
@@ -74,7 +76,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Referer", "http://www2.88sxy.com/user/login/");
 
-		HttpPost post = new HttpPost("gb2312");
+		HttpPost post = new HttpPost(POST_ENCODE);
 		post.add("Username", account);
 		post.add("Password", accountPassword);
 		post.add("Question", question);
@@ -132,4 +134,19 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/BinDing.asp?2-0-0-0-0", map);
 		return responseHeader.bodyToString(BODY_ENCODE);
 	}
+
+	@Override
+	public String bindingBuyAccount(Task task, BuyAccount buyAccount) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Referer", "http://www2.88sxy.com/task/BinDingJieShouHao.asp?Action=BinDing&Tid=" + buyAccount.getTaobaoTid() + "&ID=" + task.getTaskId());
+		HttpPost post = new HttpPost(POST_ENCODE);
+		post.add("KS_ShopName", buyAccount.getBuyAccount());
+		post.add("Save.x", "60");
+		post.add("Save.y", "20");
+		post.add("ID", task.getTaskId());
+		post.add("Tid", buyAccount.getTaobaoTid());
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/BinDingJieShouHao.asp?Action=DoSave", post, map);
+		return responseHeader.bodyToString(BODY_ENCODE);
+	}
+
 }

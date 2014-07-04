@@ -9,14 +9,15 @@
 <script src="<c:url value="http://localhost:8080/boda/res/js/upload.client.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
-	function showuploadD(){
+	function show(){
 		showUploadDialog({
 			success : function(){
-				alert("成功");
+				//alert("成功");
 			},
 			error : function(){
-				alert("失败");
+				//alert("失败");
 			},
+			group : "r-boda-test",
 		});
 	}
 </script>
@@ -24,6 +25,6 @@
 <title>测试页面</title>
 </head>
 <body>
-	<input type="button" onclick='showUploadDialog();' value="上传">
+	<input type="button" onclick='show();' value="上传">
 </body>
 </html>

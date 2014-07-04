@@ -3,17 +3,24 @@
  */
 package com.r.boda.uploadservice.upload.control;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.r.boda.uploadservice.support.DeleteUploadResoultSupport;
+import com.r.boda.uploadservice.support.Support;
+import com.r.boda.uploadservice.support.UploadResoultSupport;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
+import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -56,7 +63,15 @@ public class UploadControl {
 	 */
 	@RequestMapping(value = "uploadpage")
 	public String uploadPage(ModelMap model, HttpServletRequest request) {
-		System.out.println("uploadpage");
+		logger.debug("uploadpage");
+		String group = request.getParameter("uploadgroup");
+		List<Upload> uploads = uploadService.queryByGroup(group);
+		if (CollectionUtils.isNotEmpty(uploads)) {
+			model.put("uploads", uploads);
+			model.put("isok", true);
+		} else {
+			model.put("isok", false);
+		}
 		return "upload/uploadpage";
 	}
 
@@ -68,12 +83,40 @@ public class UploadControl {
 	 * @return
 	 */
 	@RequestMapping(value = "uploads")
-	public String uploads(ModelMap model, MultipartHttpServletRequest request) {
+	public @ResponseBody
+	Support<Upload> uploads(MultipartHttpServletRequest request) {
+		logger.debug("开始上传");
+		Support<Upload> support = new Support<Upload>();
 		String uploadname = request.getParameter("uploadname");
-		for (MultipartFile file : request.getFiles(uploadname)) {
-			System.out.println(file.getOriginalFilename());
+		try {
+			List<Upload> uploads = uploadService.save(request.getFiles(uploadname), request.getParameter("uploadgroup"));
+			if (CollectionUtils.isNotEmpty(uploads)) {
+				support.putParam("group", uploads.get(0).getGroup());
+			}
+			support.setSuccess(true);
+			support.setEntities(uploads);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("上传文件错误 : {}", e.getMessage());
+			support.setSuccess(false);
+			support.addErrors(e.getMessage());
 		}
-		return "upload/uploadpage";
+		return support;
+	}
+
+	/**
+	 * 删除上传的文件
+	 * 
+	 * @param isDeleteFile
+	 * @param fileId
+	 * @return
+	 */
+	@RequestMapping(value = "deleteUpload/{isDeleteFile}/{fileId}")
+	public @ResponseBody
+	DeleteUploadResoultSupport deleteUpload(@PathVariable Boolean isDeleteFile, @PathVariable String fileId, HttpServletRequest request) {
+		System.out.println(isDeleteFile);
+		System.out.println(fileId);
+		return null;
 	}
 
 	/**
@@ -87,7 +130,7 @@ public class UploadControl {
 	public @ResponseBody
 	FileUploadItem fileUploadStatus(ModelMap model, HttpServletRequest request) {
 		FileUploadItem fileUploadItemFromRequest = FileUploadItem.getFileUploadItemFromRequest(request.getSession());
-		System.out.println(fileUploadItemFromRequest);
+		logger.debug("上传文件进度 : " + fileUploadItemFromRequest);
 		return fileUploadItemFromRequest;
 	}
 }

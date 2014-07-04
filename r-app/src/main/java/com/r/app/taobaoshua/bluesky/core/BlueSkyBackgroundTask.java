@@ -43,19 +43,52 @@ public class BlueSkyBackgroundTask {
 				TaskService service = blueSky.getService();
 
 				List<Task> tasks = new ArrayList<Task>();
-				for (int type = 0; type < 15; type++) {
-					for (int page = 1; page < 4; page++) {
+
+				service.webGetTaskList(tasks, 1, 0, 3);
+				service.webGetTaskList(tasks, 2, 0, 3);
+				service.updateTaskList(tasks);
+				tasks.clear();
+				TaskUtil.sleep(RandomUtil.randomInteger(0, 2_000));
+				service.webGetTaskList(tasks, 1, 8, 3);
+				service.webGetTaskList(tasks, 2, 8, 3);
+				service.updateTaskList(tasks);
+				tasks.clear();
+				TaskUtil.sleep(RandomUtil.randomInteger(0, 2_000));
+				service.webGetTaskList(tasks, 1, 9, 3);
+				service.webGetTaskList(tasks, 2, 9, 3);
+				service.updateTaskList(tasks);
+				tasks.clear();
+				TaskUtil.sleep(RandomUtil.randomInteger(0, 2_000));
+				service.webGetTaskList(tasks, 1, 10, 3);
+				service.webGetTaskList(tasks, 2, 10, 3);
+				service.updateTaskList(tasks);
+				tasks.clear();
+				TaskUtil.sleep(RandomUtil.randomInteger(0, 2_000));
+
+				// 其它的
+				for (int type = 0; type < 11; type++) {
+					for (int page = 1; page < 6; page++) {
 						service.webGetTaskList(tasks, page, type, 3);
 						service.updateTaskList(tasks);
 						tasks.clear();
 						TaskUtil.sleep(RandomUtil.randomInteger(1_000, 4_000));
 					}
 				}
+
+				// 4天,5天,6天,7天
+				for (int type = 11; type < 15; type++) {
+					service.webGetTaskList(tasks, 1, type, 3);
+					service.updateTaskList(tasks);
+					tasks.clear();
+					TaskUtil.sleep(RandomUtil.randomInteger(1_000, 4_000));
+				}
+
 				logger.debug("自动获取任务信息........");
 			}
-		}, -1, 360, null, null);
+		}, -1, 400, null, null);
 	}
 
+	/** 自动获取任务详细信息 */
 	public void startAutoUpdateTaskDetail() throws SchedulerException {
 		final TaskService service = blueSky.getService();
 

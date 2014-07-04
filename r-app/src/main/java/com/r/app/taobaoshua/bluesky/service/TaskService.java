@@ -158,9 +158,13 @@ public class TaskService {
 	}
 
 	/** 任务绑定买号 */
-	public void webDoBindingBuyAccount(Task task, BuyAccount buyAccount, SuccessAndFailureCallBack successAndFailureCallBack) {
-		// TODO Auto-generated method stub
-
+	public void webDoBindingBuyAccount(Task task, BuyAccount buyAccount, SuccessAndFailureCallBack callback) {
+		String html = taskDao.bindingBuyAccount(task, buyAccount);
+		if (0 < html.indexOf("绑定买号成功")) { // 发生异常
+			callback.success("绑定买号成功", null);
+		} else {
+			callback.failure(StringUtils.substringBetween(html, "alert('", "');location"), null);
+		}
 	}
 
 	// 好评
@@ -251,10 +255,14 @@ public class TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void updateTaskDetail(Task task) {
 		if (task != null && StringUtils.isNotBlank(task.getTaskId())) {
+			TaskStatus status = task.getStatus();
 			String taskDetail = taskDao.getTaskDetail(task.getTaskId());
 			BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
 			resolve.resolveTaskDetail(task, taskDetail);
 			task.setIsUpdateTaskDetail(true);
+			if (TaskStatus.排除.equals(status)) {
+				task.setStatus(TaskStatus.排除);
+			}
 			taskDao.update(task);
 		}
 	}
@@ -344,5 +352,39 @@ public class TaskService {
 		}
 		hql.append(" order by takeTaskByDay asc, takeTaskByWeek asc, buyPrestige asc ");
 		return buyAccountDao.queryByHql(hql);
+	}
+
+	/**
+	 * 排除此任务,不在接手<br/>
+	 * 如果已经处于排除状态,则改为启用状态
+	 * 
+	 * @param task
+	 * @param successAndFailureCallBack
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void doPaichuTask(Task task, SuccessAndFailureCallBack successAndFailureCallBack) {
+		try {
+			TaskStatus status = task.getStatus();
+			if (status != null) {
+				switch (status) {
+				case 排除:
+					task.setStatus(TaskStatus.等待接手);
+					break;
+				case 等待接手:
+					task.setStatus(TaskStatus.排除);
+					break;
+				default:
+					successAndFailureCallBack.failure("排除/启用失败 : 只能排除\"" + TaskStatus.等待接手.name() + "\"的任务", null);
+					return;
+				}
+			} else {
+				task.setStatus(TaskStatus.排除);
+			}
+
+			taskDao.update(task);
+			successAndFailureCallBack.success("排除/启用成功!", null);
+		} catch (Exception e) {
+			successAndFailureCallBack.failure(e.getMessage(), e);
+		}
 	}
 }

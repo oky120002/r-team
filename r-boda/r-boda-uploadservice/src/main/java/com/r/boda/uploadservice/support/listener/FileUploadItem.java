@@ -16,6 +16,7 @@ public class FileUploadItem {
 	private long bytesRead;
 	private long contentLength;
 	private int percent;
+	private String message;
 
 	/**
 	 * @return the itemNumber
@@ -45,20 +46,28 @@ public class FileUploadItem {
 		return percent;
 	}
 
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
 	public void setFileUploadItemData(long pBytesRead, long pContentLength, int pItems) {
 		this.bytesRead = pBytesRead;
 		this.contentLength = pContentLength;
 		this.itemNumber = pItems;
-		
+
 		double b = pBytesRead;
 		double c = pContentLength;
-		
+
 		this.percent = (int) ((b / c) * 100);
+		message = MessageFormatter.arrayFormat("正在上传第{}个文件,整体上传进度为 : {}/{}   {}%", new String[] { String.valueOf(this.itemNumber), String.valueOf(this.bytesRead), String.valueOf(this.contentLength), String.valueOf(this.percent) }).getMessage();
 	}
 
 	@Override
 	public String toString() {
-		return MessageFormatter.arrayFormat("正在上传第{}个文件,整体上传进度为 : {}/{}   {}%", new String[] { String.valueOf(this.itemNumber), String.valueOf(this.bytesRead), String.valueOf(this.contentLength), String.valueOf(this.percent) }).getMessage();
+		return message;
 	}
 
 	/**

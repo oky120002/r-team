@@ -11,6 +11,7 @@ import java.awt.Image;
 import org.hibernate.Session;
 
 import com.r.app.taobaoshua.bluesky.core.AbstractDao;
+import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.context.HttpProxy;
 
@@ -83,6 +84,9 @@ public interface TaskDao extends AbstractDao<Task> {
 	/** 退出任务 */
 	String discardTask(Task task);
 
-	/**获取绑定的买号*/
+	/** 获取绑定的买号 */
 	String getTaoBaoAccount();
+
+	/** 绑定买号 */
+	String bindingBuyAccount(Task task, BuyAccount buyAccount);
 }

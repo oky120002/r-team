@@ -49,7 +49,7 @@ public class BuyAccount {
 	@Column
 	private Boolean isIDCard;// 是否实名认证
 	@Column
-	private String taobaoTid; // 买号所属区域id
+	private String taobaoTid; // 买号所属淘宝区域id
 	@Column
 	private Boolean isEnable;// 启用禁用
 
@@ -59,6 +59,7 @@ public class BuyAccount {
 
 	public BuyAccount(String buyAccount) {
 		super();
+		this.id = "-1";
 		this.buyAccount = buyAccount;
 	}
 
@@ -215,6 +216,31 @@ public class BuyAccount {
 		sb.append(takeTaskByWeek == null ? -1 : takeTaskByWeek.intValue()).append('|');
 		sb.append(buyPrestige == null ? -1 : buyPrestige.intValue());
 		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BuyAccount other = (BuyAccount) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override

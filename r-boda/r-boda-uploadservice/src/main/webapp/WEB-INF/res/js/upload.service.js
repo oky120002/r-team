@@ -21,9 +21,9 @@ jQuery.extend({
 		var fileName = fileElementName;
 		var form = jQuery('<form action="" method="POST" name="' + formId + '" id="' + formId + '" enctype="multipart/form-data"></form>');	
 		if(data){
-			for(var i in data){
-				jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
-			}			
+			jQuery.each(data, function(i, field){
+				  jQuery('<input type="hidden" name="' + field.name + '" value="' + field.value + '" />').appendTo(form);
+			});
 		}
 		if(fileElement == null){
 			var oldElement = jQuery("input[name="+fileName+"]");

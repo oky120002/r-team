@@ -834,8 +834,9 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.debug(e.getMessage());
+				} finally{
+					checkTaskStatusButton.setEnabled(true);
 				}
-				checkTaskStatusButton.setEnabled(true);
 			}
 		});
 	}

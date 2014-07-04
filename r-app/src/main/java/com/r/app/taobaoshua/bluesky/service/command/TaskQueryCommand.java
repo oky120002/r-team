@@ -118,29 +118,29 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 
 		// --- 三个区间 ---//
 		if (minSecurityPrice != null) {
-			hql.append(" and :minSecurityPrice < t.securityPrice ");
+			hql.append(" and :minSecurityPrice <= t.securityPrice ");
 			pars.put("minSecurityPrice", minSecurityPrice.doubleValue());
 		}
 		if (maxSecurityPrice != null) {
-			hql.append(" and t.securityPrice < :maxSecurityPrice ");
+			hql.append(" and t.securityPrice <= :maxSecurityPrice ");
 			pars.put("maxSecurityPrice", maxSecurityPrice.doubleValue());
 		}
 
 		if (minPublishingPoint != null) {
-			hql.append(" and :minPublishingPoint < t.publishingPoint ");
+			hql.append(" and :minPublishingPoint <= t.publishingPoint ");
 			pars.put("minPublishingPoint", minPublishingPoint.doubleValue());
 		}
 		if (maxPublishingPoint != null) {
-			hql.append(" and t.publishingPoint < :maxPublishingPoint ");
+			hql.append(" and t.publishingPoint <= :maxPublishingPoint ");
 			pars.put("maxPublishingPoint", maxPublishingPoint.doubleValue());
 		}
 
 		if (minPublishingPointOneDay != null) {
-			hql.append(" and :minPublishingPointOneDay < t.publishingPointOneDay ");
+			hql.append(" and :minPublishingPointOneDay <= t.publishingPointOneDay ");
 			pars.put("minPublishingPointOneDay", minPublishingPointOneDay.doubleValue());
 		}
 		if (maxPublishingPointOneDay != null) {
-			hql.append(" and t.publishingPointOneDay < :maxPublishingPointOneDay ");
+			hql.append(" and t.publishingPointOneDay <= :maxPublishingPointOneDay ");
 			pars.put("maxPublishingPointOneDay", maxPublishingPointOneDay.doubleValue());
 		}
 

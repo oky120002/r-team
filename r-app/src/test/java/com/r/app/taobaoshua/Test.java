@@ -17,6 +17,10 @@ public class Test {
 		String encode2 = URLEncoder.encode(post2, "gb2312");
 		System.out.println(encode2);
 		
+		String post3 = "雁hym";
+		String encode3 = URLEncoder.encode(post3, "gb2312");
+		System.out.println(encode3);
+		
 		
 		// 源代码
 		// Username=oky120002&Password=lian1990&Question=%CE%D2%D6%D0%D1%A7%D0%A3%C3%FB%C8%AB%B3%C6%CA%C7%CA%B2%C3%B4%A3%BF&Answer=%D1%EE%BC%D2%C6%BA%D6%D0%D1%A7&Verifycode=3438&u1=
