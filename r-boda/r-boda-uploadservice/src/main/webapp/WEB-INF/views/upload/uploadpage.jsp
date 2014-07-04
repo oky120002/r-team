@@ -10,22 +10,12 @@
 
 <script type="text/javascript">
 	var args = window.dialogArguments;
+	$(document).ready(function() {
+		if(args.group){ 
+			$('#uploadgroup').val(args.group);
+		}
+	});
 	
-	window.setInterval("callback();", 500);
-	/*进度条回调*/
- 	function callback(){
- 		$.ajax({
- 			type : "post",
- 			url : "/boda/upload/fileUploadStatus",//响应文件上传进度的servlet  
- 			success : function(msg) {
- 				if(msg){
- 	 				document.getElementById("span").innerHTML = "已上传：" + msg;//显示读取百分比  
- 	 				document.getElementById("table").width = msg;//通过表格宽度 实现进度条  
- 				}
- 			}
- 		});
- 	}
- 
  	/*增加一行附件*/
 	function addRow() {
 		$('<input type="file" name="uploadfile" id="file"><br />').appendTo($('#formid'));
@@ -33,19 +23,22 @@
 	
 	/**上传*/
 	function upload(){
+		startProgress();
 		$.ajaxFileUpload({
 			url: '/boda/upload/uploads',
 			fileElementName: 'uploadfile',
-			//data: $('#formid') ? null : $('#formid').serialize(),
+			data: $('#formid').serializeArray(),
 			secureuri: false,
-			//dataType: 'json',
 			success: function (data, status){
+				stopProgress();
 				try {
 					args.success(data,status);
 				} catch (e) {
 				}
+				
 			},
 			error	: function(XMLHttpRequest, textStatus, errorThrown){
+				stopProgress();
 				try {
 					args.error(XMLHttpRequest,textStatus,errorThrown);
 				} catch (e) {
@@ -53,15 +46,47 @@
 			},
 		});
 	}
+	
+	var callbackId;
+	/**启动进度条*/
+	function startProgress(){
+		try {
+			callbackId = window.setInterval("_progress();", 500);
+		} catch (e) {
+		}
+	}
+	
+	/**只听进度条*/
+	function stopProgress(){
+		try {
+			window.clearInterval(callbackId);
+		} catch (e) {
+		}
+	}
+	
+	/**进度条*/
+	function _progress(){
+ 		$.ajax({
+ 			type : "post",
+ 			url : "/boda/upload/fileUploadStatus",//响应文件上传进度的servlet  
+ 			success : function(msg) {
+ 				if(msg){
+ 	 				document.getElementById("span").innerHTML = msg.message;//显示读取百分比  
+ 	 				document.getElementById("table").width = msg.percent;//通过表格宽度 实现进度条  
+ 				} else {
+ 				}
+ 			}
+ 		});
+	}
 </script>
 
 <title>上传测试</title>
 </head>
 <body>
 	<form id="formid">
-		<input type="hidden" name="group" value="" />
+		<input type="hidden" id="uploadgroup" name="uploadgroup"/>
 		<input type="button" onclick="addRow();" value="+附件" />
-		<input type="button" onclick="jQuery.upload();" value="提交" />
+		<input type="button" onclick="upload();" value="提交" />
 		<br />
 	</form>
 
@@ -77,6 +102,23 @@
 			</td>
 		</tr>
 	</table>
-
+	
+	<c:if test="${isok }">
+		<table>
+			<thead>
+				<tr>
+					<th>文件名</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${uploads }" var="upload">
+				<tr>
+					<td>${upload.fileName }</td>
+					<td><a href="/boda/upload/deleteUpload/false/${upload.id }">删除</a></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
@@ -15,13 +16,15 @@ import com.r.core.log.LoggerFactory;
 public class UploadServiceTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadServiceTest.class); // 日志
-	
+
 	@Resource(name = "upload.uploadService")
 	private UploadService uploadService;
-	
+
 	@Test
 	public void test() {
-		
+		Upload up = new Upload();
+		up.setFileName("abcd");
+		uploadService.create(up);
 	}
 
 }
