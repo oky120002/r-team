@@ -4,7 +4,6 @@
 package com.r.boda.uploadservice.support;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,32 +15,31 @@ import java.util.Map;
  * 
  */
 public class Support<T> {
-	private String message; // 提示信息
-	private Boolean success = true; // 数据是否正确返回;true:正确返回|false:有错误信息,没有正确返回
+	private String tips; // 提示信息(包括成功提示和错误信息提示)
+	private boolean success = true; // 数据是否正确返回;true:正确返回|false:有错误信息,没有正确返回
 	private T model; // 任意Object
 	private List<T> entities = new ArrayList<T>(); // 返回的列表
 	private Map<String, Object> params = new HashMap<String, Object>(); // 返回参数
-	private List<String> errors = new ArrayList<String>(); // 错误信息
 
 	/**
-	 * @return the message
+	 * @return the tips
 	 */
-	public String getMessage() {
-		return message;
+	public String getTips() {
+		return tips;
 	}
 
 	/**
-	 * @param message
-	 *            the message to set
+	 * @param tips
+	 *            the tips to set
 	 */
-	public void setMessage(String message) {
-		this.message = message;
+	public void setTips(String tips) {
+		this.tips = tips;
 	}
 
 	/**
 	 * @return the success
 	 */
-	public Boolean getSuccess() {
+	public boolean isSuccess() {
 		return success;
 	}
 
@@ -49,7 +47,7 @@ public class Support<T> {
 	 * @param success
 	 *            the success to set
 	 */
-	public void setSuccess(Boolean success) {
+	public void setSuccess(boolean success) {
 		this.success = success;
 	}
 
@@ -98,31 +96,7 @@ public class Support<T> {
 		this.params = params;
 	}
 
-	/**
-	 * @return the errors
-	 */
-	public List<String> getErrors() {
-		return errors;
-	}
-
-	/**
-	 * @param errors
-	 *            the errors to set
-	 */
-	public void setErrors(List<String> errors) {
-		this.errors = errors;
-	}
-
-	public void addErrors(String... ts) {
-		this.errors.addAll(Arrays.asList(ts));
-	}
-
-	@SuppressWarnings("unchecked")
-	public void addEntities(T... ts) {
-		this.entities.addAll(Arrays.asList(ts));
-	}
-
-	public void putParam(String key, Object obj) {
-		this.params.put(key, obj);
+	public void putParam(String key, String value) {
+		this.params.put(key, value);
 	}
 }

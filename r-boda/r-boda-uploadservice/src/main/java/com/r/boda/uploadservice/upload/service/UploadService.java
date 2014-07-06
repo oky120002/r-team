@@ -132,4 +132,25 @@ public class UploadService {
 		sb.append(randomFile).append(".up");
 		return new File(sb.toString());
 	}
+
+	/**
+	 * 删除文件
+	 * 
+	 * @param fileId
+	 *            文件id
+	 * @param isDeleteFile
+	 *            是否删除在硬盘上对应的文件数据,false:则只删除数据中的文件记录
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	public void deleteFile(String fileId, boolean isDeleteFile) {
+		Upload find = uploadDao.find(fileId);
+		String filepath = find.getFilepath();
+		uploadDao.delete(find);
+		if (isDeleteFile) {
+			File file = new File(filepath);
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+	}
 }

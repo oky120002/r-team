@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/res/css/layout.css" />" />
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
+<script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
 	var args = window.dialogArguments;
@@ -23,6 +24,8 @@
 	
 	/**上传*/
 	function upload(){
+		$('#btn_upload').attr("disabled", "disabled");
+		$('#btn_addrow').attr("disabled", "disabled");
 		startProgress();
 		$.ajaxFileUpload({
 			url: '/boda/upload/uploads',
@@ -31,18 +34,12 @@
 			secureuri: false,
 			success: function (data, status){
 				stopProgress();
-				try {
-					args.success(data,status);
-				} catch (e) {
-				}
-				
+				_progress();
+				$('#btn_upload').removeAttr("disabled");
+				$('#btn_addrow').removeAttr("disabled");
 			},
 			error	: function(XMLHttpRequest, textStatus, errorThrown){
 				stopProgress();
-				try {
-					args.error(XMLHttpRequest,textStatus,errorThrown);
-				} catch (e) {
-				}
 			},
 		});
 	}
@@ -66,17 +63,20 @@
 	
 	/**进度条*/
 	function _progress(){
- 		$.ajax({
- 			type : "post",
- 			url : "/boda/upload/fileUploadStatus",//响应文件上传进度的servlet  
- 			success : function(msg) {
- 				if(msg){
- 	 				document.getElementById("span").innerHTML = msg.message;//显示读取百分比  
- 	 				document.getElementById("table").width = msg.percent;//通过表格宽度 实现进度条  
- 				} else {
- 				}
- 			}
+		submitDatas('/boda/upload/fileUploadStatus', null, function(data){
+			var model = data.model;
+			document.getElementById("span").innerHTML = model.message;//显示读取百分比  
+	 		document.getElementById("table").width = model.percent + "%";//通过表格宽度 实现进度条  
  		});
+	}
+
+	/**删除文件*/
+	function deleteFile(id){
+		submitDatas('/boda/upload/deleteUpload/false/' + id, null, function(data){
+			$('#deletetr'+id).remove();
+		},function(message){
+			alert(message);
+		});
 	}
 </script>
 
@@ -85,40 +85,40 @@
 <body>
 	<form id="formid">
 		<input type="hidden" id="uploadgroup" name="uploadgroup"/>
-		<input type="button" onclick="addRow();" value="+附件" />
-		<input type="button" onclick="upload();" value="提交" />
+		<input type="button" id="btn_addrow"onclick="addRow();" value="+附件" />
+		<input type="button" id="btn_upload" onclick="upload();" value="提交" />
 		<br />
 	</form>
 
 	<span id="span">已上传: 0</span>
-	<table width="300px;" border="0">
+	<table width="100%" border="0">
 		<tr>
 			<td>
 				<table id="table" height="20px;" style="background-color: gray;">
 					<tr>
 						<td></td>
 					</tr>
-				</table>//用来实现进度条显示
+				</table>
 			</td>
 		</tr>
 	</table>
 	
-	<c:if test="${isok }">
-		<table>
-			<thead>
-				<tr>
-					<th>文件名</th>
-				</tr>
-			</thead>
+	<table class="list_style_1">
+		<thead>
+			<tr>
+				<th>文件名</th>
+			</tr>
+		</thead>
+		<c:if test="${isok }">
 			<tbody>
 			<c:forEach items="${uploads }" var="upload">
-				<tr>
+				<tr id="deletetr${upload.id }">
 					<td>${upload.fileName }</td>
-					<td><a href="/boda/upload/deleteUpload/false/${upload.id }">删除</a></td>
+					<td><button onclick="deleteFile('${upload.id }');">删除</button></td>
 				</tr>
 			</c:forEach>
 			</tbody>
-		</table>
-	</c:if>
+		</c:if>
+	</table>
 </body>
 </html>

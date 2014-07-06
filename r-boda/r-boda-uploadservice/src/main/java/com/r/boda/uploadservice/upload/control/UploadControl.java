@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.r.boda.uploadservice.support.DeleteUploadResoultSupport;
 import com.r.boda.uploadservice.support.Support;
-import com.r.boda.uploadservice.support.UploadResoultSupport;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
 import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
@@ -99,7 +97,7 @@ public class UploadControl {
 			e.printStackTrace();
 			logger.error("上传文件错误 : {}", e.getMessage());
 			support.setSuccess(false);
-			support.addErrors(e.getMessage());
+			support.setTips(e.getMessage());
 		}
 		return support;
 	}
@@ -113,10 +111,17 @@ public class UploadControl {
 	 */
 	@RequestMapping(value = "deleteUpload/{isDeleteFile}/{fileId}")
 	public @ResponseBody
-	DeleteUploadResoultSupport deleteUpload(@PathVariable Boolean isDeleteFile, @PathVariable String fileId, HttpServletRequest request) {
-		System.out.println(isDeleteFile);
-		System.out.println(fileId);
-		return null;
+	Support<Object> deleteUpload(@PathVariable Boolean isDeleteFile, @PathVariable String fileId, HttpServletRequest request) {
+		Support<Object> support = new Support<Object>();
+		try {
+			uploadService.deleteFile(fileId, Boolean.valueOf(isDeleteFile).booleanValue());
+			support.setSuccess(true);
+			support.setTips("删除成功");
+		} catch (Exception e) {
+			support.setSuccess(false);
+			support.setTips("删除失败!" + e.getMessage());
+		}
+		return support;
 	}
 
 	/**
@@ -128,9 +133,10 @@ public class UploadControl {
 	 */
 	@RequestMapping(value = "fileUploadStatus")
 	public @ResponseBody
-	FileUploadItem fileUploadStatus(ModelMap model, HttpServletRequest request) {
-		FileUploadItem fileUploadItemFromRequest = FileUploadItem.getFileUploadItemFromRequest(request.getSession());
-		logger.debug("上传文件进度 : " + fileUploadItemFromRequest);
-		return fileUploadItemFromRequest;
+	Support<Object> fileUploadStatus(ModelMap model, HttpServletRequest request) {
+		Support<Object> support = new Support<Object>();
+		support.setModel(FileUploadItem.getFileUploadItemFromRequest(request.getSession()));
+		logger.debug("上传文件进度 : " + support.getModel());
+		return support;
 	}
 }
