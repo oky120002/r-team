@@ -93,6 +93,7 @@ public class UploadControl {
 			}
 			support.setSuccess(true);
 			support.setEntities(uploads);
+			support.setTips("上传成功!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("上传文件错误 : {}", e.getMessage());
@@ -133,8 +134,8 @@ public class UploadControl {
 	 */
 	@RequestMapping(value = "fileUploadStatus")
 	public @ResponseBody
-	Support<Object> fileUploadStatus(ModelMap model, HttpServletRequest request) {
-		Support<Object> support = new Support<Object>();
+	Support<FileUploadItem> fileUploadStatus(ModelMap model, HttpServletRequest request) {
+		Support<FileUploadItem> support = new Support<FileUploadItem>();
 		support.setModel(FileUploadItem.getFileUploadItemFromRequest(request.getSession()));
 		logger.debug("上传文件进度 : " + support.getModel());
 		return support;

@@ -249,7 +249,6 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 					@Override
 					public void success(String success, Object object) {
 						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
-						BlueSkyeTaskDetailDialog.this.setVisible(false);
 					}
 
 					@Override
@@ -272,7 +271,6 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
 					@Override
 					public void success(String success, Object object) {
 						HAlert.showTips(success, "成功", BlueSkyeTaskDetailDialog.this);
-						BlueSkyeTaskDetailDialog.this.setVisible(false);
 					}
 
 					@Override

@@ -117,8 +117,6 @@ public class Task {
 	@Column
 	private String taskerBuyAccount; // 接手人买号
 	@Column
-	private String tid; // 绑定买号时需要的数据
-	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date taskPublishingTime;// 任务发布时间： 2014-6-5 21:45:59
 	@Column
@@ -877,21 +875,6 @@ public class Task {
 	 */
 	public void setTaskerBuyAccount(String taskerBuyAccount) {
 		this.taskerBuyAccount = taskerBuyAccount;
-	}
-
-	/**
-	 * @return the tid
-	 */
-	public String getTid() {
-		return tid;
-	}
-
-	/**
-	 * @param tid
-	 *            the tid to set
-	 */
-	public void setTid(String tid) {
-		this.tid = tid;
 	}
 
 	/**

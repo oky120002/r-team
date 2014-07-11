@@ -1,32 +1,39 @@
 package com.r.app.taobaoshua;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 public class Test {
 
 	@org.junit.Test
 	public void test() throws UnsupportedEncodingException {
-		String post = "Username=oky120002&Password=lian1990&Question=%CE%D2%D6%D0%D1%A7%D0%A3%C3%FB%C8%AB%B3%C6%CA%C7%CA%B2%C3%B4%A3%BF&Answer=%D1%EE%BC%D2%C6%BA%D6%D0%D1%A7&Verifycode=1358&u1=";
-		String encode = URLDecoder.decode(post, "utf-8");
-		System.out.println(encode);
-		
-		
-		String post2 = "Username=oky120002&Password=lian1990&Question=我中学校名全称是什么？&Answer=杨家坪中学&Verifycode=3438&u1=";
-		String encode2 = URLEncoder.encode(post2, "gb2312");
-		System.out.println(encode2);
-		
-		String post3 = "雁hym";
-		String encode3 = URLEncoder.encode(post3, "gb2312");
-		System.out.println(encode3);
-		
-		
-		// 源代码
-		// Username=oky120002&Password=lian1990&Question=%CE%D2%D6%D0%D1%A7%D0%A3%C3%FB%C8%AB%B3%C6%CA%C7%CA%B2%C3%B4%A3%BF&Answer=%D1%EE%BC%D2%C6%BA%D6%D0%D1%A7&Verifycode=3438&u1=
-		// Username=oky120002&Password=lian1990&Question=%CE%D2%D6%D0%D1%A7%D0%A3%C3%FB%C8%AB%B3%C6%CA%C7%CA%B2%C3%B4%A3%BF&Answer=%D1%EE%BC%D2%C6%BA%D6%D0%D1%A7&Verifycode=1358&u1=
-		// Username=oky120002&Password=lian1990&Question=我中学校名全称是什么？&Answer=杨家坪中学&Verifycode=3438&u1=
-		
+		File file = new File("./datas/2.txt");
+		try {
+
+			List<String> readLines = FileUtils.readLines(file);
+			List<String> ss = new ArrayList<String>();
+
+			int index = 0;
+			for (int i = 1160; i < 1226; i++) {
+				if (index > 31) {
+					index = 0;
+				}
+				StringBuffer sb = new StringBuffer();
+				sb.append(index++).append('\t').append(i).append('\t').append(readLines.contains(String.valueOf(i)) ? "1" : "0");
+				ss.add(sb.toString());
+			}
+
+			FileUtils.writeLines(new File("./datas/3.txt"), ss);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

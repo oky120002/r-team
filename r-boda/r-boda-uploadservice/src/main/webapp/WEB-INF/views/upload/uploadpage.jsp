@@ -22,6 +22,18 @@
 		$('<input type="file" name="uploadfile" id="file"><br />').appendTo($('#formid'));
 	};
 	
+	function addTableRow(upload){
+		
+		var id = "deletetr" + upload.id;
+		var tr = "";
+		tr += '<tr id="' + id + '">';
+		tr += '<td>' + upload.fileName + '</td>';
+		tr += '<td><button onclick="deleteFile(\'' + upload.id + '\');">删除</button></td>';
+		tr += '</tr>';
+		alert(tr);
+		$('#filetabletbody').append(tr);
+	}
+	
 	/**上传*/
 	function upload(){
 		$('#btn_upload').attr("disabled", "disabled");
@@ -32,11 +44,19 @@
 			fileElementName: 'uploadfile',
 			data: $('#formid').serializeArray(),
 			secureuri: false,
+			dataType: 'json',
 			success: function (data, status){
 				stopProgress();
 				_progress();
 				$('#btn_upload').removeAttr("disabled");
 				$('#btn_addrow').removeAttr("disabled");
+				
+				alert(data.tips);
+				
+				$.each(data.entities, function(i, upload){
+					alert(upload);
+					addTableRow(upload);
+				});
 			},
 			error	: function(XMLHttpRequest, textStatus, errorThrown){
 				stopProgress();
@@ -65,7 +85,7 @@
 	function _progress(){
 		submitDatas('/boda/upload/fileUploadStatus', null, function(data){
 			var model = data.model;
-			document.getElementById("span").innerHTML = model.message;//显示读取百分比  
+			document.getElementById("span").innerHTML = model.percent + "%";//显示读取百分比  
 	 		document.getElementById("table").width = model.percent + "%";//通过表格宽度 实现进度条  
  		});
 	}
@@ -90,13 +110,12 @@
 		<br />
 	</form>
 
-	<span id="span">已上传: 0</span>
 	<table width="100%" border="0">
 		<tr>
 			<td>
 				<table id="table" height="20px;" style="background-color: gray;">
 					<tr>
-						<td></td>
+						<td><span id="span" style="color: red;">已上传: 0</span></td>
 					</tr>
 				</table>
 			</td>
@@ -110,7 +129,7 @@
 			</tr>
 		</thead>
 		<c:if test="${isok }">
-			<tbody>
+			<tbody id="filetabletbody">
 			<c:forEach items="${uploads }" var="upload">
 				<tr id="deletetr${upload.id }">
 					<td>${upload.fileName }</td>

@@ -12,6 +12,7 @@
 
 	<!-- 过滤掉不需要权限控制的URL,这里一般放置静态路径,因为不需要判断是否有登陆,如果需要判断,则必须在http子节点中配置 -->
 	<http pattern="/res/**" security="none" />
+	<http pattern="/upload/**" security="none" />
 
 	<!-- 配置http -->
 	<http access-denied-page="/denied" auto-config="true">
@@ -26,8 +27,8 @@
 			IS_AUTHENTICATED_REMEMBERED" -->
 		<!-- <intercept-url pattern="/**/au" access="IS_AUTHENTICATED_ANONYMOUSLY" 
 			/> -->
-		<intercept-url pattern="/upload" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/upload/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+<!-- 		<intercept-url pattern="/upload" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+<!-- 		<intercept-url pattern="/upload/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 
 		<!-- 配置登陆页面 -->

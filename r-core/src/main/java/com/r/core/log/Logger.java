@@ -71,7 +71,7 @@ public class Logger {
 
 	/** 记录"调试"级别的日志 */
 	public void debug(String msg) {
-		debug(getPre() + msg, (Throwable) null);
+		debug(msg, (Throwable) null);
 	}
 
 	/** 记录"调试"级别的日志 */
@@ -95,15 +95,15 @@ public class Logger {
 		msg = getPre() + msg;
 		fireListener(LOGGER_LEVEL_DEBUG, msg, throwable);
 		if (throwable == null) {
-			logger.debug(getPre() + msg);
+			logger.debug(msg);
 		} else {
-			logger.debug(getPre() + msg, throwable);
+			logger.debug(msg, throwable);
 		}
 	}
 
 	/** 记录"信息"级别的日志 */
 	public void info(String msg) {
-		info(getPre() + msg, (Throwable) null);
+		info(msg, (Throwable) null);
 	}
 
 	/** 记录"信息"级别的日志 */
@@ -127,16 +127,16 @@ public class Logger {
 		msg = getPre() + msg;
 		fireListener(LOGGER_LEVEL_INFO, msg, throwable);
 		if (throwable == null) {
-			logger.info(getPre() + msg);
+			logger.info(msg);
 		} else {
-			logger.info(getPre() + msg, throwable);
+			logger.info(msg, throwable);
 		}
 
 	}
 
 	/** 记录"调试"级别的日志 */
 	public void error(String msg) {
-		error(getPre() + msg, (Throwable) null);
+		error(msg, (Throwable) null);
 	}
 
 	/** 记录"调试"级别的日志 */
@@ -160,9 +160,9 @@ public class Logger {
 		msg = getPre() + msg;
 		fireListener(LOGGER_LEVEL_ERROR, msg, throwable);
 		if (throwable == null) {
-			logger.error(getPre() + msg);
+			logger.error(msg);
 		} else {
-			logger.error(getPre() + msg, throwable);
+			logger.error(msg, throwable);
 		}
 
 	}
