@@ -178,7 +178,12 @@ jQuery.extend({
         }
         // Get the JavaScript object, if JSON is used.
         if ( type == "json" ){
-            eval( "data = " + data );
+        	try {
+        		 eval( "data = " + data );
+			} catch (e) {
+				
+			}
+           
         }
         // evaluate scripts within html
         if ( type == "html" ){

@@ -132,6 +132,14 @@ public class BlueSkyBackgroundTask {
 		}, -1, 10, null, null);
 	}
 
+	/** 自动的循环接手任务,再30分钟超时前,把要过期的任务,自动退出任务,然后重新接手 */
+	private void startAutoLoopAcceptTask() {
+		final TaskService service = blueSky.getService();
+//		TaskQueryCommand command = new TaskQueryCommand();
+//		service.execQueryCommand(query)
+		
+	}
+
 	/**
 	 * 启动所有的后台任务
 	 * 
@@ -140,6 +148,6 @@ public class BlueSkyBackgroundTask {
 	public void startAll() throws SchedulerException {
 		startAutoTaskListInfos();
 		startAutoUpdateTaskDetail();
+		startAutoLoopAcceptTask();
 	}
-
 }
