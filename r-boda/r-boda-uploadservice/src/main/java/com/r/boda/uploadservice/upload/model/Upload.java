@@ -28,12 +28,19 @@ public class Upload implements Serializable {
 
 	/** 文件实际地址 */
 	@Column
-	private String filepath;
+	private String filePath;
+
+	@Column
+	private Long fileLength; // 文件长度
 
 	/** 文件分组 */
 	// group在某些数据库中是关键字,不能用作列名
 	@Column(name = "_group")
 	private String group;
+
+	/** 此上传文件的标签 */
+	@Column
+	private String tag;
 
 	/** 是否启用 */
 	@Column
@@ -74,18 +81,33 @@ public class Upload implements Serializable {
 	}
 
 	/**
-	 * @return the filepath
+	 * @return the filePath
 	 */
-	public String getFilepath() {
-		return filepath;
+	public String getFilePath() {
+		return filePath;
 	}
 
 	/**
-	 * @param filepath
-	 *            the filepath to set
+	 * @param filePath
+	 *            the filePath to set
 	 */
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	/**
+	 * @return the fileLength
+	 */
+	public Long getFileLength() {
+		return fileLength;
+	}
+
+	/**
+	 * @param fileLength
+	 *            the fileLength to set
+	 */
+	public void setFileLength(Long fileLength) {
+		this.fileLength = fileLength;
 	}
 
 	/**
@@ -101,6 +123,21 @@ public class Upload implements Serializable {
 	 */
 	public void setGroup(String group) {
 		this.group = group;
+	}
+
+	/**
+	 * @return the tag
+	 */
+	public String getTag() {
+		return tag;
+	}
+
+	/**
+	 * @param tag
+	 *            the tag to set
+	 */
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	/**

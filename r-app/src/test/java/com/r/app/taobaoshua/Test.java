@@ -31,7 +31,6 @@ public class Test {
 			FileUtils.writeLines(new File("./datas/3.txt"), ss);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

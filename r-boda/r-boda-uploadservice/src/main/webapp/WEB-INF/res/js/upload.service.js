@@ -9,10 +9,10 @@ jQuery.extend({
 			} else if(typeof uri== 'string'){
 				iframeHtml += ' src="' + uri + '"';
 			}	
-		}
+		} 
 		iframeHtml += ' />';
 		jQuery(iframeHtml).appendTo(document.body);
-		return jQuery('#' + frameId).get(0);			
+		return jQuery('#' + frameId).get(0);
     },
     createUploadForm : function(id,fileElementName,data,fileElement){
 		//create form	
@@ -22,7 +22,7 @@ jQuery.extend({
 		var form = jQuery('<form action="" method="POST" name="' + formId + '" id="' + formId + '" enctype="multipart/form-data"></form>');	
 		if(data){
 			jQuery.each(data, function(i, field){
-				  jQuery('<input type="hidden" name="' + field.name + '" value="' + field.value + '" />').appendTo(form);
+				  jQuery('<input type="hidden" name="' + field.name + '" value="' + field.value + '" />').prependTo(form);
 			});
 		}
 		if(fileElement == null){
@@ -42,7 +42,7 @@ jQuery.extend({
 			jQuery(oldElement).before(newElement);
 			jQuery(oldElement).appendTo(form);
 		}
-		jQuery('<input type="hidden" name="uploadname" value="' + fileName + '" />').appendTo(form);	// 向后台传送文件的Name
+		jQuery('<input type="hidden" name="uploadname" value="' + fileName + '" />').prependTo(form);	// 向后台传送文件的Name
 		
 		//set attributes
 		jQuery(form).css('position', 'absolute');
@@ -84,7 +84,7 @@ jQuery.extend({
             } catch(e) {
 				jQuery.handleError(s, xml, null, e);
 			}
-            if( xml || isTimeout == "timeout"){				
+            if( xml || isTimeout == "timeout"){
                 requestDone = true;
                 var status;
                 try {
@@ -150,15 +150,14 @@ jQuery.extend({
 			jQuery(form).attr('method', 'POST');
 			jQuery(form).attr('target', frameId);
             if(form.encoding){
-				jQuery(form).attr('encoding', 'multipart/form-data');      			
+				jQuery(form).attr('encoding', 'multipart/form-data');
             } else {	
-				jQuery(form).attr('enctype', 'multipart/form-data');			
-            }			
+				jQuery(form).attr('enctype', 'multipart/form-data');
+            }
             jQuery(form).submit();
         } catch(e) {			
             jQuery.handleError(s, xml, null, e);
         }
-		
 		jQuery('#' + frameId).load(uploadCallback);
         return {abort: function(){
 			try{
@@ -174,16 +173,20 @@ jQuery.extend({
 		
         // If the type is "script", eval it in global context
         if ( type == "script" ){
-            jQuery.globalEval( data );
+           
+        	try {
+        		 jQuery.globalEval( data );
+			} catch (err) {
+				 jQuery.globalEval(jQuery(data).html());
+			}
         }
         // Get the JavaScript object, if JSON is used.
         if ( type == "json" ){
         	try {
-        		 eval( "data = " + data );
-			} catch (e) {
-				
+        		 eval( " data = " + data);
+			} catch (err) {
+				 eval( " data = " + jQuery(data).html());
 			}
-           
         }
         // evaluate scripts within html
         if ( type == "html" ){

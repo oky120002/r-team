@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -74,11 +75,15 @@ public class UploadService {
 				FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), uploadFile);
 				Upload up = new Upload();
 				up.setFileName(multipartFile.getOriginalFilename());
-				up.setFilepath(uploadFile.getAbsolutePath());
+				up.setFilePath(uploadFile.getAbsolutePath());
 				up.setGroup(group);
+				up.setFileLength(uploadFile.length());
 				up.setIsEnabled(true);
 				up.setFileType(FileType.re(multipartFile.getOriginalFilename()));
 				uploadDao.create(up);
+				Upload target = new Upload();
+				BeanUtils.copyProperties(up, target, new String[] { "filepath" }); // 过滤掉真实文件地址
+				failUploads.add(target);
 			} catch (Exception e) {
 				if (error == null) {
 					error = new UpLoadErrorException("");
@@ -144,7 +149,7 @@ public class UploadService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
 	public void deleteFile(String fileId, boolean isDeleteFile) {
 		Upload find = uploadDao.find(fileId);
-		String filepath = find.getFilepath();
+		String filepath = find.getFilePath();
 		uploadDao.delete(find);
 		if (isDeleteFile) {
 			File file = new File(filepath);
@@ -152,5 +157,11 @@ public class UploadService {
 				file.delete();
 			}
 		}
+	}
+
+	/** 根据文件id查找文件 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public Upload find(String fileId) {
+		return uploadDao.find(fileId);
 	}
 }
