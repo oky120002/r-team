@@ -92,7 +92,7 @@ body {
 /*表格样式*/ 
 table.list_style_1{border:none;border-left:1px #ddd solid;border-top:1px #ddd solid; margin:0 auto; width:100%;}
 table.list_style_1 tr.d2{ background:#f0f3f4;}
-table.list_style_1 th{ background:url(../images/index/table_title.jpg) left top repeat-x;text-align:center; height:31px; border-right:1px #ddd solid;}
+table.list_style_1 th{ background:url(../images/table/table_title.jpg) left top repeat-x;text-align:center; height:31px; border-right:1px #ddd solid;}
 table.list_style_1 th span.sort{text-decoration: underline;}
 table.list_style_1 td{border:none;border-right:1px #ddd solid;border-bottom:1px #ddd solid; padding:5px;}
 table.list_style_1 td a{ color:#069;}
@@ -101,7 +101,7 @@ table.list_style_1 td.dblclick{cursor: pointer;text-decoration : underline;}
 
 table.list_style_2{border:none;  margin:0 auto; width:100%;}
 table.list_style_2 tr.d2{ background:#f0f3f4;}
-table.list_style_2 th{ background:url(../images/index/table_title.jpg) left top repeat-x;text-align:center; height:15px; }
+table.list_style_2 th{ background:url(../images/table/table_title.jpg) left top repeat-x;text-align:center; height:15px; }
 table.list_style_2 td{border:none;border-bottom:1px #ddd solid; }
 table.list_style_2 td a{ color:#069;}
 table.list_style_2 td a:hover{ color:#F00;}

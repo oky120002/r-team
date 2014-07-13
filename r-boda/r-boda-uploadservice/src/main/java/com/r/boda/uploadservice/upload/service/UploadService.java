@@ -58,37 +58,50 @@ public class UploadService {
 	 * 保存上传的文件
 	 * 
 	 * @param files
+	 *            文件
+	 * @param tags
+	 *            标签
 	 * @throws IOException
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public List<Upload> save(List<MultipartFile> files, String group) throws UpLoadErrorException {
+	public List<Upload> save(List<MultipartFile> files, List<String> tags, String group) throws UpLoadErrorException {
 		if (CollectionUtils.isEmpty(files)) {
 			return new ArrayList<Upload>();
 		}
 
 		List<Upload> failUploads = new ArrayList<Upload>();
 		UpLoadErrorException error = null;
-		for (MultipartFile multipartFile : files) {
-			logger.debug("保存上传的文件 : {}", multipartFile.getOriginalFilename());
-			try {
-				File uploadFile = getUploadRandomFile();
-				FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), uploadFile);
-				Upload up = new Upload();
-				up.setFileName(multipartFile.getOriginalFilename());
-				up.setFilePath(uploadFile.getAbsolutePath());
-				up.setGroup(group);
-				up.setFileLength(uploadFile.length());
-				up.setIsEnabled(true);
-				up.setFileType(FileType.re(multipartFile.getOriginalFilename()));
-				uploadDao.create(up);
-				Upload target = new Upload();
-				BeanUtils.copyProperties(up, target, new String[] { "filepath" }); // 过滤掉真实文件地址
-				failUploads.add(target);
-			} catch (Exception e) {
-				if (error == null) {
-					error = new UpLoadErrorException("");
+		int size = files.size();
+		int tagSize = tags.size();
+		if (tagSize != size) {
+			throw new UpLoadErrorException("上传文件和上传文件标签数量必须相等");
+		}
+		for (int index = 0; index < size; index++) {
+			MultipartFile multipartFile = files.get(index);
+			String tag = tags.get(index);
+			if (!multipartFile.isEmpty()) {
+				logger.debug("保存上传的文件 : {}", multipartFile.getOriginalFilename());
+				try {
+					File uploadFile = getUploadRandomFile();
+					FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), uploadFile);
+					Upload up = new Upload();
+					up.setFileName(multipartFile.getOriginalFilename());
+					up.setFilePath(uploadFile.getAbsolutePath());
+					up.setGroup(group);
+					up.setFileLength(uploadFile.length());
+					up.setIsEnabled(true);
+					up.setFileType(FileType.re(multipartFile.getOriginalFilename()));
+					up.setTag(tag);
+					uploadDao.create(up);
+					Upload target = new Upload();
+					BeanUtils.copyProperties(up, target, new String[] { "filepath" }); // 过滤掉真实文件地址
+					failUploads.add(target);
+				} catch (Exception e) {
+					if (error == null) {
+						error = new UpLoadErrorException("");
+					}
+					error.addError(multipartFile.getOriginalFilename(), e.getMessage());
 				}
-				error.addError(multipartFile.getOriginalFilename(), e.getMessage());
 			}
 		}
 		if (error != null) {

@@ -1,3 +1,37 @@
+function isEmpty(obj) {
+	if(obj == undefined || obj == null || obj == "" || jQuery.isEmptyObject(obj)){
+		return true;
+	}
+	return false;
+}
+
+function isInArrays(target,arr){
+	var flag = false;
+	$.each(arr, function(index, ar) {
+		if(target == ar){
+			flag = true;
+			return false;
+		}
+	});
+	return flag;
+}
+
+/**刷新页面*/
+function f5(){
+	try {
+		window.history.go(0);
+	} catch (e) {
+	}
+	try {
+		window.location.reload();
+	} catch (e) {
+	}
+	try {
+		window.location.href = window.location.href;
+	} catch (e) {
+	}
+}
+
 /**
  * 提交数据
  * 
@@ -61,3 +95,4 @@ function submitDatas(url, formId, callback, errorback) {
 		}
 	});
 }
+

@@ -6,13 +6,19 @@ public enum FileType {
 	jpeg("image/jpeg", ResponseDataType.image), //
 	png("image/png", ResponseDataType.image), //
 	gif("image/gif", ResponseDataType.image), //
-	tif("image/tif", ResponseDataType.image), //
+	ico("image/x-icon", ResponseDataType.image), //
+	tiff("image/tiff", ResponseDataType.image), //
 	bmp("image/bmp", ResponseDataType.image), //
 	txt("text/plain", ResponseDataType.txt), //
-	pdf("", ResponseDataType.pdf), //
-	doc("", ResponseDataType.office_doc), //
-	docx("", ResponseDataType.office_docx), //
-	// xls, xlsx, ppt, pptx, ini, //
+	sql("text/plain", ResponseDataType.txt), //
+	pdf("application/pdf", ResponseDataType.pdf), //
+	doc("application/msword", ResponseDataType.office), //
+	docx("application/msword", ResponseDataType.office), //
+	xls("application/vnd.ms-excel", ResponseDataType.office), //
+	xlsx("application/vnd.ms-excel", ResponseDataType.office), //
+	ppt("application/vnd.ms-powerpoint", ResponseDataType.office), //
+	pptx("application/vnd.ms-powerpoint", ResponseDataType.office), //
+	ini("text/plain", ResponseDataType.txt), //
 	// dll, jar, exe, zip, bat, chm, log, reg, dat, unbeknown,
 	;
 
@@ -59,8 +65,8 @@ public enum FileType {
 	public enum ResponseDataType {
 		binary, // 二进制
 		txt, //
-		office_doc, //
-		office_docx, pdf, //
+		office, //
+		pdf, //
 		image, //
 		audia, //
 		file, //

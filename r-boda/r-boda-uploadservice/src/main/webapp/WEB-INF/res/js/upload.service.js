@@ -14,35 +14,26 @@ jQuery.extend({
 		jQuery(iframeHtml).appendTo(document.body);
 		return jQuery('#' + frameId).get(0);
     },
-    createUploadForm : function(id,fileElementName,data,fileElement){
+    createUploadForm : function(id,fileElementIds,data){
 		//create form	
 		var formId = 'jUploadForm' + id;
 		var fileId = 'jUploadFile' + id;
-		var fileName = fileElementName;
+		var fileName = fileElementIds;
 		var form = jQuery('<form action="" method="POST" name="' + formId + '" id="' + formId + '" enctype="multipart/form-data"></form>');	
 		if(data){
 			jQuery.each(data, function(i, field){
 				  jQuery('<input type="hidden" name="' + field.name + '" value="' + field.value + '" />').prependTo(form);
 			});
 		}
-		if(fileElement == null){
-			var oldElement = jQuery("input[name="+fileName+"]");
-			oldElement.each(function() {
-				var newElement = jQuery($(this)).clone();
-				jQuery($(this)).attr('id', fileId);
-				jQuery($(this)).before(newElement);
-				jQuery($(this)).appendTo(form);
+		jQuery.each(fileElementIds, function(indexId, fileElementId) {
+			jQuery.each(jQuery('[id="' + fileElementId + '"]'), function(indexEle, fileElement) {
+				var fileEle = jQuery(fileElement);
+				var newElement = fileEle.clone();
+				fileEle.attr('id', fileElementId);
+				fileEle.before(newElement);
+				fileEle.appendTo(form);
 			});
-		} else {
-			var oldElement = fileElement;
-			var newElement = jQuery(oldElement).clone();
-			fileName = jQuery(oldElement).attr('name') ? jQuery(oldElement).attr('name') : '__jUploadName';
-			jQuery(oldElement).attr('id', fileId);
-			jQuery(oldElement).attr('name', fileName);
-			jQuery(oldElement).before(newElement);
-			jQuery(oldElement).appendTo(form);
-		}
-		jQuery('<input type="hidden" name="uploadname" value="' + fileName + '" />').prependTo(form);	// 向后台传送文件的Name
+		});
 		
 		//set attributes
 		jQuery(form).css('position', 'absolute');
@@ -56,7 +47,7 @@ jQuery.extend({
         // TODO introduce global settings, allowing the client to modify them for all requests, not only timeout		
         s = jQuery.extend({}, jQuery.ajaxSettings, s);
         var id = new Date().getTime();    
-		var form = jQuery.createUploadForm(id, s.fileElementName, (typeof(s.data)=='undefined'?false:s.data),s.fileElement);
+		var form = jQuery.createUploadForm(id, s.fileElementIds, (typeof(s.data)=='undefined'?false:s.data));
 		var io = jQuery.createUploadIframe(id, s.secureuri);
 		var frameId = 'jUploadFrame' + id;
 		var formId = 'jUploadForm' + id;		

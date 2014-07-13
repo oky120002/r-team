@@ -11,13 +11,10 @@
 <script type="text/javascript">
 	function show(){
 		showUploadDialog({
-			success : function(){
-				//alert("成功");
-			},
-			error : function(){
-				//alert("失败");
-			},
 			group : "r-boda-test",
+			tags : [
+					"abcd","efgh","321123"
+				],
 		});
 	}
 </script>

@@ -3,11 +3,14 @@
  */
 package com.r.boda.uploadservice.upload.control;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.r.boda.uploadservice.support.Support;
@@ -68,30 +73,32 @@ public class UploadControl {
 	@RequestMapping(value = "uploadpage")
 	public String uploadPage(ModelMap model, HttpServletRequest request) {
 		logger.debug("uploadpage");
-		String group = request.getParameter("uploadgroup");
-		List<Upload> uploads = uploadService.queryByGroup(group);
+
+		// 上传文件分组
+		String uploadgroup = request.getParameter("uploadgroup");
+		model.put("uploadgroup", uploadgroup);
+
+		List<Upload> uploads = uploadService.queryByGroup(uploadgroup);
+
+		// 列表
+		model.put("isok", false);
+		model.put("havetags", "[]");
 		if (CollectionUtils.isNotEmpty(uploads)) {
 			model.put("uploads", uploads);
 			model.put("isok", true);
-		} else {
-			model.put("isok", false);
+
+			// 保存已经存在的标签
+			StringBuilder tags = new StringBuilder();
+			tags.append('[');
+			for (Upload upload : uploads) {
+				if (StringUtils.isNotBlank(upload.getTag())) {
+					tags.append('\'').append(upload.getTag()).append('\'').append(", ");
+				}
+			}
+			tags.append(']');
+			model.put("havetags", tags.toString());
 		}
 		return "upload/uploadpage";
-	}
-
-	/**
-	 * 上传页面
-	 * 
-	 * @param model
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value = "test")
-	@ResponseBody
-	public Support<Object> test(ModelMap model, HttpServletRequest request) {
-		Support<Object> support = new Support<Object>();
-		support.putParam("qabc", "0000");
-		return support;
 	}
 
 	/**
@@ -106,9 +113,16 @@ public class UploadControl {
 	public Support<Upload> uploads(ModelMap model, MultipartHttpServletRequest request) {
 		logger.debug("开始上传");
 		Support<Upload> support = new Support<Upload>();
-		String uploadname = request.getParameter("uploadname");
 		try {
-			List<Upload> uploads = uploadService.save(request.getFiles(uploadname), request.getParameter("uploadgroup"));
+			Map<String, MultipartFile> fileMap = request.getFileMap();
+			List<MultipartFile> multipartFiles = new ArrayList<MultipartFile>();
+			List<String> tags = new ArrayList<String>();
+			for (Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+				multipartFiles.add(entry.getValue());
+				tags.add(request.getParameter(entry.getKey() + "_tag"));
+			}
+			
+			List<Upload> uploads = uploadService.save(multipartFiles, tags, request.getParameter("uploadgroup"));
 			if (CollectionUtils.isNotEmpty(uploads)) {
 				support.putParam("group", uploads.get(0).getGroup());
 			}
@@ -174,11 +188,20 @@ public class UploadControl {
 	 */
 	@RequestMapping(value = "lookUploadFile/{fileId}")
 	public void lookUploadFile(@PathVariable String fileId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		Upload upload = uploadService.find(fileId);
-//		download(request, response, upload);
-		// Support<Object> support = new Support<Object>();
+		Upload upload = uploadService.find(fileId);
+		response.setContentType(upload.getFileType().getContentType());
+		InputStream bis = null;
+		OutputStream bos = null;
+		try {
+			bis = new FileInputStream(upload.getFilePath());
+			bos = response.getOutputStream();
+			IOUtils.copy(bis, bos);
+		} finally {
+			IOUtils.closeQuietly(bis);
+			IOUtils.closeQuietly(bos);
+		}
 	}
-	
+
 	/**
 	 * 下载文件
 	 * 
@@ -190,33 +213,17 @@ public class UploadControl {
 	@RequestMapping(value = "downloadFile/{fileId}")
 	public void downloadFile(@PathVariable String fileId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Upload upload = uploadService.find(fileId);
-		download(request, response, upload);
-		// Support<Object> support = new Support<Object>();
-	}
-	
-	
-
-	/**
-	 * 下载
-	 * 
-	 * @param request
-	 * @param response
-	 * @param upload
-	 * @throws IOException
-	 */
-	public static void download(HttpServletRequest request, HttpServletResponse response, Upload upload) throws IOException {
 		response.setContentType(upload.getFileType().getContentType());
-		response.setHeader("Content-disposition", "attachment; filename=" + upload.getFileName());
-		response.setHeader("Content-Length", upload.getFileLength().toString());
-
-		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(upload.getFilePath()));
-		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-		byte[] buff = new byte[2048];
-		int bytesRead;
-		while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
-			bos.write(buff, 0, bytesRead);
+		response.setHeader("Content-Disposition", "attachment;fileName=" + upload.getFileName());
+		InputStream bis = null;
+		OutputStream bos = null;
+		try {
+			bis = new FileInputStream(upload.getFilePath());
+			bos = response.getOutputStream();
+			IOUtils.copy(bis, bos);
+		} finally {
+			IOUtils.closeQuietly(bis);
+			IOUtils.closeQuietly(bos);
 		}
-		IOUtils.closeQuietly(bis);
-		IOUtils.closeQuietly(bos);
 	}
 }
