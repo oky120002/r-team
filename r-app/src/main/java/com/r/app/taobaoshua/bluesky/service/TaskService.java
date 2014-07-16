@@ -65,14 +65,14 @@ public class TaskService {
 
 	// /-------------------------网络-----------------------//
 
-	/** 获取验证码 */
+	/** web操作 - 获取验证码 */
 	public Image webGetLoginBlueSkyCaptchaImage() {
 		return taskDao.getLoginCaptchaImage();
 	}
 
 	/**
 	 * 
-	 * 登陆
+	 * web操作 - 登陆
 	 * 
 	 * @param account
 	 *            账户
@@ -97,7 +97,7 @@ public class TaskService {
 	}
 
 	/**
-	 * 获取任务列表的html代码
+	 * web操作 - 获取任务列表的html代码
 	 * 
 	 * @param tasks
 	 *            任务列表
@@ -137,7 +137,7 @@ public class TaskService {
 		resolve.resolveTaskListHtml(tasks, html);
 	}
 
-	/** 接手任务 */
+	/** web操作 - 接手任务 */
 	public void webAcceptTask(Task task, SuccessAndFailureCallBack callback) {
 		String html = taskDao.acceptTask(task);
 		if (0 < html.indexOf("history.back(-1)")) { // 发生异常
@@ -147,7 +147,7 @@ public class TaskService {
 		}
 	}
 
-	/** 退出任务 */
+	/** web操作 - 退出任务 */
 	public void webDiscardTask(Task task, SuccessAndFailureCallBack callback) {
 		String html = taskDao.discardTask(task);
 		if (0 < html.indexOf("退出任务成功")) { // 发生异常
@@ -157,7 +157,7 @@ public class TaskService {
 		}
 	}
 
-	/** 任务绑定买号 */
+	/** web操作 - 任务绑定买号 */
 	public void webDoBindingBuyAccount(Task task, BuyAccount buyAccount, SuccessAndFailureCallBack callback) {
 		String html = taskDao.bindingBuyAccount(task, buyAccount);
 		if (0 < html.indexOf("绑定买号成功")) { // 发生异常
@@ -188,7 +188,7 @@ public class TaskService {
 		// }
 	}
 
-	/** 返回绑定的买号 */
+	/** web操作 - 返回绑定的买号 */
 	public void webGetBuyAccount(Collection<BuyAccount> buys) {
 		BlueSky blueSky = BlueSky.getInstance();
 		if (!blueSky.isLogin()) {
@@ -248,7 +248,7 @@ public class TaskService {
 	}
 
 	/**
-	 * 更新列表中任务的任务状态
+	 * 更新列表中任务的任务详细信息
 	 * 
 	 * @param task
 	 */

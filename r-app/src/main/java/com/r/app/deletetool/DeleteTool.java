@@ -13,7 +13,6 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
-import com.r.core.util.TaskUtil;
 
 /**
  * 删除工具
@@ -35,12 +34,13 @@ public class DeleteTool {
 		try {
 			List<String> readLines = FileUtils.readLines(file);
 			for (final String string : readLines) {
-//				TaskUtil.executeTask(new Runnable() {
-//					@Override
-//					public void run() {
-						new DeleteTool().deleteFiles(new File(string.trim()));
-//					}
-//				}); 
+				File f = null;
+				try {
+					f = new File(string.trim());
+				} catch (Exception e) {
+				}
+				
+				new DeleteTool().deleteFiles(f);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

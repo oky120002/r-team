@@ -13,8 +13,11 @@ import org.quartz.SchedulerException;
 
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.Task;
+import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
 import com.r.app.taobaoshua.bluesky.service.command.QueryCommand;
+import com.r.app.taobaoshua.bluesky.service.command.TaskQueryCommand;
+import com.r.core.callback.SuccessAndFailureCallBack;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.RandomUtil;
@@ -133,11 +136,52 @@ public class BlueSkyBackgroundTask {
 	}
 
 	/** 自动的循环接手任务,再30分钟超时前,把要过期的任务,自动退出任务,然后重新接手 */
-	private void startAutoLoopAcceptTask() {
-		final TaskService service = blueSky.getService();
-//		TaskQueryCommand command = new TaskQueryCommand();
-//		service.execQueryCommand(query)
-		
+	private void startAutoLoopAcceptTask() throws SchedulerException {
+		logger.debug("启动后台任务 : 自动延续快过期的任务........");
+		final TaskQueryCommand command = new TaskQueryCommand();
+		command.setStatus(TaskStatus.等待接手);
+		command.setTaskerAccount(blueSky.getLoginAccount()); // 接手人
+
+		// 3分钟检查一次
+		TaskUtil.executeScheduleTask(new Runnable() {
+			@Override
+			public void run() {
+				final TaskService service = blueSky.getService();
+				List<Task> tasks = service.execQueryCommand(command);
+
+				if (CollectionUtils.isNotEmpty(tasks)) {
+					for (final Task task : tasks) {
+						if (task.isTaskerTimeout()) {
+							// 先放弃任务
+							service.webDiscardTask(task, new SuccessAndFailureCallBack() {
+								@Override
+								public void success(String success, Object object) {
+									// 放弃任务成功后,瞬间重新接手任务
+									service.webAcceptTask(task, new SuccessAndFailureCallBack() {
+										@Override
+										public void success(String success, Object object) {
+											logger.info("重新接手任务成功 : {}", task.getNumber());
+										}
+
+										@Override
+										public void failure(String error, Object object) {
+											logger.warn("重新接手任务失败 : {} , {}", task.getNumber(), error);
+											// 只有在放弃任务成功,而接手任务失败的情况下,任务的详细信息才会变化
+											service.updateTaskDetail(task);
+										}
+									});
+								}
+
+								@Override
+								public void failure(String error, Object object) {
+									logger.warn("放弃任务失败 : {} , {}", task.getNumber(), error);
+								}
+							});
+						}
+					}
+				}
+			}
+		}, -1, 180, null, null);
 	}
 
 	/**

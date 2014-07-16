@@ -167,7 +167,11 @@
 					<tr id="deletetr${upload.id }">
 						<td class="tag">${upload.tag }</td>
 						<td>${upload.fileName }</td>
-						<td><button onclick="lookUploadFile('${upload.id }');">查看</button><button onclick="downloadFile('${upload.id }');">下载</button><button onclick="deleteFile('${upload.id }');">删除</button></td>
+						<td>
+							<button onclick="lookUploadFile('${upload.id }');">查看</button>
+							<button onclick="downloadFile('${upload.id }');">下载</button>
+							<button onclick="deleteFile('${upload.id }');">删除</button> 
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

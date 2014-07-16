@@ -1047,4 +1047,21 @@ public class Task {
 		this.securityPriceOneDayOnePPoint = securityPriceOneDayOnePPoint;
 	}
 
+	/*--------------非ben方法---------------*/
+	/**
+	 * 判断此任务在被接手的情况下,是否快过期(期限为5内都算快过期)
+	 * 
+	 * @return true:快过期|false:没有快过期,或者就不是接手状态
+	 */
+	public boolean isTaskerTimeout() {
+		if (TaskStatus.等待绑定买号.equals(this.status)) {
+			long tasktime = taskedTime.getTime();
+			long newtime = new Date().getTime();
+			long time = newtime - tasktime;
+			if(time < 300_000){
+				return true;
+			}
+		}
+		return false;
+	}
 }
