@@ -711,7 +711,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 					}
 				}
 
-				// QQ
+				// 改价
 				selection = updatePriceGroup.getSelection();
 				if (selection != null) {
 					String actionCommand = selection.getActionCommand();

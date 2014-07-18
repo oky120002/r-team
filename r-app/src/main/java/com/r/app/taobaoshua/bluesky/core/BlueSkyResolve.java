@@ -35,6 +35,14 @@ public class BlueSkyResolve {
 
 		while ((curPos = html.indexOf("<tr>")) != -1) {
 			html = html.substring(curPos);
+			
+			// 过滤掉已经被接手或者已经完成 的任务
+			if(0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")){
+			    curPos += 100;
+			    html = html.substring(curPos);
+			    continue;
+			}
+			
 			Task task = new Task();
 
 			// 商品类型和编号
@@ -74,12 +82,7 @@ public class BlueSkyResolve {
 			// 接手任务ID
 			curPos = html.indexOf("width=\"72\"");
 			html = html.substring(curPos);
-			String taskId = StringUtils.substringBetween(html, "ID=", "\">");
-			if (StringUtils.isNotBlank(taskId)) {
-				task.setTaskId(StringUtils.substringBetween(html, "ID=", "\">").trim());
-			} else { // 此任务已经被接手,或者已经删除,或者已经完成,多数出现在7,6,5天评价中
-				task.setTaskId(null);
-			}
+			task.setTaskId(StringUtils.substringBetween(html, "ID=", "\">").trim());
 
 			// 计算统计值
 			task.calStatistics();

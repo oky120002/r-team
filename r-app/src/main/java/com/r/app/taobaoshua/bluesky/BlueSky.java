@@ -84,7 +84,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 		isRunning = true;
 	}
 
-	@Override
+    @Override
 	public boolean isRunning() {
 		return isRunning;
 	}

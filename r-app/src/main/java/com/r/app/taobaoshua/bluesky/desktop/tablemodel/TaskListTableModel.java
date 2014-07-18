@@ -29,7 +29,7 @@ import com.r.core.exceptions.SwitchPathException;
  */
 public class TaskListTableModel extends AbstractTableModel implements TableModel {
 	private static final long serialVersionUID = -154657428132471147L;
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
 	private static final NumberFormat numberFormat = NumberFormat.getNumberInstance();
 	private static final List<Task> EMPTY = new ArrayList<Task>();
 	private List<Task> tasks = EMPTY;
@@ -174,9 +174,9 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
 		条件("条件", String.class, 250, 19), //
 		发布人("发布人", String.class, 100, 4), //
 		是否在线("在线", Icon.class, -1, 5), //
-		是否VIP("VIP", Icon.class, 30, 6), //
-		等级("等级图标", Icon.class, -1, 7), //
-		发布时间("发布时间", String.class, -1, 8), //
+		//是否VIP("VIP", Icon.class, 30, 6), //
+		//等级("等级图标", Icon.class, -1, 7), //
+		//发布时间("发布时间", String.class, -1, 8), //
 		任务状态("任务状态", String.class, 80, 10), //
 		;
 

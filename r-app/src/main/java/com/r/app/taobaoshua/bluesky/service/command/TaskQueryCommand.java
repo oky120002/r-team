@@ -60,6 +60,7 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 		// --- 条件 ---//
 		if (ArrayUtils.isNotEmpty(status)) { // 任务状态
 			hql.append(" and t.status in (:status) ");
+			pars.put("status", status);
 		}
 
 		if (isSearch != null) { // 是否需要搜索
@@ -163,9 +164,6 @@ public class TaskQueryCommand implements QueryCommand<Task> {
 
 		// 开始查询
 		Query query = session.createQuery(hql.toString());
-		if (ArrayUtils.isNotEmpty(status)) { // 任务状态
-			query.setParameterList("status", status);
-		}
 		query.setProperties(pars);
 		if (0 <= this.firstResult && 0 < this.maxResults && this.firstResult <= this.maxResults) {
 			query.setFirstResult(firstResult);
