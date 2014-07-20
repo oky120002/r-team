@@ -7,6 +7,9 @@
 package com.r.app.taobaoshua.bluesky.dao;
 
 import java.awt.Image;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -149,4 +152,20 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		return responseHeader.bodyToString(BODY_ENCODE);
 	}
 
+	@Override
+	public String checkItemAddr(Task task, String itemAddr) {
+		String taskId = task.getTaskId();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Referer", "http://www2.88sxy.com/task/SearchLaiLuDetail.asp?UserType=2&ID=" + taskId);
+
+		HttpPost post = new HttpPost(POST_ENCODE);
+		post.add("ProductUrl", itemAddr);
+		post.add("ChkProductUrl", "验证商品网址");
+		post.add("Action", "Check");
+		post.add("ID", task.getTaskId());
+		post.add("TaskType", "淘宝");
+
+		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/SearchLaiLuDetail.asp?UserType=2&ID=" + taskId, post, map);
+		return responseHeader.bodyToString(BODY_ENCODE);
+	}
 }

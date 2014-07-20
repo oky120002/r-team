@@ -216,8 +216,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		HBaseBox buttomBox = HBaseBox.createHorizontalBaseBox();
 		buttomBox.setBorder(BorderFactory.createTitledBorder("功能区"));
 		buttomBox.add(HBaseBox.createHorizontalGlue());
-		buttomBox.add(checkTaskStatusButton);
-		buttomBox.add(HBaseBox.createHorizontalStrut(5));
+		buttomBox.adds(checkTaskStatusButton, HBaseBox.EmptyHorizontal);
 		buttomBox.add(taskInfosButton);
 		add(buttomBox, BorderLayout.SOUTH);
 	}
@@ -834,7 +833,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.debug(e.getMessage());
-				} finally{
+				} finally {
 					checkTaskStatusButton.setEnabled(true);
 				}
 			}

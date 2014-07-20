@@ -89,4 +89,7 @@ public interface TaskDao extends AbstractDao<Task> {
 
 	/** 绑定买号 */
 	String bindingBuyAccount(Task task, BuyAccount buyAccount);
+
+	/**检测宝贝地址是否正确*/
+	String checkItemAddr(Task task, String itemAddr);
 }

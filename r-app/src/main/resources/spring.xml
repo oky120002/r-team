@@ -11,7 +11,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- h2 -->
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:D:/r-term/h2db/lantian" />
+		<property name="url" value="jdbc:h2:D:/h2db/lantian" />
 		<property name="username" value="oky120002" />
 		<property name="password" value="oky120002" />
 

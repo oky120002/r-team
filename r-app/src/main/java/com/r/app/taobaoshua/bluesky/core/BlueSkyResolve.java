@@ -37,10 +37,10 @@ public class BlueSkyResolve {
 			html = html.substring(curPos);
 			
 			// 过滤掉已经被接手或者已经完成 的任务
-			if(0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")){
-			    curPos += 100;
-			    html = html.substring(curPos);
-			    continue;
+			if (0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")) {
+				curPos += 100;
+				html = html.substring(curPos);
+				continue;
 			}
 			
 			Task task = new Task();
@@ -100,7 +100,12 @@ public class BlueSkyResolve {
 				}
 
 				if (0 < tr.indexOf("商品标题")) {
-					task.setItemTitle(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
+					String substringBetween = StringUtils.substringBetween(tr, "&nbsp;", "</td>");
+					if (0 < substringBetween.indexOf("color=red")) {
+						task.setItemTitle("");
+					} else {
+						task.setItemTitle(substringBetween);
+					}
 				}
 
 				if (0 < tr.indexOf("商品地址")) {
@@ -109,10 +114,6 @@ public class BlueSkyResolve {
 
 				if (0 < tr.indexOf("支付方式")) {
 					task.setPaymentType(PaymentType.valueOf(StringUtils.substringBetween(tr, "&nbsp;", "</td>").trim()));
-				}
-
-				if (0 < tr.indexOf("商品标题")) {
-					task.setItemTitle(StringUtils.substringBetween(tr, "&nbsp;", "</td>"));
 				}
 
 				if (0 < tr.indexOf("指定好评内容")) {
