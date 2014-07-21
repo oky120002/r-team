@@ -1,5 +1,6 @@
 package com.r.app.taobaoshua.bluesky.model;
 
+import java.text.NumberFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,171 +30,123 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 public class Task {
     
     private static final BlueSky blueSky = BlueSky.getInstance();
+    private static final NumberFormat numberFormat = NumberFormat.getNumberInstance();
     
     @Id
     @Column
     @GeneratedValue(generator = "sys_uuid")
     @GenericGenerator(name = "sys_uuid", strategy = "uuid")
     private String id;
-    
     @Column
     private String number; // 任务编号
-    
     @Column
     private String account; // 发布任务者账号
-    
     @Column
     private Boolean isAccountVip; // 发布任务者是否VIP
-    
     @Column
     private Integer accountExe; // 发布任务者账号经验值
-    
     @Column
     private String accountLevel; // 发布者等级(等级图标名)
-    
     @Column
     private Boolean isAccountOnLine; // 发布任务者是否在线
-    
     @Column
     private Boolean isNew; // 发布者是否是新手
-    
     @Column
     private String shopkeeper; // 店掌柜
-    
     @Column
     private String taskId; // 接手任务的id
-    
     @Column
     @Enumerated(EnumType.STRING)
     private TaskAddr type; // 任务区
-    
     @Column
     private String itemId; // 商品id
-    
     @Column
     private String itemTitle; // 商品标题
-    
     @Column(length = 2048)
     private String itemAddr; // 商品地址
-    
     @Column
     private Boolean isUseSearchLoc; // 是否使用搜索来路
-    
     @Column
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType; // 支付方式
-    
     @Column
     private Double securityPrice; // 任务担保金额,这里金额不大所以使用Double.如果发现有大金额可以改为BigDecimal
-    
     @Column
     private Double publishingPoint; // 发布点
-    
     @Column
     @Enumerated(EnumType.STRING)
     private TaskType taskType; // 任务类型
-    
     @Column
     @Enumerated(EnumType.STRING)
     private TaskTimeLimit timeLimit; // 任务时限(分钟)
-    
     @Column
     @Enumerated(EnumType.STRING)
     private ShopScore shopScore; // 商铺动态平分
-    
     @Column
     private String praise; // 好评内容
-    
     @Column
     private String qq; // 发布方QQ号码
-    
     @Column
     private Boolean isSearch; // 是否需要搜索
-    
     @Column
     private Boolean isCollect; // 是否收藏
-    
     @Column
     private Boolean isIDCard;// 是否实名认证
-    
     @Column
     private Boolean isSincerity; // 诚信商家
-    
     @Column
     private Boolean isWangWang; // 是否旺聊
-    
     @Column
     private Boolean isReview; // 是否需要审核
-    
     @Column
     private Boolean isUseQQ; // 是否使用QQ
-    
     @Column
     private Boolean isUpdatePrice; // 是否改价
-    
     @Column
     private Boolean isUpdateAddr; // 是否改地址
-    
     @Column
     private Boolean isBaoGuo; // 是否真是地址
-    
     @Column
     private String auxiliaryCondition; // 附加条件
-    
     @Column
     private String addr; // 收货地址
-    
     @Column
     private String loc; // 指定地区
-    
     @Column
     private String taskerAccount; // 接手人账号
-    
     @Column
     private String taskerBuyAccount; // 接手人买号
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskPublishingTime;// 任务发布时间： 2014-6-5 21:45:59
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskedTime;// 任务接手时间： 2014-6-5 23:23:30
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskPaymentTime;// 任务支付时间： 2014-6-5 23:27:48
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskShippingTime;// 任务发货时间： 2014-6-5 23:49:54
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskReceiptTime;// 任务收货好评时间： 2014-6-6 23:54:08
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskConfirmedReviewTime;// 任务确认审核时间： 2014-6-7 22:31:38
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskPublishingEvaluationTime;// 发布方平台评价时间： 2014-6-7 22:31:50
-    
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date taskerEvaluationTime;// 接手方平台评价时间： 2014-6-8 12:34:18
-    
     @Column
     @Enumerated(EnumType.STRING)
     private TaskStatus status; // 当前任务状态
-    
     @Column
     private Boolean isUpdateTaskDetail; // 是否已经更新过详细信息
-    
     @Column
     private Double publishingPointOneDay; // 一天可以赚取的发布点数
-    
     @Column
     private Double securityPriceOneDayOnePPoint; // 一天一发布点需要的担保金投入
     
@@ -210,8 +163,7 @@ public class Task {
         
         // 计算一天一发布点需要的担保金投入
         if (securityPrice != null && publishingPointOneDay != null) {
-            securityPriceOneDayOnePPoint = Double.valueOf(securityPrice.doubleValue()
-                    / publishingPointOneDay.doubleValue());
+            securityPriceOneDayOnePPoint = Double.valueOf(securityPrice.doubleValue() / publishingPointOneDay.doubleValue());
         }
     }
     
@@ -1027,8 +979,7 @@ public class Task {
      * @param taskPublishingEvaluationTime
      *            the taskPublishingEvaluationTime to set
      */
-    public void setTaskPublishingEvaluationTime(
-            Date taskPublishingEvaluationTime) {
+    public void setTaskPublishingEvaluationTime(Date taskPublishingEvaluationTime) {
         this.taskPublishingEvaluationTime = taskPublishingEvaluationTime;
     }
     
@@ -1070,8 +1021,7 @@ public class Task {
     }
     
     public boolean isUpdateTaskDetail() {
-        return isUpdateTaskDetail == null ? false
-                : isUpdateTaskDetail.booleanValue();
+        return isUpdateTaskDetail == null ? false : isUpdateTaskDetail.booleanValue();
     }
     
     /**
@@ -1094,8 +1044,7 @@ public class Task {
         return securityPriceOneDayOnePPoint;
     }
     
-    public void setSecurityPriceOneDayOnePPoint(
-            Double securityPriceOneDayOnePPoint) {
+    public void setSecurityPriceOneDayOnePPoint(Double securityPriceOneDayOnePPoint) {
         this.securityPriceOneDayOnePPoint = securityPriceOneDayOnePPoint;
     }
     
@@ -1115,5 +1064,17 @@ public class Task {
             }
         }
         return false;
+    }
+    
+    /**返回每天赚取发布点数和报酬*/
+    public String getPublishingPointAndMoneyOneDay() {
+        try {
+            double ppod = getPublishingPointOneDay().doubleValue();
+            double money = ppod * 0.8 * 0.4;
+            double sumMoney = money * getTimeLimit().getDay();
+            return numberFormat.format(ppod) + "点|" + numberFormat.format(money) + "元|" + numberFormat.format(sumMoney) + "元";
+        } catch (Exception e) {
+            return "NAN";
+        }
     }
 }

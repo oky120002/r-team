@@ -168,4 +168,10 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao {
 		ResponseHeader responseHeader = httpSocket.send("http://www2.88sxy.com/task/SearchLaiLuDetail.asp?UserType=2&ID=" + taskId, post, map);
 		return responseHeader.bodyToString(BODY_ENCODE);
 	}
+
+    @Override
+    public String pay(Task task) {
+        
+        return null;
+    }
 }

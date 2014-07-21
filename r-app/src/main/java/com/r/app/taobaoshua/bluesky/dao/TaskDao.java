@@ -92,4 +92,7 @@ public interface TaskDao extends AbstractDao<Task> {
 
 	/**检测宝贝地址是否正确*/
 	String checkItemAddr(Task task, String itemAddr);
+
+	/**支付*/
+    String pay(Task task);
 }

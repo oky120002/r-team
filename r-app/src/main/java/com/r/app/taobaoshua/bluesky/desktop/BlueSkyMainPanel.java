@@ -291,7 +291,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		JCheckBox checkBox6 = new JCheckBox(TaskTimeLimit.立即.getName());
 		JCheckBox checkBox7 = new JCheckBox(TaskTimeLimit.分钟30.getName());
 		JCheckBox checkBox8 = new JCheckBox(TaskTimeLimit.天1.getName());
-		checkBox8.setSelected(true);
+//		checkBox8.setSelected(true);
 		JCheckBox checkBox9 = new JCheckBox(TaskTimeLimit.天2.getName());
 		checkBox9.setSelected(true);
 		JCheckBox checkBox10 = new JCheckBox(TaskTimeLimit.天3.getName());
@@ -299,8 +299,11 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		JCheckBox checkBox11 = new JCheckBox(TaskTimeLimit.天4.getName());
 		checkBox11.setSelected(true);
 		JCheckBox checkBox12 = new JCheckBox(TaskTimeLimit.天5.getName());
+		checkBox12.setSelected(true);
 		JCheckBox checkBox13 = new JCheckBox(TaskTimeLimit.天6.getName());
+		checkBox13.setSelected(true);
 		JCheckBox checkBox14 = new JCheckBox(TaskTimeLimit.天7.getName());
+		checkBox14.setSelected(true);
 		timeLimitCheckBoxs.add(checkBox6);
 		timeLimitCheckBoxs.add(checkBox7);
 		timeLimitCheckBoxs.add(checkBox8);
@@ -324,7 +327,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 
 	// 排序
 	private void initTaskListOrderBox(HBaseBox box) {
-		taskListOrderComboBox.setSelectedItem(TaskListOrder.每天发布点从高到低);
+		taskListOrderComboBox.setSelectedItem(TaskListOrder.发布点从高到低);
 		taskListOrderComboBox.addActionListener(this);
 		taskListOrderComboBox.setActionCommand(COMMAND_LIST_TASKLISTORDER);
 		taskListOrderComboBox.setFocusable(false);

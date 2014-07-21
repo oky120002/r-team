@@ -38,7 +38,7 @@ public class BlueSkyResolve {
 			
 			// 过滤掉已经被接手或者已经完成 的任务
 			if (0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")) {
-				curPos += 100;
+				curPos += 5;
 				html = html.substring(curPos);
 				continue;
 			}
