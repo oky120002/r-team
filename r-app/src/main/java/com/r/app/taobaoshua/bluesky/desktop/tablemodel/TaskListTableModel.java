@@ -156,7 +156,7 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
         任务类型("任务类型", Icon.class, 45, 1), //
         发布价格("发布价格", String.class, -1, 2), //
         发布点数("发布点数", String.class, -1, 3), //
-        发布点天("发布点/天", String.class, 145, 11), //
+        发布点天("发布点/天", String.class, 205, 11), //
         元发布点天("元/1发布点1天", String.class, 90, 12), //
         好评时限("好评时限", String.class, 65, 9), //
         商保("商保", Icon.class, 45, 13), //

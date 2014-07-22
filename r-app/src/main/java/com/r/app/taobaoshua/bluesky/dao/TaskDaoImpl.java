@@ -7,9 +7,6 @@
 package com.r.app.taobaoshua.bluesky.dao;
 
 import java.awt.Image;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 

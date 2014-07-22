@@ -30,9 +30,9 @@
 
 	/**增加一行列表数据*/
 	function addTableRow(upload) {
-		var id = "deletetr" + upload.id;
+		var deleteid = "deletetr" + upload.id;
 		var tr = "";
-		tr += '<tr id="' + id + '">';
+		tr += '<tr id="' + deleteid + '">';
 		tr += '<td>' + (isEmpty(upload.tag) ? "": upload.tag) + '</td>'; // 标签列
 		tr += '<td>' + upload.fileName + '</td>'; // 文件名列
 		tr += '<td>';
@@ -61,7 +61,7 @@
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				stopProgress();
-			},
+			}
 		});
 	}
 
@@ -70,16 +70,14 @@
 	function startProgress() {
 		try {
 			callbackId = window.setInterval("_progress();", 500);
-		} catch (e) {
-		};
+		} catch (e) { };
 	}
 
 	/**停止进度条*/
 	function stopProgress() {
 		try {
 			window.clearInterval(callbackId);
-		} catch (e) {
-		};
+		} catch (e) { };
 	}
 
 	/**进度条*/
@@ -113,6 +111,16 @@
 		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
+	/*删除pdf页面*/
+	function deletePdf(id){
+		
+	}
+	
+	/*向pdf插入页面*/
+	function insertPdf(id){
+		
+	}
+	
 	$(document).ready(function() {
 		// 如果有标签功能.则不能进行自由的添加附件
 		if(isTagModel){
@@ -127,7 +135,7 @@
 		} else {
 			$('.untag').show();
 			$('.tag').hide();
-		};
+		}
 	});
 </script>
 
@@ -170,7 +178,11 @@
 						<td>
 							<button onclick="lookUploadFile('${upload.id }');">查看</button>
 							<button onclick="downloadFile('${upload.id }');">下载</button>
-							<button onclick="deleteFile('${upload.id }');">删除</button> 
+							<button onclick="deleteFile('${upload.id }');">删除</button>
+							<c:if test="${upload.fileType.responseDataType.name eq 'pdf' }">
+								<button onclick="deletePdf('${upload.id }');">删除页面</button>
+								<button onclick="insertPdf('${upload.id }');">插入页面</button>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

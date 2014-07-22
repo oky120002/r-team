@@ -71,6 +71,10 @@ public enum FileType {
 		audia, //
 		file, //
 		;
+		
+		public String getName(){
+		    return this.name();
+		}
 	}
 
 }

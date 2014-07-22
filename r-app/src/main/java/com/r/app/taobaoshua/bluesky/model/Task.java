@@ -28,9 +28,12 @@ import com.r.app.taobaoshua.bluesky.model.enumtask.TaskType;
 @Entity
 @Table(name = "task")
 public class Task {
-    
     private static final BlueSky blueSky = BlueSky.getInstance();
     private static final NumberFormat numberFormat = NumberFormat.getNumberInstance();
+    {
+        numberFormat.setMaximumFractionDigits(2);
+    }
+    private static double MONEY_FRACTIONAL = 0.4 * 0.8;
     
     @Id
     @Column
@@ -148,6 +151,8 @@ public class Task {
     @Column
     private Double publishingPointOneDay; // 一天可以赚取的发布点数
     @Column
+    private Double sumMoney; // 公共赚取的佣金
+    @Column
     private Double securityPriceOneDayOnePPoint; // 一天一发布点需要的担保金投入
     
     public void calStatistics() {
@@ -159,6 +164,7 @@ public class Task {
             double p = publishingPoint.doubleValue(); // 默认赚取全部的发布点,立即完成
             int day = (int) (timeLimit.getTimeLimit() / 60 / 24);
             publishingPointOneDay = Double.valueOf(p / (day < 1 ? 1 : day));
+            sumMoney = publishingPointOneDay * timeLimit.getDay() * MONEY_FRACTIONAL;
         }
         
         // 计算一天一发布点需要的担保金投入
@@ -1040,6 +1046,14 @@ public class Task {
         this.publishingPointOneDay = publishingPointOneDay;
     }
     
+    public Double getSumMoney() {
+        return sumMoney;
+    }
+    
+    public void setSumMoney(Double sumMoney) {
+        this.sumMoney = sumMoney;
+    }
+    
     public Double getSecurityPriceOneDayOnePPoint() {
         return securityPriceOneDayOnePPoint;
     }
@@ -1071,7 +1085,6 @@ public class Task {
         try {
             double ppod = getPublishingPointOneDay().doubleValue();
             double money = ppod * 0.8 * 0.4;
-            double sumMoney = money * getTimeLimit().getDay();
             return numberFormat.format(ppod) + "点|" + numberFormat.format(money) + "元|" + numberFormat.format(sumMoney) + "元";
         } catch (Exception e) {
             return "NAN";
