@@ -221,6 +221,12 @@
 			<artifactId>quartz</artifactId>
 		</dependency>
 
+		<!-- pdf处理 -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+		</dependency>
+
 		<!-- 测试 -->
 		<dependency>
 			<groupId>junit</groupId>

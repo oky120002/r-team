@@ -23,8 +23,8 @@
 	<properties>
 		<!-- lib info -->
 		<r-version>0.0.1-SNAPSHOT</r-version>
-		<spring-version>3.2.2.RELEASE</spring-version>
-		<spring-security-version>3.1.4.RELEASE</spring-security-version>
+		<spring-version>3.2.10.RELEASE</spring-version>
+		<spring-security-version>3.2.4.RELEASE</spring-security-version>
 
 		<!-- base info -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +35,7 @@
 		<skipTests>true</skipTests>
 	</properties>
 
-	<!-- 弄1�7发�1�7�信恄1�7 -->
+	<!-- 开发者信息 -->
 	<developers>
 		<developer>
 			<name>HeYu</name>
@@ -448,7 +448,7 @@
 				<version>2.2.2</version>
 			</dependency>
 
-			<!-- 定时噄1�7 -->
+			<!-- 定时器 -->
 			<dependency>
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
@@ -479,6 +479,12 @@
 				<version>2.3.20</version>
 			</dependency>
 
+			<!-- pdf处理 -->
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itextpdf</artifactId>
+				<version>5.5.1</version>
+			</dependency>
 
 			<!-- junit -->
 			<dependency>
