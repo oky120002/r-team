@@ -35,14 +35,14 @@ public class BlueSkyResolve {
 
 		while ((curPos = html.indexOf("<tr>")) != -1) {
 			html = html.substring(curPos);
-			
+
 			// 过滤掉已经被接手或者已经完成 的任务
 			if (0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")) {
 				curPos += 5;
 				html = html.substring(curPos);
 				continue;
 			}
-			
+
 			Task task = new Task();
 
 			// 商品类型和编号
@@ -418,7 +418,12 @@ public class BlueSkyResolve {
 				task.setIsBaoGuo(Boolean.FALSE);
 			}
 
-			// 判断改价..不止这里一处
+			// 改地址..不止这里一处,所以没有else
+			if (0 < td.indexOf("收货地址修改")) {
+				task.setIsUpdateAddr(Boolean.TRUE);
+			}
+
+			// 判断改价..不止这里一处,所以没有else
 			if (0 < td.indexOf("改价")) {
 				task.setIsUpdatePrice(Boolean.TRUE);
 			}

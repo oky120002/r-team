@@ -553,7 +553,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.setActionCommand(COMMAND_LIST_BAOGUO_ALL);
 		radio2.setActionCommand(COMMAND_LIST_BAOGUO_INCLUDE);
 		radio3.setActionCommand(COMMAND_LIST_BAOGUO_EXCLUDE);
-		radio1.setSelected(true);
+		radio3.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("真实空包"));
 		b.add(radio1);
@@ -576,7 +576,7 @@ public class BlueSkyMainPanel extends HBasePanel implements ActionListener {
 		radio1.setActionCommand(COMMAND_LIST_UPDATEADDR_ALL);
 		radio2.setActionCommand(COMMAND_LIST_UPDATEADDR_INCLUDE);
 		radio3.setActionCommand(COMMAND_LIST_UPDATEADDR_EXCLUDE);
-		radio1.setSelected(true);
+		radio3.setSelected(true);
 		HBaseBox b = HBaseBox.createHorizontalBaseBox();
 		b.setBorder(BorderFactory.createTitledBorder("改地址"));
 		b.add(radio1);
