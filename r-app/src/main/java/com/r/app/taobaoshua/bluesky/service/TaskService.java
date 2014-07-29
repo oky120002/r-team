@@ -92,7 +92,6 @@ public class TaskService {
             String error = StringUtils.substringBetween(login, "alert('", "')");
             throw new LoginErrorException(error);
         }
-        logger.debug(login);
     }
     
     /**
@@ -133,7 +132,7 @@ public class TaskService {
         
         BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
         String html = taskDao.getTaskListHtml(page, type, order);
-        resolve.resolveTaskListHtml(tasks, html);
+        resolve.resolveTaskList(tasks, html);
     }
     
     /** web操作 - 接手任务 */
@@ -296,8 +295,7 @@ public class TaskService {
         if (task != null && StringUtils.isNotBlank(task.getTaskId())) {
             TaskStatus status = task.getStatus();
             String taskDetail = taskDao.getTaskDetail(task.getTaskId());
-            BlueSkyResolve resolve = BlueSky.getInstance().getResolve();
-            resolve.resolveTaskDetail(task, taskDetail);
+            BlueSky.getInstance().getResolve().resolveTaskDetail(task, taskDetail);
             task.setIsUpdateTaskDetail(true);
             if (TaskStatus.排除.equals(status)) {
                 task.setStatus(TaskStatus.排除);

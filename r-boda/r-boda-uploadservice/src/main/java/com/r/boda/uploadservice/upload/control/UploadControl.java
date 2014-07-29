@@ -28,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.support.Support;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
+import com.r.boda.uploadservice.upload.model.FileType;
 import com.r.boda.uploadservice.upload.model.FileType.ResponseDataType;
 import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
@@ -46,14 +48,14 @@ import com.r.core.log.LoggerFactory;
 @RequestMapping(value = "/upload")
 public class UploadControl {
     private static final Logger logger = LoggerFactory.getLogger(UploadControl.class);
-    
+
     @Resource(name = "upload.uploadService")
     private UploadService uploadService;
-    
+
     public UploadControl() {
         logger.info("Instance UploadControl............................");
     }
-    
+
     /**
      * 主页
      * 
@@ -64,7 +66,7 @@ public class UploadControl {
     public String index(ModelMap model, HttpServletRequest request) {
         return "index";
     }
-    
+
     /**
      * 上传页面
      * 
@@ -75,20 +77,20 @@ public class UploadControl {
     @RequestMapping(value = "uploadpage")
     public String uploadPage(ModelMap model, HttpServletRequest request) {
         logger.debug("uploadpage");
-        
+
         // 上传文件分组
         String uploadgroup = request.getParameter("uploadgroup");
         model.put("uploadgroup", uploadgroup);
-        
+
         List<Upload> uploads = uploadService.queryByGroup(uploadgroup);
-        
+
         // 列表
         model.put("isok", false);
         model.put("havetags", "[]");
         if (CollectionUtils.isNotEmpty(uploads)) {
             model.put("uploads", uploads);
             model.put("isok", true);
-            
+
             // 保存已经存在的标签
             StringBuilder tags = new StringBuilder();
             tags.append('[');
@@ -102,7 +104,7 @@ public class UploadControl {
         }
         return "upload/uploadpage";
     }
-    
+
     /**
      * 上传应答入口
      * 
@@ -123,7 +125,7 @@ public class UploadControl {
                 multipartFiles.add(entry.getValue());
                 tags.add(request.getParameter(entry.getKey() + "_tag"));
             }
-            
+
             List<Upload> uploads = uploadService.save(multipartFiles, tags, request.getParameter("uploadgroup"));
             if (CollectionUtils.isNotEmpty(uploads)) {
                 support.putParam("group", uploads.get(0).getGroup());
@@ -139,7 +141,7 @@ public class UploadControl {
         }
         return support;
     }
-    
+
     /**
      * 上传状态(进度条)
      * 
@@ -155,7 +157,7 @@ public class UploadControl {
         logger.debug("上传文件进度 : " + support.getModel());
         return support;
     }
-    
+
     /**
      * 删除上传的文件
      * 
@@ -179,7 +181,7 @@ public class UploadControl {
         }
         return support;
     }
-    
+
     /**
      * 查看上传的文件
      * 
@@ -198,13 +200,12 @@ public class UploadControl {
             bis = new FileInputStream(upload.getFilePath());
             bos = response.getOutputStream();
             IOUtils.copy(bis, bos);
-        }
-        finally {
+        } finally {
             IOUtils.closeQuietly(bis);
             IOUtils.closeQuietly(bos);
         }
     }
-    
+
     /**
      * 下载文件
      * 
@@ -224,43 +225,69 @@ public class UploadControl {
             bis = new FileInputStream(upload.getFilePath());
             bos = response.getOutputStream();
             IOUtils.copy(bis, bos);
-        }
-        finally {
+        } finally {
             IOUtils.closeQuietly(bis);
             IOUtils.closeQuietly(bos);
         }
     }
-    
+
     /**
-    * 删除pdf页面
-    * 
-    * @param fileId
-    *            文件id
-    * @return
-    * @throws IOException
-    */
-    @RequestMapping(value = "deletePageByPdf/{fileId}/{start}/{end}")
-    public String deletePageByPdf(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, HttpServletRequest request) {
-        Upload upload = uploadService.find(fileId);
+     * pdf删除页面
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "deletePageByPdf/{fileId}")
+    public String deletePageByPdf(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
+        Upload upload = null;
         try {
-            if (!ResponseDataType.pdf.equals(upload.getFileType().getResponseDataType())) {
-                model.put("errorMsg", "此文件不是PDF文件");
-                return "upload/errorPage";
-            }
-        } catch (NullPointerException npe) {
-            model.put("errorMsg", "系统错误,请联系管理员");
-            return "upload/errorPage";
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+        } catch (UpLoadErrorException e) {
+            model.put("error", e.getMessage());
+            return "upload/errorPdfPage";
         }
-        
-        File file = uploadService.getFile(fileId);
-        
-        uploadService.deletePageByPdf(file, start, end);
-        
-        return "upload/deletePdfPage";
+        try {
+            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
+            model.put("fileId", fileId);
+            model.put("pdfPageNumber", pdfPageNumber);
+            return "upload/deletePdfPage";
+        } catch (IOException e) {
+            logger.error("pdf删除页面 : {}", e.getMessage());
+            model.put("error", " 附件平台内部错误 : " + e.toString());
+            return "upload/errorPdfPage";
+        }
     }
-    
+
     /**
-     * 插入pdf页面
+     * 删除pdf页面
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "deletePageByPdf/{fileId}/{start}/{end}")
+    public Support<Object> deletePageByPdf(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, HttpServletRequest request) {
+        Support<Object> support = new Support<Object>();
+        Upload upload = null;
+        try {
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+        } catch (UpLoadErrorException e) {
+            support.setSuccess(false);
+            support.setTips(e.getMessage());
+            return support;
+        }
+
+        uploadService.pdfDeletePage(upload.getFile(), start, end);
+        
+        support.setTips("删除成功");
+        return new Support<Object>();
+    }
+
+    /**
+     * pdf插入页面
      * 
      * @param fileId
      *            文件id
@@ -279,7 +306,33 @@ public class UploadControl {
             model.put("errorMsg", "系统错误,请联系管理员");
             return "upload/errorPage";
         }
-        
+
         return "upload/insertPdfPage";
+    }
+
+    /**
+     * 插入pdf页面
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "insertPdfPage/{fileId}/{start}/{end}")
+    public Support<Object> insertPdfPage(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, MultipartHttpServletRequest request) {
+        Upload upload = uploadService.find(fileId);
+        // try {
+        // if
+        // (!ResponseDataType.pdf.equals(upload.getFileType().getResponseDataType()))
+        // {
+        // model.put("errorMsg", "此文件不是PDF文件");
+        // return "upload/errorPage";
+        // }
+        // } catch (NullPointerException npe) {
+        // model.put("errorMsg", "系统错误,请联系管理员");
+        // return "upload/errorPage";
+        // }
+
+        return new Support<Object>();
     }
 }

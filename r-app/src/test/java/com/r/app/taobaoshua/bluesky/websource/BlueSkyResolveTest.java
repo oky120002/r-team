@@ -29,7 +29,7 @@ public class BlueSkyResolveTest {
 		String html = FileUtils.readFileToString(new File("./page/tasklist.txt"));
 		BlueSkyResolve r = new BlueSkyResolve();
 		List<Task> tasks = new ArrayList<Task>();
-		r.resolveTaskListHtml(tasks, html);
+		r.resolveTaskList(tasks, html);
 		for (Task task : tasks) {
 			System.out.println(task.getNumber());
 		}

@@ -1,4 +1,5 @@
 var httpUrl = 'http://localhost:8080/boda/';
+//var httpUrl = 'http://192.168.0.154:8080/boda/';
 
 /**
  * 

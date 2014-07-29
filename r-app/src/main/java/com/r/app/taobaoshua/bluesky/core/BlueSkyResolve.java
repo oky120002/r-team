@@ -27,7 +27,7 @@ public class BlueSkyResolve {
 	 * @param html
 	 * @return
 	 */
-	public void resolveTaskListHtml(Collection<Task> tasks, String html) {
+	public void resolveTaskList(Collection<Task> tasks, String html) {
 		int curPos = 0;
 		int start = html.indexOf("class=\"list_tbl\"");
 		int end = html.indexOf("</table>", start);
@@ -35,27 +35,27 @@ public class BlueSkyResolve {
 
 		while ((curPos = html.indexOf("<tr>")) != -1) {
 			html = html.substring(curPos);
-
+			
 			// 过滤掉已经被接手或者已经完成 的任务
 			if (0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")) {
 				curPos += 5;
 				html = html.substring(curPos);
 				continue;
 			}
-
+			
 			Task task = new Task();
 
 			// 商品类型和编号
 			String td = StringUtils.substringBetween(html, "<td width=\"163\"", "</td>");
-			resolveTaskNumberAndTaskType(task, td);
+			resolveTaskListByNumberAndTaskType(task, td);
 
 			// 发布者
 			td = StringUtils.substringBetween(html, "<td width=\"145\"", "</td>");
-			resolveTaskPublishing(task, td);
+			resolveTaskListByPublishing(task, td);
 
 			// 商品抵押金
 			td = StringUtils.substringBetween(html, "<td width=\"104\"", "</td>");
-			resolveTaskSecurityPrice(task, td);
+			resolveTaskListBySecurityPrice(task, td);
 
 			// 发布点
 			curPos = html.indexOf("width=\"70\"");
@@ -73,11 +73,11 @@ public class BlueSkyResolve {
 
 			// 几天好评
 			td = StringUtils.substringBetween(html, "<td width=\"80\"", "</td>");
-			resolveTaskTimeLimit(task, td);
+			resolveTaskListByTimeLimit(task, td);
 
 			// 限制条件
 			td = StringUtils.substringBetween(html, "<td width=\"164\"", "</td>");
-			resolveTaskRestrictiveCondition(task, td);
+			resolveTaskListByRestrictiveCondition(task, td);
 
 			// 接手任务ID
 			curPos = html.indexOf("width=\"72\"");
@@ -268,7 +268,7 @@ public class BlueSkyResolve {
 	}
 
 	/** 解析商品类型和编号 */
-	private void resolveTaskNumberAndTaskType(Task task, String td) {
+	private void resolveTaskListByNumberAndTaskType(Task task, String td) {
 		if (0 < td.indexOf("realobject.gif")) { // 实物商品
 			task.setTaskType(TaskType.实物);
 		} else if (0 < td.indexOf("realobject_shop.gif")) { // 实购商品
@@ -289,7 +289,7 @@ public class BlueSkyResolve {
 	}
 
 	/** 解析发布者信息 */
-	private void resolveTaskPublishing(Task task, String td) {
+	private void resolveTaskListByPublishing(Task task, String td) {
 		// 发布者平台账号
 		String account = StringUtils.substringBetween(td, "center\">", "<img").trim();
 		String temp = StringUtils.substringBetween(account, "<span class=\"red\">", "</span>");
@@ -334,7 +334,7 @@ public class BlueSkyResolve {
 	}
 
 	/** 解析商品抵押金 */
-	private void resolveTaskSecurityPrice(Task task, String td) {
+	private void resolveTaskListBySecurityPrice(Task task, String td) {
 		task.setSecurityPrice(Double.valueOf(StringUtils.substringBetween(td, "dm_gold\">", "</span>").trim()));
 		if (0 < td.indexOf("需改价")) { // 需改价
 			task.setIsUpdatePrice(Boolean.TRUE);
@@ -344,7 +344,7 @@ public class BlueSkyResolve {
 	}
 
 	/** 解析好评期限 */
-	private void resolveTaskTimeLimit(Task task, String td) {
+	private void resolveTaskListByTimeLimit(Task task, String td) {
 		if (0 < td.indexOf("店评5分")) { // 店评5分
 			task.setShopScore(ShopScore.全5分);
 		} else {
@@ -357,7 +357,7 @@ public class BlueSkyResolve {
 	}
 
 	/** 解析商品限制条件 */
-	private void resolveTaskRestrictiveCondition(Task task, String td) {
+	private void resolveTaskListByRestrictiveCondition(Task task, String td) {
 		if (0 < td.indexOf("ShangBao.gif")) { // 商保任务
 			task.setIsSincerity(Boolean.TRUE);
 		} else {
@@ -418,12 +418,7 @@ public class BlueSkyResolve {
 				task.setIsBaoGuo(Boolean.FALSE);
 			}
 
-			// 改地址..不止这里一处,所以没有else
-			if (0 < td.indexOf("收货地址修改")) {
-				task.setIsUpdateAddr(Boolean.TRUE);
-			}
-
-			// 判断改价..不止这里一处,所以没有else
+			// 判断改价..不止这里一处
 			if (0 < td.indexOf("改价")) {
 				task.setIsUpdatePrice(Boolean.TRUE);
 			}

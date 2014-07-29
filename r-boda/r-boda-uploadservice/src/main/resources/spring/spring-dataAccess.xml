@@ -12,6 +12,7 @@
 		<!-- h2 -->
 		<property name="driverClassName" value="org.h2.Driver" />
 		<property name="url" value="jdbc:h2:D:/boda/h2db/bodaupload" />
+<!-- 		<property name="url" value="jdbc:h2:/home/boda/h2db/bodaupload" /> -->
 		<property name="username" value="oky" />
 		<property name="password" value="oky" />
 

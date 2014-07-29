@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,12 +17,12 @@
 	
 	/*增加一行附件*/
 	function addRow(tag) {
-		var name = "uploadfile" + new Date().getTime();
+		var _name = "uploadfile" + new Date().getTime();
 		var tr = '<tr class="tr_uploadfile">';
 		if(tag){
 			tr += '<td><label>' + tag + '</label><td>';
 		}
-		tr += '<td><input type="file" name="' + name + '" id="uploadfile" /> <input type="hidden" name="' + name + '_tag" value="' + tag + '" /> </td>';
+		tr += '<td><input type="file" name="' + _name + '" id="uploadfile" /> <input type="hidden" name="' + _name + '_tag" value="' + tag + '" /> </td>';
 		tr += '</tr>';
 		$(tr).appendTo($('#formtable'));
 	};
@@ -50,7 +49,7 @@
 		$('#btn_addrow').attr("disabled", "disabled");
 		startProgress();
 		$.ajaxFileUpload({
-			url : '/boda/upload/uploads?format=json',
+			url : '<c:url value="/upload/uploads?format=json" />',
 			fileElementIds : ['uploadfile'],
 			data : $('#formid').serializeArray(),
 			secureuri : false,
@@ -82,16 +81,18 @@
 
 	/**进度条*/
 	function _progress() {
-		submitDatas('/boda/upload/fileUploadStatus', null, function(data) {
+		var url = '<c:url value="/upload/fileUploadStatus" />';
+		submitDatas(url, null, function(data) {
 			var model = data.model;
-			document.getElementById("span").innerHTML = model.percent + "%";//显示读取百分比  
-			document.getElementById("table").width = model.percent + "%";//通过表格宽度 实现进度条  
+			$('#span').html(model.percent + "%");//显示读取百分比  
+			$('#table').width(model.percent + "%");//通过表格宽度 实现进度条  
 		});
 	}
 
 	/**删除文件*/
 	function deleteFile(id) {
-		submitDatas('/boda/upload/deleteUpload/false/' + id, null, function(data) {
+		var url = '<c:url value="/upload/deleteUpload/false/" />' + id;
+		submitDatas(url, null, function(data) {
 			// 如果有标签功能.则不能进行自由的添加附件
 			f5();
 		}, function(message) {
@@ -101,24 +102,26 @@
 	
 	/**查看文件*/
 	function lookUploadFile(id) {
-		var url = "/boda/upload/lookUploadFile/" + id;
+		var url = '<c:url value="/upload/lookUploadFile/" />' + id;
 		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
 	/**下载文件*/
 	function downloadFile(id) {
-		var url = "/boda/upload/downloadFile/" + id;
+		var url = '<c:url value="/upload/downloadFile/" />' + id;
 		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
 	/*删除pdf页面*/
 	function deletePdf(id){
-		
+		var url = '<c:url value="/upload/deletePageByPdf/" />' + id;
+		window.showModalDialog(url, null, "dialogWidth=400px;dialogHeight=50px");
 	}
 	
 	/*向pdf插入页面*/
 	function insertPdf(id){
-		
+		var url = '<c:url value="/upload/insertPdfPage/" />' + id;
+		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
 	$(document).ready(function() {
@@ -179,7 +182,7 @@
 							<button onclick="lookUploadFile('${upload.id }');">查看</button>
 							<button onclick="downloadFile('${upload.id }');">下载</button>
 							<button onclick="deleteFile('${upload.id }');">删除</button>
-							<c:if test="${upload.fileType.responseDataType.name eq 'pdf' }">
+							<c:if test="${upload.fileType.responseDataType.name eq 'PDF' }">
 								<button onclick="deletePdf('${upload.id }');">删除页面</button>
 								<button onclick="insertPdf('${upload.id }');">插入页面</button>
 							</c:if>

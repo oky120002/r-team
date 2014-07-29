@@ -11,5 +11,7 @@
 		<!-- ip -->
 		<property name="addr" value="190.100.100.50" />
 		<property name="fileSavePath" value="D:\\boda\\upload\\"	/>
+<!-- 		<property name="addr" value="192.168.0.154" /> -->
+<!-- 		<property name="fileSavePath" value="/home/boda/upload/"	/> -->
 	</bean>
 </beans>

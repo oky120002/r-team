@@ -33,7 +33,7 @@ public class UpLoadErrorException extends SException {
 
 	@Override
 	protected String doGetErrorMessage() {
-		return "上传文件错误";
+		return "附件平台内部错误";
 	}
 
 	public void addError(String errorFileName, String errorMessage) {

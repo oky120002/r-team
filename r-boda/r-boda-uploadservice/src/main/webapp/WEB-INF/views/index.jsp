@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="<c:url value="/res/css/layout.css" />" />
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
-<script src="<c:url value="http://localhost:8080/boda/res/js/upload.client.js" />" type="text/javascript"></script>
+<script src="<c:url value="/res/js/upload.client.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
 	function show(){

@@ -7,6 +7,9 @@
 package com.r.boda.uploadservice.upload.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +18,20 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.BadPdfFormatException;
+import com.itextpdf.text.pdf.PdfCopy;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.r.boda.uploadservice.core.EnviromentalParameter;
 import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.upload.dao.UploadDao;
@@ -39,21 +49,21 @@ import com.r.core.util.RandomUtil;
 @Service("upload.uploadService")
 public class UploadService {
     private static final Logger logger = LoggerFactory.getLogger(UploadService.class); // 日志
-    
+
     public UploadService() {
         super();
         logger.info("Instance UploadService............................");
     }
-    
+
     @Resource(name = "upload.uploadDao")
     private UploadDao uploadDao; // 用户Dao
-    
+
     @Resource(name = "epar")
     private EnviromentalParameter epar;
-    
-    @Resource(name = "passwordEncoder")
-    private PasswordEncoder passwordEncoder; // 密码
-    
+
+    // @Resource(name = "passwordEncoder")
+    // private PasswordEncoder passwordEncoder; // 密码
+
     /**
      * 保存上传的文件
      * 
@@ -68,7 +78,7 @@ public class UploadService {
         if (CollectionUtils.isEmpty(files)) {
             return new ArrayList<Upload>();
         }
-        
+
         List<Upload> failUploads = new ArrayList<Upload>();
         UpLoadErrorException error = null;
         int size = files.size();
@@ -109,12 +119,12 @@ public class UploadService {
         }
         return failUploads;
     }
-    
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void create(Upload up) {
         uploadDao.create(up);
     }
-    
+
     /**
      * 根据分组查询上传的文件
      * 
@@ -128,7 +138,7 @@ public class UploadService {
         up.setIsEnabled(true);
         return uploadDao.queryByExample(up);
     }
-    
+
     /**
      * 删除文件
      * 
@@ -149,25 +159,157 @@ public class UploadService {
             }
         }
     }
-    
+
     /** 根据文件id查找文件 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
     public Upload find(String fileId) {
         return uploadDao.find(fileId);
     }
-    
-    /**根据fileId查找文件*/
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public File getFile(String fileId) {
-        Upload upload = uploadDao.find(fileId);
-        return new File(upload.getFilePath());
+
+    /** 根据文件id查找文件,并且校验文件类型,此方法会抛出错误 */
+    public Upload findByCheck(String fileId, FileType fileType) throws UpLoadErrorException {
+        if (StringUtils.isBlank(fileId)) {
+            throw new UpLoadErrorException("fileId不能为空");
+        }
+        if (fileType == null) {
+            throw new UpLoadErrorException("fileType不能为空");
+        }
+
+        Upload upload = find(fileId);
+        if (upload == null) {
+            throw new UpLoadErrorException("此附件信息丢失,请联系管理员");
+        }
+        File file = upload.getFile();
+        if (file == null) {
+            throw new UpLoadErrorException("此附件丢失,请联系管理员");
+        }
+
+        if (!fileType.equals(upload.getFileType())) {
+            throw new UpLoadErrorException("此附件不是" + fileType.getResponseDataType().getName() + "类型文件,请联系管理员");
+        }
+        return upload;
     }
 
-    /**删除pdf页面*/
-    public void deletePageByPdf(File file, Integer start, Integer end) {
+    /**
+     * 删除pdf页面
+     * 
+     * @throws IOException
+     */
+    public void pdfDeletePage(File srcFile, Integer start, Integer end) throws UpLoadErrorException {
+        if (srcFile == null || !srcFile.exists()) {
+            throw new UpLoadErrorException("PDF文件不存在");
+        }
+        if (start == null || end == null) {
+            throw new UpLoadErrorException("删除的pdf页面,起始页和结束页不能为空");
+        }
+
+        StringBuffer sb = new StringBuffer();
+        int size = end.intValue() - start.intValue();
+        for (int i = start.intValue(); i <= size; i++) {
+            sb.append(",!").append(i);
+        }
+        sb.deleteCharAt(0);
         
+        
+        
+        PdfReader pdfReader = null;
+        try {
+            pdfReader = new PdfReader(srcFile.getPath());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        PdfStamper pdfStamper = null;
+        try {
+            pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(srcFile.getPath() + ".tem"));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+//        pdfReader.selectPages(sb.toString());
+        try {
+            pdfStamper.close();
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        
+//        
+//
+//        File tempFile = new File(srcFile.getPath() + ".tmp");
+////        Document document = null;
+//        PdfReader pdfReader = null;
+////        PdfCopy pdfCopy = null;
+//        FileInputStream fileInputStream = null;
+//        try {
+//            fileInputStream = new FileInputStream(srcFile);
+//            pdfReader = new PdfReader(fileInputStream);
+////            pdfReader.selectPages(sb.toString());
+////            int newPdfPageNumber = pdfReader.getNumberOfPages();
+////            document = new Document(pdfReader.getPageSize(1));
+////            pdfCopy = new PdfCopy(document, new FileOutputStream(tempFile));
+////            
+////            document.open();
+////            for (int i = 1; i <= newPdfPageNumber; i++) {
+////                pdfCopy.addPage(pdfCopy.getImportedPage(pdfReader, i));
+////            }
+////            
+//            
+//            PdfStamper pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(tempFile));
+//            pdfReader.selectPages(sb.toString());
+//            pdfStamper.close(); 
+//        } catch (FileNotFoundException e) {
+//            throw new UpLoadErrorException("创建PdfCopy失败 : " + e.toString());
+//        } catch (BadPdfFormatException e) {
+//            throw new UpLoadErrorException("删除PDF页失败 : " + e.toString());
+//        } catch (DocumentException e) {
+//            throw new UpLoadErrorException("创建PdfCopy失败 : " + e.toString());
+//        } catch (IOException e) {
+//            throw new UpLoadErrorException("删除PDF页失败 : " + e.toString());
+//        } finally {
+//            // 删除临时文件
+//            // tempFile.delete();
+////            pdfCopy.close();
+//            pdfReader.close();
+////            document.close();
+//            IOUtils.closeQuietly(fileInputStream);
+//        }
+
     }
-    
+
+    /** 插入pdf页面 */
+    public void pdfInsertPage(File srcFile, File insertFile, Integer start, Integer end) {
+
+    }
+
+    /**
+     * 获取pdf页数
+     * 
+     * @throws IOException
+     */
+    public int pdfPageNumber(File file) throws IOException {
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            PdfReader pdfReader = new PdfReader(fileInputStream);
+            return pdfReader.getNumberOfPages();
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            IOUtils.closeQuietly(fileInputStream);
+        }
+    }
+
     /**
      * 根据上传的文件名生成对应的File实体<br />
      * 

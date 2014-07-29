@@ -2,7 +2,8 @@
 <configuration scan="true" scanPeriod="10 seconds">
 	<property name="contentName" value="upload" />
 	<property name="commonPattern" value="%date %-4relative |-%-5level in %logger{50} - %msg%n" />
-	<property name="logfile" value="D:/boda/logs/" />
+<!-- 	<property name="logfile" value="D:/boda/logs/" /> -->
+	<property name="logfile" value="/home/boda/logs/" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
 

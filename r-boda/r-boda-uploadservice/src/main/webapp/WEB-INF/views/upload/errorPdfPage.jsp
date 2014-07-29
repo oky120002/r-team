@@ -15,7 +15,7 @@
 <body>
 	<table>
 		<tr>
-			<td>${errorMsg }</td>
+			<td>${error }</td>
 		</tr>
 	</table>
 </body>

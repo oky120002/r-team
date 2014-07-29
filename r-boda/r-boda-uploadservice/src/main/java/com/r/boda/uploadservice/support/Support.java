@@ -15,13 +15,17 @@ import java.util.Map;
  * 
  */
 public class Support<T> {
-	private String tips; // 提示信息(包括成功提示和错误信息提示)
+	private String tips = null; // 提示信息(包括成功提示和错误信息提示)
 	private boolean success = true; // 数据是否正确返回;true:正确返回|false:有错误信息,没有正确返回
-	private T model; // 任意Object
+	private T model = null; // 任意Object
 	private List<T> entities = new ArrayList<T>(); // 返回的列表
 	private Map<String, Object> params = new HashMap<String, Object>(); // 返回参数
+	
+	public Support() {
+        super();
+    }
 
-	/**
+    /**
 	 * @return the tips
 	 */
 	public String getTips() {
