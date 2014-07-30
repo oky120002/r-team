@@ -60,7 +60,7 @@ function submitDatas(url, formId, callback, errorback) {
 		cache : false,
 		data : form.serialize(),
 		success : function(data, textStatus, XMLHttpRequest) {
-			if (data !== null) {
+			if (data) {
 				if (data.success == 'true' || data.success == true) {
 					try {
 						callback(data);
@@ -72,13 +72,13 @@ function submitDatas(url, formId, callback, errorback) {
 					} catch (e) {
 					}
 				}
-			} else {
+			} else { 
 				try {
 					errorback(data);
 				} catch (e) {
 				}
 			}
-		},
+		}, 
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			errorMsg = XMLHttpRequest.responseText;
 			if (/{error:([^}]+)}/ig.test(errorMsg)) {

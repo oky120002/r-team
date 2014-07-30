@@ -10,22 +10,15 @@
 <script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
-	/*增加一行附件*/
-	function deletePdfPage() {
-		var fileId = '${fileId}';
-		var start = $('#start').val();
-		var end = $('#end').val();
-		var url = '<c:url value="/upload/deletePageByPdf/" />' + fileId + '/' + start + '/' + end;
-		
-		
-		
-		submitDatas(url, null, function(data) {
-			alert(data.tips);
-		}, function(message) {
-			alert(message);
-		});
-	};
-
+function deletePdfPage() {
+	var url = '<c:url value="/upload/deletePageByPdf/" />${fileId}/' + $('#start').val() + '/' + $('#end').val();
+	submitDatas(url, null, function(data) {
+		$('#span').html(data.params.pdfNumber);
+		alert(data.tips);
+	}, function(message) {
+		alert(message);
+	});
+};
 </script>
 
 <title>删除pdf页</title>
@@ -37,7 +30,7 @@
 			<td><input type="text" id="start" /></td>
 			<td>到</td>
 			<td><input type="text" id="end"/></td>
-			<td>/${pdfPageNumber }</td>
+			<td>/<span id="span">${pdfPageNumber }</span></td>
 			<td><input type="button" value="删除" onclick="deletePdfPage();" /> </td>
 		</tr>
 	</table>

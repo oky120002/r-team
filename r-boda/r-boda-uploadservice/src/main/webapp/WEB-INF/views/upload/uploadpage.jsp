@@ -58,7 +58,7 @@
 				alert(data.tips);
 				f5();
 			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			error : function(xml, status, errorThrown) {
 				stopProgress();
 			}
 		});

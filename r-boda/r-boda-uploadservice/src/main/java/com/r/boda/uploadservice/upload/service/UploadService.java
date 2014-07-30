@@ -28,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.BadPdfFormatException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -40,6 +39,7 @@ import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.util.RandomUtil;
+import com.r.core.util.TaskUtil;
 
 /**
  * 用户Service<br />
@@ -203,93 +203,119 @@ public class UploadService {
             throw new UpLoadErrorException("删除的pdf页面,起始页和结束页不能为空");
         }
 
-        StringBuffer sb = new StringBuffer();
-        int size = end.intValue() - start.intValue();
-        for (int i = start.intValue(); i <= size; i++) {
-            sb.append(",!").append(i);
-        }
-        sb.deleteCharAt(0);
-        
-        
-        
+        String tempPath = srcFile.getPath() + ".temp";
         PdfReader pdfReader = null;
-        try {
-            pdfReader = new PdfReader(srcFile.getPath());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
         PdfStamper pdfStamper = null;
+        FileOutputStream tempOutputStream = null;
+        FileInputStream fileInputStream = null;
         try {
-            pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(srcFile.getPath() + ".tem"));
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (DocumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-//        pdfReader.selectPages(sb.toString());
-        try {
+            fileInputStream = new FileInputStream(srcFile);
+            tempOutputStream = new FileOutputStream(tempPath);
+            pdfReader = new PdfReader(fileInputStream);
+            pdfStamper = new PdfStamper(pdfReader, tempOutputStream);
+            pdfReader.selectPages(calPdfSelectRanges(start.intValue(), end.intValue(), pdfReader.getNumberOfPages()));
             pdfStamper.close();
         } catch (DocumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new UpLoadErrorException("加载或者关闭pdf文档错误 : " + e.toString());
+        } catch (FileNotFoundException e) {
+            throw new UpLoadErrorException("加载pdf临时文件错误 : " + e.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } 
-        
-//        
-//
-//        File tempFile = new File(srcFile.getPath() + ".tmp");
-////        Document document = null;
-//        PdfReader pdfReader = null;
-////        PdfCopy pdfCopy = null;
-//        FileInputStream fileInputStream = null;
-//        try {
-//            fileInputStream = new FileInputStream(srcFile);
-//            pdfReader = new PdfReader(fileInputStream);
-////            pdfReader.selectPages(sb.toString());
-////            int newPdfPageNumber = pdfReader.getNumberOfPages();
-////            document = new Document(pdfReader.getPageSize(1));
-////            pdfCopy = new PdfCopy(document, new FileOutputStream(tempFile));
-////            
-////            document.open();
-////            for (int i = 1; i <= newPdfPageNumber; i++) {
-////                pdfCopy.addPage(pdfCopy.getImportedPage(pdfReader, i));
-////            }
-////            
-//            
-//            PdfStamper pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(tempFile));
-//            pdfReader.selectPages(sb.toString());
-//            pdfStamper.close(); 
-//        } catch (FileNotFoundException e) {
-//            throw new UpLoadErrorException("创建PdfCopy失败 : " + e.toString());
-//        } catch (BadPdfFormatException e) {
-//            throw new UpLoadErrorException("删除PDF页失败 : " + e.toString());
-//        } catch (DocumentException e) {
-//            throw new UpLoadErrorException("创建PdfCopy失败 : " + e.toString());
-//        } catch (IOException e) {
-//            throw new UpLoadErrorException("删除PDF页失败 : " + e.toString());
-//        } finally {
-//            // 删除临时文件
-//            // tempFile.delete();
-////            pdfCopy.close();
-//            pdfReader.close();
-////            document.close();
-//            IOUtils.closeQuietly(fileInputStream);
-//        }
+            throw new UpLoadErrorException("pdf文件流错误 : " + e.toString());
+        } finally {
+            if (pdfReader != null) {
+                pdfReader.close();
+            }
+            IOUtils.closeQuietly(fileInputStream);
+            IOUtils.closeQuietly(tempOutputStream);
+        }
 
+        TaskUtil.sleep(50); // 等待0.05秒,让磁盘能够反映过来,好让文件重命名
+        File tempFile = new File(tempPath);
+        srcFile.delete();
+        TaskUtil.sleep(50);// 等待0.05秒,让磁盘能够反映过来,好让文件重命名
+        tempFile.renameTo(srcFile);
     }
 
     /** 插入pdf页面 */
-    public void pdfInsertPage(File srcFile, File insertFile, Integer start, Integer end) {
+    public void pdfInsertPage(File srcFile, MultipartFile multipartFile, Integer start) {
+        if (srcFile == null || !srcFile.exists()) {
+            throw new UpLoadErrorException("PDF文件不存在");
+        }
+        if (multipartFile == null) {
+            throw new UpLoadErrorException("被插入的文件不存在");
+        }
+        if (start == null) {
+            throw new UpLoadErrorException("插入的起始页不能为空");
+        }
+        FileType fileType = FileType.re(multipartFile.getOriginalFilename());
+        switch (fileType.getResponseDataType()) {
+        // pdf
+        case pdf:
+            break;
+        default:
+            throw new UpLoadErrorException("不支持" + fileType.getResponseDataType().getName() + "类型的文件插入到pdf中");
+        }
 
+        String tempPath = srcFile.getPath() + ".temp";
+        FileInputStream fileInputStream = null;
+        FileOutputStream fileOutputStream = null;
+        Document doc = null;
+        PdfCopy copy = null;
+        try {
+            fileInputStream = new FileInputStream(srcFile);
+            fileOutputStream = new FileOutputStream(tempPath);
+            doc = new Document();
+            copy = new PdfCopy(doc, fileOutputStream);
+
+            doc.open();
+            PdfReader reader = new PdfReader(fileInputStream);
+            int pageNumber = reader.getNumberOfPages();
+            for (int i = 1; i <= pageNumber; i++) {
+                doc.newPage();
+                copy.addPage(copy.getImportedPage(reader, i));
+                if (start.intValue() == i) { // 从选择的pdf位置插入新上传的pdf
+                    switch (fileType) {
+                    // pdf
+                    case pdf:
+                        PdfReader insertReader = new PdfReader(multipartFile.getInputStream());
+                        int insertPages = insertReader.getNumberOfPages();
+                        for (int j = 1; j <= insertPages; j++) {
+                            doc.newPage();
+                            copy.addPage(copy.getImportedPage(insertReader, j));
+                        }
+                        break;
+                    // 图片
+                    case jpeg:
+                    case bmp:
+                    case gif:
+                    case jpg:
+                    case png:
+                    case tiff:
+                        break;
+
+                    }
+                }
+            }
+            doc.close();
+        } catch (DocumentException e) {
+            throw new UpLoadErrorException("加载或者关闭pdf文档错误 : " + e.toString());
+        } catch (FileNotFoundException e) {
+            throw new UpLoadErrorException("加载pdf临时文件错误 : " + e.toString());
+        } catch (IOException e) {
+            throw new UpLoadErrorException("pdf文件流错误 : " + e.toString());
+        } finally {
+            if (copy != null) {
+                copy.close();
+            }
+            IOUtils.closeQuietly(fileInputStream);
+            IOUtils.closeQuietly(fileOutputStream);
+        }
+
+        TaskUtil.sleep(50); // 等待0.05秒,让磁盘能够反映过来,好让文件重命名
+        File tempFile = new File(tempPath);
+        srcFile.delete();
+        TaskUtil.sleep(50);// 等待0.05秒,让磁盘能够反映过来,好让文件重命名
+        tempFile.renameTo(srcFile);
     }
 
     /**
@@ -297,17 +323,54 @@ public class UploadService {
      * 
      * @throws IOException
      */
-    public int pdfPageNumber(File file) throws IOException {
+    public int pdfPageNumber(File file) throws UpLoadErrorException {
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
             PdfReader pdfReader = new PdfReader(fileInputStream);
             return pdfReader.getNumberOfPages();
         } catch (IOException e) {
-            throw e;
+            throw new UpLoadErrorException(e);
         } finally {
             IOUtils.closeQuietly(fileInputStream);
         }
+    }
+
+    /**
+     * 计算pdf选择范围
+     * 
+     * @param cutStart
+     *            截断起始页码
+     * @param cutEnd
+     *            截断结束页码
+     * @param pdfPageNumber
+     *            总页码
+     * @return 选择的页码字符串
+     */
+    private List<Integer> calPdfSelectRanges(int cutStart, int cutEnd, int pdfPageNumber) {
+        int temp = -1;
+        if (cutStart > cutEnd) {
+            temp = cutStart;
+            cutStart = cutEnd;
+            cutEnd = temp;
+        }
+
+        if (cutStart < 1) {
+            cutStart = 1;
+        }
+        if (pdfPageNumber < cutStart) {
+            cutStart = pdfPageNumber;
+        }
+
+        List<Integer> list = new ArrayList<Integer>();
+
+        for (int number = 1; number <= pdfPageNumber; number++) {
+            if (number < cutStart || cutEnd < number) {
+                list.add(Integer.valueOf(number));
+            }
+        }
+
+        return list;
     }
 
     /**

@@ -3,7 +3,6 @@
  */
 package com.r.boda.uploadservice.upload.control;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,6 @@ import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.support.Support;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
 import com.r.boda.uploadservice.upload.model.FileType;
-import com.r.boda.uploadservice.upload.model.FileType.ResponseDataType;
 import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
 import com.r.core.log.Logger;
@@ -253,7 +252,7 @@ public class UploadControl {
             model.put("fileId", fileId);
             model.put("pdfPageNumber", pdfPageNumber);
             return "upload/deletePdfPage";
-        } catch (IOException e) {
+        } catch (UpLoadErrorException e) {
             logger.error("pdf删除页面 : {}", e.getMessage());
             model.put("error", " 附件平台内部错误 : " + e.toString());
             return "upload/errorPdfPage";
@@ -269,21 +268,22 @@ public class UploadControl {
      * @throws IOException
      */
     @RequestMapping(value = "deletePageByPdf/{fileId}/{start}/{end}")
+    @ResponseBody
     public Support<Object> deletePageByPdf(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, HttpServletRequest request) {
         Support<Object> support = new Support<Object>();
         Upload upload = null;
         try {
             upload = uploadService.findByCheck(fileId, FileType.pdf);
+            uploadService.pdfDeletePage(upload.getFile(), start, end);
+            support.putParam("pdfNumber", uploadService.pdfPageNumber(upload.getFile()));
         } catch (UpLoadErrorException e) {
             support.setSuccess(false);
             support.setTips(e.getMessage());
             return support;
         }
 
-        uploadService.pdfDeletePage(upload.getFile(), start, end);
-        
         support.setTips("删除成功");
-        return new Support<Object>();
+        return support;
     }
 
     /**
@@ -296,18 +296,23 @@ public class UploadControl {
      */
     @RequestMapping(value = "insertPdfPage/{fileId}")
     public String insertPdfPage(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
-        Upload upload = uploadService.find(fileId);
+        Upload upload = null;
         try {
-            if (!ResponseDataType.pdf.equals(upload.getFileType().getResponseDataType())) {
-                model.put("errorMsg", "此文件不是PDF文件");
-                return "upload/errorPage";
-            }
-        } catch (NullPointerException npe) {
-            model.put("errorMsg", "系统错误,请联系管理员");
-            return "upload/errorPage";
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+        } catch (UpLoadErrorException e) {
+            model.put("error", e.getMessage());
+            return "upload/errorPdfPage";
         }
-
-        return "upload/insertPdfPage";
+        try {
+            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
+            model.put("fileId", fileId);
+            model.put("pdfPageNumber", pdfPageNumber);
+            return "upload/insertPdfPage";
+        } catch (UpLoadErrorException e) {
+            logger.error("pdf删除页面 : {}", e.getMessage());
+            model.put("error", " 附件平台内部错误 : " + e.toString());
+            return "upload/errorPdfPage";
+        }
     }
 
     /**
@@ -318,21 +323,29 @@ public class UploadControl {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "insertPdfPage/{fileId}/{start}/{end}")
-    public Support<Object> insertPdfPage(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, MultipartHttpServletRequest request) {
-        Upload upload = uploadService.find(fileId);
-        // try {
-        // if
-        // (!ResponseDataType.pdf.equals(upload.getFileType().getResponseDataType()))
-        // {
-        // model.put("errorMsg", "此文件不是PDF文件");
-        // return "upload/errorPage";
-        // }
-        // } catch (NullPointerException npe) {
-        // model.put("errorMsg", "系统错误,请联系管理员");
-        // return "upload/errorPage";
-        // }
+    @RequestMapping(value = "insertPdfPage/{fileId}/{start}")
+    @ResponseBody
+    public Support<Object> insertPdfPage(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, MultipartHttpServletRequest request) {
+        Support<Object> support = new Support<Object>();
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+        if (MapUtils.isEmpty(fileMap)) {
+            support.setSuccess(false);
+            support.setTips("请选择要插入的pdf文档");
+            return support;
+        }
 
-        return new Support<Object>();
+        Upload upload = null;
+        try {
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+            uploadService.pdfInsertPage(upload.getFile(), fileMap.values().iterator().next(), start);
+            support.putParam("pdfNumber", uploadService.pdfPageNumber(upload.getFile()));
+        } catch (UpLoadErrorException e) {
+            support.setSuccess(false);
+            support.setTips(e.getMessage());
+            return support;
+        }
+
+        support.setTips("插入成功");
+        return support;
     }
 }

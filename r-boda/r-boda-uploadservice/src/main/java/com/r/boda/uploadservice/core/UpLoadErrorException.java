@@ -6,39 +6,42 @@ import java.util.List;
 import com.r.core.exceptions.SException;
 
 public class UpLoadErrorException extends SException {
-	private static final long serialVersionUID = -3366306307845731707L;
+    private static final long serialVersionUID = -3366306307845731707L;
 
-	private List<KeyValue<String, String>> errorFileNames = new ArrayList<KeyValue<String, String>>();
+    private List<KeyValue<String, String>> errorFileNames = new ArrayList<KeyValue<String, String>>();
 
-	public UpLoadErrorException(String message, int mark) {
-		super(message, mark);
-	}
+    public UpLoadErrorException(String message, int mark) {
+        super(message, mark);
+    }
 
-	public UpLoadErrorException(String message, Object... objects) {
-		super(message, objects);
-	}
+    public UpLoadErrorException(String message, Object... objects) {
+        super(message, objects);
+    }
 
-	public UpLoadErrorException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public UpLoadErrorException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public UpLoadErrorException(String message) {
-		super(message);
-	}
+    public UpLoadErrorException(String message) {
+        super(message);
+    }
 
-	@Override
-	protected String doGetErrorCode() {
-		return "UPLOAD_ERROR_EXCEPTION";
-	}
+    public UpLoadErrorException(Exception e) {
+        super(e.getMessage());
+    }
 
-	@Override
-	protected String doGetErrorMessage() {
-		return "附件平台内部错误";
-	}
+    @Override
+    protected String doGetErrorCode() {
+        return "UPLOAD_ERROR_EXCEPTION";
+    }
 
-	public void addError(String errorFileName, String errorMessage) {
-		errorFileNames.add(KeyValue.kv(errorFileName, errorMessage));
-	}
-	
-	
+    @Override
+    protected String doGetErrorMessage() {
+        return "附件平台内部错误";
+    }
+
+    public void addError(String errorFileName, String errorMessage) {
+        errorFileNames.add(KeyValue.kv(errorFileName, errorMessage));
+    }
+
 }

@@ -45,7 +45,7 @@
 				<!-- 如果上面有启用扩展名支持    例如 /user/{userid}.json  中的   .json  就会映射到   application/json  -->
 					<map>
 		                <entry key="atom" value="application/atom+xml" />  
-		                <entry key="html" value="text/html" /><!-- 真正静态页面，使用htm后缀(文件格式) -->  
+		                <entry key="html" value="text/html" /><!-- 真正静态页面，使用html后缀(文件格式) -->  
 		                <entry key="json" value="application/json" />  
 		                <entry key="xml" value="application/xml" />  
 					</map>
