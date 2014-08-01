@@ -21,10 +21,8 @@
 	<mvc:resources mapping="/res/**" location="/WEB-INF/res/" />
 
 	<!-- 扫描并自动装配Control -->
-	<context:component-scan base-package="com.r.boda"
-		use-default-filters="false">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+	<context:component-scan base-package="com.r.boda" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 	<!-- 添加mvc拦截器 -->
@@ -37,17 +35,17 @@
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="contentNegotiationManager">
 			<bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-				<property name="favorPathExtension" value="false" />	<!-- 这里是是否启用扩展名支持，默认true			例如  /user/{userid}.json  -->
-				<property name="favorParameter" value="true" />	<!-- 这里是是否启用参数支持，默认false				例如  /user/{userid}?format=json    format是默认的参数名-->
+				<property name="favorPathExtension" value="true" />	<!-- 这里是是否启用扩展名支持，默认true			例如  /user/{userid}.json  -->
+				<property name="favorParameter" value="false" />	<!-- 这里是是否启用参数支持，默认false				例如  /user/{userid}?format=json    format是默认的参数名-->
 				<property name="ignoreAcceptHeader" value="false" />	<!-- 这里是否忽略掉accept header，默认false		例如  GET /user HTTP/1.1   Accept:application/json  -->
 				<property name="defaultContentType" value="text/html" />	<!-- 如果所有的mediaType都没匹配上，就会使用defaultContentType -->
 				<property name="mediaTypes">
 				<!-- 如果上面有启用扩展名支持    例如 /user/{userid}.json  中的   .json  就会映射到   application/json  -->
 					<map>
-		                <entry key="atom" value="application/atom+xml" />  
-		                <entry key="html" value="text/html" /><!-- 真正静态页面，使用html后缀(文件格式) -->  
-		                <entry key="json" value="application/json" />  
-		                <entry key="xml" value="application/xml" />  
+		                <entry key="atom" value="application/atom+xml" />
+		                <entry key="htm" value="text/html" /><!-- 真正静态页面，使用html后缀(文件格式) -->
+		                <entry key="json" value="application/json" />
+		                <entry key="xml" value="application/xml" />
 					</map>
 				</property>
 			</bean>
@@ -72,8 +70,7 @@
 	</bean>
 	
 	<!-- 上传 -->
-	<bean id="multipartResolver"
-		class="com.r.boda.uploadservice.support.listener.UploadCommonsMultipartResolver">
+	<bean id="multipartResolver" class="com.r.boda.uploadservice.support.listener.UploadCommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="maxUploadSize" value="999999999999999" />
 	</bean>

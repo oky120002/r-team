@@ -48,7 +48,7 @@
 		$('#btn_addrow').attr("disabled", "disabled");
 		startProgress();
 		$.ajaxFileUpload({
-			url : '<c:url value="/upload/uploads?format=json" />',
+			url : '<c:url value="/upload/uploads" />',
 			fileElementIds : ['uploadfile'],
 			data : $('#formid').serializeArray(),
 			secureuri : false,
@@ -194,5 +194,7 @@
 			</c:if>
 		</tbody>
 	</table>
+	
+	 <input id="abcd" type="radio" ><label for="abcd" >你好</label></input> 
 </body>
 </html>

@@ -12,7 +12,6 @@
 <script type="text/javascript">
 	function insertPdfPage() {
 		$('#inserBtn').attr("disabled", "disabled");
-<<<<<<< HEAD
 		/// 校验插入的页码
 		var start = $('#start').val();
 		try {
@@ -28,9 +27,6 @@
 		
 		
 		var u = '<c:url value="/upload/insertPdfPage/" />${fileId}/' + start;
-=======
-		var u = '<c:url value="/upload/insertPdfPage/" />${fileId}/' + $('#start').val();
->>>>>>> refs/remotes/origin/master
 		$.ajaxFileUpload({
 			url : u,
 			fileElementIds : ['uploadfile'],

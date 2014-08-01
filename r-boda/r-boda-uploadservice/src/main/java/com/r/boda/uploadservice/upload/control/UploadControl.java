@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.IOUtils;
@@ -113,7 +115,6 @@ public class UploadControl extends AbstractControl {
         }
         t.append(']');
         model.put(PARAMS_TAGS, t.toString());
-        
 
         // 上传文件分组
         String uploadgroup = String.valueOf(session.getAttribute(PARAMS_UPLOAD_GROUP));
@@ -146,10 +147,10 @@ public class UploadControl extends AbstractControl {
      * @param model
      * @param request
      * @return
+     * @throws IOException
      */
     @RequestMapping(value = "uploads")
-    @ResponseBody
-    public Support<Upload> uploads(ModelMap model, MultipartHttpServletRequest request,HttpServletResponse response) {
+    public void uploads(ModelMap model, MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
         logger.debug("开始上传");
         Support<Upload> support = new Support<Upload>();
         try {
@@ -166,7 +167,6 @@ public class UploadControl extends AbstractControl {
                 support.putParam("group", uploads.get(0).getGroup());
             }
             support.setSuccess(true);
-            support.setEntities(uploads);
             support.setTips("上传成功!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,8 +174,9 @@ public class UploadControl extends AbstractControl {
             support.setSuccess(false);
             support.setTips(e.getMessage());
         }
-        response.setContentType(FileType.txt.getContentType());
-        return support;
+        // 这个里不能通过返回String类型或者Object类型(Object会自动转换成json字符串)来返回.前者有乱码问题,后者IE8不能识别,会自动弹出下载框
+        response.setContentType("text/html; charset=utf-8");
+        response.getWriter().print(JSONObject.fromObject(support).toString());
     }
 
     /**
@@ -187,8 +188,7 @@ public class UploadControl extends AbstractControl {
      */
     @RequestMapping(value = "fileUploadStatus")
     @ResponseBody
-    public Support<FileUploadItem> fileUploadStatus(ModelMap model, HttpServletRequest request,HttpServletResponse response) {
-        response.setContentType("application/json;charset=utf-8");
+    public Support<FileUploadItem> fileUploadStatus(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         Support<FileUploadItem> support = new Support<FileUploadItem>();
         support.setModel(FileUploadItem.getFileUploadItemFromRequest(request.getSession()));
         logger.debug("上传文件进度 : " + support.getModel());
