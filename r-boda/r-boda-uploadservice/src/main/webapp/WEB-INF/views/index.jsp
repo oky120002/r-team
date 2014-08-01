@@ -12,9 +12,7 @@
 	function show(){
 		showUploadDialog({
 			group : "r-boda-test",
-			tags : [
-					"abcd","efgh","321123","111111111111"
-				],
+			tags : "abcd,efgh,321123,111111111111",
 		});
 	}
 </script>

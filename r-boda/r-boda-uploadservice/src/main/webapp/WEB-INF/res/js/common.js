@@ -18,18 +18,9 @@ function isInArrays(target,arr){
 
 /**刷新页面*/
 function f5(){
-	try {
-		window.history.go(0);
-	} catch (e) {
-	}
-	try {
-		window.location.reload();
-	} catch (e) {
-	}
-	try {
-		window.location.href = window.location.href;
-	} catch (e) {
-	}
+	window.location.reload();
+	window.location.href = window.location.href;
+	location.replace(location.href);
 }
 
 /**

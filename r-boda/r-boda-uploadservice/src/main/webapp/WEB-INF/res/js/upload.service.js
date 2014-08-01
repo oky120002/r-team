@@ -2,7 +2,7 @@ jQuery.extend({
     createUploadIframe : function(id, uri){
 		//create frame
 		var frameId = 'jUploadFrame' + id;
-		var iframeHtml = '<iframe id="' + frameId + '" name="' + frameId + '" style="position:absolute; top:-9999px; left:-9999px"';
+		var iframeHtml = '<iframe id="' + frameId + '" name="' + frameId + '" style="position:absolute; "';
 		if(window.ActiveXObject){
 			if(typeof uri== 'boolean'){
 				iframeHtml += ' src="' + 'javascript:false' + '"';

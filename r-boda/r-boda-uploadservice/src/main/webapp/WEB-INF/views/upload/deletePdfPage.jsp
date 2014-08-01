@@ -11,7 +11,35 @@
 
 <script type="text/javascript">
 function deletePdfPage() {
+<<<<<<< HEAD
+	var start = $('#start').val();
+	try {
+		if($.isNumeric(start)){
+			start = start * 1;
+		} else {
+			start = 1;
+		}
+	} catch (e) {
+		start = 1;
+	}
+	$('#start').val(start);
+	var end = $('#end').val();
+	try {
+		if($.isNumeric(end)){
+			end = end * 1;
+		} else {
+			end = 1;
+		}
+	} catch (e) {
+		end = 1;
+	}
+	$('#end').val(end);
+	
+	
+	var url = '<c:url value="/upload/deletePageByPdf/" />${fileId}/' + start + '/' + end;
+=======
 	var url = '<c:url value="/upload/deletePageByPdf/" />${fileId}/' + $('#start').val() + '/' + $('#end').val();
+>>>>>>> refs/remotes/origin/master
 	submitDatas(url, null, function(data) {
 		$('#span').html(data.params.pdfNumber);
 		alert(data.tips);

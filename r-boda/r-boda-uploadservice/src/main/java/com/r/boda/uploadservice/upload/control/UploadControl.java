@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.r.boda.uploadservice.core.AbstractControl;
+import com.r.boda.uploadservice.core.EnviromentalParameter;
 import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.support.Support;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
@@ -45,11 +48,17 @@ import com.r.core.log.LoggerFactory;
  */
 @Controller
 @RequestMapping(value = "/upload")
-public class UploadControl {
+public class UploadControl extends AbstractControl {
     private static final Logger logger = LoggerFactory.getLogger(UploadControl.class);
+
+    private static final String PARAMS_UPLOAD_GROUP = "uploadgroup";
+    private static final String PARAMS_TAGS = "tags";
 
     @Resource(name = "upload.uploadService")
     private UploadService uploadService;
+
+    @Resource(name = "epar")
+    private EnviromentalParameter epar;
 
     public UploadControl() {
         logger.info("Instance UploadControl............................");
@@ -67,6 +76,23 @@ public class UploadControl {
     }
 
     /**
+     * 此方法主要解决showUploadDialog调用跨域获取不到值的问题.通过全局session来解决
+     * 
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "sessionparams")
+    @ResponseBody
+    public Support<Object> sessionparams(HttpServletRequest request) {
+        Support<Object> support = new Support<Object>();
+        HttpSession session = request.getSession();
+        session.setAttribute(PARAMS_TAGS, request.getParameter(PARAMS_TAGS)); // 标签
+        session.setAttribute(PARAMS_UPLOAD_GROUP, request.getParameter(PARAMS_UPLOAD_GROUP)); // 分组
+        support.putParam("url", epar.getAddr("/upload/uploadpage")); // 跳转的链接
+        return support;
+    }
+
+    /**
      * 上传页面
      * 
      * @param model
@@ -75,31 +101,41 @@ public class UploadControl {
      */
     @RequestMapping(value = "uploadpage")
     public String uploadPage(ModelMap model, HttpServletRequest request) {
-        logger.debug("uploadpage");
+        HttpSession session = request.getSession();
+
+        // 标签
+        String tags = String.valueOf(session.getAttribute(PARAMS_TAGS));
+        String[] splitTags = tags.split(",");
+        StringBuilder t = new StringBuilder();
+        t.append('[');
+        for (String s : splitTags) {
+            t.append('\'').append(s).append('\'').append(", ");
+        }
+        t.append(']');
+        model.put(PARAMS_TAGS, t.toString());
+        
 
         // 上传文件分组
-        String uploadgroup = request.getParameter("uploadgroup");
-        model.put("uploadgroup", uploadgroup);
+        String uploadgroup = String.valueOf(session.getAttribute(PARAMS_UPLOAD_GROUP));
+        model.put(PARAMS_UPLOAD_GROUP, uploadgroup);
 
-        List<Upload> uploads = uploadService.queryByGroup(uploadgroup);
-
-        // 列表
-        model.put("isok", false);
-        model.put("havetags", "[]");
+        List<Upload> uploads = uploadService.queryByGroup(uploadgroup); // 附件列表
+        model.put("isok", false); // 是否已经存在附件
+        model.put("havetags", "[]"); // 已经存在的标签
         if (CollectionUtils.isNotEmpty(uploads)) {
             model.put("uploads", uploads);
             model.put("isok", true);
 
             // 保存已经存在的标签
-            StringBuilder tags = new StringBuilder();
-            tags.append('[');
+            StringBuilder havetags = new StringBuilder();
+            havetags.append('[');
             for (Upload upload : uploads) {
                 if (StringUtils.isNotBlank(upload.getTag())) {
-                    tags.append('\'').append(upload.getTag()).append('\'').append(", ");
+                    havetags.append('\'').append(upload.getTag()).append('\'').append(", ");
                 }
             }
-            tags.append(']');
-            model.put("havetags", tags.toString());
+            havetags.append(']');
+            model.put("havetags", havetags.toString());
         }
         return "upload/uploadpage";
     }
@@ -113,7 +149,7 @@ public class UploadControl {
      */
     @RequestMapping(value = "uploads")
     @ResponseBody
-    public Support<Upload> uploads(ModelMap model, MultipartHttpServletRequest request) {
+    public Support<Upload> uploads(ModelMap model, MultipartHttpServletRequest request,HttpServletResponse response) {
         logger.debug("开始上传");
         Support<Upload> support = new Support<Upload>();
         try {
@@ -138,6 +174,7 @@ public class UploadControl {
             support.setSuccess(false);
             support.setTips(e.getMessage());
         }
+        response.setContentType(FileType.txt.getContentType());
         return support;
     }
 
@@ -150,7 +187,8 @@ public class UploadControl {
      */
     @RequestMapping(value = "fileUploadStatus")
     @ResponseBody
-    public Support<FileUploadItem> fileUploadStatus(ModelMap model, HttpServletRequest request) {
+    public Support<FileUploadItem> fileUploadStatus(ModelMap model, HttpServletRequest request,HttpServletResponse response) {
+        response.setContentType("application/json;charset=utf-8");
         Support<FileUploadItem> support = new Support<FileUploadItem>();
         support.setModel(FileUploadItem.getFileUploadItemFromRequest(request.getSession()));
         logger.debug("上传文件进度 : " + support.getModel());
@@ -218,6 +256,7 @@ public class UploadControl {
         Upload upload = uploadService.find(fileId);
         response.setContentType(upload.getFileType().getContentType());
         response.setHeader("Content-Disposition", "attachment;fileName=" + upload.getFileName());
+        response.setHeader("Content-Length", String.valueOf(upload.getFile().length()));
         InputStream bis = null;
         OutputStream bos = null;
         try {

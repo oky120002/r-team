@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.BadPdfFormatException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -270,30 +272,17 @@ public class UploadService {
             doc.open();
             PdfReader reader = new PdfReader(fileInputStream);
             int pageNumber = reader.getNumberOfPages();
+            if (start.intValue() < 1) {
+                start = Integer.valueOf(1);
+            }
+            if (pageNumber < start.intValue()) {
+                start = Integer.valueOf(pageNumber);
+            }
             for (int i = 1; i <= pageNumber; i++) {
                 doc.newPage();
                 copy.addPage(copy.getImportedPage(reader, i));
                 if (start.intValue() == i) { // 从选择的pdf位置插入新上传的pdf
-                    switch (fileType) {
-                    // pdf
-                    case pdf:
-                        PdfReader insertReader = new PdfReader(multipartFile.getInputStream());
-                        int insertPages = insertReader.getNumberOfPages();
-                        for (int j = 1; j <= insertPages; j++) {
-                            doc.newPage();
-                            copy.addPage(copy.getImportedPage(insertReader, j));
-                        }
-                        break;
-                    // 图片
-                    case jpeg:
-                    case bmp:
-                    case gif:
-                    case jpg:
-                    case png:
-                    case tiff:
-                        break;
-
-                    }
+                    insertPage(multipartFile.getInputStream(), doc, copy, fileType);
                 }
             }
             doc.close();
@@ -336,6 +325,29 @@ public class UploadService {
         }
     }
 
+    private void insertPage(InputStream inputStream, Document doc, PdfCopy copy, FileType fileType) throws IOException, BadPdfFormatException {
+        switch (fileType) {
+        // pdf
+        case pdf:
+            PdfReader insertReader = new PdfReader(inputStream);
+            int insertPages = insertReader.getNumberOfPages();
+            for (int j = 1; j <= insertPages; j++) {
+                doc.newPage();
+                copy.addPage(copy.getImportedPage(insertReader, j));
+            }
+            break;
+        // 图片
+        case jpeg:
+        case bmp:
+        case gif:
+        case jpg:
+        case png:
+        case tiff:
+            break;
+
+        }
+    }
+
     /**
      * 计算pdf选择范围
      * 
@@ -372,6 +384,7 @@ public class UploadService {
 
         return list;
     }
+
 
     /**
      * 根据上传的文件名生成对应的File实体<br />

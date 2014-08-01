@@ -8,12 +8,11 @@
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
-
+<base target="_self">
 <script type="text/javascript">
-	var args = window.dialogArguments;
-	var tags = args.tags; // 标签
+	var tags = ${tags}; // 标签
 	var havetags = ${havetags};	//  已经存在的标签
-	var isTagModel = $.isArray(args.tags);	// 是否是标签模式
+	var isTagModel = $.isArray(tags);	// 是否是标签模式
 	
 	/*增加一行附件*/
 	function addRow(tag) {
@@ -56,7 +55,7 @@
 			dataType : 'json',
 			success : function(data, status) {
 				alert(data.tips);
-				f5();
+				reload.click();
 			},
 			error : function(xml, status, errorThrown) {
 				stopProgress();
@@ -94,7 +93,7 @@
 		var url = '<c:url value="/upload/deleteUpload/false/" />' + id;
 		submitDatas(url, null, function(data) {
 			// 如果有标签功能.则不能进行自由的添加附件
-			f5();
+			reload.click();
 		}, function(message) {
 			alert(message);
 		});
@@ -103,13 +102,13 @@
 	/**查看文件*/
 	function lookUploadFile(id) {
 		var url = '<c:url value="/upload/lookUploadFile/" />' + id;
-		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
+		window.open(url, null, "alwaysRaised=yes;dialogWidth=800px;dialogHeight=600px");
 	}
 	
 	/**下载文件*/
 	function downloadFile(id) {
 		var url = '<c:url value="/upload/downloadFile/" />' + id;
-		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
+		window.open(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
 	/*删除pdf页面*/
@@ -139,12 +138,15 @@
 			$('.untag').show();
 			$('.tag').hide();
 		}
+		
+		$('#reload').attr('href',window.location.href);
 	});
 </script>
 
 <title>上传测试</title>
 </head>
 <body>
+	<a id="reload" style="display: none;">reload...</a>
 	<form id="formid">
 		<input type="hidden" id="uploadgroup" name="uploadgroup" value="${uploadgroup }" /> 
 		<input type="button" id="btn_addrow" onclick="addRow();" value="+附件" class="untag"/>

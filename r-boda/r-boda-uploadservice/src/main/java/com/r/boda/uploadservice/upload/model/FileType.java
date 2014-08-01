@@ -11,6 +11,7 @@ public enum FileType {
     bmp("image/bmp", ResponseDataType.image), //
     txt("text/plain", ResponseDataType.txt), //
     sql("text/plain", ResponseDataType.txt), //
+    html("text/html", ResponseDataType.html), //
     pdf("application/pdf", ResponseDataType.pdf), //
     doc("application/msword", ResponseDataType.office), //
     docx("application/msword", ResponseDataType.office), //
@@ -65,6 +66,7 @@ public enum FileType {
     public enum ResponseDataType {
         binary("二进制文件流"), // 二进制
         txt("文本"), //
+        html("网页"), //
         office("Office"), //
         pdf("PDF"), //
         image("图片"), //
