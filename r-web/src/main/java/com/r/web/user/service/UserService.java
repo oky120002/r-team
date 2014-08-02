@@ -28,7 +28,7 @@ import com.r.web.user.model.User;
  * 
  * @author rain
  */
-@Service("user.userService")
+@Service("account.userService")
 public class UserService {
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class); // 日志
 
@@ -37,7 +37,7 @@ public class UserService {
 		logger.info("Instance UserService............................");
 	}
 
-	@Resource(name = "user.userDao")
+	@Resource(name = "account.userDao")
 	private UserDao userDao; // 用户Dao
 
 	@Resource(name = "passwordEncoder")

@@ -8,7 +8,7 @@ import com.r.core.exceptions.SException;
 public class UpLoadErrorException extends SException {
     private static final long serialVersionUID = -3366306307845731707L;
 
-    private List<KeyValue<String, String>> errorFileNames = new ArrayList<KeyValue<String, String>>();
+    private List<KV<String, String>> errorFileNames = new ArrayList<KV<String, String>>();
 
     public UpLoadErrorException(String message, int mark) {
         super(message, mark);
@@ -41,7 +41,7 @@ public class UpLoadErrorException extends SException {
     }
 
     public void addError(String errorFileName, String errorMessage) {
-        errorFileNames.add(KeyValue.kv(errorFileName, errorMessage));
+        errorFileNames.add(KV.kv(errorFileName, errorMessage));
     }
 
 }
