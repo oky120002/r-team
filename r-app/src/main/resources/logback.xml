@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="10 seconds">
 	<property name="contentName" value="taobaoshua" />
 	<property name="commonPattern" value="%date %-4relative |-%-5level in %logger{50} - %msg%n" />
-	<property name="logfile" value="D:/logs/r-app/" />
+	<property name="logfile" value="D:/rain/r-app/logs/" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
 
