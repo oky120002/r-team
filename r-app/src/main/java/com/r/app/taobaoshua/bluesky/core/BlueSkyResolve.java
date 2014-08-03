@@ -35,14 +35,17 @@ public class BlueSkyResolve {
 
 		while ((curPos = html.indexOf("<tr>")) != -1) {
 			html = html.substring(curPos);
-			
+
 			// 过滤掉已经被接手或者已经完成 的任务
 			if (0 < html.indexOf("任务已完成") || 0 < html.indexOf("任务已接手，正在进行中")) {
 				curPos += 5;
-				html = html.substring(curPos);
+				try {
+					html = html.substring(curPos);
+				} catch (Exception e) {
+				}
 				continue;
 			}
-			
+
 			Task task = new Task();
 
 			// 商品类型和编号

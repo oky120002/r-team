@@ -11,9 +11,9 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- h2 -->
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:./h2db/loverlover" />
-		<property name="username" value="heyu" />
-		<property name="password" value="heyulovelian1990" />
+		<property name="url" value="jdbc:h2:D:/rainteam/h2db/r-web/db" />
+		<property name="username" value="db" />
+		<property name="password" value="db" />
 
 		<!-- mysql -->
 <!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
