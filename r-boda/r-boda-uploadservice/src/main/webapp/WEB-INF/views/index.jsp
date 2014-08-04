@@ -12,7 +12,8 @@
 	function show(){
 		showUploadDialog({
 			group : "r-boda-test",
-			tags : "abcd,efgh,321123,111111111111",
+			tags : "精灵,矮人,半兽人,人族,半龙人,龙族", 
+			sysname : "lms",
 		});
 	}
 </script>

@@ -17,7 +17,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/fileupload?connectTimeout=3000&amp;socketTimeout=60000" />
 		<property name="username" value="root" />
-		<property name="password" value="root4567" />
+		<property name="password" value="root1234" />
 
 		<property name="maxActive" value="100" />	
 		<property name="maxIdle" value="30" />
@@ -42,7 +42,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- hibernate方言 -->
-				<prop key="hibernate.dialect"> 	org.hibernate.dialect.MySQLInnoDBDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLMyISAMDialect</prop>
 <!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop> -->
 				<!-- 显示sql语句 -->
 				<prop key="hibernate.show_sql">true</prop>

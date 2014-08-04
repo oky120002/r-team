@@ -14,32 +14,47 @@
 	var havetags = ${havetags};	//  已经存在的标签
 	var isTagModel = $.isArray(tags);	// 是否是标签模式
 	
+	function _getRandomString(len) {
+		len = len || 32;
+		var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz'; // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1和数字2345678
+		var maxPos = $chars.length;
+		var pwd = '';
+		for ( var i = 0; i < len; i++) {
+			pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+		}
+		return pwd;
+	}
+	
 	/*增加一行附件*/
 	function addRow(tag) {
-		var _name = "uploadfile" + new Date().getTime();
-		var tr = '<tr class="tr_uploadfile">';
 		if(tag){
-			tr += '<td><label>' + tag + '</label><td>';
+			var name = _getRandomString(16);
+			var tr = '<tr class="tr_uploadfile">';
+			if(tag){
+				tr += '<td><label>' + tag + '</label><td>';
+			}
+			tr += '<td><input type="file" name="' + name + '" id="uploadfile" /> <input type="hidden" name="' + name + '_tag" value="' + tag + '" /> </td>';
+			tr += '</tr>';
+			$(tr).appendTo($('#formtable'));
 		}
-		tr += '<td><input type="file" name="' + _name + '" id="uploadfile" /> <input type="hidden" name="' + _name + '_tag" value="' + tag + '" /> </td>';
-		tr += '</tr>';
-		$(tr).appendTo($('#formtable'));
 	};
 
 	/**增加一行列表数据*/
 	function addTableRow(upload) {
-		var deleteid = "deletetr" + upload.id;
-		var tr = "";
-		tr += '<tr id="' + deleteid + '">';
-		tr += '<td>' + (isEmpty(upload.tag) ? "": upload.tag) + '</td>'; // 标签列
-		tr += '<td>' + upload.fileName + '</td>'; // 文件名列
-		tr += '<td>';
-		tr += '<button onclick="lookUploadFile(\'' + upload.id + '\');">查看</button>';
-		tr += '<button onclick="downloadFile(\'' + upload.id + '\');">下载</button>';
-		tr += '<button onclick="deleteFile(\'' + upload.id + '\');">删除</button>';
-		tr += '</td>';
-		tr += '</tr>';
-		$('#filetabletbody').append(tr);
+		if(upload){
+			var deleteid = "deletetr" + upload.id;
+			var tr = "";
+			tr += '<tr id="' + deleteid + '">';
+			tr += '<td>' + (isEmpty(upload.tag) ? "": upload.tag) + '</td>'; // 标签列
+			tr += '<td>' + upload.fileName + '</td>'; // 文件名列
+			tr += '<td>';
+			tr += '<button onclick="lookUploadFile(\'' + upload.id + '\');">查看</button>';
+			tr += '<button onclick="downloadFile(\'' + upload.id + '\');">下载</button>';
+			tr += '<button onclick="deleteFile(\'' + upload.id + '\');">删除</button>';
+			tr += '</td>';
+			tr += '</tr>';
+			$('#filetabletbody').append(tr);
+		}
 	}
 
 	/**上传*/
@@ -123,14 +138,23 @@
 		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
 	}
 	
+	function isInArrays(target,arr){
+		var flg = false;
+		$.each(arr, function(index, ar) {
+			if(target == ar){
+				flg = true;
+			}
+		});
+		return flg;
+	}
+	
 	$(document).ready(function() {
 		// 如果有标签功能.则不能进行自由的添加附件
 		if(isTagModel){
 			$('.untag').hide();
 			$('.tag').show();
-			
 			$.each(tags, function(index, tag) {
-				if(!isInArrays(tag,havetags)){
+				if(!isInArrays(tag, havetags)){
 					addRow(tag);
 				}
 			});
@@ -194,7 +218,5 @@
 			</c:if>
 		</tbody>
 	</table>
-	
-	 <input id="abcd" type="radio" ><label for="abcd" >你好</label></input> 
 </body>
 </html>

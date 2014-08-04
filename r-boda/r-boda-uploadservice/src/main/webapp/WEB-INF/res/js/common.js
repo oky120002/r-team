@@ -5,17 +5,6 @@ function isEmpty(obj) {
 	return false;
 }
 
-function isInArrays(target,arr){
-	var flag = false;
-	$.each(arr, function(index, ar) {
-		if(target == ar){
-			flag = true;
-			return false;
-		}
-	});
-	return flag;
-}
-
 /**刷新页面*/
 function f5(){
 	window.location.reload();

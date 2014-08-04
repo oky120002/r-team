@@ -76,7 +76,7 @@ public class UploadService {
      * @throws IOException
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-    public List<Upload> save(List<MultipartFile> files, List<String> tags, String group) throws UpLoadErrorException {
+    public List<Upload> save(List<MultipartFile> files, String sysname, List<String> tags, String group) throws UpLoadErrorException {
         if (CollectionUtils.isEmpty(files)) {
             return new ArrayList<Upload>();
         }
@@ -385,7 +385,6 @@ public class UploadService {
         return list;
     }
 
-
     /**
      * 根据上传的文件名生成对应的File实体<br />
      * 
@@ -399,7 +398,7 @@ public class UploadService {
         char c3 = randomFile.charAt(2);
         char c4 = randomFile.charAt(3);
         StringBuilder sb = new StringBuilder();
-        sb.append(epar.getFileSavePath());
+        sb.append(epar.getFileSavePath()).append(File.separatorChar);
         sb.append(c1).append(File.separatorChar);
         sb.append(c2).append(File.separatorChar);
         sb.append(c3).append(File.separatorChar);

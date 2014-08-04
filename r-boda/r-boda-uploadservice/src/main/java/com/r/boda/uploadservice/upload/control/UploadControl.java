@@ -53,8 +53,9 @@ import com.r.core.log.LoggerFactory;
 public class UploadControl extends AbstractControl {
     private static final Logger logger = LoggerFactory.getLogger(UploadControl.class);
 
-    private static final String PARAMS_UPLOAD_GROUP = "uploadgroup";
-    private static final String PARAMS_TAGS = "tags";
+    private static final String PARAMS_UPLOAD_GROUP = "uploadgroup"; // 附件分组
+    private static final String PARAMS_TAGS = "tags"; // 附件标签
+    private static final String PARAMS_SYSNAME = "sysname"; // 附件-系统
 
     @Resource(name = "upload.uploadService")
     private UploadService uploadService;
@@ -88,8 +89,9 @@ public class UploadControl extends AbstractControl {
     public Support<Object> sessionparams(HttpServletRequest request) {
         Support<Object> support = new Support<Object>();
         HttpSession session = request.getSession();
-        session.setAttribute(PARAMS_TAGS, request.getParameter(PARAMS_TAGS)); // 标签
-        session.setAttribute(PARAMS_UPLOAD_GROUP, request.getParameter(PARAMS_UPLOAD_GROUP)); // 分组
+        session.setAttribute(PARAMS_TAGS, request.getParameter(PARAMS_TAGS));
+        session.setAttribute(PARAMS_UPLOAD_GROUP, request.getParameter(PARAMS_UPLOAD_GROUP));
+        session.setAttribute(PARAMS_SYSNAME, request.getParameter("PARAMS_SYSNAME"));
         support.putParam("url", epar.getAddr("/upload/uploadpage")); // 跳转的链接
         return support;
     }
@@ -104,6 +106,9 @@ public class UploadControl extends AbstractControl {
     @RequestMapping(value = "uploadpage")
     public String uploadPage(ModelMap model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+
+        // 附件-系统
+        model.put(PARAMS_SYSNAME, String.valueOf(session.getAttribute(PARAMS_SYSNAME)));
 
         // 标签
         String tags = String.valueOf(session.getAttribute(PARAMS_TAGS));
@@ -151,6 +156,7 @@ public class UploadControl extends AbstractControl {
      */
     @RequestMapping(value = "uploads")
     public void uploads(ModelMap model, MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
         logger.debug("开始上传");
         Support<Upload> support = new Support<Upload>();
         try {
@@ -162,7 +168,8 @@ public class UploadControl extends AbstractControl {
                 tags.add(request.getParameter(entry.getKey() + "_tag"));
             }
 
-            List<Upload> uploads = uploadService.save(multipartFiles, tags, request.getParameter("uploadgroup"));
+            String sysname = String.valueOf(session.getAttribute(PARAMS_SYSNAME));
+            List<Upload> uploads = uploadService.save(multipartFiles, sysname, tags, request.getParameter("uploadgroup"));
             if (CollectionUtils.isNotEmpty(uploads)) {
                 support.putParam("group", uploads.get(0).getGroup());
             }
