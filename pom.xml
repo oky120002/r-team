@@ -878,5 +878,6 @@
 		<module>r-app</module>
 		<module>r-boda</module>
 		<module>r-webs</module>
+		<module>r-apps</module>
 	</modules>
 </project>

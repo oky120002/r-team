@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.app.deletetool;
+package com.r.app.sample.deletetool;
 
 import java.io.File;
 import java.io.IOException;

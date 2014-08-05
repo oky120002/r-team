@@ -39,7 +39,7 @@ function submitDatas(url, formId, callback, errorback) {
 	var form;
 	// 默认值设置
 	if (formId) {
-		form = $('#' + form);
+		form = $('#' + formId);
 	} else {
 		form = $('form');
 	}
