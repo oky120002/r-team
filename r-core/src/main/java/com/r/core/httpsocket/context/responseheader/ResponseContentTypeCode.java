@@ -18,6 +18,7 @@ public enum ResponseContentTypeCode {
 	application_javascript("application/javascript", ResponseDataType.文本, "js"), // js
 	application_x_javascript("application/x-javascript", ResponseDataType.文本, "js"), // js
 	application_xhtml_xml("application/xhtml+xml", ResponseDataType.文本, "xhtml"), // xhtml
+	application_json("application/json",ResponseDataType.文本, "js"),// json
 	text_javascript("text/javascript", ResponseDataType.文本, "js"), // js
 	text_css("text/css", ResponseDataType.文本, "css"), // css
 	text_html("text/html", ResponseDataType.文本, "html"), // html
@@ -30,7 +31,7 @@ public enum ResponseContentTypeCode {
 	image_bmp("image/bmp", ResponseDataType.图片, "bmp"), // bmp
 	image_png("image/png", ResponseDataType.图片, "png"), // png
 	audio_mpeg("audio/mpeg", ResponseDataType.音频, "mp3"), // mp3
-
+	
 	;
 
 	/** response返回的ContentType字符串 */
