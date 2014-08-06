@@ -205,13 +205,13 @@ public class ResponseHeader implements Serializable {
 			IOUtils.closeQuietly(in);
 		}
 	}
-	
-	public static void main(String[] args) {
-		String[] names = ImageIO.getWriterMIMETypes();
-		for (String string : names) {
-			System.out.println(string);
-		}
-	}
+//	
+//	public static void main(String[] args) {
+//		String[] names = ImageIO.getWriterMIMETypes();
+//		for (String string : names) {
+//			System.out.println(string);
+//		}
+//	}
 
 	/**
 	 * 获得Response返回的图片
@@ -284,6 +284,40 @@ public class ResponseHeader implements Serializable {
 		}
 		return file;
 	}
+	
+	   /**
+     * 获得Response返回的文件
+     * 
+     * @return InputStream 文件流.请自己关闭此文件流
+     * @throws IOException
+     *             获取文件失败时 or 获取文件是突然断开链接时
+     */
+    public InputStream bodyToInputStream() {
+        ByteArrayInputStream in = null;
+        ResponseContentEncoding contentEncoding = getContentEncoding();
+        ResponseContentType contentType = getContentType(null);
+        ResponseDataType responseDataType = contentType.getResponseContentTypeCode().getResponseDataType();
+        if (!ResponseDataType.文件.equals(responseDataType) && !ResponseDataType.二进制流.equals(responseDataType)) {
+            throw new ContentTypeErrorException("返回状态 : {}  Response的返回Body是[{}]", getStatus().toString(), responseDataType.name());
+        }
+        try {
+            in = new ByteArrayInputStream(getBody());
+            try {
+                switch (contentEncoding) {
+                case gzip:
+                    return new GZIPInputStream(in);
+                case deflate:
+                    return in;
+                default:
+                    throw new SwitchPathException("不能识别未知的压缩类型");
+                }
+            } catch (IOException e) {
+                throw new IOReadErrorException("从Response返回的body流转换成文件时流IO转换错误", e);
+            }
+        } finally {
+//            IOUtils.closeQuietly(in);
+        }
+    }
 
 	/**
 	 * 返回内容的类型<br>

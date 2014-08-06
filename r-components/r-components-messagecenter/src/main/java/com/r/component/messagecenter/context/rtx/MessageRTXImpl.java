@@ -6,6 +6,7 @@ package com.r.component.messagecenter.context.rtx;
 import com.r.component.messagecenter.Message;
 import com.r.component.messagecenter.MessageDefaultImpl;
 import com.r.component.messagecenter.context.MessageCenterContextConfigurator;
+import com.r.component.messagecenter.exception.ErrorMessageException;
 
 /**
  * rtx消息实体
@@ -80,7 +81,7 @@ public class MessageRTXImpl extends MessageDefaultImpl implements Message, Messa
 			String[] split = super.protocol.split("/");
 			// 1:消息协议类型
 			if (!getMessageType().equals(split[0])) {
-				throw new MessageRTXException("Agreement is inconsistent with the corresponding protocol parser!");
+				throw new ErrorMessageException("Agreement is inconsistent with the corresponding protocol parser!");
 			}
 
 			// 2:消息类型
@@ -121,7 +122,7 @@ public class MessageRTXImpl extends MessageDefaultImpl implements Message, Messa
 		try {
 			this.delaytime = Integer.valueOf(split[4]);
 		} catch (Exception e) {
-			throw new MessageRTXException("The second parameter is a positive integer!");
+			throw new ErrorMessageException("The second parameter is a positive integer!");
 		}
 
 		StringBuilder sb = new StringBuilder();

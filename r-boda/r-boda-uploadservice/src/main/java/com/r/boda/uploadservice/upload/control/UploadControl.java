@@ -62,11 +62,11 @@ public class UploadControl extends AbstractControl {
 
     @Resource(name = "epar")
     private EnviromentalParameter epar;
-
+    
     public UploadControl() {
         logger.info("Instance UploadControl............................");
     }
-
+    
     /**
      * 主页
      * 

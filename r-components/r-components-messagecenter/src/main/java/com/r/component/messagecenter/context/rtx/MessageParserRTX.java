@@ -15,6 +15,7 @@ import com.r.component.messagecenter.Message;
 import com.r.component.messagecenter.MessageParser;
 import com.r.component.messagecenter.MessageParserConfigurator;
 import com.r.component.messagecenter.context.MessageCenterContextConfigurator;
+import com.r.component.messagecenter.exception.ErrorMessageException;
 import com.r.core.util.RandomUtil;
 
 /**
@@ -55,12 +56,12 @@ public class MessageParserRTX extends MessageParserConfigurator implements Messa
 			MessageRTX messageRtx = (MessageRTX) message;
 			String recipient = messageRtx.getRecipient();
 			if (recipient == null || recipient.trim().length() == 0) {
-				throw new MessageRTXException("message's recipient value is empty!");
+				throw new ErrorMessageException("message's recipient value is empty!");
 			}
 			String title = messageRtx.getTitle();
 			String content = messageRtx.getContent();
 			if (content == null || content.trim().length() == 0) {
-				throw new MessageRTXException("message's content value is empty!");
+				throw new ErrorMessageException("message's content value is empty!");
 			}
 			int delaytime = messageRtx.getDelaytime(); // 显示时间(毫秒,如果为0则手动关闭)
 
@@ -82,7 +83,7 @@ public class MessageParserRTX extends MessageParserConfigurator implements Messa
 			substring = id + "(" + index++ + "/" + sumpage + ")\r\n" + content;
 			sendNotify(recipient, title, substring, delaytime);
 		} else {
-			throw new MessageRTXException("MessageBean is not instanceof MessageRTX : [MessageBean's type is " + message.getMessageType() + "]");
+			throw new ErrorMessageException("MessageBean is not instanceof MessageRTX : [MessageBean's type is " + message.getMessageType() + "]");
 		}
 
 	}
@@ -119,10 +120,10 @@ public class MessageParserRTX extends MessageParserConfigurator implements Messa
 			logger.info("send [RTX] message : " + content);
 
 			if (!content.contains("操作成功")) {
-				throw new MessageRTXException("RTX message sending failed!");
+				throw new ErrorMessageException("RTX message sending failed!");
 			}
 		} catch (IOException e) {
-			throw new MessageRTXException("Connection RTX server fails!", e);
+			throw new ErrorMessageException("Connection RTX server fails!", e);
 		} finally {
 			if (in != null) {
 				try {
@@ -167,7 +168,7 @@ public class MessageParserRTX extends MessageParserConfigurator implements Messa
 			in.close();
 			httpconn.disconnect();
 		} catch (Exception e) {
-			throw new MessageRTXException("Connection RTX server fails!", e);
+			throw new ErrorMessageException("Connection RTX server fails!", e);
 		}
 	}
 
