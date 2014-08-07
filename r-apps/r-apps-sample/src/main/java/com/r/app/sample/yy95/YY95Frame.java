@@ -49,7 +49,7 @@ public class YY95Frame extends HBaseFrame implements ActionListener {
     private JComboBox<KV<String, String>> useridCombo = new JComboBox<KV<String, String>>(new KV[] { KV.kv("泡泡", "11581"), KV.kv("米豆", "12541") });
 
     public YY95Frame() {
-        super("投票器 - 注意换ip");
+        super("YY95活动投票器 - 注意换ip -       支持风筝,支持９３１        ９３１✦﹍     雨『闪耀筝团』");
         initStyle();
         initComponents();
     }
@@ -106,7 +106,7 @@ public class YY95Frame extends HBaseFrame implements ActionListener {
                         logger(e.toString());
                     }
                 }
-            }, String.valueOf(group % 3));
+            }, String.valueOf(group % 5));
             group++;
         }
     }
