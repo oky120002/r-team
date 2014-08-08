@@ -70,6 +70,7 @@ public class HttpUrl {
         String port = "80";
         if (token > 0) {
             port = host.substring(token + 1, host.length());
+            host = host.substring(0, token);
         }
 
         this.host = host;
@@ -81,11 +82,7 @@ public class HttpUrl {
      * @return 返回 host
      */
     public String getHost() {
-        if (port == 80) {
-            return host;
-        } else {
-            return host + ":" + port;
-        }
+        return host;
     }
 
     /**

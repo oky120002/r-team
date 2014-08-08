@@ -79,7 +79,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- 中文乱码过滤器 -->
+	<!-- 中文乱码过滤器 POST 用,GET请设置tomcat service.xml 中 port=8080 中.增加 URIEncoding="UTF-8" -->
 	<filter>
 		<filter-name>encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

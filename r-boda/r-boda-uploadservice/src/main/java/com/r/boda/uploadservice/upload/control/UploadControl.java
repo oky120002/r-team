@@ -62,11 +62,11 @@ public class UploadControl extends AbstractControl {
 
     @Resource(name = "epar")
     private EnviromentalParameter epar;
-    
+
     public UploadControl() {
         logger.info("Instance UploadControl............................");
     }
-    
+
     /**
      * 主页
      * 
@@ -277,6 +277,42 @@ public class UploadControl extends AbstractControl {
     }
 
     /**
+     * 下载文件,通过 group和tag下载文件
+     * 
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "downloadFile")
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String group = request.getParameter("group");
+        String tag = request.getParameter("tag");
+        List<Upload> uploads = null;
+        if (StringUtils.isNotBlank(tag)) {
+            uploads = uploadService.queryByGroupAndTag(group, tag);
+        } else {
+            uploads = uploadService.queryByGroup(group);
+        }
+        if (CollectionUtils.isNotEmpty(uploads) && uploads.size() == 1) {
+            Upload upload = uploads.get(0);
+            response.setContentType(upload.getFileType().getContentType());
+            response.setHeader("Content-Disposition", "attachment;fileName=" + upload.getFileName());
+            response.setHeader("Content-Length", String.valueOf(upload.getFile().length()));
+            InputStream bis = null;
+            OutputStream bos = null;
+            try {
+                bis = new FileInputStream(upload.getFilePath());
+                bos = response.getOutputStream();
+                IOUtils.copy(bis, bos);
+            } finally {
+                IOUtils.closeQuietly(bis);
+                IOUtils.closeQuietly(bos);
+            }
+        } else {
+            // 没有找到对应的附件
+        }
+    }
+
+    /**
      * pdf删除页面
      * 
      * @param fileId
@@ -358,6 +394,37 @@ public class UploadControl extends AbstractControl {
             logger.error("pdf删除页面 : {}", e.getMessage());
             model.put("error", " 附件平台内部错误 : " + e.toString());
             return "upload/errorPdfPage";
+        }
+    }
+
+    /**
+     * 判断附件是否纯在
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "isExist")
+    public void isExist(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String group = request.getParameter("group");
+        String tag = request.getParameter("tag");
+        response.setContentType("text/html; charset=utf-8");
+        List<Upload> uploads = null;
+        try {
+            if (StringUtils.isBlank(tag)) {
+                uploads = uploadService.queryByGroup(group);
+            } else {
+                uploads = uploadService.queryByGroupAndTag(group, tag);
+            }
+        } catch (Exception e) {
+            response.getWriter().print("查询附件失败 : " + e.toString());
+            return;
+        }
+        if (CollectionUtils.isNotEmpty(uploads)) {
+            response.getWriter().print("true");
+        } else {
+            response.getWriter().print("false");
         }
     }
 

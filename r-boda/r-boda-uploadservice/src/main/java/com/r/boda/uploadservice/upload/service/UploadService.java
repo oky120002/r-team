@@ -140,6 +140,21 @@ public class UploadService {
         up.setIsEnabled(true);
         return uploadDao.queryByExample(up);
     }
+    
+    /**
+     * 根据附件分组和标签查询附件
+     * 
+     * @param group
+     * @param tag
+     * @return
+     */
+    public List<Upload> queryByGroupAndTag(String group, String tag) {
+        Upload up = new Upload();
+        up.setGroup(group);
+        up.setTag(tag);
+        up.setIsEnabled(true);
+        return uploadDao.queryByExample(up);
+    }
 
     /**
      * 删除文件
