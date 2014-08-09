@@ -9,6 +9,7 @@ package com.r.core.util;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -40,7 +41,7 @@ public abstract class TaskUtil {
 	private static final String RunnableCall = "_RunnableCall";
 
 	/** 全局任务 */
-	private static final String GlobalTask = "_GLOBALTASK";
+	private static final String GlobalTask = "_GLOBALTASK_" + UUID.randomUUID().toString();
 
 	private static final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
