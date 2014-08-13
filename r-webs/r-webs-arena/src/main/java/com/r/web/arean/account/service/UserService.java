@@ -34,11 +34,11 @@ public class UserService {
     @Resource(name = "account.userDao")
     private UserDao userDao; // 用户Dao
 
-    @Resource(name = "passwordEncoder")
+    @Resource(name = "xml.spring.passwordEncoder")
     private PasswordEncoder passwordEncoder; // 密码
 
     /**
-     * 查询用户
+     * 根据用户id查询用户
      * 
      * @param id
      *            用户ID
@@ -57,16 +57,6 @@ public class UserService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
     public List<User> queryAll() {
         return userDao.queryAll();
-    }
-
-    /**
-     * 创建用户
-     * 
-     * @param user
-     */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-    public void createUser(User user) {
-        userDao.create(user);
     }
 
     /**
@@ -135,20 +125,5 @@ public class UserService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void deleteUser(User user) {
         userDao.delete(user);
-    }
-
-    /**
-     * 删除所有用户
-     * 
-     * @return integer 删除实体个数
-     */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-    public int deleteAllUser() {
-        return userDao.deleteAll();
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-    public void us(User user) {
-        userDao.updateOrDeleteByHql("update " + User.class.getName() + " set id = '0' where id = '" + user.getId() + "'", null);
     }
 }

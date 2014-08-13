@@ -20,6 +20,10 @@ public class KV<K, V> implements Map.Entry<K, V> {
         return kv;
     }
 
+    public void setKey(K key) {
+        this.key = key;
+    }
+
     @Override
     public K getKey() {
         return key;

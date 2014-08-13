@@ -35,8 +35,7 @@
 		<form-login login-page="/login" default-target-url="/main" always-use-default-target="true" />
 
 		<!-- 配置登出页面 -->
-		<logout invalidate-session="true" logout-url="/logout"
-			logout-success-url="/login" delete-cookies="JSESSIONID" />
+		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login" delete-cookies="JSESSIONID" />
 
 		<!-- 实现免登陆验证 ,启用后会记住登陆的session方便下次登陆.如果auto-config="true" 会自动启用 -->
 		<remember-me />
@@ -44,8 +43,7 @@
 		<!-- 配置session超时 -->
 		<session-management invalid-session-url="/login">
 			<!-- 只能允许登陆一次 -->
-			<concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="true" />
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</session-management>
 
 	</http>
@@ -53,24 +51,21 @@
 	<!-- 自定义权限管理 -->
 	<authentication-manager>
 		<!-- 自定义的权限提供器 -->
-		<authentication-provider ref="authenticationProvider" />
+		<authentication-provider ref="xml.spring.authenticationProvider" />
 	</authentication-manager>
 
 	<!-- 密码编码器 -->
-	<beans:bean id="passwordEncoder"
-		class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+	<beans:bean id="xml.spring.passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
 	<!-- 用户获取器 -->
-	<beans:bean id="userDetailsService"
-		class="com.r.boda.uploadservice.user.service.UserDetailsService" />
+	<beans:bean id="xml.spring.userDetailsService" class="com.r.web.arean.account.service.UserDetailsService" />
 
 	<!-- 权限提供器 -->
-	<beans:bean id="authenticationProvider"
+	<beans:bean id=""xml.spring.authenticationProvider""
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<beans:property name="userDetailsService" ref="userDetailsService" />
-		<beans:property name="passwordEncoder" ref="passwordEncoder" />
-		<beans:property name="hideUserNotFoundExceptions"
-			value="false" />
+		<beans:property name="userDetailsService" ref="xml.spring.userDetailsService" />
+		<beans:property name="passwordEncoder" ref="xml.spring.passwordEncoder" />
+		<beans:property name="hideUserNotFoundExceptions" value="false" />
 	</beans:bean>
 
 	<!-- 国际化.这个Bean的id是定死的，只能为“messageSource”。 -->

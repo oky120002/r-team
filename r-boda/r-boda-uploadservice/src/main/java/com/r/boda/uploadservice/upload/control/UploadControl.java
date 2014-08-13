@@ -292,7 +292,7 @@ public class UploadControl extends AbstractControl {
         } else {
             uploads = uploadService.queryByGroup(group);
         }
-        if (CollectionUtils.isNotEmpty(uploads) && uploads.size() == 1) {
+        if (CollectionUtils.isNotEmpty(uploads) && uploads.size() == 1) { 
             Upload upload = uploads.get(0);
             response.setContentType(upload.getFileType().getContentType());
             response.setHeader("Content-Disposition", "attachment;fileName=" + upload.getFileName());

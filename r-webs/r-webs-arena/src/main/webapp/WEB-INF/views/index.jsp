@@ -9,12 +9,6 @@
 <script src="<c:url value="/res/js/upload.client.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
-	function show(){
-		showUploadDialog({
-			group : "r-boda-test",
-			tags : "abcd,efgh,321123,111111111111",
-		});
-	}
 </script>
 
 <title>测试页面</title>

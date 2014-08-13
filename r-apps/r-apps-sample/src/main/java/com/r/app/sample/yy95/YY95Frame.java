@@ -61,9 +61,10 @@ public class YY95Frame extends HBaseFrame implements ActionListener {
 	}; // 投票对象数组
 
 	private static final StrIntKV[] sudu = new StrIntKV[] { 
-			StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1秒1个账号          好吧.这个速度明显有点异常了            支持菇凉,支持931", 1, null), //
+	        StrIntKV.accountKV("┊      ➣ 　 安心啦             每5秒1个账号          10M光纤,脚本能达到的速度               支持菇凉,支持931", 5, null), //
 			StrIntKV.accountKV("┊      ➣ 　 超级安全           每10秒1个账号         一般网络,脚本能达到的速度              支持菇凉,支持931", 10, null), //
 			StrIntKV.accountKV("┊      ➣ 　 安心啦             每5秒1个账号          10M光纤,脚本能达到的速度               支持菇凉,支持931", 5, null), //
+			StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1秒1个账号          好吧.这个速度明显有点异常了            支持菇凉,支持931", 1, null), //
 			StrIntKV.accountKV("┊      ➣ 　 微笑哦             每3秒1个账号          电信内部网络,高手的脚本能达到的速度    支持菇凉,支持931", 3, null), //
 			StrIntKV.accountKV("┊      ➣ 　 画个圈圈诅咒你     3线程并行,无间隔      刘翔都没有这个快                       支持菇凉,支持931", -3, null), //
 			StrIntKV.accountKV("┊      ➣ 　 扎小人             5线程并行,无间隔      你造嘛,这个速度,已经突破天际了         支持菇凉,支持931", -5, null), //

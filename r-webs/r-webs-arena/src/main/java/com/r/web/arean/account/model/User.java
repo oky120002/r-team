@@ -48,7 +48,7 @@ public class User implements UserDetails {
 	@Column(name = "nickname")
 	private String nickname;
 
-	// spring security 必要属性
+	//------------ spring security 必要属性
 
 	/** 用户名 */
 	@Column(name = "username", unique = true, nullable = false)
