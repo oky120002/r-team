@@ -8,14 +8,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.r.boda.uploadservice.upload.model.Upload;
-import com.r.core.log.Logger;
-import com.r.core.log.LoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/*.xml" })
 public class UploadServiceTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(UploadServiceTest.class); // 日志
+//	private static final Logger logger = LoggerFactory.getLogger(UploadServiceTest.class); // 日志
 
 	@Resource(name = "upload.uploadService")
 	private UploadService uploadService;

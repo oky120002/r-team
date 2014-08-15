@@ -49,14 +49,12 @@ public class TaoBaoLoginFrame extends HBaseFrame implements ActionListener {
 
 
     private void initComponents() {
-        // TODO Auto-generated method stub
         
     }
 
 
 
     private void initListeners() {
-        // TODO Auto-generated method stub
         
     }
 }
