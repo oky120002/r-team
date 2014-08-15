@@ -73,7 +73,7 @@ public class BlueSkyResolve {
 				task.setTaskPublishingTime(sdf.parse(time));
 			} catch (ParseException e) {
 			}
-
+			
 			// 几天好评
 			td = StringUtils.substringBetween(html, "<td width=\"80\"", "</td>");
 			resolveTaskListByTimeLimit(task, td);

@@ -3,13 +3,10 @@
  */
 package com.r.web.support.service;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
-import com.r.web.user.service.UserService;
 
 /**
  * @author Administrator
@@ -24,8 +21,8 @@ public class InitSystemService {
 		logger.info("Instance InitSystemService............................");
 	}
 
-	@Resource(name = "user.userService")
-	private UserService userService;
+//	@Resource(name = "user.userService")
+//	private UserService userService;
 
 	/**
 	 * 初始化系统管理员账号

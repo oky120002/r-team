@@ -70,7 +70,7 @@
 			dataType : 'json',
 			success : function(data, status) {
 				alert(data.tips);
-				reload.click();
+				reload.click(); 
 			},
 			error : function(xml, status, errorThrown) {
 				stopProgress();

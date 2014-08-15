@@ -100,7 +100,6 @@ public class CnProxyMatcher implements FindProxyMatcher {
 	}
 
 	private void resloveTr(String tr) {
-		// XXX r-core:findproxy 这里效率问题.需要修改
 		int index = 0;
 		int curPos = 0;
 		String ip = null;

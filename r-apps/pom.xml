@@ -20,5 +20,7 @@
   <modules>
     <module>r-apps-taobaoshua</module>
     <module>r-apps-sample</module>
+    <module>r-apps-qqmingame</module>
+    <module>r-apps-qqminigame</module>
   </modules>
 </project>
