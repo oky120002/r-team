@@ -8,6 +8,7 @@ public enum FileType {
     gif("image/gif", ResponseDataType.image), //
     ico("image/x-icon", ResponseDataType.image), //
     tiff("image/tiff", ResponseDataType.image), //
+    tif("image/tiff", ResponseDataType.image), //
     bmp("image/bmp", ResponseDataType.image), //
     txt("text/plain", ResponseDataType.txt), //
     sql("text/plain", ResponseDataType.txt), //
@@ -55,7 +56,8 @@ public enum FileType {
      */
     public static FileType re(String fileName) {
         try {
-            FileType valueOf = FileType.valueOf(fileName.substring(fileName.lastIndexOf('.') + 1));
+            String lowerCase = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+            FileType valueOf = FileType.valueOf(lowerCase);
             return valueOf == null ? FileType.binary : valueOf;
         } catch (Exception e) {
             return FileType.binary;

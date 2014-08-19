@@ -105,9 +105,8 @@
 
 	/**删除文件*/
 	function deleteFile(id) {
-		var url = '<c:url value="/upload/deleteUpload/false/" />' + id;
+		var url = '<c:url value="/upload/deleteUpload/" />' + id;
 		submitDatas(url, null, function(data) {
-			// 如果有标签功能.则不能进行自由的添加附件
 			reload.click();
 		}, function(message) {
 			alert(message);
@@ -135,7 +134,7 @@
 	/*向pdf插入页面*/
 	function insertPdf(id){
 		var url = '<c:url value="/upload/insertPdfPage/" />' + id;
-		window.showModalDialog(url, null, "dialogWidth=800px;dialogHeight=600px");
+		window.showModalDialog(url, null, "dialogWidth=500px;dialogHeight=50px");
 	}
 	
 	function isInArrays(target,arr){
