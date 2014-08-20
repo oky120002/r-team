@@ -7,7 +7,11 @@
 package com.r.app.sample.yy95;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 import com.r.core.desktop.ctrl.HCtrlUtil;
 
@@ -16,7 +20,7 @@ import com.r.core.desktop.ctrl.HCtrlUtil;
  * 
  * @author rain
  */
-public class YY95 {
+public class YYVote {
 
     public static void main(String[] args) throws IOException {
         HCtrlUtil.setNoSpot();
@@ -25,7 +29,7 @@ public class YY95 {
         EventQueue.invokeLater(new Runnable(){
             @Override
             public void run() {
-                new YY95Frame().setVisible(true);
+                new YYVoteFrame().setVisible(true);
             }
         });
     }

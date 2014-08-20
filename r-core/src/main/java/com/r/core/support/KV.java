@@ -9,8 +9,8 @@ import java.util.Map;
  * @version 版本号, 2013-10-14
  */
 public class KV<K, V> implements Map.Entry<K, V> {
-	public K key;
-	public V value;
+	protected K key;
+	protected V value;
 
 	/** 创建"键值对" */
 	public static <K, V> KV<K, V> kv(K key, V value) {
