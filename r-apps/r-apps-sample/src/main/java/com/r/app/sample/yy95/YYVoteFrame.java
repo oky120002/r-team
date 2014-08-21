@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -49,18 +50,23 @@ public class YYVoteFrame extends HBaseFrame implements ActionListener {
     private static final Logger logger = LoggerFactory.getLogger(YYVoteFrame.class);
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
 
-    private static final StrIntKV[] sudu = new StrIntKV[] { StrIntKV.accountKV("┊      ➣ 　 最爱菇凉           每11~16秒1个账号         一般拨号,脚本能达到的速度              支持菇凉,支持931", 11, 16, null), //
+    private static final StrIntKV[] sudu = new StrIntKV[] { 
+            StrIntKV.accountKV("┊      ➣ 　 最爱菇凉           每11~16秒1个账号         一般拨号,脚本能达到的速度              支持菇凉,支持931", 11, 16, null), //
             StrIntKV.accountKV("┊      ➣ 　 心情舒畅           每8~13秒1个账号          10M拨号,脚本能达到的速度               支持菇凉,支持931", 8, 13, null), //
             StrIntKV.accountKV("┊      ➣ 　 安心啦             每5~10秒1个账号          10M光纤,脚本能达到的速度               支持菇凉,支持931", 5, 10, null), //
-    // StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1秒1个账号          好吧.这个速度明显有点异常了            支持菇凉,支持931",
-    // 1, null), //
-    // StrIntKV.accountKV("┊      ➣ 　 微笑哦             每3秒1个账号          电信内部网络,高手的脚本能达到的速度    支持菇凉,支持931",
-    // 3, null), //
-    // StrIntKV.accountKV("┊      ➣ 　 画个圈圈诅咒你     3线程并行,无间隔      刘翔都没有这个快                       支持菇凉,支持931",
-    // -3, null), //
-    // StrIntKV.accountKV("┊      ➣ 　 扎小人             5线程并行,无间隔      你造嘛,这个速度,已经突破天际了         支持菇凉,支持931",
-    // -5, null), //
+//            StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1~2秒1个账号          好吧.这个速度明显有点异常了            支持菇凉,支持931", 1, 2, null), //
+//            StrIntKV.accountKV("┊      ➣ 　 画个圈圈诅咒你     3线程并行,无间隔      刘翔都没有这个快                       支持菇凉,支持931", -3, null, null), //
+//            StrIntKV.accountKV("┊      ➣ 　 扎小人             5线程并行,无间隔      你造嘛,这个速度,已经突破天际了         支持菇凉,支持931", -5, null, null), //
     }; // 投票对象数组
+    
+    private static final StrIntKV[] sudu2 = new StrIntKV[] { 
+        StrIntKV.accountKV("┊      ➣ 　 最爱菇凉           每11~16秒1个账号         一般拨号,脚本能达到的速度              支持菇凉,支持931", 11, 16, null), //
+        StrIntKV.accountKV("┊      ➣ 　 心情舒畅           每8~13秒1个账号          10M拨号,脚本能达到的速度               支持菇凉,支持931", 8, 13, null), //
+        StrIntKV.accountKV("┊      ➣ 　 安心啦             每5~10秒1个账号          10M光纤,脚本能达到的速度               支持菇凉,支持931", 5, 10, null), //
+        StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1~2秒1个账号           好吧.这个速度明显有点异常了            支持菇凉,支持931", 1, 2, null), //
+        StrIntKV.accountKV("┊      ➣ 　 画个圈圈诅咒你     3线程并行,无间隔         刘翔都没有这个快                       支持菇凉,支持931", -3, null, null), //
+        StrIntKV.accountKV("┊      ➣ 　 扎小人             5线程并行,无间隔         你造嘛,这个速度,已经突破天际了         支持菇凉,支持931", -5, null, null), //
+}; // 投票对象数组
 
     private HInfoPanel text = new HInfoPanel();
     private JTextArea account = new JTextArea();
@@ -84,8 +90,13 @@ public class YYVoteFrame extends HBaseFrame implements ActionListener {
         } else { // 喜欢
             String inputValue = JOptionPane.showInputDialog("请输入菇凉工会的直播间id:");
             if (!"931".equals(inputValue)) { // 正确
-                JOptionPane.showMessageDialog(this, "你最爱菇凉.怎么会连菇凉工会直播间都不知道.请离开,黑粉", "黑粉", JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
+                if ("0619".equals(inputValue)) { // 作弊码
+//                    isZuobi = true;
+                    suduCombo.setModel(new DefaultComboBoxModel<StrIntKV>(sudu2));
+                } else {
+                    JOptionPane.showMessageDialog(this, "你最爱菇凉.怎么会连菇凉工会直播间都不知道.请离开,黑粉", "黑粉", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
             }
         }
 
