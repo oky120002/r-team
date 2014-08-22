@@ -32,12 +32,23 @@ public class VoteContext {
 
     }
 
+    /**
+     * 随机返回一个问卷
+     * 
+     * @param size
+     *            voteSize 问卷项数量
+     * @return
+     */
+    public Vote randomVote(int size) {
+        return new Vote();
+    }
+
     /** 随机返回一个问卷 */
     public Vote randomVote() {
         return null;
     }
 
-    /** 随机返回一个问题 */
+    /** 随机返回一个问卷项 */
     public VoteItem randomVoteItem() {
         return null;
     }

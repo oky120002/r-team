@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.r.app.sample.vote.context.VoteContext;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.desktop.ctrl.HBaseScrollPane;
@@ -66,7 +67,7 @@ public class YYVoteFrame extends HBaseFrame implements ActionListener {
         StrIntKV.accountKV("┊      ➣ 　 瞪着你             每1~2秒1个账号           好吧.这个速度明显有点异常了            支持菇凉,支持931", 1, 2, null), //
         StrIntKV.accountKV("┊      ➣ 　 画个圈圈诅咒你     3线程并行,无间隔         刘翔都没有这个快                       支持菇凉,支持931", -3, null, null), //
         StrIntKV.accountKV("┊      ➣ 　 扎小人             5线程并行,无间隔         你造嘛,这个速度,已经突破天际了         支持菇凉,支持931", -5, null, null), //
-}; // 投票对象数组
+    }; // 投票对象数组
 
     private HInfoPanel text = new HInfoPanel();
     private JTextArea account = new JTextArea();
@@ -159,6 +160,11 @@ public class YYVoteFrame extends HBaseFrame implements ActionListener {
         text.printlnInfo("柒烟 我宣你");
         text.printlnInfo("柒烟 我宣你");
         text.printlnInfo("柒烟 我宣你");
+        
+        
+        VoteContext voteContext = VoteContext.getInstance();
+        
+        voteContext.randomVote()
 
     }
 
