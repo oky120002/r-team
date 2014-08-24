@@ -3,53 +3,87 @@
  */
 package com.r.app.sample.vote.context;
 
-import java.util.Collection;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.r.app.sample.vote.Vote;
+import org.apache.commons.io.FileUtils;
+
 import com.r.app.sample.vote.VoteItem;
+import com.r.app.sample.vote.VoteItemType;
+import com.r.app.sample.vote.VoteItemXmlLoader;
+import com.r.core.util.RandomUtil;
+import com.r.core.util.XStreamUtil;
 
 /**
  * @author oky
  * 
  */
 public class VoteContext {
-    private static VoteContext context; // 问答容器
+	private static VoteContext context; // 问答容器
+	private List<VoteItem> votes = new ArrayList<VoteItem>(); // 加载顺序保存问卷项
+	private Map<String, VoteItem> voteItems = new HashMap<String, VoteItem>(); // 按照id保存问卷项
+	private Map<VoteItemType, List<VoteItem>> voteItemTypes = new HashMap<VoteItemType, List<VoteItem>>();// 按照问卷项类型保存问卷项
 
-    private Collection<VoteItem> votes; // 所有问题
+	/** 初始化方法 */
+	public static VoteContext init() {
+		if (VoteContext.context == null) {
+			VoteContext.context = new VoteContext();
+			VoteContext.context.loadVotes();
+		}
+		return VoteContext.getInstance();
+	}
 
-    /** 初始化方法 */
-    public static void init() {
-        VoteContext.context = new VoteContext();
-    }
+	public static VoteContext getInstance() {
+		return VoteContext.context;
+	}
 
-    public static VoteContext getInstance() {
-        return VoteContext.context;
-    }
+	/** 加载问答数据 */
+	private void loadVotes() {
+		// 先从本地加载xml,以后阿里云服务器后,从网络加载
 
-    /** 加载问答数据 */
-    private void loadVotes() {
-        // 先从本地加载xml,以后阿里云服务器后,从网络加载
+		for (VoteItemType type : VoteItemType.values()) {
+			VoteContext.context.voteItemTypes.put(type, new ArrayList<VoteItem>());
+		}
 
-    }
+		String xml = null;
+		try {
+			xml = FileUtils.readFileToString(new File("vote/vote.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		VoteItemXmlLoader xmlLoader = XStreamUtil.fromXML(VoteItemXmlLoader.class, xml);
 
-    /**
-     * 随机返回一个问卷
-     * 
-     * @param size
-     *            voteSize 问卷项数量
-     * @return
-     */
-    public Vote randomVote(int size) {
-        return new Vote();
-    }
+		for (VoteItem vi : xmlLoader.getVoteItems()) {
+			votes.add(vi);
+			voteItems.put(vi.getId(), vi);
+			voteItemTypes.get(vi.getType()).add(vi);
+		}
+	}
 
-    /** 随机返回一个问卷 */
-    public Vote randomVote() {
-        return null;
-    }
+	/** 随机返回问卷项集合 */
+	public List<VoteItem> randomVoteItems(int size) {
+		int voteSize = votes.size();
+		List<VoteItem> voteList = new ArrayList<VoteItem>();
+		if (voteSize > 0) {
+			for (int i = 0; i < size && i < voteSize; i++) {
+				voteList.add(randomNextVoteItem());
+			}
+		}
+		return voteList;
+	}
 
-    /** 随机返回一个问卷项 */
-    public VoteItem randomVoteItem() {
-        return null;
-    }
+	/** 随机返回下一个问卷项 */
+	public VoteItem randomNextVoteItem() {
+		return votes.get(RandomUtil.randomInteger(0, votes.size()));
+	}
+
+	/** 问卷项个数 */
+	public int getVoteItemSize() {
+		return this.votes.size();
+	}
 }

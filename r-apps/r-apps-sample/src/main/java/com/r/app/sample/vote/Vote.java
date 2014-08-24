@@ -1,13 +1,25 @@
+/**
+ * 
+ */
 package com.r.app.sample.vote;
 
-import java.util.Collection;
+import java.util.Iterator;
 
-public class Vote {
-    private String name; // 文件名称
-    private Collection<VoteItem> voteItems;
+/**
+ * 问卷
+ * 
+ * @author Administrator
+ *
+ */
+public interface Vote extends Iterable<VoteItem> {
 
-    /** 返回下一道问题项 */
-    public VoteItem nextVoteItem() {
-        return null;
-    }
+	/** 获得问卷名称 */
+	String getName();
+
+	/** 获得问题项数量 */
+	int size();
+
+	/** 获得问题项的迭代器,如果没有问题项则返回null */
+	@Override
+	Iterator<VoteItem> iterator();
 }

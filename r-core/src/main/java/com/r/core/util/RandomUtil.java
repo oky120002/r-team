@@ -57,7 +57,7 @@ public final class RandomUtil {
 
 	/**
 	 * 
-	 * 产生[minNumber,maxNumber)之间的随机整数<br />
+	 * 产生[minNumber,maxNumber)之间的随机正整数<br />
 	 * minNumber
 	 * 
 	 * @param minNumber
@@ -67,6 +67,10 @@ public final class RandomUtil {
 	 * @return int [minNumber,maxNumber)之间的随机整数
 	 */
 	public static int randomInteger(int minNumber, int maxNumber) {
+		if (minNumber < 0 || maxNumber < 0) {
+			throw new IllegalArgumentException("minNumber 和 maxNumber 必须是非负数");
+		}
+
 		if (minNumber == maxNumber) { // 如果最大值等于最小值,则返回0
 			return 0;
 		}
@@ -75,6 +79,7 @@ public final class RandomUtil {
 			maxNumber ^= minNumber;
 			minNumber ^= maxNumber;
 		}
+
 		return random.nextInt(maxNumber - minNumber) + minNumber;
 	}
 
@@ -120,7 +125,8 @@ public final class RandomUtil {
 	/**
 	 * 
 	 * 返回随机生成的汉字 <br />
-	 * 原理是从汉字区位码找到汉字。 在汉字区位码中分高位与底位，且其中简体又有繁体。 位数越前生成的汉字繁体的机率越大。 所以在本方法中高位从176取，底位从161取，去掉大部分的繁体和生僻字。 但仍然会有.
+	 * 原理是从汉字区位码找到汉字。 在汉字区位码中分高位与底位，且其中简体又有繁体。 位数越前生成的汉字繁体的机率越大。
+	 * 所以在本方法中高位从176取，底位从161取，去掉大部分的繁体和生僻字。 但仍然会有.
 	 * 
 	 * @return String 随机汉字
 	 * @exception throws UnsupportedEncodingException 不支持GBK编码
