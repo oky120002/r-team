@@ -19,5 +19,6 @@
 	<modules>
 		<module>r-webs-arena</module>
     <module>r-webs-sample</module>
+    <module>r-webs-vote931</module>
   </modules>
 </project>

@@ -1,4 +1,4 @@
-package com.r.boda.uploadservice.core;
+package com.r.web.vote931.support;
 
 import java.util.Map;
 
@@ -8,43 +8,43 @@ import java.util.Map;
  * @author oky
  * @version 版本号, 2013-10-14
  */
-public class KV<K, V> implements Map.Entry<K, V> {
-    public K key;
-    public V value;
+public class KekValue<Key, Value> implements Map.Entry<Key, Value> {
+    public Key key;
+    public Value value;
 
     /** 创建"键值对" */
-    public static <K, V> KV<K, V> kv(K key, V value) {
-        KV<K, V> kv = new KV<K, V>();
+    public static <K, V> KekValue<K, V> kv(K key, V value) {
+        KekValue<K, V> kv = new KekValue<K, V>();
         kv.key = key;
         kv.value = value;
         return kv;
     }
 
-    public void setKey(K key) {
+    public void setKey(Key key) {
         this.key = key;
     }
 
     @Override
-    public K getKey() {
+    public Key getKey() {
         return key;
     }
 
     @Override
-    public V getValue() {
+    public Value getValue() {
         return value;
     }
 
     @Override
-    public V setValue(V value) {
+    public Value setValue(Value value) {
         return this.value = value;
     }
 
     @SuppressWarnings("rawtypes")
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof KV))
+        if (!(o instanceof KekValue))
             return false;
-        KV e = (KV) o;
+        KekValue e = (KekValue) o;
         Object k1 = getKey();
         Object k2 = e.getKey();
         if (k1 == k2 || (k1 != null && k1.equals(k2))) {
