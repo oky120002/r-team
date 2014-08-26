@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.vote931.support;
+package com.r.web.vote931.support.bean;
 
 import java.util.ArrayList;
 import java.util.HashMap;

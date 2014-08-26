@@ -1,9 +1,11 @@
-package com.r.web.vote931.support;
+package com.r.web.vote931.support.abs;
 
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.criterion.Order;
+
+import com.r.web.vote931.support.bean.KeyValue;
 
 /**
  * 
@@ -356,7 +358,7 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryByHql(CharSequence hql, KekValue<String, ?>... keyValues);
+    public List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues);
     
     /**
      * 
@@ -425,7 +427,7 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryBySql(CharSequence sql, KekValue<String, ?>... keyValues);
+    public List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues);
     
     /**
      * 

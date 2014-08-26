@@ -11,9 +11,9 @@
 <script type="text/javascript">
 </script>
 
-<title>测试页面</title>
+<title>index</title>
 </head>
 <body>
-	<input type="button" onclick='show();' value="上传">
+	Vote!
 </body>
 </html>

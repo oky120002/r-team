@@ -21,7 +21,7 @@
 	<mvc:resources mapping="/res/**" location="/WEB-INF/res/" />
 
 	<!-- 扫描并自动装配Control -->
-	<context:component-scan base-package="com.r.boda" use-default-filters="false">
+	<context:component-scan base-package="com.r" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 

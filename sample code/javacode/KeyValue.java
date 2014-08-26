@@ -1,4 +1,4 @@
-package com.r.web.vote931.support;
+package com.r.web.vote931.support.bean;
 
 import java.util.Map;
 
@@ -8,13 +8,13 @@ import java.util.Map;
  * @author oky
  * @version 版本号, 2013-10-14
  */
-public class KekValue<Key, Value> implements Map.Entry<Key, Value> {
+public class KeyValue<Key, Value> implements Map.Entry<Key, Value> {
     public Key key;
     public Value value;
 
     /** 创建"键值对" */
-    public static <K, V> KekValue<K, V> kv(K key, V value) {
-        KekValue<K, V> kv = new KekValue<K, V>();
+    public static <K, V> KeyValue<K, V> kv(K key, V value) {
+        KeyValue<K, V> kv = new KeyValue<K, V>();
         kv.key = key;
         kv.value = value;
         return kv;
@@ -42,9 +42,9 @@ public class KekValue<Key, Value> implements Map.Entry<Key, Value> {
     @SuppressWarnings("rawtypes")
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof KekValue))
+        if (!(o instanceof KeyValue))
             return false;
-        KekValue e = (KekValue) o;
+        KeyValue e = (KeyValue) o;
         Object k1 = getKey();
         Object k2 = e.getKey();
         if (k1 == k2 || (k1 != null && k1.equals(k2))) {

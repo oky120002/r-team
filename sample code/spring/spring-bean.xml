@@ -7,11 +7,8 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-	<bean id="epar" class="com.r.boda.uploadservice.core.EnviromentalParameter">
-		<!-- ip -->
-		<property name="addr" value="http://190.100.100.50:8080/boda/" />
-		<property name="fileSavePath" value="D:\\boda\\upload"	/>
-<!-- 		<property name="addr" value="http://192.168.0.154:8080/boda/" /> -->
-<!-- 		<property name="fileSavePath" value="/home/boda/upload"	/> -->
-	</bean>
+	<!-- <bean id="epar" class="com.r.boda.uploadservice.core.EnviromentalParameter"> -->
+	<!-- <property name="addr" value="http://190.100.100.50:8080/boda/" /> -->
+	<!-- <property name="fileSavePath" value="D:\\boda\\upload" /> -->
+	<!-- </bean> -->
 </beans>

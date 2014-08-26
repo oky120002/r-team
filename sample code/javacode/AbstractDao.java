@@ -1,4 +1,4 @@
-package com.r.boda.uploadservice.core;
+package com.r.web.vote931.support;
 
 import java.util.List;
 import java.util.Map;
@@ -356,7 +356,7 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryByHql(CharSequence hql, KV<String, ?>... keyValues);
+    public List<T> queryByHql(CharSequence hql, KekValue<String, ?>... keyValues);
     
     /**
      * 
@@ -425,7 +425,7 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryBySql(CharSequence sql, KV<String, ?>... keyValues);
+    public List<T> queryBySql(CharSequence sql, KekValue<String, ?>... keyValues);
     
     /**
      * 

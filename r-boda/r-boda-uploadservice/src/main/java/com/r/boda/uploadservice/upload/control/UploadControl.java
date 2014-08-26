@@ -75,7 +75,7 @@ public class UploadControl extends AbstractControl {
      * @return 页面路径
      */
     @RequestMapping(value = "index")
-    public String index(ModelMap model, HttpServletRequest request) {
+    public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         return "index";
     }
 

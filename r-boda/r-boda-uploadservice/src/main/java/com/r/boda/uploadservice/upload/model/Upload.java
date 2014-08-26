@@ -25,11 +25,11 @@ public class Upload implements Serializable {
     private String id;
 
     /** 文件名 */
-    @Column
+    @Column(length = 1024)
     private String fileName;
 
     /** 文件实际地址 */
-    @Column
+    @Column(length = 1024)
     private String filePath;
 
     @Column
@@ -37,11 +37,11 @@ public class Upload implements Serializable {
 
     /** 文件分组 */
     // group在某些数据库中是关键字,不能用作列名
-    @Column(name = "_group")
+    @Column(name = "_group", length = 1024)
     private String group;
 
     /** 此上传文件的标签 */
-    @Column
+    @Column(length = 1024)
     private String tag;
 
     /** 是否启用 */
