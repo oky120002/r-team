@@ -420,6 +420,11 @@ public class BlueSkyResolve {
 			} else {
 				task.setIsBaoGuo(Boolean.FALSE);
 			}
+			
+			// 判断"指定地址"..不止这里一处
+			if (0 < td.indexOf("收货地址")) {
+				task.setIsUpdateAddr(Boolean.TRUE);
+			}
 
 			// 判断改价..不止这里一处
 			if (0 < td.indexOf("改价")) {
