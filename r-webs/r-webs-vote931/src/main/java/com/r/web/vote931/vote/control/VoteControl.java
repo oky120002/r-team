@@ -24,7 +24,7 @@ import com.r.web.vote931.vote.service.VoteService;
 @RequestMapping(value = "/vote")
 public class VoteControl extends AbstractControl {
 
-    @Resource(name = "vote.service.vote")
+    @Resource(name = "vote.service.vote") 
     private VoteService voteService;
 
     /**
@@ -37,5 +37,4 @@ public class VoteControl extends AbstractControl {
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         return "index";
     }
-
 }

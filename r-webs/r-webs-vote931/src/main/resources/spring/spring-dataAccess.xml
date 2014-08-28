@@ -10,12 +10,9 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- h2 -->
-<!-- 		<property name="driverClassName" value="org.h2.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:h2:D:/rainteam/h2db/r-web-vote931/db" /> -->
-<!-- 		<property name="username" value="db" /> -->
-<!-- 		<property name="password" value="db" /> -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" />
+<!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" /> -->
+		<property name="url" value="jdbc:mysql://192.168.1.100:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" />
 		<property name="username" value="root" />
 		<property name="password" value="root4567" />
 
@@ -42,8 +39,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- hibernate方言 -->
-				<prop key="hibernate.dialect"> 	org.hibernate.dialect.MySQLInnoDBDialect</prop>
-<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<!-- 显示sql语句 -->
 				<prop key="hibernate.show_sql">true</prop>
 				<!-- 格式化sql语句 -->
@@ -57,9 +53,9 @@
 	</bean>
 	
 	<bean id="mysqlSequence" class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer" >
-		<property name="incrementerName" value="auto_sequence" />
+		<property name="incrementerName" value="tab_sequence" />
 		<property name="columnName" value="value" />
-		<property name="cacheSize" value="1" />
+		<property name="cacheSize" value="10" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

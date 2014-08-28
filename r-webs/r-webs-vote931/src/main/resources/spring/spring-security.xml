@@ -13,6 +13,8 @@
 	<!-- 过滤掉不需要权限控制的URL,这里一般放置静态路径,因为不需要判断是否有登陆,如果需要判断,则必须在http子节点中配置 -->
 	<http pattern="/res/**" security="none" />
 	<http pattern="/vote/**" security="none" />
+	<!-- 暂时跳过后台管理页面的控制 -->
+	<http pattern="/admin/**" security="none" />
 
 	<!-- 配置http -->
 	<http access-denied-page="/denied" auto-config="true">
@@ -55,19 +57,16 @@
 	</authentication-manager>
 
 	<!-- 密码编码器 -->
-	<beans:bean id="passwordEncoder"
-		class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
 	<!-- 用户获取器 -->
 	<beans:bean id="userDetailsService" class="com.r.web.vote931.user.service.UserDetailsService" />
 
 	<!-- 权限提供器 -->
-	<beans:bean id="authenticationProvider"
-		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+	<beans:bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		<beans:property name="userDetailsService" ref="userDetailsService" />
 		<beans:property name="passwordEncoder" ref="passwordEncoder" />
-		<beans:property name="hideUserNotFoundExceptions"
-			value="false" />
+		<beans:property name="hideUserNotFoundExceptions" value="false" />
 	</beans:bean>
 
 	<!-- 国际化.这个Bean的id是定死的，只能为“messageSource”。 -->

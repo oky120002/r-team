@@ -44,7 +44,7 @@
 					<map>
 		                <entry key="atom" value="application/atom+xml" />
 		                <entry key="htm" value="text/html" /><!-- 真正静态页面，使用html后缀(文件格式) -->
-		                <entry key="json" value="application/json" />
+		                <entry key="json" value="application/json" /><!-- 支持HTML5的浏览器才支持此文件格式 -->
 		                <entry key="xml" value="application/xml" />
 					</map>
 				</property>
