@@ -141,8 +141,8 @@ input.button_08:active,button.button_08:active{ width:111px; height:26px; line-h
 input.button_10:active,button.button_10:active{ width:143px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/buttonbg_hover.gif) 0px -135px no-repeat;}
 
 /*导航条*/
-.dmenu{ height:30px; line-height:30px; background:url(../images/dmenubg.gif) repeat-x;}
-.dmenu p.arrow{ background:url(../images/arrow.gif) left center no-repeat; height:30px; padding-left:15px; color:#FFF; font-size:14px; margin-left:20px;text-align:left;}
+.dmenu{ height:30px; line-height:30px; background:url(../images/navigation/dmenubg.gif) repeat-x;}
+.dmenu p.arrow{ background:url(../images/navigation/arrow.gif) left center no-repeat; height:30px; padding-left:15px; color:#FFF; font-size:14px; margin-left:20px;text-align:left;}
 .dmenu ul.icon{ float:right;} 
 .dmenu ul.icon li{ float:left; margin-right:10px;}
 .dmenu ul.icon li a { padding-left:5px; color:#FFF; font-size:12px;}

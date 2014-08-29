@@ -11,9 +11,9 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- h2 -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-<!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" /> -->
-		<property name="url" value="jdbc:mysql://192.168.1.100:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" />
-		<property name="username" value="root" />
+		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" />
+<!-- 		<property name="url" value="jdbc:mysql://192.168.1.100:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" /> -->
+		<property name="username" value="root" /> 
 		<property name="password" value="root4567" />
 
 		<property name="maxActive" value="100" />	

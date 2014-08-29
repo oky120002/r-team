@@ -8,14 +8,18 @@ public enum VoteItemType {
 	completion("填空题"), // 填空
 	;
 
-	private String name;
+	private String cnName;
 
 	/** 获取类型名称 */
-	public String getName() {
-		return name;
+	public String getCnName() {
+		return cnName;
+	}
+	
+	public String getName(){
+	    return name();
 	}
 
-	VoteItemType(String name) {
-		this.name = name;
+	VoteItemType(String cnName) {
+		this.cnName = cnName;
 	}
 }
