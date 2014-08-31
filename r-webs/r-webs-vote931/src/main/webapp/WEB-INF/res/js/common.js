@@ -47,7 +47,7 @@ function submitDatas(url, formId, callback, errorback) {
 	// 数据提交
 	$.ajax({
 		type : 'POST',
-		url : url,
+		url : url ? url : form.attr('action'),
 		cache : false,
 		data : form.serialize(),
 		success : function(data, textStatus, XMLHttpRequest) {

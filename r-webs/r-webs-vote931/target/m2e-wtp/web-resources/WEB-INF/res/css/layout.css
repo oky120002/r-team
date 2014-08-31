@@ -1,3 +1,4 @@
+/*基础效果*/
 *{ margin:0; padding:0;}
 body,div,address,blockquote,iframe,ul,ol,dl,dt,dd,li,dl,h1,h2,h3,h4,h5,h6,p,pre,table,caption,th,td,form,legend,fieldset,input,button,select,textarea{font-weight: normal;font-style: normal;font-size: 100%;font-family: inherit;}
 html{filter: expression(document.execCommand("BackgroundImageCache", false, true));}/*让IE6启用图片缓存功能*/
@@ -12,9 +13,17 @@ input[type="checkbox"],input[type="radio"] {border:none;}
 .clear {clear: both;height: 1px;margin-top: -1px;width: 100%;}
 .dis {display: block;}
 .undis {display: none;}
+.placeholder{display:inline-block; width:5px;}
 
 /*特效*/
-.text_line {width: 350px; background: none repeat scroll 0 0 transparent;border-color: #999999;border-left: 0 none #999999;border-right: 0 none #999999;border-top: 0 none #999999;}
+.text_line {background: none repeat scroll 0 0 transparent;border-color: #999999;border-left: 0 none #999999;border-right: 0 none #999999;border-top: 0 none #999999;}
+
+/*特定页面专用*/
+.add_voteitem_question{width: 400px;}
+.answer1{color: red;}
+.answer2{color: blue;}
+.answer3{color: orange;}
+.answer4{color: gray;}
 
 /*表格1*/ 
 table.list_style_1{border:none;border-left:1px #ddd solid;border-top:1px #ddd solid; margin:0 auto; width:100%;}
@@ -93,3 +102,22 @@ table.list_style_2 tbody td{padding:0 5px;}
 .dmenu ul.icon li a:hover .ntt_li_ntiMeetingProposal{ background:url(../images/navigation/icon.png) -441px -21px no-repeat;}
 .dmenu ul.icon li a:hover .ntt_li_ntiMeetingIssue{ background:url(../images/navigation/icon.png) -462px -21px no-repeat;}
 .dmenu ul.icon li a:hover .ntt_li_ntiMeetingSummary{ background:url(../images/navigation/icon.png) -483px -21px no-repeat;}
+
+/*通用按钮*/   
+/* input.button_00,button.button_00{ font-family:Verdana,Arial,sans-serif;height:18px; line-height:18px; vertical-align:bottom; color:#333; text-align:center;}/**特别为"..."准备的样式*/
+input.button_00,button.button_00{ width:33px; height:26px; line-height:26px; color:#333; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -162px no-repeat;}
+input.button_01,button.button_01{ width:33px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -162px no-repeat;}
+input.button_03,button.button_03{ width:58px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px 0px no-repeat;}
+input.button_05,button.button_05{ width:71px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -27px no-repeat;}
+input.button_06,button.button_06{ width:88px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -54px no-repeat;}
+input.button_07,button.button_07{ width:99px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -81px no-repeat;}
+input.button_08,button.button_08{ width:111px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -108px no-repeat;}
+input.button_10,button.button_10{ width:143px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg.png) 0px -135px no-repeat;}
+
+input.button_01:active,button.button_01:active{ width:33px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -162px no-repeat;}
+input.button_03:active,button.button_03:active{ width:58px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px 0px no-repeat;}
+input.button_05:active,button.button_05:active{ width:71px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -27px no-repeat;}
+input.button_06:active,button.button_06:active{ width:88px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -54px no-repeat;}
+input.button_07:active,button.button_07:active{ width:99px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -81px no-repeat;}
+input.button_08:active,button.button_08:active{ width:111px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -108px no-repeat;}
+input.button_10:active,button.button_10:active{ width:143px; height:26px; line-height:26px; color:#FFF; text-align:center; border:none; background:url(../images/button/buttonbg_hover.png) 0px -135px no-repeat;}

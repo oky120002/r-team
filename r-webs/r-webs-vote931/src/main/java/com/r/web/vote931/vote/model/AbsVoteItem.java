@@ -128,7 +128,7 @@ public abstract class AbsVoteItem implements VoteItem {
     }
 
     @Override
-    public void checkVoteItemContext() {
+    public void checkVoteItemContext() throws VoteItemContextErrorException {
         if (StringUtils.isBlank(no)) {
             throw new VoteItemContextErrorException("问卷项[编号]不能为空!");
         }

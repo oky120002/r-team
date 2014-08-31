@@ -5,13 +5,12 @@ package com.r.core.util;
 
 /**
  * 计算工具<br />
- * 可以查看{@link http://blog.csdn.net/jiqingxia37/article/details/8293820}
+ * 位计算查看{@link http://blog.csdn.net/jiqingxia37/article/details/8293820}
  * 
  * @author oky
  * 
  */
-public class CalUtil {
-
+public abstract class CalUtil {
 	/** 取负数 */
 	public static int dam(int n) {
 		return n < 0 ? n : -n;

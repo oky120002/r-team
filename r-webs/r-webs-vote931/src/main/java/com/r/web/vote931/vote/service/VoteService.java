@@ -6,11 +6,13 @@
  */
 package com.r.web.vote931.vote.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,6 +25,7 @@ import com.r.web.vote931.vote.dao.CompletionVoteItemDao;
 import com.r.web.vote931.vote.dao.MultipleOptionVoteItemDao;
 import com.r.web.vote931.vote.dao.SingleOptionVoteItemDao;
 import com.r.web.vote931.vote.dao.YesOrNoVoteItemDao;
+import com.r.web.vote931.vote.exception.VoteItemContextErrorException;
 import com.r.web.vote931.vote.model.AbsVoteItem;
 
 /**
@@ -57,12 +60,30 @@ public class VoteService extends AbstractService {
 		return abstractDao.queryAll();
 	}
 
-	/** 创建问卷项 */
+	/** 分页查询数据 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public List<AbsVoteItem> queryByPage(int curPage, int pageSize) {
+		return abstractDao.query((curPage - 1) * pageSize, pageSize);
+	}
+
+	/**
+	 * 保存问卷项<br />
+	 * 如果存在id则更新，如果不存在id则新增
+	 * 
+	 * @param voteItem
+	 *            问卷项
+	 * @return
+	 * @throws VoteItemContextErrorException
+	 *             如果校验不通过.抛出VoteItemContextErrorException异常
+	 */
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public <T extends AbsVoteItem> T create(T voteItem) {
-		voteItem.setNo(incrementer.nextStringValue());
+	public <T extends AbsVoteItem> T save(T voteItem) throws VoteItemContextErrorException {
+		if (StringUtils.isBlank(voteItem.getId())) { // 新建
+			voteItem.setNo(incrementer.nextStringValue());
+			voteItem.setCreateDate(new Date());
+		}
 		voteItem.checkVoteItemContext();
-		abstractDao.create(voteItem);
+		abstractDao.save(voteItem);
 		return voteItem;
 	}
 
@@ -105,5 +126,11 @@ public class VoteService extends AbstractService {
 		} else {
 			return queryByHql.get(0);
 		}
+	}
+
+	/** 统计问卷项总数 */
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+	public long countVoteItem() {
+		return abstractDao.queryAllSize();
 	}
 }

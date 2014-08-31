@@ -24,17 +24,18 @@ import com.r.web.vote931.vote.service.VoteService;
 @RequestMapping(value = "/vote")
 public class VoteControl extends AbstractControl {
 
-    @Resource(name = "vote.service.vote") 
-    private VoteService voteService;
+	@Resource(name = "vote.service.vote")
+	private VoteService voteService;
 
-    /**
-     * 主页
-     * 
-     * @param model
-     * @return 页面路径
-     */
-    @RequestMapping(value = "index")
-    public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        return "index";
-    }
+	/**
+	 * 生成问卷管理页面
+	 * 
+	 * @param model
+	 * @return 页面路径
+	 */
+	@RequestMapping(value = "index")
+	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+//		model.put("countVoteItem", voteService.countVoteItem());
+		return "vote/voteGenerate";
+	}
 }
