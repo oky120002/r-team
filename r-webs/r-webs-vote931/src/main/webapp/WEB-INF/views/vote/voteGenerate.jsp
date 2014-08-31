@@ -15,38 +15,27 @@
 		<div class="dmenu" title="生成问卷">
 			<p class="arrow">生成问卷</p>
 		</div>
-		<table class="list_style_1">
-			<tbody>
-				<tr>
-					<td style="width: 95px;">请选生成方式 : </td>
-					<td>
-						<input id="type_default" type="radio" value="default" name="type" class="getype"/><label for="type_default">默认方式</label>
-					</td>
-				</tr>
-				<tr>
-					<td>问卷标题 : </td>
-					<td><input type="text" name="votetitle" class="text_line add_voteitem_question"/></td>
-				</tr>
-				
-				<!-- 默认模块 -->
-				<tr id="tr_default" class="getr">
-					<td colspan="2">
-						<table class="list_style_1">
-							<tbody>
-								<tr>
-									<td style="width: 89px;">问卷项数量 : </td>
-									<td><input type="text" name="votetitle" class="text_line"/></td>
-								</tr>
-								<tr>
-									<td>答题时间 : </td>
-									<td><input type="text" name="votetime" class="text_line"/><label>秒(0为不限时)</label></td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<form id="vote_option_form" action="<c:url value="/vote/func/createVote" />">
+			<table class="list_style_1">
+				<tbody>
+					<tr>
+						<td>答题人签名 : </td>
+						<td><input type="text" name="signature" class="text_line add_voteitem_question"/></td>
+					</tr>
+					<tr>
+						<td>问卷标题 : </td>
+						<td><input type="text" name="title" class="text_line add_voteitem_question"/></td>
+					</tr>
+					<tr>
+						<td style="width: 89px;">问卷项数量 : </td>
+						<td><input type="text" name="visize" value="25" class="text_line"/><label>题</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input id="btn_start" type="button" value="开始" class="button_03" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 	</div>
 </body>
 </html>

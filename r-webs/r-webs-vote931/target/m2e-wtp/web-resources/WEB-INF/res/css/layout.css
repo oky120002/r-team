@@ -22,8 +22,8 @@ input[type="checkbox"],input[type="radio"] {border:none;}
 .add_voteitem_question{width: 400px;}
 .answer1{color: red;}
 .answer2{color: blue;}
-.answer3{color: orange;}
-.answer4{color: gray;}
+.answer3{color: magenta;}
+.answer4{color: purple;}
 
 /*表格1*/ 
 table.list_style_1{border:none;border-left:1px #ddd solid;border-top:1px #ddd solid; margin:0 auto; width:100%;}

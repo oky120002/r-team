@@ -52,16 +52,9 @@ function submitDatas(url, formId, callback, errorback) {
 		data : form.serialize(),
 		success : function(data, textStatus, XMLHttpRequest) {
 			if (data) {
-				if (data.success == 'true' || data.success == true) {
-					try {
-						callback(data);
-					} catch (e) {
-					}
-				} else {
-					try {
-						errorback(data);
-					} catch (e) {
-					}
+				try {
+					callback(data);
+				} catch (e) {
 				}
 			} else { 
 				try {

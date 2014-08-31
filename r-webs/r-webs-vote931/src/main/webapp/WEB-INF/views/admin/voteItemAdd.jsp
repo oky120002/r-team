@@ -183,9 +183,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<button id="btn_add" class="button_03" >新增</button>
-						</td>
+						<td colspan="2"><input id="btn_add" type="button" class="button_03" value="新增"/></td>
 					</tr>
 				</tbody>
 			</table>

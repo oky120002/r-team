@@ -21,7 +21,7 @@ public interface VoteItem {
 	Date getCreateDate();
 
 	/** 返回问卷项编号 */
-	String getNo();
+	Integer getNo();
 
 	/** 返回问卷项问题 */
 	String getQuestion();

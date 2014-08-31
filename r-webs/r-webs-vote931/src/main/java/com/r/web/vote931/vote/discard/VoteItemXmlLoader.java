@@ -1,8 +1,9 @@
-package com.r.web.vote931.vote;
+package com.r.web.vote931.vote.discard;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.r.web.vote931.vote.VoteItem;
 import com.r.web.vote931.vote.model.CompletionVoteItem;
 import com.r.web.vote931.vote.model.MultipleOptionVoteItem;
 import com.r.web.vote931.vote.model.SingleOptionVoteItem;

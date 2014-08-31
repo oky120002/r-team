@@ -1,12 +1,18 @@
 $(document).ready(function() {
-	$('.getr').hide();
-
-	// 绑定类型选择单选框
-	$('.getype').on('click', function() {
-		var val = $(this).val();
-		// 隐藏和禁用所有的表单区域
-		$('.getr').hide();
-		// 显示和启用对应的表单区域
-		$('#tr_' + val).show("slow");
+	// 开始问卷
+	$('#btn_start').on('click', function() {
+		var btn = $(this);
+		btn.hide();
+		submitDatas(null, 'vote_option_form', function(support) {
+			alert(support.tips);
+			if (support.success == true || support.success == 'true') {
+				window.location.href = support.model;
+			} else {
+				btn.show();
+			}
+		}, function(errorMsg) {
+			alert(errorMsg);
+		})
 	});
+	return false;
 });

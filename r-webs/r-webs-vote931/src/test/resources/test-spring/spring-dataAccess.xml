@@ -55,7 +55,7 @@
 	<bean id="mysqlSequence" class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer" >
 		<property name="incrementerName" value="tab_sequence" />
 		<property name="columnName" value="value" />
-		<property name="cacheSize" value="10" />
+		<property name="cacheSize" value="1" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

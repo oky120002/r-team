@@ -16,7 +16,6 @@ import com.r.core.util.RandomUtil;
 import com.r.core.util.XStreamUtil;
 import com.r.web.vote931.vote.VoteItem;
 import com.r.web.vote931.vote.VoteItemType;
-import com.r.web.vote931.vote.VoteItemXmlLoader;
 
 /**
  * @author oky

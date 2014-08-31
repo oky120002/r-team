@@ -27,7 +27,7 @@ import com.r.web.vote931.vote.model.CompletionVoteItem;
 import com.r.web.vote931.vote.model.MultipleOptionVoteItem;
 import com.r.web.vote931.vote.model.SingleOptionVoteItem;
 import com.r.web.vote931.vote.model.YesOrNoVoteItem;
-import com.r.web.vote931.vote.service.VoteService;
+import com.r.web.vote931.vote.service.VoteItemService;
 
 /**
  * 支持视图控制器
@@ -39,8 +39,8 @@ import com.r.web.vote931.vote.service.VoteService;
 @RequestMapping(value = "/admin")
 public class VoteAdminControl extends AbstractControl {
 
-	@Resource(name = "vote.service.vote")
-	private VoteService voteService;
+	@Resource(name = "vote.service.voteitem")
+	private VoteItemService voteItemService;
 
 	/**
 	 * 问卷项列表
@@ -50,7 +50,7 @@ public class VoteAdminControl extends AbstractControl {
 	 */
 	@RequestMapping(value = "index")
 	public String pageVoteItemList(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		List<AbsVoteItem> voteItems = voteService.queryAll();
+		List<AbsVoteItem> voteItems = voteItemService.queryAll();
 		model.put("voteItems", voteItems);
 		return "admin/voteItemList";
 	}
@@ -65,7 +65,7 @@ public class VoteAdminControl extends AbstractControl {
 	 */
 	@RequestMapping(value = "index/{curPage}")
 	public String pageVoteItemList(@PathVariable Integer curPage, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		List<AbsVoteItem> voteItems = voteService.queryByPage(curPage, 20);
+		List<AbsVoteItem> voteItems = voteItemService.queryByPage(curPage, 20);
 		model.put("voteItems", voteItems);
 		return "admin/voteItemList";
 	}
@@ -95,7 +95,7 @@ public class VoteAdminControl extends AbstractControl {
 		}
 
 		try {
-			voteService.save(getAbsVoteItem(request, type));
+			voteItemService.save(getAbsVoteItem(request, type));
 		} catch (VoteItemContextErrorException vicee) {
 			support.setSuccess(false);
 			support.setTips(vicee.getMessage());
@@ -114,9 +114,9 @@ public class VoteAdminControl extends AbstractControl {
 	/** 改变状态 */
 	@RequestMapping(value = "func/changestatus/{id}")
 	public String funcVoteItemChangestatus(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		AbsVoteItem voteItem = voteService.findById(id);
+		AbsVoteItem voteItem = voteItemService.findById(id);
 		voteItem.setIsEnable(!voteItem.isEnable());
-		voteService.save(voteItem);
+		voteItemService.save(voteItem);
 		return "redirect:/admin/index";
 	}
 
@@ -128,7 +128,7 @@ public class VoteAdminControl extends AbstractControl {
 		String id = request.getParameter("id"); // 问卷项ID
 		AbsVoteItem voteItem = null;
 		if (StringUtils.isNotBlank(id)) { // 修改
-			voteItem = voteService.findById(id);
+			voteItem = voteItemService.findById(id);
 		}
 		String question = request.getParameter("question"); // 问题
 		String remark = request.getParameter("remark"); // 备注

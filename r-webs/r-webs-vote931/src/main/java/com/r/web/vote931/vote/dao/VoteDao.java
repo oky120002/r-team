@@ -7,13 +7,13 @@
 package com.r.web.vote931.vote.dao;
 
 import com.r.web.vote931.support.abs.AbstractDao;
-import com.r.web.vote931.vote.model.YesOrNoVoteItem;
+import com.r.web.vote931.vote.model.Vote;
 
 /**
- * 问卷项-是非题Dao
+ * 问卷Dao
  * 
  * @author rain
  */
-public interface YesOrNoVoteItemDao extends AbstractDao<YesOrNoVoteItem> {
-
+public interface VoteDao extends AbstractDao<Vote> {
+	
 }

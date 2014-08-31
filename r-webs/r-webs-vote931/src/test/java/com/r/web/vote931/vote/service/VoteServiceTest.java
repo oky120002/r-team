@@ -8,14 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.web.vote931.vote.bean.VoteOption;
 import com.r.web.vote931.vote.model.AbsVoteItem;
 import com.r.web.vote931.vote.model.CompletionVoteItem;
 import com.r.web.vote931.vote.model.MultipleOptionVoteItem;
 import com.r.web.vote931.vote.model.SingleOptionVoteItem;
+import com.r.web.vote931.vote.model.Vote;
 import com.r.web.vote931.vote.model.YesOrNoVoteItem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,39 +25,51 @@ public class VoteServiceTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(VoteServiceTest.class);
 
-	@Resource(name = "mysqlSequence")
-	private DataFieldMaxValueIncrementer incrementer;
+	@Resource(name = "vote.service.voteitem")
+	private VoteItemService voteItemService;
 
 	@Resource(name = "vote.service.vote")
 	private VoteService voteService;
 
 	@Test
-	public void test() {
+	public void randomVoteItems() {
+		Vote vote = voteService.createVote(new VoteOption());
+
+		logger.info(vote.getTitle());
+		logger.info(vote.getSignature());
+		int i = 1;
+		for (AbsVoteItem absVoteItem : vote) {
+			logger.info(i++ + " : " + absVoteItem.getNo() + " : " + absVoteItem.getQuestion());
+		}
+	}
+
+	// @Test
+	public void initDatas() {
 		// 删除
-		int deleteAll = voteService.deleteAll();
-		logger.debug("删除" + deleteAll + "个问卷项");
+		// int deleteAll = voteService.deleteAll();
+		// logger.debug("删除" + deleteAll + "个问卷项");
 
 		// 新增
 		YesOrNoVoteItem yesno = createYesOrNoVoteItem("菇凉真名风小筝?", false, "是的", "不是的", "筝团 - 雨");
 		SingleOptionVoteItem single = createSingleOptionVoteItem("菇凉所属工会id是多少?", 2, "2086", "931", "2080", "99", "筝团 - 雨");
 		MultipleOptionVoteItem multiple = createMultipleOptionVoteItem("以下哪些歌曲是菇凉原创?", "2,3,4", "卜卦", "梦魇", "花非花", "西江月", "筝团 - 雨");
 		CompletionVoteItem completione = createCompletionVoteItem("菇凉在{}年获得YY年度最佳女主播,在2013年获得第二届《{}》冠军。", "2012", "公主驾到", null, null, "筝团 - 雨");
-		voteService.save(yesno);
-		voteService.save(single);
-		voteService.save(multiple);
-		voteService.save(completione);
+		voteItemService.save(yesno);
+		voteItemService.save(single);
+		voteItemService.save(multiple);
+		voteItemService.save(completione);
 
 		// 根据id查询
-		AbsVoteItem voteIten = voteService.findById(single.getId());
-		logger.debug(voteIten.getQuestion());
-		voteIten = voteService.findById(multiple.getId());
-		logger.debug(voteIten.getQuestion());
+		AbsVoteItem voteIten = voteItemService.findById(single.getId());
+		logger.info(voteIten.getQuestion());
+		voteIten = voteItemService.findById(multiple.getId());
+		logger.info(voteIten.getQuestion());
 
 		// 根据编号查询
-		voteIten = voteService.findByNo(yesno.getNo());
-		logger.debug(voteIten.getQuestion());
-		voteIten = voteService.findByNo(completione.getNo());
-		logger.debug(voteIten.getQuestion());
+		voteIten = voteItemService.findByNo(yesno.getNo());
+		logger.info(voteIten.getQuestion());
+		voteIten = voteItemService.findByNo(completione.getNo());
+		logger.info(voteIten.getQuestion());
 	}
 
 	private CompletionVoteItem createCompletionVoteItem(String question, String answer1, String answer2, String answer3, String answer4, String provider) {
@@ -67,7 +80,7 @@ public class VoteServiceTest {
 		completion.setAnswer3(answer3);
 		completion.setAnswer4(answer4);
 		completion.setProvider(provider);
-		completion.setNo(incrementer.nextStringValue());
+		completion.setNo(-1);
 		completion.setCreateDate(new Date());
 		completion.setIsEnable(Boolean.TRUE);
 		completion.setRemark("多项选择测试问题");
@@ -84,7 +97,7 @@ public class VoteServiceTest {
 		multiple.setAnswer3(answer3);
 		multiple.setAnswer4(answer4);
 		multiple.setProvider(provider);
-		multiple.setNo(incrementer.nextStringValue());
+		multiple.setNo(-1);
 		multiple.setCreateDate(new Date());
 		multiple.setIsEnable(Boolean.TRUE);
 		multiple.setRemark("多项选择测试问题");
@@ -114,7 +127,7 @@ public class VoteServiceTest {
 		yesno.setAnswerYes(answerYes);
 		yesno.setAnswerNo(answerNo);
 		yesno.setProvider(provider);
-		yesno.setNo(incrementer.nextStringValue());
+		yesno.setNo(-1);
 		yesno.setCreateDate(new Date());
 		yesno.setIsEnable(Boolean.TRUE);
 		yesno.setRemark("是非题测试问题");
@@ -150,7 +163,7 @@ public class VoteServiceTest {
 		single.setAnswer3(answer3);
 		single.setAnswer4(answer4);
 		single.setProvider(provider);
-		single.setNo(incrementer.nextStringValue());
+		single.setNo(-1);
 		single.setCreateDate(new Date());
 		single.setIsEnable(Boolean.TRUE);
 		single.setRemark("单项选择测试问题");
