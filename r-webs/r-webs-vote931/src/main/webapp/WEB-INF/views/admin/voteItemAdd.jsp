@@ -36,7 +36,7 @@
 						<td colspan="2">
 							<table class="list_style_1">
 								<tbody>
-									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line add_voteitem_question"/> </td></tr>
+									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line voteitem_question_input"/> </td></tr>
 									<tr>
 										<td>选项描述 : </td>
 										<td colspan="3">
@@ -62,7 +62,7 @@
 						<td colspan="2">
 							<table class="list_style_1">
 								<tbody>
-									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line add_voteitem_question"/> </td></tr>
+									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line voteitem_question_input"/> </td></tr>
 									<tr>
 										<td>选项描述 : </td>
 										<td colspan="3">
@@ -97,7 +97,7 @@
 						<td colspan="2">
 							<table class="list_style_1">
 								<tbody>
-									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line add_voteitem_question"/> </td></tr>
+									<tr><td style="width: 89px;">问题 : </td><td colspan="3"><input type="text" name="question" class="text_line voteitem_question_input"/> </td></tr>
 									<tr>
 										<td>选项描述 : </td>
 										<td colspan="3">
@@ -148,7 +148,7 @@
 									</tr>
 									<tr><td style="width: 89px;">问题 : </td>
 										<td colspan="3">
-											<textarea rows="3" cols="100" name="question" class="text_line add_voteitem_question"></textarea>
+											<textarea rows="3" cols="100" name="question" class="text_line voteitem_question_input"></textarea>
 											<span style="color: red;">请在需要填空处使用{}来代替。</span>
 										</td>
 									</tr>
@@ -172,7 +172,7 @@
 					</tr>
 					<tr>
 						<td>备注 : </td>
-						<td><input type="text" name="remark" class="text_line add_voteitem_question"/></td>
+						<td><input type="text" name="remark" class="text_line voteitem_question_input"/></td>
 					</tr>
 					<tr>
 						<td>状态 : </td>
@@ -183,7 +183,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input id="btn_add" type="button" class="button_03" value="新增"/></td>
+						<td colspan="2" align="center" style="text-align: center;"><input id="btn_add" type="button" class="button_03" value="新增"/></td>
 					</tr>
 				</tbody>
 			</table>

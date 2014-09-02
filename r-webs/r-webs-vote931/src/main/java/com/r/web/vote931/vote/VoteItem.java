@@ -26,9 +26,6 @@ public interface VoteItem {
 	/** 返回问卷项问题 */
 	String getQuestion();
 
-	/** 返回问卷项备选答案 */
-	List<Object> getAlternativeAnswers();
-
 	/** 返回问卷项类型 */
 	VoteItemType getType();
 

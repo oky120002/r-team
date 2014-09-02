@@ -27,6 +27,10 @@
 						<td><input type="text" name="title" class="text_line add_voteitem_question"/></td>
 					</tr>
 					<tr>
+						<td>问卷副标题 : </td>
+						<td><input type="text" name="subTitle" class="text_line add_voteitem_question"/></td>
+					</tr>
+					<tr>
 						<td style="width: 89px;">问卷项数量 : </td>
 						<td><input type="text" name="visize" value="25" class="text_line"/><label>题</label></td>
 					</tr>

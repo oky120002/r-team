@@ -3,9 +3,6 @@
  */
 package com.r.web.vote931.vote.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -53,16 +50,6 @@ public class MultipleOptionVoteItem extends AbsVoteItem implements VoteItem {
 	/** 问卷项提供者 */
 	@Column
 	private String provider;
-
-	@Override
-	public List<Object> getAlternativeAnswers() {
-		List<Object> list = new ArrayList<Object>();
-		list.add(answer1);
-		list.add(answer2);
-		list.add(answer3);
-		list.add(answer4);
-		return list;
-	}
 
 	/**
 	 * 检验传入的答案是否正确<br />

@@ -30,43 +30,42 @@ import com.r.web.vote931.vote.service.VoteService;
 @RequestMapping(value = "/vote")
 public class VoteControl extends AbstractControl {
 
-	@Resource(name = "vote.service.voteitem")
-	private VoteItemService voteItemService;
+    @Resource(name = "vote.service.voteitem")
+    private VoteItemService voteItemService;
 
-	@Resource(name = "vote.service.vote")
-	private VoteService voteService;
+    @Resource(name = "vote.service.vote")
+    private VoteService voteService;
 
-	/** 生成问卷管理页面 */
-	@RequestMapping(value = "index")
-	public String pageVoteGenerate(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		return "vote/voteGenerate";
-	}
+    /** 生成问卷管理页面 */
+    @RequestMapping(value = "index")
+    public String pageVoteGenerate(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        return "vote/voteGenerate";
+    }
 
-	/** 问卷答题页面 */
-	@RequestMapping(value = "page/answer/{id}")
-	public String pageAnswer(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		// FIXME vote931 这里应该加校验
-		Vote vote = voteService.find(id);
-		model.put("vote", vote);
-		return "vote/voteAnswer";
-	}
+    /** 问卷答题页面 */
+    @RequestMapping(value = "page/answer/{id}")
+    public String pageAnswer(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        Vote vote = voteService.find(id);
+        model.put("vote", vote); // 有可能问卷为null.则页面自行判断
+        return "vote/voteAnswer";
+    }
 
-	/** 生成问卷 */
-	@RequestMapping(value = "func/createVote")
-	@ResponseBody
-	public Support<String> funcCreateVote(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		Support<String> support = new Support<String>();
-		support.setSuccess(true);
-		support.setTips("生成问卷成功！");
+    /** 生成问卷 */
+    @RequestMapping(value = "func/createVote")
+    @ResponseBody
+    public Support<String> funcCreateVote(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        Support<String> support = new Support<String>();
+        support.setSuccess(true);
+        support.setTips("生成问卷成功！");
 
-		try {
-			Vote vote = voteService.createVote(new VoteOption(request));
-			support.setModel(request.getContextPath() + "/vote/page/answer/" + vote.getId());
-		} catch (Exception e) {
-			support.setSuccess(false);
-			support.setTips(e.getMessage());
-		}
-		return support;// "redirect:" + vote.getId();
-	}
+        try {
+            Vote vote = voteService.createVote(new VoteOption(request));
+            support.setModel(request.getContextPath() + "/vote/page/answer/" + vote.getId());
+        } catch (Exception e) {
+            support.setSuccess(false);
+            support.setTips(e.getMessage());
+        }
+        return support;// "redirect:" + vote.getId();
+    }
 
 }

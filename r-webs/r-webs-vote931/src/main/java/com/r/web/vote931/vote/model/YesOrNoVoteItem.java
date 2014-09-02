@@ -4,8 +4,6 @@
 package com.r.web.vote931.vote.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,14 +46,6 @@ public class YesOrNoVoteItem extends AbsVoteItem implements VoteItem, Serializab
 	/** 问卷项提供者 */
 	@Column
 	private String provider;
-
-	@Override
-	public List<Object> getAlternativeAnswers() {
-		List<Object> list = new ArrayList<Object>();
-		list.add(answerYes);
-		list.add(answerNo);
-		return list;
-	}
 
 	/**
 	 * 检验传入的答案是否正确<br />

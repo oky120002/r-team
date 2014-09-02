@@ -49,9 +49,11 @@ public class VoteService extends AbstractService {
 	public Vote createVote(VoteOption voteOption) {
 		Vote vote = new Vote();
 		vote.setTitle(voteOption.getTitle());
+		vote.setSubTitle(voteOption.getSubTitle());
 		vote.setSignature(voteOption.getSignature());
 		vote.setVoteItems(voteItemService.queryByRandom(voteOption.getVisize()));
 		vote.setCreateDate(new Date());
+		vote.setIsEnable(Boolean.TRUE);
 		voteDao.create(vote);
 		return vote;
 	}

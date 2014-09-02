@@ -16,76 +16,95 @@ import org.apache.commons.lang3.math.NumberUtils;
  */
 public class VoteOption {
 
-	private HttpServletRequest request;
+    private HttpServletRequest request;
 
-	private String signature;
-	private String title;
-	private int visize;
+    private String signature; // 签名
+    private String title; // 标题
+    private String subTitle; // 副标题
+    private int visize; // 问卷项数量
 
-	public VoteOption() {
-		super();
-		capture();
-	}
+    public VoteOption() {
+        super();
+        capture();
+    }
 
-	public VoteOption(HttpServletRequest request) {
-		this.request = request;
-		capture();
-	}
+    public VoteOption(String signature, String title, String subTitle, int visize) {
+        super();
+        this.signature = signature;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.visize = visize;
+    }
 
-	/** 抓取数据 */
-	private void capture() {
-		String tempSignature = (request == null ? null : this.request.getParameter("signature"));
-		String tempTitle = (request == null ? null : this.request.getParameter("title"));
-		String tempvisize = (request == null ? null : this.request.getParameter("visize"));
+    public VoteOption(HttpServletRequest request) {
+        this.request = request;
+        capture();
+    }
 
-		this.signature = (StringUtils.isBlank(tempSignature) ? "这个人很懒，没有留下签名。" : tempSignature);
-		this.title = (StringUtils.isBlank(tempTitle) ? "这个人很懒，没有留下问卷标题。" : tempTitle);
-		this.visize = (NumberUtils.isNumber(tempvisize) ? Integer.valueOf(tempvisize) : 25);
-	}
+    /** 抓取数据 */
+    private void capture() {
+        String tempSignature = (request == null ? null : this.request.getParameter("signature"));
+        String tempTitle = (request == null ? null : this.request.getParameter("title"));
+        String tempSubTitle = (request == null ? null : this.request.getParameter("subTitle"));
+        String tempvisize = (request == null ? null : this.request.getParameter("visize"));
 
-	/**
-	 * @return the signature
-	 */
-	public String getSignature() {
-		return signature;
-	}
+        this.signature = (StringUtils.isBlank(tempSignature) ? "这个人很懒，没有留下签名。" : tempSignature);
+        this.title = (StringUtils.isBlank(tempTitle) ? "这个人很懒，没有留下问卷标题。" : tempTitle);
+        this.subTitle = (StringUtils.isBlank(tempSubTitle) ? null : tempSubTitle);
+        this.visize = (NumberUtils.isNumber(tempvisize) ? Integer.valueOf(tempvisize) : 25);
+    }
 
-	/**
-	 * @param signature
-	 *            the signature to set
-	 */
-	public void setSignature(String signature) {
-		this.signature = signature;
-	}
+    /**
+     * @return the signature
+     */
+    public String getSignature() {
+        return signature;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @param signature
+     *            the signature to set
+     */
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * @return the visize
-	 */
-	public int getVisize() {
-		return visize;
-	}
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * @param visize
-	 *            the visize to set
-	 */
-	public void setVisize(int visize) {
-		this.visize = visize;
-	}
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    /**
+     * @return the visize
+     */
+    public int getVisize() {
+        return visize;
+    }
+
+    /**
+     * @param visize
+     *            the visize to set
+     */
+    public void setVisize(int visize) {
+        this.visize = visize;
+    }
 
 }
