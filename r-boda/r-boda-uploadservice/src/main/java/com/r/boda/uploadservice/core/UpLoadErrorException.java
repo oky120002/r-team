@@ -10,24 +10,18 @@ public class UpLoadErrorException extends SException {
 
     private List<KV<String, String>> errorFileNames = new ArrayList<KV<String, String>>();
 
-    public UpLoadErrorException(String message, int mark) {
-        super(message, mark);
-    }
-
-    public UpLoadErrorException(String message, Object... objects) {
-        super(message, objects);
+    public UpLoadErrorException() {
+        super();
     }
 
     public UpLoadErrorException(String message, Throwable cause) {
         super(message, cause);
+        addError("文件上传错误", message + cause.toString());
     }
 
     public UpLoadErrorException(String message) {
         super(message);
-    }
-
-    public UpLoadErrorException(Exception e) {
-        super(e.getMessage());
+        addError("文件上传错误", message);
     }
 
     @Override
@@ -42,6 +36,19 @@ public class UpLoadErrorException extends SException {
 
     public void addError(String errorFileName, String errorMessage) {
         errorFileNames.add(KV.kv(errorFileName, errorMessage));
+    }
+
+    public List<KV<String, String>> getErrorFileNames() {
+        return errorFileNames;
+    }
+
+    @Override
+    public String getMessage() {
+        StringBuilder errorMsg = new StringBuilder();
+        for (KV<String, String> kv : errorFileNames) {
+            errorMsg.append(kv.getKey() + " : " + kv.getValue()).append("\r\n");
+        }
+        return errorMsg.toString();
     }
 
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="<c:url value="/res/css/layout.css" />" />
+<link  href="<c:url value="/res/css/boda.css" />" rel="stylesheet" type="text/css"/>
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>

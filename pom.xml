@@ -69,6 +69,11 @@
 				<artifactId>r-components</artifactId>
 				<version>${r-version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.rain</groupId>
+				<artifactId>r-webcomponents</artifactId>
+				<version>${r-version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.rain</groupId>
@@ -879,5 +884,6 @@
 		<module>r-boda</module>
 		<module>r-webs</module>
 		<module>r-apps</module>
+		<module>r-webcomponents</module>
 	</modules>
 </project>

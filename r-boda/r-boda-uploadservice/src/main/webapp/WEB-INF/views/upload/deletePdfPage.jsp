@@ -4,44 +4,51 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="<c:url value="/res/css/layout.css" />" />
+<link  href="<c:url value="/res/css/boda.css" />" rel="stylesheet" type="text/css"/>
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
 
 <script type="text/javascript">
 function deletePdfPage() {
-	var start = $('#start').val();
-	try {
-		if($.isNumeric(start)){
-			start = start * 1;
-		} else {
-			start = 1;
+	if(confirm("是否确认删除?")) { 
+		var start = $('#start').val();
+		try {
+			if($.isNumeric(start)){
+				start = start * 1;
+			} else {
+				alert("请输入数字型数据");
+				return; 
+			}
+		} catch (e) {
+			alert("产生未知错误,请停止操作,联系管理员." + e);
+			return; 
 		}
-	} catch (e) {
-		start = 1;
-	}
-	$('#start').val(start);
-	var end = $('#end').val();
-	try {
-		if($.isNumeric(end)){
-			end = end * 1;
-		} else {
-			end = 1;
+		$('#start').val(start);
+		var end = $('#end').val();
+		try {
+			if($.isNumeric(end)){
+				end = end * 1;
+			} else {
+				alert("请输入数字型数据");
+				return; 
+			}
+		} catch (e) {
+			alert("产生未知错误,请停止操作,联系管理员." + e);
+			return; 
 		}
-	} catch (e) {
-		end = 1;
+		$('#end').val(end);
+		
+		if(confirm("是否确认删除?")) {
+			var url = '<c:url value="/upload/deletePageByPdf/" />${fileId}/' + start + '/' + end;
+			submitDatas(url, null, function(data) {
+				$('#span').html(data.params.pdfNumber);
+				alert(data.tips);
+			}, function(message) {
+				alert(message);
+			});
+		}
 	}
-	$('#end').val(end);
-	
-	
-	var url = '<c:url value="/upload/deletePageByPdf/" />${fileId}/' + start + '/' + end;
-	submitDatas(url, null, function(data) {
-		$('#span').html(data.params.pdfNumber);
-		alert(data.tips);
-	}, function(message) {
-		alert(message);
-	});
 };
 </script>
 
@@ -55,7 +62,7 @@ function deletePdfPage() {
 			<td>到</td>
 			<td><input type="text" id="end"/></td>
 			<td>/<span id="span">${pdfPageNumber }</span></td>
-			<td><input type="button" value="删除" onclick="deletePdfPage();" /> </td>
+			<td><input type="button" value="删除" onclick="deletePdfPage();" class="tableButton"/> </td>
 		</tr>
 	</table>
 </body>

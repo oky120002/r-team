@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="<c:url value="/res/css/layout.css" />" />
+<link  href="<c:url value="/res/css/boda.css" />" rel="stylesheet" type="text/css"/>
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
@@ -33,7 +33,7 @@
 			if(tag){
 				tr += '<td><label>' + tag + '</label><td>';
 			}
-			tr += '<td><input type="file" name="' + name + '" id="uploadfile" /> <input type="hidden" name="' + name + '_tag" value="' + tag + '" /> </td>';
+			tr += '<td><input type="file" name="' + name + '" id="uploadfile"/> <input type="hidden" name="' + name + '_tag" value="' + tag + '" /> </td>';
 			tr += '</tr>';
 			$(tr).appendTo($('#formtable'));
 		}
@@ -48,9 +48,9 @@
 			tr += '<td>' + (isEmpty(upload.tag) ? "": upload.tag) + '</td>'; // 标签列
 			tr += '<td>' + upload.fileName + '</td>'; // 文件名列
 			tr += '<td>';
-			tr += '<button onclick="lookUploadFile(\'' + upload.id + '\');">查看</button>';
-			tr += '<button onclick="downloadFile(\'' + upload.id + '\');">下载</button>';
-			tr += '<button onclick="deleteFile(\'' + upload.id + '\');">删除</button>';
+			tr += '<button onclick="lookUploadFile(\'' + upload.id + '\');" class="tableButton">查看</button>';
+			tr += '<button onclick="downloadFile(\'' + upload.id + '\');" class="tableButton">下载</button>';
+			tr += '<button onclick="deleteFile(\'' + upload.id + '\');" class="tableButton">删除</button>';
 			tr += '</td>';
 			tr += '</tr>';
 			$('#filetabletbody').append(tr);
@@ -105,12 +105,14 @@
 
 	/**删除文件*/
 	function deleteFile(id) {
-		var url = '<c:url value="/upload/deleteUpload/" />' + id;
-		submitDatas(url, null, function(data) {
-			reload.click();
-		}, function(message) {
-			alert(message);
-		});
+		if(confirm("是否确认删除?")) { 
+			var url = '<c:url value="/upload/deleteUpload/" />' + id;
+			submitDatas(url, null, function(data) {
+				reload.click();
+			}, function(message) {
+				alert(message);
+			});
+		}
 	}
 	
 	/**查看文件*/
@@ -171,16 +173,15 @@
 <body>
 	<a id="reload" style="display: none;">reload...</a>
 	<form id="formid">
-		<input type="hidden" id="uploadgroup" name="uploadgroup" value="${uploadgroup }" /> 
-		<input type="button" id="btn_addrow" onclick="addRow();" value="+附件" class="untag"/>
-		<input type="button" id="btn_upload" onclick="upload();" value="提交" /> <br />
 		<table id="formtable"></table>
+		<input type="hidden" id="uploadgroup" name="uploadgroup" value="${uploadgroup }" /> 
+		<input type="button" id="btn_addrow" onclick="addRow();" value="+附件" class="untag tableButton"/>
+		<input type="button" id="btn_upload" onclick="upload();" value="提交" class="tableButton" /> <br />
 	</form>
-
-	<table width="100%" border="0">
+	<table border="0">
 		<tr>
 			<td>
-				<table id="table" height="20px;" style="background-color: gray;">
+				<table id="table" width="100%" height="20px;" style="background-color: gray;" class="table">
 					<tr>
 						<td><span id="span" style="color: red;">已上传: 0%</span></td>
 					</tr>
@@ -189,7 +190,7 @@
 		</tr>
 	</table>
 
-	<table class="list_style_1">
+	<table width="100%" cellpadding="0" cellspacing="0" border="0" class="table">
 		<thead>
 			<tr>
 				<th class="tag">标签</th>
@@ -204,18 +205,18 @@
 						<td class="tag">${upload.tag }</td>
 						<td>${upload.fileName }</td>
 						<td>
-							<button onclick="lookUploadFile('${upload.id }');">查看</button>
-							<button onclick="downloadFile('${upload.id }');">下载</button>
-							<button onclick="deleteFile('${upload.id }');">删除</button>
+							<button onclick="lookUploadFile('${upload.id }');" class="tableButton" >查看</button>
+							<button onclick="downloadFile('${upload.id }');" class="tableButton" >下载</button>
+							<button onclick="deleteFile('${upload.id }');" class="tableButton" >删除</button>
 							<c:if test="${upload.fileType.responseDataType.name eq 'PDF' }">
-								<button onclick="deletePdf('${upload.id }');">删除页面</button>
-								<button onclick="insertPdf('${upload.id }');">插入页面</button>
+								<button onclick="deletePdf('${upload.id }');" class="tableButton" >删除页面</button>
+								<button onclick="insertPdf('${upload.id }');" class="tableButton" >插入页面</button>
 							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
-	</table>
+	</table> 
 </body>
 </html>

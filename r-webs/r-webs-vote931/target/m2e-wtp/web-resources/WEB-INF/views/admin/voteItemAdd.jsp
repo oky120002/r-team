@@ -14,11 +14,11 @@
 	<div>
 		<div class="dmenu" title="新增问卷项"> 
 			<ul class="icon">
-				<li title="返回"><a href="<c:url value="/admin/index" />"><i class="ntt_li_ntiBack"></i>返回</a></li>
+				<li title="返回"><a href="<c:url value="/admin/page/voteitem/index" />"><i class="ntt_li_ntiBack"></i>返回</a></li>
 			</ul>
 			<p class="arrow">新增问卷项</p>
 		</div>
-		<form id="voteitem_add_form" action="<c:url value="/admin/func/save" />">
+		<form id="voteitem_add_form" action="<c:url value="/admin/func/voteitem/save" />">
 			<table class="list_style_1">
 				<tbody>
 					<tr>

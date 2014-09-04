@@ -29,16 +29,16 @@ import com.r.web.vote931.vote.service.VoteService;
 @Controller("vote.control.vote")
 @RequestMapping(value = "/vote")
 public class VoteControl extends AbstractControl {
+    
+    @Resource(name = "vote.service.vote")
+    private VoteService voteService;
 
     @Resource(name = "vote.service.voteitem")
     private VoteItemService voteItemService;
 
-    @Resource(name = "vote.service.vote")
-    private VoteService voteService;
-
     /** 生成问卷管理页面 */
-    @RequestMapping(value = "index")
-    public String pageVoteGenerate(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "page/generate")
+    public String pageVoteGenerate(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         return "vote/voteGenerate";
     }
 

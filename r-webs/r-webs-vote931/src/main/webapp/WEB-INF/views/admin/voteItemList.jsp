@@ -13,8 +13,8 @@
 	<div>
 		<div class="dmenu" title="问卷项列表">
 			<ul class="icon">
-				<li title="生成问卷"><a href="<c:url value="/vote/index" />"><i class="ntt_li_ntiStart"></i>生成问卷</a></li>
-				<li title="新增"><a href="<c:url value="/admin/page/add" />"><i class="ntt_li_ntiAdd"></i>新增</a></li>
+				<li title="问卷管理"><a href="<c:url value="/admin/page/vote/index" />"><i class="ntt_li_ntiStart"></i>问卷管理</a></li>
+				<li title="新增"><a href="<c:url value="/admin/page/voteitem/add" />"><i class="ntt_li_ntiAdd"></i>新增</a></li>
 			</ul>
 			<p class="arrow">问卷项列表</p>
 		</div>
@@ -73,10 +73,10 @@
 					<td>
 						<c:choose>
 							<c:when test="${voteitem.isEnable == true}">
-								<a href="<c:url value="/admin/func/changestatus/${voteitem.id }" />">禁用</a>
+								<a href="<c:url value="/admin/func/voteitem/changestatus/${voteitem.id }" />">禁用</a>
 							</c:when>
 							<c:otherwise>
-								<a href="<c:url value="/admin/func/changestatus/${voteitem.id }" />">启用</a>
+								<a href="<c:url value="/admin/func/voteitem/changestatus/${voteitem.id }" />">启用</a>
 							</c:otherwise>
 						</c:choose>
 					</td>

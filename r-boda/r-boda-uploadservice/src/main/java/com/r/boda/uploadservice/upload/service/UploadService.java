@@ -85,7 +85,8 @@ public class UploadService {
         }
 
         List<Upload> failUploads = new ArrayList<Upload>();
-        UpLoadErrorException error = null;
+        UpLoadErrorException error = new UpLoadErrorException();
+        boolean isError = false;
         int size = files.size();
         int tagSize = tags.size();
         if (tagSize != size) {
@@ -111,25 +112,36 @@ public class UploadService {
                         up.setFileName(multipartFile.getOriginalFilename());
                         up.setFileType(FileType.re(multipartFile.getOriginalFilename()));
                     }
-
                     up.setFilePath(uploadFile.getAbsolutePath());
                     up.setGroup(group);
                     up.setFileLength(uploadFile.length());
                     up.setIsEnabled(true);
                     up.setTag(tag);
+
+                    // 校验pdf单页平均大小不超过400K
+                    if (FileType.pdf.equals(up.getFileType())) {
+                        int pdfPageNumber = pdfPageNumber(up.getFile());
+                        long kb = up.getFileLength() / 1024;
+                        if (kb > 400 * pdfPageNumber) {
+                            error.addError(multipartFile.getOriginalFilename(), "文件不符合要求,无法上传到服务器,请修改pdf扫描设置,以保证pdf单页平均大小不超过400K");
+                            isError = true;
+                            break;
+                        }
+                    }
                     uploadDao.create(up);
                     Upload target = new Upload();
                     BeanUtils.copyProperties(up, target, new String[] { "filepath" }); // 过滤掉真实文件地址
                     failUploads.add(target);
+                } catch (OutOfMemoryError ome) {
+                    error.addError(multipartFile.getOriginalFilename(), "上传文件过大,系统内存溢出");
+                    isError = true;
                 } catch (Exception e) {
-                    if (error == null) {
-                        error = new UpLoadErrorException("");
-                    }
-                    error.addError(multipartFile.getOriginalFilename(), e.getMessage());
+                    error.addError(multipartFile.getOriginalFilename(), e.toString());
+                    isError = true;
                 }
             }
         }
-        if (error != null) {
+        if (isError) {
             throw error;
         }
         return failUploads;
@@ -301,7 +313,7 @@ public class UploadService {
             PdfReader pdfReader = new PdfReader(fileInputStream);
             return pdfReader.getNumberOfPages();
         } catch (IOException e) {
-            throw new UpLoadErrorException(e);
+            throw new UpLoadErrorException(e.getMessage());
         } finally {
             IOUtils.closeQuietly(fileInputStream);
         }
@@ -401,6 +413,9 @@ public class UploadService {
      * @return 如果成功转换则返回true,失败返回false
      */
     private File image2pdf(MultipartFile multipartFile, String uploadFilePath) {
+        if (FileType.pdf.equals(FileType.re(multipartFile.getOriginalFilename()))) {
+            return null;
+        }
         Document doc = new Document(PageSize.A4, 20, 20, 20, 20);
         try {
             File file = new File(uploadFilePath);

@@ -37,7 +37,6 @@ import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.support.Support;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
 import com.r.boda.uploadservice.upload.model.FileType;
-import com.r.boda.uploadservice.upload.model.FileType.ResponseDataType;
 import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
 import com.r.core.log.Logger;
@@ -186,32 +185,25 @@ public class UploadControl extends AbstractControl {
                         return;
                     }
 
-                    // 校验大小
-                    if (!ResponseDataType.pdf.equals(fileType.getResponseDataType())) {
-                        long kb = file.getSize() / 1024;
-                        if (kb > 300) {
-                            support.setSuccess(false);
-                            support.setTips("不能上传大于300K的文件!");
-                            response.getWriter().print(JSONObject.fromObject(support).toString());
-                            return;
-                        }
-                    }
-
                     multipartFiles.add(file);
                     tags.add(request.getParameter(entry.getKey() + "_tag"));
                 }
             }
 
-            String sysname = String.valueOf(session.getAttribute(PARAMS_SYSNAME));
-            List<Upload> uploads = uploadService.save(multipartFiles, sysname, tags, request.getParameter("uploadgroup"));
-            if (CollectionUtils.isNotEmpty(uploads)) {
-                support.putParam("group", uploads.get(0).getGroup());
+            if (CollectionUtils.isNotEmpty(multipartFiles)) {
+                String sysname = String.valueOf(session.getAttribute(PARAMS_SYSNAME));
+                List<Upload> uploads = uploadService.save(multipartFiles, sysname, tags, request.getParameter("uploadgroup"));
+                if (CollectionUtils.isNotEmpty(uploads)) {
+                    support.putParam("group", uploads.get(0).getGroup());
+                }
+                support.setSuccess(true);
+                support.setTips("上传成功!");
+            } else {
+                support.setSuccess(false);
+                support.setTips("不能上传空文件!");
             }
-            support.setSuccess(true);
-            support.setTips("上传成功!");
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("上传文件错误 : {}", e.getMessage());
+            logger.error(e.getMessage(), e);
             support.setSuccess(false);
             support.setTips(e.getMessage());
         }

@@ -52,10 +52,8 @@
 		</property>
 	</bean>
 	
-	<bean id="mysqlSequence" class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer" >
-		<property name="incrementerName" value="tab_sequence" />
-		<property name="columnName" value="value" />
-		<property name="cacheSize" value="1" />
+	<!-- mysqlIncrementer生成器 -->
+	<bean id="mysqlIncrementer" class="com.r.webcomponents.incrementer.impl.mysql.RainMySQLMaxValueIncrementer">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

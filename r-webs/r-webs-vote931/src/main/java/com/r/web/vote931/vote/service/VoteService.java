@@ -7,9 +7,11 @@
 package com.r.web.vote931.vote.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,34 +29,44 @@ import com.r.web.vote931.vote.model.Vote;
 @Service("vote.service.vote")
 public class VoteService extends AbstractService {
 
-	@Resource(name = "vote.doa.vote")
-	private VoteDao voteDao;
+    @Resource(name = "vote.doa.vote")
+    private VoteDao voteDao;
 
-	@Resource(name = "vote.service.voteitem")
-	private VoteItemService voteItemService;
+    @Resource(name = "vote.service.voteitem")
+    private VoteItemService voteItemService;
 
-	/** 根据id查询问卷 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-	public Vote find(String id) {
-		return voteDao.find(id);
-	}
+    /**
+     * 查询所有的问卷
+     * 
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    public List<Vote> queryAll() {
+        return voteDao.queryAll(Order.desc("createDate"));
+    }
 
-	/**
-	 * 根据问卷选项生成问卷
-	 * 
-	 * @param voteOption
-	 * @return
-	 */
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-	public Vote createVote(VoteOption voteOption) {
-		Vote vote = new Vote();
-		vote.setTitle(voteOption.getTitle());
-		vote.setSubTitle(voteOption.getSubTitle());
-		vote.setSignature(voteOption.getSignature());
-		vote.setVoteItems(voteItemService.queryByRandom(voteOption.getVisize()));
-		vote.setCreateDate(new Date());
-		vote.setIsEnable(Boolean.TRUE);
-		voteDao.create(vote);
-		return vote;
-	}
+    /** 根据id查询问卷 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    public Vote find(String id) {
+        return voteDao.find(id);
+    }
+
+    /**
+     * 根据问卷选项生成问卷
+     * 
+     * @param voteOption
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public Vote createVote(VoteOption voteOption) {
+        Vote vote = new Vote();
+        vote.setTitle(voteOption.getTitle());
+        vote.setSubTitle(voteOption.getSubTitle());
+        vote.setSignature(voteOption.getSignature());
+        vote.setVoteItems(voteItemService.queryByRandom(voteOption.getVisize()));
+        vote.setCreateDate(new Date());
+        vote.setIsEnable(Boolean.TRUE);
+        voteDao.create(vote);
+        return vote;
+    }
 }
