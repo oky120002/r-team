@@ -13,7 +13,7 @@
 	<artifactId>r-web</artifactId>
 	<name>r-web</name>
 	<packaging>war</packaging>
-
+	<description>r-web</description>
 
 	<dependencies>
 		<dependency>
@@ -262,5 +262,4 @@
 <!-- 			</plugin> -->
 <!-- 		</plugins> -->
 	</build>
-	<description>r-web</description>
 </project>

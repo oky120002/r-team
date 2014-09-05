@@ -7,13 +7,13 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.r.webcomponents.incrementer.RainMaxValueIncrementer;
+import com.r.web.components.incrementer.RainMaxValueIncrementer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/*.xml" })
 public class RainMySQLMaxValueIncrementerTest {
 
-    @Resource(name = "idGenarater")
+    @Resource(name = "mysqlIncrementer")
     private RainMaxValueIncrementer incrementer;
 
     @Test

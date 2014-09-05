@@ -26,9 +26,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.rain</groupId>
-			<artifactId>r-webcomponents</artifactId>
+			<artifactId>r-webs-components</artifactId>
 		</dependency>
-		
 
 		<!-- spring -->
 		<dependency>

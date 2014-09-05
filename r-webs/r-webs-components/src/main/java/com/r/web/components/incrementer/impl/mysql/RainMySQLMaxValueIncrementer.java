@@ -1,4 +1,4 @@
-package com.r.webcomponents.incrementer.impl.mysql;
+package com.r.web.components.incrementer.impl.mysql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.incrementer.AbstractColumnMaxValueIncrementer;
 
-import com.r.webcomponents.incrementer.RainMaxValueIncrementer;
+import com.r.web.components.incrementer.RainMaxValueIncrementer;
 
 /**
  * MySql自增长值获取器<br/>

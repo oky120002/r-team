@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<!-- 扄1�7�1�7�1�7�1�7�用的object model版本，为了确保稳定的使用，这个元素是强制性的。除非maven弄1�7�1�7�1�7�1�7��1ￄ1�7�1�7�升级模板，否则不需要修攄1�7�1�7�1�7�1�7 -->
+	<!-- 所使用的object model版本，为了确保稳定的使用，这个元素是强制性的。除非maven开发者升级模板，否则不需要修改 -->
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- 是项目创建团体或组织的唯丄1�7�1�7�1�7�1�7�志符，通常是域名�1ￄ1�7�1�7�写，如groupId org.apache.maven.plugins就是为所有maven插件预留的1�7�1�7�1�7�1�7 -->
+	<!-- 是项目创建团体或组织的唯一标志符，通常是域名倒写，如groupId org.apache.maven.plugins就是为所有maven插件预留的 -->
 	<groupId>com.rain</groupId>
-	<!-- 是项目artifact唯一的基地址各1�7�1�7�1�7�1�7 -->
+	<!-- 是项目artifact唯一的基地址名 -->
 	<artifactId>r-team</artifactId>
-	<!-- artifact的版本，通常能看见为类似0.0.1-SNAPSHOT，其中SNAPSHOT表示项目弄1�7�1�7�1�7�1�7�中，为弄1�7�1�7�1�7�1�7�版朄1�7�1�7�1�7�1�7 -->
-	<version>0.0.1-SNAPSHOT</version>
-	<!-- artifact打包的方式，如jar、war、ear等等。默认为jar。这个不仅表示项目最终产生何种后缄1�7�1�7�1�7�1�7�文件，也表示build过程使用仄1�7�1�7�1�7�1�7�样的lifecycle -->
+	<!-- artifact打包的方式，如jar、war、ear等等。默认为jar。这个不仅表示项目最终产生何种后缀的文件，也表示build过程使用什么样的lifecycle -->
 	<packaging>pom</packaging>
+	<!-- artifact的版本，通常能看见为类似0.0.1-SNAPSHOT，其中SNAPSHOT表示项目开发中，为开发版本name 表示项目的展现名，在maven生成的文档中使用 -->
+	<version>0.0.1-SNAPSHOT</version>
 	<!-- 表示项目的展现名，在maven生成的文档中使用 -->
 	<name>r-team</name>
-	<!-- 表示项目的地坄1�7�1�7�1�7�1�7�在maven生成的文档中使用 -->
+	<!-- 表示项目的地址，在maven生成的文档中使用 -->
 	<url>http://www.hiyouyu.com</url>
 	<!-- 表示项目的描述，在maven生成的文档中使用 -->
 	<description>Rain's Team</description>
@@ -35,7 +35,7 @@
 		<skipTests>true</skipTests>
 	</properties>
 
-	<!-- 弄1�7发�1�7�信恄1�7 -->
+	<!-- 开发者信息 -->
 	<developers>
 		<developer>
 			<name>HeYu</name>
@@ -47,9 +47,9 @@
 		</developer>
 	</developers>
 
-	<!-- 提供了一种管理依赖版本号的方式�1ￄ1�7�1�7�只是声明依赖，并不实现引入，因此子项目霄1�7�1�7�1�7�1�7�显式的声明霄1�7�1�7�1�7�1�7�用的依赖�1ￄ1�7�1�7�1�7�1�7�1�7�1�7 -->
-	<!-- 如果有多个子项目都引用同丄1�7�1�7�1�7�1�7�依赖，则可以避免在每个使用的子项目里都声明丄1�7�1�7�1�7�1�7�版本号，这样当想升级或切换到另丄1�7�1�7�1�7�1�7�版本时，只霄1�7�1�7�1�7�1�7�在顶层父容器里更新，�1ￄ1�7�1�7�不霄1�7�1�7�1�7�1�7�一个一个子项目的修攄1�7�1�7�1�7�1�7 
-		,另外如果某个子项目需要另外的丄1�7�1�7�1�7�1�7�版本，只需要声明version就可〄1�7�1�7�1�7�1�7 -->
+	<!-- 提供了一种管理依赖版本号的方式，并不实现引入，因此子项目需要显式的声明需要用的依赖。 -->
+	<!-- 如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改 
+		；另外如果某个子项目需要另外的一个版本，只需要声明version就可。 -->
 	<dependencyManagement>
 		<dependencies>
 
@@ -71,10 +71,10 @@
 			</dependency>
 			<dependency>
 				<groupId>com.rain</groupId>
-				<artifactId>r-webcomponents</artifactId>
+				<artifactId>r-webs-components</artifactId>
 				<version>${r-version}</version>
 			</dependency>
-
+			
 			<dependency>
 				<groupId>com.rain</groupId>
 				<artifactId>r-components-authority</artifactId>
@@ -107,33 +107,32 @@
 
 			<!-- spring -->
 			<dependency>
-				<!-- 这个jar 文件包含Spring MVC 框架相关的所有类。包括框Servlets，Web MVC框架，控制器和视图支持�1ￄ1�7�1�7�当然，如果你的应用使用了独立的MVC 
-					框架，则无需这个JAR 文件里的任何类�1ￄ1�7�1�7�1�7�1�7�1�7�1�7 -->
-				<!-- 外部依赖spring-web, (spring-support，Tiles，iText，POI)〄1�7�1�7�1�7�1�7 -->
+				<!-- 这个jar 文件包含Spring MVC 框架相关的所有类。包括框架的Servlets，Web MVC框架，控制器和视图支持。当然，如果你的应用使用了独立的MVC 
+					框架，则无需这个JAR 文件里的任何类。 -->
+				<!-- 外部依赖spring-web, (spring-support，Tiles，iText，POI)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
 				<!-- 这个jar 文件是所有应用都要用到的，它包含访问配置文件、创建和管理bean 以及进行Inversion of Control 
-					/ Dependency Injection（IoC/DI）操作相关的扄1�7�1�7�1�7�1�7�类〄1�7�1�7�1�7�1�7 -->
-				<!-- 如果应用只需基本的IoC/DI 支持，引入spring-core.jar 及spring-beans.jar 文件就可以了〄1�7�1�7�1�7�1�7 -->
-				<!-- 外部依赖spring-core＄1�7�1�7�1�7�1�7GLIB)。Code Generator -->
+					/ Dependency Injection（IoC/DI）操作相关的所有类。如果应用只需基本的IoC/DI 支持，引入spring-core.jar 
+					及spring-beans.jar 文件就可以了。 -->
+				<!-- 外部依赖spring-core，(CGLIB)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- 这个jar 文件为Spring 核心提供了大量扩展�1ￄ1�7�1�7�可以找到使用Spring ApplicationContext特�1ￄ1�7�1�7�时扄1�7�1�7�1�7�1�7�1�7�1�7�1�7�1�7�全部类，JDNI 
-					扄1�7�1�7�1�7�1�7�1�7�1�7�1�7�1�7�全部类，instrumentation组件以及校验Validation 方面的相关类〄1�7�1�7�1�7�1�7 -->
-				<!-- 外部依赖spring-beans,(spring-aop)〄1�7�1�7�1�7�1�7 -->
+				<!-- 这个jar 文件为Spring 核心提供了大量扩展。可以找到使用Spring ApplicationContext特性时所需的全部类，JDNI 
+					所需的全部类，instrumentation组件以及校验Validation 方面的相关类。 -->
+				<!-- 外部依赖spring-beans, (spring-aop)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- 这个jar 文件包含支持UI模版（Velocity，FreeMarker JasperReports），邮件服务，脚本服劄1�7�1�7�1�7�1�7 
-					(JRuby)，缓存Cache（EHCache），任务计划Scheduling（uartz）方面的类�1ￄ1�7�1�7�1�7�1�7�1�7�1�7 -->
+				<!-- 这个jar 文件包含支持UI模版（Velocity，FreeMarker，JasperReports），邮件服务，脚本服务(JRuby)，缓存Cache（EHCache），任务计划Scheduling（uartz）方面的类。 -->
 				<!-- 外部依赖spring-context, (spring-jdbc, Velocity, FreeMarker, JasperReports, 
 					BSH, Groovy, JRuby, Quartz, EHCache) -->
 				<groupId>org.springframework</groupId>
@@ -141,8 +140,8 @@
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- spring 框架核心工具籄1�7�1�7�1�7�1�7pring 其它组件要都要使用到这个包里的类，是其它组件的基本核心，当然你也可以在自己的应用系统中使用这些工具类 -->
-				<!-- 外部依赖Commons Logging＄1�7�1�7�1�7�1�7Log4J) -->
+				<!-- 这个jar 文件包含Spring 框架基本的核心工具类。Spring 其它组件要都要使用到这个包里的类，是其它组件的基本核心，当然你也可以在自己的应用系统中使用这些工具类。 -->
+				<!-- 外部依赖Commons Logging， (Log4J)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
 				<version>${spring-version}</version>
@@ -153,20 +152,18 @@
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- 这个jar 文件包含Web 应用弄1�7�1�7�1�7�1�7�时，用到Spring 框架时所霄1�7�1�7�1�7�1�7�核心类，包括自动载入Web 
-					Application Context 特�1ￄ1�7�1�7�的类�1ￄ1�7�1�7�Struts 与JSF 集成类�1ￄ1�7�1�7�文件上传的支持类�1ￄ1�7�1�7�Filter 
-					类和大量工具辅助类�1ￄ1�7�1�7�1�7�1�7�1�7�1�7 -->
+				<!-- 这个jar 文件包含Web 应用开发时，用到Spring 框架时所需的核心类，包括自动载入Web Application Context 
+					特性的类、Struts 与JSF 集成类、文件上传的支持类、Filter 类和大量工具辅助类。 -->
 				<!-- 外部依赖spring-context, Servlet API, (JSP API, JSTL, Commons FileUpload, 
-					COS)〄1�7�1�7�1�7�1�7 -->
+					COS)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- 这个jar 文件包含在应用中使用Spring 的AOP 特�1ￄ1�7�1�7�时扄1�7�1�7�1�7�1�7�1�7�1�7�1�7�1�7�类和源码级元数据支持�1ￄ1�7�1�7�使用基于AOP 
-					的Spring特�1ￄ1�7�1�7�，如声明型事务管理（Declarative Transaction Management），也要在应用里包含这个jar匄1�7�1�7�1�7�1�7 -->
-				<!-- 外部依赖spring-core＄1�7�1�7�1�7�1�7spring-beans，AOP Alliance＄1�7�1�7�1�7�1�7GLIB，Commons 
-					Attributes) -->
+				<!-- 这个jar 文件包含在应用中使用Spring 的AOP 特性时所需的类和源码级元数据支持。使用基于AOP 的Spring特性，如声明型事务管理（Declarative 
+					Transaction Management），也要在应用里包含这个jar包。 -->
+				<!-- 外部依赖spring-core， (spring-beans，AOP Alliance， CGLIB，Commons Attributes)。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
 				<version>${spring-version}</version>
@@ -187,17 +184,22 @@
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-				<!-- 提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。外部依赖�1ￄ1�7�1�7�1�7�1�7�1�7�1�7 -->
+				<!-- 提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aspects</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
-			<!-- 未引入spring-dao,如有霄1�7�1�7�1�7�1�7�，以后再进行维抄1�7�1�7�1�7�1�7pring-dao.jar 
-				这个jar 文件包含Spring DAO、Spring Transaction 进行数据访问的所有类。为了使用声明型事务支持，还霄1�7�1�7�1�7�1�7�自己的应用里包含spring-aop.jar。外部依赖spring-core＄1�7�1�7�1�7�1�7pring-aop＄1�7�1�7�1�7�1�7 
-				spring-context＄1�7�1�7�1�7�1�7TA API)〄1�7�1�7�1�7�1�7 -->
+			<!-- 这个jar 文件包含Spring DAO、Spring Transaction 进行数据访问的所有类。为了使用声明型事务支持，还需在自己的应用里包含spring-aop.jar。 -->
+			<!-- 外部依赖spring-core，(spring-aop， spring-context， JTA API)。 -->
+			<!-- 这个引用可能是错误的引用 -->
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.springframework</groupId> -->
+<!-- 				<artifactId>spring-dao</artifactId> -->
+<!-- 				<version>3.2.1.RELEASE</version> -->
+<!-- 			</dependency> -->
 			<dependency>
-				<!--这个jar 文件包含对Spring 对JDBC 数据访问进行封装的所有类〄1�7�1�7�1�7�1�7 -->
-				<!-- 外部依赖spring-beans，spring-dao〄1�7�1�7�1�7�1�7 -->
+				<!--这个jar 文件包含对Spring 对JDBC 数据访问进行封装的所有类。 -->
+				<!-- 外部依赖spring-beans，spring-dao。 -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
 				<version>3.2.1.RELEASE</version>

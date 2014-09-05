@@ -1,4 +1,4 @@
-package com.r.webcomponents.incrementer;
+package com.r.web.components.incrementer;
 
 import org.springframework.dao.DataAccessException;
 

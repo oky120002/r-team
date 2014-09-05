@@ -178,10 +178,10 @@
 		<input type="button" id="btn_addrow" onclick="addRow();" value="+附件" class="untag tableButton"/>
 		<input type="button" id="btn_upload" onclick="upload();" value="提交" class="tableButton" /> <br />
 	</form>
-	<table border="0">
+	<table border="0" style="width: 100%">
 		<tr>
 			<td>
-				<table id="table" width="100%" height="20px;" style="background-color: gray;" class="table">
+				<table id="table" height="20px;" style="background-color: gray" class="table">
 					<tr>
 						<td><span id="span" style="color: red;">已上传: 0%</span></td>
 					</tr>

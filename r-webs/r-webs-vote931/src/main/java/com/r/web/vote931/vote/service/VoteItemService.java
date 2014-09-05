@@ -20,13 +20,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.r.core.util.RandomUtil;
+import com.r.web.components.incrementer.RainMaxValueIncrementer;
 import com.r.web.vote931.support.abs.AbstractDao;
 import com.r.web.vote931.support.abs.AbstractService;
 import com.r.web.vote931.support.bean.KeyValue;
 import com.r.web.vote931.vote.dao.VoteDao;
 import com.r.web.vote931.vote.exception.VoteItemContextErrorException;
 import com.r.web.vote931.vote.model.AbsVoteItem;
-import com.r.webcomponents.incrementer.RainMaxValueIncrementer;
 
 /**
  * 用户Service<br />
