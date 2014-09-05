@@ -52,7 +52,7 @@
 		</property>
 	</bean>
 	
-	<!-- mysqlIncrementer生成器 -->
+	<!-- mysqlIncrementer生成器 --> 
 	<bean id="mysqlIncrementer" class="com.r.webcomponents.incrementer.impl.mysql.RainMySQLMaxValueIncrementer">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
