@@ -1,0 +1,24 @@
+/**
+ * 描          述:  <描述>
+ * 修  改   人:  rain
+ * 修改时间:  2013-4-3
+ * <修改描述:>
+ */
+package com.r.web.module.vote.dao;
+
+import org.springframework.stereotype.Repository;
+
+import com.r.web.module.vote.model.AbsVoteItem;
+import com.r.web.support.abs.AbstractDao;
+import com.r.web.support.abs.AbstractDaoImpl;
+
+/**
+ * @author rain
+ */
+@Repository("support.dao.default")
+public class DefaultDaoImpl extends AbstractDaoImpl<AbsVoteItem> implements AbstractDao<AbsVoteItem> {
+
+    public DefaultDaoImpl() {
+        super(AbsVoteItem.class);
+    }
+}

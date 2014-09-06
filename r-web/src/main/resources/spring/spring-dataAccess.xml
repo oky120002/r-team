@@ -2,26 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- h2 -->
-		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:D:/rainteam/h2db/r-web/db" />
-		<property name="username" value="db" />
-		<property name="password" value="db" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+<!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" /> -->
+		<property name="url" value="jdbc:mysql://192.168.1.100:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" />
+		<property name="username" value="root" /> 
+		<property name="password" value="root4567" />
 
-		<!-- mysql -->
-<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:mysql://192.168.0.169:3306/rain?connectTimeout=3000&amp;socketTimeout=60000" /> -->
-<!-- 		<property name="username" value="heyu" /> -->
-<!-- 		<property name="password" value="heyuT" /> -->
-
-		<property name="maxActive" value="100" />
+		<property name="maxActive" value="100" />	
 		<property name="maxIdle" value="30" />
 		<property name="maxWait" value="1000" />
 		<property name="defaultAutoCommit" value="true" />
@@ -35,8 +30,7 @@
 	</bean>
 
 	<!-- Session Factory -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<!-- 数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- hibernate 扫描实体的路径 -->
@@ -44,41 +38,18 @@
 		<!-- 一些参数 -->
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<!-- hibernate方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 显示sql语句 -->
 				<prop key="hibernate.show_sql">true</prop>
+				<!-- 格式化sql语句 -->
 				<prop key="hibernate.format_sql">false</prop>
-				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
-				</prop>
+				<!-- sql初始化行为 -->
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<!-- hibernate.current_session_context_class 是hibernate 4使用session事物的模式 -->
-				<!-- 1: org.hibernate.context.internal.ThreadLocalSessionContext - 当前session通过当前执行的线程来跟踪和界定。 -->
-				<!-- 2: org.hibernate.context.internal.JTASessionContext - 当前session根据JTA来跟踪和界定。这和以前的仅支持JTA的方法是完全一样的。 -->
-				<!-- 3：org.hibernate.context.internal.ManagedSessionContext - 使用spring时 
-					默认是 ，用spring的事务管理 则用org.springframework.orm.hibernate4.SpringSessionContext -->
-				<!-- 查询缓存 -->
-				<!-- <prop key="hibernate.cache.use_query_cache">true</prop> -->
-				<!-- 二级缓存 -->
-				<!-- <prop key="hibernate.cache.use_second_level_cache"> true </prop> -->
-				<!-- 二级缓存提供商 -->
-				<!-- <prop key="hibernate.cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</prop> -->
-				<!-- <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop> -->
-				<!-- <prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</prop> -->
-				<!-- <prop key="hibernate.proxool.pool_alias">myDataSource</prop> -->
-				<!-- <prop key="hibernate.proxool.xml">proxool.xml</prop> -->
-				<!-- <prop key="hibernate.connection.provider_class"> org.hibernate.service.jdbc.connections.internal.ProxoolConnectionProvider 
-					</prop> -->
-				<!-- <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop> -->
-				<!-- <prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</prop> -->
-				<!-- <prop key="hibernate.search.default.indexBase">H:\indexed</prop> -->
-				<!-- hibernate 3.3以上 -->
-				<!-- <property name="hibernate.cache.region.factory_class"> net.sf.ehcache.hibernate.EhCacheRegionFactory</property> -->
-				<!-- 或 -->
-				<!-- <property name="hibernate.cache.region.factory_class"> net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property> -->
-				<!-- Hibernate 3.0 - 3.2 -->
-				<!-- <property name="hibernate.cache.provider_class"> net.sf.ehcache.hibernate.EhCacheProvider</property> -->
-				<!-- 或 -->
-				<!-- <property name="hibernate.cache.provider_class"> net.sf.ehcache.hibernate.SingletonEhCacheProvider</property> -->
+				<!-- 当前session工厂 -->
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
 			</props>
 		</property>
 	</bean>
+	
 </beans>

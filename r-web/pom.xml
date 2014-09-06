@@ -20,6 +20,10 @@
 			<groupId>com.rain</groupId>
 			<artifactId>r-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.rain</groupId>
+			<artifactId>r-web-component</artifactId>
+		</dependency>
 
 		<!-- spring -->
 		<dependency>
@@ -242,19 +246,19 @@
 
 	<build>
 		<finalName>r-web</finalName>
-<!-- 		<plugins> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-compiler-plugin</artifactId> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-war-plugin</artifactId> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-source-plugin</artifactId> -->
-<!-- 			</plugin> -->
-<!-- 		</plugins> -->
+		<!-- <plugins> -->
+		<!-- <plugin> -->
+		<!-- <groupId>org.apache.maven.plugins</groupId> -->
+		<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+		<!-- </plugin> -->
+		<!-- <plugin> -->
+		<!-- <groupId>org.apache.maven.plugins</groupId> -->
+		<!-- <artifactId>maven-war-plugin</artifactId> -->
+		<!-- </plugin> -->
+		<!-- <plugin> -->
+		<!-- <groupId>org.apache.maven.plugins</groupId> -->
+		<!-- <artifactId>maven-source-plugin</artifactId> -->
+		<!-- </plugin> -->
+		<!-- </plugins> -->
 	</build>
 </project>
