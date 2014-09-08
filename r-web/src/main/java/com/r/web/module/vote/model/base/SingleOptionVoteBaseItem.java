@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.module.vote.model;
+package com.r.web.module.vote.model.base;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.web.module.vote.VoteItem;
+import com.r.web.module.vote.VoteBaseItem;
 import com.r.web.module.vote.VoteItemType;
 import com.r.web.module.vote.exception.AnswerTypeErrorException;
 import com.r.web.module.vote.exception.VoteItemContextErrorException;
@@ -25,12 +25,12 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * 
  */
 @Entity
-@Table(name = "voteitem_single")
+@Table(name = "votebaseitem_single")
 @PrimaryKeyJoinColumn(name = "viid")
-public class SingleOptionVoteItem extends AbsVoteItem implements VoteItem, Serializable {
+public class SingleOptionVoteBaseItem extends VoteBaseItemImpl implements VoteBaseItem, Serializable {
 	private static final long serialVersionUID = 9095859661204915202L;
 
-	public SingleOptionVoteItem() {
+	public SingleOptionVoteBaseItem() {
 		super(VoteItemType.single);
 	}
 

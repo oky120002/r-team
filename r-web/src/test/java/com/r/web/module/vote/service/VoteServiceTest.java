@@ -11,13 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.r.web.module.vote.VoteBaseItem;
 import com.r.web.module.vote.bean.VoteOption;
-import com.r.web.module.vote.model.AbsVoteItem;
-import com.r.web.module.vote.model.CompletionVoteItem;
-import com.r.web.module.vote.model.MultipleOptionVoteItem;
-import com.r.web.module.vote.model.SingleOptionVoteItem;
 import com.r.web.module.vote.model.Vote;
-import com.r.web.module.vote.model.YesOrNoVoteItem;
+import com.r.web.module.vote.model.VoteItem;
+import com.r.web.module.vote.model.base.CompletionVoteBaseItem;
+import com.r.web.module.vote.model.base.MultipleOptionVoteBaseItem;
+import com.r.web.module.vote.model.base.SingleOptionVoteBaseItem;
+import com.r.web.module.vote.model.base.YesOrNoVoteBaseItem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/*.xml" })
@@ -25,8 +26,8 @@ public class VoteServiceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(VoteServiceTest.class);
 
-    @Resource(name = "vote.service.voteitem")
-    private VoteItemService voteItemService;
+    @Resource(name = "vote.service.votebaseitem")
+    private VoteBaseItemService voteItemService;
 
     @Resource(name = "vote.service.vote")
     private VoteService voteService;
@@ -34,45 +35,44 @@ public class VoteServiceTest {
     @Test
     public void initDatas() {
 
-        for (int i = 0; i < 30; i++) {
-            // 新增
-            YesOrNoVoteItem yesno = createYesOrNoVoteItem("测试问题" + i + " : 菇凉真名风小筝?", false, "是的", "不是的", "筝团 - 雨");
-            SingleOptionVoteItem single = createSingleOptionVoteItem("测试问题" + i + " : 菇凉所属工会id是多少?", 2, "2086", "931", "2080", "99", "筝团 - 雨");
-            MultipleOptionVoteItem multiple = createMultipleOptionVoteItem("测试问题" + i + " : 以下哪些歌曲是菇凉原创?", "2,3,4", "卜卦", "梦魇", "花非花", "西江月", "筝团 - 雨");
-            CompletionVoteItem completione = createCompletionVoteItem("测试问题" + i + " : 菇凉在{}年获得YY年度最佳女主播,在2013年获得第二届《{}》冠军。", "2012", "公主驾到", null, null, "筝团 - 雨");
-            voteItemService.save(yesno);
-            voteItemService.save(single);
-            voteItemService.save(multiple);
-            voteItemService.save(completione);
-
-            // 根据id查询
-            AbsVoteItem voteIten = voteItemService.findById(single.getId());
-            logger.info(voteIten.getQuestion());
-            voteIten = voteItemService.findById(multiple.getId());
-            logger.info(voteIten.getQuestion());
-
-            // 根据编号查询
-            voteIten = voteItemService.findByNo(yesno.getNo());
-            logger.info(voteIten.getQuestion());
-            voteIten = voteItemService.findByNo(completione.getNo());
-            logger.info(voteIten.getQuestion());
-        }
+//        for (int i = 0; i < 30; i++) {
+//            // 新增
+//            YesOrNoVoteBaseItem yesno = createYesOrNoVoteItem("测试问题" + i + " : 菇凉真名风小筝?", false, "是的", "不是的", "筝团 - 雨");
+//            SingleOptionVoteBaseItem single = createSingleOptionVoteItem("测试问题" + i + " : 菇凉所属工会id是多少?", 2, "2086", "931", "2080", "99", "筝团 - 雨");
+//            MultipleOptionVoteBaseItem multiple = createMultipleOptionVoteItem("测试问题" + i + " : 以下哪些歌曲是菇凉原创?", "2,3,4", "卜卦", "梦魇", "花非花", "西江月", "筝团 - 雨");
+//            CompletionVoteBaseItem completione = createCompletionVoteItem("测试问题" + i + " : 菇凉在{}年获得YY年度最佳女主播,在2013年获得第二届《{}》冠军。", "2012", "公主驾到", null, null, "筝团 - 雨");
+//            voteItemService.save(yesno);
+//            voteItemService.save(single);
+//            voteItemService.save(multiple);
+//            voteItemService.save(completione);
+//
+//            // 根据id查询
+//            VoteBaseItem voteIten = voteItemService.findById(single.getId());
+//            logger.info(voteIten.getQuestion());
+//            voteIten = voteItemService.findById(multiple.getId());
+//            logger.info(voteIten.getQuestion());
+//
+//            // 根据编号查询
+//            voteIten = voteItemService.findByNo(yesno.getNo());
+//            logger.info(voteIten.getQuestion());
+//            voteIten = voteItemService.findByNo(completione.getNo());
+//            logger.info(voteIten.getQuestion());
+//        }
 
         // 生成问卷
         Vote vote = voteService.createVote(new VoteOption("测试-签名", "测试-标题", "测试-副标题", 25));
-
         logger.info("新生成问卷ID : " + vote.getId());
         logger.info(vote.getTitle());
         logger.info(vote.getSubTitle());
         logger.info(vote.getSignature());
         int i = 1;
-        for (AbsVoteItem absVoteItem : vote) {
-            logger.info(i++ + " : " + absVoteItem.getNo() + " : " + absVoteItem.getQuestion());
+        for (VoteItem voteItem : vote.getVoteItems()) {
+            logger.info(i++ + " : " + voteItem.getVoteBaseItem().getNo() + " : " + voteItem.getVoteBaseItem().getQuestion());
         }
     }
 
-    private CompletionVoteItem createCompletionVoteItem(String question, String answer1, String answer2, String answer3, String answer4, String provider) {
-        CompletionVoteItem completion = new CompletionVoteItem();
+    private CompletionVoteBaseItem createCompletionVoteItem(String question, String answer1, String answer2, String answer3, String answer4, String provider) {
+        CompletionVoteBaseItem completion = new CompletionVoteBaseItem();
         completion.setQuestion(question);
         completion.setAnswer1(answer1);
         completion.setAnswer2(answer2);
@@ -87,8 +87,8 @@ public class VoteServiceTest {
         return completion;
     }
 
-    private MultipleOptionVoteItem createMultipleOptionVoteItem(String question, String answer, String answer1, String answer2, String answer3, String answer4, String provider) {
-        MultipleOptionVoteItem multiple = new MultipleOptionVoteItem();
+    private MultipleOptionVoteBaseItem createMultipleOptionVoteItem(String question, String answer, String answer1, String answer2, String answer3, String answer4, String provider) {
+        MultipleOptionVoteBaseItem multiple = new MultipleOptionVoteBaseItem();
         multiple.setQuestion(question);
         multiple.setAnswer(answer);
         multiple.setAnswer1(answer1);
@@ -119,8 +119,8 @@ public class VoteServiceTest {
      *            发布者
      * @return
      */
-    private YesOrNoVoteItem createYesOrNoVoteItem(String question, boolean answer, String answerYes, String answerNo, String provider) {
-        YesOrNoVoteItem yesno = new YesOrNoVoteItem();
+    private YesOrNoVoteBaseItem createYesOrNoVoteItem(String question, boolean answer, String answerYes, String answerNo, String provider) {
+        YesOrNoVoteBaseItem yesno = new YesOrNoVoteBaseItem();
         yesno.setQuestion(question);
         yesno.setAnswer(Boolean.valueOf(answer));
         yesno.setAnswerYes(answerYes);
@@ -153,8 +153,8 @@ public class VoteServiceTest {
      *            发布者
      * @return 单选问卷项
      */
-    private SingleOptionVoteItem createSingleOptionVoteItem(String question, int answer, String answer1, String answer2, String answer3, String answer4, String provider) {
-        SingleOptionVoteItem single = new SingleOptionVoteItem();
+    private SingleOptionVoteBaseItem createSingleOptionVoteItem(String question, int answer, String answer1, String answer2, String answer3, String answer4, String provider) {
+        SingleOptionVoteBaseItem single = new SingleOptionVoteBaseItem();
         single.setQuestion(question);
         single.setAnswer(Integer.valueOf(answer));
         single.setAnswer1(answer1);

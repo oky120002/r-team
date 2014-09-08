@@ -36,11 +36,11 @@ public class VoteService extends AbstractService {
     @Resource(name = "incrementer")
     private IncrementerContext incrementer;
 
-    @Resource(name = "vote.doa.vote")
+    @Resource(name = "vote.dao.vote")
     private VoteDao voteDao;
 
-    @Resource(name = "vote.service.voteitem")
-    private VoteItemService voteItemService;
+    @Resource(name = "vote.service.votebaseitem")
+    private VoteBaseItemService voteItemService;
 
     /**
      * 查询所有的问卷
@@ -71,10 +71,10 @@ public class VoteService extends AbstractService {
         vote.setTitle(voteOption.getTitle());
         vote.setSubTitle(voteOption.getSubTitle());
         vote.setSignature(voteOption.getSignature());
-        vote.setVoteItems(voteItemService.queryByRandom(voteOption.getVisize()));
         vote.setCreateDate(new Date());
         vote.setIsEnable(Boolean.TRUE);
         voteDao.create(vote);
+        vote.setVoteItems(voteItemService.queryByRandom(vote, voteOption.getVisize()));
         return vote;
     }
 }

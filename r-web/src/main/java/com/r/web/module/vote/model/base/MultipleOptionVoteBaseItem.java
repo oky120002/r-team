@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.module.vote.model;
+package com.r.web.module.vote.model.base;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.web.module.vote.VoteItem;
+import com.r.web.module.vote.VoteBaseItem;
 import com.r.web.module.vote.VoteItemType;
 import com.r.web.module.vote.exception.AnswerTypeErrorException;
 import com.r.web.module.vote.exception.VoteItemContextErrorException;
@@ -23,12 +23,12 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * 
  */
 @Entity
-@Table(name = "voteitem_multiple")
+@Table(name = "votebaseitem_multiple")
 @PrimaryKeyJoinColumn(name = "viid")
-public class MultipleOptionVoteItem extends AbsVoteItem implements VoteItem {
+public class MultipleOptionVoteBaseItem extends VoteBaseItemImpl implements VoteBaseItem {
 	public static final String SPLIT = ",";
 
-	public MultipleOptionVoteItem() {
+	public MultipleOptionVoteBaseItem() {
 		super(VoteItemType.multiple);
 	}
 

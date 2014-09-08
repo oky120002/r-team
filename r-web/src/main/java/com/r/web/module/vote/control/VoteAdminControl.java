@@ -20,13 +20,13 @@ import com.r.core.exceptions.SwitchPathException;
 import com.r.core.util.RandomUtil;
 import com.r.web.module.vote.VoteItemType;
 import com.r.web.module.vote.exception.VoteItemContextErrorException;
-import com.r.web.module.vote.model.AbsVoteItem;
-import com.r.web.module.vote.model.CompletionVoteItem;
-import com.r.web.module.vote.model.MultipleOptionVoteItem;
-import com.r.web.module.vote.model.SingleOptionVoteItem;
 import com.r.web.module.vote.model.Vote;
-import com.r.web.module.vote.model.YesOrNoVoteItem;
-import com.r.web.module.vote.service.VoteItemService;
+import com.r.web.module.vote.model.base.VoteBaseItemImpl;
+import com.r.web.module.vote.model.base.CompletionVoteBaseItem;
+import com.r.web.module.vote.model.base.MultipleOptionVoteBaseItem;
+import com.r.web.module.vote.model.base.SingleOptionVoteBaseItem;
+import com.r.web.module.vote.model.base.YesOrNoVoteBaseItem;
+import com.r.web.module.vote.service.VoteBaseItemService;
 import com.r.web.module.vote.service.VoteService;
 import com.r.web.support.abs.AbstractControl;
 import com.r.web.support.bean.Support;
@@ -44,8 +44,8 @@ public class VoteAdminControl extends AbstractControl {
     @Resource(name = "vote.service.vote")
     private VoteService voteService;
 
-    @Resource(name = "vote.service.voteitem")
-    private VoteItemService voteItemService;
+    @Resource(name = "vote.service.votebaseitem")
+    private VoteBaseItemService voteItemService;
 
     /** 问卷列表页面 */
     @RequestMapping(value = "page/vote/index")
@@ -63,7 +63,7 @@ public class VoteAdminControl extends AbstractControl {
      */
     @RequestMapping(value = "page/voteitem/index")
     public String pageVoteItemList(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        List<AbsVoteItem> voteItems = voteItemService.queryAll();
+        List<VoteBaseItemImpl> voteItems = voteItemService.queryAll();
         model.put("voteItems", voteItems);
         return "admin/voteItemList";
     }
@@ -78,7 +78,7 @@ public class VoteAdminControl extends AbstractControl {
      */
     @RequestMapping(value = "page/voteitem/index/{curPage}")
     public String pageVoteItemList(@PathVariable Integer curPage, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        List<AbsVoteItem> voteItems = voteItemService.queryByPage(curPage, 20);
+        List<VoteBaseItemImpl> voteItems = voteItemService.queryByPage(curPage, 20);
         model.put("voteItems", voteItems);
         return "admin/voteItemList";
     }
@@ -93,8 +93,8 @@ public class VoteAdminControl extends AbstractControl {
     /** 执行保存操作 */
     @RequestMapping(value = "func/voteitem/save")
     @ResponseBody
-    public Support<AbsVoteItem> funcVoteItemSave(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        Support<AbsVoteItem> support = new Support<AbsVoteItem>();
+    public Support<VoteBaseItemImpl> funcVoteItemSave(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        Support<VoteBaseItemImpl> support = new Support<VoteBaseItemImpl>();
         support.setSuccess(true);
         support.setTips("保存成功。");
 
@@ -127,19 +127,19 @@ public class VoteAdminControl extends AbstractControl {
     /** 改变状态 */
     @RequestMapping(value = "func/voteitem/changestatus/{id}")
     public String funcVoteItemChangestatus(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        AbsVoteItem voteItem = voteItemService.findById(id);
+        VoteBaseItemImpl voteItem = voteItemService.findById(id);
         voteItem.setIsEnable(!voteItem.isEnable());
         voteItemService.save(voteItem);
         return "redirect:/admin/page/voteitem/index";
     }
 
     /** 从request中获取问卷项信息 */
-    private AbsVoteItem getAbsVoteItem(HttpServletRequest request, VoteItemType type) {
+    private VoteBaseItemImpl getAbsVoteItem(HttpServletRequest request, VoteItemType type) {
         if (type == null) {
             throw new IllegalArgumentException("未知的问卷项。");
         }
         String id = request.getParameter("id"); // 问卷项ID
-        AbsVoteItem voteItem = null;
+        VoteBaseItemImpl voteItem = null;
         if (StringUtils.isNotBlank(id)) { // 修改
             voteItem = voteItemService.findById(id);
         }
@@ -150,9 +150,9 @@ public class VoteAdminControl extends AbstractControl {
         switch (type) {
         case yesno:
             if (voteItem == null) {
-                voteItem = new YesOrNoVoteItem();
+                voteItem = new YesOrNoVoteBaseItem();
             }
-            YesOrNoVoteItem yesno = (YesOrNoVoteItem) voteItem;
+            YesOrNoVoteBaseItem yesno = (YesOrNoVoteBaseItem) voteItem;
             yesno.setType(VoteItemType.yesno);
             yesno.setRemark(remark);
             yesno.setQuestion(question);
@@ -164,9 +164,9 @@ public class VoteAdminControl extends AbstractControl {
             return yesno;
         case single:
             if (voteItem == null) {
-                voteItem = new SingleOptionVoteItem();
+                voteItem = new SingleOptionVoteBaseItem();
             }
-            SingleOptionVoteItem single = (SingleOptionVoteItem) voteItem;
+            SingleOptionVoteBaseItem single = (SingleOptionVoteBaseItem) voteItem;
             single.setType(VoteItemType.single);
             single.setRemark(remark);
             single.setQuestion(question);
@@ -180,9 +180,9 @@ public class VoteAdminControl extends AbstractControl {
             return single;
         case multiple:
             if (voteItem == null) {
-                voteItem = new MultipleOptionVoteItem();
+                voteItem = new MultipleOptionVoteBaseItem();
             }
-            MultipleOptionVoteItem multiple = (MultipleOptionVoteItem) voteItem;
+            MultipleOptionVoteBaseItem multiple = (MultipleOptionVoteBaseItem) voteItem;
             multiple.setType(VoteItemType.multiple);
             multiple.setRemark(remark);
             multiple.setQuestion(question);
@@ -192,13 +192,13 @@ public class VoteAdminControl extends AbstractControl {
             multiple.setAnswer2(request.getParameter("answer2"));
             multiple.setAnswer3(request.getParameter("answer3"));
             multiple.setAnswer4(request.getParameter("answer4"));
-            multiple.setAnswer(StringUtils.join(request.getParameterValues("answer"), MultipleOptionVoteItem.SPLIT));
+            multiple.setAnswer(StringUtils.join(request.getParameterValues("answer"), MultipleOptionVoteBaseItem.SPLIT));
             return multiple;
         case completion:
             if (voteItem == null) {
-                voteItem = new CompletionVoteItem();
+                voteItem = new CompletionVoteBaseItem();
             }
-            CompletionVoteItem completion = (CompletionVoteItem) voteItem;
+            CompletionVoteBaseItem completion = (CompletionVoteBaseItem) voteItem;
             completion.setType(VoteItemType.completion);
             completion.setRemark(remark);
             completion.setQuestion(question);

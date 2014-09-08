@@ -6,14 +6,14 @@
  */
 package com.r.web.module.vote.dao;
 
-import com.r.web.module.vote.model.MultipleOptionVoteItem;
+import com.r.web.module.vote.model.VoteItem;
 import com.r.web.support.abs.AbstractDao;
 
 /**
- * 问卷Dao
+ * 问卷项Dao
  * 
  * @author rain
  */
-public interface MultipleOptionVoteItemDao extends AbstractDao<MultipleOptionVoteItem> {
-	
+public interface VoteItemDao extends AbstractDao<VoteItem> {
+
 }

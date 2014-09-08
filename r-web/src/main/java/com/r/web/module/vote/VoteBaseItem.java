@@ -11,7 +11,7 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * @author oky
  * 
  */
-public interface VoteItem {
+public interface VoteBaseItem {
 
 	/** 返回问卷项的唯一标识,如果存在相同的id,则后被加载的问卷项覆盖先被加载的问卷项 */
 	String getId();

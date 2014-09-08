@@ -8,19 +8,19 @@ package com.r.web.module.vote.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.web.module.vote.model.Vote;
+import com.r.web.module.vote.model.VoteItem;
 import com.r.web.support.abs.AbstractDaoImpl;
 
 /**
- * 问卷项
+ * 问卷项Dao
  * 
  * @author rain
  */
-@Repository("vote.dao.vote")
-public class VoteDaoImpl extends AbstractDaoImpl<Vote> implements VoteDao {
+@Repository("vote.dao.voteitem")
+public class VoteItemDaoImpl extends AbstractDaoImpl<VoteItem> implements VoteItemDao {
 
-    public VoteDaoImpl() {
-        super(Vote.class);
+    public VoteItemDaoImpl() {
+        super(VoteItem.class);
     }
 
 }

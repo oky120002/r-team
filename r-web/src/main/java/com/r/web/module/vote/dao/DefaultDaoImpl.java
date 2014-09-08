@@ -8,17 +8,19 @@ package com.r.web.module.vote.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.web.module.vote.model.AbsVoteItem;
+import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 import com.r.web.support.abs.AbstractDao;
 import com.r.web.support.abs.AbstractDaoImpl;
 
 /**
+ * 基础问卷项Dao
+ * 
  * @author rain
  */
 @Repository("support.dao.default")
-public class DefaultDaoImpl extends AbstractDaoImpl<AbsVoteItem> implements AbstractDao<AbsVoteItem> {
+public class DefaultDaoImpl extends AbstractDaoImpl<VoteBaseItemImpl> implements AbstractDao<VoteBaseItemImpl> {
 
     public DefaultDaoImpl() {
-        super(AbsVoteItem.class);
+        super(VoteBaseItemImpl.class);
     }
 }

@@ -4,9 +4,9 @@
  * 修改时间:  2013-4-7
  * <修改描述:>
  */
-package com.r.web.module.vote.dao;
+package com.r.web.module.vote.discard;
 
-import com.r.web.module.vote.model.YesOrNoVoteItem;
+import com.r.web.module.vote.model.base.YesOrNoVoteBaseItem;
 import com.r.web.support.abs.AbstractDao;
 
 /**
@@ -14,6 +14,6 @@ import com.r.web.support.abs.AbstractDao;
  * 
  * @author rain
  */
-public interface YesOrNoVoteItemDao extends AbstractDao<YesOrNoVoteItem> {
+public interface YesOrNoVoteItemDao extends AbstractDao<YesOrNoVoteBaseItem> {
 
 }

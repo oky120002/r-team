@@ -14,7 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.r.core.util.RandomUtil;
 import com.r.core.util.XStreamUtil;
-import com.r.web.module.vote.VoteItem;
+import com.r.web.module.vote.VoteBaseItem;
 import com.r.web.module.vote.VoteItemType;
 
 /**
@@ -24,9 +24,9 @@ import com.r.web.module.vote.VoteItemType;
 public class VoteContext1 {
 
     private static VoteContext1 context; // 问答容器
-    private List<VoteItem> votes = new ArrayList<VoteItem>(); // 按照加载顺序保存问卷项
-    private Map<String, VoteItem> voteItems = new HashMap<String, VoteItem>(); // 按照id保存问卷项
-    private Map<VoteItemType, List<VoteItem>> voteItemTypes = new HashMap<VoteItemType, List<VoteItem>>();// 按照问卷项类型保存问卷项
+    private List<VoteBaseItem> votes = new ArrayList<VoteBaseItem>(); // 按照加载顺序保存问卷项
+    private Map<String, VoteBaseItem> voteItems = new HashMap<String, VoteBaseItem>(); // 按照id保存问卷项
+    private Map<VoteItemType, List<VoteBaseItem>> voteItemTypes = new HashMap<VoteItemType, List<VoteBaseItem>>();// 按照问卷项类型保存问卷项
 
     /** 初始化方法 */
     public static VoteContext1 init() {
@@ -58,7 +58,7 @@ public class VoteContext1 {
         }
         VoteItemXmlLoader xmlLoader = XStreamUtil.fromXML(VoteItemXmlLoader.class, xml);
 
-        for (VoteItem vi : xmlLoader.getVoteItems()) {
+        for (VoteBaseItem vi : xmlLoader.getVoteItems()) {
             votes.add(vi);
             voteItems.put(vi.getId(), vi);
             voteItemTypes.get(vi.getType()).add(vi);
@@ -66,9 +66,9 @@ public class VoteContext1 {
     }
 
     /** 随机返回问卷项集合 */
-    public List<VoteItem> randomVoteItems(int size) {
+    public List<VoteBaseItem> randomVoteItems(int size) {
         int voteSize = votes.size();
-        List<VoteItem> voteList = new ArrayList<VoteItem>();
+        List<VoteBaseItem> voteList = new ArrayList<VoteBaseItem>();
         if (voteSize > 0) {
             for (int i = 0; i < size && i < voteSize; i++) {
                 voteList.add(randomNextVoteItem());
@@ -78,7 +78,7 @@ public class VoteContext1 {
     }
 
     /** 随机返回下一个问卷项 */
-    public VoteItem randomNextVoteItem() {
+    public VoteBaseItem randomNextVoteItem() {
         return votes.get(RandomUtil.randomInteger(0, votes.size()));
     }
 

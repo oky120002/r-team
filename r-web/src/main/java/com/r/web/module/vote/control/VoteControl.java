@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.r.web.module.vote.bean.VoteOption;
 import com.r.web.module.vote.model.Vote;
-import com.r.web.module.vote.service.VoteItemService;
+import com.r.web.module.vote.service.VoteBaseItemService;
 import com.r.web.module.vote.service.VoteService;
 import com.r.web.support.abs.AbstractControl;
 import com.r.web.support.bean.Support;
@@ -29,12 +29,12 @@ import com.r.web.support.bean.Support;
 @Controller("vote.control.vote")
 @RequestMapping(value = "/vote")
 public class VoteControl extends AbstractControl {
-    
+
     @Resource(name = "vote.service.vote")
     private VoteService voteService;
 
-    @Resource(name = "vote.service.voteitem")
-    private VoteItemService voteItemService;
+    @Resource(name = "vote.service.votebaseitem")
+    private VoteBaseItemService voteItemService;
 
     /** 生成问卷管理页面 */
     @RequestMapping(value = "page/generate")

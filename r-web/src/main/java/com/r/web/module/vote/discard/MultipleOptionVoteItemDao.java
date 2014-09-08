@@ -4,9 +4,9 @@
  * 修改时间:  2013-4-7
  * <修改描述:>
  */
-package com.r.web.module.vote.dao;
+package com.r.web.module.vote.discard;
 
-import com.r.web.module.vote.model.SingleOptionVoteItem;
+import com.r.web.module.vote.model.base.MultipleOptionVoteBaseItem;
 import com.r.web.support.abs.AbstractDao;
 
 /**
@@ -14,6 +14,6 @@ import com.r.web.support.abs.AbstractDao;
  * 
  * @author rain
  */
-public interface SingleOptionVoteItemDao extends AbstractDao<SingleOptionVoteItem> {
+public interface MultipleOptionVoteItemDao extends AbstractDao<MultipleOptionVoteBaseItem> {
 	
 }
