@@ -20,6 +20,7 @@ import com.r.web.component.incrementer.context.IncrementerContext;
 import com.r.web.module.vote.bean.VoteOption;
 import com.r.web.module.vote.dao.VoteDao;
 import com.r.web.module.vote.model.Vote;
+import com.r.web.module.vote.model.VoteItem;
 import com.r.web.support.abs.AbstractService;
 
 /**
@@ -39,8 +40,11 @@ public class VoteService extends AbstractService {
     @Resource(name = "vote.dao.vote")
     private VoteDao voteDao;
 
+    @Resource(name = "vote.service.voteitem")
+    private VoteItemService voteItemService;
+
     @Resource(name = "vote.service.votebaseitem")
-    private VoteBaseItemService voteItemService;
+    private VoteBaseItemService voteBaseItemService;
 
     /**
      * 查询所有的问卷
@@ -74,7 +78,9 @@ public class VoteService extends AbstractService {
         vote.setCreateDate(new Date());
         vote.setIsEnable(Boolean.TRUE);
         voteDao.create(vote);
-        vote.setVoteItems(voteItemService.queryByRandom(vote, voteOption.getVisize()));
+        voteBaseItemService.queryByRandom(vote, voteOption.getVisize());
+//        vote.setVoteItems(voteBaseItemService.queryByRandom(vote, voteOption.getVisize()));
+//        voteDao.update(vote);
         return vote;
     }
 }

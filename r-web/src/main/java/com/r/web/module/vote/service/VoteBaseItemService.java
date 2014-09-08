@@ -108,8 +108,7 @@ public class VoteBaseItemService extends AbstractService {
         VoteBaseItemImpl maxNoVoteItem = abstractDao.query(0, 1, Order.desc("no")).get(0);
         int maxNo = Integer.valueOf(maxNoVoteItem.getNo());
 
-        List<VoteItem> voteItems = new ArrayList<VoteItem>();
-        return queryByRandom(vote, voteItems, visize, maxNo);
+        return queryByRandom(vote, new ArrayList<VoteItem>(), visize, maxNo);
     }
 
     /** 统计问卷项总数 */
@@ -156,7 +155,7 @@ public class VoteBaseItemService extends AbstractService {
      *            最大生成的问卷项数目
      * @return
      */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     private List<VoteItem> queryByRandom(Vote vote, List<VoteItem> voteItems, int visize, int maxNo) {
         int size = voteItems.size();
         if (size == visize) { // 达到目标则返回对应数目的问卷项
@@ -183,9 +182,10 @@ public class VoteBaseItemService extends AbstractService {
             } else {
                 vi.setNo(voteItems.get(voteItems.size() - 1).getNo() + 1);
             }
+            voteItemService.create(vi);
             vi.setVote(vote);
             vi.setVoteBaseItem(voteBaseItemImpl);
-//            voteItemService.create(vi);
+            voteItemService.update(vi);
             voteItems.add(vi);
         }
 

@@ -29,11 +29,22 @@ public class VoteItemService extends AbstractService {
 
     /**
      * 创建问卷项
+     * 
      * @param vi
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void create(VoteItem vi) {
         voteItemDao.create(vi);
+    }
+
+    /**
+     * 更新问卷项
+     * 
+     * @param vote
+     */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void update(VoteItem vote) {
+        voteItemDao.update(vote);
     }
 
 }
