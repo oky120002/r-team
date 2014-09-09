@@ -120,10 +120,21 @@
 			<artifactId>antlr</artifactId>
 		</dependency>
 
-		<!-- db -->
+		<!-- db h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+
+		<!-- db mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
 		</dependency>
 
 		<!-- db connnetct pool -->

@@ -7,10 +7,10 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.r.app.core.util.ImageUtil;
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
-import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -40,7 +40,7 @@ public class BlueSkyFrame extends HBaseFrame implements BlueSkyLoginPanleListene
 		setResizable(false);
 		setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
 		try {
-			setIconImage(CoreUtil.getDefaultIco());
+			setIconImage(ImageUtil.getDefaultIco());
 		} catch (Exception e) {
 		}
 	}

@@ -10,7 +10,7 @@ import java.awt.Image;
 
 import org.hibernate.Session;
 
-import com.r.app.taobaoshua.bluesky.core.AbstractDao;
+import com.r.app.core.support.AbstractDao;
 import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.context.HttpProxy;

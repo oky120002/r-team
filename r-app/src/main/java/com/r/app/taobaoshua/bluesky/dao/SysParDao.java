@@ -6,7 +6,7 @@
  */
 package com.r.app.taobaoshua.bluesky.dao;
 
-import com.r.app.taobaoshua.bluesky.core.AbstractDao;
+import com.r.app.core.support.AbstractDao;
 import com.r.app.taobaoshua.bluesky.model.SysPar;
 import com.r.app.taobaoshua.bluesky.model.enumsyspar.SysParName;
 

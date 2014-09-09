@@ -4,7 +4,7 @@
  * 修改时间:  2013-10-14
  * 修改描述:
  */
-package com.r.app.taobaoshua.bluesky.core;
+package com.r.app.core.support;
 
 import java.util.Map;
 

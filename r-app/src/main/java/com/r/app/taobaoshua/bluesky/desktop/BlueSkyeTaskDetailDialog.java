@@ -24,12 +24,12 @@ import javax.swing.JTextField;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.r.app.core.util.ImageUtil;
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.app.taobaoshua.bluesky.model.enumtask.TaskStatus;
 import com.r.app.taobaoshua.bluesky.service.TaskService;
-import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.core.callback.SuccessAndFailureCallBack;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBaseDialog;
@@ -163,7 +163,7 @@ public class BlueSkyeTaskDetailDialog extends HBaseDialog implements ActionListe
         setResizable(false);
         setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
         try {
-            setIconImage(CoreUtil.getDefaultIco());
+            setIconImage(ImageUtil.getDefaultIco());
         } catch (Exception e) {}
     }
     

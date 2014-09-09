@@ -146,7 +146,7 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
-		<!-- db -->
+		<!-- db h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -162,7 +162,7 @@
 			<artifactId>commons-pool</artifactId>
 		</dependency>
 
-		<!-- jdbc -->
+		<!-- db mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

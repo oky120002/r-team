@@ -12,8 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.r.app.core.util.ImageUtil;
 import com.r.app.taobaoshua.bluesky.BlueSky;
-import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBaseFrame;
@@ -73,7 +73,7 @@ public class TaobaoShuaDesktop extends HBaseFrame implements ActionListener {
 		setResizable(false);
 		setLocationRelativeTo(null); // 移动到屏幕中部(上下左右)
 		try {
-			setIconImage(CoreUtil.getDefaultIco());
+			setIconImage(ImageUtil.getDefaultIco());
 		} catch (Exception e) {
 		}
 	}

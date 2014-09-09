@@ -1,9 +1,11 @@
-package com.r.app.taobaoshua.bluesky.core;
+package com.r.app.core.support;
 
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+
 
 /**
  * 
@@ -12,7 +14,16 @@ import org.hibernate.criterion.Order;
  * @author rain
  */
 public interface AbstractDao<T> {
-    
+
+    /**
+     * 
+     * 获得当前事务Seesion
+     * 
+     * @return Session
+     * @author rain
+     */
+    Session getSession();
+
     /**
      * 
      * 新增实体
@@ -24,8 +35,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void create(T model);
-    
+    void create(T model);
+
     /**
      * 
      * 新增实体集
@@ -37,8 +48,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void creates(List<T> models);
-    
+    void creates(List<T> models);
+
     /**
      * 
      * 新增实体集
@@ -51,8 +62,8 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public void creates(T... models);
-    
+    void creates(T... models);
+
     /**
      * 
      * 修改实体
@@ -64,8 +75,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void update(T model);
-    
+    void update(T model);
+
     /**
      * 
      * 修改实体集
@@ -77,8 +88,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void updates(List<T> models);
-    
+    void updates(List<T> models);
+
     /**
      * 
      * 修改实体集
@@ -91,26 +102,30 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public void updates(T... models);
-    
+    void updates(T... models);
+
     /**
-    * 根据Hql语句更新或者删除实体
-    * 
-    * @param hql Hql语句
-    * @param pars 条件参数
-    * @return 成功实体条数
-    */
-    public int updateOrDeleteByHql(CharSequence hql, Map<String, Object> pars);
-    
+     * 根据Hql语句更新或者删除实体
+     * 
+     * @param hql
+     *            Hql语句
+     * @param pars
+     *            条件参数
+     * @return 成功实体条数
+     */
+    int updateOrDeleteByHql(CharSequence hql, Map<String, Object> pars);
+
     /**
      * 根据Sql语句更新或者删除实体
      * 
-     * @param hql Hql语句
-     * @param pars 条件参数
+     * @param hql
+     *            Hql语句
+     * @param pars
+     *            条件参数
      * @return 成功实体条数
      */
-    public int updateOrDeleteBySql(CharSequence sql, Map<String, Object> pars);
-    
+    int updateOrDeleteBySql(CharSequence sql, Map<String, Object> pars);
+
     /**
      * 
      * 保存实体
@@ -122,8 +137,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void save(T model);
-    
+    void save(T model);
+
     /**
      * 
      * 保存实体集
@@ -135,8 +150,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void saves(List<T> models);
-    
+    void saves(List<T> models);
+
     /**
      * 
      * 保存实体集
@@ -149,8 +164,8 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public void saves(T... models);
-    
+    void saves(T... models);
+
     /**
      * 合并对象后执行saveOrUpdate()方法<br />
      * <b>如果session中没有缓存数据或者有一个缓存数据,则直接saveOrUpdate()</b><br />
@@ -161,8 +176,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void merge(T model);
-    
+    void merge(T model);
+
     /**
      * 合并对象集后执行saveOrUpdate()方法<br />
      * <b>如果session中没有缓存数据或者有一个缓存数据,则直接saveOrUpdate()</b><br />
@@ -173,8 +188,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void merges(List<T> models);
-    
+    void merges(List<T> models);
+
     /**
      * 合并对象集后执行saveOrUpdate()方法<br />
      * <b>如果session中没有缓存数据或者有一个缓存数据,则直接saveOrUpdate()</b><br />
@@ -186,8 +201,8 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public void merges(T... models);
-    
+    void merges(T... models);
+
     /**
      * 
      * 删除实体
@@ -199,8 +214,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void delete(T model);
-    
+    void delete(T model);
+
     /**
      * 
      * 删除实体集
@@ -212,8 +227,8 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    public void deletes(List<T> models);
-    
+    void deletes(List<T> models);
+
     /**
      * 
      * 删除实体集
@@ -226,16 +241,16 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public void deletes(T... models);
-    
+    void deletes(T... models);
+
     /**
      * 删除全部实体集
      * 
      * @author rain
      * @return integer 删除实体数量
      */
-    public int deleteAll();
-    
+    int deleteAll();
+
     /**
      * 
      * 查找单个实体
@@ -248,8 +263,8 @@ public interface AbstractDao<T> {
      * @return T 查询到的实体
      * @author rain
      */
-    public T find(CharSequence id);
-    
+    T find(CharSequence id);
+
     /**
      * 
      * 查询全部实体的条数
@@ -257,20 +272,22 @@ public interface AbstractDao<T> {
      * @return int 实体条数
      * @author rain
      */
-    public long queryAllSize();
-    
+    long queryAllSize();
+
     /**
      * 
      * 查询全部实体
      * 
      * @param <T>
      *            实体类型
+     * @param orders
+     *            排序
      * 
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryAll();
-    
+    List<T> queryAll(Order... orders);
+
     /**
      * 
      * 查询实体
@@ -287,8 +304,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> query(int firstResult, int maxResults, Order... orders);
-    
+    List<T> query(int firstResult, int maxResults, Order... orders);
+
     /**
      * 
      * 根据实体查询实体<br />
@@ -303,8 +320,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryByExample(T model);
-    
+    List<T> queryByExample(T model);
+
     /**
      * 
      * 根据实体查询实体<br />
@@ -325,8 +342,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryByExample(T model, int firstResult, int maxResults, Order... orders);
-    
+    List<T> queryByExample(T model, int firstResult, int maxResults, Order... orders);
+
     /**
      * 
      * 根据hql语句查询实体
@@ -339,8 +356,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryByHql(CharSequence hql);
-    
+    List<T> queryByHql(CharSequence hql);
+
     /**
      * 
      * 根据hql语句查询实体
@@ -356,8 +373,8 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues);
-    
+    List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues);
+
     /**
      * 
      * 根据hql语句查询实体
@@ -372,8 +389,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryByHql(CharSequence hql, Map<String, Object> pars);
-    
+    List<T> queryByHql(CharSequence hql, Map<String, Object> pars);
+
     /**
      * 
      * 根据hql语句查询实体
@@ -394,8 +411,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryByHql(CharSequence hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
-    
+    List<T> queryByHql(CharSequence hql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
+
     /**
      * 
      * 根据sql语句查询实体
@@ -408,8 +425,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryBySql(CharSequence sql);
-    
+    List<T> queryBySql(CharSequence sql);
+
     /**
      * 
      * 根据sql语句查询实体
@@ -425,8 +442,8 @@ public interface AbstractDao<T> {
      * @author rain
      */
     @SuppressWarnings("unchecked")
-    public List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues);
-    
+    List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues);
+
     /**
      * 
      * 根据sql语句查询实体
@@ -441,8 +458,8 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryBySql(CharSequence sql, Map<String, Object> pars);
-    
+    List<T> queryBySql(CharSequence sql, Map<String, Object> pars);
+
     /**
      * 
      * 根据sql语句查询实体
@@ -463,5 +480,5 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    public List<T> queryBySql(CharSequence sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
+    List<T> queryBySql(CharSequence sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
 }

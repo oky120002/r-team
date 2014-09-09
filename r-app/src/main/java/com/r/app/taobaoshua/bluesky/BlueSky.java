@@ -64,7 +64,7 @@ public class BlueSky implements TaoBaoShuaStartup {
 			}
 		});
 
-		applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+		applicationContext = new ClassPathXmlApplicationContext("taobaoshua/spring.xml");
 		backgroundTask = new BlueSkyBackgroundTask();
 		blueSkyResolve = new BlueSkyResolve();
 		blueSkyDialog = new BlueSkyFrame();

@@ -8,7 +8,7 @@ package com.r.app.taobaoshua.bluesky.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
+import com.r.app.core.support.AbstractDaoImpl;
 import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;

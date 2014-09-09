@@ -17,7 +17,7 @@ import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring.xml" })
+@ContextConfiguration(locations = { "classpath:taobaoshua/spring.xml" })
 public class TaskServiceTest {
 
 	@Resource(name = "taskService")

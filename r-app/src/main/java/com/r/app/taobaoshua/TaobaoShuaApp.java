@@ -12,9 +12,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.r.app.core.util.ImageUtil;
 import com.r.app.taobaoshua.bluesky.BlueSky;
 import com.r.app.taobaoshua.core.Core;
-import com.r.app.taobaoshua.core.CoreUtil;
 import com.r.app.taobaoshua.taobao.TaoBao;
 import com.r.app.taobaoshua.yuuboo.YuuBoo;
 import com.r.core.desktop.ctrl.HCtrlUtil;
@@ -109,7 +109,7 @@ public class TaobaoShuaApp {
 	private void init() {
 
 		try {
-			Image image = CoreUtil.getDefaultIco();
+			Image image = ImageUtil.getDefaultIco();
 			TrayUtil.initTray(image, "淘宝刷", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

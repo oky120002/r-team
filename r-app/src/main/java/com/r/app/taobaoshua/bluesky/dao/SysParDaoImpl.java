@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
-import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
+import com.r.app.core.support.AbstractDaoImpl;
 import com.r.app.taobaoshua.bluesky.model.SysPar;
 import com.r.app.taobaoshua.bluesky.model.enumsyspar.SysParName;
 import com.r.core.log.Logger;

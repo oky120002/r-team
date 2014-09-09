@@ -13,7 +13,7 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.r.app.taobaoshua.bluesky.core.AbstractDaoImpl;
+import com.r.app.core.support.AbstractDaoImpl;
 import com.r.app.taobaoshua.bluesky.model.BuyAccount;
 import com.r.app.taobaoshua.bluesky.model.Task;
 import com.r.core.httpsocket.HttpSocket;
