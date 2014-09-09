@@ -59,27 +59,26 @@ public class ZhuangXiuBangApp {
         }
     }
 
-    /** 创建托盘图标 */
-    private void init() {
+    /**
+     * 创建托盘图标
+     * 
+     * @throws IOException
+     */
+    private void init() throws IOException {
         applicationContext = new ClassPathXmlApplicationContext("zhuangxiubang/spring.xml");
-//        applicationContext = new FileSystemXmlApplicationContext("zhuangxiubang/spring.xml");
         desktop = new ZhuangXiuBangDesktop("装修帮监视器");
         desktop.setVisible(true);
-        try {
-            Image image = ImageUtil.getDefaultIco();
-            TrayUtil.initTray(image, "装修帮监视器", new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (ZhuangXiuBangApp.app.desktop.isVisible()) {
-                        ZhuangXiuBangApp.app.desktop.setVisible(false);
-                    } else {
-                        ZhuangXiuBangApp.app.desktop.setVisible(true);
-                    }
+        Image image = ImageUtil.getDefaultIco();
+        TrayUtil.initTray(image, "装修帮监视器", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ZhuangXiuBangApp.app.desktop.isVisible()) {
+                    ZhuangXiuBangApp.app.desktop.setVisible(false);
+                } else {
+                    ZhuangXiuBangApp.app.desktop.setVisible(true);
                 }
-            }, null);
-        } catch (IOException ioe) {
-            logger.warn("托盘图标加载失败", ioe);
-        }
+            }
+        }, null);
         // 装修帮
         TrayUtil.addTrayMenuItem(COMMAND_TRAY_SHOW_MAIN_DESKTOP, "show main", new ActionListener() {
             @Override
@@ -122,6 +121,5 @@ public class ZhuangXiuBangApp {
     public ApplicationContext getApplicationContext() {
         return applicationContext;
     }
-    
-    
+
 }
