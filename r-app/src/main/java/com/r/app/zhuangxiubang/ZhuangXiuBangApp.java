@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.r.app.core.util.ImageUtil;
 import com.r.app.zhuangxiubang.core.Resolve;
@@ -80,7 +79,7 @@ public class ZhuangXiuBangApp {
             }
         }, null);
         // 装修帮
-        TrayUtil.addTrayMenuItem(COMMAND_TRAY_SHOW_MAIN_DESKTOP, "show main", new ActionListener() {
+        TrayUtil.addTrayMenuItem(COMMAND_TRAY_SHOW_MAIN_DESKTOP, "show main(显示主界面)", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ZhuangXiuBangApp.app.desktop.setVisible(true);
@@ -89,7 +88,7 @@ public class ZhuangXiuBangApp {
         // 分隔符
         TrayUtil.addSeparator();
         // 退出
-        TrayUtil.addTrayMenuItem(COMMAND_TRAY_EXIT, "exit", new ActionListener() {
+        TrayUtil.addTrayMenuItem(COMMAND_TRAY_EXIT, "exit(退出)", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "是否退出装修帮监视器?", "装修帮监视器", JOptionPane.YES_NO_OPTION)) {

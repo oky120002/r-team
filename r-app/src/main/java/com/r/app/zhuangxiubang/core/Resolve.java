@@ -25,12 +25,18 @@ public class Resolve {
             task.setLoupan(StringUtils.isBlank(loupan) ? "(无楼盘信息)" : loupan);
 
             // 户型
-            String huxing = StringUtils.substringBetween(html, "户型：", "</li>").replace("&nbsp;", "");
-            task.setHuxing(StringUtils.isBlank(huxing) ? "(无户型信息)" : huxing);
+            String huxing = StringUtils.substringBetween(html, "户型：", "</li>");
+            if (StringUtils.isNotBlank(huxing)) {
+                huxing = huxing.replace("&nbsp;", "");
+                task.setHuxing(StringUtils.isBlank(huxing) ? "(无户型信息)" : huxing);
+            }
 
             // 要求
             String yaoqiuContext = StringUtils.substringBetween(html, "onclick=\"Hide", "隐藏全文");
-            String yaoqiu = StringUtils.substringBetween(yaoqiuContext, "\">", "<a").replace("&nbsp;", "");
+            String yaoqiu = StringUtils.substringBetween(yaoqiuContext, "\">", "<a");
+            if (StringUtils.isNotBlank(yaoqiu)) {
+                yaoqiu = yaoqiu.replace("&nbsp;", "");
+            }
             task.setYaoqiu(StringUtils.isBlank(yaoqiu) ? "(无特殊要求)" : yaoqiu);
 
             // 是否可以接标

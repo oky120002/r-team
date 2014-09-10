@@ -71,6 +71,8 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
 
     /** 开始监控 */
     private void start() {
+        HAlert.showTips("开始进行监听", "开始进行监听", this);
+        setVisible(false);
         try {
             TaskUtil.executeScheduleTask(new Runnable() {
                 private boolean isflg = true;
@@ -96,12 +98,20 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
                             sb.append(task.getBianhao() + ":" + task.getLoupan()).append("\r\n");
                         }
                         sb.append("\r\n\r\n-----点击确认阅读-----\r\n\r\n");
-                        int yesno = JOptionPane.showConfirmDialog(null, sb.toString(), "有新的招标信息,请阅读", JOptionPane.YES_NO_OPTION);
+                        // 提示
+                        ZhuangXiuBangDesktop.this.setVisible(false);
+                        ZhuangXiuBangDesktop.this.setAlwaysOnTop(true);
+                        TaskUtil.sleep(1000);
+                        ZhuangXiuBangDesktop.this.setAlwaysOnTop(false);
+                        ZhuangXiuBangDesktop.this.setVisible(true);
+                        int yesno = JOptionPane.showConfirmDialog(ZhuangXiuBangDesktop.this, sb.toString(), "有新的招标信息,请阅读", JOptionPane.YES_NO_OPTION);
                         if (yesno == 0) { // 点击确认
                             service.saveReaded(newTasks, true);
                             tasks = service.query(0, 30);
                             taskListTableModel.setTasks(tasks);
                             taskListTable.updateUI();
+                        } else {
+                            ZhuangXiuBangDesktop.this.setVisible(false);
                         }
                         isflg = true;
                     }
