@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.r.web.module.vote.VoteBaseItem;
 import com.r.web.module.vote.bean.VoteOption;
 import com.r.web.module.vote.model.Vote;
 import com.r.web.module.vote.model.VoteItem;
@@ -35,29 +34,17 @@ public class VoteServiceTest {
     @Test
     public void initDatas() {
 
-//        for (int i = 0; i < 30; i++) {
-//            // 新增
-//            YesOrNoVoteBaseItem yesno = createYesOrNoVoteItem("测试问题" + i + " : 菇凉真名风小筝?", false, "是的", "不是的", "筝团 - 雨");
-//            SingleOptionVoteBaseItem single = createSingleOptionVoteItem("测试问题" + i + " : 菇凉所属工会id是多少?", 2, "2086", "931", "2080", "99", "筝团 - 雨");
-//            MultipleOptionVoteBaseItem multiple = createMultipleOptionVoteItem("测试问题" + i + " : 以下哪些歌曲是菇凉原创?", "2,3,4", "卜卦", "梦魇", "花非花", "西江月", "筝团 - 雨");
-//            CompletionVoteBaseItem completione = createCompletionVoteItem("测试问题" + i + " : 菇凉在{}年获得YY年度最佳女主播,在2013年获得第二届《{}》冠军。", "2012", "公主驾到", null, null, "筝团 - 雨");
-//            voteItemService.save(yesno);
-//            voteItemService.save(single);
-//            voteItemService.save(multiple);
-//            voteItemService.save(completione);
-//
-//            // 根据id查询
-//            VoteBaseItem voteIten = voteItemService.findById(single.getId());
-//            logger.info(voteIten.getQuestion());
-//            voteIten = voteItemService.findById(multiple.getId());
-//            logger.info(voteIten.getQuestion());
-//
-//            // 根据编号查询
-//            voteIten = voteItemService.findByNo(yesno.getNo());
-//            logger.info(voteIten.getQuestion());
-//            voteIten = voteItemService.findByNo(completione.getNo());
-//            logger.info(voteIten.getQuestion());
-//        }
+        for (int i = 0; i < 5; i++) {
+            // 新增
+            YesOrNoVoteBaseItem yesno = createYesOrNoVoteItem("测试问题" + i + " : 菇凉真名风小筝?", false, "是的", "不是的", "筝团 - 雨");
+            SingleOptionVoteBaseItem single = createSingleOptionVoteItem("测试问题" + i + " : 菇凉所属工会id是多少?", 2, "2086", "931", "2080", "99", "筝团 - 雨");
+            MultipleOptionVoteBaseItem multiple = createMultipleOptionVoteItem("测试问题" + i + " : 以下哪些歌曲是菇凉原创?", "2,3,4", "卜卦", "梦魇", "花非花", "西江月", "筝团 - 雨");
+            CompletionVoteBaseItem completione = createCompletionVoteItem("测试问题" + i + " : 菇凉在{}年获得YY年度最佳女主播,在2013年获得第二届《{}》冠军。", "2012", "公主驾到", null, null, "筝团 - 雨");
+            voteItemService.save(yesno);
+            voteItemService.save(single);
+            voteItemService.save(multiple);
+            voteItemService.save(completione);
+        }
 
         // 生成问卷
         Vote vote = voteService.createVote(new VoteOption("测试-签名", "测试-标题", "测试-副标题", 25));

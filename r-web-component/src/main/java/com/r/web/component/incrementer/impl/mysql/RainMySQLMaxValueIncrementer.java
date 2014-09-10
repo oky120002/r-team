@@ -267,6 +267,7 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
         }
     }
 
+    // FIXME r-web-component 这里有问题, 每次启动项目都会清空编号
     /**
      * 初始化数据表<br />
      * 步骤1.首先校验是否存在,如果不存在则建表<br />

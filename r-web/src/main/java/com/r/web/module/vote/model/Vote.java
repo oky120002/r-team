@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -48,10 +49,12 @@ public class Vote {
     @Column
     private Boolean isEnable;
     /** 问卷项集合 */
-    @OneToMany(targetEntity = VoteItem.class, fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "vote_id")
     private List<VoteItem> voteItems;
     /** 问卷结果集合 */
-    @OneToMany(targetEntity = VoteResult.class, fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "vote_id")
     private List<VoteResult> voteResults;
 
     /** 备注,意见 */
@@ -120,6 +123,14 @@ public class Vote {
 
     public void setVoteItems(List<VoteItem> voteItems) {
         this.voteItems = voteItems;
+    }
+
+    public List<VoteResult> getVoteResults() {
+        return voteResults;
+    }
+
+    public void setVoteResults(List<VoteResult> voteResults) {
+        this.voteResults = voteResults;
     }
 
     public String getRemark() {

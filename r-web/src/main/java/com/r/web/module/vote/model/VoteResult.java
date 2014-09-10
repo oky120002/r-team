@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,7 +31,8 @@ public class VoteResult {
     @Column(unique = true)
     private Integer no;
     /** 关联问卷 */
-    @ManyToOne(targetEntity = Vote.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "vote_id")
     private Vote vote;
 
     public String getId() {

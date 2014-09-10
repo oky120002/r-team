@@ -20,7 +20,6 @@ import com.r.web.component.incrementer.context.IncrementerContext;
 import com.r.web.module.vote.bean.VoteOption;
 import com.r.web.module.vote.dao.VoteDao;
 import com.r.web.module.vote.model.Vote;
-import com.r.web.module.vote.model.VoteItem;
 import com.r.web.support.abs.AbstractService;
 
 /**
@@ -77,10 +76,8 @@ public class VoteService extends AbstractService {
         vote.setSignature(voteOption.getSignature());
         vote.setCreateDate(new Date());
         vote.setIsEnable(Boolean.TRUE);
+        vote.setVoteItems(voteBaseItemService.queryByRandom(voteOption.getVisize()));
         voteDao.create(vote);
-        voteBaseItemService.queryByRandom(vote, voteOption.getVisize());
-//        vote.setVoteItems(voteBaseItemService.queryByRandom(vote, voteOption.getVisize()));
-//        voteDao.update(vote);
         return vote;
     }
 }

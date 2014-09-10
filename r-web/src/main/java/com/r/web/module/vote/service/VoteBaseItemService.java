@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.r.core.util.RandomUtil;
 import com.r.web.component.incrementer.context.IncrementerContext;
 import com.r.web.module.vote.exception.VoteItemContextErrorException;
-import com.r.web.module.vote.model.Vote;
 import com.r.web.module.vote.model.VoteItem;
 import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 import com.r.web.support.abs.AbstractDao;
@@ -103,12 +102,12 @@ public class VoteBaseItemService extends AbstractService {
 
     /** 随机查询问卷项 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public List<VoteItem> queryByRandom(Vote vote, int visize) {
+    public List<VoteItem> queryByRandom(int visize) {
         // 获取最大的问卷项编号
         VoteBaseItemImpl maxNoVoteItem = abstractDao.query(0, 1, Order.desc("no")).get(0);
         int maxNo = Integer.valueOf(maxNoVoteItem.getNo());
 
-        return queryByRandom(vote, new ArrayList<VoteItem>(), visize, maxNo);
+        return queryByRandom(new ArrayList<VoteItem>(), visize, maxNo);
     }
 
     /** 统计问卷项总数 */
@@ -130,7 +129,7 @@ public class VoteBaseItemService extends AbstractService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public <T extends VoteBaseItemImpl> T save(T voteItem) throws VoteItemContextErrorException {
         if (StringUtils.isBlank(voteItem.getId())) { // 新建
-            voteItem.setNo(-1); // 新建时这里设置成-1,是为了让自增长编号不要断号过多
+            voteItem.setNo(-1); // 新建时这里设置成-1,是为了让下面check通过.最终目的是为了自增长编号不要断号过多
         }
         voteItem.checkVoteItemContext();
         if (StringUtils.isBlank(voteItem.getId())) { // 新建
@@ -156,7 +155,7 @@ public class VoteBaseItemService extends AbstractService {
      * @return
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
-    private List<VoteItem> queryByRandom(Vote vote, List<VoteItem> voteItems, int visize, int maxNo) {
+    private List<VoteItem> queryByRandom(List<VoteItem> voteItems, int visize, int maxNo) {
         int size = voteItems.size();
         if (size == visize) { // 达到目标则返回对应数目的问卷项
             return voteItems;
@@ -182,13 +181,11 @@ public class VoteBaseItemService extends AbstractService {
             } else {
                 vi.setNo(voteItems.get(voteItems.size() - 1).getNo() + 1);
             }
-            voteItemService.create(vi);
-            vi.setVote(vote);
             vi.setVoteBaseItem(voteBaseItemImpl);
-            voteItemService.update(vi);
+            voteItemService.create(vi);
             voteItems.add(vi);
         }
 
-        return queryByRandom(vote, voteItems, visize, maxNo);
+        return queryByRandom(voteItems, visize, maxNo);
     }
 }

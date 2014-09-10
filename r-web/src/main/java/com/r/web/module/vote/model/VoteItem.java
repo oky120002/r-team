@@ -2,9 +2,9 @@ package com.r.web.module.vote.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,10 +23,11 @@ public class VoteItem {
     @Column
     private Integer no;
     /** 关联问卷 */
-    @ManyToOne(targetEntity = Vote.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "vote_id")
     private Vote vote;
     /** 关联的基本问卷项 */
-    @ManyToOne(targetEntity = Vote.class, fetch = FetchType.LAZY)
+    @ManyToOne
     private VoteBaseItemImpl voteBaseItem;
 
     public String getId() {

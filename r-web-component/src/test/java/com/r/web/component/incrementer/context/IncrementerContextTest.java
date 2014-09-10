@@ -22,7 +22,7 @@ public class IncrementerContextTest {
         System.out.println(incrementer.getIncrementer().nextIntValue());
         System.out.println(incrementer.getIncrementer().nextIntValue());
 
-        incrementer.getIncrementer().returnZero();
+//        incrementer.getIncrementer().returnZero();
         
         System.out.println(incrementer.getIncrementer().nextIntValue());
         System.out.println(incrementer.getIncrementer().nextIntValue());
