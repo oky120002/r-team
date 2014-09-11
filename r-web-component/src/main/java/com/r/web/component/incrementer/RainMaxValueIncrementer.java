@@ -70,10 +70,26 @@ public interface RainMaxValueIncrementer {
     String nextStringValue(String columnTypeValue) throws DataAccessException;
 
     /**
-     * 编号归零,重新计算
+     * 默认类型编号归零,重新计算
      * 
      * @throws DataAccessException
      *             数据库操作出错抛出此异常
      */
-    void returnZero() throws DataAccessException;
+    void clear() throws DataAccessException;
+
+    /**
+     * 根据类型编号归零,重新计算
+     * 
+     * @throws DataAccessException
+     *             数据库操作出错抛出此异常
+     */
+    void clear(String columnTypeValue) throws DataAccessException;
+
+    /**
+     * 所有编号归零,重新计算
+     * 
+     * @throws DataAccessException
+     *             数据库操作出错抛出此异常
+     */
+    void clearAll() throws DataAccessException;
 }

@@ -35,6 +35,7 @@ import com.r.web.component.incrementer.RainMaxValueIncrementer;
  *
  */
 public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncrementer implements RainMaxValueIncrementer {
+    private static final Object LOCK = new Object();
     /** 默认的自增长类型 */
     private static final String DEFAULT_INCREMENTER_TYPE_VALUE = "_DefaultIncrementerType";
     /** 日志 */
@@ -131,7 +132,7 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
 
     @Override
     public int nextIntValue(String columnTypeValue) throws DataAccessException {
-        synchronized (DEFAULT_INCREMENTER_TYPE_VALUE) {
+        synchronized (LOCK) {
             this.incrementerTypeValue = StringUtils.isBlank(columnTypeValue) ? DEFAULT_INCREMENTER_TYPE_VALUE : columnTypeValue;
             return super.nextIntValue();
         }
@@ -139,7 +140,7 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
 
     @Override
     public long nextLongValue(String columnTypeValue) throws DataAccessException {
-        synchronized (DEFAULT_INCREMENTER_TYPE_VALUE) {
+        synchronized (LOCK) {
             this.incrementerTypeValue = StringUtils.isBlank(columnTypeValue) ? DEFAULT_INCREMENTER_TYPE_VALUE : columnTypeValue;
             return super.nextLongValue();
         }
@@ -147,16 +148,76 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
 
     @Override
     public String nextStringValue(String columnTypeValue) throws DataAccessException {
-        synchronized (DEFAULT_INCREMENTER_TYPE_VALUE) {
+        synchronized (LOCK) {
             this.incrementerTypeValue = StringUtils.isBlank(columnTypeValue) ? DEFAULT_INCREMENTER_TYPE_VALUE : columnTypeValue;
             return super.nextStringValue();
         }
     }
 
     @Override
-    public void returnZero() throws DataAccessException {
-        initTable();
-        ids.clear();
+    public void clear() throws DataAccessException {
+        synchronized (LOCK) {
+            this.incrementerTypeValue = DEFAULT_INCREMENTER_TYPE_VALUE;
+            doClear();
+        }
+    }
+
+    @Override
+    public void clear(String columnTypeValue) throws DataAccessException {
+        synchronized (LOCK) {
+            this.incrementerTypeValue = StringUtils.isBlank(columnTypeValue) ? DEFAULT_INCREMENTER_TYPE_VALUE : columnTypeValue;
+            doClear();
+        }
+    }
+
+    /**
+     * 所有编号归零,重新计算
+     * 
+     * @throws DataAccessException
+     *             数据库操作出错抛出此异常
+     */
+    @Override
+    public void clearAll() throws DataAccessException {
+        synchronized (LOCK) {
+            this.incrementerTypeValue = null;
+            doClear();
+        }
+    }
+
+    protected void doClear() throws DataAccessException {
+        // 清空数据库,先删除数据库,然后重建
+        Connection con = DataSourceUtils.getConnection(getDataSource());
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            DataSourceUtils.applyTransactionTimeout(stmt, getDataSource());
+            String incrementerName = getIncrementerName();
+            String columnName = getColumnName();
+            String incrementerColumnName = getIncrementerColumnName();
+            try {
+                if (this.incrementerTypeValue == null) {
+                    logger.info("所有编号归零,重新计算.................");
+                    stmt.executeUpdate("DROP TABLE IF EXISTS `" + incrementerName + "`");
+                    stmt.executeUpdate("CREATE TABLE `" + incrementerName + "` ( `" + columnName + "` int(11) NOT NULL DEFAULT '0', `" + incrementerColumnName + "` varchar(255) DEFAULT NULL )");
+                    // 再清空缓存
+                    ids.clear();
+                } else {
+                    logger.info("类型为{}的编号归零,重新计算.................", this.incrementerTypeValue);
+                    stmt.executeUpdate("update " + incrementerName + " set " + columnName + " = 0 where " + incrementerColumnName + " = '" + this.incrementerTypeValue + "'");
+                    // 再清空缓存
+                    ids.put(this.incrementerTypeValue, Long.valueOf(0));
+                }
+            } catch (SQLException ex) {
+                throw new DataAccessResourceFailureException("初始化数据表失败.........", ex);
+            }
+        } catch (DataAccessResourceFailureException darfe) {
+            throw darfe;
+        } catch (SQLException ex) {
+            throw new DataAccessResourceFailureException("开启数据库链接或者开启事务出错", ex);
+        } finally {
+            JdbcUtils.closeStatement(stmt);
+            DataSourceUtils.releaseConnection(con, getDataSource());
+        }
     }
 
     @Override
@@ -267,11 +328,10 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
         }
     }
 
-    // FIXME r-web-component 这里有问题, 每次启动项目都会清空编号
     /**
      * 初始化数据表<br />
      * 步骤1.首先校验是否存在,如果不存在则建表<br />
-     * 步骤2.不论表内的列是否正确,都进行删除表再建表的操作
+     * 步骤2.不论表内的列是否正确,都进行列表的新增操作(如果出错,则略过异常,不捕获)
      *
      * @param stmt
      */
@@ -284,13 +344,24 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
             String incrementerName = getIncrementerName();
             String columnName = getColumnName();
             String incrementerColumnName = getIncrementerColumnName();
-            // 校验表incrementerName,列columnName和列incrementerColumnName是否正确,如果不正确会通过查询抛出SQLException异常,从而建表
+            logger.info("初始化数据表.................");
             try {
-                logger.info("初始化数据表.................");
-                stmt.executeUpdate("DROP TABLE IF EXISTS `" + incrementerName + "`");
                 stmt.executeUpdate("CREATE TABLE `" + incrementerName + "` ( `" + columnName + "` int(11) NOT NULL DEFAULT '0', `" + incrementerColumnName + "` varchar(255) DEFAULT NULL )");
+                logger.debug("创建自增长器数据表{}", incrementerName);
             } catch (SQLException ex) {
-                throw new DataAccessResourceFailureException("初始化数据表失败.........", ex);
+                logger.debug("自增长器数据表{}存在", incrementerName);
+            }
+            try {
+                stmt.executeUpdate("ALTER TABLE `" + incrementerName + "` ADD `" + columnName + "` int(11) NOT NULL DEFAULT '0' ");
+                logger.debug("创建{}类型的自增长器", columnName);
+            } catch (SQLException ex) {
+                logger.debug("自增长表{}的列{}存在", incrementerName, columnName);
+            }
+            try {
+                stmt.executeUpdate("ALTER TABLE `" + incrementerName + "` ADD `" + incrementerColumnName + "` varchar(255) DEFAULT NULL ");
+                logger.debug("创建{}类型的自增长器", incrementerColumnName);
+            } catch (SQLException ex) {
+                logger.debug("自增长表{}的列{}存在", incrementerName, incrementerColumnName);
             }
         } catch (DataAccessResourceFailureException darfe) {
             throw darfe;

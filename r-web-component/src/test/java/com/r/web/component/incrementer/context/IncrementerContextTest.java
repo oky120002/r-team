@@ -16,19 +16,26 @@ public class IncrementerContextTest {
 
     @Test
     public void test() {
-        System.out.println(incrementer.getIncrementer().nextIntValue());
-        System.out.println(incrementer.getIncrementer().nextIntValue());
-        System.out.println(incrementer.getIncrementer().nextIntValue());
-        System.out.println(incrementer.getIncrementer().nextIntValue());
-        System.out.println(incrementer.getIncrementer().nextIntValue());
-
-//        incrementer.getIncrementer().returnZero();
+        incrementer.getIncrementer().clearAll();
         
         System.out.println(incrementer.getIncrementer().nextIntValue());
         System.out.println(incrementer.getIncrementer().nextIntValue());
         System.out.println(incrementer.getIncrementer().nextIntValue());
+        incrementer.getIncrementer().clear();
         System.out.println(incrementer.getIncrementer().nextIntValue());
         System.out.println(incrementer.getIncrementer().nextIntValue());
+
+        
+        System.out.println(incrementer.getIncrementer().nextIntValue("abcd"));
+        System.out.println(incrementer.getIncrementer().nextIntValue("abcd"));
+        incrementer.getIncrementer().clear("abcd");
+        System.out.println(incrementer.getIncrementer().nextIntValue("abcd"));
+        System.out.println(incrementer.getIncrementer().nextIntValue("abcd"));
+        
+        
+        incrementer.getIncrementer().clearAll();
+        System.out.println(incrementer.getIncrementer().nextIntValue());
+        System.out.println(incrementer.getIncrementer().nextIntValue("abcd"));
     }
 
 }

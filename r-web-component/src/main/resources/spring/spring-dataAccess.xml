@@ -12,7 +12,7 @@
 		<!-- h2 -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 <!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/vote?connectTimeout=3000&amp;socketTimeout=60000" /> -->
-		<property name="url" value="jdbc:mysql://114.215.158.227:3306/vote_test?connectTimeout=3000&amp;socketTimeout=60000" />
+		<property name="url" value="jdbc:mysql://114.215.158.227:3306/test_incrementer?connectTimeout=3000&amp;socketTimeout=60000" />
 		<property name="username" value="root" /> 
 		<property name="password" value="root4567" />
 

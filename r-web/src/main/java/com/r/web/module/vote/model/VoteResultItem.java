@@ -3,6 +3,8 @@ package com.r.web.module.vote.model;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,12 +21,40 @@ public class VoteResultItem {
     @GeneratedValue(generator = "sys_uuid")
     @GenericGenerator(name = "sys_uuid", strategy = "uuid")
     private String id;
-    /** 问题编号 */
-    @Column
-    private Integer no;
-    /** 问题项 */
-    @Column
+    /** 关联问卷答案 */
+    @ManyToOne
+    @JoinColumn(name = "voteResult_id")
+    private VoteResult voteResult;
+    /** 基础问题项 */
+    @ManyToOne
+    @JoinColumn(name = "voteItem_id")
     private VoteBaseItemImpl voteItem;
-    
-    
+    /** 是否回答正确 */
+    @Column
+    private Boolean isRight;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public VoteBaseItemImpl getVoteItem() {
+        return voteItem;
+    }
+
+    public void setVoteItem(VoteBaseItemImpl voteItem) {
+        this.voteItem = voteItem;
+    }
+
+    public Boolean getIsRight() {
+        return isRight;
+    }
+
+    public void setIsRight(Boolean isRight) {
+        this.isRight = isRight;
+    }
+
 }

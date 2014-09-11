@@ -28,6 +28,7 @@ public class VoteItem {
     private Vote vote;
     /** 关联的基本问卷项 */
     @ManyToOne
+    @JoinColumn(name = "voteBaseItem_id")
     private VoteBaseItemImpl voteBaseItem;
 
     public String getId() {

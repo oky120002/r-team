@@ -31,11 +31,11 @@ public class IncrementerContext extends IncrementerContextConfigurator implement
 
     /** 默认自增长器编号归零,重新计算 */
     public void returnZero() {
-        getIncrementer().returnZero();
+        getIncrementer().clear();
     }
 
     /** 指定的自增长器编号归零,重新计算 */
     public void returnZero(String incrementerName) {
-        getIncrementer(incrementerName).returnZero();
+        getIncrementer(incrementerName).clear();
     }
 }
