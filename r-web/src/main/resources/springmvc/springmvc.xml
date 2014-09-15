@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 首页跳转 -->
-	<!-- <mvc:view-controller path="/" view-name="forward:/login" /> -->
+	<mvc:view-controller path="/index" view-name="forward:/admin/vote/page/vote/index" />
 
 	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
 	<mvc:default-servlet-handler />

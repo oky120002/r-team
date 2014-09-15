@@ -34,7 +34,7 @@ public class VoteControl extends AbstractControl {
     private VoteService voteService;
 
     @Resource(name = "vote.service.votebaseitem")
-    private VoteBaseItemService voteItemService;
+    private VoteBaseItemService voteBaseItemService;
 
     /** 生成问卷管理页面 */
     @RequestMapping(value = "page/generate")

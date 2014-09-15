@@ -332,8 +332,6 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
      * 初始化数据表<br />
      * 步骤1.首先校验是否存在,如果不存在则建表<br />
      * 步骤2.不论表内的列是否正确,都进行列表的新增操作(如果出错,则略过异常,不捕获)
-     *
-     * @param stmt
      */
     private void initTable() {
         Connection con = DataSourceUtils.getConnection(getDataSource());

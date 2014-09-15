@@ -38,62 +38,68 @@ import com.r.web.support.bean.Support;
  * 
  */
 @Controller("vote.control.admin")
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/vote")
 public class VoteAdminControl extends AbstractControl {
 
     @Resource(name = "vote.service.vote")
     private VoteService voteService;
 
     @Resource(name = "vote.service.votebaseitem")
-    private VoteBaseItemService voteItemService;
+    private VoteBaseItemService voteBaseItemService;
+
+    /** 问卷列表页面 */
+    @RequestMapping(value = "index")
+    public String pageIndex(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        return pageVoteIndex(model, request, response);
+    }
 
     /** 问卷列表页面 */
     @RequestMapping(value = "page/vote/index")
-    public String pageVoteGenerate(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    public String pageVoteIndex(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         List<Vote> votes = voteService.queryAll();
         model.put("votes", votes);
-        return "admin/voteList";
+        return "admin/vote/voteIndex";
     }
 
     /**
-     * 问卷项列表
+     * 基础问卷项列表,全部
      * 
      * @param model
      * @return 页面路径
      */
-    @RequestMapping(value = "page/voteitem/index")
-    public String pageVoteItemList(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        List<VoteBaseItemImpl> voteItems = voteItemService.queryAll();
-        model.put("voteItems", voteItems);
-        return "admin/voteItemList";
+    @RequestMapping(value = "page/votebaseitem/index")
+    public String pageVoteBaseItemIndex(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        List<VoteBaseItemImpl> voteBaseItems = voteBaseItemService.queryAll();
+        model.put("voteBaseItems", voteBaseItems);
+        return "admin/vote/voteBaseItemIndex";
     }
 
     /**
-     * 问卷项列表<br />
+     * 基础问卷项列表,分页<br />
      * 
      * @param page
      *            页数
      * @param model
      * @return 页面路径
      */
-    @RequestMapping(value = "page/voteitem/index/{curPage}")
-    public String pageVoteItemList(@PathVariable Integer curPage, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        List<VoteBaseItemImpl> voteItems = voteItemService.queryByPage(curPage, 20);
-        model.put("voteItems", voteItems);
-        return "admin/voteItemList";
+    @RequestMapping(value = "page/votebaseitem/index/{curPage}")
+    public String pageVoteItemIndex(@PathVariable Integer curPage, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        List<VoteBaseItemImpl> voteBaseItems = voteBaseItemService.queryByPage(curPage, 20);
+        model.put("voteBaseItems", voteBaseItems);
+        return "admin/vote/voteBaseItemIndex";
     }
 
-    /** 新增问卷项 */
-    @RequestMapping(value = "page/voteitem/add")
-    public String pageVoteItemAdd(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    /** 新增基础问卷项 */
+    @RequestMapping(value = "page/votebaseitem/add")
+    public String pageVoteBaseItemAdd(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         model.put("types", VoteItemType.values());
-        return "admin/voteItemAdd";
+        return "admin/vote/voteBaseItemAdd";
     }
 
-    /** 执行保存操作 */
-    @RequestMapping(value = "func/voteitem/save")
+    /** 执行基础问卷项的保存操作 */
+    @RequestMapping(value = "func/votebaseitem/save")
     @ResponseBody
-    public Support<VoteBaseItemImpl> funcVoteItemSave(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    public Support<VoteBaseItemImpl> funcVoteBaseItemSave(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         Support<VoteBaseItemImpl> support = new Support<VoteBaseItemImpl>();
         support.setSuccess(true);
         support.setTips("保存成功。");
@@ -103,12 +109,12 @@ public class VoteAdminControl extends AbstractControl {
             type = VoteItemType.valueOf(request.getParameter("type"));
         } catch (Exception e) {
             support.setSuccess(false);
-            support.setTips("问卷项类型错误，请选择一个正确的问卷项类型。");
+            support.setTips("基础问卷项类型错误，请选择一个正确的基础问卷项类型。");
             return support;
         }
 
         try {
-            voteItemService.save(getAbsVoteItem(request, type));
+            voteBaseItemService.save(getAbsVoteItem(request, type));
         } catch (VoteItemContextErrorException vicee) {
             support.setSuccess(false);
             support.setTips(vicee.getMessage());
@@ -124,13 +130,13 @@ public class VoteAdminControl extends AbstractControl {
         return support;
     }
 
-    /** 改变状态 */
-    @RequestMapping(value = "func/voteitem/changestatus/{id}")
-    public String funcVoteItemChangestatus(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        VoteBaseItemImpl voteItem = voteItemService.findById(id);
-        voteItem.setIsEnable(!voteItem.isEnable());
-        voteItemService.save(voteItem);
-        return "redirect:/admin/page/voteitem/index";
+    /** 改变基础问卷项的状态 */
+    @RequestMapping(value = "func/votebaseitem/changestatus/{id}")
+    public String funcVoteBaseItemChangestatus(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        VoteBaseItemImpl voteBaseItem = voteBaseItemService.findById(id);
+        voteBaseItem.setIsEnable(!voteBaseItem.isEnable());
+        voteBaseItemService.save(voteBaseItem);
+        return "redirect:/admin/vote/page/votebaseitem/index";
     }
 
     /** 从request中获取问卷项信息 */
@@ -141,7 +147,7 @@ public class VoteAdminControl extends AbstractControl {
         String id = request.getParameter("id"); // 问卷项ID
         VoteBaseItemImpl voteItem = null;
         if (StringUtils.isNotBlank(id)) { // 修改
-            voteItem = voteItemService.findById(id);
+            voteItem = voteBaseItemService.findById(id);
         }
         String question = request.getParameter("question"); // 问题
         String remark = request.getParameter("remark"); // 备注

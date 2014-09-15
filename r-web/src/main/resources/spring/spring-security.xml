@@ -12,7 +12,6 @@
 
 	<!-- 过滤掉不需要权限控制的URL,这里一般放置静态路径,因为不需要判断是否有登陆,如果需要判断,则必须在http子节点中配置 -->
 	<http pattern="/res/**" security="none" />
-	<http pattern="/vote/**" security="none" />
 	<!-- 暂时跳过后台管理页面的控制 -->
 	<http pattern="/admin/**" security="none" />
 
@@ -31,7 +30,8 @@
 			/> -->
 <!-- 		<intercept-url pattern="/upload" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
 <!-- 		<intercept-url pattern="/upload/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
-		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+		
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED" />
 
 		<!-- 配置登陆页面 -->
 		<form-login login-page="/login" default-target-url="/main" always-use-default-target="true" />
@@ -41,9 +41,9 @@
 
 		<!-- 实现免登陆验证 ,启用后会记住登陆的session方便下次登陆.如果auto-config="true" 会自动启用 -->
 		<remember-me />
-
+		
 		<!-- 配置session超时 -->
-		<session-management invalid-session-url="/login">
+		<session-management invalid-session-url="/">
 			<!-- 只能允许登陆一次 -->
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</session-management>

@@ -11,10 +11,10 @@
 </head>
 <body>
 	<div>
-		<div class="dmenu" title="问卷项列表">
+		<div class="dmenu" title="基础问卷项列表">
 			<ul class="icon">
 				<li title="问卷管理"><a href="<c:url value="/admin/page/vote/index" />"><i class="ntt_li_ntiStart"></i>问卷管理</a></li>
-				<li title="新增"><a href="<c:url value="/admin/page/voteitem/add" />"><i class="ntt_li_ntiAdd"></i>新增</a></li>
+				<li title="新增"><a href="<c:url value="/admin/page/votebaseitem/add" />"><i class="ntt_li_ntiAdd"></i>新增</a></li>
 			</ul>
 			<p class="arrow">问卷项列表</p>
 		</div>
@@ -30,49 +30,49 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${voteItems }" var="voteitem" varStatus="status">
+			<c:forEach items="${voteBaseItems }" var="votebaseitem" varStatus="status">
 				<c:choose>
-					<c:when test="${voteitem.isEnable == false}">
+					<c:when test="${votebaseitem.isEnable == false}">
 						<tr style="color: green;">
 					</c:when>
 					<c:otherwise>
 						<tr>
 					</c:otherwise>
 				</c:choose>
-					<td>${voteitem.no }</td>
-					<td>${voteitem.type.cnName }</td>
-					<td>${voteitem.question }</td>
+					<td>${votebaseitem.no }</td>
+					<td>${votebaseitem.type.cnName }</td>
+					<td>${votebaseitem.question }</td>
 					<td>
 						<c:choose>
-							<c:when test="${voteitem.type.name == 'yesno'}">
-								<label class="answer1">选项Yes : ${voteitem.answerYes }</label>
+							<c:when test="${votebaseitem.type.name == 'yesno'}">
+								<label class="answer1">选项Yes : ${votebaseitem.answerYes }</label>
 								<span class="placeholder"></span>
-								<label class="answer2">选项No : ${voteitem.answerNo }</label>
+								<label class="answer2">选项No : ${votebaseitem.answerNo }</label>
 							</c:when>
-							<c:when test="${voteitem.type.name == 'single'}">
-								<label class="answer1">选项A : ${voteitem.answer1 }</label>
+							<c:when test="${votebaseitem.type.name == 'single'}">
+								<label class="answer1">选项A : ${votebaseitem.answer1 }</label>
 								<span class="placeholder"></span>
-								<label class="answer2">选项B : ${voteitem.answer2 }</label>
+								<label class="answer2">选项B : ${votebaseitem.answer2 }</label>
 								<span class="placeholder"></span>
-								<label class="answer3">选项C : ${voteitem.answer3 }</label>
+								<label class="answer3">选项C : ${votebaseitem.answer3 }</label>
 								<span class="placeholder"></span>
-								<label class="answer4">选项D : ${voteitem.answer4 }</label>
+								<label class="answer4">选项D : ${votebaseitem.answer4 }</label>
 							</c:when>
-							<c:when test="${voteitem.type.name == 'multiple'}">
-								<label class="answer1">选项A : ${voteitem.answer1 }</label>
+							<c:when test="${votebaseitem.type.name == 'multiple'}">
+								<label class="answer1">选项A : ${votebaseitem.answer1 }</label>
 								<span class="placeholder"></span>
-								<label class="answer2">选项B : ${voteitem.answer2 }</label>
+								<label class="answer2">选项B : ${votebaseitem.answer2 }</label>
 								<span class="placeholder"></span>
-								<label class="answer3">选项C : ${voteitem.answer3 }</label>
+								<label class="answer3">选项C : ${votebaseitem.answer3 }</label>
 								<span class="placeholder"></span>
-								<label class="answer4">选项D : ${voteitem.answer4 }</label>
+								<label class="answer4">选项D : ${votebaseitem.answer4 }</label>
 							</c:when>
 						</c:choose>
 					</td>
-					<td><label>${voteitem.createDate }</label></td>
+					<td><label>${votebaseitem.createDate }</label></td>
 					<td>
 						<c:choose>
-							<c:when test="${voteitem.isEnable == true}">
+							<c:when test="${votebaseitem.isEnable == true}">
 								<a href="<c:url value="/admin/func/voteitem/changestatus/${voteitem.id }" />">禁用</a>
 							</c:when>
 							<c:otherwise>
