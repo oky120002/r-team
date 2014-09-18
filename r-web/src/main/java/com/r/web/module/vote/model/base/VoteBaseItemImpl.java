@@ -26,7 +26,7 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  *
  */
 @Entity
-@Table(name = "votebaseitem")
+@Table(name = "vote_votebaseitem")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class VoteBaseItemImpl implements VoteBaseItem {
 

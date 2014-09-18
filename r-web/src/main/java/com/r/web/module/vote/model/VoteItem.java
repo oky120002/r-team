@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 
 @Entity
-@Table(name = "voteitem")
+@Table(name = "vote_voteitem")
 public class VoteItem {
     @Id
     @GeneratedValue(generator = "sys_uuid")

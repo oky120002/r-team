@@ -48,12 +48,6 @@ public class VoteAdminControl extends AbstractControl {
     private VoteBaseItemService voteBaseItemService;
 
     /** 问卷列表页面 */
-    @RequestMapping(value = "index")
-    public String pageIndex(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        return pageVoteIndex(model, request, response);
-    }
-
-    /** 问卷列表页面 */
     @RequestMapping(value = "page/vote/index")
     public String pageVoteIndex(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         List<Vote> votes = voteService.queryAll();

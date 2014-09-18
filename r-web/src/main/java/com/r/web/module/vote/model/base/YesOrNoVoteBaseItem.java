@@ -25,7 +25,7 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * 
  */
 @Entity
-@Table(name = "votebaseitem_yesno")
+@Table(name = "vote_votebaseitem_yesno")
 @PrimaryKeyJoinColumn(name = "viid")
 public class YesOrNoVoteBaseItem extends VoteBaseItemImpl implements VoteBaseItem, Serializable {
 	private static final long serialVersionUID = 222635932556751177L;

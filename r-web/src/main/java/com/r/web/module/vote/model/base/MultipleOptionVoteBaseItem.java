@@ -23,7 +23,7 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * 
  */
 @Entity
-@Table(name = "votebaseitem_multiple")
+@Table(name = "vote_votebaseitem_multiple")
 @PrimaryKeyJoinColumn(name = "viid")
 public class MultipleOptionVoteBaseItem extends VoteBaseItemImpl implements VoteBaseItem {
 	public static final String SPLIT = ",";

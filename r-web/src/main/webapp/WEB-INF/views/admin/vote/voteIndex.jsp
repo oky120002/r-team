@@ -10,9 +10,11 @@
 <title>问卷管理</title>
 </head>
 <body>
+
 	<div>
 		<div class="dmenu" title="问卷列表">
 			<ul class="icon">
+				<li title="问卷项管理"><a href="<c:url value="/admin/page/votebaseitem/index" />"><i class="ntt_li_ntiStart"></i>问卷项管理</a></li>
 				<li title="生成问卷"><a href="<c:url value="/vote/page/generate" />"><i class="ntt_li_ntiStart"></i>生成问卷</a></li>
 			</ul>
 			<p class="arrow">问卷列表</p>

@@ -19,7 +19,7 @@ import com.r.web.module.vote.model.base.VoteBaseItemImpl;
  *
  */
 @Entity
-@Table(name = "voteresultitem")
+@Table(name = "vote_voteresultitem")
 public class VoteResultItem {
     @Id
     @GeneratedValue(generator = "sys_uuid")

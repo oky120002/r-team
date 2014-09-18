@@ -27,7 +27,7 @@ import com.r.web.module.vote.exception.VoteItemContextErrorException;
  * 
  */
 @Entity
-@Table(name = "votebaseitem_completion")
+@Table(name = "vote_votebaseitem_completion")
 @PrimaryKeyJoinColumn(name = "viid")
 public class CompletionVoteBaseItem extends VoteBaseItemImpl implements VoteBaseItem, Serializable {
     private static final long serialVersionUID = -1488247346091698158L;

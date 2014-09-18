@@ -23,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "vote")
+@Table(name = "vote_vote")
 public class Vote {
     @Id
     @GeneratedValue(generator = "sys_uuid")
