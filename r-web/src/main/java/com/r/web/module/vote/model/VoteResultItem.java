@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 
 /**
- * 答案条目
+ * 问卷结果条目
  * 
  * @author Administrator
  *
@@ -25,14 +25,17 @@ public class VoteResultItem {
     @GeneratedValue(generator = "sys_uuid")
     @GenericGenerator(name = "sys_uuid", strategy = "uuid")
     private String id;
+    /** 问卷结果条目编号 */
+    @Column(unique = true)
+    private Integer no;
     /** 关联问卷答案 */
     @ManyToOne
     @JoinColumn(name = "voteResult_id")
     private VoteResult voteResult;
     /** 基础问题项 */
     @ManyToOne
-    @JoinColumn(name = "voteItem_id")
-    private VoteBaseItemImpl voteItem;
+    @JoinColumn(name = "voteBaseItem_id")
+    private VoteBaseItemImpl voteBaseItem;
     /** 是否回答正确 */
     @Column
     private Boolean isRight;
@@ -45,12 +48,28 @@ public class VoteResultItem {
         this.id = id;
     }
 
-    public VoteBaseItemImpl getVoteItem() {
-        return voteItem;
+    public Integer getNo() {
+        return no;
     }
 
-    public void setVoteItem(VoteBaseItemImpl voteItem) {
-        this.voteItem = voteItem;
+    public void setNo(Integer no) {
+        this.no = no;
+    }
+
+    public VoteResult getVoteResult() {
+        return voteResult;
+    }
+
+    public void setVoteResult(VoteResult voteResult) {
+        this.voteResult = voteResult;
+    }
+
+    public VoteBaseItemImpl getVoteBaseItem() {
+        return voteBaseItem;
+    }
+
+    public void setVoteBaseItem(VoteBaseItemImpl voteBaseItem) {
+        this.voteBaseItem = voteBaseItem;
     }
 
     public Boolean getIsRight() {

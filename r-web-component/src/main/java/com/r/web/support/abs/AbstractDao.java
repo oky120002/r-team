@@ -1,5 +1,6 @@
 package com.r.web.support.abs;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,7 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    void creates(List<T> models);
+    void creates(Collection<T> models);
 
     /**
      * 
@@ -89,7 +90,7 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    void updates(List<T> models);
+    void updates(Collection<T> models);
 
     /**
      * 
@@ -151,7 +152,7 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    void saves(List<T> models);
+    void saves(Collection<T> models);
 
     /**
      * 
@@ -189,7 +190,7 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    void merges(List<T> models);
+    void merges(Collection<T> models);
 
     /**
      * 合并对象集后执行saveOrUpdate()方法<br />
@@ -228,7 +229,7 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    void deletes(List<T> models);
+    void deletes(Collection<T> models);
 
     /**
      * 

@@ -15,7 +15,8 @@
 		<div class="dmenu" title="问卷">
 			<p class="arrow">问卷</p>
 		</div>
-		<form id="voteitem_add_form" action="<c:url value="/admin/func/save" />">
+		<form id="voteresult_answer_form" action="<c:url value="/vote/func/answer" />">
+			<input name="vid" type="hidden" value="${vote.id }" />
 			<table class="list_style_1">
 				<tbody>
 					<tr><td colspan="2" align="center" valign="baseline" class="vote_title_tr">${vote.title }<c:if test="${vote.subTitle != null }"><span class="vote_subtitle_span"> - ${vote.subTitle }</span></c:if></td></tr> 
@@ -23,58 +24,56 @@
 					<c:forEach items="${vote.voteItems }" var="vi" varStatus="status">
 						<tr>
 							<td colspan="2">
+								<input type="hidden" name="viid" value="${vi.id }" />
+								<input type="hidden" name="type" value="${vi.voteBaseItem.type.name }" />
 								<table class="list_style_1 voteitem_question_table"> 
 									<tbody>
-										<tr><td align="center" valign="baseline" class="voteitem_question_tr">问题 ${status.count }  ${vi.question }</td></tr>
+										<tr><td align="center" valign="baseline" class="voteitem_question_tr">问题 ${status.count }  ${vi.voteBaseItem.question }</td></tr>
 										<c:choose>
-											<c:when test="${vi.type.name == 'yesno'}">
+											<c:when test="${vi.voteBaseItem.type.name == 'yesno'}">
 											<!-- 是非题 -->
 												<tr>
 													<td>
-														<input type="hidden" name="viid" value="${vi.id }" />
-														<input type="radio" id="${vi.id }_answer_yes" name="${vi.id }_answer" value="1"/><label for="${vi.id }_answer_yes">  ${vi.answerYes }</label>
+														<input type="radio" id="${vi.id }_answer_yes" name="${vi.id }_answer" value="1"/><label for="${vi.id }_answer_yes">  ${vi.voteBaseItem.answerYes }</label>
 														<span class="placeholder"></span>
-														<input type="radio" id="${vi.id }_answer_no" name="${vi.id }_answer" value="0"/><label for="${vi.id }_answer_no">  ${vi.answerNo }</label>
+														<input type="radio" id="${vi.id }_answer_no" name="${vi.id }_answer" value="0"/><label for="${vi.id }_answer_no">  ${vi.voteBaseItem.answerNo }</label>
 													</td>
 												</tr>
 											</c:when>
-											<c:when test="${vi.type.name == 'single'}">
+											<c:when test="${vi.voteBaseItem.type.name == 'single'}">
 											<!-- 单选题 -->
 												<tr>
 													<td>
-														<input type="hidden" name="viid" value="${vi.id }" />
-														<input type="radio" id="${vi.id }_answer_1" name="${vi.id }_answer" value="1"/><label for="${vi.id }_answer_1">  ${vi.answer1 }</label>
+														<input type="radio" id="${vi.id }_answer_1" name="${vi.id }_answer" value="1"/><label for="${vi.id }_answer_1">  ${vi.voteBaseItem.answer1 }</label>
 														<span class="placeholder"></span>
-														<input type="radio" id="${vi.id }_answer_2" name="${vi.id }_answer" value="2"/><label for="${vi.id }_answer_2">  ${vi.answer2 }</label>
+														<input type="radio" id="${vi.id }_answer_2" name="${vi.id }_answer" value="2"/><label for="${vi.id }_answer_2">  ${vi.voteBaseItem.answer2 }</label>
 														<span class="placeholder"></span>
-														<input type="radio" id="${vi.id }_answer_3" name="${vi.id }_answer" value="3"/><label for="${vi.id }_answer_3">  ${vi.answer3 }</label>
+														<input type="radio" id="${vi.id }_answer_3" name="${vi.id }_answer" value="3"/><label for="${vi.id }_answer_3">  ${vi.voteBaseItem.answer3 }</label>
 														<span class="placeholder"></span>
-														<input type="radio" id="${vi.id }_answer_4" name="${vi.id }_answer" value="4"/><label for="${vi.id }_answer_4">  ${vi.answer4 }</label>
+														<input type="radio" id="${vi.id }_answer_4" name="${vi.id }_answer" value="4"/><label for="${vi.id }_answer_4">  ${vi.voteBaseItem.answer4 }</label>
 													</td>
 												</tr>
 											</c:when>
-											<c:when test="${vi.type.name == 'multiple'}">
+											<c:when test="${vi.voteBaseItem.type.name == 'multiple'}">
 											<!-- 多选题 -->
 												<tr>
 													<td>
-														<input type="hidden" name="viid" value="${vi.id }" />
-														<input type="checkbox" id="${vi.id }_answer_1" name="${vi.id }_answer_1" value="1"/><label for="${vi.id }_answer_1">  ${vi.answer1 }</label>
+														<input type="checkbox" id="${vi.id }_answer_1" name="${vi.id }_answer_1" value="1"/><label for="${vi.id }_answer_1">  ${vi.voteBaseItem.answer1 }</label>
 														<span class="placeholder"></span>
-														<input type="checkbox" id="${vi.id }_answer_2" name="${vi.id }_answer_2" value="2"/><label for="${vi.id }_answer_2">  ${vi.answer2 }</label>
+														<input type="checkbox" id="${vi.id }_answer_2" name="${vi.id }_answer_2" value="2"/><label for="${vi.id }_answer_2">  ${vi.voteBaseItem.answer2 }</label>
 														<span class="placeholder"></span>
-														<input type="checkbox" id="${vi.id }_answer_3" name="${vi.id }_answer_3" value="3"/><label for="${vi.id }_answer_3">  ${vi.answer3 }</label>
+														<input type="checkbox" id="${vi.id }_answer_3" name="${vi.id }_answer_3" value="3"/><label for="${vi.id }_answer_3">  ${vi.voteBaseItem.answer3 }</label>
 														<span class="placeholder"></span>
-														<input type="checkbox" id="${vi.id }_answer_4" name="${vi.id }_answer_4" value="4"/><label for="${vi.id }_answer_4">  ${vi.answer4 }</label>
+														<input type="checkbox" id="${vi.id }_answer_4" name="${vi.id }_answer_4" value="4"/><label for="${vi.id }_answer_4">  ${vi.voteBaseItem.answer4 }</label>
 													</td>
 												</tr>
 											</c:when>
-											<c:when test="${vi.type.name == 'completion'}">
+											<c:when test="${vi.voteBaseItem.type.name == 'completion'}">
 											<!-- 填空题 -->
 												<tr>
 													<td>
-														<input type="hidden" name="viid" value="${vi.id }" />
-														<c:forEach items="${vi.completionAnswerLabels }" var="label" varStatus="vistatus">
-															${label }<input type="text" name="${vi.id }_answer_${vistatus.count }" class="text_line"/><span class="placeholder"></span>
+														<c:forEach items="${vi.voteBaseItem.completionAnswerLabels }" var="label" varStatus="vistatus">
+														<label>${label }</label><input type="text" name="${vi.id }_answer_${vistatus.count }" class="text_line"/><span class="placeholder" ></span>
 														</c:forEach> 
 													</td>
 												</tr>
@@ -90,7 +89,7 @@
 							<td><input type="text" name="remark" class="text_line voteitem_question_input"/></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center" style="text-align: center;"><input id="btn_submit_vote" type="button" class="button_03" value="确定"/></td>
+							<td colspan="2" align="center" style="text-align: center;"><input id="btn_submit_answer" type="button" class="button_03" value="确定"/></td>
 						</tr>
 				</tbody>
 			</table>

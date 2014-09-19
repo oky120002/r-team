@@ -21,10 +21,10 @@ import com.r.core.util.RandomUtil;
 import com.r.web.module.vote.VoteItemType;
 import com.r.web.module.vote.exception.VoteItemContextErrorException;
 import com.r.web.module.vote.model.Vote;
-import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 import com.r.web.module.vote.model.base.CompletionVoteBaseItem;
 import com.r.web.module.vote.model.base.MultipleOptionVoteBaseItem;
 import com.r.web.module.vote.model.base.SingleOptionVoteBaseItem;
+import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 import com.r.web.module.vote.model.base.YesOrNoVoteBaseItem;
 import com.r.web.module.vote.service.VoteBaseItemService;
 import com.r.web.module.vote.service.VoteService;
@@ -127,7 +127,7 @@ public class VoteAdminControl extends AbstractControl {
     /** 改变基础问卷项的状态 */
     @RequestMapping(value = "func/votebaseitem/changestatus/{id}")
     public String funcVoteBaseItemChangestatus(@PathVariable String id, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-        VoteBaseItemImpl voteBaseItem = voteBaseItemService.findById(id);
+        VoteBaseItemImpl voteBaseItem = voteBaseItemService.find(id);
         voteBaseItem.setIsEnable(!voteBaseItem.isEnable());
         voteBaseItemService.save(voteBaseItem);
         return "redirect:/admin/vote/page/votebaseitem/index";
@@ -141,7 +141,7 @@ public class VoteAdminControl extends AbstractControl {
         String id = request.getParameter("id"); // 问卷项ID
         VoteBaseItemImpl voteItem = null;
         if (StringUtils.isNotBlank(id)) { // 修改
-            voteItem = voteBaseItemService.findById(id);
+            voteItem = voteBaseItemService.find(id);
         }
         String question = request.getParameter("question"); // 问题
         String remark = request.getParameter("remark"); // 备注

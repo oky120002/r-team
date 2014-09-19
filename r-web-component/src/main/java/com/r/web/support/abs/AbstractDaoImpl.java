@@ -1,5 +1,6 @@
 package com.r.web.support.abs;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +61,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void creates(List<T> models) {
+    public final void creates(Collection<T> models) {
         AssertUtil.isNotEmpty("创建实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -87,7 +88,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void updates(List<T> models) {
+    public final void updates(Collection<T> models) {
         AssertUtil.isNotEmpty("更新实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -114,7 +115,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void saves(List<T> models) {
+    public final void saves(Collection<T> models) {
         AssertUtil.isNotEmpty("保存实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -141,7 +142,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void merges(List<T> models) {
+    public final void merges(Collection<T> models) {
         AssertUtil.isNotEmpty("合并实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -168,7 +169,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void deletes(List<T> models) {
+    public final void deletes(Collection<T> models) {
         AssertUtil.isNotEmpty("删除实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
