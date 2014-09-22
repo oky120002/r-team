@@ -41,10 +41,9 @@ import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.upload.dao.UploadDao;
 import com.r.boda.uploadservice.upload.model.FileType;
 import com.r.boda.uploadservice.upload.model.Upload;
-import com.r.core.log.Logger;
-import com.r.core.log.LoggerFactory;
 import com.r.core.util.RandomUtil;
 import com.r.core.util.TaskUtil;
+import com.r.web.support.abs.AbstractService;
 
 /**
  * 用户Service<br />
@@ -52,13 +51,7 @@ import com.r.core.util.TaskUtil;
  * @author rain
  */
 @Service("upload.uploadService")
-public class UploadService {
-    private static final Logger logger = LoggerFactory.getLogger(UploadService.class); // 日志
-
-    public UploadService() {
-        super();
-        logger.info("Instance UploadService............................");
-    }
+public class UploadService extends AbstractService {
 
     @Resource(name = "upload.uploadDao")
     private UploadDao uploadDao; // 用户Dao

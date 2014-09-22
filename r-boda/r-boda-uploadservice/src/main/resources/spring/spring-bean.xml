@@ -9,13 +9,26 @@
 
 	<bean id="epar" class="com.r.boda.uploadservice.core.EnviromentalParameter">
 		<!-- ip -->
-<!-- 		<property name="addr" value="http://190.100.100.50:8080/boda/" /> -->
-<!-- 		<property name="fileSavePath" value="D:\rainteam\boda\upload"	/> -->
+		<property name="addr" value="http://190.100.100.50:8080/boda/" />
+		<property name="fileSavePath" value="D:\rainteam\boda\upload"	/>
 
-		<property name="addr" value="http://192.168.0.154:8080/boda/" />
-		<property name="fileSavePath" value="/home/boda/upload"	/>
+<!-- 		<property name="addr" value="http://192.168.0.154:8080/boda/" /> -->
+<!-- 		<property name="fileSavePath" value="/home/boda/upload"	/> -->
 
 <!-- 		<property name="addr" value="http://192.168.1.2:8080/boda/" /> -->
 <!-- 		<property name="fileSavePath" value="D:\rainteam\boda\upload"	/> -->
 	</bean>
+	
+	<bean id="bodarmi"  class=" com.r.boda.uploadservice.upload.rmi.BodaRmiProxyFactoryBean" >
+		<property name="serviceUrl" value="rmi://172.16.18.100:1199/authorityFacade" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+		<property name="lookupStubOnStartup" value="true" />
+		<property name="serviceInterface">
+			<bean class="" />
+		</property>
+	</bean>
 </beans>
+
+181
+55*7
+215

@@ -31,16 +31,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.r.boda.uploadservice.core.AbstractControl;
 import com.r.boda.uploadservice.core.EnviromentalParameter;
 import com.r.boda.uploadservice.core.UpLoadErrorException;
-import com.r.boda.uploadservice.support.Support;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
 import com.r.boda.uploadservice.upload.model.FileType;
 import com.r.boda.uploadservice.upload.model.Upload;
 import com.r.boda.uploadservice.upload.service.UploadService;
-import com.r.core.log.Logger;
-import com.r.core.log.LoggerFactory;
+import com.r.web.support.abs.AbstractControl;
+import com.r.web.support.bean.Support;
 
 /**
  * 支持视图控制器
@@ -51,8 +49,6 @@ import com.r.core.log.LoggerFactory;
 @Controller
 @RequestMapping(value = "/upload")
 public class UploadControl extends AbstractControl {
-    private static final Logger logger = LoggerFactory.getLogger(UploadControl.class);
-
     private static final String PARAMS_UPLOAD_GROUP = "uploadgroup"; // 附件分组
     private static final String PARAMS_TAGS = "tags"; // 附件标签
     private static final String PARAMS_SYSNAME = "sysname"; // 附件-系统

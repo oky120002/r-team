@@ -31,7 +31,7 @@ import com.r.web.support.bean.KeyValue;
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     /** 日志 */
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;

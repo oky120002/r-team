@@ -21,6 +21,10 @@
 			<groupId>com.rain</groupId>
 			<artifactId>r-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.rain</groupId>
+			<artifactId>r-web-component</artifactId>
+		</dependency>
 
 		<!-- spring -->
 		<dependency>

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.r.core.exceptions.SException;
+import com.r.web.support.bean.KeyValue;
 
 public class UpLoadErrorException extends SException {
     private static final long serialVersionUID = -3366306307845731707L;
 
-    private List<KV<String, String>> errorFileNames = new ArrayList<KV<String, String>>();
+    private List<KeyValue<String, String>> errorFileNames = new ArrayList<KeyValue<String, String>>();
 
     public UpLoadErrorException() {
         super();
@@ -35,17 +36,17 @@ public class UpLoadErrorException extends SException {
     }
 
     public void addError(String errorFileName, String errorMessage) {
-        errorFileNames.add(KV.kv(errorFileName, errorMessage));
+        errorFileNames.add(KeyValue.kv(errorFileName, errorMessage));
     }
 
-    public List<KV<String, String>> getErrorFileNames() {
+    public List<KeyValue<String, String>> getErrorFileNames() {
         return errorFileNames;
     }
 
     @Override
     public String getMessage() {
         StringBuilder errorMsg = new StringBuilder();
-        for (KV<String, String> kv : errorFileNames) {
+        for (KeyValue<String, String> kv : errorFileNames) {
             errorMsg.append(kv.getKey() + " : " + kv.getValue()).append("\r\n");
         }
         return errorMsg.toString();

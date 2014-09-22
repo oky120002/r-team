@@ -6,8 +6,8 @@
  */
 package com.r.boda.uploadservice.upload.dao;
 
-import com.r.boda.uploadservice.core.AbstractDao;
 import com.r.boda.uploadservice.upload.model.Upload;
+import com.r.web.support.abs.AbstractDao;
 
 /**
  * 用户Dao

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.r.web.module.vote.VoteItemType;
 import com.r.web.module.vote.exception.AnswerTypeErrorException;
-import com.r.web.module.vote.model.VoteResult;
 import com.r.web.module.vote.model.VoteResultItem;
 import com.r.web.module.vote.model.base.VoteBaseItemImpl;
 import com.r.web.module.vote.service.VoteBaseItemService;

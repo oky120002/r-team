@@ -8,21 +8,15 @@ package com.r.boda.uploadservice.upload.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.boda.uploadservice.core.AbstractDaoImpl;
 import com.r.boda.uploadservice.upload.model.Upload;
-import com.r.core.log.Logger;
-import com.r.core.log.LoggerFactory;
+import com.r.web.support.abs.AbstractDaoImpl;
 
 /**
  * @author rain
  */
 @Repository("upload.uploadDao")
 public class UploadDaoImpl extends AbstractDaoImpl<Upload> implements UploadDao {
-
-	private static final Logger logger = LoggerFactory.getLogger(UploadDaoImpl.class); // 日志
-
 	public UploadDaoImpl() {
 		super(Upload.class);
-		logger.info("Instance UploadDaoImpl............................");
 	}
 }

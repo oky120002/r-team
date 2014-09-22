@@ -20,7 +20,7 @@ import com.r.web.module.vote.model.VoteResultItem;
 import com.r.web.support.abs.AbstractService;
 
 /**
- * 用户Service<br />
+ * 用户Service<br/>
  * 
  * @author rain
  */
@@ -28,7 +28,7 @@ import com.r.web.support.abs.AbstractService;
 public class VoteResultItemService extends AbstractService {
 
     /** 问卷结果自增长器类型 */
-    private static final String VOTE_RESULT_ITEM_INCREMENTER_TYPE = "vote_result_item";
+//    private static final String VOTE_RESULT_ITEM_INCREMENTER_TYPE = "vote_result_item";
 
     @Resource(name = "incrementer")
     private IncrementerContext incrementer;
