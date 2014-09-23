@@ -69,7 +69,10 @@ function submitDatas(url, formId, callback, errorback) {
 				errorMsg = errorMsg.replace(/<div style="display:none">/gi, '');
 			}
 			try {
-				errorback(errorMsg);
+				var support;
+				support.success = false;
+				support.tips = errorMsg;
+				errorback(support);
 			} catch (e) {
 			}
 		}

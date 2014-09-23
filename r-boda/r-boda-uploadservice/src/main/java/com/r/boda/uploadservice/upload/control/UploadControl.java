@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kingdee.boda.facade.loan.LoanBillFacade;
 import com.r.boda.uploadservice.core.EnviromentalParameter;
 import com.r.boda.uploadservice.core.UpLoadErrorException;
 import com.r.boda.uploadservice.support.listener.FileUploadItem;
@@ -49,15 +51,21 @@ import com.r.web.support.bean.Support;
 @Controller
 @RequestMapping(value = "/upload")
 public class UploadControl extends AbstractControl {
-    private static final String PARAMS_UPLOAD_GROUP = "uploadgroup"; // 附件分组
+    private static final String PARAMS_UPLOAD_GROUP = "group"; // 附件分组
     private static final String PARAMS_TAGS = "tags"; // 附件标签
     private static final String PARAMS_SYSNAME = "sysname"; // 附件-系统
+    private static final String PARAMS_EMP = "emp";// 操作人
+    private static final String PARAMS_AUT = "aut"; // 权限
 
     @Resource(name = "upload.uploadService")
     private UploadService uploadService;
 
     @Resource(name = "epar")
     private EnviromentalParameter epar;
+
+    @Resource(name = "loanBillFacade")
+    private LoanBillFacade facade;
+    private HttpSession session;
 
     public UploadControl() {
         logger.info("Instance UploadControl............................");
@@ -85,9 +93,26 @@ public class UploadControl extends AbstractControl {
     public Support<Object> sessionparams(HttpServletRequest request) {
         Support<Object> support = new Support<Object>();
         HttpSession session = request.getSession();
-        session.setAttribute(PARAMS_TAGS, request.getParameter(PARAMS_TAGS));
+        String tags = request.getParameter(PARAMS_TAGS);
+        session.setAttribute(PARAMS_TAGS, tags);
         session.setAttribute(PARAMS_UPLOAD_GROUP, request.getParameter(PARAMS_UPLOAD_GROUP));
-        session.setAttribute(PARAMS_SYSNAME, request.getParameter("PARAMS_SYSNAME"));
+        session.setAttribute(PARAMS_SYSNAME, request.getParameter(PARAMS_SYSNAME));
+        session.setAttribute(PARAMS_EMP, request.getParameter(PARAMS_EMP));
+        // 权限
+        if (StringUtils.isNotBlank(tags)) {
+            Map<String, Integer> autMap = new HashMap<String, Integer>();
+            String[] split = tags.split(",");
+            for (String tag : split) {
+                String aut = request.getParameter(PARAMS_AUT + "[" + tag + "]");
+                if (StringUtils.isNotBlank(aut)) {
+                    autMap.put(tag, Integer.valueOf(aut));
+                } else {
+                    autMap.put(tag, Integer.MIN_VALUE);
+                }
+            }
+            session.setAttribute(PARAMS_AUT, autMap);
+        }
+
         support.putParam("url", epar.getAddr("/upload/uploadpage")); // 跳转的链接
         return support;
     }
@@ -102,10 +127,11 @@ public class UploadControl extends AbstractControl {
     @RequestMapping(value = "uploadpage")
     public String uploadPage(ModelMap model, HttpServletRequest request) {
         logger.debug("进入上传页面");
-        HttpSession session = request.getSession();
+        session = request.getSession();
 
-        // 附件-系统
-        model.put(PARAMS_SYSNAME, String.valueOf(session.getAttribute(PARAMS_SYSNAME)));
+        model.put(PARAMS_SYSNAME, String.valueOf(session.getAttribute(PARAMS_SYSNAME))); // 附件-系统
+        @SuppressWarnings("unchecked")
+        Map<String, Integer> autMap = (Map<String, Integer>) session.getAttribute(PARAMS_AUT); // 权限
 
         // 标签
         String tags = String.valueOf(session.getAttribute(PARAMS_TAGS));
@@ -129,12 +155,22 @@ public class UploadControl extends AbstractControl {
             model.put("uploads", uploads);
             model.put("isok", true);
 
-            // 保存已经存在的标签
             StringBuilder havetags = new StringBuilder();
             havetags.append('[');
             for (Upload upload : uploads) {
+                // 保存已经存在的标签
                 if (StringUtils.isNotBlank(upload.getTag())) {
                     havetags.append('\'').append(upload.getTag()).append('\'').append(", ");
+                }
+                // 权限
+                if (autMap.containsKey(upload.getTag())) {
+                    int intValue = autMap.get(upload.getTag()).intValue();
+                    if(intValue == 0){  // 为0则不显示上传按钮,不在列表里面显示这一行
+                        havetags.append('\'').append(upload.getTag()).append('\'').append(", ");
+                    }
+                    upload.setAut(intValue);
+                } else {
+                    upload.setAut(Integer.MIN_VALUE);
                 }
             }
             havetags.append(']');
@@ -240,9 +276,16 @@ public class UploadControl extends AbstractControl {
             uploadService.unEnabledFile(fileId);
             support.setSuccess(true);
             support.setTips("删除成功");
+
+            Upload file = uploadService.find(fileId);
+            String group = file.getGroup();
+            String tag = file.getTag();
+            String emp = String.valueOf(request.getSession().getAttribute(PARAMS_EMP));
+            facade.persisApplyNote(group, tag, emp);
         } catch (Exception e) {
             support.setSuccess(false);
             support.setTips("删除失败!" + e.getMessage());
+            logger.error(e.getMessage(), e);
         }
         return support;
     }
@@ -334,51 +377,29 @@ public class UploadControl extends AbstractControl {
     }
 
     /**
-     * pdf删除页面
-     * 
-     * @param fileId
-     *            文件id
-     * @return
-     * @throws IOException
-     */
-    @RequestMapping(value = "deletePageByPdf/{fileId}")
-    public String deletePageByPdf(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
-        Upload upload = null;
-        try {
-            upload = uploadService.findByCheck(fileId, FileType.pdf);
-        } catch (UpLoadErrorException e) {
-            model.put("error", e.getMessage());
-            return "upload/errorPdfPage";
-        }
-        try {
-            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
-            model.put("fileId", fileId);
-            model.put("pdfPageNumber", pdfPageNumber);
-            return "upload/deletePdfPage";
-        } catch (UpLoadErrorException e) {
-            logger.error("pdf删除页面 : {}", e.getMessage());
-            model.put("error", " 附件平台内部错误 : " + e.toString());
-            return "upload/errorPdfPage";
-        }
-    }
-
-    /**
      * 删除pdf页面
      * 
      * @param fileId
      *            文件id
      * @return
+     * @throws Exception
      * @throws IOException
      */
     @RequestMapping(value = "deletePageByPdf/{fileId}/{start}/{end}")
     @ResponseBody
-    public Support<Object> deletePageByPdf(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, HttpServletRequest request) {
+    public Support<Object> deletePageByPdf(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, @PathVariable Integer end, HttpServletRequest request) throws Exception {
         Support<Object> support = new Support<Object>();
         Upload upload = null;
         try {
             upload = uploadService.findByCheck(fileId, FileType.pdf);
             uploadService.pdfDeletePage(upload.getFile(), start, end);
             support.putParam("pdfNumber", uploadService.pdfPageNumber(upload.getFile()));
+
+            Upload file = uploadService.find(fileId);
+            String group = file.getGroup();
+            String tag = file.getTag();
+            String emp = String.valueOf(request.getSession().getAttribute(PARAMS_EMP));
+            facade.persisApplyNote(group, tag, emp);
         } catch (UpLoadErrorException e) {
             support.setSuccess(false);
             support.setTips(e.getMessage());
@@ -387,35 +408,6 @@ public class UploadControl extends AbstractControl {
 
         support.setTips("删除成功");
         return support;
-    }
-
-    /**
-     * pdf插入页面
-     * 
-     * @param fileId
-     *            文件id
-     * @return
-     * @throws IOException
-     */
-    @RequestMapping(value = "insertPdfPage/{fileId}")
-    public String insertPdfPage(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
-        Upload upload = null;
-        try {
-            upload = uploadService.findByCheck(fileId, FileType.pdf);
-        } catch (UpLoadErrorException e) {
-            model.put("error", e.getMessage());
-            return "upload/errorPdfPage";
-        }
-        try {
-            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
-            model.put("fileId", fileId);
-            model.put("pdfPageNumber", pdfPageNumber);
-            return "upload/insertPdfPage";
-        } catch (UpLoadErrorException e) {
-            logger.error("pdf删除页面 : {}", e.getMessage());
-            model.put("error", " 附件平台内部错误 : " + e.toString());
-            return "upload/errorPdfPage";
-        }
     }
 
     /**
@@ -455,10 +447,10 @@ public class UploadControl extends AbstractControl {
      * @param fileId
      *            文件id
      * @return
-     * @throws IOException
+     * @throws Exception
      */
     @RequestMapping(value = "insertPdfPage/{fileId}/{start}")
-    public void insertPdfPage(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void insertPdfPage(ModelMap model, @PathVariable String fileId, @PathVariable Integer start, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html; charset=utf-8");
         Support<Object> support = new Support<Object>();
         Map<String, MultipartFile> fileMap = request.getFileMap();
@@ -473,10 +465,17 @@ public class UploadControl extends AbstractControl {
             upload = uploadService.findByCheck(fileId, FileType.pdf);
             uploadService.pdfInsertPage(upload.getFile(), fileMap.values().iterator().next(), start);
             support.putParam("pdfNumber", uploadService.pdfPageNumber(upload.getFile()));
+
+            Upload file = uploadService.find(fileId);
+            String group = file.getGroup();
+            String tag = file.getTag();
+            String emp = String.valueOf(request.getSession().getAttribute(PARAMS_EMP));
+            facade.persisApplyNote(group, tag, emp);
         } catch (UpLoadErrorException e) {
             support.setSuccess(false);
             support.setTips(e.getMessage());
             response.getWriter().print(JSONObject.fromObject(support).toString());
+            return;
         }
 
         support.setTips("插入成功");

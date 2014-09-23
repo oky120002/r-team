@@ -1,3 +1,6 @@
+<%@page import="javax.swing.text.AbstractDocument.Content"%>
+<%@page import="java.util.Map" %>
+<%@page import="com.r.core.util.CalUtil"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,7 +10,7 @@
 <link  href="<c:url value="/res/css/boda.css" />" rel="stylesheet" type="text/css"/>
 <script src="<c:url value="/res/jquery/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/res/js/upload.service.js" />" type="text/javascript"></script>
-<script src="<c:url value="/res/js/common.js" />" type="text/javascript"></script>
+<script src="<c:url value="/res/js/common.js?2" />" type="text/javascript"></script>
 <base target="_self">
 <script type="text/javascript">
 	var tags = ${tags}; // 标签
@@ -96,8 +99,8 @@
 	/**进度条*/
 	function _progress() {
 		var url = '<c:url value="/upload/fileUploadStatus" />';
-		submitDatas(url, null, function(data) {
-			var model = data.model;
+		submitDatas(url, null, function(support) {
+			var model = support.model;
 			$('#span').html(model.percent + "%");//显示读取百分比  
 			$('#table').width(model.percent + "%");//通过表格宽度 实现进度条  
 		});
@@ -107,10 +110,11 @@
 	function deleteFile(id) {
 		if(confirm("是否确认删除?")) { 
 			var url = '<c:url value="/upload/deleteUpload/" />' + id;
-			submitDatas(url, null, function(data) {
+			submitDatas(url, null, function(support) {
 				reload.click();
-			}, function(message) {
-				alert(message);
+			}, function(support) {
+				alert(support.tips);
+				reload.click();
 			});
 		}
 	}
@@ -201,19 +205,31 @@
 		<tbody id="filetabletbody">
 			<c:if test="${isok }">
 				<c:forEach items="${uploads }" var="upload">
-					<tr id="deletetr${upload.id }">
-						<td class="tag">${upload.tag }</td>
-						<td>${upload.fileName }</td>
-						<td>
-							<button onclick="lookUploadFile('${upload.id }');" class="tableButton" >查看</button>
-							<button onclick="downloadFile('${upload.id }');" class="tableButton" >下载</button>
-							<button onclick="deleteFile('${upload.id }');" class="tableButton" >删除</button>
-							<c:if test="${upload.fileType.responseDataType.name eq 'PDF' }">
-								<button onclick="deletePdf('${upload.id }');" class="tableButton" >删除页面</button>
-								<button onclick="insertPdf('${upload.id }');" class="tableButton" >插入页面</button>
-							</c:if>
-						</td>
-					</tr>
+					<c:if test="${upload.aut != 0}">
+						<tr id="deletetr${upload.id }">
+							<td class="tag">${upload.tag }</td>
+							<td>${upload.fileName }</td>
+							<td>
+								<c:if test="${upload.aut1}">
+									<button onclick="lookUploadFile('${upload.id }');" class="tableButton" >查看</button>
+								</c:if>
+								<c:if test="${upload.aut2}">
+									<button onclick="downloadFile('${upload.id }');" class="tableButton" >下载</button>
+								</c:if>
+								<c:if test="${upload.aut4}">
+									<button onclick="deleteFile('${upload.id }');" class="tableButton" >删除</button>
+								</c:if>
+								<c:if test="${upload.fileType.responseDataType.name eq 'PDF' }">
+									<c:if test="${upload.aut8}">
+										<button onclick="deletePdf('${upload.id }');" class="tableButton" >删除页面</button>
+									</c:if>
+									<c:if test="${upload.aut16}">
+										<button onclick="insertPdf('${upload.id }');" class="tableButton" >插入页面</button>
+									</c:if>
+								</c:if>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</c:if>
 		</tbody>

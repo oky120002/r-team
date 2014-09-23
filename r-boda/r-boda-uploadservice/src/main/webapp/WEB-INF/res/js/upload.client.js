@@ -9,8 +9,11 @@ var httpUrl = 'http://190.100.100.50:8080/boda/';
  */
 function showUploadDialog(args) {
 	$.post(httpUrl + "upload/sessionparams", {
+		group : args.group,
 		tags : args.tags,
-		uploadgroup : args.group,
+		sysname : args.sysname,
+		emp : args.emp,
+		aut : args.aut,
 	}, function(data) {
 		window.showModalDialog(data.params.url, null, "dialogWidth=800px;dialogHeight=600px");
 	});

@@ -19,16 +19,6 @@
 <!-- 		<property name="fileSavePath" value="D:\rainteam\boda\upload"	/> -->
 	</bean>
 	
-	<bean id="bodarmi"  class=" com.r.boda.uploadservice.upload.rmi.BodaRmiProxyFactoryBean" >
-		<property name="serviceUrl" value="rmi://172.16.18.100:1199/authorityFacade" />
-		<property name="refreshStubOnConnectFailure" value="true" />
-		<property name="lookupStubOnStartup" value="true" />
-		<property name="serviceInterface">
-			<bean class="" />
-		</property>
-	</bean>
+	<!--   rmi LMS系统记事本反写 -->
+    <bean id="loanBillFacade" class="com.r.boda.uploadservice.upload.rmi.BodaRmiProxyFactoryBean" lazy-init="true" />
 </beans>
-
-181
-55*7
-215

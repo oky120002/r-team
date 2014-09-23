@@ -10,9 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.r.core.util.CalUtil;
 
 @Entity
 @Table(name = "UPLOAD")
@@ -51,6 +54,10 @@ public class Upload implements Serializable {
     @Column
     @Enumerated(EnumType.STRING)
     private FileType fileType;
+
+    /** 页面操作权限 */
+    @Transient
+    private Integer aut;
 
     /**
      * @return the id
@@ -182,5 +189,33 @@ public class Upload implements Serializable {
             return null;
         }
         return file;
+    }
+
+    public Integer getAut() {
+        return aut;
+    }
+
+    public void setAut(Integer aut) {
+        this.aut = aut;
+    }
+
+    public boolean getAut1() {
+        return CalUtil.inBit(this.aut, 1);
+    }
+
+    public boolean getAut2() {
+        return CalUtil.inBit(this.aut, 2);
+    }
+
+    public boolean getAut4() {
+        return CalUtil.inBit(this.aut, 4);
+    }
+
+    public boolean getAut8() {
+        return CalUtil.inBit(this.aut, 8);
+    }
+
+    public boolean getAut16() {
+        return CalUtil.inBit(this.aut, 16);
     }
 }

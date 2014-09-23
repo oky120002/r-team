@@ -58,10 +58,7 @@ public class UploadService extends AbstractService {
 
     @Resource(name = "epar")
     private EnviromentalParameter epar;
-
-    // @Resource(name = "passwordEncoder")
-    // private PasswordEncoder passwordEncoder; // 密码
-
+    
     /**
      * 保存上传的文件
      * 
