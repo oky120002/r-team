@@ -119,6 +119,7 @@ public class UploadService extends AbstractService {
                         }
                     }
                     uploadDao.create(up);
+                    System.out.println(up.getId());
                     Upload target = new Upload();
                     BeanUtils.copyProperties(up, target, new String[] { "filepath" }); // 过滤掉真实文件地址
                     failUploads.add(target);

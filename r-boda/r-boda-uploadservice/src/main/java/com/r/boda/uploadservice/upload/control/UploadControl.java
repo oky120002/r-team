@@ -65,7 +65,6 @@ public class UploadControl extends AbstractControl {
 
     @Resource(name = "loanBillFacade")
     private LoanBillFacade facade;
-    private HttpSession session;
 
     public UploadControl() {
         logger.info("Instance UploadControl............................");
@@ -127,7 +126,7 @@ public class UploadControl extends AbstractControl {
     @RequestMapping(value = "uploadpage")
     public String uploadPage(ModelMap model, HttpServletRequest request) {
         logger.debug("进入上传页面");
-        session = request.getSession();
+        HttpSession session = request.getSession();
 
         model.put(PARAMS_SYSNAME, String.valueOf(session.getAttribute(PARAMS_SYSNAME))); // 附件-系统
         @SuppressWarnings("unchecked")
@@ -165,7 +164,7 @@ public class UploadControl extends AbstractControl {
                 // 权限
                 if (autMap.containsKey(upload.getTag())) {
                     int intValue = autMap.get(upload.getTag()).intValue();
-                    if(intValue == 0){  // 为0则不显示上传按钮,不在列表里面显示这一行
+                    if (intValue == 0) { // 为0则不显示上传按钮,不在列表里面显示这一行
                         havetags.append('\'').append(upload.getTag()).append('\'').append(", ");
                     }
                     upload.setAut(intValue);
@@ -224,7 +223,8 @@ public class UploadControl extends AbstractControl {
 
             if (CollectionUtils.isNotEmpty(multipartFiles)) {
                 String sysname = String.valueOf(session.getAttribute(PARAMS_SYSNAME));
-                List<Upload> uploads = uploadService.save(multipartFiles, sysname, tags, request.getParameter("uploadgroup"));
+                String group = String.valueOf(session.getAttribute(PARAMS_UPLOAD_GROUP));
+                List<Upload> uploads = uploadService.save(multipartFiles, sysname, tags, group);
                 if (CollectionUtils.isNotEmpty(uploads)) {
                     support.putParam("group", uploads.get(0).getGroup());
                 }
@@ -375,6 +375,36 @@ public class UploadControl extends AbstractControl {
             // 没有找到对应的附件
         }
     }
+    
+    /**
+     * pdf删除页面
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "deletePageByPdf/{fileId}")
+    public String deletePageByPdf(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
+        Upload upload = null;
+        try {
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+        } catch (UpLoadErrorException e) {
+            model.put("error", e.getMessage());
+            return "upload/errorPdfPage";
+        }
+        try {
+            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
+            model.put("fileId", fileId);
+            model.put("pdfPageNumber", pdfPageNumber);
+            return "upload/deletePdfPage";
+        } catch (UpLoadErrorException e) {
+            logger.error("pdf删除页面 : {}", e.getMessage());
+            model.put("error", " 附件平台内部错误 : " + e.toString());
+            return "upload/errorPdfPage";
+        }
+    }
+
 
     /**
      * 删除pdf页面
@@ -409,6 +439,37 @@ public class UploadControl extends AbstractControl {
         support.setTips("删除成功");
         return support;
     }
+    
+
+    /**
+     * pdf插入页面
+     * 
+     * @param fileId
+     *            文件id
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "insertPdfPage/{fileId}")
+    public String insertPdfPage(ModelMap model, @PathVariable String fileId, HttpServletRequest request) {
+        Upload upload = null;
+        try {
+            upload = uploadService.findByCheck(fileId, FileType.pdf);
+        } catch (UpLoadErrorException e) {
+            model.put("error", e.getMessage());
+            return "upload/errorPdfPage";
+        }
+        try {
+            int pdfPageNumber = uploadService.pdfPageNumber(upload.getFile());
+            model.put("fileId", fileId);
+            model.put("pdfPageNumber", pdfPageNumber);
+            return "upload/insertPdfPage";
+        } catch (UpLoadErrorException e) {
+            logger.error("pdf删除页面 : {}", e.getMessage());
+            model.put("error", " 附件平台内部错误 : " + e.toString());
+            return "upload/errorPdfPage";
+        }
+    }
+
 
     /**
      * 判断附件是否纯在

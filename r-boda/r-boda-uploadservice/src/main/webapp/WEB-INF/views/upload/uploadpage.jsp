@@ -178,7 +178,6 @@
 	<a id="reload" style="display: none;">reload...</a>
 	<form id="formid">
 		<table id="formtable"></table>
-		<input type="hidden" id="uploadgroup" name="uploadgroup" value="${uploadgroup }" /> 
 		<input type="button" id="btn_addrow" onclick="addRow();" value="+附件" class="untag tableButton"/>
 		<input type="button" id="btn_upload" onclick="upload();" value="提交" class="tableButton" /> <br />
 	</form>

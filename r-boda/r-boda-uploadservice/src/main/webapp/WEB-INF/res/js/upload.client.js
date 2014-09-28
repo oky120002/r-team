@@ -1,5 +1,5 @@
-var httpUrl = 'http://190.100.100.50:8080/boda/';
-// var httpUrl = 'http://192.168.0.154:8080/boda/';
+//var httpUrl = 'http://190.100.100.50:8080/boda/';
+ var httpUrl = 'http://192.168.0.154:8080/boda/';
 // var httpUrl = 'http://192.168.1.2:8080/boda/';
 
 /**
