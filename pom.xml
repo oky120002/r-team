@@ -312,10 +312,11 @@
 				<artifactId>druid</artifactId>
 				<version>0.2.26</version>
 			</dependency>
+			<!-- 因为oracle版权问题,在maven默认中央库中是没有jar包的,所以请自己下载然后放入lib文件夹 -->
 			<dependency>
 				<groupId>com.oracle</groupId>
 				<artifactId>ojdbc14</artifactId>
-				<version>10.2.0.4.0</version>
+				<version>10.2.0.3.0</version>
 			</dependency>
 			<dependency>
 				<groupId>postgresql</groupId>

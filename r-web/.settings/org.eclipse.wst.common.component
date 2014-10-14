@@ -13,6 +13,6 @@
         </dependent-module>
         <property name="java-output-path" value="/r-web/target/classes"/>
         <property name="component.exclusion.patterns" value="**/spy.properties"/>
-        <property name="context-root" value="/"/>
+        <property name="context-root" value="r-web"/>
     </wb-module>
 </project-modules>

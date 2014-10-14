@@ -14,10 +14,17 @@
 <!-- 		<property name="url" value="jdbc:h2:D:/rainteam/h2db/r-boda-uploadservice/db" /> -->
 <!-- 		<property name="username" value="db" /> -->
 <!-- 		<property name="password" value="db" /> -->
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.0.154:3306/fileupload?connectTimeout=3000&amp;socketTimeout=60000" />
-		<property name="username" value="root" />
-		<property name="password" value="root4567" />
+		<!-- mysql -->
+<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/fileupload?connectTimeout=3000&amp;socketTimeout=60000" /> -->
+<!-- 		<property name="username" value="root" /> -->
+<!-- 		<property name="password" value="root4567" /> -->
+		<!-- .Oracle  -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@172.16.18.31:1521:bdlms" />
+		<property name="username" value="cw0916" />
+		<property name="password" value="cw0916" />
+		
 
 		<property name="maxActive" value="100" />	
 		<property name="maxIdle" value="30" />

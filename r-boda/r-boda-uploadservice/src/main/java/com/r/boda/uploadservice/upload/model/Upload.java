@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.r.core.util.CalUtil;
 
 @Entity
-@Table(name = "UPLOAD")
+@Table(name = "UPLOADSERVICE_UPLOAD")
 public class Upload implements Serializable {
     private static final long serialVersionUID = 2879893099183340578L;
 
