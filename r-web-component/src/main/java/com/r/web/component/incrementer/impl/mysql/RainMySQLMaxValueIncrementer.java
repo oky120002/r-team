@@ -24,12 +24,12 @@ import com.r.web.component.incrementer.RainMaxValueIncrementer;
 /**
  * MySql自增长值获取器<br/>
  * 次自增长获取器会在服务器启动自动检查自增长表是否存在,里面的有效列是否存在,如果不存在则会尝试删除表再重建<br/>
- * dataSource : 实现{@link BasicDataSource}接口的数据源<br/>
- * incrementerName : 表名<br/>
- * columnName : 自增长数值列名<br/>
- * incrementerColumnName : 自增长类型列名<br/>
- * cacheSize : 缓存长度,每生成这个长度的数字,则刷新缓存到数据库<br/>
- * max : 自增长数值最大值,超过则重新计算自增长值,如果为null则无限大<br/>
+ * dataSource : 实现{@link BasicDataSource}接口的数据源(必填)<br/>
+ * incrementerName : 表名,(默认值为"tab_sequence")<br/>
+ * columnName : 自增长数值列名(默认值为"value")<br/>
+ * incrementerColumnName : 自增长类型列名(默认值为"incrementertype")<br/>
+ * cacheSize : 缓存长度,每生成这个长度的数字,则刷新缓存到数据库(默认值为"1")<br/>
+ * max : 自增长数值最大值,超过则重新计算自增长值(默认值为"mysql整型最大值")<br/>
  *
  * @author rain
  *
@@ -40,11 +40,11 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
     private static final String DEFAULT_INCREMENTER_TYPE_VALUE = "_DefaultIncrementerType";
     /** 日志 */
     private static Logger logger = LoggerFactory.getLogger(RainMySQLMaxValueIncrementer.class);
-    /** 检索新的序列值的SQL字符串 */
-    private static final String VALUE_SQL = "select last_insert_id()";
+
     /** 所有自增长值的集合 */
     private ConcurrentMap<String, Long> ids = new ConcurrentHashMap<String, Long>();
     /** 自增长值的最大值,超过则从新从0开始,如果为null则为无限大 */
+
     private Long max;
     /** 自增长类型所在列名 */
     private String incrementerColumnName;
@@ -245,7 +245,7 @@ public class RainMySQLMaxValueIncrementer extends AbstractColumnMaxValueIncremen
                 // Retrieve the new max of the sequence column...
                 ResultSet rs = null;
                 try {
-                    rs = stmt.executeQuery(VALUE_SQL);
+                    rs = stmt.executeQuery("select last_insert_id()");
                     if (!rs.next()) {
                         throw new DataAccessResourceFailureException("last_insert_id() failed after executing an update");
                     }
