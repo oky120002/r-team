@@ -17,7 +17,7 @@ import javax.swing.AbstractListModel;
  * @author Administrator
  * 
  */
-public class SortedListModel<T> extends AbstractListModel<T> {
+public class SortedListModel<T> extends AbstractListModel {
 	private static final long serialVersionUID = 8505134122262609492L;
 
 	private final SortedSet<T> model;

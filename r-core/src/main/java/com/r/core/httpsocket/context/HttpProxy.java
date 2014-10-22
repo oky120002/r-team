@@ -59,7 +59,7 @@ public class HttpProxy {
 		httpProxy.setEnable(isEnable);
 		httpProxy.setProxyType(proxy.type());
 		InetSocketAddress address = (InetSocketAddress) proxy.address();
-		httpProxy.setProxyHostName(address.getHostString());
+		httpProxy.setProxyHostName(address.getHostName());
 		httpProxy.setProxyPort(address.getPort());
 		return httpProxy;
 	}
