@@ -9,28 +9,19 @@
 
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<!-- h2 -->
-<!-- 		<property name="driverClassName" value="org.h2.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:h2:D:/rainteam/h2db/r-boda-uploadservice/db" /> -->
-<!-- 		<property name="username" value="db" /> -->
-<!-- 		<property name="password" value="db" /> -->
 		<!-- mysql -->
-<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:mysql://192.168.0.154:3306/fileupload?connectTimeout=3000&amp;socketTimeout=60000" /> -->
-<!-- 		<property name="username" value="root" /> -->
-<!-- 		<property name="password" value="root4567" /> -->
-		<!-- .Oracle  -->
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@172.16.18.31:1521:bdlms" />
-		<property name="username" value="cw0916" />
-		<property name="password" value="cw0916" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.0.154:3306/autogame?connectTimeout=3000&amp;socketTimeout=60000" />
+<!-- 		<property name="url" value="jdbc:mysql://114.215.158.227:3306/vote_test?connectTimeout=3000&amp;socketTimeout=60000" /> -->
+		<property name="username" value="root" /> 
+		<property name="password" value="root4567" />
 
 		<property name="maxActive" value="100" />	
 		<property name="maxIdle" value="30" />
 		<property name="maxWait" value="1000" />
 		<property name="defaultAutoCommit" value="true" />
-		
-<!-- 		<property name="validationQuery" value="select 1"></property> -->
+		<property name="validationQuery" value="select 1"></property>
+
 		<property name="removeAbandoned" value="true"></property>
 		<property name="removeAbandonedTimeout" value="180"></property>
 		<property name="logAbandoned" value="true"></property>
@@ -48,9 +39,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- hibernate方言 -->
-				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-<!-- 				<prop key="hibernate.dialect"> 	org.hibernate.dialect.MySQLInnoDBDialect</prop> -->
-<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<!-- 显示sql语句 -->
 				<prop key="hibernate.show_sql">true</prop>
 				<!-- 格式化sql语句 -->
@@ -62,4 +51,5 @@
 			</props>
 		</property>
 	</bean>
+	
 </beans>

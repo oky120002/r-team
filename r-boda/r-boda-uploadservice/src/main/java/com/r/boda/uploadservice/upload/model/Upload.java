@@ -28,30 +28,30 @@ public class Upload implements Serializable {
     private String id;
 
     /** 文件名 */
-    @Column(length = 1024)
+    @Column(name="fileName",length = 1024)
     private String fileName;
 
     /** 文件实际地址 */
-    @Column(length = 1024)
+    @Column(name="filePath",length = 1024)
     private String filePath;
 
-    @Column
+    @Column(name="fileLength")
     private Long fileLength; // 文件长度
 
     /** 文件分组 */
     // group在某些数据库中是关键字,不能用作列名
-    @Column(name = "_group", length = 1024)
+    @Column(name = "fileGroup", length = 1024)
     private String group;
 
     /** 此上传文件的标签 */
-    @Column(length = 1024)
+    @Column(name = "fileTag", length = 1024)
     private String tag;
 
     /** 是否启用 */
-    @Column
+    @Column(name="isEnabled")
     private Boolean isEnabled;
 
-    @Column
+    @Column(name="fileType")
     @Enumerated(EnumType.STRING)
     private FileType fileType;
 
