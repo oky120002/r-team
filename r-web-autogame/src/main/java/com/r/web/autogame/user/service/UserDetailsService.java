@@ -18,9 +18,10 @@ import com.r.web.support.abs.AbstractService;
  */
 public class UserDetailsService extends AbstractService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-	@Override
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
-	}
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+
 }
