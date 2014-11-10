@@ -23,7 +23,7 @@
 					class="com.r.web.component.messagecenter.context.htsms.MessageParserHTSMS">
 					<property name="corpID" value="HTEK03720" />
 					<property name="pwd" value="114477" />
-					<property name="timeout" value="3000" />
+					<property name="timeout" value="10000" />
 				</bean>
 			</list>
 		</property>

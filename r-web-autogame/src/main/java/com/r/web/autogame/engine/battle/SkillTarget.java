@@ -10,11 +10,17 @@ package com.r.web.autogame.engine.battle;
  *
  */
 public enum SkillTarget {
+    /** 全体 */
     All("全体", Integer.MAX_VALUE), //
+    /** 自身 */
     Self("自身", 1), //
+    /** 自方个体 */
     TeamUnit("自方个体", 1), //
+    /** 自方全体 */
     TeamAll("自方全体", Integer.MAX_VALUE), //
+    /** 敌方个体 */
     EnemyUnit("敌方个体", 1), //
+    /** 敌方全体 */
     EnemyAll("敌方全体", Integer.MAX_VALUE), //
     ;
 

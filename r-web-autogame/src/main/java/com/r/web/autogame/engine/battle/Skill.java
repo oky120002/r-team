@@ -10,6 +10,9 @@ package com.r.web.autogame.engine.battle;
  *
  */
 public interface Skill {
+    /** 技能唯一识别码 */
+    String getId();
+
     /** 获取技能名称 */
     String getName();
 
@@ -19,10 +22,12 @@ public interface Skill {
     /** 技能释放目标 */
     SkillTarget getTarget();
 
-    /** 技能效果(值️) */
-    int getValueByEffect();
+    /** 技能类型 */
+    SkillType getType();
 
-    /** 技能效果(百分比) */
-    int getValueByPercentage();
+    /** 获取技能效果(百分数) */
+    int getValueByPercent();
 
+    /** 获取技能效果(数值) */
+    int getValueByNumber();
 }

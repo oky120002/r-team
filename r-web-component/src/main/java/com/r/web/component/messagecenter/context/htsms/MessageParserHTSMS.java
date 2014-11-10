@@ -3,16 +3,10 @@
  */
 package com.r.web.component.messagecenter.context.htsms;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.core.util.IOUtil;
+import com.r.core.httpsocket.HttpSocket;
+import com.r.core.httpsocket.context.HttpPost;
 import com.r.web.component.messagecenter.Message;
 import com.r.web.component.messagecenter.MessageParser;
 import com.r.web.component.messagecenter.exception.ErrorMessageException;
@@ -84,32 +78,19 @@ public class MessageParserHTSMS extends MessageParserHTSMSConfigurator implement
      */
     private void send(String mobile, String content, String sendTime) {
         logger.debug("MessageParserHTSMS.send();");
-        BufferedReader in = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            StringBuilder sendMsgParams = new StringBuilder(SEND_SMS_SIMGLE);
-            sendMsgParams.append("?CorpID=").append(getCorpID());
-            sendMsgParams.append("&Pwd=").append(getPwd());
-            sendMsgParams.append("&Mobile=").append(mobile);
-            sendMsgParams.append("&Content=").append(URLEncoder.encode(content, ENCODE));
-            sendMsgParams.append("&SendTime=").append(sendTime);
-            sendMsgParams.append("&Cell=");
-            URL url = new URL("HTTP", getServiceAddr(), getServicePort(), sendMsgParams.toString());
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(getTimeout());
-            String backContext = IOUtil.inputStreamToString(urlConnection.getInputStream());
-            logger.info("send [HTSMS] message : " + backContext);
-        } catch (IOException e) {
-            throw new ErrorMessageException("Connection HTSMS server fails!", e);
-        } finally {
-            IOUtils.closeQuietly(in);
-            if (urlConnection != null) {
-                try {
-                    urlConnection.disconnect();
-                } catch (Exception e2) {
-                }
-            }
-        }
+
+        HttpPost post = new HttpPost(ENCODE);
+        post.add("CorpID", getCorpID());
+        post.add("Pwd", getPwd());
+        post.add("Mobile", mobile);
+        post.add("Content", content);
+        post.add("SendTime", sendTime);
+        post.add("Cell", "");
+
+        HttpSocket socket = HttpSocket.newHttpSocket(false, null);
+        socket.setTimeout(getTimeout());
+        String body = socket.send(getServiceAddr() + SEND_SMS_SIMGLE, post).bodyToString();
+        logger.info("send [HTSMS] message : " + body);
     }
 
     /**
@@ -124,31 +105,18 @@ public class MessageParserHTSMS extends MessageParserHTSMSConfigurator implement
      */
     private void batchsend(String mobile, String content, String sendTime) {
         logger.debug("MessageParserHTSMS.batchsend();");
-        BufferedReader in = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            StringBuilder sendMsgParams = new StringBuilder(SEND_SMS_BATCH);
-            sendMsgParams.append("?CorpID=").append(getCorpID());
-            sendMsgParams.append("&Pwd=").append(getPwd());
-            sendMsgParams.append("&Mobile=").append(mobile);
-            sendMsgParams.append("&Content=").append(URLEncoder.encode(content, ENCODE));
-            sendMsgParams.append("&SendTime=").append(sendTime);
-            sendMsgParams.append("&Cell=");
-            URL url = new URL("HTTP", getServiceAddr(), getServicePort(), sendMsgParams.toString());
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(getTimeout());
-            String backContext = IOUtil.inputStreamToString(urlConnection.getInputStream());
-            logger.info("send [HTSMS] message : " + backContext);
-        } catch (IOException e) {
-            throw new ErrorMessageException("Connection HTSMS server fails!", e);
-        } finally {
-            IOUtils.closeQuietly(in);
-            if (urlConnection != null) {
-                try {
-                    urlConnection.disconnect();
-                } catch (Exception e2) {
-                }
-            }
-        }
+
+        HttpPost post = new HttpPost(ENCODE);
+        post.add("CorpID", getCorpID());
+        post.add("Pwd", getPwd());
+        post.add("Mobile", mobile);
+        post.add("Content", content);
+        post.add("SendTime", sendTime);
+        post.add("Cell", "");
+
+        HttpSocket socket = HttpSocket.newHttpSocket(false, null);
+        socket.setTimeout(getTimeout());
+        String body = socket.send(getServiceAddr() + SEND_SMS_BATCH, post).bodyToString();
+        logger.info("send [HTSMS] message : " + body);
     }
 }

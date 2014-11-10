@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MessageParserHTSMSConfigurator {
 
-    private static final String SERVICE_ADDR = "www.ht3g.com";
+    private static final String SERVICE_ADDR = "http://www.ht3g.com";
     private static final int SERVICE_PORT = 80;
 
     /** 日志 */
