@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds">
 	<property name="contentName" value="autogame" />
-	<property name="commonPattern" value="%date %-4relative |-%-5level in %logger{50} - %msg%n" />
-	<property name="logfile" value="D:/rainteam/logback/r-web-autogame/logs" />
+	<property name="commonPattern" value="%date %-4relative |-%-5level in %logger{100} - %msg%n" />
+	<property name="logfile" value="logs" />
 	<property name="maxLogFileSize" value="10MB"></property>
 	<property name="maxLogFileNum" value="3"></property>
 
@@ -16,9 +16,9 @@
 	</appender>
 	
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logfile}.log</file>
+		<file>${logfile}/${contentName}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${logfile}.%i.log.zip</fileNamePattern>
+			<fileNamePattern>${logfile}/${contentName}.%i.log.zip</fileNamePattern>
 			<minIndex>1</minIndex>
 			<maxIndex>${maxLogFileNum}</maxIndex>
 		</rollingPolicy>
@@ -32,7 +32,7 @@
 	</appender>
 	
 	<appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">  
-	    <file>${logfile}.sql.log</file>  
+	    <file>${logfile}/${contentName}.sql.log</file>  
 	    <append>false</append>  
 	    <encoder>  
 	      <pattern>${commonPattern}</pattern>  

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds">
-	<property name="contentName" value="core" />
+	<property name="contentName" value="web_component_test" />
 	<property name="commonPattern" value="%date %-4relative |-%-5level in %logger{100} - %msg%n" />
 	<property name="logfile" value="logs" />
 	<property name="maxLogFileSize" value="10MB"></property>
