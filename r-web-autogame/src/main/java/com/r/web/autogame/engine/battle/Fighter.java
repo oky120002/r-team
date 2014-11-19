@@ -16,7 +16,7 @@ import java.util.Map;
  * 耐力:<br/>
  * 
  * @author rain
- *
+ *5
  */
 public interface Fighter {
 

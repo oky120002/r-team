@@ -19,7 +19,7 @@ import org.h2.tools.Server;
 public class StartH2Service {
 	private static Server tcpServer;
 	private String port = "9094";
-	private String dbDir = "E:/workspace-sts/r-team/r-app/h2db/lantian";
+	private String dbDir = "./core/h2";
 	private String user = "oky120002";
 	private String password = "oky120002";
 

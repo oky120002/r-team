@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<!-- �?��用的object model版本，为了确保稳定的使用，这个元素是强制性的。除非maven�?��者升级模板，否则不需要修�? -->
 	<modelVersion>4.0.0</modelVersion>
 
@@ -614,7 +613,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -860,5 +859,6 @@
 		<module>r-webcomponents</module>
 		<module>r-web-component</module>
 		<module>r-web-autogame</module>
-	</modules>
+    <module>r-qqxiu</module>
+  </modules>
 </project>

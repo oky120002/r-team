@@ -1,0 +1,518 @@
+2014-11-17 13:03:21,741 1834 |-INFO  in com.r.app.taobaoshua.TaobaoShuaApp - TaobaoShuaApp newInstance  ................
+2014-11-17 13:03:21,745 1838 |-DEBUG in com.r.app.taobaoshua.core.Core - Core newInstance..........
+2014-11-17 13:03:21,745 1838 |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBoo - YuuBoo newInstance................
+2014-11-17 13:03:21,746 1839 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBoo - TaoBao newInstance..........
+2014-11-17 13:03:21,756 1849 |-DEBUG in com.r.app.taobaoshua.bluesky.BlueSky - BlueSky newInstance..........
+2014-11-17 13:03:21,907 2000 |-DEBUG in com.r.app.taobaoshua.core.CoreManger - CoreManger newInstance  ................
+2014-11-17 13:03:22,823 2916 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoAction - TaoBaoAction newInstance..............
+2014-11-17 13:03:22,825 2918 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - TaoBaoManger newInstance  ................
+2014-11-17 13:03:22,828 2921 |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBooAction - YuuBooAction newInstance ..........
+2014-11-17 13:03:22,830 2923 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - YuuBooManger newInstance  ................
+2014-11-17 13:03:22,922 3015 |-INFO  in com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop - YuuBooDesktop newInstance...................
+2014-11-17 13:03:24,170 4263 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-11-17 13:03:24,961 5054 |-WARN  in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - HHH000342: Could not obtain connection to query metadata : Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+2014-11-17 13:03:25,292 5385 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-11-17 13:03:25,593 5686 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000319: Could not get database metadata
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.BlueSky.init(BlueSky.java:67) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp.startup(TaobaoShuaApp.java:101) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp$5.run(TaobaoShuaApp.java:165) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 42 common frames omitted
+2014-11-17 13:03:25,595 5688 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000299: Could not complete schema update
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.BlueSky.init(BlueSky.java:67) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp.startup(TaobaoShuaApp.java:101) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp$5.run(TaobaoShuaApp.java:165) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 42 common frames omitted
+2014-11-17 13:03:25,651 5744 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - Instance BuyAccountDaoImpl............................
+2014-11-17 13:03:25,651 5744 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - BuyAccountDaoImpl Instance............................
+2014-11-17 13:03:25,672 5765 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - Instance SysParDaoImpl............................
+2014-11-17 13:03:25,673 5766 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - SysParDaoImpl Instance............................
+2014-11-17 13:03:25,686 5779 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - Instance TaskDaoImpl............................
+2014-11-17 13:03:25,687 5780 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - TaskDaoImpl Instance............................
+2014-11-17 13:03:25,699 5792 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:03:25,837 5930 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:03:25,868 5961 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - BlueSkyLoginPanle newInstance..........
+2014-11-17 13:03:25,880 5973 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - 蓝天数据平台获得验证码图片.......
+2014-11-17 13:03:26,028 6121 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyeTaskDetailDialog - BlueSkyeTaskDetailDialog newInstance..........
+2014-11-17 13:03:26,105 6198 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyMainPanel - BlueSkyMainPanel newInstance..........
+2014-11-17 13:03:26,174 6267 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyFrame - BlueSkyDialog newInstance..........
+2014-11-17 13:03:26,177 6270 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - 在taoBaoHttpSocket中设置代理:null
+2014-11-17 13:03:26,178 6271 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - 在yuuBooHttpSocket中设置代理:null
+2014-11-17 13:03:26,182 6275 |-INFO  in com.r.app.taobaoshua.TaobaoShuaDesktop - MainDesktop newInstance .............
+2014-11-17 13:03:31,643 11736 |-DEBUG in com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop - 获得验证码图片.......
+2014-11-17 13:03:38,821 18914 |-DEBUG in com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop - 登陆...........
+2014-11-17 13:03:39,300 19393 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 登陆成功后的body文本 : <script language='javascript' type='text/javascript'>if(''!='') {	alert('');}window.location.href='http://www.yuuboo.net:80/member/index.php'</script>
+2014-11-17 13:03:39,301 19394 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 开启PV自动获取列表功能，每30秒获取一次............ 
+2014-11-17 13:03:39,399 19492 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 开启PV任务自动获取列表功能，每15秒获取一次............ 
+2014-11-17 13:03:39,403 19496 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 开启自动接手任务功能，每10秒获取一次............ 
+2014-11-17 13:03:39,406 19499 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 开启刷流量功能，每30秒获取一次..在淘宝搜索匹配宝贝时,仅仅匹配前50页中的宝贝,在前50页中没有找到.则自动停止搜索匹配,撤销接手任务.......... 
+2014-11-17 13:03:39,409 19502 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 开启自动保存数据功能，每60秒保存一次............ 
+2014-11-17 13:03:39,413 19506 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 保存PVQuestid一次.............
+2014-11-17 13:03:42,377 22470 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 获取PV列表.............
+2014-11-17 13:03:42,796 22889 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 执行PV的淘宝搜索任务.............
+2014-11-17 13:03:43,480 23573 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 获取PVQuest列表.............
+2014-11-17 13:03:44,770 24863 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooAction - 自动接手PV任务.............
+2014-11-17 13:03:59,637 792  |-INFO  in com.r.app.taobaoshua.TaobaoShuaApp - TaobaoShuaApp newInstance  ................
+2014-11-17 13:03:59,643 798  |-DEBUG in com.r.app.taobaoshua.core.Core - Core newInstance..........
+2014-11-17 13:03:59,643 798  |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBoo - YuuBoo newInstance................
+2014-11-17 13:03:59,643 798  |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBoo - TaoBao newInstance..........
+2014-11-17 13:03:59,650 805  |-DEBUG in com.r.app.taobaoshua.bluesky.BlueSky - BlueSky newInstance..........
+2014-11-17 13:03:59,734 889  |-DEBUG in com.r.app.taobaoshua.core.CoreManger - CoreManger newInstance  ................
+2014-11-17 13:04:00,598 1753 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoAction - TaoBaoAction newInstance..............
+2014-11-17 13:04:00,599 1754 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - TaoBaoManger newInstance  ................
+2014-11-17 13:04:00,603 1758 |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBooAction - YuuBooAction newInstance ..........
+2014-11-17 13:04:00,605 1760 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - YuuBooManger newInstance  ................
+2014-11-17 13:04:00,689 1844 |-INFO  in com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop - YuuBooDesktop newInstance...................
+2014-11-17 13:04:01,592 2747 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-11-17 13:04:02,114 3269 |-WARN  in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - HHH000342: Could not obtain connection to query metadata : Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+2014-11-17 13:04:02,329 3484 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-11-17 13:04:02,548 3703 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000319: Could not get database metadata
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.BlueSky.init(BlueSky.java:67) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp.startup(TaobaoShuaApp.java:101) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp$5.run(TaobaoShuaApp.java:165) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 42 common frames omitted
+2014-11-17 13:04:02,550 3705 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000299: Could not complete schema update
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.BlueSky.init(BlueSky.java:67) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp.startup(TaobaoShuaApp.java:101) [classes/:na]
+	at com.r.app.taobaoshua.TaobaoShuaApp$5.run(TaobaoShuaApp.java:165) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 42 common frames omitted
+2014-11-17 13:04:02,600 3755 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - Instance BuyAccountDaoImpl............................
+2014-11-17 13:04:02,601 3756 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - BuyAccountDaoImpl Instance............................
+2014-11-17 13:04:02,620 3775 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - Instance SysParDaoImpl............................
+2014-11-17 13:04:02,621 3776 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - SysParDaoImpl Instance............................
+2014-11-17 13:04:02,633 3788 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - Instance TaskDaoImpl............................
+2014-11-17 13:04:02,634 3789 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - TaskDaoImpl Instance............................
+2014-11-17 13:04:02,646 3801 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:04:02,781 3936 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:04:02,809 3964 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - BlueSkyLoginPanle newInstance..........
+2014-11-17 13:04:02,819 3974 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - 蓝天数据平台获得验证码图片.......
+2014-11-17 13:04:02,928 4083 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyeTaskDetailDialog - BlueSkyeTaskDetailDialog newInstance..........
+2014-11-17 13:04:03,018 4173 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyMainPanel - BlueSkyMainPanel newInstance..........
+2014-11-17 13:04:03,098 4253 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyFrame - BlueSkyDialog newInstance..........
+2014-11-17 13:04:03,102 4257 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - 在taoBaoHttpSocket中设置代理:null
+2014-11-17 13:04:03,103 4258 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - 在yuuBooHttpSocket中设置代理:null
+2014-11-17 13:04:03,107 4262 |-INFO  in com.r.app.taobaoshua.TaobaoShuaDesktop - MainDesktop newInstance .............
+2014-11-17 13:04:04,300 5455 |-DEBUG in com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask - 启动后台任务 : 自动获取任务信息........
+2014-11-17 13:04:04,300 5455 |-DEBUG in com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask - 启动后台任务 : 删除失效的任务..........
+2014-11-17 13:04:04,398 5553 |-WARN  in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2014-11-17 13:04:04,399 5554 |-ERROR in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+2014-11-17 13:04:08,859 10014 |-WARN  in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2014-11-17 13:04:08,860 10015 |-ERROR in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+2014-11-17 13:04:08,861 10016 |-ERROR in org.quartz.core.JobRunShell - Job DEFAULT.1792303046 threw an unhandled Exception: 
+org.springframework.transaction.CannotCreateTransactionException: Could not open Hibernate Session for transaction; nested exception is org.hibernate.exception.GenericJDBCException: Could not open connection
+	at org.springframework.orm.hibernate4.HibernateTransactionManager.doBegin(HibernateTransactionManager.java:512) ~[spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:372) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:417) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:255) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:94) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:633) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$EnhancerBySpringCGLIB$$5e79d41e.updateTaskList(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask$1.run(BlueSkyBackgroundTask.java:53) ~[classes/:na]
+	at com.r.core.util.TaskUtil$RunnableJob.execute(TaskUtil.java:186) ~[classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.1.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.1.jar:na]
+Caused by: org.hibernate.exception.GenericJDBCException: Could not open connection
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:54) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:125) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:110) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.obtainConnection(LogicalConnectionImpl.java:304) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.getConnection(LogicalConnectionImpl.java:169) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction.doBegin(JdbcTransaction.java:67) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.transaction.spi.AbstractTransactionImpl.begin(AbstractTransactionImpl.java:160) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionImpl.beginTransaction(SessionImpl.java:1395) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.HibernateTransactionManager.doBegin(HibernateTransactionManager.java:471) ~[spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	... 11 common frames omitted
+Caused by: org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.AbstractSessionImpl$NonContextualJdbcConnectionAccess.obtainConnection(AbstractSessionImpl.java:292) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.obtainConnection(LogicalConnectionImpl.java:297) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	... 16 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 21 common frames omitted
+2014-11-17 13:04:08,862 10017 |-ERROR in org.quartz.core.ErrorLogger - Job (DEFAULT.1792303046 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.2.1.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.1.jar:na]
+Caused by: org.springframework.transaction.CannotCreateTransactionException: Could not open Hibernate Session for transaction; nested exception is org.hibernate.exception.GenericJDBCException: Could not open connection
+	at org.springframework.orm.hibernate4.HibernateTransactionManager.doBegin(HibernateTransactionManager.java:512) ~[spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:372) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:417) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:255) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:94) ~[spring-tx-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:633) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$EnhancerBySpringCGLIB$$5e79d41e.updateTaskList(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask$1.run(BlueSkyBackgroundTask.java:53) ~[classes/:na]
+	at com.r.core.util.TaskUtil$RunnableJob.execute(TaskUtil.java:186) ~[classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.1.jar:na]
+	... 1 common frames omitted
+Caused by: org.hibernate.exception.GenericJDBCException: Could not open connection
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:54) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:125) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:110) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.obtainConnection(LogicalConnectionImpl.java:304) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.getConnection(LogicalConnectionImpl.java:169) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction.doBegin(JdbcTransaction.java:67) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.transaction.spi.AbstractTransactionImpl.begin(AbstractTransactionImpl.java:160) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionImpl.beginTransaction(SessionImpl.java:1395) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.HibernateTransactionManager.doBegin(HibernateTransactionManager.java:471) ~[spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	... 11 common frames omitted
+Caused by: org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.AbstractSessionImpl$NonContextualJdbcConnectionAccess.obtainConnection(AbstractSessionImpl.java:292) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.obtainConnection(LogicalConnectionImpl.java:297) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	... 16 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:178) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:154) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:392) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:42) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 21 common frames omitted
+2014-11-17 13:04:08,949 10104 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - 登陆...........
+2014-11-17 13:04:10,377 11532 |-WARN  in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2014-11-17 13:04:10,378 11533 |-ERROR in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot create PoolableConnectionFactory (A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:h2db/taobaoshua/h2.db". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-178])
+2014-11-17 13:04:56,744 792  |-INFO  in com.r.app.taobaoshua.TaobaoShuaApp - TaobaoShuaApp newInstance  ................
+2014-11-17 13:04:56,747 795  |-DEBUG in com.r.app.taobaoshua.core.Core - Core newInstance..........
+2014-11-17 13:04:56,748 796  |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBoo - YuuBoo newInstance................
+2014-11-17 13:04:56,748 796  |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBoo - TaoBao newInstance..........
+2014-11-17 13:04:56,767 815  |-DEBUG in com.r.app.taobaoshua.bluesky.BlueSky - BlueSky newInstance..........
+2014-11-17 13:04:56,857 905  |-DEBUG in com.r.app.taobaoshua.core.CoreManger - CoreManger newInstance  ................
+2014-11-17 13:04:57,671 1719 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoAction - TaoBaoAction newInstance..............
+2014-11-17 13:04:57,672 1720 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - TaoBaoManger newInstance  ................
+2014-11-17 13:04:57,675 1723 |-INFO  in com.r.app.taobaoshua.yuuboo.YuuBooAction - YuuBooAction newInstance ..........
+2014-11-17 13:04:57,677 1725 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - YuuBooManger newInstance  ................
+2014-11-17 13:04:57,756 1804 |-INFO  in com.r.app.taobaoshua.yuuboo.desktop.YuuBooDesktop - YuuBooDesktop newInstance...................
+2014-11-17 13:04:58,693 2741 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-11-17 13:04:59,768 3816 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-11-17 13:04:59,973 4021 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: buyaccount
+2014-11-17 13:04:59,975 4023 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: syspar
+2014-11-17 13:04:59,977 4025 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: task
+2014-11-17 13:04:59,979 4027 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: buyaccount
+2014-11-17 13:04:59,981 4029 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: syspar
+2014-11-17 13:04:59,982 4030 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: task
+2014-11-17 13:05:00,058 4106 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - Instance BuyAccountDaoImpl............................
+2014-11-17 13:05:00,058 4106 |-INFO  in com.r.app.taobaoshua.bluesky.dao.BuyAccountDaoImpl - BuyAccountDaoImpl Instance............................
+2014-11-17 13:05:00,080 4128 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - Instance SysParDaoImpl............................
+2014-11-17 13:05:00,081 4129 |-INFO  in com.r.app.taobaoshua.bluesky.dao.SysParDaoImpl - SysParDaoImpl Instance............................
+2014-11-17 13:05:00,094 4142 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - Instance TaskDaoImpl............................
+2014-11-17 13:05:00,095 4143 |-INFO  in com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl - TaskDaoImpl Instance............................
+2014-11-17 13:05:00,108 4156 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:05:00,239 4287 |-INFO  in com.r.app.taobaoshua.bluesky.service.TaskService - TaskService Instance............................
+2014-11-17 13:05:00,266 4314 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - BlueSkyLoginPanle newInstance..........
+2014-11-17 13:05:00,276 4324 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - 蓝天数据平台获得验证码图片.......
+2014-11-17 13:05:00,362 4410 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyeTaskDetailDialog - BlueSkyeTaskDetailDialog newInstance..........
+2014-11-17 13:05:00,454 4502 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyMainPanel - BlueSkyMainPanel newInstance..........
+2014-11-17 13:05:00,533 4581 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyFrame - BlueSkyDialog newInstance..........
+2014-11-17 13:05:00,537 4585 |-DEBUG in com.r.app.taobaoshua.taobao.TaoBaoManger - 在taoBaoHttpSocket中设置代理:null
+2014-11-17 13:05:00,538 4586 |-DEBUG in com.r.app.taobaoshua.yuuboo.YuuBooManger - 在yuuBooHttpSocket中设置代理:null
+2014-11-17 13:05:00,542 4590 |-INFO  in com.r.app.taobaoshua.TaobaoShuaDesktop - MainDesktop newInstance .............
+2014-11-17 13:05:01,619 5667 |-DEBUG in com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask - 启动后台任务 : 自动获取任务信息........
+2014-11-17 13:05:01,619 5667 |-DEBUG in com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask - 启动后台任务 : 删除失效的任务..........
+2014-11-17 13:05:01,978 6026 |-DEBUG in com.r.app.taobaoshua.bluesky.service.TaskService - 删除失效任务 0 个.....
+2014-11-17 13:05:07,740 11788 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyLoginPanle - 登陆...........
+2014-11-17 13:05:17,426 21474 |-DEBUG in com.r.app.taobaoshua.bluesky.desktop.BlueSkyFrame - 获取绑定的买号完成.......
+2014-11-17 13:06:42,348 106396 |-ERROR in org.quartz.core.JobRunShell - Job DEFAULT.1156193810 threw an unhandled Exception: 
+com.r.core.exceptions.io.NetworkIOReadErrorException: 获取数据超时!
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:200) ~[classes/:na]
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:166) ~[classes/:na]
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:71) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl.getTaskListHtml(TaskDaoImpl.java:102) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.service.TaskService.webGetTaskList(TaskService.java:134) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$FastClassBySpringCGLIB$$c5838c7.invoke(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:629) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$EnhancerBySpringCGLIB$$30f2bee3.webGetTaskList(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask$1.run(BlueSkyBackgroundTask.java:67) ~[classes/:na]
+	at com.r.core.util.TaskUtil$RunnableJob.execute(TaskUtil.java:186) ~[classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.1.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.1.jar:na]
+2014-11-17 13:06:42,349 106397 |-ERROR in org.quartz.core.ErrorLogger - Job (DEFAULT.1156193810 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.2.1.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.1.jar:na]
+Caused by: com.r.core.exceptions.io.NetworkIOReadErrorException: 获取数据超时!
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:200) ~[classes/:na]
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:166) ~[classes/:na]
+	at com.r.core.httpsocket.HttpSocket.send(HttpSocket.java:71) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.dao.TaskDaoImpl.getTaskListHtml(TaskDaoImpl.java:102) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.service.TaskService.webGetTaskList(TaskService.java:134) ~[classes/:na]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$FastClassBySpringCGLIB$$c5838c7.invoke(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:629) ~[spring-aop-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.app.taobaoshua.bluesky.service.TaskService$$EnhancerBySpringCGLIB$$30f2bee3.webGetTaskList(<generated>) ~[spring-core-3.2.10.RELEASE.jar:na]
+	at com.r.app.taobaoshua.bluesky.core.BlueSkyBackgroundTask$1.run(BlueSkyBackgroundTask.java:67) ~[classes/:na]
+	at com.r.core.util.TaskUtil$RunnableJob.execute(TaskUtil.java:186) ~[classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.1.jar:na]
+	... 1 common frames omitted
