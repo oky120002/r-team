@@ -1,4 +1,4 @@
-package com.r.qqxiu;
+package com.r.qqcard;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
