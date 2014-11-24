@@ -857,5 +857,6 @@
 		<module>r-web-component</module>
 		<module>r-web-autogame</module>
     <module>r-qqcard</module>
+    <module>r-app-component</module>
   </modules>
 </project>

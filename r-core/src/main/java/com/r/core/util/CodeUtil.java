@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 /**
- * 特定字符串生成类
+ * 特定字符串生成实用工具
  * 
  * @author rain
  * 

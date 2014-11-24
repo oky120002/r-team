@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.r.core.exceptions.AssertException;
 
 /**
- * 断言工具<br />
+ * 断言实用工具<br />
  * 此工具主要作用于方法参数的合法性判断<br />
  * 此工具就类是于JUnit的断言库。 如果传入一个错误的或者不合法的参数,就抛出一个{@link AssertException}异常。
  * 

@@ -13,7 +13,7 @@ import org.slf4j.helpers.MessageFormatter;
 
 /**
  * 
- * 字符串工具
+ * 字符串实用工具
  * 
  * @author Rain
  * 

@@ -46,6 +46,11 @@ public class HttpUrl {
         return hu;
     }
 
+    /** 根据传入的URL实例化一个HttpUrl */
+    public static HttpUrl newInstance(HttpWebUrl url) {
+        return new HttpUrl(url.getUrl());
+    }
+
     /** 解析httpurl */
     private void detachHttpUrl(String httpUrl) {
         String tempHttpUrl = httpUrl.trim();

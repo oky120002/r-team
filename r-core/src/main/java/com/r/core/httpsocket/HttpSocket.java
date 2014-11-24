@@ -17,6 +17,7 @@ import com.r.core.httpsocket.context.Cookie;
 import com.r.core.httpsocket.context.HttpPost;
 import com.r.core.httpsocket.context.HttpProxy;
 import com.r.core.httpsocket.context.HttpUrl;
+import com.r.core.httpsocket.context.HttpWebUrl;
 import com.r.core.httpsocket.context.RequestHeader;
 import com.r.core.httpsocket.context.ResponseHeader;
 
@@ -72,6 +73,16 @@ public class HttpSocket implements Serializable {
     }
 
     /**
+     * 发送请求
+     * 
+     * @param httpWebUrl
+     * @return
+     */
+    public ResponseHeader send(HttpWebUrl httpWebUrl) throws NetworkIOReadErrorException {
+        return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpWebUrl), requestHeader.getHttpProxy()));
+    }
+
+    /**
      * 发送请求地址
      * 
      * @param httpUrl
@@ -104,6 +115,17 @@ public class HttpSocket implements Serializable {
      */
     public ResponseHeader send(String httpUrl, HttpPost post) throws NetworkIOReadErrorException {
         return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, requestHeader.getHttpProxy()));
+    }
+
+    /**
+     * 发送请求
+     * 
+     * @param httpWebUrl
+     * @param post
+     * @return
+     */
+    public ResponseHeader send(HttpWebUrl httpWebUrl, HttpPost post) throws NetworkIOReadErrorException {
+        return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpWebUrl), post, requestHeader.getHttpProxy()));
     }
 
     /**

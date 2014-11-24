@@ -12,7 +12,7 @@ import com.r.core.exceptions.initialization.InitializationErrorException;
 import com.r.core.exceptions.io.IOReadErrorException;
 
 /**
- * 图片缓存工具 <br />
+ * 图片缓存实用工具 <br />
  * 自带图片缓存,可是满足绝大多数使用情况<br/>
  * ImageCacheUtil工具类的"get"方法,必须在实现"ReadImage"接口的情况下才能使用,给ImageUtil初始化
  * 

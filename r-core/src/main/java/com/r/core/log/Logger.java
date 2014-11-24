@@ -169,7 +169,10 @@ public class Logger {
 
     /** 返回前缀 */
     private String getPre() {
-        return this.pre;
+        if (StringUtils.isBlank(this.pre)) {
+            return "";
+        }
+        return this.pre + " - ";
     }
 
     private void fireListener(String key, String message, Throwable error) {

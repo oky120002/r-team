@@ -5,19 +5,21 @@ package com.r.qqcard;
 
 import java.awt.EventQueue;
 
-import javax.swing.UIManager;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 
 /** QQ卡片辅助程序入口 */
-public class QQCardApp {
+public class QQCardApp implements Runnable {
     /** 日志 */
     private static final Logger logger = LoggerFactory.getLogger(QQCardApp.class);
 
     /** QQ卡片辅助程序实例 */
     private static QQCardApp app = null; // 应用程序
+    private ApplicationContext applicationContext;
 
     public QQCardApp() {
         super();
@@ -35,14 +37,14 @@ public class QQCardApp {
     }
 
     public static void main(String[] args) {
-        logger.debug("main ......");
+        logger.debug("QQ卡片辅助程序（进入main方法） ......");
         HCtrlUtil.init();
-        System.out.println(UIManager.getDefaults().size());
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                QQCardApp.startup(); // 启动
-            }
-        });
+        EventQueue.invokeLater(new QQCardApp());
+    }
+
+    @Override
+    public void run() {
+        QQCardApp.app = this;
+        applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     }
 }

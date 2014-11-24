@@ -6,7 +6,7 @@ package com.r.core.util;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 校验,判断工具类
+ * 校验,判断实用工具
  * 
  * @author rain
  *

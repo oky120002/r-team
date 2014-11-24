@@ -10,7 +10,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- * 图片的相关操作<br/>
+ * 图片的相关操作实用工具<br/>
  * 
  * @author rain
  * 

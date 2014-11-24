@@ -30,7 +30,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 /**
  * 
- * 任务调度工具
+ * 任务调度实用工具
  * 
  * @see java.util.concurrent
  * @author rain

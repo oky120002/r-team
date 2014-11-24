@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 身份证工具
+ * 身份证实用工具
  * @author Rain
  *
  */

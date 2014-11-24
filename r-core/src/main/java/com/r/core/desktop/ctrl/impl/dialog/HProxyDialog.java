@@ -324,7 +324,7 @@ public class HProxyDialog extends HBaseDialog {
 		/** 设置是否启用代理 */
 		public void setEnable(boolean isEnable);
 
-		/** 是否启用代理 */
+		/** 获取是否启用代理 */
 		public boolean isEnable();
 
 		/** 设置代理类型 */

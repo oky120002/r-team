@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 /**
- * IO工具
+ * IO实用工具
  * 
  * @author Rain
  * @date 2012年1月30日

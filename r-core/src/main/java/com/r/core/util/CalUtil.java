@@ -4,7 +4,7 @@
 package com.r.core.util;
 
 /**
- * 计算工具<br />
+ * 计算实用工具<br />
  * 位计算查看{@link http://blog.csdn.net/jiqingxia37/article/details/8293820}
  * 
  * @author oky
