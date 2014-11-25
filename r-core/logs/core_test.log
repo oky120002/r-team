@@ -210,3 +210,19 @@
 2014-11-25 18:18:28,412 11549 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
 
 2014-11-25 18:18:28,412 11549 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！
+2014-11-25 20:38:16,942 305  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-25 20:38:17,438 801  |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9644826490003779
+2014-11-25 20:38:32,197 15560 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:kyzp
+2014-11-25 20:38:32,197 15560 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码 - http://check.ptlogin2.qq.com/check?uin=2912617246&appid=10000101&r=0.7332643277743448
+2014-11-25 20:38:32,464 15827 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=CC4E2FF9C0DC6CE97948871737455592&aid=10000101&verifycode=kyzp&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-25 20:38:32,754 16117 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('4','0','','0','您输入的验证码不正确，请重新输入。', '2912617246');
+
+2014-11-25 20:38:32,754 16117 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 您输入的验证码不正确，请重新输入。
+2014-11-25 20:39:28,322 420  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-25 20:39:28,513 611  |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5938935593502654
+2014-11-25 20:39:32,126 4224 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:vwbs
+2014-11-25 20:39:32,126 4224 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码 - http://check.ptlogin2.qq.com/check?uin=2912617246&appid=10000101&r=0.6806507678759604
+2014-11-25 20:39:32,311 4409 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=2DF8C196F1B2EFF8F784767ED88CF13E&aid=10000101&verifycode=vwbs&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-25 20:39:32,598 4696 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-25 20:39:32,598 4696 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！

@@ -5,6 +5,7 @@ import java.awt.Image;
 
 import org.junit.Test;
 
+import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.desktop.ctrl.alert.HAlert.AuthCodeObtain;
 import com.r.core.httpsocket.HttpSocket;
@@ -32,6 +33,8 @@ public class QQToolTest implements AuthCodeObtain {
 
     @Test
     public void test() {
+        HCtrlUtil.init();
+        
         logger.debug("进行登陆测试.");
         String verifycode = HAlert.showAuthCodeDialog(this);
         logger.debug("检验码:" + verifycode);
