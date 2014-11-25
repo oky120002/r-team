@@ -194,29 +194,4 @@ public abstract class TaskUtil {
         } catch (InterruptedException e) {
         }
     }
-
-    public static void main(String[] args) throws SchedulerException {
-        // new JNowTimeLabel("abcd");
-        // new JNowTimeLabel("efgh");
-        // TaskUtil.executeScheduleTask(new Runnable() {
-        // @Override
-        // public void run() {
-        // System.out.println("abcd" + DateUtil.formatDate(null, null));
-        // }
-        // }, "0/1 * * * * ?");
-        //
-        // TaskUtil.executeScheduleTask(new Runnable() {
-        // @Override
-        // public void run() {
-        // System.out.println("efgh" + DateUtil.formatDate(null, null));
-        // }
-        // }, "0/1 * * * * ?");
-
-        TaskUtil.executeScheduleTask(new Runnable() {
-            @Override
-            public void run() {
-                // System.out.println("hijk" + DateUtil.formatDate(null, null));
-            }
-        }, 0, 1, new Date(), null);
-    }
 }

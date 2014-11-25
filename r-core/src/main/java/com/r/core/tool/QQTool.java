@@ -44,6 +44,9 @@ public class QQTool {
      */
     public static final Image getLoginWebVerifycodeImage(HttpSocket httpSocket, String appid, String username) {
         AssertUtil.isNotNull("套接字不能为null！", httpSocket);
+        AssertUtil.isNotBlank("QQ网络应用ID不能为空！", appid);
+        AssertUtil.isNotBlank("用户名不能为空！", username);
+
         HttpWebUrl url = new HttpWebUrl("http://captcha.qq.com/getimage");
         url.add("uin", username);
         url.add("aid", appid);
@@ -71,6 +74,10 @@ public class QQTool {
      */
     public static final String loginWeb(HttpSocket httpSocket, String appid, String username, String password, String verifycode) {
         AssertUtil.isNotNull("套接字不能为null！", httpSocket);
+        AssertUtil.isNotBlank("QQ网络应用ID不能为空！", appid);
+        AssertUtil.isNotBlank("用户名不能为空！", username);
+        AssertUtil.isNotBlank("密码不能为空！", password);
+        AssertUtil.isNotBlank("验证码不能为空！", verifycode);
 
         String checkVC = getCheckVC(httpSocket, username, verifycode, appid); // 获取辅助计算码计算码
         String pwd = getPassword(checkVC, password, verifycode); // 获取加密后的密码
@@ -95,7 +102,7 @@ public class QQTool {
         logger.debug("登陆QQ的web账户 - {}", url.getUrl());
         ResponseHeader responseHeader = httpSocket.send(url);
         String message = responseHeader.bodyToString();
-        logger.debug(message);
+        logger.debug("登陆QQ的web后的返回值 - {}", message);
         return ResolveUtil.jsfunction(message).getPar(5);
     }
 

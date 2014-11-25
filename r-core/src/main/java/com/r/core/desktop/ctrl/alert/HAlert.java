@@ -4,6 +4,8 @@
 package com.r.core.desktop.ctrl.alert;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -11,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog;
 
 /**
  * 弹出框
@@ -62,7 +66,7 @@ public class HAlert {
     }
 
     /** 弹出输入框 */
-    public static String showInput(String title) {
+    public static String showInputDialog(String title) {
         return JOptionPane.showInputDialog(title);
     }
 
@@ -102,4 +106,40 @@ public class HAlert {
             return null;
         }
     }
+
+    /**
+     * 弹出验证码输入框
+     * 
+     * @param obtain
+     *            验证码图片获取器
+     * @return 验证码
+     */
+    public static String showAuthCodeDialog(AuthCodeObtain obtain) {
+        HAuthCodeDialog hAuthCodeDialog = new HAuthCodeDialog(obtain);
+        hAuthCodeDialog.updateAuthCodeImage();
+        hAuthCodeDialog.setVisible(true);
+        hAuthCodeDialog.dispose();
+        try {
+            return hAuthCodeDialog.getAuthCode();
+        } finally {
+            hAuthCodeDialog = null;
+
+        }
+    }
+
+    /**
+     * 验证码图片获取器<br/>
+     * 此获取器中两个获取方法都不能返回null
+     * 
+     * @author rain
+     *
+     */
+    public interface AuthCodeObtain {
+        /** 获取验证码图片 */
+        Image getAuthCodeImage();
+
+        /** 获取验证码图片尺寸 */
+        Dimension getAuthCodeImageSize();
+    }
+
 }

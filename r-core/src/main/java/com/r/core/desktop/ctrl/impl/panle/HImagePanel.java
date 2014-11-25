@@ -35,23 +35,33 @@ public class HImagePanel extends HBasePanel {
     /** 图片大小 */
     private Dimension dimension;
 
-    /** 构造一个没有背景图片的JImagePane */
+    /** 构造一个没有背景图片的JImagePanel */
     public HImagePanel() {
         this(null, null, null, ShowMode.居中);
     }
 
-    /** 构造一个没有背景图片,但具有高宽的JImagePane */
+    /** 构造一个没有背景图片且居中的JImagePanel */
+    public HImagePanel(Image image) {
+        this(null, image, null, ShowMode.居中);
+    }
+
+    /** 构造一个没有背景图片但设置了尺寸且居中的JImagePanel */
+    public HImagePanel(Dimension dimension) {
+        this(dimension, null, null, ShowMode.居中);
+    }
+
+    /** 构造一个没有背景图片,但具有高宽的JImagePanel */
     public HImagePanel(Dimension dimension, ShowMode showMode) {
         this(dimension, null, null, showMode == null ? ShowMode.居中 : showMode);
     }
 
-    /** 构造一个没有背景图片,但具有高宽的JImagePane */
+    /** 构造一个没有背景图片,但具有高宽的JImagePanel */
     public HImagePanel(Image image, ShowMode showMode) {
         this(null, image, null, showMode == null ? ShowMode.居中 : showMode);
     }
 
     /**
-     * 构造一个具有指定背景图片和指定显示模式的JImagePane
+     * 构造一个具有指定背景图片和指定显示模式的JImagePanel
      * 
      * @param backgroundImage
      *            背景图片

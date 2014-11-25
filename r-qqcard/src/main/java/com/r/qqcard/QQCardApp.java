@@ -19,6 +19,7 @@ public class QQCardApp implements Runnable {
 
     /** QQ卡片辅助程序实例 */
     private static QQCardApp app = null; // 应用程序
+    /** Spring 入口 */
     private ApplicationContext applicationContext;
 
     public QQCardApp() {
