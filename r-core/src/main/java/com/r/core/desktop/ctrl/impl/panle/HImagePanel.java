@@ -158,7 +158,7 @@ public class HImagePanel extends HBasePanel {
     /** 设置背景图片,默认null.png */
     public void setBackImage(Image backImage) {
         if (backImage == null) {
-            this.backImage = ImageUtil.readImageFromIO("com/hiyouyu/core/controls/ctrl/impl/panle/null.png");
+            this.backImage = ImageUtil.getImageByNull();
         }
         this.backImage = backImage;
     }

@@ -17,6 +17,7 @@ import com.r.core.log.LoggerFactory;
 import com.r.core.util.AssertUtil;
 import com.r.core.util.RandomUtil;
 import com.r.core.util.ResolveUtil;
+import com.r.core.util.bean.ResolveBeanOfJsFunction;
 
 /**
  * QQ工具
@@ -70,7 +71,7 @@ public class QQTool {
      *            密码
      * @param verifycode
      *            验证码
-     * @return 返回标识
+     * @return 如果登陆提示信息,如果返回null则表明登陆成功
      */
     public static final String loginWeb(HttpSocket httpSocket, String appid, String username, String password, String verifycode) {
         AssertUtil.isNotNull("套接字不能为null！", httpSocket);
@@ -103,7 +104,11 @@ public class QQTool {
         ResponseHeader responseHeader = httpSocket.send(url);
         String message = responseHeader.bodyToString();
         logger.debug("登陆QQ的web后的返回值 - {}", message);
-        return ResolveUtil.jsfunction(message).getPar(5);
+        ResolveBeanOfJsFunction jsfunction = ResolveUtil.jsfunction(message);
+        if ("0".equals(jsfunction.getPar(1))) {
+            return null;
+        }
+        return jsfunction.getPar(5);
     }
 
     /**
@@ -149,7 +154,7 @@ public class QQTool {
         checkVC = ResolveUtil.jsfunction(checkVC).getPar(3); // 提取校验码
         return checkVC;
     }
-    
+
     /** 获取QQ的Web请求时的识别码 */
     private static final String getChecksum() {
         return "0." + RandomUtil.randomString("0123456789", 16);

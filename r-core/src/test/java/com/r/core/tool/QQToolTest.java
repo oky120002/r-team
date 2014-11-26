@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.desktop.ctrl.alert.HAlert;
-import com.r.core.desktop.ctrl.alert.HAlert.AuthCodeObtain;
+import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.HLoginHandler;
+import com.r.core.desktop.ctrl.obtain.HImageObtain;
+import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -19,7 +21,7 @@ import com.r.core.log.LoggerFactory;
  * @author rain
  *
  */
-public class QQToolTest implements AuthCodeObtain {
+public class QQToolTest implements HImageObtain, HLoginHandler {
     /** 日志 */
     private static final Logger logger = LoggerFactory.getLogger(QQToolTest.class, "QQ工具测试类");
     /** 套接字 */
@@ -31,25 +33,47 @@ public class QQToolTest implements AuthCodeObtain {
     /** QQ网络应用唯一标识-QQ魔法卡片 */
     private static final String appid = "10000101";
 
+    {
+        HCtrlUtil.init(); // 初始化控件行为
+        httpSocket.setTimeout(10 * 000); // 设置超时时间.10秒
+    }
+
+    /** 登陆测试 */
     @Test
     public void test() {
-        HCtrlUtil.init();
-        
         logger.debug("进行登陆测试.");
+        boolean isLogin = HAlert.showLoginDialog("登陆QQ账户", this, this);
+        if (isLogin) {
+            logger.debug("登陆信息 : {}", "成功登陆!");
+        } else {
+            logger.debug("登陆信息 : {}", "登陆失败!");
+        }
+    }
+
+    /** 验证码获取测试 */
+    public void testVerifycode() {
+        logger.debug("进行验证码获取测试.");
         String verifycode = HAlert.showAuthCodeDialog(this);
         logger.debug("检验码:" + verifycode);
-
-        String loginWeb = QQTool.loginWeb(httpSocket, appid, username, password, verifycode);
-        logger.debug("登陆信息 : {}", loginWeb);
     }
 
     @Override
-    public Image getAuthCodeImage() {
-        return QQTool.getLoginWebVerifycodeImage(httpSocket, appid, username);
+    public Image getHImage() {
+        try {
+            return QQTool.getLoginWebVerifycodeImage(httpSocket, appid, username);
+        } catch (NetworkIOReadErrorException e) {
+            HAlert.showErrorTips(e, null);
+        }
+        return null;
     }
 
     @Override
-    public Dimension getAuthCodeImageSize() {
+    public Dimension getHImageSize() {
         return new Dimension(130, 55);
+    }
+
+    @Override
+    public String doLogin(String username, String password, String authCode) {
+        return QQTool.loginWeb(httpSocket, appid, username, password, authCode);
     }
 }

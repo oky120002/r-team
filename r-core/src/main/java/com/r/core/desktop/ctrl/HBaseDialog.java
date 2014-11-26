@@ -46,8 +46,8 @@ public class HBaseDialog extends JDialog implements EventShow {
 		baseFramMouseInit();
 	}
 
-	public HBaseDialog(Dialog dialog, String title, boolean isModel) {
-		super(dialog, title, isModel);
+	public HBaseDialog(Dialog owner, String title, boolean isModel) {
+		super(owner, title, isModel);
 		eventContainer = new EventContainer(this.getClass());
 		baseFramMouseInit();
 	}

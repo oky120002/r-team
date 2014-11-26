@@ -4,8 +4,6 @@
 package com.r.core.desktop.ctrl.alert;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Image;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -15,6 +13,10 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog;
+import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog;
+import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.HLoginHandler;
+import com.r.core.desktop.ctrl.obtain.HImageObtain;
+import com.r.core.exceptions.SException;
 
 /**
  * 弹出框
@@ -23,6 +25,7 @@ import com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog;
  * 
  */
 public class HAlert {
+
     /**
      * 弹出提示框信息
      * 
@@ -41,6 +44,11 @@ public class HAlert {
         JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.WARNING_MESSAGE);
     }
 
+    /** 弹出错误信息,自定义级错误,弹出错误信息后不会退出系统 */
+    public static void showErrorTips(SException e, Component parentComponent) {
+        showErrorTips(e.getMessage(), parentComponent, e);
+    }
+
     /** 弹出错误信息,系统级错误,弹出错误信息后不会退出系统 */
     public static void showErrorTips(String errorMessage, Component parentComponent, Throwable e) {
         if (e == null) {
@@ -51,18 +59,18 @@ public class HAlert {
         } else {
             e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /** 弹出错误信息,系统级错误,弹出错误信息后不会退出系统 */
-    public static void showErrorTips(String errorMessage, Component parentComponent) {
-        JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.ERROR_MESSAGE);
+        showError(errorMessage, parentComponent);
     }
 
     /** 弹出错误信息,系统级错误,弹出错误信息后会自动退出系统 */
-    public static void showError(String errorMessage, Component parentComponent, Throwable e) {
+    public static void showErrorOnExit(String errorMessage, Component parentComponent, Throwable e) {
         showErrorTips(errorMessage, parentComponent, e);
         System.exit(1);
+    }
+
+    /** 弹出错误信息,系统级错误,弹出错误信息后不会退出系统 */
+    public static void showError(String errorMessage, Component parentComponent) {
+        JOptionPane.showMessageDialog(parentComponent, errorMessage, "错误信息", JOptionPane.ERROR_MESSAGE);
     }
 
     /** 弹出输入框 */
@@ -114,7 +122,7 @@ public class HAlert {
      *            验证码图片获取器
      * @return 验证码
      */
-    public static String showAuthCodeDialog(AuthCodeObtain obtain) {
+    public static String showAuthCodeDialog(HImageObtain obtain) {
         HAuthCodeDialog hAuthCodeDialog = new HAuthCodeDialog(obtain);
         hAuthCodeDialog.updateAuthCodeImage();
         hAuthCodeDialog.setVisible(true);
@@ -128,18 +136,25 @@ public class HAlert {
     }
 
     /**
-     * 验证码图片获取器<br/>
-     * 此获取器中两个获取方法都不能返回null
+     * 弹出登陆框
      * 
-     * @author rain
-     *
+     * @param title
+     *            标题
+     * @param handler
+     *            登陆执行处理器
+     * @param obtain
+     *            验证码图片获取器
+     * @return 如果成功登陆,则返回true,其它任何情况下都返回false
      */
-    public interface AuthCodeObtain {
-        /** 获取验证码图片 */
-        Image getAuthCodeImage();
-
-        /** 获取验证码图片尺寸 */
-        Dimension getAuthCodeImageSize();
+    public static boolean showLoginDialog(String title, HLoginHandler handler, HImageObtain obtain) {
+        HLoginDialog hLoginDialog = new HLoginDialog(null, title, handler, obtain);
+        hLoginDialog.updateAuthCodeImage();
+        hLoginDialog.setVisible(true);
+        hLoginDialog.dispose();
+        try {
+            return hLoginDialog.isLogin();
+        } finally {
+            hLoginDialog = null;
+        }
     }
-
 }

@@ -226,3 +226,172 @@
 2014-11-25 20:39:32,598 4696 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
 
 2014-11-25 20:39:32,598 4696 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！
+2014-11-26 09:35:29,753 1929 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 09:35:30,033 2209 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1790450877122787
+2014-11-26 09:35:35,096 7272 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6361167693424532
+2014-11-26 09:36:12,384 44560 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:kuku
+2014-11-26 09:36:12,384 44560 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码 - http://check.ptlogin2.qq.com/check?uin=2912617246&appid=10000101&r=0.6252415451583116
+2014-11-26 09:36:12,577 44753 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=E17F772C6672A2B91818A2B352DA3E7E&aid=10000101&verifycode=kuku&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-26 09:36:12,743 44919 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-26 09:36:12,743 44919 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！
+2014-11-26 12:50:01,577 1473 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 12:50:01,908 1804 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.2821962247968337
+2014-11-26 12:50:10,351 10247 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8365768803856511
+2014-11-26 12:50:12,676 12572 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4159837137704446
+2014-11-26 12:50:13,796 13692 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4865194097675001
+2014-11-26 12:50:14,887 14783 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9815615834012091
+2014-11-26 12:50:42,372 42268 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:null
+2014-11-26 14:18:48,424 1234 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:19:24,795 37605 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6400373328901548
+2014-11-26 14:19:31,375 44185 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5321209271840454
+2014-11-26 14:20:08,150 925  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:20:21,487 14262 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7267462326955513
+2014-11-26 14:20:25,214 17989 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 14:22:14,355 895  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:22:14,550 1090 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0560229104543268
+2014-11-26 14:22:26,379 12919 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5900989626571416
+2014-11-26 14:22:34,355 20895 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5846294838271789
+2014-11-26 14:22:35,919 22459 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3619212053901669
+2014-11-26 14:22:36,695 23235 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6136872484278840
+2014-11-26 14:22:37,280 23820 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6951508360769967
+2014-11-26 14:22:37,977 24517 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1323330509600986
+2014-11-26 14:22:38,551 25091 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5888264090511678
+2014-11-26 14:22:39,294 25834 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3009045649909741
+2014-11-26 14:22:47,090 33630 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7584842659143874
+2014-11-26 14:22:55,977 42517 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8698115818905864
+2014-11-26 14:22:57,519 44059 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7286292901077747
+2014-11-26 14:28:09,121 355661 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9634880108686812
+2014-11-26 14:28:10,549 357089 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4474647630721693
+2014-11-26 14:28:14,126 360666 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:huns
+2014-11-26 14:28:14,127 360667 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码 - http://check.ptlogin2.qq.com/check?uin=2912617246&appid=10000101&r=0.1159188063482815
+2014-11-26 14:28:14,351 360891 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=B1A394CD0FFABC7B1205EA5E4138F43C&aid=10000101&verifycode=huns&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-26 14:28:14,545 361085 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-26 14:28:14,546 361086 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！
+2014-11-26 14:31:38,706 939  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:31:38,927 1160 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8891154744327114
+2014-11-26 14:31:44,739 6972 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3484073777541242
+2014-11-26 14:31:45,481 7714 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1983130365234400
+2014-11-26 14:31:46,089 8322 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9183572079966201
+2014-11-26 14:31:46,696 8929 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1085198533368157
+2014-11-26 14:31:47,180 9413 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0939759523979144
+2014-11-26 14:31:47,709 9942 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6628154577555200
+2014-11-26 14:31:48,249 10482 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9091290828795925
+2014-11-26 14:31:48,789 11022 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8607495471209154
+2014-11-26 14:31:49,305 11538 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0308397601852029
+2014-11-26 14:31:49,812 12045 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9706459992200209
+2014-11-26 14:31:50,318 12551 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4640791357689639
+2014-11-26 14:31:50,791 13024 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1829138445135350
+2014-11-26 14:31:51,343 13576 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0931640375180169
+2014-11-26 14:31:51,928 14161 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6646426877118662
+2014-11-26 14:31:52,524 14757 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4706175874825712
+2014-11-26 14:31:59,471 21704 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4830131260887741
+2014-11-26 14:40:35,130 861  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:40:35,326 1057 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3207999982741580
+2014-11-26 14:40:36,864 2595 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6525449480274168
+2014-11-26 14:40:37,718 3449 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7644851150271747
+2014-11-26 14:40:38,393 4124 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3926143278319025
+2014-11-26 14:40:38,922 4653 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3033164194979210
+2014-11-26 14:40:39,462 5193 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.2144025390284984
+2014-11-26 14:40:39,901 5632 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9721737784057848
+2014-11-26 14:40:40,058 5789 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3775463457230815
+2014-11-26 14:40:40,227 5958 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3492481995380315
+2014-11-26 14:40:40,396 6127 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0480849639364795
+2014-11-26 14:40:40,553 6284 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7719656358636643
+2014-11-26 14:40:42,815 8546 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9533582273343307
+2014-11-26 14:40:42,938 8669 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7157438901147740
+2014-11-26 14:40:43,112 8843 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6835495818967011
+2014-11-26 14:40:43,222 8953 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7570664284820497
+2014-11-26 14:40:44,637 10368 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7843593651805431
+2014-11-26 14:40:44,796 10527 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7079625958080119
+2014-11-26 14:40:44,952 10683 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.2245789091291749
+2014-11-26 14:40:45,110 10841 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0721435817706631
+2014-11-26 14:40:45,267 10998 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9575401958060347
+2014-11-26 14:40:45,413 11144 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1835050281251183
+2014-11-26 14:40:45,594 11325 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7853035651574344
+2014-11-26 14:40:45,760 11491 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.4001728081485843
+2014-11-26 14:40:45,908 11639 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3421617495316708
+2014-11-26 14:40:46,077 11808 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6026502739371099
+2014-11-26 14:40:51,036 16767 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.7434297351415931
+2014-11-26 14:40:51,159 16890 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.2523467758433584
+2014-11-26 14:40:51,268 16999 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0659838770594930
+2014-11-26 14:40:51,370 17101 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0804341416894398
+2014-11-26 14:40:51,472 17203 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6951596496380563
+2014-11-26 14:40:51,598 17329 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1142386742391551
+2014-11-26 14:41:04,345 30076 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 14:43:27,039 896  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 14:43:27,243 1100 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6479004993626124
+2014-11-26 14:43:35,605 9462 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:zyss
+2014-11-26 14:43:35,605 9462 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码 - http://check.ptlogin2.qq.com/check?uin=2912617246&appid=10000101&r=0.1268221972120072
+2014-11-26 14:43:35,814 9671 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=1134740E0A1608134109E4D6E9E920BF&aid=10000101&verifycode=zyss&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-26 14:43:35,973 9830 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-26 14:43:35,974 9831 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登录成功！
+2014-11-26 16:50:40,018 1603 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 16:50:40,240 1825 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1878958118356788
+2014-11-26 16:50:40,427 2012 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 16:50:47,530 9115 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 16:51:30,551 905  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 16:51:30,757 1111 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8894381823702176
+2014-11-26 16:51:30,936 1290 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 16:51:40,679 11033 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 17:03:19,714 873  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:03:19,920 1079 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6099759406889716
+2014-11-26 17:03:20,099 1258 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:03:24,185 5344 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 17:03:39,773 880  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:03:39,960 1067 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0888751057400349
+2014-11-26 17:03:43,401 4508 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:03:54,671 15778 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5221396798826357
+2014-11-26 17:03:54,779 15886 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:03:57,247 18354 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 17:04:22,131 861  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:04:22,330 1060 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.1848943970993515
+2014-11-26 17:04:22,480 1210 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:04:29,355 8085 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 17:04:52,398 876  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:04:52,611 1089 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0840070220741941
+2014-11-26 17:04:52,762 1240 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:04:55,691 4169 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:
+2014-11-26 17:05:04,767 881  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:05:04,957 1071 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9987962349233551
+2014-11-26 17:05:05,155 1269 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:05:09,930 6044 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:null
+2014-11-26 17:12:52,553 899  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:12:52,765 1111 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9015717102880335
+2014-11-26 17:12:52,970 1316 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:13:17,649 25995 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 检验码:null
+2014-11-26 17:42:52,388 910  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:42:52,608 1130 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.6730441196355638
+2014-11-26 17:42:52,782 1304 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog - 验证码对话框 - 获取验证码成功!
+2014-11-26 17:51:45,900 873  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:52:16,037 912  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:52:46,019 30894 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 成功失败!
+2014-11-26 17:54:57,075 864  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 17:54:57,224 1013 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.0050863775975422
+2014-11-26 17:54:58,403 2192 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 17:55:05,487 9276 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!
+2014-11-26 18:01:56,469 823  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:01:56,673 1027 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.5390376534806053
+2014-11-26 18:01:56,894 1248 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:03:15,787 80141 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!
+2014-11-26 18:03:33,085 870  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:03:33,283 1068 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.8576833621144533
+2014-11-26 18:03:33,457 1242 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:03:55,904 814  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:03:56,099 1009 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.3125849374166655
+2014-11-26 18:03:56,265 1175 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:04:00,278 5188 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!
+2014-11-26 18:04:06,597 810  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:04:06,788 1001 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.2148410238842172
+2014-11-26 18:04:06,947 1160 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:04:12,628 6841 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!
+2014-11-26 18:05:01,737 843  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:05:01,933 1039 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9550948456585224
+2014-11-26 18:05:02,081 1187 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:05:10,144 9250 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!
+2014-11-26 18:05:17,771 824  |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-26 18:05:17,965 1018 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的验证码图片 - http://captcha.qq.com/getimage?uin=2912617246&aid=10000101&0.9858021341923219
+2014-11-26 18:05:18,108 1161 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码成功!
+2014-11-26 18:05:28,401 11454 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 登陆失败!

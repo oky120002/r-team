@@ -31,14 +31,6 @@
 		</encoder>
 	</appender>
 	
-	<appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">  
-	    <file>${logfile}/${contentName}.sql.log</file>  
-	    <append>false</append>  
-	    <encoder>  
-	      <pattern>${commonPattern}</pattern>  
-	    </encoder>  
-	</appender>  
-	
 	<!-- spring框架打印日志级别 -->
 	<logger name="org.springframework" level="INFO"/>
 	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN"/>
@@ -61,10 +53,6 @@
 	<!-- mybatis日志级别 -->
 	<logger name="org.apache.ibatis" level="WARN" />
 	<logger name="org.mybais" level="WARN" />
-	<!-- sql日志级别 -->
-	<logger name="java.sql.Connection" level="ERROR">
-		<appender-ref ref="SQL_FILE"/>
-	</logger>
 	
 	<logger name="com.r.core.httpsocket" level="ERROR" />
 	<logger name="com.r" level="DEBUG" />
