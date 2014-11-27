@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.r.app.core.util.ImageUtil;
@@ -90,7 +89,7 @@ public class TaobaoShuaApp {
         try {
             TaobaoShuaApp.app.init();
         } catch (Exception e) {
-            HAlert.showError(e.toString(), null, e);
+            HAlert.showErrorTips(e.toString(), null, e);
         }
         TaobaoShuaApp.app.core.init();
         LoggerFactory.addLoggerListener(TaobaoShuaApp.app.core);

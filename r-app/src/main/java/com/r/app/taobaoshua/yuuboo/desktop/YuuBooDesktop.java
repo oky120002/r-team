@@ -259,7 +259,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 				String accountPassword = accountPasswordTextField.getText();
 				String captcha = captchaTextField.getText();
 				if (StringUtils.isBlank(account) || StringUtils.isBlank(accountPassword) || StringUtils.isBlank(captcha)) {
-					HAlert.showErrorTips("用户名，密码，验证 不能为空", YuuBooDesktop.this);
+					HAlert.showError("用户名，密码，验证 不能为空", YuuBooDesktop.this);
 					loginYuuBooButton.setEnabled(true);
 					return;
 				}
@@ -343,7 +343,7 @@ public class YuuBooDesktop extends HBaseDialog implements YuuBooDataChangerListe
 						loginYuuBooButton.setEnabled(false);
 						throw new SwitchPathException("未知错误，请联系开发者！");
 					}
-					HAlert.showErrorTips(lee.getMessage(), YuuBooDesktop.this);
+					HAlert.showError(lee.getMessage(), YuuBooDesktop.this);
 				} catch (NetworkIOReadErrorException niree) {
 					doCaptchaImage();
 					HAlert.showErrorTips(niree.getMessage(), YuuBooDesktop.this, niree);

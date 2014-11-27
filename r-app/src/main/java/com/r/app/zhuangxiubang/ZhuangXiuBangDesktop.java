@@ -118,7 +118,7 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
                 }
             }, -1, 20, null, null);
         } catch (SchedulerException e) {
-            HAlert.showError(e.toString(), null, e);
+            HAlert.showErrorTips(e.toString(), null, e);
         }
     }
 

@@ -54,7 +54,7 @@ public class ZhuangXiuBangApp {
         try {
             ZhuangXiuBangApp.app.init();
         } catch (Exception e) {
-            HAlert.showError(e.toString(), null, e);
+            HAlert.showErrorTips(e.toString(), null, e);
         }
     }
 

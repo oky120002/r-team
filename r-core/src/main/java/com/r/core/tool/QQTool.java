@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 
+import com.r.core.bean.JsFunction;
 import com.r.core.exceptions.StrEncodingExcepton;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.HttpWebUrl;
@@ -17,7 +18,6 @@ import com.r.core.log.LoggerFactory;
 import com.r.core.util.AssertUtil;
 import com.r.core.util.RandomUtil;
 import com.r.core.util.ResolveUtil;
-import com.r.core.util.bean.ResolveBeanOfJsFunction;
 
 /**
  * QQ工具
@@ -58,6 +58,36 @@ public class QQTool {
     }
 
     /**
+     * 获取登陆QQ账号时的辅助计算码<br/>
+     * appid：QQ魔法卡片-10000101<br/>
+     * appid：。。。 。。。
+     * 
+     * @param httpSocket
+     *            套接字
+     * @param appid
+     *            QQ网络应用的唯一标志
+     * @param username
+     *            QQ账号
+     * @return 密码校验的辅助计算码<br/>
+     *         参数1:是否需要手动输入验证码标识(1:需要,2:不需要)<br/>
+     *         参数2:自动生成的验证码<br/>
+     *         参数3:辅助校验码<br/>
+     * 
+     */
+    public static final JsFunction getCheckVC(HttpSocket httpSocket, String appid, String username) {
+        AssertUtil.isNotNull("套接字不能为null！", httpSocket);
+
+        HttpWebUrl url = new HttpWebUrl("http://check.ptlogin2.qq.com/check");
+        url.add("uin", username);
+        url.add("appid", appid);
+        url.add("r", getChecksum());
+
+        String checkVC = httpSocket.send(url).bodyToString();
+        logger.debug("获取登陆QQ账号时的辅助计算码返回值 - {}", checkVC);
+        return ResolveUtil.jsfunction(checkVC);
+    }
+
+    /**
      * 登陆QQ的web账户<br/>
      * 请传入已经获取过验证码图片且保持着cookies的套接字
      * 
@@ -69,19 +99,24 @@ public class QQTool {
      *            账号（一般为QQ号码）
      * @param password
      *            密码
+     * @param checkVC
+     *            辅助校验码
      * @param verifycode
      *            验证码
-     * @return 如果登陆提示信息,如果返回null则表明登陆成功
+     * @return 返回登陆情况<br/>
+     *         参数1:登陆提示码(-1:未知错误,0:登陆成功,7:提交的参数错误或者缺失)<br/>
+     *         参数5:提示信息<br/>
+     *         参数6:用户昵称<br/>
      */
-    public static final String loginWeb(HttpSocket httpSocket, String appid, String username, String password, String verifycode) {
+    public static final JsFunction loginWeb(HttpSocket httpSocket, String appid, String username, String password, String checkVC, String verifycode) {
         AssertUtil.isNotNull("套接字不能为null！", httpSocket);
         AssertUtil.isNotBlank("QQ网络应用ID不能为空！", appid);
         AssertUtil.isNotBlank("用户名不能为空！", username);
         AssertUtil.isNotBlank("密码不能为空！", password);
+        AssertUtil.isNotBlank("辅助校验码不能为空！", checkVC);
         AssertUtil.isNotBlank("验证码不能为空！", verifycode);
 
-        String checkVC = getCheckVC(httpSocket, username, verifycode, appid); // 获取辅助计算码
-        String pwd = getPassword(checkVC, password, verifycode); // 获取加密后的密码
+        String pwd = getPassword(checkVC, password, verifycode); // 给密码加密
 
         HttpWebUrl url = new HttpWebUrl("http://ptlogin2.qq.com/login");
         url.add("u", username);
@@ -104,11 +139,9 @@ public class QQTool {
         ResponseHeader responseHeader = httpSocket.send(url);
         String message = responseHeader.bodyToString();
         logger.debug("登陆QQ的web后的返回值 - {}", message);
-        ResolveBeanOfJsFunction jsfunction = ResolveUtil.jsfunction(message);
-        if ("0".equals(jsfunction.getPar(1))) {
-            return null;
-        }
-        return jsfunction.getPar(5);
+        // ResolveBeanOfJsFunction jsfunction = ResolveUtil.jsfunction(message);
+        // return Integer.valueOf(jsfunction.getPar(1)).intValue();
+        return ResolveUtil.jsfunction(message);
     }
 
     /**
@@ -124,35 +157,6 @@ public class QQTool {
             hash += (hash << 5) + skey.charAt(i);
         }
         return hash & 0x7fffffff;
-    }
-
-    /**
-     * 获取登陆QQ账号时的辅助计算码<br/>
-     * appid：QQ魔法卡片-10000101<br/>
-     * appid：。。。 。。。
-     * 
-     * @param httpSocket
-     *            套接字
-     * @param username
-     *            QQ账号
-     * @param verifycode
-     *            验证码
-     * @param appid
-     *            QQ网络应用的唯一标志
-     * @return 密码校验的辅助计算码
-     */
-    private static final String getCheckVC(HttpSocket httpSocket, String username, String verifycode, String appid) {
-        AssertUtil.isNotNull("套接字不能为null！", httpSocket);
-
-        HttpWebUrl url = new HttpWebUrl("http://check.ptlogin2.qq.com/check");
-        url.add("uin", username);
-        url.add("appid", appid);
-        url.add("r", getChecksum());
-
-        logger.debug("获取登陆QQ账号时的辅助计算码 - {}", url.getUrl());
-        String checkVC = httpSocket.send(url).bodyToString();
-        checkVC = ResolveUtil.jsfunction(checkVC).getPar(3); // 提取校验码
-        return checkVC;
     }
 
     /** 获取QQ的Web请求时的识别码 */

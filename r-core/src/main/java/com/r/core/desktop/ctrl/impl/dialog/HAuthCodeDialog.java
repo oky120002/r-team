@@ -58,6 +58,9 @@ public class HAuthCodeDialog extends HBaseDialog implements ActionListener, Runn
     /** 验证码 */
     private String authCode = null;
 
+    /** 是否已经第一次调用了setVisible方法 */
+    private boolean _firstVisible = false;
+
     /**
      * 构造验证码对话框
      * 
@@ -122,6 +125,15 @@ public class HAuthCodeDialog extends HBaseDialog implements ActionListener, Runn
         this.setAuthCodeDialogSize(new Dimension(authCodeImage.getWidth(null), authCodeImage.getHeight(null)));
         this.imagePanel.setImage(authCodeImage);
         this.testField.setText(null);
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        if (!this._firstVisible) {
+            this._firstVisible = true;
+            this.updateAuthCodeImage();
+        }
+        super.setVisible(b);
     }
 
     /**

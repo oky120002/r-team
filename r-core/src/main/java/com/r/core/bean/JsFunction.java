@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.core.util.bean;
+package com.r.core.bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,12 @@ import org.apache.commons.lang3.StringUtils;
  * @author Administrator
  * 
  */
-public class ResolveBeanOfJsFunction {
+public class JsFunction {
     private String js;
     private String jsName;
     private List<String> pars = new ArrayList<String>();
 
-    public ResolveBeanOfJsFunction(String js) {
+    public JsFunction(String js) {
         if (StringUtils.isNotBlank(js)) {
             this.js = js;
             resolve(js);
