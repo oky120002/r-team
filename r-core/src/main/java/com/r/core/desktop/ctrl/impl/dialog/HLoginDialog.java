@@ -69,8 +69,8 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     /** 验证码区域 */
     private HBaseBox authCodebox = HBaseBox.createHorizontalBaseBox();
 
-    /** 是否成功登陆 */
-    private boolean isLogin = false;
+    /** 登陆状态(-1:未知状态,0:登陆中,1:登陆成功) */
+    private int loginstatus = -1;
 
     /** 是否已经第一次调用了setVisible方法 */
     private boolean _firstVisible = false;
@@ -91,6 +91,7 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     public HLoginDialog(Dialog owner, String title, HLoginHandler handler) {
         super(owner, title, true);
         AssertUtil.isNotNull("登陆执行处理器不能为null", handler);
+        this.loginstatus = 0;
         this.handler = handler;
 
         this.setAuthCodeDialogSize(new Dimension(0, 0)); // 调整登陆对话框大小
@@ -116,12 +117,11 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.isLogin = false;
         int flag = this.handler.doLogin(this.usernameTextField.getText(), this.passwordTextField.getText(), this.authCodeTextField.getText());
         switch (flag) {
         case 0:// 成功登陆
             logger.debug("登陆系统成功!");
-            this.isLogin = true;
+            this.loginstatus = 0;
             this.setVisible(false);
             break;
         case 1:// 密码错误
@@ -260,9 +260,13 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         super.setVisible(b);
     }
 
-    /** 是否成功登陆 */
-    public boolean isLogin() {
-        return this.isLogin;
+    /**
+     * 返回登陆状态
+     * 
+     * @return -1:未知状态,0:登陆中,1:登陆成功
+     */
+    public int getLoginStatus() {
+        return loginstatus;
     }
 
     /**

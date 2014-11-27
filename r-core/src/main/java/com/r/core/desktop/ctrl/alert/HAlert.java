@@ -148,14 +148,14 @@ public class HAlert {
      *            标题
      * @param handler
      *            登陆执行处理器
-     * @return 如果成功登陆,则返回true,其它任何情况下都返回false
+     * @return 登陆结构标识符(-1:未知状态,0:登陆中,1:登陆成功)
      */
-    public static boolean showLoginDialog(String title, HLoginHandler handler) {
+    public static int showLoginDialog(String title, HLoginHandler handler) {
         HLoginDialog hLoginDialog = new HLoginDialog(null, title, handler);
         hLoginDialog.setVisible(true);
         hLoginDialog.dispose();
         try {
-            return hLoginDialog.isLogin();
+            return hLoginDialog.getLoginStatus();
         } finally {
             hLoginDialog = null;
         }
@@ -172,9 +172,9 @@ public class HAlert {
      *            默认用户名
      * @param password
      *            默认密码
-     * @return 是否登陆成功
+     * @return 登陆结构标识符(-1:未知状态,0:登陆中,1:登陆成功)
      */
-    public static boolean showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password) {
+    public static int showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password) {
         return HAlert.showLoginDialog("请登陆QQ账户", new HLoginHandler() {
 
             /** 默认的验证码 */

@@ -3,14 +3,10 @@ package com.r.core.tool;
 import java.awt.Dimension;
 import java.awt.Image;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.r.core.bean.JsFunction;
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.desktop.ctrl.alert.HAlert;
-import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.AuthCodeTime;
-import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.HLoginHandler;
 import com.r.core.desktop.ctrl.obtain.HImageObtain;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
@@ -45,14 +41,21 @@ public class QQToolTest {
     @Test
     public void testLogin() {
         logger.debug("进行登陆测试.");
-        boolean isLogin = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD);
+        int loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD);
 
-        if (isLogin) {
+        switch (loginstatus) {
+        case -1:
+            logger.debug("登陆信息 : {}", "未知原因,登陆失败!");
+            HAlert.showTips("未知原因,登陆失败", "登陆结果", null);
+            break;
+        case 0:
+            logger.debug("登陆信息 : {}", "正在登录中....");
+            HAlert.showTips("正在登录中....", "登陆结果", null);
+            break;
+        case 1:
             logger.debug("登陆信息 : {}", "成功登陆!");
             HAlert.showTips("登陆成功", "登陆结果", null);
-        } else {
-            logger.debug("登陆信息 : {}", "登陆失败!");
-            HAlert.showTips("登陆失败", "登陆结果", null);
+            break;
         }
     }
 
