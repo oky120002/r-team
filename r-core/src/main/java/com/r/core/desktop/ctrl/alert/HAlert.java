@@ -19,6 +19,7 @@ import com.r.core.desktop.ctrl.impl.dialog.HAuthCodeDialog;
 import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog;
 import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.AuthCodeTime;
 import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.HLoginHandler;
+import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.LoginStatus;
 import com.r.core.desktop.ctrl.obtain.HImageObtain;
 import com.r.core.exceptions.SException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
@@ -148,9 +149,9 @@ public class HAlert {
      *            标题
      * @param handler
      *            登陆执行处理器
-     * @return 登陆结构标识符(-1:未知状态,0:登陆中,1:登陆成功)
+     * @return 登陆结果标识
      */
-    public static int showLoginDialog(String title, HLoginHandler handler) {
+    public static LoginStatus showLoginDialog(String title, HLoginHandler handler) {
         HLoginDialog hLoginDialog = new HLoginDialog(null, title, handler);
         hLoginDialog.setVisible(true);
         hLoginDialog.dispose();
@@ -172,38 +173,74 @@ public class HAlert {
      *            默认用户名
      * @param password
      *            默认密码
-     * @return 登陆结构标识符(-1:未知状态,0:登陆中,1:登陆成功)
+     * @return 登陆结果标识
      */
-    public static int showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password) {
+    public static LoginStatus showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password) {
         return HAlert.showLoginDialog("请登陆QQ账户", new HLoginHandler() {
 
             /** 默认的验证码 */
             private String authCode = null;
             /** 辅助校验码 */
             private String checkVC = null;
-            /** 是否需要输入验证码 */
+            /** 是否需要手动输入验证码 */
             private boolean isHaveAuthCode = false;
 
             @Override
-            public Dimension getHImageSize() {
-                return new Dimension(130, 55);
+            public LoginStatus doLogin(String username, String password, String authCode) {
+                if (StringUtils.isBlank(username)) {// 用户名不能为空
+                    return LoginStatus.账号为空;
+                }
+                if (StringUtils.isBlank(password)) {// 密码不能为空
+                    return LoginStatus.密码为空;
+                }
+                if (StringUtils.isBlank(authCode) && this.isHaveAuthCode) { // 需要验证码时,就必须验证验证码是否为空
+                    return LoginStatus.验证码为空;
+                }
+                if (StringUtils.isBlank(this.authCode) && !this.isHaveAuthCode) {// 当不需要手动填写验证码时,必须传入腾讯网页传过来的默认验证码
+                    return LoginStatus.提交的参数错误或者缺失;
+                }
+
+                JsFunction loginWeb = QQTool.loginWeb(httpSocket, appid, username, password, this.checkVC, this.isHaveAuthCode ? authCode : this.authCode);
+                int flag = Integer.valueOf(loginWeb.getPar(1));
+                switch (flag) {
+                case 0:
+                    return LoginStatus.成功登陆;
+                case 4:
+                    return LoginStatus.密码错误;
+                case 7:
+                    return LoginStatus.提交的参数错误或者缺失;
+                }
+                return LoginStatus.未知错误;
             }
 
             @Override
-            public Image getHImage(String username, String password) {
+            public boolean isHaveAuthCode() {
+                return true;
+            }
+
+            @Override
+            public Image getHImage(AuthCodeTime autchCodeTime, Image authCodeImage, String username, String password) {
                 if (StringUtils.isNotBlank(username)) {
                     JsFunction checkVC = QQTool.getCheckVC(httpSocket, appid, username);
                     this.checkVC = checkVC.getPar(3);
-
                     if ("1".equals(checkVC.getPar(1))) { // 需要验证码
                         isHaveAuthCode = true;
                         try {
-                            return QQTool.getLoginWebVerifycodeImage(httpSocket, appid, username);
+                            switch (autchCodeTime) {
+                            case 第一次显示登陆框:
+                            case 登陆后验证码错误:
+                            case 点击验证码图片后:
+                            case 填写用户名之后:
+                                return QQTool.getLoginWebVerifycodeImage(httpSocket, appid, username);
+                            default:
+                                return authCodeImage;
+                            }
                         } catch (NetworkIOReadErrorException e) {
                             HAlert.showErrorTips(e, null);
                         }
-
+                        return null;
                     }
+
                     if ("0".equals(checkVC.getPar(1))) { // 不需要验证码 .默认验证码
                         isHaveAuthCode = false;
                         this.authCode = checkVC.getPar(2);
@@ -214,36 +251,8 @@ public class HAlert {
             }
 
             @Override
-            public AuthCodeTime getAuthCodeTime() {
-                return AuthCodeTime.填写用户名之后;
-            }
-
-            @Override
-            public int doLogin(String username, String password, String authCode) {
-                if (StringUtils.isBlank(username)) {// 用户名不能为空
-                    return 6;
-                }
-                if (StringUtils.isBlank(password)) {// 密码不能为空
-                    return 7;
-                }
-                if (StringUtils.isBlank(authCode) && this.isHaveAuthCode) { // 需要验证码时,就必须验证验证码是否为空
-                    return 8;
-                }
-                if (StringUtils.isBlank(this.authCode) && !this.isHaveAuthCode) {// 当不需要手动填写验证码时,必须传入腾讯网页传过来的默认验证码
-                    return 5;
-                }
-
-                JsFunction loginWeb = QQTool.loginWeb(httpSocket, appid, username, password, this.checkVC, this.isHaveAuthCode ? authCode : this.authCode);
-                int flag = Integer.valueOf(loginWeb.getPar(1));
-                switch (flag) {
-                case 0:
-                    return 0;
-                case 4:
-                    return 2;
-                case 7:
-                    return 5;
-                }
-                return -1;
+            public Dimension getHImageSize() {
+                return new Dimension(130, 55);
             }
 
             @Override
@@ -255,6 +264,7 @@ public class HAlert {
             public String getPassword() {
                 return password;
             }
+
         });
     }
 }

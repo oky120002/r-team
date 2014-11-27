@@ -36,7 +36,7 @@ import com.r.core.util.TaskUtil;
  * @author rain
  *
  */
-public class HLoginDialog extends HBaseDialog implements ActionListener, FocusListener, KeyListener, MouseListener, Runnable {
+public class HLoginDialog extends HBaseDialog implements ActionListener, FocusListener, KeyListener, MouseListener {
     private static final long serialVersionUID = -7004190292798750897L;
 
     /** 日志 */
@@ -65,15 +65,15 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     private JLabel authCodeLabel = new JLabel("验证码: ");
     /** 登陆按钮 */
     private JButton loginButton = new JButton("登陆");
-
     /** 验证码区域 */
     private HBaseBox authCodebox = HBaseBox.createHorizontalBaseBox();
 
-    /** 登陆状态(-1:未知状态,0:登陆中,1:登陆成功) */
-    private int loginstatus = -1;
-
-    /** 是否已经第一次调用了setVisible方法 */
-    private boolean _firstVisible = false;
+    /** 登陆状态 */
+    private LoginStatus loginstatus = LoginStatus.未登陆;
+    /** 是否已经第一次调用了setVisible方法(用户验证码变换) */
+    private boolean _firstAuthCode = false;
+    /** 保存上一次的用户名(用户验证码变换) */
+    private String _lastUsername = null;
 
     /**
      * 构造一个登陆对话框<br/>
@@ -91,7 +91,6 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     public HLoginDialog(Dialog owner, String title, HLoginHandler handler) {
         super(owner, title, true);
         AssertUtil.isNotNull("登陆执行处理器不能为null", handler);
-        this.loginstatus = 0;
         this.handler = handler;
 
         this.setAuthCodeDialogSize(new Dimension(0, 0)); // 调整登陆对话框大小
@@ -99,7 +98,7 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // 关闭对话框,则直接销毁窗口
         this.setResizable(false);// 不能调整对话框大小
         this.setLayout(new BorderLayout());// 设置对话框布局为"方向"布局
-        if (!AuthCodeTime.永不.equals(this.handler.getAuthCodeTime())) {
+        if (this.handler.isHaveAuthCode()) {
             this.imagePanel = new HImagePanel(handler.getHImageSize()); // 创建验证码图片面板
             this.imagePanel.addMouseListener(this);
             this.authCodebox.adds(this.authCodeLabel, this.imagePanel, this.authCodeTextField); // 初始化验证码区域控件
@@ -113,54 +112,27 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         this.usernameTextField.addFocusListener(this);// 添加"账号文本框"失去焦点事件
         this.passwordTextField.addFocusListener(this);// 添加"密码文本框"失去焦点事件
 
+        this._lastUsername = this.handler.getUsername();
+        this.usernameTextField.setText(this._lastUsername);
+        this.passwordTextField.setText(this.handler.getPassword());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int flag = this.handler.doLogin(this.usernameTextField.getText(), this.passwordTextField.getText(), this.authCodeTextField.getText());
-        switch (flag) {
-        case 0:// 成功登陆
+        this.loginstatus = this.handler.doLogin(this.usernameTextField.getText(), this.passwordTextField.getText(), this.authCodeTextField.getText());
+        switch (loginstatus) {
+        case 成功登陆:
             logger.debug("登陆系统成功!");
-            this.loginstatus = 0;
             this.setVisible(false);
             break;
-        case 1:// 密码错误
-            logger.debug("登陆系统失败 - 密码错误");
-            HAlert.showError("密码错误!", this);
-            break;
-        case 2:// 验证码错误
+        case 验证码错误:// 验证码错误
             logger.debug("登陆系统失败 - 验证码错误");
             HAlert.showError("验证码错误!", this);
-            this.updateAuthCodeImage();
+            this.updateAuthCodeImage(AuthCodeTime.登陆后验证码错误);
             break;
-        case 3:// 不存在此账号
-            logger.debug("登陆系统失败 - 不存在此账号");
-            HAlert.showError("不存在此账号!", this);
-            break;
-        case 4:// 账号与密码不匹配
-            logger.debug("登陆系统失败 - 账号与密码不匹配");
-            HAlert.showError("账号与密码不匹配!", this);
-            break;
-        case 5:// 提交的参数错误或者缺失
-            logger.debug("登陆系统失败 - 提交的参数错误或者缺失");
-            HAlert.showError("提交的参数错误或者缺失!", this);
-            break;
-        case 6:// 账号为空
-            logger.debug("登陆系统失败 - 账号为空");
-            HAlert.showError("账号为空!", this);
-            break;
-        case 7:// 密码为空
-            logger.debug("登陆系统失败 - 密码为空");
-            HAlert.showError("密码为空!", this);
-            break;
-        case 8:// 验证码为空
-            logger.debug("登陆系统失败 - 验证码为空");
-            HAlert.showError("验证码为空!", this);
-            break;
-        case -1:
         default:
-            logger.debug("登陆系统失败 - 未知错误");
-            HAlert.showError("未知错误!", this);
+            logger.debug("登陆系统失败 - {}", loginstatus.name());
+            HAlert.showError(loginstatus.name(), this);
             break;
         }
     }
@@ -171,22 +143,9 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
 
     @Override
     public void focusLost(FocusEvent e) {
-        switch (this.handler.getAuthCodeTime()) {
-        case 填写用户名之后:
-            if (this.usernameTextField.equals(e.getSource())) {
-                updateAuthCodeImage();
-            }
-            break;
-        case 填写密码之后:
-            if (this.passwordTextField.equals(e.getSource())) {
-                updateAuthCodeImage();
-            }
-            break;
-        case 填写用户名和密码之后:
-            updateAuthCodeImage();
-            break;
-        default:
-            break;
+        if (this.usernameTextField.equals(e.getSource()) && !this.usernameTextField.getText().equals(this._lastUsername)) {
+            this._lastUsername = this.usernameTextField.getText();
+            updateAuthCodeImage(AuthCodeTime.填写用户名之后);
         }
     }
 
@@ -205,16 +164,42 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     public void keyReleased(KeyEvent e) {
     }
 
-    /** 变换验证码图片 */
-    public void updateAuthCodeImage() {
-        if (!AuthCodeTime.永不.equals(this.handler.getAuthCodeTime())) {
-            TaskUtil.executeSequenceTask(this, HAuthCodeDialog.class.getName());
+    /**
+     * 变换验证码图片
+     * 
+     * @param authCodeTime
+     *            验证码获取时机
+     */
+    public void updateAuthCodeImage(final AuthCodeTime authCodeTime) {
+        if (this.handler.isHaveAuthCode()) {
+            TaskUtil.executeSequenceTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (handler.isHaveAuthCode()) {
+                        loginButton.setEnabled(false);
+                        Image authCodeImage = handler.getHImage(authCodeTime, imagePanel.getImage(), usernameTextField.getText(), passwordTextField.getText()); // 如果获取验证码失败
+                        authCodeTextField.setText(null);
+                        if (authCodeImage == null) {
+                            logger.debug("获取验证码图片完成! - 没有获取到验证码图片");
+                            authCodebox.setVisible(false);
+                            setAuthCodeDialogSize(new Dimension(0, 0));
+                        } else {
+                            logger.debug("获取验证码图片完成! - 获取到验证码图片");
+                            authCodebox.setVisible(true);
+                            setAuthCodeDialogSize(new Dimension(authCodeImage.getWidth(null), authCodeImage.getHeight(null)));
+                            imagePanel.setImage(authCodeImage);
+                        }
+                        loginButton.setEnabled(true);
+                    }
+
+                }
+            }, HAuthCodeDialog.class.getName());
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        updateAuthCodeImage();
+        updateAuthCodeImage(AuthCodeTime.点击验证码图片后);
     }
 
     @Override
@@ -234,39 +219,17 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     }
 
     @Override
-    public void run() {
-        if (!AuthCodeTime.永不.equals(this.handler.getAuthCodeTime())) {
-            Image authCodeImage = this.handler.getHImage(this.usernameTextField.getText(), this.passwordTextField.getText()); // 如果获取验证码失败
-            this.authCodeTextField.setText(null);
-            if (authCodeImage == null) {
-                logger.debug("获取验证码图片完成! - 没有获取到验证码图片");
-                this.authCodebox.setVisible(false);
-                this.setAuthCodeDialogSize(new Dimension(0, 0));
-            } else {
-                logger.debug("获取验证码图片完成! - 获取到验证码图片");
-                this.authCodebox.setVisible(true);
-                this.setAuthCodeDialogSize(new Dimension(authCodeImage.getWidth(null), authCodeImage.getHeight(null)));
-                this.imagePanel.setImage(authCodeImage);
-            }
-        }
-    }
-
-    @Override
     public void setVisible(boolean b) {
-        if (!this._firstVisible && AuthCodeTime.立即.equals(this.handler.getAuthCodeTime())) {
-            this._firstVisible = true;
-            this.updateAuthCodeImage();
+        if (!this._firstAuthCode) {
+            this._firstAuthCode = true;
+            this.updateAuthCodeImage(AuthCodeTime.第一次显示登陆框);
         }
         super.setVisible(b);
     }
 
-    /**
-     * 返回登陆状态
-     * 
-     * @return -1:未知状态,0:登陆中,1:登陆成功
-     */
-    public int getLoginStatus() {
-        return loginstatus;
+    /** 返回登陆状态 */
+    public LoginStatus getLoginStatus() {
+        return this.loginstatus;
     }
 
     /**
@@ -290,13 +253,11 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
 
     /** 返回子控件面板 */
     private Component getContextPanel() {
-        this.usernameTextField.setText(this.handler.getUsername());
-        this.passwordTextField.setText(this.handler.getPassword());
 
         HBaseBox box = HBaseBox.createVerticalBaseBox();
         box.add(HBaseBox.createHorizontalBaseBox(this.usernameLabel, this.usernameTextField));
         box.add(HBaseBox.createHorizontalBaseBox(this.passwordLabel, this.passwordTextField));
-        if (!AuthCodeTime.永不.equals(this.handler.getAuthCodeTime())) {
+        if (this.handler.isHaveAuthCode()) {
             box.add(this.authCodebox);
         }
         box.add(HBaseBox.createHorizontalRight(this.loginButton));
@@ -316,34 +277,29 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
          * @param authCode
          *            验证码,如果此登陆不需要验证码,则传入null
          * @return 返回登陆情况<br/>
-         *         -1:未知错误<br/>
-         *         0:登陆成功<br/>
-         *         1:密码错误<br/>
-         *         2:验证码错误<br/>
-         *         3:不存在此账号<br/>
-         *         4:账号与密码不匹配<br/>
-         *         5:提交的参数错误或者缺失<br/>
-         *         6:账号为空<br/>
-         *         7:密码为空<br/>
-         *         8:验证码为空<br/>
          */
-        int doLogin(String username, String password, String authCode);
+        LoginStatus doLogin(String username, String password, String authCode);
+
+        /** 是否需要验证码 */
+        boolean isHaveAuthCode();
 
         /**
          * 获取验证码图片
          * 
+         * @param autchCodeTime
+         *            验证获取时机
+         * @param authCodeImage
+         *            当前的验证码图片
          * @param username
          *            用户名
          * @param password
          *            密码
+         * @return 如果返回null,隐藏验证码区域
          */
-        Image getHImage(String username, String password);
+        Image getHImage(AuthCodeTime autchCodeTime, Image authCodeImage, String username, String password);
 
         /** 获取图片尺寸 */
         Dimension getHImageSize();
-
-        /** 获取获得验证码的时机 */
-        AuthCodeTime getAuthCodeTime();
 
         /** 获取默认用户名 */
         String getUsername();
@@ -352,9 +308,17 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         String getPassword();
     }
 
-    /** 获取验证码的时机 */
+    /** 获取验证码的时机(除开"永不"之外的情况,只生效一次) */
     public enum AuthCodeTime {
-        永不, 立即, 填写用户名之后, 填写密码之后, 填写用户名和密码之后, ;
+        第一次显示登陆框, 填写用户名之后, 点击验证码图片后, 登陆后验证码错误, ;
+    }
+
+    public enum LoginStatus {
+        未登陆, 未知错误, // 难以发现的问题
+        取消登陆, // TODO r-core 完成通用登陆框的取消登登陆状态
+        成功登陆, // 成功登陆
+        密码错误, 验证码错误, 不存在此账号, 账号与密码不匹配, 提交的参数错误或者缺失, 账号为空, 密码为空, 验证码为空, // 基本上是登陆后状态
+        ;
     }
 
 }

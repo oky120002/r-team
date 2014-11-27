@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.desktop.ctrl.alert.HAlert;
+import com.r.core.desktop.ctrl.impl.dialog.HLoginDialog.LoginStatus;
 import com.r.core.desktop.ctrl.obtain.HImageObtain;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
@@ -41,20 +42,22 @@ public class QQToolTest {
     @Test
     public void testLogin() {
         logger.debug("进行登陆测试.");
-        int loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD);
+        LoginStatus loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD);
 
         switch (loginstatus) {
-        case -1:
+        case 成功登陆:
+            logger.debug("登陆信息 : {}", "成功登陆!");
+            HAlert.showTips("登陆成功", "登陆结果", null);
+            break;
+        case 未知错误:
             logger.debug("登陆信息 : {}", "未知原因,登陆失败!");
             HAlert.showTips("未知原因,登陆失败", "登陆结果", null);
             break;
-        case 0:
+        case 未登陆:
+            break;
+        default:
             logger.debug("登陆信息 : {}", "正在登录中....");
             HAlert.showTips("正在登录中....", "登陆结果", null);
-            break;
-        case 1:
-            logger.debug("登陆信息 : {}", "成功登陆!");
-            HAlert.showTips("登陆成功", "登陆结果", null);
             break;
         }
     }
