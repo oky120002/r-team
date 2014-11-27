@@ -52,12 +52,10 @@ public class QQToolTest {
         case 未知错误:
             logger.debug("登陆信息 : {}", "未知原因,登陆失败!");
             HAlert.showTips("未知原因,登陆失败", "登陆结果", null);
-            break;
-        case 未登陆:
-            break;
+            break; 
         default:
-            logger.debug("登陆信息 : {}", "正在登录中....");
-            HAlert.showTips("正在登录中....", "登陆结果", null);
+            logger.debug("登陆信息 : {}", loginstatus.name());
+            HAlert.showTips(loginstatus.name(), "登陆结果", null);
             break;
         }
     }
