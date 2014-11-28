@@ -4,16 +4,24 @@
 package com.r.core.log;
 
 /**
- * @author Administrator
+ * 日志监听器
+ * 
+ * @author rain
  *
  */
 public interface LoggerListener {
 
-	boolean warn(String message, Throwable error);
-
-	boolean debug(String message, Throwable error);
-
-	boolean info(String message, Throwable error);
-
-	boolean error(String message, Throwable error);
+    /**
+     * 写日志
+     * 
+     * @param loglevel
+     *            日志级别
+     * @param pre
+     *            前缀
+     * @param message
+     *            日志信息
+     * @param e
+     *            抛出的错误
+     */
+    void log(String loglevel, String pre, String message, Throwable e);
 }

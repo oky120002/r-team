@@ -42,7 +42,7 @@ public class QQToolTest {
     @Test
     public void testLogin() {
         logger.debug("进行登陆测试.");
-        LoginStatus loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD);
+        LoginStatus loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD, null);
 
         switch (loginstatus) {
         case 成功登陆:
@@ -52,7 +52,7 @@ public class QQToolTest {
         case 未知错误:
             logger.debug("登陆信息 : {}", "未知原因,登陆失败!");
             HAlert.showTips("未知原因,登陆失败", "登陆结果", null);
-            break; 
+            break;
         default:
             logger.debug("登陆信息 : {}", loginstatus.name());
             HAlert.showTips(loginstatus.name(), "登陆结果", null);

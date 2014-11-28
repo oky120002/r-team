@@ -19,6 +19,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -54,7 +55,7 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
     /** 用户名文本框 */
     private JTextField usernameTextField = new JTextField(18);
     /** 密码文本框 */
-    private JTextField passwordTextField = new JTextField(18);
+    private JTextField passwordTextField = new JPasswordField(18);
     /** 校验码文本框 */
     private JTextField authCodeTextField = new JTextField(4);
     /** 账号标签 */
@@ -125,10 +126,18 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
             logger.debug("登陆系统成功!");
             this.setVisible(false);
             break;
-        case 验证码错误:// 验证码错误
-            logger.debug("登陆系统失败 - 验证码错误");
-            HAlert.showError("验证码错误!", this);
-            this.updateAuthCodeImage(AuthCodeTime.登陆后验证码错误);
+        case 验证码错误:
+        case 不存在此账号:
+        case 密码错误:
+        case 提交的参数错误或者缺失:
+        case 账号与密码不匹配:
+        case 账号为空:
+        case 验证码为空:
+        case 密码为空:
+        case 未知错误:
+            logger.debug("登陆系统失败 - {}", loginstatus.name());
+            HAlert.showError(loginstatus.name(), this);
+            this.updateAuthCodeImage(AuthCodeTime.登陆后失败后);
             break;
         default:
             logger.debug("登陆系统失败 - {}", loginstatus.name());
@@ -232,6 +241,27 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         return this.loginstatus;
     }
 
+    /** 获取登陆名 */
+    public String getUsername() {
+        return this.usernameTextField.getText();
+    }
+
+    /** 获取登陆密码 */
+    public String getPassword() {
+        return this.passwordTextField.getText();
+    }
+
+    /** 获取验证码图片 */
+    public Image getAuthCodeImage() {
+        return this.imagePanel == null ? null : this.imagePanel.getImage();
+    }
+
+    /** 是否保存用户名和密码 */
+    public boolean isKeepUsernameAndPassword() {
+        // TODO r-core 实现"登陆框"保存用户名和密码功能
+        return true;
+    }
+
     /**
      * 根据验证码图片大小和其他控件大小,来设置验证码对话框大小<br/>
      * 宽=max(标签+验证码+验证码输入框,标签+文本框)的高度<br/>
@@ -310,7 +340,7 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
 
     /** 获取验证码的时机(除开"永不"之外的情况,只生效一次) */
     public enum AuthCodeTime {
-        第一次显示登陆框, 填写用户名之后, 点击验证码图片后, 登陆后验证码错误, ;
+        第一次显示登陆框, 填写用户名之后, 点击验证码图片后, 登陆后失败后, ;
     }
 
     public enum LoginStatus {
@@ -320,5 +350,4 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         密码错误, 验证码错误, 不存在此账号, 账号与密码不匹配, 提交的参数错误或者缺失, 账号为空, 密码为空, 验证码为空, // 基本上是登陆后状态
         ;
     }
-
 }

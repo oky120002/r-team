@@ -25,6 +25,7 @@ import com.r.core.exceptions.SException;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.tool.QQTool;
+import com.r.core.util.AssertUtil;
 
 /**
  * 弹出框
@@ -131,6 +132,7 @@ public class HAlert {
      * @return 验证码
      */
     public static String showAuthCodeDialog(HImageObtain obtain) {
+        AssertUtil.isNotNull("验证码图片获取器不能为空", obtain);
         HAuthCodeDialog hAuthCodeDialog = new HAuthCodeDialog(obtain);
         hAuthCodeDialog.setVisible(true);
         hAuthCodeDialog.dispose();
@@ -149,17 +151,25 @@ public class HAlert {
      *            标题
      * @param handler
      *            登陆执行处理器
-     * @return 登陆结果标识
+     * @param obtain
+     *            登陆后数据获取器(可为null)
+     * @return 返回登陆后的状态
      */
-    public static LoginStatus showLoginDialog(String title, HLoginHandler handler) {
-        HLoginDialog hLoginDialog = new HLoginDialog(null, title, handler);
+    public static LoginStatus showLoginDialog(String title, HLoginHandler handler, LoginReturnValueObtain obtain) {
+        AssertUtil.isNotNull("登陆执行处理器不能为空", handler);
+        HLoginDialog hLoginDialog = new HLoginDialog(null, StringUtils.isBlank(title) ? "登陆框" : title, handler);
         hLoginDialog.setVisible(true);
         hLoginDialog.dispose();
+        LoginStatus loginStatus = hLoginDialog.getLoginStatus();
+        if (obtain != null) {
+            obtain.returnValue(loginStatus, hLoginDialog.getUsername(), hLoginDialog.getPassword(), hLoginDialog.getAuthCodeImage(), hLoginDialog.isKeepUsernameAndPassword());
+        }
         try {
-            return hLoginDialog.getLoginStatus();
+            return loginStatus;
         } finally {
             hLoginDialog = null;
         }
+
     }
 
     /**
@@ -170,12 +180,16 @@ public class HAlert {
      * @param appid
      *            腾讯网页应用ID
      * @param username
-     *            默认用户名
+     *            默认用户名,可为null
      * @param password
-     *            默认密码
-     * @return 登陆结果标识
+     *            默认密码,可为null,为了安全最好为null
+     * @param obtain
+     *            登陆后数据获取器
+     * @return 返回登陆后的状态
      */
-    public static LoginStatus showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password) {
+    public static LoginStatus showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password, LoginReturnValueObtain obtain) {
+        AssertUtil.isNotNull("网络请求套接字不能为空", httpSocket);
+        AssertUtil.isNotBlank("QQ网络应用ID不能为空", appid);
         return HAlert.showLoginDialog("请登陆QQ账户", new HLoginHandler() {
 
             /** 默认的验证码 */
@@ -205,6 +219,8 @@ public class HAlert {
                 switch (flag) {
                 case 0:
                     return LoginStatus.成功登陆;
+                case 3:
+                    return LoginStatus.账号与密码不匹配;
                 case 4:
                     return LoginStatus.密码错误;
                 case 7:
@@ -228,7 +244,7 @@ public class HAlert {
                         try {
                             switch (autchCodeTime) {
                             case 第一次显示登陆框:
-                            case 登陆后验证码错误:
+                            case 登陆后失败后:
                             case 点击验证码图片后:
                             case 填写用户名之后:
                                 return QQTool.getLoginWebVerifycodeImage(httpSocket, appid, username);
@@ -265,6 +281,24 @@ public class HAlert {
                 return password;
             }
 
-        });
+        }, obtain);
+    }
+
+    /** 登陆后数据获取器 */
+    public interface LoginReturnValueObtain {
+        /**
+         * 返回值
+         * 
+         * @param loginStatus
+         *            登陆后状态
+         * @param username
+         *            用户名
+         * @param password
+         *            密码
+         * @param image
+         *            验证码图片
+         */
+        void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword);
+
     }
 }

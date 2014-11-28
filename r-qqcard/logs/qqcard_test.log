@@ -1,2 +1,46 @@
 2014-11-25 20:50:23,915 222  |-DEBUG in com.r.qqcard.QQCardApp - QQ卡片辅助程序（进入main方法） ......
 2014-11-25 20:50:24,015 322  |-INFO  in com.r.qqcard.QQCardApp - QQCardApp 实例化 ......
+2014-11-28 14:50:52,438 1228 |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-11-28 14:50:53,669 2459 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-11-28 14:50:54,641 3431 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-11-28 14:50:54,946 3736 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 14:51:00,882 9672 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!XTI','\x00\x00\x00\x00\x00\xd5\xb8\x19','7dbbcb0efb44bf6204e1318d86a46c2b8d7f55fcaf2bebd542aefa6b047ba8e5f6c8dc13a2f1603b0c14d44c8a07588a');
+2014-11-28 14:51:00,886 9676 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 14:51:02,458 11248 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=3064A78A588911FA9B2329264AD32FC5&aid=10000101&verifycode=!XTI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:51:02,591 11381 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('3','0','','0','您输入的帐号或密码不正确，请重新输入。', '14006297');
+
+2014-11-28 14:51:02,591 11381 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 未知错误
+2014-11-28 14:51:04,261 13051 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=3064A78A588911FA9B2329264AD32FC5&aid=10000101&verifycode=!XTI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:51:04,358 13148 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('3','0','','0','您输入的帐号或密码不正确，请重新输入。', '14006297');
+
+2014-11-28 14:51:04,359 13149 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 未知错误
+2014-11-28 14:51:10,921 19711 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=824A972C8214ACF3BF137DFD8C86E21D&aid=10000101&verifycode=!XTI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:51:11,006 19796 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('4','0','','0','您输入的验证码不正确，请重新输入。', '14006297');
+
+2014-11-28 14:51:11,007 19797 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 密码错误
+2014-11-28 14:51:22,925 31715 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=824A972C8214ACF3BF137DFD8C86E21D&aid=10000101&verifycode=!XTI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:51:23,028 31818 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('4','0','','0','您输入的验证码不正确，请重新输入。', '14006297');
+
+2014-11-28 14:51:23,029 31819 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 密码错误
+2014-11-28 14:55:27,135 623  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-11-28 14:55:27,808 1296 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-11-28 14:55:28,708 2196 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-11-28 14:55:28,940 2428 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 14:55:33,166 6654 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!NSL','\x00\x00\x00\x00\x00\xd5\xb8\x19','e15bf80c50b513eb1f27b883a91ef0800d84c63b586f5bc8c79ce349ed2f0e2b14b64b6400757315b3e45398401ad9ff');
+2014-11-28 14:55:33,168 6656 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 14:55:35,159 8647 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=6A8F652A0BAD77AB72E011AB1B5C9648&aid=10000101&verifycode=!NSL&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:55:35,289 8777 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('3','0','','0','您输入的帐号或密码不正确，请重新输入。', '14006297');
+
+2014-11-28 14:55:35,289 8777 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 账号与密码不匹配
+2014-11-28 14:55:36,474 9962 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!ENQ','\x00\x00\x00\x00\x00\xd5\xb8\x19','0d765b0f6cf3fa5f9e4aecfeeb563e048e6c37d52ede596032b01a6aaba674086aa59e98f8d6e972fa9754356d8a8914');
+2014-11-28 14:55:36,474 9962 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 14:55:42,766 16254 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=A94BC337F8572CDF0A8EFA0D11585D32&aid=10000101&verifycode=!ENQ&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 14:55:42,867 16355 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-28 14:55:42,867 16355 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-11-28 17:16:22,057 1227 |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-11-28 17:16:23,079 2249 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-11-28 17:16:24,132 3302 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-11-28 17:16:24,418 3588 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 17:16:28,173 7343 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('2','','\x00\x00\x00\x00\x00\x00\x04\x63','');
+2014-11-28 17:16:28,175 7345 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片

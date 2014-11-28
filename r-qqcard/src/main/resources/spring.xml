@@ -6,9 +6,15 @@
 	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
-	
-	<!-- 扫描非Controll -->
-	<context:component-scan base-package="com.r.qqcard">
-<!-- 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> -->
-	</context:component-scan>
+
+	<!-- 扫描bean -->
+	<context:component-scan base-package="com.r.qqcard" />
+
+	<bean id="springxml.context" class="com.r.qqcard.context.QQCardFactory">
+		<!-- httpsocket 请求超时时间 -->
+		<property name="httpSocketTimeout" value="10000" />
+		<!-- QQ网络应用id(qq魔法卡片:10000101) -->
+		<property name="appid" value="10000101" />
+
+	</bean>
 </beans>

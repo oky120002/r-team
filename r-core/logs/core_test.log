@@ -782,3 +782,11 @@
 2014-11-27 18:08:28,931 2377 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 获取到验证码图片
 2014-11-27 18:08:35,694 9140 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('1','iDt_0LiNErWqy46ZUGPkYlN0kL-ZdPvj','\x00\x00\x00\x00\xad\x9b\x03\x1e','');
 2014-11-27 18:08:35,694 9140 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 获取到验证码图片
+2014-11-28 10:55:38,300 1387 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-28 10:55:39,475 2562 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!ADR','\x00\x00\x00\x00\xad\x9b\x03\x1e','528b92c64c3c999f415102199fd66acba675860e5ef04c2619f92e45c19158d6f2444febd08b6776a2626fbdac120bad');
+2014-11-28 10:55:39,478 2565 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-28 10:55:41,119 4206 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=2912617246&p=54075735881CFCC6146C317FB8792BF3&aid=10000101&verifycode=!ADR&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-11-28 10:55:41,287 4374 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-11-28 10:55:41,288 4375 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-11-28 10:55:41,306 4393 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 成功登陆!
