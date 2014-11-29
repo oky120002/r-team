@@ -58,7 +58,6 @@ public class HOutLookBar extends HBasePanel implements ActionListener {
     public void addBar(String name, HBasePanel panel) {
         BarInfo barInfo = new BarInfo(name, panel);
         barInfo.getButton().addActionListener(this);
-        addEventShow(panel);
         this.bars.put(name, barInfo);
         render();
     }
@@ -73,7 +72,6 @@ public class HOutLookBar extends HBasePanel implements ActionListener {
     public void addBar(String name, Icon icon, HBasePanel panel) {
         BarInfo barInfo = new BarInfo(name, icon, panel);
         barInfo.getButton().addActionListener(this);
-        addEventShow(panel);
         this.bars.put(name, barInfo);
         render();
     }
@@ -84,7 +82,6 @@ public class HOutLookBar extends HBasePanel implements ActionListener {
        * @param name The name of the bar to remove
        */
     public void removeBar(String name) {
-        removeEventShow(this.bars.get(name).getPanel());
         this.bars.remove(name);
         render();
     }

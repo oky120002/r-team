@@ -28,6 +28,6 @@ public class LogController implements InitializingBean, LoggerListener {
 
     @Override
     public void log(String loglevel, String pre, String message, Throwable e) {
-
+        
     }
 }

@@ -24,57 +24,57 @@ import com.r.core.desktop.ctrl.impl.panle.HInfoPanel;
  * @since [产品/模块版本]
  */
 public class HInfoDialog extends HBaseDialog {
-	private static final long serialVersionUID = -6294574984222305510L;
+    private static final long serialVersionUID = -6294574984222305510L;
 
-	/** 中部面板 */
-	private HInfoPanel infoPanel = null;
+    /** 中部面板 */
+    private HInfoPanel infoPanel = null;
 
-	public HInfoDialog(String title) {
-		super(title);
-		initStyle();
-		initComponent(null);
-	}
+    public HInfoDialog(String title) {
+        super(title);
+        initStyle();
+        initComponent();
+    }
 
-	public HInfoDialog(JFrame frame, String title, boolean isModel) {
-		super(frame, title, isModel);
-		initStyle();
-		initComponent(null);
-	}
+    public HInfoDialog(JFrame frame, String title, boolean isModel) {
+        super(frame, title, isModel);
+        initStyle();
+        initComponent();
+    }
 
-	public HInfoDialog(JDialog dialog, String title, boolean isModel) {
-		super(dialog, title, isModel);
-		initStyle();
-		initComponent(null);
-	}
+    public HInfoDialog(JDialog dialog, String title, boolean isModel) {
+        super(dialog, title, isModel);
+        initStyle();
+        initComponent();
+    }
 
-	/** 打印信息 */
-	public void printlnInfo(String message) {
-		infoPanel.printlnInfo(message);
-	}
+    /** 打印信息 */
+    public void printlnInfo(String message) {
+        infoPanel.printlnInfo(message);
+    }
 
-	public void setReadOnly(boolean isReadOnly) {
+    public void setReadOnly(boolean isReadOnly) {
 
-	}
+    }
 
-	/** 设置窗体样式 */
-	private void initStyle() {
-		// 设置窗口大小
-		this.setSize(new Dimension(600, 400));
+    /** 设置窗体样式 */
+    private void initStyle() {
+        // 设置窗口大小
+        this.setSize(new Dimension(600, 400));
 
-		// 让窗体居中显示
-		this.setLocationRelativeTo(null);
+        // 让窗体居中显示
+        this.setLocationRelativeTo(null);
 
-		// 点击关闭按钮,隐藏窗口
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-	}
+        // 点击关闭按钮,隐藏窗口
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }
 
-	/** 设置窗体组件 */
-	private void initComponent(String eventUid) {
-		// 设置页面面板布局类型
-		setLayout(new BorderLayout());
+    /** 设置窗体组件 */
+    private void initComponent() {
+        // 设置页面面板布局类型
+        setLayout(new BorderLayout());
 
-		// 初始化信息面板
-		infoPanel = new HInfoPanel(eventUid);
-		add(infoPanel, BorderLayout.CENTER);
-	}
+        // 初始化信息面板
+        infoPanel = new HInfoPanel();
+        add(infoPanel, BorderLayout.CENTER);
+    }
 }
