@@ -16,14 +16,12 @@ public class AccountService {
 
     /** 获取默认用户名 */
     public String getDefaultUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return "14006297";
     }
 
     /** 获取默认密码 */
     public String getDefaultPassword() {
-        // TODO Auto-generated method stub
-        return null;
+        return "yuyu0619@qq.com";
     }
 
     /** 是否记录登录名和密码 */

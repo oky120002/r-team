@@ -10,11 +10,18 @@
 	<!-- 扫描bean -->
 	<context:component-scan base-package="com.r.qqcard" />
 
+	<!-- 通知工厂 -->
+	<bean id="springxml.notify" class="com.r.qqcard.notify.context.NotifyFactory" />
+
+	<!-- QQ卡片辅助程序工厂 -->
 	<bean id="springxml.context" class="com.r.qqcard.context.QQCardFactory">
 		<!-- httpsocket 请求超时时间 -->
 		<property name="httpSocketTimeout" value="10000" />
 		<!-- QQ网络应用id(qq魔法卡片:10000101) -->
 		<property name="appid" value="10000101" />
-
+		<!-- 程序名称 -->
+		<property name="appName" value="QQ卡片辅助程序" />
+		<!-- 版本号 -->
+		<property name="appVersion" value="test_0.0.1" />
 	</bean>
 </beans>

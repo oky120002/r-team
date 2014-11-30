@@ -52,10 +52,6 @@ public class HInfoDialog extends HBaseDialog {
         infoPanel.printlnInfo(message);
     }
 
-    public void setReadOnly(boolean isReadOnly) {
-
-    }
-
     /** 设置窗体样式 */
     private void initStyle() {
         // 设置窗口大小

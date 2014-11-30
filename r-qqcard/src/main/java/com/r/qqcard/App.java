@@ -11,7 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
-import com.r.qqcard.login.controller.LoginController;
+import com.r.qqcard.notify.context.NotifyContext;
+import com.r.qqcard.notify.handler.Event;
 
 /** QQ卡片辅助程序入口 */
 public class App implements Runnable {
@@ -49,8 +50,8 @@ public class App implements Runnable {
     public void run() {
         App.app = this;
         applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-        LoginController loginController = (LoginController) applicationContext.getBean("controller.login");
-        loginController.showLoginDialog();
+        NotifyContext notify = (NotifyContext) applicationContext.getBean("springxml.notify");
+        notify.notifyEvent(Event.程序启动);
     }
 
     /** 退出QQ卡片辅助程序 */

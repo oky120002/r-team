@@ -14,6 +14,10 @@ public class QQCardContextConfigurator implements InitializingBean {
     private int httpSocketTimeout = 10 * 1000;
     /** QQ网络应用id */
     private String appid = null;
+    /** 程序名字 */
+    private String appName = "QQ卡片辅助程序";
+    /** 版本号 */
+    private String appVersion = "test_0.0.1";
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -37,6 +41,26 @@ public class QQCardContextConfigurator implements InitializingBean {
     /** 设置QQ网络应用id */
     public void setAppid(String appid) {
         this.appid = appid;
+    }
+
+    /** 获取程序名字 */
+    public String getAppName() {
+        return appName;
+    }
+
+    /** 设置程序名字 */
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    /** 获取版本号 */
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    /** 设置版本号 */
+    public void setAppVersion(String version) {
+        this.appVersion = version;
     }
 
 }

@@ -18,7 +18,9 @@ import com.r.core.log.LoggerFactory;
 import com.r.qqcard.App;
 import com.r.qqcard.account.AccountService;
 import com.r.qqcard.context.QQCardContext;
-import com.r.qqcard.main.controller.MainController;
+import com.r.qqcard.notify.context.NotifyContext;
+import com.r.qqcard.notify.handler.Event;
+import com.r.qqcard.notify.handler.EventAnn;
 
 /**
  * 登陆界面控制器
@@ -34,18 +36,17 @@ public class LoginController {
     /** QQ卡片辅助程序容器 */
     @Resource(name = "springxml.context")
     private QQCardContext context;
-
-    /** 账号业务类 */
+    /** 通知 */
+    @Resource(name = "springxml.notify")
+    private NotifyContext notify;
+    /** 账号业务处理器 */
     @Resource(name = "service.account")
     private AccountService accountService;
 
-    /** 主界面控制器 */
-    @Resource(name = "controller.main")
-    private MainController mainController;
-
     /** 显示登陆对话框 */
+    @EventAnn(Event.程序启动)
     public void showLoginDialog() {
-        logger.info("登陆QQ......");
+        notify.notifyEvent(Event.登陆前);
         HttpSocket httpSocket = context.getHttpSocket();
         String appid = context.getAppid();
         String defaultUsername = accountService.getDefaultUsername();
@@ -54,13 +55,16 @@ public class LoginController {
             @Override
             public void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword) {
                 if (LoginStatus.成功登陆.equals(loginStatus)) {
-                    logger.info("成功登陆账号[{}]......", username);
                     accountService.setDefaultUsernameAndPassword(username, password, isKeepUsernameAndPassword);
-                    mainController.showMainFrame();
+                    notify.notifyEvent(Event.登陆成功, username, password, isKeepUsernameAndPassword);
+                    logger.info("登陆QQ......");
+                    logger.info("成功登陆账号[{}]......", username);
                 } else {
+                    notify.notifyEvent(Event.登陆失败, username, password, isKeepUsernameAndPassword);
                     App.getInstance().exit();
                 }
             }
         });
     }
+
 }

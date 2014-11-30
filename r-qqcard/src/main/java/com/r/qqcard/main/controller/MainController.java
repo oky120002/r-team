@@ -3,12 +3,23 @@
  */
 package com.r.qqcard.main.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.log.LoggerListener;
+import com.r.qqcard.context.QQCardContext;
 import com.r.qqcard.main.view.MainFrame;
+import com.r.qqcard.notify.context.NotifyContext;
+import com.r.qqcard.notify.handler.Event;
+import com.r.qqcard.notify.handler.EventAnn;
+import com.r.qqcard.notify.handler.ValueType;
 
 /**
  * 主界面控制器
@@ -17,22 +28,49 @@ import com.r.qqcard.main.view.MainFrame;
  *
  */
 @Controller("controller.main")
-public class MainController implements InitializingBean {
+public class MainController implements InitializingBean, LoggerListener {
     /** 日志 */
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+    /** 时间格式化类 */
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /** 主界面 */
     private MainFrame mainFrame;
+    /** QQ卡片辅助程序容器 */
+    @Resource(name = "springxml.context")
+    private QQCardContext context;
+    /** 通知 */
+    @Resource(name = "springxml.notify")
+    private NotifyContext notify;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.mainFrame = new MainFrame();
+        logger.debug("添加日志监听器......");
+        LoggerFactory.addLoggerListener(this);
     }
 
     /** 显示主界面窗口 */
     public void showMainFrame() {
+        // 创建主窗口
+        if (this.mainFrame == null) {
+            this.mainFrame = new MainFrame(context.getAppName() + " " + context.getAppVersion());
+        }
         logger.info("显示主界面......");
-
+        this.mainFrame.setVisible(true);
     }
 
+    @Override
+    public void log(String loglevel, String pre, String message, Throwable e) {
+        if (Logger.LOGGER_LEVEL_INFO.equals(loglevel)) {
+            StringBuilder sb = new StringBuilder(dateFormat.format(new Date()));
+            sb.append(" ");
+            sb.append(message);
+            this.mainFrame.printlnInfo(sb.toString());
+        }
+    }
+
+    @EventAnn(Event.登陆成功)
+    public void loginOk(String username, String password, Boolean isflg) {
+        showMainFrame();
+    }
 }

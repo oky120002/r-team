@@ -790,3 +790,7 @@
 
 2014-11-28 10:55:41,288 4375 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
 2014-11-28 10:55:41,306 4393 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 成功登陆!
+2014-11-30 20:28:59,368 1535 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 进行登陆测试.
+2014-11-30 20:29:00,415 2582 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!CDL','\x00\x00\x00\x00\xad\x9b\x03\x1e','e7fc4109185aac86b891b38a0a5f536bb55768e1f8a25b9d663c78849ad07b3e93816cdb0a9632a3041e3a51d342be57');
+2014-11-30 20:29:00,417 2584 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-11-30 20:29:02,175 4342 |-DEBUG in com.r.core.tool.QQToolTest - QQ工具测试类 - 登陆信息 : 未登陆
