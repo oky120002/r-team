@@ -16,7 +16,7 @@ import com.r.qqcard.notify.handler.EventAnn;
 public class CoreService {
 
     /** 程序启动,登陆前的初始化工作 */
-    @EventAnn(Event.登陆前)
+    @EventAnn(Event.程序启动)
     public void preLogin() {
         System.out.println(1000000);
     }

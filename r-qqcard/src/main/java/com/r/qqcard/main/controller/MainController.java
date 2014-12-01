@@ -47,14 +47,11 @@ public class MainController implements InitializingBean, LoggerListener {
     public void afterPropertiesSet() throws Exception {
         logger.debug("添加日志监听器......");
         LoggerFactory.addLoggerListener(this);
+        this.mainFrame = new MainFrame(context.getAppName() + " " + context.getAppVersion());
     }
 
     /** 显示主界面窗口 */
     public void showMainFrame() {
-        // 创建主窗口
-        if (this.mainFrame == null) {
-            this.mainFrame = new MainFrame(context.getAppName() + " " + context.getAppVersion());
-        }
         logger.info("显示主界面......");
         this.mainFrame.setVisible(true);
     }

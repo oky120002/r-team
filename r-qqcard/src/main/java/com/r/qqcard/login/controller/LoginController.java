@@ -51,13 +51,13 @@ public class LoginController {
         String appid = context.getAppid();
         String defaultUsername = accountService.getDefaultUsername();
         String defaultPassword = accountService.getDefaultPassword();
+        logger.info("登陆QQ......");
         HAlert.showLoginDialogByQQ(httpSocket, appid, defaultUsername, defaultPassword, new LoginReturnValueObtain() {
             @Override
             public void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword) {
                 if (LoginStatus.成功登陆.equals(loginStatus)) {
                     accountService.setDefaultUsernameAndPassword(username, password, isKeepUsernameAndPassword);
                     notify.notifyEvent(Event.登陆成功, username, password, isKeepUsernameAndPassword);
-                    logger.info("登陆QQ......");
                     logger.info("成功登陆账号[{}]......", username);
                 } else {
                     notify.notifyEvent(Event.登陆失败, username, password, isKeepUsernameAndPassword);
