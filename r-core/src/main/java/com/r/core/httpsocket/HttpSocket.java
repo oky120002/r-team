@@ -43,7 +43,11 @@ public class HttpSocket implements Serializable {
     /** 是否持有返回的cookies,如果持有,则每次返回时自动获取,发送时自动发送 */
     private boolean isHoldCookies = true;
 
-    private HttpSocket(boolean isHoldCookies) {
+    public HttpSocket() {
+        this.requestHeader = RequestHeader.newRequestHeaderByEmpty();
+    }
+
+    public HttpSocket(boolean isHoldCookies) {
         this.isHoldCookies = isHoldCookies;
         this.requestHeader = RequestHeader.newRequestHeaderByEmpty();
     }

@@ -1,3 +1,305 @@
 2014-11-21 16:59:35,159 1216 |-DEBUG in com.r.qqcard.QQCardApp - main......
 2014-11-21 18:34:12,412 1246 |-DEBUG in com.r.qqcard.QQCardApp - main ......
 2014-11-21 18:34:13,797 2631 |-INFO  in com.r.qqcard.QQCardApp - QQCardApp 实例化 ......
+2014-12-02 12:09:34,389 1207 |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 12:09:35,205 2023 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 12:09:36,421 3239 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 12:09:36,427 3245 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 12:09:36,437 3255 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 12:09:36,546 3364 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 12:09:36,664 3482 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 12:09:36,703 3521 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@2027d19e
+2014-12-02 12:09:36,703 3521 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@2027d19e
+2014-12-02 12:09:36,704 3522 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@2027d19e
+2014-12-02 12:09:36,706 3524 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@36d87f9e
+2014-12-02 12:09:36,709 3527 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.TrueFalseType@1ab38813
+2014-12-02 12:09:36,710 3528 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.YesNoType@86d30aa
+2014-12-02 12:09:36,714 3532 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@15b5cf07
+2014-12-02 12:09:36,714 3532 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@15b5cf07
+2014-12-02 12:09:36,714 3532 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@15b5cf07
+2014-12-02 12:09:36,717 3535 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration character -> org.hibernate.type.CharacterType@919e003
+2014-12-02 12:09:36,717 3535 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration char -> org.hibernate.type.CharacterType@919e003
+2014-12-02 12:09:36,717 3535 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@919e003
+2014-12-02 12:09:36,720 3538 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@2de0b137
+2014-12-02 12:09:36,720 3538 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@2de0b137
+2014-12-02 12:09:36,722 3540 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.ShortType@2de0b137
+2014-12-02 12:09:36,725 3543 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.IntegerType@789fba1d
+2014-12-02 12:09:36,726 3544 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration int -> org.hibernate.type.IntegerType@789fba1d
+2014-12-02 12:09:36,726 3544 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@789fba1d
+2014-12-02 12:09:36,729 3547 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@3f0904c4
+2014-12-02 12:09:36,730 3548 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@3f0904c4
+2014-12-02 12:09:36,730 3548 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.LongType@3f0904c4
+2014-12-02 12:09:36,733 3551 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@6abc0896
+2014-12-02 12:09:36,734 3552 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@6abc0896
+2014-12-02 12:09:36,734 3552 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.FloatType@6abc0896
+2014-12-02 12:09:36,753 3571 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@2585c97f
+2014-12-02 12:09:36,753 3571 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@2585c97f
+2014-12-02 12:09:36,753 3571 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@2585c97f
+2014-12-02 12:09:36,757 3575 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@1e4387f5
+2014-12-02 12:09:36,757 3575 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@1e4387f5
+2014-12-02 12:09:36,758 3576 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BigIntegerType@43d95624
+2014-12-02 12:09:36,759 3577 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@43d95624
+2014-12-02 12:09:36,761 3579 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration string -> org.hibernate.type.StringType@5596211f
+2014-12-02 12:09:36,761 3579 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.StringType@5596211f
+2014-12-02 12:09:36,763 3581 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.StringNVarcharType@3b032e9e
+2014-12-02 12:09:36,764 3582 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@462a6d65
+2014-12-02 12:09:36,766 3584 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration url -> org.hibernate.type.UrlType@79d4583d
+2014-12-02 12:09:36,766 3584 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.UrlType@79d4583d
+2014-12-02 12:09:36,770 3588 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration date -> org.hibernate.type.DateType@1d7d4a63
+2014-12-02 12:09:36,771 3589 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.DateType@1d7d4a63
+2014-12-02 12:09:36,775 3593 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration time -> org.hibernate.type.TimeType@6f43707d
+2014-12-02 12:09:36,776 3594 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.TimeType@6f43707d
+2014-12-02 12:09:36,780 3598 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.TimestampType@2d266aa7
+2014-12-02 12:09:36,780 3598 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@2d266aa7
+2014-12-02 12:09:36,780 3598 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.TimestampType@2d266aa7
+2014-12-02 12:09:36,782 3600 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@53d329f7
+2014-12-02 12:09:36,784 3602 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.CalendarType@5cf906d8
+2014-12-02 12:09:36,785 3603 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@5cf906d8
+2014-12-02 12:09:36,785 3603 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@5cf906d8
+2014-12-02 12:09:36,786 3604 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@1b3a49f2
+2014-12-02 12:09:36,788 3606 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.LocaleType@6d4d9023
+2014-12-02 12:09:36,788 3606 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@6d4d9023
+2014-12-02 12:09:36,789 3607 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.CurrencyType@a59cf7f
+2014-12-02 12:09:36,790 3608 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@a59cf7f
+2014-12-02 12:09:36,792 3610 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.TimeZoneType@6a939082
+2014-12-02 12:09:36,792 3610 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@6a939082
+2014-12-02 12:09:36,794 3612 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration class -> org.hibernate.type.ClassType@4c47a353
+2014-12-02 12:09:36,794 3612 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.ClassType@4c47a353
+2014-12-02 12:09:36,797 3615 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@185623a7
+2014-12-02 12:09:36,797 3615 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@185623a7
+2014-12-02 12:09:36,798 3616 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@3ba0aaa8
+2014-12-02 12:09:36,800 3618 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@4f2866c
+2014-12-02 12:09:36,802 3620 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BinaryType@4ff67d05
+2014-12-02 12:09:36,802 3620 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BinaryType@4ff67d05
+2014-12-02 12:09:36,802 3620 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BinaryType@4ff67d05
+2014-12-02 12:09:36,804 3622 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@7a9c8b97
+2014-12-02 12:09:36,805 3623 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@7a9c8b97
+2014-12-02 12:09:36,805 3623 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@7a9c8b97
+2014-12-02 12:09:36,806 3624 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration image -> org.hibernate.type.ImageType@3185768f
+2014-12-02 12:09:36,808 3626 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.CharArrayType@4f270ec6
+2014-12-02 12:09:36,808 3626 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.CharArrayType@4f270ec6
+2014-12-02 12:09:36,808 3626 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.CharArrayType@4f270ec6
+2014-12-02 12:09:36,810 3628 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@3063adc4
+2014-12-02 12:09:36,810 3628 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@3063adc4
+2014-12-02 12:09:36,811 3629 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@3063adc4
+2014-12-02 12:09:36,812 3630 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration text -> org.hibernate.type.TextType@39e4ff0c
+2014-12-02 12:09:36,813 3631 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.NTextType@24b1c39f
+2014-12-02 12:09:36,821 3639 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BlobType@3ce19ea8
+2014-12-02 12:09:36,821 3639 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@3ce19ea8
+2014-12-02 12:09:36,822 3640 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@56a3a097
+2014-12-02 12:09:36,831 3649 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.ClobType@26458b19
+2014-12-02 12:09:36,832 3650 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@26458b19
+2014-12-02 12:09:36,840 3658 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.NClobType@669f809d
+2014-12-02 12:09:36,840 3658 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@669f809d
+2014-12-02 12:09:36,841 3659 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@46488fac
+2014-12-02 12:09:36,842 3660 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@70745955
+2014-12-02 12:09:36,843 3661 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.SerializableType@5c171dba
+2014-12-02 12:09:36,848 3666 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration object -> org.hibernate.type.ObjectType@7854691e
+2014-12-02 12:09:36,849 3667 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@7854691e
+2014-12-02 12:09:36,850 3668 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@541c803
+2014-12-02 12:09:36,850 3668 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@21b23fa7
+2014-12-02 12:09:36,850 3668 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@3d70fe39
+2014-12-02 12:09:36,851 3669 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@45426fb2
+2014-12-02 12:09:36,851 3669 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@cb332a4
+2014-12-02 12:09:36,851 3669 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@48c1b37f
+2014-12-02 12:09:36,851 3669 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@24ef7c2a
+2014-12-02 12:09:36,851 3669 |-DEBUG in org.hibernate.type.BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@66c0bc57
+2014-12-02 12:09:36,886 3704 |-INFO  in org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2014-12-02 12:09:36,896 3714 |-INFO  in org.hibernate.Version - HHH000412: Hibernate Core {4.1.10.Final}
+2014-12-02 12:09:36,898 3716 |-INFO  in org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2014-12-02 12:09:36,901 3719 |-INFO  in org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2014-12-02 12:09:36,925 3743 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
+2014-12-02 12:09:36,926 3744 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
+2014-12-02 12:09:36,927 3745 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
+2014-12-02 12:09:36,928 3746 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid.hex] -> [org.hibernate.id.UUIDHexGenerator]
+2014-12-02 12:09:36,930 3748 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [hilo] -> [org.hibernate.id.TableHiLoGenerator]
+2014-12-02 12:09:36,931 3749 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [assigned] -> [org.hibernate.id.Assigned]
+2014-12-02 12:09:36,935 3753 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [identity] -> [org.hibernate.id.IdentityGenerator]
+2014-12-02 12:09:36,936 3754 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [select] -> [org.hibernate.id.SelectGenerator]
+2014-12-02 12:09:36,937 3755 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [sequence] -> [org.hibernate.id.SequenceGenerator]
+2014-12-02 12:09:36,939 3757 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [seqhilo] -> [org.hibernate.id.SequenceHiLoGenerator]
+2014-12-02 12:09:36,940 3758 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [increment] -> [org.hibernate.id.IncrementGenerator]
+2014-12-02 12:09:36,941 3759 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [foreign] -> [org.hibernate.id.ForeignGenerator]
+2014-12-02 12:09:36,942 3760 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [sequence-identity] -> [org.hibernate.id.SequenceIdentityGenerator]
+2014-12-02 12:09:36,944 3762 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [enhanced-sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+2014-12-02 12:09:36,946 3764 |-DEBUG in org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [enhanced-table] -> [org.hibernate.id.enhanced.TableGenerator]
+2014-12-02 12:09:37,087 3905 |-DEBUG in org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
+2014-12-02 12:09:37,183 4001 |-DEBUG in org.hibernate.cfg.Configuration - Preparing to build session factory with filters : {}
+2014-12-02 12:09:37,259 4077 |-DEBUG in org.hibernate.cfg.Configuration - Processing hbm.xml files
+2014-12-02 12:09:37,259 4077 |-DEBUG in org.hibernate.cfg.Configuration - Process annotated classes
+2014-12-02 12:09:37,263 4081 |-DEBUG in org.hibernate.cfg.Configuration - Processing fk mappings (*ToOne and JoinedSubclass)
+2014-12-02 12:09:37,264 4082 |-DEBUG in org.hibernate.cfg.Configuration - Processing extends queue
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Processing extends queue
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Processing collection mappings
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Processing native query and ResultSetMapping mappings
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Processing association property references
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Creating tables' unique integer identifiers
+2014-12-02 12:09:37,265 4083 |-DEBUG in org.hibernate.cfg.Configuration - Processing foreign key constraints
+2014-12-02 12:09:37,779 4597 |-DEBUG in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - Database ->
+       name : H2
+    version : 1.4.178 (2014-05-02)
+      major : 1
+      minor : 4
+2014-12-02 12:09:37,779 4597 |-DEBUG in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - Driver ->
+       name : H2 JDBC Driver
+    version : 1.4.178 (2014-05-02)
+      major : 1
+      minor : 4
+2014-12-02 12:09:37,779 4597 |-DEBUG in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - JDBC version : 4.0
+2014-12-02 12:09:37,822 4640 |-INFO  in org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2014-12-02 12:09:37,870 4688 |-DEBUG in org.hibernate.cfg.SettingsFactory - Automatic flush during beforeCompletion(): disabled
+2014-12-02 12:09:37,871 4689 |-DEBUG in org.hibernate.cfg.SettingsFactory - Automatic session close at end of transaction: disabled
+2014-12-02 12:09:37,871 4689 |-DEBUG in org.hibernate.cfg.SettingsFactory - Scrollable result sets: enabled
+2014-12-02 12:09:37,871 4689 |-DEBUG in org.hibernate.cfg.SettingsFactory - Wrap result sets: disabled
+2014-12-02 12:09:37,871 4689 |-DEBUG in org.hibernate.cfg.SettingsFactory - JDBC3 getGeneratedKeys(): enabled
+2014-12-02 12:09:37,871 4689 |-DEBUG in org.hibernate.cfg.SettingsFactory - multi-tenancy strategy : NONE
+2014-12-02 12:09:37,872 4690 |-DEBUG in org.hibernate.cfg.SettingsFactory - Connection release mode: auto
+2014-12-02 12:09:37,872 4690 |-INFO  in org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2014-12-02 12:09:37,876 4694 |-DEBUG in org.hibernate.cfg.SettingsFactory - Default batch fetch size: 1
+2014-12-02 12:09:37,877 4695 |-DEBUG in org.hibernate.cfg.SettingsFactory - Generate SQL with comments: disabled
+2014-12-02 12:09:37,877 4695 |-DEBUG in org.hibernate.cfg.SettingsFactory - Order SQL updates by primary key: disabled
+2014-12-02 12:09:37,877 4695 |-DEBUG in org.hibernate.cfg.SettingsFactory - Order SQL inserts for batching: disabled
+2014-12-02 12:09:37,878 4696 |-DEBUG in org.hibernate.cfg.SettingsFactory - Query translator: org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory
+2014-12-02 12:09:37,885 4703 |-INFO  in org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2014-12-02 12:09:37,885 4703 |-DEBUG in org.hibernate.cfg.SettingsFactory - Query language substitutions: {}
+2014-12-02 12:09:37,885 4703 |-DEBUG in org.hibernate.cfg.SettingsFactory - JPA-QL strict compliance: disabled
+2014-12-02 12:09:37,885 4703 |-DEBUG in org.hibernate.cfg.SettingsFactory - Second-level cache: enabled
+2014-12-02 12:09:37,885 4703 |-DEBUG in org.hibernate.cfg.SettingsFactory - Query cache: disabled
+2014-12-02 12:09:37,886 4704 |-DEBUG in org.hibernate.cfg.SettingsFactory - Cache region factory : org.hibernate.cache.internal.NoCachingRegionFactory
+2014-12-02 12:09:37,887 4705 |-DEBUG in org.hibernate.cfg.SettingsFactory - org.hibernate.cache.internal.NoCachingRegionFactory did not provide constructor accepting java.util.Properties; attempting no-arg constructor.
+2014-12-02 12:09:37,887 4705 |-DEBUG in org.hibernate.cfg.SettingsFactory - Optimize cache for minimal puts: disabled
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Structured second-level cache entries: disabled
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Statistics: disabled
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Deleted entity synthetic identifier rollback: disabled
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Default entity-mode: pojo
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Named query checking : enabled
+2014-12-02 12:09:37,888 4706 |-DEBUG in org.hibernate.cfg.SettingsFactory - Check Nullability in Core (should be disabled when Bean Validation is on): enabled
+2014-12-02 12:09:37,889 4707 |-DEBUG in org.hibernate.cfg.SettingsFactory - Allow initialization of lazy state outside session : : disabled
+2014-12-02 12:09:37,905 4723 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Building session factory
+2014-12-02 12:09:37,927 4745 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Session factory constructed with filter configurations : {}
+2014-12-02 12:09:37,928 4746 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Instantiating session factory with properties: {java.runtime.name=Java(TM) SE Runtime Environment, sun.boot.library.path=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib, java.vm.version=24.71-b01, gopherProxySet=false, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=:, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, user.country=CN, sun.java.launcher=SUN_STANDARD, sun.os.patch.level=unknown, java.vm.specification.name=Java Virtual Machine Specification, user.dir=/Users/rain/Develop/sts-workspace/r-team/r-qqcard, java.runtime.version=1.7.0_71-b14, java.awt.graphicsenv=sun.awt.CGraphicsEnvironment, hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext, java.endorsed.dirs=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/endorsed, os.arch=x86_64, java.io.tmpdir=/var/folders/zq/1_hx7x1j3ds6y7vk3dghb8280000gn/T/, line.separator=
+, java.vm.specification.vendor=Oracle Corporation, os.name=Mac OS X, sun.jnu.encoding=UTF-8, java.library.path=/Users/rain/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., hibernate.connection.datasource=org.apache.commons.dbcp.BasicDataSource@1c934e78, sun.awt.enableExtraMouseButtons=true, java.specification.name=Java Platform API Specification, java.class.version=51.0, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=10.10.1, http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, user.home=/Users/rain, user.timezone=Asia/Chongqing, java.awt.printerjob=sun.lwawt.macosx.CPrinterJob, java.specification.version=1.7, file.encoding=UTF-8, hibernate.format_sql=false, javax.swing.text.Style=no-spot, user.name=rain, java.class.path=/Users/rain/Develop/sts-workspace/r-team/r-qqcard/target/classes:/Users/rain/Develop/sts-workspace/r-team/r-core/target/classes:/Users/rain/.m2/repository/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar:/Users/rain/.m2/repository/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2.jar:/Users/rain/.m2/repository/xmlpull/xmlpull/1.1.3.4d_b4_min/xmlpull-1.1.3.4d_b4_min.jar:/Users/rain/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar:/Users/rain/.m2/repository/com/thoughtworks/xstream/xstream/1.4.6/xstream-1.4.6.jar:/Users/rain/.m2/repository/org/springframework/spring-beans/3.2.10.RELEASE/spring-beans-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-context/3.2.10.RELEASE/spring-context-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-aop/3.2.10.RELEASE/spring-aop-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/Users/rain/.m2/repository/org/springframework/spring-expression/3.2.10.RELEASE/spring-expression-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-context-support/3.2.10.RELEASE/spring-context-support-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-core/3.2.10.RELEASE/spring-core-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-tx/3.2.10.RELEASE/spring-tx-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-orm/3.2.10.RELEASE/spring-orm-3.2.10.RELEASE.jar:/Users/rain/.m2/repository/org/springframework/spring-jdbc/3.2.1.RELEASE/spring-jdbc-3.2.1.RELEASE.jar:/Users/rain/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/Users/rain/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/Users/rain/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar:/Users/rain/.m2/repository/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar:/Users/rain/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4.jar:/Users/rain/.m2/repository/commons-math/commons-math/1.2/commons-math-1.2.jar:/Users/rain/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/rain/.m2/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar:/Users/rain/.m2/repository/commons-pool/commons-pool/1.6/commons-pool-1.6.jar:/Users/rain/.m2/repository/org/hibernate/hibernate-core/4.1.10.Final/hibernate-core-4.1.10.Final.jar:/Users/rain/.m2/repository/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA.jar:/Users/rain/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.1_spec/1.0.0.Final/jboss-transaction-api_1.1_spec-1.0.0.Final.jar:/Users/rain/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/Users/rain/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/rain/.m2/repository/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA.jar:/Users/rain/.m2/repository/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final.jar:/Users/rain/.m2/repository/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final.jar:/Users/rain/.m2/repository/javax/validation/validation-api/1.1.0.CR2/validation-api-1.1.0.CR2.jar:/Users/rain/.m2/repository/com/h2database/h2/1.4.178/h2-1.4.178.jar:/Users/rain/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/rain/.m2/repository/ch/qos/logback/logback-core/1.1.2/logback-core-1.1.2.jar:/Users/rain/.m2/repository/ch/qos/logback/logback-classic/1.1.2/logback-classic-1.1.2.jar:/Users/rain/.m2/repository/org/slf4j/slf4j-api/1.7.3/slf4j-api-1.7.3.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=true, hibernate.classLoader.application=sun.misc.Launcher$AppClassLoader@6951a712, java.vm.specification.version=1.7, sun.arch.data.model=64, java.home=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre, sun.java.command=com.r.qqcard.App, hibernate.dialect=org.hibernate.dialect.SQLServerDialect, java.specification.vendor=Oracle Corporation, user.language=zh, awt.toolkit=sun.lwawt.macosx.LWCToolkit, java.vm.info=mixed mode, java.version=1.7.0_71, java.ext.dirs=/Users/rain/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java, sun.boot.class.path=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre/classes, java.vendor=Oracle Corporation, file.separator=/, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, hibernate.hbm2ddl.auto=update, sun.cpu.endian=little, sun.io.unicode.encoding=UnicodeBig, sun.font.fontmanager=sun.font.CFontManager, socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16, ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, sun.cpu.isalist=}
+2014-12-02 12:09:37,989 4807 |-INFO  in org.hibernate.validator.util.Version - Hibernate Validator 4.2.0.Final
+2014-12-02 12:09:38,001 4819 |-DEBUG in org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+2014-12-02 12:09:38,003 4821 |-DEBUG in org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.engine.resolver.JPATraversableResolver.
+2014-12-02 12:09:38,008 4826 |-DEBUG in org.hibernate.validator.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2014-12-02 12:09:38,010 4828 |-DEBUG in org.hibernate.validator.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only
+2014-12-02 12:09:38,131 4949 |-DEBUG in org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+2014-12-02 12:09:38,131 4949 |-DEBUG in org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.engine.resolver.JPATraversableResolver.
+2014-12-02 12:09:38,132 4950 |-DEBUG in org.hibernate.validator.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2014-12-02 12:09:38,132 4950 |-DEBUG in org.hibernate.validator.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only
+2014-12-02 12:09:38,173 4991 |-DEBUG in org.hibernate.internal.SessionFactoryRegistry - Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@f0e2457
+2014-12-02 12:09:38,173 4991 |-DEBUG in org.hibernate.internal.SessionFactoryRegistry - Registering SessionFactory: a9be5f7c-af5b-4680-af61-131517e2d8f4 (<unnamed>)
+2014-12-02 12:09:38,173 4991 |-DEBUG in org.hibernate.internal.SessionFactoryRegistry - Not binding SessionFactory to JNDI, no JNDI name configured
+2014-12-02 12:09:38,173 4991 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Instantiated session factory
+2014-12-02 12:09:38,192 5010 |-INFO  in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2014-12-02 12:09:38,193 5011 |-INFO  in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2014-12-02 12:09:38,195 5013 |-INFO  in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2014-12-02 12:09:38,195 5013 |-DEBUG in org.hibernate.cfg.Configuration - Processing hbm.xml files
+2014-12-02 12:09:38,195 5013 |-DEBUG in org.hibernate.cfg.Configuration - Process annotated classes
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing fk mappings (*ToOne and JoinedSubclass)
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing extends queue
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing extends queue
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing collection mappings
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing native query and ResultSetMapping mappings
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing association property references
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Creating tables' unique integer identifiers
+2014-12-02 12:09:38,196 5014 |-DEBUG in org.hibernate.cfg.Configuration - Processing foreign key constraints
+2014-12-02 12:09:38,197 5015 |-INFO  in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2014-12-02 12:09:38,198 5016 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Checking 0 named HQL queries
+2014-12-02 12:09:38,199 5017 |-DEBUG in org.hibernate.internal.SessionFactoryImpl - Checking 0 named SQL queries
+2014-12-02 12:09:38,209 5027 |-DEBUG in org.hibernate.stat.internal.StatisticsInitiator - Statistics initialized [enabled=false]
+2014-12-02 12:09:38,295 5113 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 12:09:39,406 6224 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!QIE','\x00\x00\x00\x00\x00\xd5\xb8\x19','c7c6a4168426eb9aff0c0543c38f876a0836bffe62f92de4cc0a19660a98064a4b574d59dea854970df1f93c9233aa18');
+2014-12-02 12:09:39,408 6226 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 12:28:25,412 611  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 12:28:26,081 1280 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 12:28:27,125 2324 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 12:28:27,130 2329 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 12:28:27,140 2339 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 12:28:27,191 2390 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 12:28:52,503 444  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 12:28:52,923 864  |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 12:28:53,874 1815 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 12:28:53,880 1821 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 12:28:53,889 1830 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 12:28:53,943 1884 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 12:28:54,079 2020 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 12:28:55,089 3030 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:17:46,928 1932 |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:17:47,895 2899 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:18:55,537 648  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:18:56,195 1306 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:18:57,359 2470 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:19:58,205 602  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:19:58,689 1086 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:19:59,894 2291 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:20:01,619 4016 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:20:02,023 4420 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:20:02,026 4423 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:20:02,028 4425 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:20:02,030 4427 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:20:02,032 4429 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:20:02,034 4431 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:20:02,036 4433 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:20:02,039 4436 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:20:02,040 4437 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:20:02,043 4440 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:20:02,185 4582 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:20:02,203 4600 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:20:02,209 4606 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:20:02,373 4770 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$61c3fa30 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$61c3fa30............................
+2014-12-02 18:20:02,394 4791 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$a51f5a44 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$a51f5a44............................
+2014-12-02 18:20:02,396 4793 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:20:02,439 4836 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:20:02,452 4849 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:20:02,465 4862 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:20:02,586 4983 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:21:45,533 642  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:21:46,328 1437 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:21:47,687 2796 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:21:49,364 4473 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:21:49,868 4977 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:21:49,882 4991 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:21:49,887 4996 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:21:50,043 5152 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$d18b3606 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$d18b3606............................
+2014-12-02 18:21:50,062 5171 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$14e6961a - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$14e6961a............................
+2014-12-02 18:21:50,064 5173 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:21:50,104 5213 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:21:50,115 5224 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:21:50,125 5234 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:21:50,230 5339 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:21:50,535 5644 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:21:51,523 6632 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:21:55,775 10884 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!OWI','\x00\x00\x00\x00\x00\xd5\xb8\x19','5c9f2c1c61fc65291443ea797dc2e921d564cde299ec7d46e0b810b90a35647a1d0ac5295025130ef4a606d3dbf163ab');
+2014-12-02 18:21:55,776 10885 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:22:00,412 15521 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=0970F31C811DF1763EE4B8ED32241281&aid=10000101&verifycode=!OWI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:22:00,594 15703 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:22:00,594 15703 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:22:00,656 15765 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:22:00,741 15850 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......
+2014-12-02 18:25:51,758 680  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:25:52,869 1791 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:25:54,264 3186 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:25:55,946 4868 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:25:56,464 5386 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:25:56,478 5400 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:25:56,483 5405 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:25:56,642 5564 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$d18b3606 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$d18b3606............................
+2014-12-02 18:25:56,661 5583 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$14e6961a - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$14e6961a............................
+2014-12-02 18:25:56,663 5585 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:25:56,702 5624 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:25:56,713 5635 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:25:56,728 5650 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:25:56,838 5760 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:25:57,110 6032 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:25:58,099 7021 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:26:02,606 11528 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!IZQ','\x00\x00\x00\x00\x00\xd5\xb8\x19','7e89d0c3906fc998b14ae876a4a30fee6527c074447b5576065ed265c8932192bf31757e51e1d6b245dc9e84b6e9e928');
+2014-12-02 18:26:02,608 11530 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:26:07,301 16223 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=9C91B73408672192D081286376120F52&aid=10000101&verifycode=!IZQ&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:26:07,477 16399 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:26:07,478 16400 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:26:07,548 16470 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:26:07,616 16538 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......

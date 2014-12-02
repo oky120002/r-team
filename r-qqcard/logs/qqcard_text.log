@@ -1,0 +1,361 @@
+2014-12-02 18:30:56,947 544  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:30:57,682 1279 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:30:58,953 2550 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:31:00,704 4301 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:31:01,218 4815 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:31:01,233 4830 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:31:01,238 4835 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:31:01,395 4992 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$501596dc - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$501596dc............................
+2014-12-02 18:31:01,411 5008 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$9370f6f0 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$9370f6f0............................
+2014-12-02 18:31:01,413 5010 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:31:01,453 5050 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:31:01,465 5062 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:31:01,475 5072 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:31:01,574 5171 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:31:01,801 5398 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:31:02,700 6297 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:31:06,274 9871 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!FMK','\x00\x00\x00\x00\x00\xd5\xb8\x19','d2a60722470572514b7d820bcab496e168d669b3dd3578d4ba2de558218d57bb4f3d661c71e81436697542e2c672326c');
+2014-12-02 18:31:06,275 9872 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:31:10,991 14588 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=2A6889D0427C91388AF45D26ABDDAEE2&aid=10000101&verifycode=!FMK&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:31:24,444 28041 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=2A6889D0427C91388AF45D26ABDDAEE2&aid=10000101&verifycode=!FMK&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:31:24,537 28134 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('4','0','','0','您输入的验证码不正确，请重新输入。', '14006297');
+
+2014-12-02 18:31:24,538 28135 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统失败 - 密码错误
+2014-12-02 18:31:25,702 29299 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!RGW','\x00\x00\x00\x00\x00\xd5\xb8\x19','9fa3ec0cc787736039a2cbd68ad73d3cd127e7c2fbc38c8d095bf2bbab7e228dcc437bb8559efb5df960b7874c2a86f6');
+2014-12-02 18:31:25,710 29307 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:31:32,733 36330 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!DUM','\x00\x00\x00\x00\x08\x59\x30\xfb','50ad1071ea655703c6bec353a0ccbb7aa8c8524fb4d713661b6eb14679420b4ff2b30a5232772204aecdf60fe2f01ade');
+2014-12-02 18:31:32,741 36338 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:31:33,891 37488 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!MRI','\x00\x00\x00\x00\x00\xd5\xb8\x19','6ba92c63bbbb6572e06b31a9f4bb17f1e86192d9054bd8813b8f80ad5f5ce3d1c9b9623ff09a001cc2c2413da5f01ff6');
+2014-12-02 18:31:33,891 37488 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:31:39,519 43116 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=AB676B4F1A1BFA5A0455B0ACFDF6481C&aid=10000101&verifycode=!MRI&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:31:39,680 43277 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:31:39,680 43277 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:31:39,756 43353 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:31:39,824 43421 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......
+2014-12-02 18:33:58,677 488  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:33:59,354 1165 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:34:00,543 2354 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:34:01,769 3580 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:34:02,042 3853 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:34:02,045 3856 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:34:02,047 3858 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:34:02,050 3861 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:34:02,052 3863 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:34:02,055 3866 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:34:02,057 3868 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:34:02,059 3870 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:34:02,061 3872 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:34:02,063 3874 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:34:02,192 4003 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:34:02,208 4019 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:34:02,213 4024 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:34:02,340 4151 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$d2b64412 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$d2b64412............................
+2014-12-02 18:34:02,357 4168 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$1611a426 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$1611a426............................
+2014-12-02 18:34:02,360 4171 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:34:02,405 4216 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:34:02,416 4227 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:34:02,427 4238 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:34:02,479 4290 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:34:02,719 4530 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:34:03,552 5363 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:34:07,353 9164 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!SYT','\x00\x00\x00\x00\x00\xd5\xb8\x19','86bfe23aa1d0f3daf224bb40a2d815bae3e428fb2e0512ef1257dfffbdb2f8b1d948147dc9728c2368c87e0230ef4018');
+2014-12-02 18:34:07,354 9165 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:34:11,944 13755 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=C47BD517FD2654C6E0ECE8F252CE8D2A&aid=10000101&verifycode=!SYT&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:34:12,129 13940 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:34:12,129 13940 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:34:12,202 14013 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:34:12,283 14094 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......
+2014-12-02 18:39:34,961 466  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:39:35,521 1026 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:39:36,665 2170 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:39:37,634 3139 |-WARN  in org.hibernate.engine.jdbc.internal.JdbcServicesImpl - HHH000342: Could not obtain connection to query metadata : Cannot create PoolableConnectionFactory (Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178])
+2014-12-02 18:39:37,996 3501 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:39:38,370 3875 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000319: Could not get database metadata
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1117) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.qqcard.notify.context.NotifyContext.afterPropertiesSet(NotifyContext.java:61) [classes/:na]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.qqcard.App.run(App.java:52) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:167) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:104) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.getPageStore(Database.java:2355) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.open(Database.java:659) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.openDatabase(Database.java:262) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.<init>(Database.java:256) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:57) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 50 common frames omitted
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db [1.4.178/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:757) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.FileStore.open(FileStore.java:168) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:304) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2554) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:94) ~[h2-1.4.178.jar:1.4.178]
+	... 67 common frames omitted
+2014-12-02 18:39:38,373 3878 |-ERROR in org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000299: Could not complete schema update
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178])
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044) ~[commons-dbcp-1.4.jar:1.4]
+	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1743) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1781) ~[hibernate-core-4.1.10.Final.jar:4.1.10.Final]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:252) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:377) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:362) [spring-orm-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1117) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.qqcard.notify.context.NotifyContext.afterPropertiesSet(NotifyContext.java:61) [classes/:na]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1572) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1510) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:615) [spring-beans-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83) [spring-context-3.2.10.RELEASE.jar:3.2.10.RELEASE]
+	at com.r.qqcard.App.run(App.java:52) [classes/:na]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733) [na:1.7.0_71]
+	at java.awt.EventQueue.access$200(EventQueue.java:103) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:694) [na:1.7.0_71]
+	at java.awt.EventQueue$3.run(EventQueue.java:692) [na:1.7.0_71]
+	at java.security.AccessController.doPrivileged(Native Method) [na:1.7.0_71]
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76) [na:1.7.0_71]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138) [na:1.7.0_71]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91) [na:1.7.0_71]
+Caused by: org.h2.jdbc.JdbcSQLException: Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.message.DbException.get(DbException.java:167) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:104) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.getPageStore(Database.java:2355) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.open(Database.java:659) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.openDatabase(Database.java:262) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Database.<init>(Database.java:256) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:57) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.openSession(Engine.java:164) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:142) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:125) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.Engine.createSession(Engine.java:27) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:335) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.Driver.connect(Driver.java:74) ~[h2-1.4.178.jar:1.4.178]
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556) ~[commons-dbcp-1.4.jar:1.4]
+	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545) ~[commons-dbcp-1.4.jar:1.4]
+	... 50 common frames omitted
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db [1.4.178/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:757) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.FileStore.open(FileStore.java:168) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:304) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2554) ~[h2-1.4.178.jar:1.4.178]
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:94) ~[h2-1.4.178.jar:1.4.178]
+	... 67 common frames omitted
+2014-12-02 18:39:38,473 3978 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:39:38,486 3991 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:39:38,492 3997 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:39:38,642 4147 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$35088d6d - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$35088d6d............................
+2014-12-02 18:39:38,678 4183 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$7863ed81 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$7863ed81............................
+2014-12-02 18:39:38,679 4184 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:39:38,726 4231 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:39:38,735 4240 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:39:38,748 4253 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:39:38,845 4350 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:39:38,958 4463 |-WARN  in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2014-12-02 18:39:38,958 4463 |-ERROR in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot create PoolableConnectionFactory (Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178])
+2014-12-02 18:39:38,962 4467 |-WARN  in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2014-12-02 18:39:38,962 4467 |-ERROR in org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot create PoolableConnectionFactory (Database may be already in use: "/Users/rain/Develop/sts-workspace/r-team/r-qqcard/h2db/qqcard.mv.db". Possible solutions: close all other connection(s); use the server mode [90020-178])
+2014-12-02 18:39:57,994 450  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:39:58,480 936  |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:39:59,612 2068 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:40:00,930 3386 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:40:01,322 3778 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:40:01,335 3791 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:40:01,340 3796 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:40:01,465 3921 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$501596dc - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$501596dc............................
+2014-12-02 18:40:01,497 3953 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$9370f6f0 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$9370f6f0............................
+2014-12-02 18:40:01,498 3954 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:40:01,540 3996 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:40:01,551 4007 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:40:01,561 4017 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:40:01,613 4069 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:41:40,755 495  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:41:41,264 1004 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:41:42,360 2100 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:41:43,620 3360 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:41:44,037 3777 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:41:44,051 3791 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:41:44,059 3799 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:41:44,207 3947 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$57bdde16 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$57bdde16............................
+2014-12-02 18:41:44,237 3977 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$9b193e2a - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$9b193e2a............................
+2014-12-02 18:41:44,239 3979 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:41:44,278 4018 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:41:44,289 4029 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:41:44,300 4040 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:41:44,394 4134 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:41:55,885 15625 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:41:56,899 16639 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!CAW','\x00\x00\x00\x00\x00\xd5\xb8\x19','2ea03f7216e25389aecd8ed50af3770f3980126be7fe5948c34f17ccc1395e1ca09bc6658a73a127a031875f40d2716c');
+2014-12-02 18:41:56,901 16641 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:42:00,187 19927 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=10B488B072E625901645D47BBFF83E29&aid=10000101&verifycode=!CAW&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:42:00,349 20089 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:42:00,350 20090 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:42:00,397 20137 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:42:00,451 20191 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......
+2014-12-02 18:54:12,531 705  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:54:13,723 1897 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:54:15,208 3382 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:54:16,862 5036 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:54:17,229 5403 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:54:17,231 5405 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:54:17,234 5408 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:54:17,236 5410 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:54:17,239 5413 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:54:17,241 5415 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:54:17,242 5416 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:54:17,244 5418 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:54:17,246 5420 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:54:17,248 5422 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:54:17,375 5549 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:54:17,389 5563 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:54:17,396 5570 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:54:17,542 5716 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$356834e8 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$356834e8............................
+2014-12-02 18:54:17,560 5734 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$78c394fc - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$78c394fc............................
+2014-12-02 18:54:17,562 5736 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:54:17,606 5780 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:54:17,616 5790 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:54:17,627 5801 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:54:17,743 5917 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:54:18,028 6202 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:54:18,922 7096 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:54:22,320 10494 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:55:09,803 57977 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!UHN','\x00\x00\x00\x00\x08\x59\x30\xfb','93c9a4afb6ef92cf1458361942cac5c4e00e398dc042cd073d456606d1b4256580fdc182375d4a00e16c443759babe60');
+2014-12-02 18:55:09,806 57980 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:55:11,802 59976 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!OHD','\x00\x00\x00\x00\x00\xd5\xb8\x19','9c57a61dd87500036df02ae4d5a0bbddfa649cb0a26cff0fc2cfdec3065a4f93be4e70a0d229e9becb66ad341eb6e3f2');
+2014-12-02 18:55:11,802 59976 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:55:12,702 60876 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=F9781B94E15D84B8D90C57975CBCF172&aid=10000101&verifycode=!OHD&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:55:12,846 61020 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:55:12,847 61021 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:55:12,948 61122 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:55:13,029 61203 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......
+2014-12-02 18:57:35,620 677  |-DEBUG in com.r.qqcard.App - QQCard - QQ卡片辅助程序（进入main方法） ......
+2014-12-02 18:57:36,549 1606 |-INFO  in com.r.qqcard.App - QQCard - QQCardApp 实例化 ......
+2014-12-02 18:57:37,953 3010 |-DEBUG in org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+2014-12-02 18:57:39,568 4625 |-WARN  in org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2014-12-02 18:57:39,917 4974 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:57:39,919 4976 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:57:39,922 4979 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:57:39,924 4981 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:57:39,926 4983 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:57:39,928 4985 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_basedata
+2014-12-02 18:57:39,930 4987 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_card
+2014-12-02 18:57:39,932 4989 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_compose
+2014-12-02 18:57:39,934 4991 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_gift
+2014-12-02 18:57:39,935 4992 |-INFO  in java.sql.DatabaseMetaData - HHH000262: Table not found: qqcard_theme
+2014-12-02 18:57:40,053 5110 |-DEBUG in com.r.qqcard.account.service.AccountService - QQCard - Instance AccountService............................
+2014-12-02 18:57:40,066 5123 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService - QQCard - Instance BaseDataService............................
+2014-12-02 18:57:40,072 5129 |-DEBUG in com.r.qqcard.basedata.dao.BaseDataDaoImpl - Instance BaseDataDaoImpl............................
+2014-12-02 18:57:40,216 5273 |-DEBUG in com.r.qqcard.basedata.service.BaseDataService$$EnhancerBySpringCGLIB$$d2b64412 - QQCard - Instance BaseDataService$$EnhancerBySpringCGLIB$$d2b64412............................
+2014-12-02 18:57:40,232 5289 |-DEBUG in com.r.qqcard.account.service.AccountService$$EnhancerBySpringCGLIB$$1611a426 - QQCard - Instance AccountService$$EnhancerBySpringCGLIB$$1611a426............................
+2014-12-02 18:57:40,234 5291 |-DEBUG in com.r.qqcard.core.serivce.CoreService - QQCard - Instance CoreService............................
+2014-12-02 18:57:40,275 5332 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.core.serivce.CoreService:preLogin({})
+2014-12-02 18:57:40,285 5342 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.login.controller.LoginController:showLoginDialog({})
+2014-12-02 18:57:40,296 5353 |-DEBUG in com.r.qqcard.main.controller.MainController - QQCard - 添加日志监听器......
+2014-12-02 18:57:40,390 5447 |-DEBUG in com.r.qqcard.notify.context.NotifyContext - QQCard - 扫描到注解@EventAnn : com.r.qqcard.main.controller.MainController:loginOk({class java.lang.String,class java.lang.String,class java.lang.Boolean})
+2014-12-02 18:57:40,665 5722 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 登陆QQ......
+2014-12-02 18:57:41,599 6656 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:57:45,186 10243 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 获取登陆QQ账号时的辅助计算码返回值 - ptui_checkVC('0','!GEJ','\x00\x00\x00\x00\x00\xd5\xb8\x19','71f85578bd9952cf013b80e15afd996a3cc722fc17b6dae6cc1d85ab84ae3b14befadc384b386486f66cc79589a92097');
+2014-12-02 18:57:45,187 10244 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 获取验证码图片完成! - 没有获取到验证码图片
+2014-12-02 18:57:50,099 15156 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web账户 - http://ptlogin2.qq.com/login?u=14006297&p=7FC99547DAA93A75E2222EFA5B5A6F20&aid=10000101&verifycode=!GEJ&js_type=0&js_ver=10100&g=1&h=1&from_ui=1&dumy=&u1=http%3A%2F%2Fimgcache.qq.com%2Fqqshow_v3%2Fhtdocs%2Finc%2Floginto.html%3Fmyurl%3Dhttp%253A%2F%2Fappimg2.qq.com%2Fcard%2Findex_v3.html
+2014-12-02 18:57:50,232 15289 |-DEBUG in com.r.core.tool.QQTool - QQ工具 - 登陆QQ的web后的返回值 - ptuiCB('0','0','http://imgcache.qq.com/qqshow_v3/htdocs/inc/loginto.html?myurl=http%3A//appimg2.qq.com/card/index_v3.html','0','登录成功！', '雨');
+
+2014-12-02 18:57:50,233 15290 |-DEBUG in com.r.core.desktop.ctrl.impl.dialog.HLoginDialog - 登陆框 - 登陆系统成功!
+2014-12-02 18:57:50,283 15340 |-INFO  in com.r.qqcard.account.service.AccountService - QQCard - 测试 - 用户名:14006297
+2014-12-02 18:57:50,313 15370 |-INFO  in com.r.qqcard.main.controller.MainController - QQCard - 显示主界面......
+2014-12-02 18:57:50,368 15425 |-INFO  in com.r.qqcard.login.controller.LoginController - QQCard - 成功登陆账号[14006297]......

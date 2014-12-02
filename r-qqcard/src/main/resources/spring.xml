@@ -4,19 +4,21 @@
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
-
-	<!-- 扫描bean -->
-	<context:component-scan base-package="com.r.qqcard" />
 
 	<!-- 通知工厂 -->
 	<bean id="springxml.notify" class="com.r.qqcard.notify.context.NotifyFactory" />
 
+	<!-- 网络请求套接字 -->
+	<bean id="springxml.httpsocket" class="com.r.core.httpsocket.HttpSocket">
+		<!-- 保持cookie -->
+		<property name="holdCookies" value="true" />
+		<!-- httpsocket 请求超时时间(10秒) -->
+		<property name="timeout" value="10000" />
+	</bean>
+
 	<!-- QQ卡片辅助程序工厂 -->
 	<bean id="springxml.context" class="com.r.qqcard.context.QQCardFactory">
-		<!-- httpsocket 请求超时时间 -->
-		<property name="httpSocketTimeout" value="10000" />
 		<!-- QQ网络应用id(qq魔法卡片:10000101) -->
 		<property name="appid" value="10000101" />
 		<!-- 程序名称 -->
@@ -24,4 +26,65 @@
 		<!-- 版本号 -->
 		<property name="appVersion" value="test_0.0.1" />
 	</bean>
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- h2 -->
+		<property name="driverClassName" value="org.h2.Driver" />
+		<!-- 嵌入式 -->
+<!-- 		<property name="url" value="jdbc:h2:./h2db/qqcard" /> -->
+		<!-- 内存式 -->
+		<property name="url" value="jdbc:h2:mem:qqcard" />
+
+		<property name="username" value="root" />
+		<property name="password" value="root1234" />
+
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="1000" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="validationQuery" value="select 1"></property>
+
+		<property name="removeAbandoned" value="true"></property>
+		<property name="removeAbandonedTimeout" value="180"></property>
+		<property name="logAbandoned" value="true"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="60000"></property>
+		<property name="minEvictableIdleTimeMillis" value="1800000"></property>
+	</bean>
+
+	<!-- Session Factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- hibernate 扫描实体的路径 -->
+		<property name="packagesToScan" value="com.r.*.**" />
+		<!-- 一些参数 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 事务驱动 -->
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="transactionManager" />
+
+	<!-- 扫描bean -->
+	<context:component-scan base-package="com.r.qqcard" />
 </beans>

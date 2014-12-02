@@ -16,7 +16,7 @@ import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.qqcard.App;
-import com.r.qqcard.account.AccountService;
+import com.r.qqcard.account.service.AccountService;
 import com.r.qqcard.context.QQCardContext;
 import com.r.qqcard.notify.context.NotifyContext;
 import com.r.qqcard.notify.handler.Event;
@@ -42,21 +42,23 @@ public class LoginController {
     /** 账号业务处理器 */
     @Resource(name = "service.account")
     private AccountService accountService;
+    /** 网络请求套接字 */
+    @Resource(name = "springxml.httpsocket")
+    private HttpSocket httpSocket;
 
     /** 显示登陆对话框 */
     @EventAnn(Event.程序启动)
     public void showLoginDialog() {
         notify.notifyEvent(Event.登陆前);
-        HttpSocket httpSocket = context.getHttpSocket();
         String appid = context.getAppid();
-        String defaultUsername = accountService.getDefaultUsername();
-        String defaultPassword = accountService.getDefaultPassword();
+        String defaultUsername = accountService.getUsername();
+        String defaultPassword = accountService.getPassword();
         logger.info("登陆QQ......");
         HAlert.showLoginDialogByQQ(httpSocket, appid, defaultUsername, defaultPassword, new LoginReturnValueObtain() {
             @Override
             public void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword) {
                 if (LoginStatus.成功登陆.equals(loginStatus)) {
-                    accountService.setDefaultUsernameAndPassword(username, password, isKeepUsernameAndPassword);
+                    accountService.setUsernameAndPassword(username, password, isKeepUsernameAndPassword);
                     notify.notifyEvent(Event.登陆成功, username, password, isKeepUsernameAndPassword);
                     logger.info("成功登陆账号[{}]......", username);
                 } else {

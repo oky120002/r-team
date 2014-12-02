@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.vote931.support;
+package com.r.qqcard.core.support;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;

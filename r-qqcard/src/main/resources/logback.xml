@@ -31,27 +31,40 @@
 		</encoder>
 	</appender>
 	
-<!-- <appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">   -->
-<!-- 	    <file>${logfile}/${contentName}.sql.log</file>   -->
-<!-- 	    <append>false</append>   -->
-<!-- 	    <encoder>   -->
-<!-- 	      <pattern>${commonPattern}</pattern>   -->
-<!-- 	    </encoder>   -->
-<!-- 	</appender>   -->
+	<appender name="SQL_FILE" class="ch.qos.logback.core.FileAppender">  
+	    <file>${logfile}/${contentName}.sql.log</file>  
+	    <append>false</append>  
+	    <encoder>  
+	      <pattern>${commonPattern}</pattern>  
+	    </encoder>  
+	</appender>  
 	
 	<!-- spring框架打印日志级别 -->
 	<logger name="org.springframework" level="INFO"/>
+	<logger name="org.springframework.web.servlet.mvc.annotation" level="WARN"/>
+	<logger name="org.springframework.web.servlet.view.JstlView" level="WARN"/>
+	<logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="WARN"/>
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN"/>
+	<logger name="org.springframework.web.bind.annotation.support.HandlerMethodInvoker" level="WARN"/>
 	<!-- springMVC答应日志级别 -->
 	<logger name="org.springframework.aop" level="ERROR" />
 	<logger name="org.springframework.web" level="DEBUG" />
 	<logger name="org.springframework.beans" level="ERROR" />
 	<!-- 任务计划 -->
 	<logger name="org.quartz" level="ERROR" />
+	<!-- hibernate -->
+	<logger name="org.hibernate" level="WARN" />
+	<!-- cxf日志级别 -->
+	<logger name="org.apache.cxf" level="WARN" />
 	<!-- ehcache日志级别 -->
 	<logger name="net.sf.ehcache" level="WARN" />
-	
-	<logger name="com.r.core.httpsocket" level="ERROR" />
-	<logger name="com.r" level="DEBUG" />
+	<!-- mybatis日志级别 -->
+	<logger name="org.apache.ibatis" level="WARN" />
+	<logger name="org.mybais" level="WARN" />
+	<!-- sql日志级别 -->
+	<logger name="java.sql.Connection" level="ERROR">
+		<appender-ref ref="SQL_FILE"/>
+	</logger>
 
 	<!-- level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。 -->
 	<!-- 工具类级别 -->

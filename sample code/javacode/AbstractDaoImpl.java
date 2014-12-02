@@ -45,7 +45,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 			this.modelClass = modelClass;
 		}
 
-		logger.info("Instance " + getClass().getSimpleName() + "............................");
+		logger.debug("Instance " + getClass().getSimpleName() + "............................");
 	}
 
 	/**
