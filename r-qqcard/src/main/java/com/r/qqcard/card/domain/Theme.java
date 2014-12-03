@@ -3,6 +3,8 @@
  */
 package com.r.qqcard.card.domain;
 
+import java.awt.Color;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "qqcard_theme")
-public class Theme {
+public class Theme implements Serializable {
+    private static final long serialVersionUID = -7055447944244135258L;
     @Id
     private Integer id; // id
     @Column
@@ -49,9 +52,7 @@ public class Theme {
     @JoinColumn(name = "theme_id")
     private List<Card> cards; // 此主题拥有的所有卡片
     @Column
-    private Integer nid; // 当前卡片状态(9:闪卡|...?)
-    @Column
-    private Integer type; // ?
+    private Integer themeType; // 主题类型(9:闪卡|...?)
     @Column
     private Integer version; // 版本
     @Column
@@ -60,6 +61,52 @@ public class Theme {
     private Date offtime; // 下架时间
     @Column
     private Integer flashSrcTid; // ?
+
+    public Theme() {
+        super();
+    }
+
+    /**
+     * @param id
+     * @param name
+     * @param difficulty
+     * @param publishTime
+     * @param pickRate
+     * @param enable
+     * @param prize
+     * @param score
+     * @param color
+     * @param gift
+     * @param text
+     * @param cards
+     * @param nid
+     * @param type
+     * @param version
+     * @param time
+     * @param offtime
+     * @param flashSrcTid
+     */
+    public Theme(Integer id, String name, Integer difficulty, Date publishTime, Integer pickRate, Boolean enable, Integer prize, Integer score, String color, String gift, String text, List<Card> cards, Integer themeType, Integer version, Date time, Date offtime, Integer flashSrcTid) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.publishTime = publishTime;
+        this.pickRate = pickRate;
+        this.enable = enable;
+        this.prize = prize;
+        this.score = score;
+        this.color = color;
+        this.gift = gift;
+        this.text = text;
+        this.cards = cards;
+        this.themeType = themeType;
+
+        this.version = version;
+        this.time = time;
+        this.offtime = offtime;
+        this.flashSrcTid = flashSrcTid;
+    }
 
     /** 获得QQ卡片主题id */
     public Integer getId() {
@@ -112,6 +159,11 @@ public class Theme {
      */
     public String getColor() {
         return color;
+    }
+
+    /** 获取QQ卡片主题颜色 */
+    public static Color getColor(String color) {
+        return Color.decode(color);
     }
 
     /** 获得QQ卡片主题完成后获得的QQ秀(以"|"分割) */
@@ -189,16 +241,6 @@ public class Theme {
         this.cards = cards;
     }
 
-    /***/
-    public void setNid(Integer nid) {
-        this.nid = nid;
-    }
-
-    /** 设置卡片类型 */
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     /** 设置版本 */
     public void setVersion(Integer version) {
         this.version = version;
@@ -219,14 +261,26 @@ public class Theme {
         this.flashSrcTid = flashSrcTid;
     }
 
-    /** 获得当前卡片状态(9:闪卡|...?) */
-    public Integer getNid() {
-        return nid;
+    /**
+     * @return the themeType
+     */
+    public Integer getThemeType() {
+        return themeType;
     }
 
-    /** 获得QQ卡片主题类型 */
-    public Integer getType() {
-        return type;
+    /**
+     * @param themeType
+     *            the themeType to set
+     */
+    public void setThemeType(Integer themeType) {
+        this.themeType = themeType;
+    }
+
+    /**
+     * @return the enable
+     */
+    public Boolean getEnable() {
+        return enable;
     }
 
     /** 获得QQ卡片主题版本 */

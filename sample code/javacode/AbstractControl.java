@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.vote931.support;
+package com.r.web.support.abs;
 
 import javax.servlet.http.HttpServletRequest;
 

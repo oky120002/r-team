@@ -25,12 +25,12 @@ public class JsFunction {
     public JsFunction(String js) {
         if (StringUtils.isNotBlank(js)) {
             this.js = js;
-            resolve(js);
+            resolve();
         }
     }
 
     /** 解析jsfunction字符串 */
-    private void resolve(String js) {
+    private void resolve() {
         js = js.trim();
 
         // 如果最后一个符号是";"号.则去掉
@@ -53,13 +53,6 @@ public class JsFunction {
             par = par.substring(1, par.length() - 1); // 去掉左右引号(或者单引号)
             this.pars.add(par);
         }
-    }
-
-    /**
-     * @return the js
-     */
-    public String getJs() {
-        return js;
     }
 
     /**

@@ -49,7 +49,6 @@ public class LoginController {
     /** 显示登陆对话框 */
     @EventAnn(Event.程序启动)
     public void showLoginDialog() {
-        notify.notifyEvent(Event.登陆前);
         String appid = context.getAppid();
         String defaultUsername = accountService.getUsername();
         String defaultPassword = accountService.getPassword();

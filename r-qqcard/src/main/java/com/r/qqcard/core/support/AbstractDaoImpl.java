@@ -1,5 +1,6 @@
 package com.r.qqcard.core.support;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ import com.r.core.util.AssertUtil;
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     /** 日志 */
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
@@ -47,14 +48,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         logger.debug("Instance " + getClass().getSimpleName() + "............................");
     }
 
-    /**
-     * 
-     * 获得当前事务Seesion
-     * 
-     * @return Session
-     * @author rain
-     */
-    protected Session getSession() {
+    @Override
+    public Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
@@ -65,7 +60,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void creates(List<T> models) {
+    public final void creates(Collection<T> models) {
         AssertUtil.isNotEmpty("创建实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -74,7 +69,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
-    @SafeVarargs
+    @SuppressWarnings("unchecked")
     @Override
     public final void creates(T... models) {
         AssertUtil.isNotEmpty("创建实体时，实体集合不能为空。", models);
@@ -92,7 +87,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void updates(List<T> models) {
+    public final void updates(Collection<T> models) {
         AssertUtil.isNotEmpty("更新实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -101,8 +96,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    @SafeVarargs
     public final void updates(T... models) {
         AssertUtil.isNotEmpty("更新实体时，实体集合不能为空。", models);
         for (T t : models) {
@@ -119,7 +114,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void saves(List<T> models) {
+    public final void saves(Collection<T> models) {
         AssertUtil.isNotEmpty("保存实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -128,8 +123,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    @SafeVarargs
     public final void saves(T... models) {
         AssertUtil.isNotEmpty("保存实体时，实体集合不能为空。", models);
         for (T t : models) {
@@ -146,7 +141,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void merges(List<T> models) {
+    public final void merges(Collection<T> models) {
         AssertUtil.isNotEmpty("合并实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -155,8 +150,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    @SafeVarargs
     public final void merges(T... models) {
         AssertUtil.isNotEmpty("合并实体时，实体集合不能为空。", models);
         for (T t : models) {
@@ -173,7 +168,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
     @Override
-    public final void deletes(List<T> models) {
+    public final void deletes(Collection<T> models) {
         AssertUtil.isNotEmpty("删除实体时，实体集合不能为空。", models);
         for (T t : models) {
             if (t != null) {
@@ -182,7 +177,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
-    @SafeVarargs
+    @SuppressWarnings("unchecked")
     @Override
     public final void deletes(T... models) {
         AssertUtil.isNotEmpty("删除实体时，实体集合不能为空。", models);
@@ -290,7 +285,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         return queryByHql(hql, null, -1, -1);
     }
 
-    @SafeVarargs
+    @SuppressWarnings("unchecked")
     @Override
     public final List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues) {
         if (ArrayUtils.isEmpty(keyValues)) {
@@ -334,7 +329,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         return queryBySql(sql, null, -1, -1);
     }
 
-    @SafeVarargs
+    @SuppressWarnings("unchecked")
     @Override
     public final List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues) {
         if (ArrayUtils.isEmpty(keyValues)) {

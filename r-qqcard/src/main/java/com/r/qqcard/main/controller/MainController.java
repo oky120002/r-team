@@ -19,7 +19,6 @@ import com.r.qqcard.main.view.MainFrame;
 import com.r.qqcard.notify.context.NotifyContext;
 import com.r.qqcard.notify.handler.Event;
 import com.r.qqcard.notify.handler.EventAnn;
-import com.r.qqcard.notify.handler.ValueType;
 
 /**
  * 主界面控制器
@@ -54,6 +53,8 @@ public class MainController implements InitializingBean, LoggerListener {
     public void showMainFrame() {
         logger.info("显示主界面......");
         this.mainFrame.setVisible(true);
+        logger.info("初始化基础数据......");
+        notify.notifyEvent(Event.初始化数据); // 初始化数据完成后,才能完全使用
     }
 
     @Override
@@ -70,4 +71,10 @@ public class MainController implements InitializingBean, LoggerListener {
     public void loginOk(String username, String password, Boolean isflg) {
         showMainFrame();
     }
+
+    @EventAnn(Event.初始化数据完成)
+    public void endInit() {
+        logger.info("初始化基础数据完成......");
+    }
+
 }

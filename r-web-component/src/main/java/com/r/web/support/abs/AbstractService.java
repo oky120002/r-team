@@ -16,6 +16,6 @@ public abstract class AbstractService {
 
     public AbstractService() {
         super();
-        logger.info("Instance  " + getClass().getSimpleName() + "............................");
+        logger.debug("Instance  " + getClass().getSimpleName() + "............................");
     }
 }

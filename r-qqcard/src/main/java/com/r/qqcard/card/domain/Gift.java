@@ -3,6 +3,8 @@
  */
 package com.r.qqcard.card.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +18,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "qqcard_gift")
-public class Gift {
+public class Gift implements Serializable {
+    private static final long serialVersionUID = 8899763199940874195L;
     @Id
     private Integer id; // id
     @Column
@@ -25,6 +28,25 @@ public class Gift {
     private String name; // 名称
     @Column
     private String szTypeID; // ?
+
+    public Gift() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @param id
+     * @param type
+     * @param name
+     * @param szTypeID
+     */
+    public Gift(Integer id, Integer type, String name, String szTypeID) {
+        super();
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.szTypeID = szTypeID;
+    }
 
     /** 获取id */
     public Integer getId() {

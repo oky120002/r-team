@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.web.vote931.support;
+package com.r.web.support.abs;
 
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -16,7 +16,6 @@ public abstract class AbstractService {
 
     public AbstractService() {
         super();
-        logger.debug("Instance " + getClass().getSimpleName() + "............................");
+        logger.debug("Instance  " + getClass().getSimpleName() + "............................");
     }
-
 }

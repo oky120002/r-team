@@ -11,11 +11,12 @@ package com.r.qqcard.notify.handler;
  */
 public enum Event {
     程序启动, //
-    登陆前, //
     /** 账号,密码,是否保存密码和账号 */
     登陆成功(String.class, String.class, Boolean.class), //
     /** 账号,密码,是否保存密码和账号 */
     登陆失败(String.class, String.class, Boolean.class), //
+    初始化数据, //
+    初始化数据完成, //
     ;
 
     private Class<?>[] clazzes;

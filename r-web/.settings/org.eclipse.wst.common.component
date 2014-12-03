@@ -8,9 +8,6 @@
         <dependent-module archiveName="r-core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/r-core/r-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="r-web-component-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/r-web-component/r-web-component">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/r-web/target/classes"/>
         <property name="component.exclusion.patterns" value="**/spy.properties"/>
         <property name="context-root" value="r-web"/>

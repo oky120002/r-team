@@ -3,6 +3,8 @@
  */
 package com.r.qqcard.card.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "qqcard_card")
-public class Card {
+public class Card implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     private Integer id; // 卡片id
     @ManyToOne
@@ -37,11 +40,43 @@ public class Card {
     @Column
     private Integer version; // 版本
     @Column
-    private Integer time; // 炼卡时间
+    private Long time; // 炼卡时间
     @Column
     private Integer itemNo; // 物品编号?
     @Column
     private Integer mana; // 魔法值
+
+    public Card() {
+        super();
+    }
+
+    /**
+     * @param id
+     * @param theme
+     * @param name
+     * @param price
+     * @param type
+     * @param pickRate
+     * @param enable
+     * @param version
+     * @param time
+     * @param itemNo
+     * @param mana
+     */
+    public Card(Integer id, Theme theme, String name, Integer price, Integer type, Integer pickRate, Boolean enable, Integer version, Long time, Integer itemNo, Integer mana) {
+        super();
+        this.id = id;
+        this.theme = theme;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.pickRate = pickRate;
+        this.enable = enable;
+        this.version = version;
+        this.time = time;
+        this.itemNo = itemNo;
+        this.mana = mana;
+    }
 
     /** 获得QQ卡片id */
     public Integer getId() {
@@ -84,7 +119,7 @@ public class Card {
     }
 
     /** 获得QQ卡片炼卡时间 */
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
@@ -139,7 +174,7 @@ public class Card {
     }
 
     /** 设置时间 */
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

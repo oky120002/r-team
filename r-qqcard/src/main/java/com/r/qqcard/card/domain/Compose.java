@@ -3,15 +3,14 @@
  */
 package com.r.qqcard.card.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * QQ魔法卡片合成规则
@@ -21,11 +20,9 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "qqcard_compose")
-public class Compose {
+public class Compose implements Serializable {
+    private static final long serialVersionUID = -219713206850628833L;
     @Id
-    @GeneratedValue(generator = "sys_uuid")
-    @GenericGenerator(name = "sys_uuid", strategy = "uuid")
-    private String id; // id
     @ManyToOne
     @JoinColumn(name = "theme_id")
     private Theme theme; // 所在主题
@@ -42,23 +39,39 @@ public class Compose {
     @JoinColumn(name = "card3_id")
     private Card card3; // 合成卡片3
     @Column
-    private Integer time; // 消耗时间
+    private Long time; // 消耗时间
     @Column
     private Integer state; // 状态
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
+    public Compose() {
+        super();
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param theme
+     *            所在主题
+     * @param cardTar
+     *            合成的目标卡片
+     * @param card1
+     *            素材1
+     * @param card2
+     *            素材2
+     * @param card3
+     *            素材3
+     * @param time
+     *            消耗时间
+     * @param state
+     *            状态
      */
-    public void setId(String id) {
-        this.id = id;
+    public Compose(Theme theme, Card cardTar, Card card1, Card card2, Card card3, Long time, Integer state) {
+        super();
+        this.theme = theme;
+        this.cardTar = cardTar;
+        this.card1 = card1;
+        this.card2 = card2;
+        this.card3 = card3;
+        this.time = time;
+        this.state = state;
     }
 
     /** 获取合成的主题 */
@@ -87,7 +100,7 @@ public class Compose {
     }
 
     /** 获取合成素材需要消耗的时间 */
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
@@ -127,7 +140,7 @@ public class Compose {
     }
 
     /** 设置要消耗的时间 */
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

@@ -12,10 +12,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.util.ClassUtils;
 
 import com.r.core.exceptions.InvokeMethodException;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.TaskUtil;
 import com.r.qqcard.notify.handler.Event;
 import com.r.qqcard.notify.handler.EventAnn;
 import com.r.qqcard.notify.handler.ValueChangeAnn;
@@ -55,14 +57,15 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
         context = this;
-
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         for (String beanName : beanDefinitionNames) {
-            Object bean = applicationContext.getBean(beanName);
-            Method[] methods = bean.getClass().getMethods();
+            Object bean = applicationContext.getBean(beanName); // 要先判断获得的bean是否是代理类(在方法里面有加事务,则会成为代理类)
+            Class<?> userClass = ClassUtils.getUserClass(bean.getClass()); // 直接获取用户类(代理类实质上是用户类的子类)
+            Method[] methods = userClass.getMethods();
             for (Method method : methods) {
                 EventAnn eventAnn = method.getAnnotation(EventAnn.class);
                 ValueChangeAnn valueChangeAnn = method.getAnnotation(ValueChangeAnn.class);
+
                 // 获取事件注解
                 if (eventAnn != null) {
                     Event event = eventAnn.value();
@@ -74,7 +77,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
                         this.events.put(event, new ArrayList<EventMethod>());
                     }
                     String methodName = method.getName();
-                    logger.debug("扫描到注解@EventAnn : {}:{}({})", bean.getClass().getName(), methodName, ArrayUtils.toString(event.getClazzes()));
+                    logger.debug("扫描到注解@EventAnn : {}:{}({})", userClass.getName(), methodName, ArrayUtils.toString(event.getClazzes()));
                     this.events.get(event).add(new EventMethod(beanName, methodName));
                 }
 
@@ -91,7 +94,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
                             this.valueChanges.put(valueType, new ArrayList<EventMethod>());
                         }
                         String methodName = method.getName();
-                        logger.debug("扫描到注解@ValueChangeAnn : {}:{}()", bean.getClass().getName(), methodName, valueType.getClazz());
+                        logger.debug("扫描到注解@ValueChangeAnn : {}:{}()", userClass.getName(), methodName, valueType.getClazz());
                         this.valueChanges.get(valueType).add(new EventMethod(beanName, methodName));
                     }
                 }
@@ -112,12 +115,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
         if (CollectionUtils.isNotEmpty(eventMethods)) {
             for (EventMethod eventMethod : eventMethods) {
                 Object bean = this.applicationContext.getBean(eventMethod.beanName);
-                try {
-                    Method method = bean.getClass().getMethod(eventMethod.methodName, event.getClazzes());
-                    method.invoke(bean, objects);
-                } catch (Exception e) {
-                    throw new InvokeMethodException(e);
-                }
+                TaskUtil.executeTask(new Ta(bean, eventMethod.methodName, event.getClazzes(), objects));
             }
         }
     }
@@ -135,12 +133,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
         if (CollectionUtils.isNotEmpty(eventMethods)) {
             for (EventMethod eventMethod : eventMethods) {
                 Object bean = this.applicationContext.getBean(eventMethod.beanName);
-                try {
-                    Method method = bean.getClass().getMethod(eventMethod.methodName, valueType.getClazz());
-                    method.invoke(bean, newValue);
-                } catch (Exception e) {
-                    throw new InvokeMethodException(e);
-                }
+                TaskUtil.executeTask(new Ta(bean, eventMethod.methodName, new Class<?>[] { valueType.getClazz() }, new Object[] { newValue }));
             }
         }
     }
@@ -170,7 +163,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
         }
     }
 
-    class EventMethod {
+    private class EventMethod {
         String beanName;
         String methodName;
 
@@ -179,7 +172,36 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
             this.beanName = beanName;
             this.methodName = methodName;
         }
-
     }
 
+    private class Ta implements Runnable {
+        private Object bean;
+        private String methodName;
+        private Class<?>[] clazzes;
+        private Object[] objects;
+
+        /**
+         * @param bean
+         * @param methodName
+         * @param clazzes
+         * @param objects
+         */
+        public Ta(Object bean, String methodName, Class<?>[] clazzes, Object[] objects) {
+            super();
+            this.bean = bean;
+            this.methodName = methodName;
+            this.clazzes = clazzes;
+            this.objects = objects;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Method method = bean.getClass().getMethod(methodName, clazzes);
+                method.invoke(bean, objects);
+            } catch (Exception e) {
+                throw new InvokeMethodException(e);
+            }
+        }
+    }
 }

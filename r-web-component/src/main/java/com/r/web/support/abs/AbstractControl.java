@@ -36,7 +36,7 @@ public abstract class AbstractControl {
     
     public AbstractControl() {
         super();
-        logger.info("Instance " + getClass().getSimpleName() + "............................");
+        logger.debug("Instance " + getClass().getSimpleName() + "............................");
     }
 
     /**
