@@ -7,6 +7,7 @@
 package com.r.core.httpsocket.context;
 
 import com.r.core.util.AssertUtil;
+import com.r.core.util.StrUtil;
 
 /**
  * url
@@ -126,6 +127,11 @@ public class HttpUrl {
      */
     public void setPort(int port) {
         this.port = port;
+    }
+
+    @Override
+    public String toString() {
+        return StrUtil.formart("HttpUrl [{}:{}/{}]", host, port, url);
     }
 
 }

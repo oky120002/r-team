@@ -12,16 +12,16 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.ClassUtils;
 
 import com.r.core.exceptions.InvokeMethodException;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.StrUtil;
 import com.r.core.util.TaskUtil;
 import com.r.qqcard.notify.handler.Event;
 import com.r.qqcard.notify.handler.EventAnn;
-import com.r.qqcard.notify.handler.ValueChangeAnn;
-import com.r.qqcard.notify.handler.ValueType;
 
 /**
  * 通知容器<br/>
@@ -38,8 +38,6 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
     private static NotifyContext context = null;
     /** 事件方法映射 */
     private Map<Event, List<EventMethod>> events = new HashMap<Event, List<EventMethod>>();
-    /** 值变换方法映射 */
-    private Map<ValueType, List<EventMethod>> valueChanges = new HashMap<ValueType, List<EventMethod>>();
     /** spring 容器 */
     private ApplicationContext applicationContext;
 
@@ -57,47 +55,25 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
         context = this;
-        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-        for (String beanName : beanDefinitionNames) {
-            Object bean = applicationContext.getBean(beanName); // 要先判断获得的bean是否是代理类(在方法里面有加事务,则会成为代理类)
-            Class<?> userClass = ClassUtils.getUserClass(bean.getClass()); // 直接获取用户类(代理类实质上是用户类的子类)
+        Map<String, Object> beanMap = applicationContext.getBeansWithAnnotation(Controller.class);
+        for (Map.Entry<String, Object> entry : beanMap.entrySet()) {
+            Class<?> userClass = ClassUtils.getUserClass(entry.getValue().getClass()); // 直接获取用户类(代理类实质上是用户类的子类),一般只有加了事务的类才会被Hibernate代理
             Method[] methods = userClass.getMethods();
             for (Method method : methods) {
-                EventAnn eventAnn = method.getAnnotation(EventAnn.class);
-                ValueChangeAnn valueChangeAnn = method.getAnnotation(ValueChangeAnn.class);
-
                 // 获取事件注解
+                EventAnn eventAnn = method.getAnnotation(EventAnn.class);
                 if (eventAnn != null) {
+                    // 校验
+                    checkMethodParam(method);
                     Event event = eventAnn.value();
-                    if (event == null) {
-                        continue;
-                    }
-                    checkMethodParam(event, method);
                     if (!this.events.containsKey(event)) {
                         this.events.put(event, new ArrayList<EventMethod>());
                     }
                     String methodName = method.getName();
                     logger.debug("扫描到注解@EventAnn : {}:{}({})", userClass.getName(), methodName, ArrayUtils.toString(event.getClazzes()));
-                    this.events.get(event).add(new EventMethod(beanName, methodName));
+                    this.events.get(event).add(new EventMethod(entry.getKey(), methodName));
                 }
 
-                // 获取之变换注解
-                if (valueChangeAnn != null) {
-                    ValueType[] valueTypes = valueChangeAnn.value();
-                    if (ArrayUtils.isEmpty(valueTypes)) {
-                        continue;
-                    }
-
-                    for (ValueType valueType : valueTypes) {
-                        checkMethodParam(valueType, method);
-                        if (!this.valueChanges.containsKey(valueType)) {
-                            this.valueChanges.put(valueType, new ArrayList<EventMethod>());
-                        }
-                        String methodName = method.getName();
-                        logger.debug("扫描到注解@ValueChangeAnn : {}:{}()", userClass.getName(), methodName, valueType.getClazz());
-                        this.valueChanges.get(valueType).add(new EventMethod(beanName, methodName));
-                    }
-                }
             }
         }
     }
@@ -115,25 +91,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
         if (CollectionUtils.isNotEmpty(eventMethods)) {
             for (EventMethod eventMethod : eventMethods) {
                 Object bean = this.applicationContext.getBean(eventMethod.beanName);
-                TaskUtil.executeTask(new Ta(bean, eventMethod.methodName, event.getClazzes(), objects));
-            }
-        }
-    }
-
-    /**
-     * 通知某值发生了改变
-     * 
-     * @param valueType
-     *            值类型
-     * @param newValue
-     *            改变后的新值
-     */
-    public void notifyEvent(ValueType valueType, Object newValue) {
-        List<EventMethod> eventMethods = this.valueChanges.get(valueType);
-        if (CollectionUtils.isNotEmpty(eventMethods)) {
-            for (EventMethod eventMethod : eventMethods) {
-                Object bean = this.applicationContext.getBean(eventMethod.beanName);
-                TaskUtil.executeTask(new Ta(bean, eventMethod.methodName, new Class<?>[] { valueType.getClazz() }, new Object[] { newValue }));
+                TaskUtil.executeTask(new NotifyTask(bean, eventMethod.methodName, event.getClazzes(), objects));
             }
         }
     }
@@ -141,25 +99,20 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
     /**
      * 检查方法入参和事件能否一致
      * 
-     * @param event
      * @param method
      */
-    private void checkMethodParam(Event event, Method method) {
+    private void checkMethodParam(Method method) {
+        Class<?> beanClass = method.getDeclaringClass();
+        EventAnn annotation = method.getAnnotation(EventAnn.class);
+        Event event = annotation.value();
+        if (event == null) {
+            throw new NullPointerException(StrUtil.formart("{}.{}({})方法上的注解事件不能为空", beanClass.getName(), method.getName(), ArrayUtils.toString(method.getParameterTypes())));
+        }
+
         Class<?>[] clazzes = event.getClazzes();
         Class<?>[] parameterTypes = method.getParameterTypes();
         if (!ArrayUtils.isEquals(clazzes, parameterTypes)) {
-            throw new IllegalArgumentException("方法入参和注解配置入参不一致");
-        }
-    }
-
-    /** 检查值变换方法参数的正确性 */
-    private void checkMethodParam(ValueType type, Method method) {
-        Class<?>[] parameterTypes = method.getParameterTypes();
-        if (!ValueType.class.equals(parameterTypes[0])) {
-            throw new IllegalArgumentException("方法第一个参数必须是ValueType");
-        }
-        if (!type.getClazz().equals(parameterTypes[1])) {
-            throw new IllegalArgumentException("方法第二个参数必须是ValueType枚举对应的类型");
+            throw new IllegalArgumentException(StrUtil.formart("{}.{}({})方法入参和注解配置入参不一致", beanClass.getName(), method.getName(), ArrayUtils.toString(clazzes)));
         }
     }
 
@@ -174,7 +127,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
         }
     }
 
-    private class Ta implements Runnable {
+    private class NotifyTask implements Runnable {
         private Object bean;
         private String methodName;
         private Class<?>[] clazzes;
@@ -186,7 +139,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
          * @param clazzes
          * @param objects
          */
-        public Ta(Object bean, String methodName, Class<?>[] clazzes, Object[] objects) {
+        public NotifyTask(Object bean, String methodName, Class<?>[] clazzes, Object[] objects) {
             super();
             this.bean = bean;
             this.methodName = methodName;

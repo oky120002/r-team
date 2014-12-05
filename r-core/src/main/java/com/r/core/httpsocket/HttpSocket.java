@@ -338,22 +338,4 @@ public class HttpSocket implements Serializable {
     public String toString() {
         return "HttpSocket [requestHeader=" + requestHeader + ", isHoldCookies=" + isHoldCookies + "]";
     }
-
-    public static void main(String[] args) {
-        HttpSocket hs = null;
-
-        // System.out.println("-------------保存返回的图片-----------------");
-        // hs = HttpSocket.newHttpSocket(false, null);
-        // hs.send("http://su.bdimg.com/static/superpage/img/logo_white.png");
-        // System.out.println(hs.getResponseHeader().getResponse());
-        // ImageUtil.saveImageToFile(hs.getResponseBodyToImage(), new
-        // File("d://baidu." +
-        // hs.getResponseHeader().getContentType().getResponseContentTypeCode().getFileSuffixName()));
-
-        System.out.println("-------------读取返回的字符串-----------------");
-        hs = HttpSocket.newHttpSocket(true, null);
-        ResponseHeader responseHeader = hs.send("http://www.baidu.com/");
-        System.out.println(responseHeader.getResponse());
-        System.out.println(responseHeader.bodyToFile("d://baidu.txt"));
-    }
 }

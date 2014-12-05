@@ -42,7 +42,7 @@ public class QQToolTest {
     @Test
     public void testLogin() {
         logger.debug("进行登陆测试.");
-        LoginStatus loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD, null);
+        LoginStatus loginstatus = HAlert.showLoginDialogByQQ(HTTPSOCKET, APPID, USERNAME, PASSWORD, true, null);
 
         switch (loginstatus) {
         case 成功登陆:

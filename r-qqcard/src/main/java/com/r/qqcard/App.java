@@ -51,7 +51,8 @@ public class App implements Runnable {
         App.app = this;
         applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         NotifyContext notify = (NotifyContext) applicationContext.getBean("springxml.notify");
-        notify.notifyEvent(Event.程序启动);
+        notify.notifyEvent(Event.login$程序启动);
+        notify.notifyEvent(Event.init$全局数据初始化);
     }
 
     /** 退出QQ卡片辅助程序 */

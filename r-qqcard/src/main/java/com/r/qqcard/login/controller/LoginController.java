@@ -39,33 +39,34 @@ public class LoginController {
     /** 通知 */
     @Resource(name = "springxml.notify")
     private NotifyContext notify;
-    /** 账号业务处理器 */
-    @Resource(name = "service.account")
-    private AccountService accountService;
     /** 网络请求套接字 */
     @Resource(name = "springxml.httpsocket")
     private HttpSocket httpSocket;
+    /** 账号业务处理器 */
+    @Resource(name = "service.account")
+    private AccountService accountService;
 
     /** 显示登陆对话框 */
-    @EventAnn(Event.程序启动)
+    @EventAnn(Event.login$程序启动)
     public void showLoginDialog() {
+        logger.info("QQ卡片程序启动......");
         String appid = context.getAppid();
-        String defaultUsername = accountService.getUsername();
-        String defaultPassword = accountService.getPassword();
-        logger.info("登陆QQ......");
-        HAlert.showLoginDialogByQQ(httpSocket, appid, defaultUsername, defaultPassword, new LoginReturnValueObtain() {
+        String defaultUsername = accountService.getLoginUsername();
+        String defaultPassword = accountService.getLoginPassword();
+        boolean loginKeepUsernameAndPassword = accountService.isLoginKeepUsernameAndPassword();
+        HAlert.showLoginDialogByQQ(httpSocket, appid, defaultUsername, defaultPassword, loginKeepUsernameAndPassword, new LoginReturnValueObtain() {
             @Override
             public void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword) {
                 if (LoginStatus.成功登陆.equals(loginStatus)) {
                     accountService.setUsernameAndPassword(username, password, isKeepUsernameAndPassword);
-                    notify.notifyEvent(Event.登陆成功, username, password, isKeepUsernameAndPassword);
+                    notify.notifyEvent(Event.login$登陆完成, Boolean.TRUE, username, password, isKeepUsernameAndPassword);
+                    notify.notifyEvent(Event.init$玩家信息初始化);
                     logger.info("成功登陆账号[{}]......", username);
                 } else {
-                    notify.notifyEvent(Event.登陆失败, username, password, isKeepUsernameAndPassword);
+                    notify.notifyEvent(Event.login$登陆完成, Boolean.FALSE, username, password, isKeepUsernameAndPassword);
                     App.getInstance().exit();
                 }
             }
         });
     }
-
 }

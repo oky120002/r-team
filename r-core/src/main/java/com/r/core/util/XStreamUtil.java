@@ -29,7 +29,7 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
  */
 public final class XStreamUtil {
     /** 日志 */
-    private static Logger logger = LoggerFactory.getLogger(XStreamUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(XStreamUtil.class, "XML解析构成");
 
     /** XStream集合 */
     private static Map<Class<?>, XStream> xstreamMap = new WeakHashMap<Class<?>, XStream>();
@@ -153,7 +153,7 @@ public final class XStreamUtil {
             res = new XStream(new Xpp3DomDriver(nameCoder));
         }
 
-        logger.info("create xstream by [{}] , parameter [{}]", new Object[] { classType.getName(), isSkipOverElement });
+        logger.warn("create xstream by [{}] , parameter [{}]", new Object[] { classType.getName(), isSkipOverElement });
 
         res.processAnnotations(classType);
 

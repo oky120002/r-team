@@ -27,50 +27,6 @@ public class BaseData {
     }
 
     /**
-     * @param key
-     * @param value
-     * @param remark
-     */
-    public BaseData(String key, String value, String remark) {
-        this.key = key;
-        this.value = value;
-        this.remark = remark;
-    }
-
-    /**
-     * @param key
-     * @param value
-     * @param remark
-     */
-    public BaseData(String key, boolean value, String remark) {
-        this.key = key;
-        this.value = Boolean.toString(value);
-        this.remark = remark;
-    }
-
-    /**
-     * @param key
-     * @param value
-     * @param remark
-     */
-    public BaseData(String key, int value, String remark) {
-        this.key = key;
-        this.value = Integer.toString(value);
-        this.remark = remark;
-    }
-
-    /**
-     * @param key
-     * @param value
-     * @param remark
-     */
-    public BaseData(String key, long value, String remark) {
-        this.key = key;
-        this.value = Long.toString(value);
-        this.remark = remark;
-    }
-
-    /**
      * @return the key
      */
     public String getKey() {
@@ -114,19 +70,4 @@ public class BaseData {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-
-    /**
-     * @return
-     */
-    public boolean getValueByBoolean() {
-        return Boolean.valueOf(this.value).booleanValue();
-    }
-
-    /**
-     * @return
-     */
-    public int getValueByInteger() {
-        return Integer.valueOf(this.value).intValue();
-    }
-
 }

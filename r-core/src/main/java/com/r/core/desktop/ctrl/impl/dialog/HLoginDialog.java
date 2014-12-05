@@ -310,9 +310,6 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
          */
         LoginStatus doLogin(String username, String password, String authCode);
 
-        /** 是否需要验证码 */
-        boolean isHaveAuthCode();
-
         /**
          * 获取验证码图片
          * 
@@ -336,6 +333,13 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
 
         /** 获取默认密码 */
         String getPassword();
+
+        /** 是否保存用户名和密码 */
+        // TODO r-core 请实现此功能
+        boolean isLoginKeepUsernameAndPassword();
+
+        /** 是否需要验证码 */
+        boolean isHaveAuthCode();
     }
 
     /** 获取验证码的时机(除开"永不"之外的情况,只生效一次) */

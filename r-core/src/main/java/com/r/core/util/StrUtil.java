@@ -117,16 +117,6 @@ public abstract class StrUtil {
         return RandomUtil.uuid();
     }
 
-    /** 根据前字符串和后字符串截取中间的一段字符串,如果截取不到,则返回null */
-    public static String mid(String html, String pre, String last) {
-        int index = html.indexOf(pre);
-        int lastIndex = html.lastIndexOf(last);
-        if (index == -1 || lastIndex == -1) {
-            return null;
-        }
-        return html.substring(index + pre.length(), lastIndex);
-    }
-
     /**
      * 格式化字符串<br />
      * 把"{}"字符按照传入顺序替换成传入的字符串

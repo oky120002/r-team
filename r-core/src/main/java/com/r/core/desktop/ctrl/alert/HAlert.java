@@ -187,7 +187,7 @@ public class HAlert {
      *            登陆后数据获取器
      * @return 返回登陆后的状态
      */
-    public static LoginStatus showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password, LoginReturnValueObtain obtain) {
+    public static LoginStatus showLoginDialogByQQ(final HttpSocket httpSocket, final String appid, final String username, final String password, final boolean isLoginKeepUsernameAndPassword, LoginReturnValueObtain obtain) {
         AssertUtil.isNotNull("网络请求套接字不能为空", httpSocket);
         AssertUtil.isNotBlank("QQ网络应用ID不能为空", appid);
         return HAlert.showLoginDialog("请登陆QQ账户", new HLoginHandler() {
@@ -227,11 +227,6 @@ public class HAlert {
                     return LoginStatus.提交的参数错误或者缺失;
                 }
                 return LoginStatus.未知错误;
-            }
-
-            @Override
-            public boolean isHaveAuthCode() {
-                return true;
             }
 
             @Override
@@ -279,6 +274,16 @@ public class HAlert {
             @Override
             public String getPassword() {
                 return password;
+            }
+
+            @Override
+            public boolean isHaveAuthCode() {
+                return true;
+            }
+
+            @Override
+            public boolean isLoginKeepUsernameAndPassword() {
+                return isLoginKeepUsernameAndPassword;
             }
 
         }, obtain);

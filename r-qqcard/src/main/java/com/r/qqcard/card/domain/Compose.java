@@ -144,4 +144,36 @@ public class Compose implements Serializable {
         this.time = time;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((theme == null) ? 0 : theme.hashCode());
+        return result;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Compose other = (Compose) obj;
+        if (theme == null) {
+            if (other.theme != null)
+                return false;
+        } else if (!theme.equals(other.theme))
+            return false;
+        return true;
+    }
+
+    
 }

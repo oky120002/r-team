@@ -145,9 +145,10 @@ public class QQTool {
     }
 
     /**
-     * QQ网页操作时,计算执行某些动作需要的校验码
+     * QQ网页操作时,计算执行某些动作需要的校验码(一般在登录完成后获取)
      * 
      * @param skey
+     *            (此值从cookie中获取)
      * @return 计算执行某些动作需要的校验码
      */
     public static int getGTK(String skey) {
@@ -159,7 +160,7 @@ public class QQTool {
         return hash & 0x7fffffff;
     }
 
-    /** 获取QQ的Web请求时的识别码 */
+    /** 获取QQ的Web请求时的识别码(此识别码用来防止重复提交) */
     private static final String getChecksum() {
         return "0." + RandomUtil.randomString("0123456789", 16);
     }
