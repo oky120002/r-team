@@ -19,8 +19,6 @@ public class BaseData {
     private String key;
     @Column
     private String value;
-    @Column
-    private String remark;
 
     public BaseData() {
         super();
@@ -54,20 +52,5 @@ public class BaseData {
      */
     public void setValue(String value) {
         this.value = value;
-    }
-
-    /**
-     * @return the remark
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * @param remark
-     *            the remark to set
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 }

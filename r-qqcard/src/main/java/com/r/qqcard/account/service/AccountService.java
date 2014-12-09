@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.r.core.util.AssertUtil;
 import com.r.qqcard.basedata.service.BaseDataService;
 import com.r.qqcard.card.qqhome.QQHomeUser;
 import com.r.qqcard.core.component.WebAction;
@@ -22,15 +23,6 @@ import com.r.qqcard.core.support.AbstractService;
  */
 @Service("service.account")
 public class AccountService extends AbstractService {
-    /** 基础数据key前缀 */
-    private static final String BASEDATA_KEYPRE = "service.account.";
-    private static final String BASEDATA_KEY_USERNAME = BASEDATA_KEYPRE + "username"; // 默认登录名
-    private static final String BASEDATA_KEY_PASSWORD = BASEDATA_KEYPRE + "password"; // 默认密码
-    private static final String BASEDATA_KEY_ISKEEPUSERNAMEANDPASSWORD = BASEDATA_KEYPRE + "isKeepUsernameAndPassword"; // 默认是否记住登录名和密码
-
-    private static final String BASEDATA_KEY_NICKNAME = BASEDATA_KEYPRE + "nickname"; // 昵称
-    private static final String BASEDATA_KEY_GOLD = BASEDATA_KEYPRE + "gold"; // 金币
-    private static final String BASEDATA_KEY_MANA = BASEDATA_KEYPRE + "mana"; // 魔法值
 
     /** 网络行为 */
     @Resource(name = "component.webaction")
@@ -39,46 +31,28 @@ public class AccountService extends AbstractService {
     @Resource(name = "service.basedata")
     private BaseDataService baseDataService;
 
-    /** 获取登录名 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public String getLoginUsername() {
-        return baseDataService.getValueString(BASEDATA_KEY_USERNAME, "");
+    /** 设置账户中的值 */
+    public void setValue(AccountEnum accountEnum, Object value) {
+        AssertUtil.isNotNull(accountEnum);
+        baseDataService.setValue(accountEnum.getKey(), value);
     }
 
-    /** 获取密码 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public String getLoginPassword() {
-        return baseDataService.getValueString(BASEDATA_KEY_PASSWORD, "");
+    /** 获取账户中的字符串值 */
+    public String getValueString(AccountEnum accountEnum, String defaultValue) {
+        AssertUtil.isNotNull(accountEnum);
+        return baseDataService.getValueString(accountEnum.getKey(), defaultValue);
     }
 
-    /** 获取是否记住登录名和密码 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public boolean isLoginKeepUsernameAndPassword() {
-        return baseDataService.getValueBoolean(BASEDATA_KEY_ISKEEPUSERNAMEANDPASSWORD, false);
+    /** 获取账户中的整数值 */
+    public int getValueInteger(AccountEnum accountEnum, int defaultValue) {
+        AssertUtil.isNotNull(accountEnum);
+        return baseDataService.getValueInteger(accountEnum.getKey(), defaultValue);
     }
 
-    /** 获取用户名 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public String getUsername() {
-        return baseDataService.getValueString(BASEDATA_KEY_USERNAME);
-    }
-
-    /** 获取昵称 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public String getNickName() {
-        return baseDataService.getValueString(BASEDATA_KEY_NICKNAME);
-    }
-
-    /** 获取金币 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public int getGold() {
-        return baseDataService.getValueInteger(BASEDATA_KEY_GOLD);
-    }
-
-    /** 获取魔法值 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public int getMana() {
-        return baseDataService.getValueInteger(BASEDATA_KEY_MANA);
+    /** 获取账户中的布尔值 */
+    public boolean getValueBoolean(AccountEnum accountEnum, boolean defaultValue) {
+        AssertUtil.isNotNull(accountEnum);
+        return baseDataService.getValueBoolean(accountEnum.getKey(), defaultValue);
     }
 
     /**
@@ -93,16 +67,37 @@ public class AccountService extends AbstractService {
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void setUsernameAndPassword(String username, String password, boolean isKeepUsernameAndPassword) {
-        baseDataService.save(BASEDATA_KEY_USERNAME, username, "登录名");
-        baseDataService.save(BASEDATA_KEY_PASSWORD, password, "密码");
-        baseDataService.save(BASEDATA_KEY_ISKEEPUSERNAMEANDPASSWORD, isKeepUsernameAndPassword, "是否保存登录名和密码");
+        baseDataService.setValue(AccountEnum.登录名.getKey(), username);
+        baseDataService.setValue(AccountEnum.密码.getKey(), password);
+        baseDataService.setValue(AccountEnum.记住登录名和密码.getKey(), isKeepUsernameAndPassword);
     }
 
     /** 初始化账号信息 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void initAccount(QQHomeUser user) {
-        baseDataService.setValue(BASEDATA_KEY_NICKNAME, user.getNick()); // 昵称
-        baseDataService.setValue(BASEDATA_KEY_GOLD, Integer.toString(user.getMana())); // 金币
-        baseDataService.setValue(BASEDATA_KEY_MANA, Integer.toString(user.getMana())); // 魔法值
+        baseDataService.setValue(AccountEnum.昵称.getKey(), user.getNick()); // 昵称
+        baseDataService.setValue(AccountEnum.金币.getKey(), user.getMana()); // 金币
+        baseDataService.setValue(AccountEnum.魔法值.getKey(), user.getMana()); // 魔法值
+    }
+
+    public enum AccountEnum {
+        登录名("username"), //
+        密码("password"), //
+        记住登录名和密码("isKeepUsernameAndPassword"), //
+        昵称("nickname"), //
+        金币("gold"), //
+        魔法值("mana"), ;
+
+        private static final String BASEDATA_KEYPRE = "service.account.";
+
+        private String key;
+
+        public String getKey() {
+            return key;
+        }
+
+        AccountEnum(String key) {
+            this.key = BASEDATA_KEYPRE + key;
+        }
     }
 }

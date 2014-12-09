@@ -17,6 +17,7 @@ import com.r.core.log.LoggerFactory;
 import com.r.core.log.LoggerListener;
 import com.r.core.util.StrUtil;
 import com.r.qqcard.account.service.AccountService;
+import com.r.qqcard.account.service.AccountService.AccountEnum;
 import com.r.qqcard.context.QQCardContext;
 import com.r.qqcard.core.serivce.InitService;
 import com.r.qqcard.main.view.MainFrame;
@@ -81,7 +82,7 @@ public class MainController implements InitializingBean, LoggerListener {
     }
 
     @EventAnn(Event.login$登陆完成)
-    public void loginOk(Boolean isLogin, String username, String password, Boolean isflg) {
+    public void loginEnd(Boolean isLogin, String username, String password, Boolean isflg) {
         if (Boolean.TRUE.equals(isLogin)) {
             showMainFrame();
         }
@@ -89,24 +90,28 @@ public class MainController implements InitializingBean, LoggerListener {
 
     @EventAnn(Event.init$全局数据初始化完成)
     public void initGlobalEnd() {
-        logger.info("初始化基础数据完成......");
-        isInitGlobal = true;
-        startupGame();
+        synchronized (this) {
+            logger.info("初始化基础数据完成......");
+            isInitGlobal = true;
+            startupGame();
+        }
     }
 
     @EventAnn(Event.init$玩家信息初始化完成)
     public void initGameDatasEnd() {
-        logger.info("更新交换箱信息，卡箱信息，账号信息完成......");
-        isInitGameData = true;
-        startupGame();
+        synchronized (this) {
+            logger.info("更新交换箱信息，卡箱信息，账号信息完成......");
+            isInitGameData = true;
+            startupGame();
+        }
     }
 
-    /** 启动游戏(解除各种功能的限制) */
+    /** 启动游戏(解除各种功能的限制,必须在全局数据和游戏数据都加在完成后) */
     private void startupGame() {
         if (isInitGameData && isInitGlobal) {
-            String nickName = accountService.getNickName();
-            int gold = accountService.getGold();
-            int mana = accountService.getMana();
+            String nickName = accountService.getValueString(AccountEnum.昵称, "null");
+            int gold = accountService.getValueInteger(AccountEnum.金币, -1);
+            int mana = accountService.getValueInteger(AccountEnum.魔法值, -1);
             HAlert.showTips(StrUtil.formart("获取昵称:{},金币:{},魔法值:{}", nickName, gold, mana), "启动", mainFrame);
         }
     }

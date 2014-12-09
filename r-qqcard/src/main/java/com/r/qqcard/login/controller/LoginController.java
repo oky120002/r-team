@@ -17,6 +17,7 @@ import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.qqcard.App;
 import com.r.qqcard.account.service.AccountService;
+import com.r.qqcard.account.service.AccountService.AccountEnum;
 import com.r.qqcard.context.QQCardContext;
 import com.r.qqcard.notify.context.NotifyContext;
 import com.r.qqcard.notify.handler.Event;
@@ -51,9 +52,9 @@ public class LoginController {
     public void showLoginDialog() {
         logger.info("QQ卡片程序启动......");
         String appid = context.getAppid();
-        String defaultUsername = accountService.getLoginUsername();
-        String defaultPassword = accountService.getLoginPassword();
-        boolean loginKeepUsernameAndPassword = accountService.isLoginKeepUsernameAndPassword();
+        String defaultUsername = accountService.getValueString(AccountEnum.登录名, null);
+        String defaultPassword = accountService.getValueString(AccountEnum.密码, null);
+        boolean loginKeepUsernameAndPassword = accountService.getValueBoolean(AccountEnum.记住登录名和密码, false);
         HAlert.showLoginDialogByQQ(httpSocket, appid, defaultUsername, defaultPassword, loginKeepUsernameAndPassword, new LoginReturnValueObtain() {
             @Override
             public void returnValue(LoginStatus loginStatus, String username, String password, Image image, boolean isKeepUsernameAndPassword) {

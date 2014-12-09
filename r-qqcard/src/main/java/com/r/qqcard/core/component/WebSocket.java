@@ -5,11 +5,11 @@ package com.r.qqcard.core.component;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.HttpPost;
-import com.r.core.httpsocket.context.HttpWebUrl;
 import com.r.core.httpsocket.context.ResponseHeader;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -55,7 +55,9 @@ public class WebSocket {
         post.add("uid", username);
 
         ResponseHeader send = httpSocket.send("http://card.show.qq.com/cgi-bin/card_user_mainpage?g_tk=" + getGTK(), post);
-        System.out.println(httpSocket.getRequestHeader().getRequest());
+        
+//        FileUtils.write(new File(), data);
+        
         return send.bodyToString();
     }
 
