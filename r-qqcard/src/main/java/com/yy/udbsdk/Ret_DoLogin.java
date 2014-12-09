@@ -1,4 +1,4 @@
-package com.yy;
+package com.yy.udbsdk;
 
 public final class Ret_DoLogin
 {

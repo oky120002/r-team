@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yy;
+package com.yy.udbsdk;
 
 import com.mchange.lang.ByteUtils;
 

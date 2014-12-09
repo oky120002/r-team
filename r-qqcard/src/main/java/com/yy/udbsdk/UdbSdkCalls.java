@@ -1,14 +1,14 @@
-package com.yy;
+package com.yy.udbsdk;
 
 final class UdbSdkCalls {
     static {
         try {
             // System.loadLibrary("crypto");
             // System.loadLibrary("UdbAndroidSdk");
-            System.load("/Users/rain/Develop/sts-workspace/r-team/r-qqcard/lib/libUdbAndroidSdk.so");
+            System.load("D:\\develop\\workspace-sts-3.6.3.RELEASE\\r-team\\r-qqcard\\libUdbAndroidSdk.so");
         } catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
             localUnsatisfiedLinkError.printStackTrace();
-        }
+        } 
     }
 
     public static native void closeConn();
