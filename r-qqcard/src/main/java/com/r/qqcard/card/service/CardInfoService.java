@@ -15,11 +15,10 @@ import com.r.qqcard.card.dao.CardDao;
 import com.r.qqcard.card.dao.ComposeDao;
 import com.r.qqcard.card.dao.GiftDao;
 import com.r.qqcard.card.dao.ThemeDao;
-import com.r.qqcard.card.domain.Card;
-import com.r.qqcard.card.domain.Compose;
-import com.r.qqcard.card.domain.Gift;
-import com.r.qqcard.card.domain.Theme;
-import com.r.qqcard.card.domain.bean.CardInfo;
+import com.r.qqcard.card.model.Card;
+import com.r.qqcard.card.model.Compose;
+import com.r.qqcard.card.model.Gift;
+import com.r.qqcard.card.model.Theme;
 import com.r.qqcard.core.component.WebAction;
 import com.r.qqcard.core.support.AbstractService;
 
@@ -43,7 +42,7 @@ public class CardInfoService extends AbstractService {
 
     /** QQ秀Dao */
     @Resource(name = "dao.gift")
-    private GiftDao gitfDao;
+    private GiftDao giftDao;
 
     /** 合成关系Dao */
     @Resource(name = "dao.compose")
@@ -53,13 +52,19 @@ public class CardInfoService extends AbstractService {
     /** 保存QQ秀 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void saveGifts(Collection<Gift> gifts) {
-        gitfDao.saves(gifts);
+        giftDao.saves(gifts);
     }
 
     /** 获取QQ秀数量 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
     public long getGiftSize() {
-        return gitfDao.queryAllSize();
+        return giftDao.queryAllSize();
+    }
+
+    /** 清空QQ秀 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void deleteAllGifts() {
+        giftDao.deleteAll();
     }
 
     // -----------卡片主题
@@ -75,7 +80,19 @@ public class CardInfoService extends AbstractService {
         return themeDao.queryAllSize();
     }
 
+    /** 清空主题 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void deleteAllThemes() {
+        themeDao.deleteAll();
+    }
+
     // -----------卡片
+    /** 根据卡片ID获取卡片 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    public Card findCardByCardId(int id) {
+        return cardDao.findCardByCardId(id);
+    }
+
     /** 保存卡片 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public void saveCards(Collection<Card> cards) {
@@ -86,6 +103,12 @@ public class CardInfoService extends AbstractService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
     public long getCardSize() {
         return cardDao.queryAllSize();
+    }
+
+    /** 清空卡片 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void deleteAllCards() {
+        cardDao.deleteAll();
     }
 
     // -----------合成规则
@@ -101,4 +124,9 @@ public class CardInfoService extends AbstractService {
         return composeDao.queryAllSize();
     }
 
+    /** 清空合成规则 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void deleteAllCompose() {
+        composeDao.deleteAll();
+    }
 }

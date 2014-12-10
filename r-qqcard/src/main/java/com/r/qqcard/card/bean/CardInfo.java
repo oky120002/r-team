@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.qqcard.card.domain.bean;
+package com.r.qqcard.card.bean;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,10 +18,10 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.r.core.exceptions.ScriptResolveException;
 import com.r.core.exceptions.SwitchPathException;
-import com.r.qqcard.card.domain.Card;
-import com.r.qqcard.card.domain.Compose;
-import com.r.qqcard.card.domain.Gift;
-import com.r.qqcard.card.domain.Theme;
+import com.r.qqcard.card.model.Card;
+import com.r.qqcard.card.model.Compose;
+import com.r.qqcard.card.model.Gift;
+import com.r.qqcard.card.model.Theme;
 
 /**
  * 此JS数据模式,没有进行正确方法校验<br />
@@ -80,7 +80,7 @@ public class CardInfo {
                 Card card2 = toCard(toInteger(items.get(4)));
                 Card card3 = toCard(toInteger(items.get(5)));
                 long time = toLong(items.get(6));
-                this.composes.put(Integer.valueOf(theme.getId()), new Compose(theme, card, card1, card2, card3, time, state));
+                this.composes.put(Integer.valueOf(theme.getThemeid()), new Compose(theme, card, card1, card2, card3, time, state));
             }
         }
     }
@@ -113,7 +113,7 @@ public class CardInfo {
             Date offtime = toDate(items.get(15)); // 下架时间
             int flashSrcTid = -1;// toInteger(split[17]); // 这里QQ注释不明确
             Theme qqTheme = new Theme(themeid, name, difficulty, publishTime, pickRate, enable, prize, score, color, gift, text, null, themeType, version, time, offtime, flashSrcTid);
-            this.themes.put(Integer.valueOf(qqTheme.getId()), qqTheme);
+            this.themes.put(Integer.valueOf(themeid), qqTheme);
         }
     }
 
@@ -146,9 +146,9 @@ public class CardInfo {
             int version = toInteger(items.get(7));
             long time = toLong(items.get(8));
             int itemNo = toInteger(items.get(9));
-            int mana = -1; // XXX yaojing 这里直接把魔法值设置为-1,因为不知道这个值有什么用,且不好解析
+            int mana = -1; // XXX yaojing 这里直接把魔法值设置为-1,因为不好解析
             Card qqCard = new Card(cardid, theme, name, price, type, pickRate, enable, version, time, itemNo, mana);
-            this.cards.put(Integer.valueOf(qqCard.getId()), qqCard);
+            this.cards.put(Integer.valueOf(cardid), qqCard);
         }
     }
 

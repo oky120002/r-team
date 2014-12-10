@@ -1,16 +1,19 @@
 /**
  * 
  */
-package com.r.qqcard.card.domain;
+package com.r.qqcard.card.model;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 卡片信息
@@ -22,8 +25,13 @@ import javax.persistence.Table;
 @Table(name = "qqcard_card")
 public class Card implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
-    private Integer id; // 卡片id
+    @GeneratedValue(generator = "sys_uuid")
+    @GenericGenerator(name = "sys_uuid", strategy = "uuid")
+    private String id;
+    @Column
+    private Integer cardid; // 卡片id
     @ManyToOne
     @JoinColumn(name = "theme_id")
     private Theme theme; // 主题
@@ -51,21 +59,34 @@ public class Card implements Serializable {
     }
 
     /**
+     * 构建一个卡片
+     * 
      * @param id
+     *            卡片id
      * @param theme
+     *            主题
      * @param name
+     *            名称
      * @param price
+     *            价格
      * @param type
+     *            类型(0:基础卡片|1:合成出现的卡片|...未发现)
      * @param pickRate
+     *            选择范围?
      * @param enable
+     *            是否启用
      * @param version
+     *            版本
      * @param time
+     *            炼卡时间
      * @param itemNo
+     *            物品编号?
      * @param mana
+     *            魔法值
      */
-    public Card(Integer id, Theme theme, String name, Integer price, Integer type, Integer pickRate, Boolean enable, Integer version, Long time, Integer itemNo, Integer mana) {
+    public Card(Integer cardid, Theme theme, String name, Integer price, Integer type, Integer pickRate, Boolean enable, Integer version, Long time, Integer itemNo, Integer mana) {
         super();
-        this.id = id;
+        this.cardid = cardid;
         this.theme = theme;
         this.name = name;
         this.price = price;
@@ -78,9 +99,24 @@ public class Card implements Serializable {
         this.mana = mana;
     }
 
-    /** 获得QQ卡片id */
-    public Integer getId() {
+    /** 获取主键 */
+    public String getId() {
         return id;
+    }
+
+    /** 设置主键 */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /** 获取卡片id */
+    public Integer getCardid() {
+        return cardid;
+    }
+
+    /** 设置卡片id */
+    public void setCardid(Integer cardid) {
+        this.cardid = cardid;
     }
 
     /** 获取此卡片的主题 */
@@ -131,11 +167,6 @@ public class Card implements Serializable {
     /** 获得QQ卡片魔法值 */
     public Integer getMana() {
         return mana;
-    }
-
-    /** 设置id */
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     /** 设置主题 */

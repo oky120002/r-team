@@ -3,7 +3,7 @@
  */
 package com.r.qqcard.card.dao;
 
-import com.r.qqcard.card.domain.Compose;
+import com.r.qqcard.card.model.Compose;
 import com.r.qqcard.core.support.AbstractDao;
 
 /**

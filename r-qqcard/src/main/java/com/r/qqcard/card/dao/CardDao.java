@@ -3,7 +3,7 @@
  */
 package com.r.qqcard.card.dao;
 
-import com.r.qqcard.card.domain.Card;
+import com.r.qqcard.card.model.Card;
 import com.r.qqcard.core.support.AbstractDao;
 
 /**
@@ -13,5 +13,6 @@ import com.r.qqcard.core.support.AbstractDao;
  *
  */
 public interface CardDao extends AbstractDao<Card> {
-
+    /** 根据卡片id查询卡片 */
+    public Card findCardByCardId(int cardid);
 }

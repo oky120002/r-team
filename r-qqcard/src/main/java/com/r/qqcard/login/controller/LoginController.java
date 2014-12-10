@@ -61,7 +61,7 @@ public class LoginController {
                 if (LoginStatus.成功登陆.equals(loginStatus)) {
                     accountService.setUsernameAndPassword(username, password, isKeepUsernameAndPassword);
                     notify.notifyEvent(Event.login$登陆完成, Boolean.TRUE, username, password, isKeepUsernameAndPassword);
-                    notify.notifyEvent(Event.init$玩家信息初始化);
+                    notify.notifyEvent(Event.core$玩家信息初始化);
                     logger.info("成功登陆账号[{}]......", username);
                 } else {
                     notify.notifyEvent(Event.login$登陆完成, Boolean.FALSE, username, password, isKeepUsernameAndPassword);

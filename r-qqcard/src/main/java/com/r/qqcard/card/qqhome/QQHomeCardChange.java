@@ -15,7 +15,7 @@ public class QQHomeCardChange implements Comparable<QQHomeCardChange> {
     @XStreamAsAttribute
     private int id; // 卡片ID
     @XStreamAsAttribute
-    private int type; // 卡片类型
+    private int type; // 卡片类型(0:基础卡片,1:合成的卡片)
     @XStreamAsAttribute
     private int st; // ?
     @XStreamAsAttribute
@@ -24,6 +24,10 @@ public class QQHomeCardChange implements Comparable<QQHomeCardChange> {
     private int status; // 状态[0:正常|4:空]
     @XStreamAsAttribute
     private int unlock; // 是否加锁
+
+    public QQHomeCardChange() {
+        super();
+    }
 
     public QQHomeCardChange(int id, int type, int st, int slot, int status, int unlock) {
         super();

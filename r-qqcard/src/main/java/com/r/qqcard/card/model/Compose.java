@@ -1,16 +1,19 @@
 /**
  * 
  */
-package com.r.qqcard.card.domain;
+package com.r.qqcard.card.model;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * QQ魔法卡片合成规则
@@ -23,6 +26,9 @@ import javax.persistence.Table;
 public class Compose implements Serializable {
     private static final long serialVersionUID = -219713206850628833L;
     @Id
+    @GeneratedValue(generator = "sys_uuid")
+    @GenericGenerator(name = "sys_uuid", strategy = "uuid")
+    private String id;
     @ManyToOne
     @JoinColumn(name = "theme_id")
     private Theme theme; // 所在主题
@@ -72,6 +78,16 @@ public class Compose implements Serializable {
         this.card3 = card3;
         this.time = time;
         this.state = state;
+    }
+
+    /** 获取主键 */
+    public String getId() {
+        return id;
+    }
+
+    /** 设置主键 */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /** 获取合成的主题 */
@@ -144,7 +160,9 @@ public class Compose implements Serializable {
         this.time = time;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -155,7 +173,9 @@ public class Compose implements Serializable {
         return result;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -175,5 +195,4 @@ public class Compose implements Serializable {
         return true;
     }
 
-    
 }

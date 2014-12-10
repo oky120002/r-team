@@ -1,14 +1,17 @@
 /**
  * 
  */
-package com.r.qqcard.card.domain;
+package com.r.qqcard.card.model;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * QQ秀
@@ -21,7 +24,11 @@ import javax.persistence.Table;
 public class Gift implements Serializable {
     private static final long serialVersionUID = 8899763199940874195L;
     @Id
-    private Integer id; // id
+    @GeneratedValue(generator = "sys_uuid")
+    @GenericGenerator(name = "sys_uuid", strategy = "uuid")
+    private String id;
+    @Column
+    private Integer giftid; // QQ秀id
     @Column
     private Integer type; // 类型
     @Column
@@ -35,27 +42,43 @@ public class Gift implements Serializable {
     }
 
     /**
-     * @param id
+     * 构建QQ秀
+     * 
+     * @param giftid
+     *            QQ秀id
      * @param type
+     *            类型
      * @param name
+     *            名称
      * @param szTypeID
+     *            ?
      */
-    public Gift(Integer id, Integer type, String name, String szTypeID) {
+    public Gift(Integer giftid, Integer type, String name, String szTypeID) {
         super();
-        this.id = id;
+        this.giftid = giftid;
         this.type = type;
         this.name = name;
         this.szTypeID = szTypeID;
     }
 
-    /** 获取id */
-    public Integer getId() {
+    /** 获取主键 */
+    public String getId() {
         return id;
     }
 
-    /** 设置id */
-    public void setId(Integer id) {
+    /** 设置主键 */
+    public void setId(String id) {
         this.id = id;
+    }
+
+    /** 获取QQ秀主键 */
+    public Integer getGiftid() {
+        return giftid;
+    }
+
+    /** 设置QQ秀主键 */
+    public void setGiftid(Integer giftid) {
+        this.giftid = giftid;
     }
 
     /** 获取类型 */

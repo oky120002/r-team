@@ -5,7 +5,7 @@ package com.r.qqcard.card.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.r.qqcard.card.domain.Theme;
+import com.r.qqcard.card.model.Theme;
 import com.r.qqcard.core.support.AbstractDaoImpl;
 
 /**

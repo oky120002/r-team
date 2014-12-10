@@ -15,7 +15,7 @@ public class QQHomeCardStore implements Comparable<QQHomeCardStore> {
     @XStreamAsAttribute
     private int id; // 卡片ID
     @XStreamAsAttribute
-    private int type; // 卡片类型
+    private int type; // 卡片类型(0:基础卡片,1:合成的卡片)
     @XStreamAsAttribute
     private int st; // ?
     @XStreamAsAttribute
@@ -24,7 +24,7 @@ public class QQHomeCardStore implements Comparable<QQHomeCardStore> {
     private int status; // 状态
 
     public QQHomeCardStore() {
-
+        super();
     }
 
     public QQHomeCardStore(int id, int type, int st, int slot, int status) {

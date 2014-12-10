@@ -84,49 +84,43 @@ public class HttpUrl {
         this.port = Integer.valueOf(port).intValue();
     }
 
-    /**
-     * @return 返回 host
-     */
+    /** 返回主机地址 */
     public String getHost() {
         return host;
     }
 
-    /**
-     * @return 返回 url
-     */
+    /** 返回url */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * @return 返回 port
-     */
+    /** 返回访问端口 */
     public int getPort() {
         return port;
     }
 
-    /**
-     * @param host
-     *            the host to set
-     */
+    /** 设置主机地址 */
     public void setHost(String host) {
         this.host = host;
     }
 
-    /**
-     * @param url
-     *            the url to set
-     */
+    /** 设置url */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    /**
-     * @param port
-     *            the port to set
-     */
+    /** 设置访问端口 */
     public void setPort(int port) {
         this.port = port;
+    }
+
+    /** 返回http协议中的host值 */
+    public String getHttpHost() {
+        if (this.port == 80) {
+            return this.host;
+        } else {
+            return this.host + ":" + this.port;
+        }
     }
 
     @Override

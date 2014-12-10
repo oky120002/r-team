@@ -5,7 +5,6 @@ package com.r.qqcard.core.component;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import com.r.core.httpsocket.HttpSocket;
@@ -49,15 +48,12 @@ public class WebSocket {
      * @return XML格式的信息
      */
     public String getCardUserMainpage(String username) {
-        logger.info("获取主要信息(交换箱信息，卡箱信息，用户信息......)");
+        logger.debug("获取主要信息(交换箱信息，卡箱信息，用户信息......)");
         HttpPost post = new HttpPost();
         post.add("code", "");
         post.add("uid", username);
 
         ResponseHeader send = httpSocket.send("http://card.show.qq.com/cgi-bin/card_user_mainpage?g_tk=" + getGTK(), post);
-        
-//        FileUtils.write(new File(), data);
-        
         return send.bodyToString();
     }
 

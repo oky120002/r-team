@@ -12,12 +12,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.r.qqcard.account.service.AccountService;
-import com.r.qqcard.card.domain.Card;
-import com.r.qqcard.card.domain.Compose;
-import com.r.qqcard.card.domain.Gift;
-import com.r.qqcard.card.domain.Theme;
-import com.r.qqcard.card.domain.bean.CardInfo;
+import com.r.qqcard.card.bean.CardInfo;
+import com.r.qqcard.card.model.Card;
+import com.r.qqcard.card.model.Compose;
+import com.r.qqcard.card.model.Gift;
+import com.r.qqcard.card.model.Theme;
 import com.r.qqcard.card.qqhome.QQHome;
+import com.r.qqcard.card.service.CardBoxService;
 import com.r.qqcard.card.service.CardInfoService;
 import com.r.qqcard.core.component.WebAction;
 import com.r.qqcard.core.support.AbstractService;
@@ -45,6 +46,9 @@ public class InitService extends AbstractService {
     /** 账户信息业务处理类 */
     @Resource(name = "service.account")
     private AccountService accountService;
+    /** 卡片箱子业务处理器 */
+    @Resource(name = "service.cardbox")
+    private CardBoxService cardBoxService;
 
     /** 全局数据初始化,登陆前的初始化工作 */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -60,21 +64,25 @@ public class InitService extends AbstractService {
 
         long themeSize = cardInfoService.getThemeSize();
         if (themes.size() != themeSize) {
+            cardInfoService.deleteAllThemes();
             cardInfoService.saveThemes(themes);
         }
 
         long cardSize = cardInfoService.getCardSize();
         if (cards.size() != cardSize) {
+            cardInfoService.deleteAllCards();
             cardInfoService.saveCards(cards);
         }
 
         long composeSize = cardInfoService.getComposeSize();
         if (composes.size() != composeSize) {
+            cardInfoService.deleteAllCompose();
             cardInfoService.saveCompses(composes);
         }
 
         long giftSize = cardInfoService.getGiftSize();
         if (gifts.size() != giftSize) {
+            cardInfoService.deleteAllGifts();
             cardInfoService.saveGifts(gifts);
         }
 
@@ -82,7 +90,7 @@ public class InitService extends AbstractService {
         logger.debug("从数据库查找到卡片{}张,网络返回卡片{}张", String.valueOf(cardSize), cards.size());
         logger.debug("从数据库查找到合成规则{}条,网络返回合成规则{}条", String.valueOf(composeSize), composes.size());
         logger.debug("从数据库查找到QQ秀{}条,网络返回QQ秀{}条", String.valueOf(giftSize), gifts.size());
-        notify.notifyEvent(Event.init$全局数据初始化完成);
+        notify.notifyEvent(Event.core$全局数据初始化完成);
     }
 
     /** 初始化交换箱信息，卡箱信息，账号信息 */
@@ -91,6 +99,7 @@ public class InitService extends AbstractService {
         logger.info("初始化交换箱信息，卡箱信息，账号信息......");
         QQHome home = action.getQQHome();
         accountService.initAccount(home.getUser());
-        notify.notifyEvent(Event.init$玩家信息初始化完成);
+        cardBoxService.initCardBox(home.getChangeBox(), home.getStoreBox());
+        notify.notifyEvent(Event.core$玩家信息初始化完成);
     }
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.qqcard.main.controller;
+package com.r.qqcard.card.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,16 +11,14 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 
-import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.log.LoggerListener;
-import com.r.core.util.StrUtil;
 import com.r.qqcard.account.service.AccountService;
 import com.r.qqcard.account.service.AccountService.AccountEnum;
+import com.r.qqcard.card.view.MainFrame;
 import com.r.qqcard.context.QQCardContext;
 import com.r.qqcard.core.serivce.InitService;
-import com.r.qqcard.main.view.MainFrame;
 import com.r.qqcard.notify.context.NotifyContext;
 import com.r.qqcard.notify.handler.Event;
 import com.r.qqcard.notify.handler.EventAnn;
@@ -62,7 +60,7 @@ public class MainController implements InitializingBean, LoggerListener {
     public void afterPropertiesSet() throws Exception {
         logger.debug("添加日志监听器......");
         LoggerFactory.addLoggerListener(this);
-        this.mainFrame = new MainFrame(context.getAppName() + " " + context.getAppVersion());
+        this.mainFrame = new MainFrame(this.notify, context.getAppName() + " " + context.getAppVersion());
     }
 
     /** 显示主界面窗口 */
@@ -88,31 +86,37 @@ public class MainController implements InitializingBean, LoggerListener {
         }
     }
 
-    @EventAnn(Event.init$全局数据初始化完成)
+    @EventAnn(Event.core$全局数据初始化完成)
     public void initGlobalEnd() {
         synchronized (this) {
-            logger.info("初始化基础数据完成......");
             isInitGlobal = true;
             startupGame();
         }
     }
 
-    @EventAnn(Event.init$玩家信息初始化完成)
+    @EventAnn(Event.core$玩家信息初始化完成)
     public void initGameDatasEnd() {
         synchronized (this) {
-            logger.info("更新交换箱信息，卡箱信息，账号信息完成......");
             isInitGameData = true;
             startupGame();
+            initGameDatas();
         }
     }
 
     /** 启动游戏(解除各种功能的限制,必须在全局数据和游戏数据都加在完成后) */
     private void startupGame() {
         if (isInitGameData && isInitGlobal) {
-            String nickName = accountService.getValueString(AccountEnum.昵称, "null");
-            int gold = accountService.getValueInteger(AccountEnum.金币, -1);
-            int mana = accountService.getValueInteger(AccountEnum.魔法值, -1);
-            HAlert.showTips(StrUtil.formart("获取昵称:{},金币:{},魔法值:{}", nickName, gold, mana), "启动", mainFrame);
+            logger.info("初始化游戏信息完成.开启所有功能......");
+            this.mainFrame.startupGame();
         }
+    }
+
+    /** 初始化游戏数据 */
+    private void initGameDatas() {
+        this.mainFrame.setNickName(accountService.getValueString(AccountEnum.昵称, "null"));
+        this.mainFrame.setGold(accountService.getValueString(AccountEnum.金币, "-1"));
+        this.mainFrame.setMana(accountService.getValueString(AccountEnum.魔法值, "-1"));
+        this.mainFrame.setLevel(accountService.getValueString(AccountEnum.等级, "-1"));
+        this.mainFrame.setExp(accountService.getValueString(AccountEnum.经验值, "-1"), accountService.getValueString(AccountEnum.升级经验值, "-1"));
     }
 }

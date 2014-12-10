@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.r.core.util.AssertUtil;
 import com.r.qqcard.basedata.service.BaseDataService;
+import com.r.qqcard.card.qqhome.QQEXP;
 import com.r.qqcard.card.qqhome.QQHomeUser;
 import com.r.qqcard.core.component.WebAction;
 import com.r.qqcard.core.support.AbstractService;
@@ -78,15 +79,15 @@ public class AccountService extends AbstractService {
         baseDataService.setValue(AccountEnum.昵称.getKey(), user.getNick()); // 昵称
         baseDataService.setValue(AccountEnum.金币.getKey(), user.getMana()); // 金币
         baseDataService.setValue(AccountEnum.魔法值.getKey(), user.getMana()); // 魔法值
+        baseDataService.setValue(AccountEnum.等级.getKey(), user.getLv()); // 等级
+        baseDataService.setValue(AccountEnum.经验值.getKey(), user.getExp()); // 经验值
+        baseDataService.setValue(AccountEnum.升级经验值.getKey(), QQEXP.values()[user.getLv() - 1].getExp()); // 经验值
     }
 
     public enum AccountEnum {
-        登录名("username"), //
-        密码("password"), //
-        记住登录名和密码("isKeepUsernameAndPassword"), //
-        昵称("nickname"), //
-        金币("gold"), //
-        魔法值("mana"), ;
+        登录名("username"), 密码("password"), 记住登录名和密码("isKeepUsernameAndPassword"), //
+        昵称("nickname"), 金币("gold"), 魔法值("mana"), 等级("level"), 经验值("exp"), 升级经验值("expLevel")//
+        ;
 
         private static final String BASEDATA_KEYPRE = "service.account.";
 

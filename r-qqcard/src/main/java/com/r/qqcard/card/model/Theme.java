@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.r.qqcard.card.domain;
+package com.r.qqcard.card.model;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -11,10 +11,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * QQ魔法卡片主题
@@ -27,7 +30,11 @@ import javax.persistence.Table;
 public class Theme implements Serializable {
     private static final long serialVersionUID = -7055447944244135258L;
     @Id
-    private Integer id; // id
+    @GeneratedValue(generator = "sys_uuid")
+    @GenericGenerator(name = "sys_uuid", strategy = "uuid")
+    private String id;
+    @Column
+    private Integer themeid; // 主题id
     @Column
     private String name; // 名称
     @Column
@@ -67,28 +74,44 @@ public class Theme implements Serializable {
     }
 
     /**
-     * @param id
+     * @param themeid
+     *            主题id
      * @param name
+     *            名称
      * @param difficulty
+     *            合成难度
      * @param publishTime
+     *            发布时间
      * @param pickRate
+     *            卡牌来源(0:购买和变卡,1:变卡(不确定),100:礼物,800:抽卡)
      * @param enable
+     *            是否启用
      * @param prize
+     *            奖品?
      * @param score
+     *            得分,完成后得到的经验值(不确定)
      * @param color
+     *            主题颜色
      * @param gift
+     *            合成成功后的QQ秀(用"|"分割)
      * @param text
+     *            描述
      * @param cards
-     * @param nid
-     * @param type
+     *            此主题拥有的所有卡片
+     * @param themeType
+     *            主题类型(9:闪卡|...?)
      * @param version
+     *            版本
      * @param time
+     *            ?
      * @param offtime
+     *            下架时间
      * @param flashSrcTid
+     *            ?
      */
-    public Theme(Integer id, String name, Integer difficulty, Date publishTime, Integer pickRate, Boolean enable, Integer prize, Integer score, String color, String gift, String text, List<Card> cards, Integer themeType, Integer version, Date time, Date offtime, Integer flashSrcTid) {
+    public Theme(Integer themeid, String name, Integer difficulty, Date publishTime, Integer pickRate, Boolean enable, Integer prize, Integer score, String color, String gift, String text, List<Card> cards, Integer themeType, Integer version, Date time, Date offtime, Integer flashSrcTid) {
         super();
-        this.id = id;
+        this.themeid = themeid;
         this.name = name;
         this.difficulty = difficulty;
         this.publishTime = publishTime;
@@ -101,16 +124,30 @@ public class Theme implements Serializable {
         this.text = text;
         this.cards = cards;
         this.themeType = themeType;
-
         this.version = version;
         this.time = time;
         this.offtime = offtime;
         this.flashSrcTid = flashSrcTid;
     }
 
-    /** 获得QQ卡片主题id */
-    public Integer getId() {
+    /** 获取主题 */
+    public String getId() {
         return id;
+    }
+
+    /** 设置主题 */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /** 获取主题ID */
+    public Integer getThemeid() {
+        return themeid;
+    }
+
+    /** 设置主题ID */
+    public void setThemeid(Integer themeid) {
+        this.themeid = themeid;
     }
 
     /** 获得QQ卡片主题名称 */
@@ -179,11 +216,6 @@ public class Theme implements Serializable {
     /** 获得QQ卡片主题下的所有QQ卡片 */
     public Collection<Card> getCards() {
         return this.cards;
-    }
-
-    /** 设置id */
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     /** 设置名称 */

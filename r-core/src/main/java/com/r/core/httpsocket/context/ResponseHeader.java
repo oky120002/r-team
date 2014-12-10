@@ -327,7 +327,7 @@ public class ResponseHeader implements Serializable {
             return "";
         }
         StringBuilder header = new StringBuilder();
-        header.append(httpType.getHttpType()).append(' ').append(status.getCode()).append(' ').append(status.getTitle()).append("\r\n");
+        header.append(httpType.getHttpType()).append(' ').append(status.getCode()).append(' ').append(status.getContext()).append("\r\n");
         for (Entry<String, String> entry : this.headers.entrySet()) {
             header.append(entry.getKey()).append(": ").append(entry.getValue()).append("\r\n");
         }

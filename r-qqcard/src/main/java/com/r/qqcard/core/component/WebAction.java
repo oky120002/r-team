@@ -3,16 +3,18 @@
  */
 package com.r.qqcard.core.component;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import com.r.core.util.XStreamUtil;
 import com.r.qqcard.account.service.AccountService;
 import com.r.qqcard.account.service.AccountService.AccountEnum;
-import com.r.qqcard.card.domain.bean.CardInfo;
+import com.r.qqcard.card.bean.CardInfo;
 import com.r.qqcard.card.qqhome.QQHome;
 import com.r.qqcard.card.qqhome.impl.QQHomeImpl;
 
@@ -45,6 +47,14 @@ public class WebAction {
     public QQHome getQQHome() {
         String username = accountService.getValueString(AccountEnum.登录名, null);
         String cardUserMainpage = webSocket.getCardUserMainpage(username);
+
+        try {
+            FileUtils.write(new File("./doc/cardUserMainpage.xml"), cardUserMainpage);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         return XStreamUtil.fromXML(QQHomeImpl.class, cardUserMainpage);
     }
 

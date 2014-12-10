@@ -31,7 +31,7 @@ import com.r.core.util.RandomUtil;
 public class RequestHeader implements Serializable {
     private static final long serialVersionUID = -8999621270754679019L;
     private static final String BOUNDARY = "--hiyouyu--rain--" + RandomUtil.randomString(12) + "--"; // 上传时的文件分隔符(7d是ie
-                                                                                                        // 71是firfox)
+                                                                                                     // 71是firfox)
     /** 请求地址类型,默认为GET */
     private RequestUrlType urlType = RequestUrlType.GET;
     /** 请求路径(GET或者POST请求的路径) */
@@ -260,6 +260,7 @@ public class RequestHeader implements Serializable {
      */
     public RequestHeader setHost(String host) {
         HttpUrl hu = HttpUrl.newInstance(host);
+        httpUrl.setUrl(hu.getUrl());
         httpUrl.setHost(hu.getHost());
         httpUrl.setPort(hu.getPort());
         return this;
@@ -341,7 +342,7 @@ public class RequestHeader implements Serializable {
      *             链接失败,链接超时
      */
     public synchronized Socket send(int timeout) throws IOException {
-        headers.put("Host", this.httpUrl.getHost() + ":" + this.httpUrl.getPort());
+        headers.put("Host", this.httpUrl.getHttpHost());
 
         checkRequest();
         Socket socket = new Socket(getConnectHost(), getConnectPort());

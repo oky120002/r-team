@@ -10,12 +10,14 @@ package com.r.qqcard.notify.handler;
  *
  */
 public enum Event {
-    init$全局数据初始化, //
-    init$全局数据初始化完成, //
-    init$玩家信息初始化, //
-    init$玩家信息初始化完成, //
+    core$全局数据初始化, //
+    core$全局数据初始化完成, //
+    core$玩家信息初始化, //
+    core$玩家信息初始化完成, //
+    core$启动自动炼卡, //
     login$程序启动, //
     login$登陆完成(Boolean.class, String.class, String.class, Boolean.class), // 登陆是否成功,账号,密码,是否保存密码和账号
+    box$显示卡片箱子, //
     ;
 
     private Class<?>[] clazzes;

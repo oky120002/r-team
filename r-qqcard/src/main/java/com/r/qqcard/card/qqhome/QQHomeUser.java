@@ -73,12 +73,4 @@ public interface QQHomeUser {
 
 	/** 获取宠物名称 */
 	String getElfname();
-
-	/** 值类型 */
-	public static enum HomeUserType {
-		Money, // 金币
-		Randchance, // 可以抽卡张数
-		Exp, // 经验值
-		;
-	}
 }

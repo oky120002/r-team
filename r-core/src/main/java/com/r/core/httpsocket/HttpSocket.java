@@ -20,6 +20,9 @@ import com.r.core.httpsocket.context.HttpUrl;
 import com.r.core.httpsocket.context.HttpWebUrl;
 import com.r.core.httpsocket.context.RequestHeader;
 import com.r.core.httpsocket.context.ResponseHeader;
+import com.r.core.httpsocket.context.responseheader.ResponseStatus;
+import com.r.core.log.Logger;
+import com.r.core.log.LoggerFactory;
 
 /**
  * 提供对Http协议的发送和接收<br />
@@ -30,6 +33,8 @@ import com.r.core.httpsocket.context.ResponseHeader;
  */
 public class HttpSocket implements Serializable {
     private static final long serialVersionUID = -9216646912368723831L;
+    /** 日志 */
+    private static final Logger logger = LoggerFactory.getLogger(HttpSocket.class, "Http套接字");
 
     /** http发送头信息 */
     private RequestHeader requestHeader = null;
@@ -221,6 +226,11 @@ public class HttpSocket implements Serializable {
             // 如果保持cookies,则从返回头中提取出cookies保存起来
             if (this.isHoldCookies) {
                 this.cookies.putAll(responseHeader.getCookies());
+            }
+
+            ResponseStatus status = responseHeader.getStatus();
+            if (!ResponseStatus.s200.equals(status)) {
+                logger.warn("返回非正常的报文{}", status.toString());
             }
         } catch (SocketTimeoutException ste) {
             throw new NetworkIOReadErrorException("获取数据超时!", 1);

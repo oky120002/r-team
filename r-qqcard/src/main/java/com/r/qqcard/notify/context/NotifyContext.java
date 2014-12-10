@@ -70,7 +70,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
                         this.events.put(event, new ArrayList<EventMethod>());
                     }
                     String methodName = method.getName();
-                    logger.debug("扫描到注解@EventAnn : {}:{}({})", userClass.getName(), methodName, ArrayUtils.toString(event.getClazzes()));
+                    logger.debug("扫描到注解@EventAnn({}) : {}:{}({})", eventAnn.value().name(), userClass.getName(), methodName, ArrayUtils.toString(event.getClazzes()));
                     this.events.get(event).add(new EventMethod(entry.getKey(), methodName));
                 }
 

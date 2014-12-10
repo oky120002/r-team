@@ -1,10 +1,10 @@
 package com.r.core.httpsocket.context.responseheader;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.helpers.MessageFormatter;
 
 import com.r.core.exceptions.arg.ArgIllegalException;
 import com.r.core.util.AssertUtil;
+import com.r.core.util.StrUtil;
 
 /**
  * 返回时的状态
@@ -28,8 +28,8 @@ public enum ResponseStatus {
 
     /** 状态编码 */
     private String code;
-    /** 状态标题 */
-    private String title;
+    /** 状态内容 */
+    private String context;
     /** 状态说明 */
     private String caption;
 
@@ -37,17 +37,17 @@ public enum ResponseStatus {
         return this.code;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getContext() {
+        return this.context;
     }
 
     public String getCaption() {
         return this.caption;
     }
 
-    ResponseStatus(String code, String title, String caption) {
+    ResponseStatus(String code, String context, String caption) {
         this.code = code;
-        this.title = title;
+        this.context = context;
         this.caption = caption;
     }
 
@@ -64,6 +64,6 @@ public enum ResponseStatus {
 
     @Override
     public String toString() {
-        return MessageFormatter.arrayFormat(" {} - {}({})", new String[] { this.code, this.title, StringUtils.abbreviate(this.caption, 10) }).getMessage();
+        return StrUtil.formart("{} : {}({})", this.code, this.context, StringUtils.abbreviate(this.caption, 10));
     }
 }
