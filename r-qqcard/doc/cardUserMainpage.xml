@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QQHOME code="0">
-	<hello time="1418204274"></hello>
-	<user nick="&#x96E8;" uin="14006297" sex="1" money="293656" exp="1710199" regti="1280653392" lastloginti="1418180880" randchance="3" lastrandti="1418198592" missionid="-3" missionstep="-1" missionflag="-3" lastgetmoneyti="1418180880" lv="57" lvupbonus="0" redvip="0" missionv3="1" hasmsg="0" mana="422" redlv="0" yearvip="0" elfname="&#x9B54;&#x6CD5;&#x7CBE;&#x7075;"></user>
-	<elf bname="1" type="0" lost="1" losttime="1309190400" hunger="1" powertype="1" power="0" exp="72" hungertime="1418117874" count="0&#x7C;0" guard="0" lv="1"></elf>
+	<hello time="1418378323"></hello>
+	<user nick="&#x96E8;" uin="14006297" sex="1" money="294746" exp="1711066" regti="1280653392" lastloginti="1418360921" randchance="0" lastrandti="1418376792" missionid="-3" missionstep="-1" missionflag="-3" lastgetmoneyti="1418360921" lv="57" lvupbonus="0" redvip="0" missionv3="1" hasmsg="0" mana="422" redlv="0" yearvip="0" elfname="&#x9B54;&#x6CD5;&#x7CBE;&#x7075;"></user>
+	<elf bname="1" type="0" lost="1" losttime="1309190400" hunger="1" powertype="1" power="0" exp="72" hungertime="1418291923" count="0&#x7C;0" guard="0" lv="1"></elf>
 	<changebox cur="18" vipnum="3" max="18" exch="122,0,0,0">
-		<card slot="0" status="0" unlock="0" id="4418" type="0" st="0"></card>
-		<card slot="2" status="0" unlock="0" id="2783" type="0" st="0"></card>
-		<card slot="3" status="0" unlock="0" id="5172" type="0" st="0"></card>
-		<card slot="4" status="0" unlock="0" id="1467" type="0" st="0"></card>
-		<card slot="5" status="0" unlock="0" id="686" type="0" st="0"></card>
-		<card slot="6" status="0" unlock="0" id="5268" type="0" st="0"></card>
-		<card slot="7" status="0" unlock="0" id="4796" type="0" st="0"></card>
-		<card slot="8" status="0" unlock="0" id="756" type="0" st="0"></card>
-		<card slot="9" status="0" unlock="0" id="611" type="0" st="0"></card>
-		<card slot="10" status="0" unlock="0" id="5662" type="0" st="0"></card>
-		<card slot="14" status="0" unlock="0" id="5663" type="0" st="1"></card>
-		<card slot="16" status="4" unlock="0" id="-1" type="0" st="1"></card>
-		<card slot="17" status="4" unlock="0" id="-1" type="0" st="1"></card>
+		<card slot="0" status="0" unlock="1418378538" id="4334" type="0" st="0"></card>
+		<card slot="1" status="0" unlock="0" id="5606" type="1" st="0"></card>
+		<card slot="2" status="0" unlock="0" id="71" type="0" st="0"></card>
+		<card slot="3" status="0" unlock="0" id="5665" type="0" st="0"></card>
+		<card slot="4" status="0" unlock="0" id="5682" type="0" st="0"></card>
+		<card slot="5" status="0" unlock="1418378538" id="5306" type="0" st="0"></card>
+		<card slot="6" status="0" unlock="0" id="5033" type="0" st="0"></card>
+		<card slot="7" status="0" unlock="1418378538" id="5141" type="0" st="0"></card>
+		<card slot="8" status="0" unlock="0" id="5030" type="0" st="0"></card>
+		<card slot="9" status="0" unlock="0" id="5676" type="1" st="0"></card>
+		<card slot="10" status="0" unlock="0" id="5673" type="1" st="0"></card>
+		<card slot="11" status="0" unlock="0" id="5421" type="1" st="0"></card>
+		<card slot="12" status="0" unlock="0" id="5680" type="0" st="0"></card>
+		<card slot="13" status="0" unlock="0" id="5324" type="1" st="0"></card>
+		<card slot="14" status="4" unlock="0" id="0" type="0" st="1"></card>
+		<card slot="16" status="4" unlock="0" id="0" type="0" st="1"></card>
+		<card slot="17" status="4" unlock="0" id="0" type="0" st="1"></card>
 	</changebox>
 	<storebox cur="45" max="100" nor="45">
-		<card slot="0" status="0" id="5423" type="1" st="0"></card>
-		<card slot="1" status="0" id="5549" type="0" st="0"></card>
-		<card slot="2" status="0" id="5421" type="1" st="0"></card>
-		<card slot="3" status="0" id="5541" type="1" st="0"></card>
-		<card slot="4" status="0" id="5606" type="1" st="0"></card>
+		<card slot="0" status="0" id="5549" type="0" st="0"></card>
+		<card slot="1" status="0" id="5668" type="1" st="0"></card>
+		<card slot="2" status="0" id="5548" type="0" st="0"></card>
+		<card slot="3" status="0" id="5549" type="0" st="0"></card>
+		<card slot="4" status="0" id="5549" type="0" st="0"></card>
 		<card slot="5" status="0" id="5581" type="1" st="0"></card>
 		<card slot="6" status="0" id="5547" type="0" st="0"></card>
-		<card slot="7" status="0" id="5547" type="0" st="0"></card>
-		<card slot="8" status="0" id="5550" type="0" st="0"></card>
+		<card slot="7" status="0" id="5673" type="1" st="0"></card>
+		<card slot="8" status="0" id="5671" type="1" st="0"></card>
 		<card slot="9" status="0" id="5418" type="1" st="0"></card>
-		<card slot="12" status="0" id="5324" type="1" st="0"></card>
+		<card slot="10" status="0" id="5678" type="1" st="0"></card>
+		<card slot="11" status="0" id="5669" type="1" st="0"></card>
+		<card slot="12" status="0" id="5550" type="0" st="0"></card>
 		<card slot="13" status="0" id="5033" type="0" st="0"></card>
+		<card slot="14" status="0" id="5550" type="0" st="0"></card>
+		<card slot="15" status="0" id="5547" type="0" st="0"></card>
+		<card slot="16" status="0" id="5680" type="0" st="0"></card>
+		<card slot="17" status="0" id="5541" type="1" st="0"></card>
 		<card slot="21" status="0" id="5546" type="0" st="0"></card>
+		<card slot="22" status="0" id="5677" type="1" st="0"></card>
+		<card slot="24" status="0" id="5678" type="1" st="0"></card>
+		<card slot="25" status="0" id="5523" type="0" st="0"></card>
+		<card slot="26" status="0" id="5681" type="0" st="0"></card>
+		<card slot="27" status="0" id="5683" type="0" st="0"></card>
+		<card slot="28" status="0" id="2610" type="0" st="0"></card>
+		<card slot="29" status="0" id="5141" type="0" st="0"></card>
+		<card slot="30" status="0" id="5681" type="0" st="0"></card>
+		<card slot="31" status="0" id="5685" type="0" st="0"></card>
+		<card slot="32" status="0" id="5684" type="0" st="0"></card>
+		<card slot="34" status="0" id="5684" type="0" st="0"></card>
 		<card slot="35" status="0" id="5549" type="0" st="0"></card>
+		<card slot="36" status="0" id="2131" type="0" st="0"></card>
+		<card slot="37" status="0" id="5685" type="0" st="0"></card>
 		<card slot="38" status="0" id="5030" type="0" st="0"></card>
-		<card slot="39" status="0" id="5032" type="0" st="0"></card>
-		<card slot="40" status="0" id="5033" type="0" st="0"></card>
+		<card slot="39" status="0" id="5683" type="0" st="0"></card>
+		<card slot="40" status="0" id="5682" type="0" st="0"></card>
+		<card slot="41" status="0" id="5423" type="1" st="0"></card>
 	</storebox>
 	<info>
 		<runeback id="1" expire="0"></runeback>
-		<stove id="0" endtime="1418205876" lv="9"></stove>
-		<stove id="1" endtime="1418202284" lv="9"></stove>
-		<stove id="2" endtime="1418205874" lv="9"></stove>
+		<stove id="0" endtime="1418379027" lv="9"></stove>
+		<stove id="1" endtime="1418379492" lv="9"></stove>
+		<stove id="2" endtime="1418386670" lv="9"></stove>
 	</info>
 	<stovebox cur="7" max="7" stovenum="3">
-		<card slot="0" stove="2" btime="1418198674" locktime="3600" id="5673" type="1" prop="0" flag="2"></card>
-		<card slot="1" stove="0" btime="1418198676" locktime="3600" id="5672" type="1" prop="0" flag="2"></card>
-		<card slot="2" stove="1" btime="1418198684" locktime="3600" id="5669" type="1" prop="0" flag="2"></card>
-		<card slot="3" stove="2" btime="1418202274" locktime="3600" id="5671" type="1" prop="0" flag="1"></card>
-		<card slot="4" stove="0" btime="1418202276" locktime="3600" id="5670" type="1" prop="0" flag="1"></card>
-		<card slot="6" stove="0" btime="1418198703" locktime="3600" id="5668" type="1" prop="0" opuin="324067767" flag="2" slottype="steal" opuin2="0" id2="0"></card>
+		<card slot="0" stove="0" btime="1418361027" locktime="14400" id="5674" type="1" prop="0" flag="2"></card>
+		<card slot="1" stove="2" btime="1418372270" locktime="14400" id="5675" type="1" prop="0" flag="1"></card>
+		<card slot="2" stove="1" btime="1418372292" locktime="3600" id="5670" type="1" prop="0" flag="2"></card>
+		<card slot="3" stove="0" btime="1418375427" locktime="3600" id="5672" type="1" prop="0" flag="1"></card>
+		<card slot="4" stove="1" btime="1418375892" locktime="3600" id="5668" type="1" prop="0" flag="1"></card>
+		<card slot="6" stove="0" btime="1418372314" locktime="3600" id="5671" type="1" prop="0" opuin="324067767" flag="2" slottype="steal" opuin2="0" id2="0"></card>
 	</stovebox>
 	<rent_slot rent_count="0" max_count="9">
 		

@@ -3,6 +3,8 @@
  */
 package com.r.qqcard.notify.handler;
 
+import com.r.qqcard.card.bean.CardBoxListItem;
+
 /**
  * 事件
  * 
@@ -17,7 +19,9 @@ public enum Event {
     core$启动自动炼卡, //
     login$程序启动, //
     login$登陆完成(Boolean.class, String.class, String.class, Boolean.class), // 登陆是否成功,账号,密码,是否保存密码和账号
-    box$显示卡片箱子, //
+    box$显示卡片箱子对话框, //
+    box$交换卡片(CardBoxListItem.class), // 卡箱列表项
+    box$一键抽卡, //
     ;
 
     private Class<?>[] clazzes;

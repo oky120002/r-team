@@ -16,6 +16,8 @@ public class QQExChangeBox {
     private int code;
     @XStreamAsAttribute
     private int destid;
+    @XStreamAsAttribute
+    private String message;
 
     /**
      * @return the code
@@ -45,6 +47,21 @@ public class QQExChangeBox {
      */
     public void setDestid(int destid) {
         this.destid = destid;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message
+     *            the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

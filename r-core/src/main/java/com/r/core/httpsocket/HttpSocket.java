@@ -92,18 +92,6 @@ public class HttpSocket implements Serializable {
     }
 
     /**
-     * 发送请求地址
-     * 
-     * @param httpUrl
-     * @param headers
-     * @return
-     * @throws NetworkIOReadErrorException
-     */
-    public ResponseHeader send(String httpUrl, Map<String, String> headers) throws NetworkIOReadErrorException {
-        return send(RequestHeader.newRequestHeaderByGet(HttpUrl.newInstance(httpUrl), requestHeader.getHttpProxy()).putAllHeader(headers));
-    }
-
-    /**
      * 发送请求
      * 
      * @param httpUrl
@@ -135,19 +123,6 @@ public class HttpSocket implements Serializable {
      */
     public ResponseHeader send(HttpWebUrl httpWebUrl, HttpPost post) throws NetworkIOReadErrorException {
         return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpWebUrl), post, requestHeader.getHttpProxy()));
-    }
-
-    /**
-     * 发送请求
-     * 
-     * @param httpUrl
-     * @param post
-     * @param headers
-     * @return
-     * @throws NetworkIOReadErrorException
-     */
-    public ResponseHeader send(String httpUrl, HttpPost post, Map<String, String> headers) throws NetworkIOReadErrorException {
-        return send(RequestHeader.newRequestHeaderByPost(HttpUrl.newInstance(httpUrl), post, requestHeader.getHttpProxy()).putAllHeader(headers));
     }
 
     /**

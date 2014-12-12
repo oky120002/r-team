@@ -10,34 +10,39 @@ package com.r.core.exceptions;
  * 
  */
 public class SwitchPathException extends SException {
-	private static final long serialVersionUID = -2845413097321002632L;
+    private static final long serialVersionUID = -2845413097321002632L;
 
-	@Override
-	protected String doGetErrorCode() {
-		return "SWITCH_PATH_ERROR";
-	}
+    @Override
+    protected String doGetErrorCode() {
+        return "SWITCH_PATH_ERROR";
+    }
 
-	@Override
-	protected String doGetErrorMessage() {
-		return "switch分支错误，走到了不该走的switch分支。";
-	}
+    @Override
+    protected String doGetErrorMessage() {
+        return "switch分支错误，走到了不该走的switch分支。";
+    }
 
-	/** switch分支异常 */
-	public SwitchPathException(String message, Object... objects) {
-		super(message, objects);
-	}
+    /** switch分支异常 */
+    public SwitchPathException() {
+        super("switch分支错误，走到了不该走的switch分支。");
+    }
 
-	/** switch分支异常 */
-	public SwitchPathException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    /** switch分支异常 */
+    public SwitchPathException(String message, Object... objects) {
+        super(message, objects);
+    }
 
-	/** switch分支异常 */
-	public SwitchPathException(String message) {
-		super(message);
-	}
+    /** switch分支异常 */
+    public SwitchPathException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public SwitchPathException(String message, int mark) {
-		super(message, mark);
-	}
+    /** switch分支异常 */
+    public SwitchPathException(String message) {
+        super(message);
+    }
+
+    public SwitchPathException(String message, int mark) {
+        super(message, mark);
+    }
 }

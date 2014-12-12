@@ -121,7 +121,7 @@ public class MainFrame extends HBaseFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source.equals(this.storeBoxButton)) {
-            notify.notifyEvent(Event.box$显示卡片箱子);
+            notify.notifyEvent(Event.box$显示卡片箱子对话框);
         }
         if (source.equals(this.startAutoButton)) {
             notify.notifyEvent(Event.core$启动自动炼卡);

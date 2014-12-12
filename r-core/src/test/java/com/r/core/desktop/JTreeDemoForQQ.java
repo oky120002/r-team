@@ -28,7 +28,8 @@ public class JTreeDemoForQQ {
 
 	private JButton jbtnOnlineFriendList, jbtnMyGroupChat;
 
-	private JList jlistOnlineFriendList;
+	@SuppressWarnings("rawtypes")
+    private JList jlistOnlineFriendList;
 
 	private JScrollPane jscrollPaneOnlineFriendList;
 

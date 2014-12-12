@@ -28,7 +28,7 @@ public class AccountService extends AbstractService {
     /** 网络行为 */
     @Resource(name = "component.webaction")
     private WebAction action;
-
+    /** 基础数据业务处理类 */
     @Resource(name = "service.basedata")
     private BaseDataService baseDataService;
 

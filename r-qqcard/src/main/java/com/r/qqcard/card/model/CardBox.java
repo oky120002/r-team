@@ -35,7 +35,7 @@ public class CardBox {
     @Column
     private Integer type;// 卡片类型(0:基础卡片,1:合成的卡片)
     @Column
-    private Integer boxtype; // 箱子类型(0:换卡箱,1:储藏箱)
+    private Integer cardBoxType; // 箱子类型(0:换卡箱,1:储藏箱)
 
     public CardBox() {
         super();
@@ -92,13 +92,12 @@ public class CardBox {
     }
 
     /** 获取箱子类型(0:换卡箱,1:储藏箱) */
-    public Integer getBoxtype() {
-        return boxtype;
+    public Integer getCardBoxtype() {
+        return cardBoxType;
     }
 
     /** 设置箱子类型(0:换卡箱,1:储藏箱) */
-    public void setBoxtype(Integer boxtype) {
-        this.boxtype = boxtype;
+    public void setCardBoxtype(Integer cardBoxType) {
+        this.cardBoxType = cardBoxType;
     }
-
 }
