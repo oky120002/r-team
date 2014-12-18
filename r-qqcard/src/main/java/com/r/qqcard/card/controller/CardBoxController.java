@@ -7,13 +7,11 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
-import com.r.qqcard.card.bean.CardBoxListItem;
 import com.r.qqcard.card.model.CardBox;
 import com.r.qqcard.card.service.CardBoxService;
 import com.r.qqcard.card.view.CardBoxDialog;
@@ -49,12 +47,13 @@ public class CardBoxController {
     }
 
     @EventAnn(Event.box$交换卡片)
-    public void changeCardBox(CardBoxListItem cardBoxListItem) {
+    public void changeCardBox(String cardboxid) {
         if (isValid()) {
-            CardBox cardBox = this.cardboxService.find(cardBoxListItem.getCardBoxid());
+            CardBox cardBox = this.cardboxService.find(cardboxid);
+            int oldSlot = cardBox.getSlot(); // 原来所在卡箱位置
             int destSlot = this.cardboxService.changeCardBox(cardBox);
             if (0 <= destSlot) {
-                this.cardBoxDialog.changeCardBox(cardBoxListItem, destSlot);
+                this.cardBoxDialog.changeCardBox(oldSlot, cardBox);
             } else {
                 switch (destSlot) {
                 case -1:
@@ -81,19 +80,31 @@ public class CardBoxController {
     @EventAnn(Event.box$一键抽卡)
     public void doRandomAllCard() {
         if (isValid()) {
-            Collection<CardBox> cardBoxs = this.cardboxService.randomAllCard();
-            if (CollectionUtils.isNotEmpty(cardBoxs)) {
-                this.cardBoxDialog.addCardBoxToChange(cardBoxs);
-            }
+            this.cardBoxDialog.addCardBox(this.cardboxService.randomAllCard());
         }
+    }
+
+    @EventAnn(Event.box$增加卡箱卡片)
+    public void addCardBox(Collection<CardBox> cardBoxs) {
+        this.cardBoxDialog.addCardBox(cardBoxs);
+    }
+
+    @EventAnn(Event.core$同步数据)
+    public void synchronizedGameDatas() {
+        updateCardBox();
+    }
+
+    @EventAnn(Event.box$整理卡片)
+    public void tidyCard() {
+        this.cardboxService.tidyCard();
+        updateCardBox();
     }
 
     /** 初始化卡片箱子控件(只有在显示的时候,更新卡箱信息) */
     private void updateCardBox() {
         if (isValid()) {
-            Collection<CardBox> cardboxChange = cardboxService.queryAllByChange(); // 变卡箱的卡片
-            Collection<CardBox> cardboxStore = cardboxService.queryAllByStore();// 储藏箱的卡片
-            this.cardBoxDialog.initCardBox(cardboxChange, cardboxStore); // 初始化卡箱信息
+            Collection<CardBox> cardbosx = cardboxService.queryAll();
+            this.cardBoxDialog.initCardBox(cardbosx);
         }
     }
 

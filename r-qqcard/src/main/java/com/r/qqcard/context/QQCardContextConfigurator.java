@@ -10,6 +10,8 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class QQCardContextConfigurator implements InitializingBean {
 
+    /** 是否调试模式 */
+    private Boolean isDebug;
     /** QQ网络应用id */
     private String appid = null;
     /** 程序名字 */
@@ -49,6 +51,16 @@ public class QQCardContextConfigurator implements InitializingBean {
     /** 设置版本号 */
     public void setAppVersion(String version) {
         this.appVersion = version;
+    }
+
+    /** 判断是否调试模式 */
+    public boolean isDebug() {
+        return isDebug == null ? false : isDebug.booleanValue();
+    }
+
+    /** 设置是否调试模式 */
+    public void setIsDebug(Boolean isDebug) {
+        this.isDebug = isDebug;
     }
 
 }

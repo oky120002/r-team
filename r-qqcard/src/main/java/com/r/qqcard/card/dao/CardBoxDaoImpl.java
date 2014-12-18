@@ -26,9 +26,27 @@ public class CardBoxDaoImpl extends AbstractDaoImpl<CardBox> implements CardBoxD
     @Override
     public Collection<CardBox> queryAll(int cardboxType) {
         CardBox cardBox = new CardBox();
-        cardBox.setCardBoxtype(Integer.valueOf(cardboxType));
+        cardBox.setCardBoxType(Integer.valueOf(cardboxType));
         cardBox.setStatus(Integer.valueOf(0));
         return queryByExample(cardBox);
     }
 
+    @Override
+    public Collection<CardBox> queryAll() {
+        CardBox cardBox = new CardBox();
+        cardBox.setStatus(Integer.valueOf(0));
+        return queryByExample(cardBox);
+    }
+
+    @Override
+    public Collection<CardBox> queryTidyCards() {
+        StringBuffer hql = new StringBuffer();
+
+        hql.append(" from ").append(CardBox.class.getName()).append(" card ");
+        hql.append(" where ").append(' ');
+        hql.append(" ( card.cardBoxType = 0 and 10 < card.gold ) ");
+        hql.append(" or ( card.cardBoxType = 1 and 10 = card.gold ) ");
+
+        return queryByHql(hql);
+    }
 }

@@ -19,4 +19,7 @@ import java.lang.annotation.Target;
 public @interface EventAnn {
     /** 事件 */
     Event value();
+
+    /** 执行顺序,越大越后执行,如果相同,则不保证执行的顺序 // TODO 尽快实现 */
+    int order() default Integer.MAX_VALUE;
 }

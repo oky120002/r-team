@@ -368,4 +368,9 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
         return (List<T>) sqlQuery.list();
     }
+
+    @Override
+    public void flush() {
+        getSession().flush();
+    }
 }

@@ -108,6 +108,7 @@ public class HLoginDialog extends HBaseDialog implements ActionListener, FocusLi
         this.add(getContextPanel(), BorderLayout.CENTER); // 添加子控件
 
         this.loginButton.addActionListener(this); // 添加"登陆"按钮响应事件
+        this.usernameTextField.addKeyListener(this);// 添加"密码文本框"键盘响应事件
         this.passwordTextField.addKeyListener(this); // 添加"密码文本框"键盘响应事件
         this.authCodeTextField.addKeyListener(this);// 添加"验证码文本框"键盘响应事件
         this.usernameTextField.addFocusListener(this);// 添加"账号文本框"失去焦点事件

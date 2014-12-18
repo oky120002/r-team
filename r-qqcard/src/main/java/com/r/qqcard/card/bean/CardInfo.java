@@ -99,7 +99,7 @@ public class CardInfo {
             boolean enable = toBoolean(items.get(5));
             int prize = toInteger(items.get(6));
             int score = toInteger(items.get(7));
-            String color = String.valueOf(items.get(8));
+            Integer color = toInteger(items.get(8));
             String gift = toString(items.get(9));
             String text = toString(items.get(10));
             // List<Card> cards = new ArrayList<Card>();

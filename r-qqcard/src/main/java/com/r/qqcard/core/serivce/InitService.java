@@ -90,7 +90,7 @@ public class InitService extends AbstractService {
         logger.debug("从数据库查找到卡片{}张,网络返回卡片{}张", String.valueOf(cardSize), cards.size());
         logger.debug("从数据库查找到合成规则{}条,网络返回合成规则{}条", String.valueOf(composeSize), composes.size());
         logger.debug("从数据库查找到QQ秀{}条,网络返回QQ秀{}条", String.valueOf(giftSize), gifts.size());
-        notify.notifyEvent(Event.core$全局数据初始化完成);
+        notify.notifyLocalEvent(Event.core$全局数据初始化完成);
     }
 
     /** 初始化交换箱信息，卡箱信息，账号信息 */
@@ -100,6 +100,6 @@ public class InitService extends AbstractService {
         QQHome home = action.getQQHome();
         accountService.initAccount(home.getUser());
         cardBoxService.initCardBox(home.getChangeBox(), home.getStoreBox());
-        notify.notifyEvent(Event.core$玩家信息初始化完成);
+        notify.notifyLocalEvent(Event.core$玩家信息初始化完成);
     }
 }

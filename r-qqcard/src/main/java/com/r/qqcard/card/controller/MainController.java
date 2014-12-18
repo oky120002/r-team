@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.core.log.LoggerListener;
+import com.r.core.util.RandomUtil;
 import com.r.qqcard.account.service.AccountService;
 import com.r.qqcard.account.service.AccountService.AccountEnum;
 import com.r.qqcard.card.view.MainFrame;
@@ -60,12 +61,7 @@ public class MainController implements InitializingBean, LoggerListener {
     public void afterPropertiesSet() throws Exception {
         logger.debug("添加日志监听器......");
         LoggerFactory.addLoggerListener(this);
-        this.mainFrame = new MainFrame(this.notify, context.getAppName() + " " + context.getAppVersion());
-    }
-
-    /** 显示主界面窗口 */
-    public void showMainFrame() {
-        this.mainFrame.setVisible(true);
+        this.mainFrame = new MainFrame(this, context.getAppName() + " " + context.getAppVersion(), context.isDebug());
     }
 
     /** 记录日志 */
@@ -77,6 +73,33 @@ public class MainController implements InitializingBean, LoggerListener {
             sb.append(message);
             this.mainFrame.printlnInfo(sb.toString());
         }
+    }
+
+    /** 显示主界面窗口 */
+    public void showMainFrame() {
+        this.mainFrame.setVisible(true);
+    }
+
+    /** 启动自动炼卡 */
+    public void startAutoStove() {
+        this.notify.notifyEvent(Event.core$启动自动炼卡);
+    }
+
+    /** 显示卡片箱子对话框 */
+    public void showCardBoxDialog() {
+        this.notify.notifyEvent(Event.box$显示卡片箱子对话框);
+    }
+
+    /** 显示卡片图片对话框 */
+    public void showCardImageDialog() {
+        this.notify.notifyEvent(Event.cardimage$显示卡片图片对话框);
+    }
+
+    /** 同步数据 */
+    public void synchronizedGameDatas() {
+        String eventName = RandomUtil.randomString(16);
+        this.notify.notifySynchronizedEvent(Event.core$玩家信息初始化, eventName);
+        this.notify.notifySynchronizedEvent(Event.core$同步数据, eventName);
     }
 
     @EventAnn(Event.login$登陆完成)
@@ -106,7 +129,7 @@ public class MainController implements InitializingBean, LoggerListener {
     /** 启动游戏(解除各种功能的限制,必须在全局数据和游戏数据都加在完成后) */
     private void startupGame() {
         if (isInitGameData && isInitGlobal) {
-            logger.info("初始化游戏信息完成.开启所有功能......");
+            logger.info("初始化游戏信息完成......");
             this.mainFrame.startupGame();
         }
     }

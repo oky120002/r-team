@@ -3,6 +3,7 @@
  */
 package com.r.qqcard.core.component;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.HttpPost;
 import com.r.core.tool.QQTool;
+import com.r.core.util.RandomUtil;
 
 /**
  * @author rain
@@ -27,6 +29,28 @@ public class WebSocket {
     /** 网络请求套接字 */
     @Resource(name = "springxml.httpsocket")
     private HttpSocket httpSocket;
+
+    /**
+     * 获取卡片图片
+     * 
+     * @param cardid
+     *            卡片id
+     * @return 卡片图片
+     */
+    public BufferedImage getCardImage(int cardid) {
+        return httpSocket.send("http://appimg2.qq.com/card/img/card/" + cardid).bodyToImage();
+    }
+
+    /**
+     * 获取卡片的主题边框图片
+     * 
+     * @param themeid
+     *            主题id
+     * @return 主题边框图片
+     */
+    public BufferedImage getCardThemeImage(int themeid) {
+        return httpSocket.send("http://appimg2.qq.com/card/img/theme/" + themeid).bodyToImage();
+    }
 
     /**
      * 获取第三版卡片信息
@@ -186,6 +210,6 @@ public class WebSocket {
         if (this.gtk == null) {
             this.gtk = Integer.toString(QQTool.getGTK(httpSocket.getCookie("skey").getValue()));
         }
-        return this.gtk;
+        return this.gtk + "&r=" + RandomUtil.randomString(16);
     }
 }

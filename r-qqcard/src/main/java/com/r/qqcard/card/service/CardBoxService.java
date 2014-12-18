@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.r.core.exceptions.SwitchPathException;
+import com.r.core.util.TaskUtil;
 import com.r.qqcard.card.dao.CardBoxDao;
 import com.r.qqcard.card.model.CardBox;
 import com.r.qqcard.card.qqhome.QQHomeBoxChange;
@@ -33,19 +33,9 @@ import com.r.qqcard.core.support.AbstractService;
  */
 @Service("service.cardbox")
 public class CardBoxService extends AbstractService {
-    // /** 拥有的变卡箱最大格子数Key */
-    // private static final String KEY_MAX_BOXCHANGE =
-    // "service.cardbox.max.boxchange";
-    // /** 拥有的储藏箱最大格子数Key */
-    // private static final String KEY_MAX_BOXSTORE =
-    // "service.cardbox.max.boxstore";
-
     /** 卡箱Dao */
     @Resource(name = "dao.cardbox")
     private CardBoxDao cardboxDao;
-    // /** 基础数据业务处理类 */
-    // @Resource(name = "service.basedata")
-    // private BaseDataService baseDataService;
     /** 网络行为 */
     @Resource(name = "component.webaction")
     private WebAction action;
@@ -67,7 +57,7 @@ public class CardBoxService extends AbstractService {
         Map<Integer, CardBox> changeMap = new HashMap<Integer, CardBox>();
         for (int index = 0; index < maxBoxChange; index++) {
             CardBox cb = new CardBox();
-            cb.setCardBoxtype(0);
+            cb.setCardBoxType(0);
             cb.setSlot(index);
             cb.setStatus(4);
             cb.setType(0);
@@ -76,7 +66,7 @@ public class CardBoxService extends AbstractService {
         Map<Integer, CardBox> storeMap = new HashMap<Integer, CardBox>();
         for (int index = 0; index < maxBoxStore; index++) {
             CardBox cb = new CardBox();
-            cb.setCardBoxtype(1);
+            cb.setCardBoxType(1);
             cb.setSlot(index);
             cb.setStatus(4);
             cb.setType(0);
@@ -106,28 +96,6 @@ public class CardBoxService extends AbstractService {
         cardboxDao.creates(changeMap.values());
         cardboxDao.creates(storeMap.values());
 
-        // baseDataService.setValue(KEY_MAX_BOXCHANGE, maxBoxChange);
-        // baseDataService.setValue(KEY_MAX_BOXCHANGE, maxBoxStore);
-    }
-
-    /** 换卡箱卡片bean转成卡箱实体 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public void homeCard2CardBox(QQHomeCardChange cc, CardBox cardBox) {
-        cardBox.setCard(cardinfoService.findCardByCardId(cc.getId()));
-        cardBox.setSlot(cc.getSlot());
-        cardBox.setStatus(cc.getStatus());
-        cardBox.setType(cc.getType());
-        cardBox.setCardBoxtype(0);
-    }
-
-    /** 保险箱箱卡片bean转成卡箱实体 */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
-    public void homeCard2CardBox(QQHomeCardStore cs, CardBox cardBox) {
-        cardBox.setCard(cardinfoService.findCardByCardId(cs.getId()));
-        cardBox.setSlot(cs.getSlot());
-        cardBox.setStatus(cs.getStatus());
-        cardBox.setType(cs.getType());
-        cardBox.setCardBoxtype(1);
     }
 
     /** 根据卡片箱子ID查找卡片箱子 */
@@ -148,6 +116,12 @@ public class CardBoxService extends AbstractService {
         return cardboxDao.queryAll(1);
     }
 
+    /** 返回所有卡片箱中的卡片 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    public Collection<CardBox> queryAll() {
+        return cardboxDao.queryAll();
+    }
+
     /**
      * 交换卡片
      * 
@@ -159,18 +133,16 @@ public class CardBoxService extends AbstractService {
     public int changeCardBox(CardBox cardBox) {
         int flag = -1;
         int slot = cardBox.getSlot();
-        switch (cardBox.getCardBoxtype()) {
+        switch (cardBox.getCardBoxType()) {
         case 0: // 换卡箱
             flag = this.action.doChange2Store(slot);
             break;
         case 1: // 保险箱
             flag = this.action.doStore2Change(slot);
             break;
-        default:
-            throw new SwitchPathException();
         }
         if (0 <= flag) {
-            cardBox.setCardBoxtype(cardBox.getCardBoxtype() == 0 ? 1 : 0);
+            cardBox.setCardBoxType(cardBox.getCardBoxType() == 0 ? 1 : 0);
             cardBox.setSlot(flag);
             cardboxDao.update(cardBox);
         }
@@ -191,5 +163,46 @@ public class CardBoxService extends AbstractService {
             this.cardboxDao.creates(cbs);
         }
         return cbs;
+    }
+
+    /** 整理卡片 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public void tidyCard() {
+        // 接着把换卡箱中大于10的,从大到小排序,尽最大可能移动到保险箱
+        Collection<CardBox> cardboxs = this.cardboxDao.queryTidyCards();
+        if (CollectionUtils.isNotEmpty(cardboxs)) {
+            for (CardBox cardBox : cardboxs) {
+                int destSlot = this.changeCardBox(cardBox);
+                if (destSlot < 0) {
+                    break;
+                }
+                logger.info("移动卡片 : {}", cardBox.toString());
+                TaskUtil.sleep(10);
+            }
+
+            this.cardboxDao.updates(cardboxs);
+        }
+    }
+
+    /** 换卡箱卡片bean转成卡箱实体 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    private void homeCard2CardBox(QQHomeCardChange cc, CardBox cardBox) {
+        cardBox.setCard(cardinfoService.findCardByCardId(cc.getId()));
+        cardBox.setSlot(cc.getSlot());
+        cardBox.setStatus(cc.getStatus());
+        cardBox.setType(cc.getType());
+        cardBox.setCardBoxType(0);
+        cardBox.setGold(cardBox.getCard().getPrice());
+    }
+
+    /** 保险箱箱卡片bean转成卡箱实体 */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = true)
+    private void homeCard2CardBox(QQHomeCardStore cs, CardBox cardBox) {
+        cardBox.setCard(cardinfoService.findCardByCardId(cs.getId()));
+        cardBox.setSlot(cs.getSlot());
+        cardBox.setStatus(cs.getStatus());
+        cardBox.setType(cs.getType());
+        cardBox.setCardBoxType(1);
+        cardBox.setGold(cardBox.getCard().getPrice());
     }
 }

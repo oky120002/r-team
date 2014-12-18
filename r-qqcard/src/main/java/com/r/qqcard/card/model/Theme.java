@@ -50,7 +50,7 @@ public class Theme implements Serializable {
     @Column
     private Integer score; // 得分(可能是完成后得到的经验值?)
     @Column
-    private String color; // 主题颜色
+    private Integer color; // 主题颜色
     @Column
     private String gift; // 合成成功后的QQ秀(用"|"分割)
     @Column
@@ -109,7 +109,7 @@ public class Theme implements Serializable {
      * @param flashSrcTid
      *            ?
      */
-    public Theme(Integer themeid, String name, Integer difficulty, Date publishTime, Integer pickRate, Boolean enable, Integer prize, Integer score, String color, String gift, String text, List<Card> cards, Integer themeType, Integer version, Date time, Date offtime, Integer flashSrcTid) {
+    public Theme(Integer themeid, String name, Integer difficulty, Date publishTime, Integer pickRate, Boolean enable, Integer prize, Integer score, Integer color, String gift, String text, List<Card> cards, Integer themeType, Integer version, Date time, Date offtime, Integer flashSrcTid) {
         super();
         this.themeid = themeid;
         this.name = name;
@@ -194,7 +194,7 @@ public class Theme implements Serializable {
     /**
      * 获得QQ卡片主题颜色
      */
-    public String getColor() {
+    public Integer getColor() {
         return color;
     }
 
@@ -254,7 +254,7 @@ public class Theme implements Serializable {
     }
 
     /** 设置颜色 */
-    public void setColor(String color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 

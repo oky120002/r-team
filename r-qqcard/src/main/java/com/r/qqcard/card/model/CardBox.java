@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.r.core.util.StrUtil;
+
 /**
  * @author rain
  *
@@ -36,6 +38,8 @@ public class CardBox {
     private Integer type;// 卡片类型(0:基础卡片,1:合成的卡片)
     @Column
     private Integer cardBoxType; // 箱子类型(0:换卡箱,1:储藏箱)
+    @Column
+    private Integer gold; // 金币
 
     public CardBox() {
         super();
@@ -91,13 +95,29 @@ public class CardBox {
         this.type = type;
     }
 
-    /** 获取箱子类型(0:换卡箱,1:储藏箱) */
-    public Integer getCardBoxtype() {
+    /** 获取箱子类型(0:换卡箱,1:保险箱) */
+    public Integer getCardBoxType() {
         return cardBoxType;
     }
 
-    /** 设置箱子类型(0:换卡箱,1:储藏箱) */
-    public void setCardBoxtype(Integer cardBoxType) {
+    /** 设置箱子类型(0:换卡箱,1:保险箱) */
+    public void setCardBoxType(Integer cardBoxType) {
         this.cardBoxType = cardBoxType;
     }
+
+    /** 获取卡片金币 */
+    public Integer getGold() {
+        return gold;
+    }
+
+    /** 设置卡片金币 */
+    public void setGold(Integer gold) {
+        this.gold = gold;
+    }
+
+    @Override
+    public String toString() {
+        return StrUtil.formart("{}({}￥,{},{}★)", this.card.getName(), this.card.getPrice(), this.card.getTheme().getName(), this.card.getTheme().getDifficulty());
+    }
+
 }

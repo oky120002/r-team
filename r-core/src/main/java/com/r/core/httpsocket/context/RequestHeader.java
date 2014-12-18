@@ -465,4 +465,9 @@ public class RequestHeader implements Serializable {
             throw new NullPointerException("headers里面没有包含能发送的路径,不能发送");
         }
     }
+
+    /** 返回Post数据 */
+    public String getPost() {
+        return new String(this.post);
+    }
 }

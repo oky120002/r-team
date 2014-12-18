@@ -15,8 +15,7 @@ import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.desktop.ctrl.impl.panle.HInfoPanel;
 import com.r.core.util.StrUtil;
-import com.r.qqcard.notify.context.NotifyContext;
-import com.r.qqcard.notify.handler.Event;
+import com.r.qqcard.card.controller.MainController;
 
 /**
  * 主窗口
@@ -27,8 +26,10 @@ import com.r.qqcard.notify.handler.Event;
 public class MainFrame extends HBaseFrame implements ActionListener {
     private static final long serialVersionUID = -1173373452689687625L;
 
-    /** 消息容器 */
-    private NotifyContext notify;
+    /** 主窗口控制器 */
+    private MainController mainController;
+    /** 是否调试模式 */
+    private boolean isDebug;
 
     /** 日志面板 */
     private HInfoPanel logPanel = new HInfoPanel();
@@ -46,11 +47,16 @@ public class MainFrame extends HBaseFrame implements ActionListener {
     private JButton startAutoButton = new JButton("启动自动炼卡");
     /** 显示储藏箱按钮 */
     private JButton storeBoxButton = new JButton("储藏箱");
+    /** 同步数据按钮(开发期间显示) */
+    private JButton synchronizationButton = new JButton("同步数据");
+    /** 显示卡片图片对话框 */
+    private JButton cardImageButton = new JButton("卡片图片");
 
     /** 构造一个拥有一个标题的窗口 */
-    public MainFrame(NotifyContext notify, String title) {
+    public MainFrame(MainController mainController, String title, boolean isDebug) {
         super(title);
-        this.notify = notify;
+        this.mainController = mainController;
+        this.isDebug = isDebug;
 
         // 窗口属性
         this.setSize(600, 480); // 调整窗口大小
@@ -64,6 +70,8 @@ public class MainFrame extends HBaseFrame implements ActionListener {
         this.storeBoxButton.addActionListener(this);
         this.startAutoButton.setEnabled(false);
         this.startAutoButton.addActionListener(this);
+        this.cardImageButton.setEnabled(false);
+        this.cardImageButton.addActionListener(this);
 
         // 顶部账户信息
         HBaseBox boxTop = HBaseBox.createHorizontalBaseBox();
@@ -78,7 +86,13 @@ public class MainFrame extends HBaseFrame implements ActionListener {
         // 底部功能按钮
         HBaseBox boxBottom = HBaseBox.createHorizontalBaseBox();
         add(boxBottom, BorderLayout.SOUTH);
-        boxBottom.adds(startAutoButton, HBaseBox.EmptyHorizontal, storeBoxButton);
+        boxBottom.adds(startAutoButton, HBaseBox.EmptyHorizontal, storeBoxButton, HBaseBox.EmptyHorizontal, cardImageButton);
+
+        if (this.isDebug) {
+            this.synchronizationButton.setEnabled(false);
+            this.synchronizationButton.addActionListener(this);
+            boxBottom.adds(HBaseBox.EmptyHorizontal, this.synchronizationButton);
+        }
     }
 
     /** 打印日志信息 */
@@ -90,6 +104,8 @@ public class MainFrame extends HBaseFrame implements ActionListener {
     public void startupGame() {
         this.storeBoxButton.setEnabled(true);
         this.startAutoButton.setEnabled(true);
+        this.synchronizationButton.setEnabled(true);
+        this.cardImageButton.setEnabled(true);
     }
 
     /** 设置昵称 */
@@ -121,10 +137,16 @@ public class MainFrame extends HBaseFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source.equals(this.storeBoxButton)) {
-            notify.notifyEvent(Event.box$显示卡片箱子对话框);
+            this.mainController.showCardBoxDialog();
         }
         if (source.equals(this.startAutoButton)) {
-            notify.notifyEvent(Event.core$启动自动炼卡);
+            this.mainController.startAutoStove();
+        }
+        if (source.equals(this.synchronizationButton)) { // 同步数据按钮
+            this.mainController.synchronizedGameDatas();
+        }
+        if (source.equals(this.cardImageButton)) { // 显示卡片图片对话框按钮
+            this.mainController.showCardImageDialog();
         }
     }
 }

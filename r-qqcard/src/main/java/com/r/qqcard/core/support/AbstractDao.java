@@ -481,4 +481,7 @@ public interface AbstractDao<T> {
      * @author rain
      */
     List<T> queryBySql(CharSequence sql, Map<String, Object> pars, int firstResult, int maxResults, Order... orders);
+
+    /** 刷新session,把所有的新建,更改,删除执行到数据库中 */
+    void flush();
 }

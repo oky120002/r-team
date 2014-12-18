@@ -10,6 +10,8 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.r.core.desktop.ctrl.HBaseDialog;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel;
 import com.r.core.desktop.ctrl.impl.panle.HImagePanel.ShowMode;
@@ -26,11 +28,9 @@ public class HImageDialog extends HBaseDialog {
     /** 图片面板 */
     private HImagePanel imagePanel = new HImagePanel();
 
-    /**
-     * @param title
-     */
-    public HImageDialog() {
-        super((JFrame) null, "图片对话框", true);
+    /** 构建图片对话框,标题可不填 */
+    public HImageDialog(String title) {
+        super((JFrame) null, StringUtils.isBlank(title) ? "图片对话框" : title, false);
         initStyle();
         initComponent();
     }

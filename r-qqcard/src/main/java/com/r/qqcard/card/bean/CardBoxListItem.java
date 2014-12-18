@@ -13,6 +13,8 @@ import com.r.qqcard.card.model.CardBox;
  *
  */
 public class CardBoxListItem {
+    /** 卡片id */
+    private int cardid;
     /** 卡片箱子id */
     private String cardBoxid;
     /** 卡片在卡箱中的位置 */
@@ -25,14 +27,28 @@ public class CardBoxListItem {
     private int cardBoxType;
     /** 星级 */
     private int star;
+    /** 金币 */
+    private int gold;
 
     public CardBoxListItem(CardBox cardBox) {
+        this.cardid = cardBox.getCard().getCardid();
         this.cardBoxid = cardBox.getId();
         this.slot = cardBox.getSlot().intValue();
         this.cardName = cardBox.getCard().getName();
         this.themeName = cardBox.getCard().getTheme().getName();
-        this.cardBoxType = cardBox.getCardBoxtype().intValue();
+        this.cardBoxType = cardBox.getCardBoxType().intValue();
         this.star = cardBox.getCard().getTheme().getDifficulty();
+        this.gold = cardBox.getCard().getPrice();
+    }
+
+    /** 获取卡片id */
+    public int getCardid() {
+        return cardid;
+    }
+
+    /** 设置卡片id */
+    public void setCardid(int cardid) {
+        this.cardid = cardid;
     }
 
     /** 获取卡片箱子id */
@@ -95,9 +111,43 @@ public class CardBoxListItem {
         this.star = star;
     }
 
-    @Override
-    public String toString() {
-        return StrUtil.formart("{}[{} - {}★]", this.cardName, this.themeName, this.star);
+    /** 获取卡片价格 */
+    public int getGold() {
+        return gold;
     }
 
+    /** 设置卡片价格 */
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    @Override
+    public String toString() {
+        return StrUtil.formart("{}({}￥,{},{}★)", this.cardName, this.gold, this.themeName, this.star);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getCardBoxid() == null) ? 0 : getCardBoxid().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardBoxListItem other = (CardBoxListItem) obj;
+        if (getCardBoxid() == null) {
+            if (other.getCardBoxid() != null)
+                return false;
+        } else if (!getCardBoxid().equals(other.getCardBoxid()))
+            return false;
+        return true;
+    }
 }

@@ -219,4 +219,14 @@ public class Card implements Serializable {
         this.mana = mana;
     }
 
+    @Override
+    public String toString() {
+        Theme theme = getTheme();
+        StringBuilder sb = new StringBuilder();
+        sb.append(theme.getDifficulty()).append("星 ");
+        sb.append(getPrice()).append("￥ ");
+        sb.append(theme.getName()).append(' ');
+        sb.append(this.name);
+        return sb.toString();
+    }
 }

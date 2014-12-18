@@ -79,7 +79,7 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
     }
 
     /**
-     * 通知发生某事件
+     * 通知发生某事件(全局异步执行)
      * 
      * @param event
      *            事件
@@ -92,6 +92,43 @@ public class NotifyContext extends NotifyContextConfigurator implements Initiali
             for (EventMethod eventMethod : eventMethods) {
                 Object bean = this.applicationContext.getBean(eventMethod.beanName);
                 TaskUtil.executeTask(new NotifyTask(bean, eventMethod.methodName, event.getClazzes(), objects));
+            }
+        }
+    }
+
+    /**
+     * 通知发生某事件(关键字顺序执行)
+     * 
+     * @param event
+     *            事件
+     * @param objects
+     *            事件发生时传入的参数
+     */
+    public void notifySynchronizedEvent(Event event, String eventName, Object... objects) {
+        List<EventMethod> eventMethods = this.events.get(event);
+        if (CollectionUtils.isNotEmpty(eventMethods)) {
+            for (EventMethod eventMethod : eventMethods) {
+                Object bean = this.applicationContext.getBean(eventMethod.beanName);
+                TaskUtil.executeSequenceTask(new NotifyTask(bean, eventMethod.methodName, event.getClazzes(), objects), eventName);
+            }
+        }
+    }
+
+    /**
+     * 通知发生某事件(本地执行,不使用线程)
+     * 
+     * @param event
+     *            事件
+     * @param objects
+     *            事件发生时传入的参数
+     */
+    public void notifyLocalEvent(Event event, Object... objects) {
+        List<EventMethod> eventMethods = this.events.get(event);
+        if (CollectionUtils.isNotEmpty(eventMethods)) {
+            for (EventMethod eventMethod : eventMethods) {
+                Object bean = this.applicationContext.getBean(eventMethod.beanName);
+                new NotifyTask(bean, eventMethod.methodName, event.getClazzes(), objects).run();
+                TaskUtil.sleep(5);
             }
         }
     }
