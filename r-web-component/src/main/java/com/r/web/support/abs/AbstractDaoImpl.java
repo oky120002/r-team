@@ -70,6 +70,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final void creates(T... models) {
         AssertUtil.isNotEmpty("创建实体时，实体集合不能为空。", models);
@@ -96,6 +97,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final void updates(T... models) {
         AssertUtil.isNotEmpty("更新实体时，实体集合不能为空。", models);
@@ -122,6 +124,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final void saves(T... models) {
         AssertUtil.isNotEmpty("保存实体时，实体集合不能为空。", models);
@@ -148,6 +151,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final void merges(T... models) {
         AssertUtil.isNotEmpty("合并实体时，实体集合不能为空。", models);
@@ -174,6 +178,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final void deletes(T... models) {
         AssertUtil.isNotEmpty("删除实体时，实体集合不能为空。", models);
@@ -281,6 +286,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         return queryByHql(hql, null, -1, -1);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues) {
         if (ArrayUtils.isEmpty(keyValues)) {
@@ -324,6 +330,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         return queryBySql(sql, null, -1, -1);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public final List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues) {
         if (ArrayUtils.isEmpty(keyValues)) {

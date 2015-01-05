@@ -20,6 +20,50 @@ public class Sandbox {
     private Group groupA;
     /** 战斗团体B */
     private Group groupB;
+    
+    
+
+    /**
+     * @return the scene
+     */
+    public Scene getScene() {
+        return scene;
+    }
+
+    /**
+     * @param scene the scene to set
+     */
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    /**
+     * @return the groupA
+     */
+    public Group getGroupA() {
+        return groupA;
+    }
+
+    /**
+     * @param groupA the groupA to set
+     */
+    public void setGroupA(Group groupA) {
+        this.groupA = groupA;
+    }
+
+    /**
+     * @return the groupB
+     */
+    public Group getGroupB() {
+        return groupB;
+    }
+
+    /**
+     * @param groupB the groupB to set
+     */
+    public void setGroupB(Group groupB) {
+        this.groupB = groupB;
+    }
 
     /**
      * @param scene
