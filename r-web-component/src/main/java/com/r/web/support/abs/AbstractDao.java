@@ -63,7 +63,6 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     void creates(T... models);
 
     /**
@@ -103,7 +102,6 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     void updates(T... models);
 
     /**
@@ -165,7 +163,6 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     void saves(T... models);
 
     /**
@@ -202,7 +199,6 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     void merges(T... models);
 
     /**
@@ -242,7 +238,6 @@ public interface AbstractDao<T> {
      * 
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     void deletes(T... models);
 
     /**
@@ -374,7 +369,6 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     List<T> queryByHql(CharSequence hql, KeyValue<String, ?>... keyValues);
 
     /**
@@ -443,7 +437,6 @@ public interface AbstractDao<T> {
      * @return List<T> 查询到的实体集
      * @author rain
      */
-    @SuppressWarnings("unchecked")
     List<T> queryBySql(CharSequence sql, KeyValue<String, ?>... keyValues);
 
     /**

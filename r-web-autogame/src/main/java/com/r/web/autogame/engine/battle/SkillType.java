@@ -11,21 +11,9 @@ package com.r.web.autogame.engine.battle;
  *
  */
 public enum SkillType {
-    PhysicalAttack("物理攻击"), //
-    MagicAttack("魔法攻击"), //
-    PiercingAttack("穿刺攻击"), //
+    物理攻击, //
+    // 魔法攻击, //
+    // 穿刺攻击, //
     ;
-
-    /** 技能攻击类型名称 */
-    private String name;
-
-    /** 获取技能攻击类型的名称 */
-    public String getName() {
-        return name;
-    }
-
-    SkillType(String name) {
-        this.name = name;
-    }
 
 }

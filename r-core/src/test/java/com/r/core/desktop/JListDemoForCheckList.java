@@ -41,7 +41,6 @@ import javax.swing.plaf.metal.MetalIconFactory;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public class JListDemoForCheckList extends JFrame {
     private static final long serialVersionUID = -8438020016195507991L;
 

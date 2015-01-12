@@ -4,43 +4,60 @@
 package com.r.web.autogame.engine.battle;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 战斗者基础属性<br/>
- * 力量:决定物理攻击力,格挡成功后效果<br/>
- * 敏捷:决定穿刺攻击力,闪避几率,格挡几率<br/>
- * 智力:决定魔法攻击力,魔法回复速度,魔法抗性(减少魔法伤害),<br/>
- * 精神:<br/>
- * 耐力:<br/>
+ * 力量:决定物理攻击力,中等的穿刺攻击力,格挡成功后效果<br/>
+ * 耐力:决定血量,血量恢复速度,物理防御力,中等的穿刺防御力,微弱的魔法抗性<br/>
+ * 敏捷:决定行动力,中等的穿刺攻击力,闪避成功几率,格挡成功几率(只能格挡物理攻击,微弱格挡穿刺攻击)<br/>
+ * 智力:决定魔法攻击力,魔法闪避成功几率(大多数魔法都有必中属性,此类型魔法不能闪避)<br/>
+ * 精神:决定魔法值,魔法恢复速度,魔法抗性<br/>
+ * 幸运:各种几率性事件(包括但不限于:技能发动成功率,命中,闪避,获取物品几率,获取的物品高级与否等)(此值,每次战斗都随机)
  * 
  * @author rain
- *5
  */
 public interface Fighter {
 
     /** 获取昵称 */
-    String getNickName();
+    String getName();
 
-    /** 获取力量(Strength) */
+    /**
+     * 获取力量(Strength)<br/>
+     * 决定物理攻击力,中等的穿刺攻击力,格挡成功后效果
+     */
     int getStr();
 
-    /** 获取耐力(Endurance) */
+    /**
+     * 获取耐力(Endurance)<br/>
+     * 决定血量,血量恢复速度,物理防御力,中等的穿刺防御力,微弱的魔法抗性
+     */
     int getEnd();
 
-    /** 获取智力(Intelligence) */
-    int getInt();
-
-    /** 获取敏捷(Speed) */
+    /**
+     * 获取敏捷(Speed)<br/>
+     * 决定行动力,中等的穿刺攻击力,闪避成功几率,格挡成功几率(只能格挡物理攻击,微弱格挡穿刺攻击)
+     */
     int getSpe();
 
-    /** 获取装备 */
-    Map<EquipPos, Equip> getEquips();
+    /**
+     * 获取智力(Intelligence)<br/>
+     * 决定魔法攻击力,魔法闪避成功几率(大多数魔法都有必中属性,此类型魔法不能闪避)
+     */
+    int getInt();
+
+    /**
+     * 获取精神(Spunk)<br/>
+     * 决定魔法值,魔法恢复速度,魔法抗性
+     */
+    int getSpk();
+
+    /**
+     * 获取幸运(Luck)<br/>
+     * 各种几率性事件(包括但不限于:技能发动成功率,命中,闪避,获取物品几率,获取的物品高级与否等)(此值,每次战斗都随机)
+     */
+    int getLuc();
 
     /** 获取技能 */
     Collection<Skill> getSkills();
 
-    /** 获取行动策略 */
-    List<Strategy> getStrategies();
 }

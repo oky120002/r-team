@@ -4,11 +4,12 @@
 package com.r.web.autogame.engine.battle;
 
 /**
- * 行动策略
+ * 战队
  * 
  * @author rain
  *
  */
-public interface Strategy {
-
+public class Tearm {
+    private String name;
+    
 }

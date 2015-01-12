@@ -96,24 +96,32 @@ public final class RandomUtil {
     }
 
     /**
-     * 
      * 计算命中率<br />
      * 以100为基数根据rate参数计算命中率
      * 
      * @param rate
      *            命中概率,如果小于等于0,则直接不命中
-     * @param maxRate
-     *            最大命中概率,如果小于等于0,则为最大命中率为100
      * @return 如果命中,则返回true,否则返回false
      */
-    public static boolean hitRate100(int rate, int maxRate) {
-        if (rate <= 0) {
+    public static boolean hitRate100(int rate) {
+        return hitRate(rate, 100);
+    }
+
+    /**
+     * 计算命中率<br />
+     * 以maxRate为基数根据rate参数计算命中率
+     * 
+     * @param rate
+     *            命中概率,如果小于等于0,则直接不命中
+     * @param maxRate
+     *            命中基数,如果小于等于0,则直接不命中
+     * @return 如果命中,则返回true,否则返回false
+     */
+    public static boolean hitRate(int rate, int maxRate) {
+        if (rate <= 0 || maxRate <= 0) {
             return false;
         }
-        maxRate = maxRate <= 0 ? 100 : maxRate;
-        rate = CalUtil.min(rate, maxRate);
-
-        return rate > randomInteger(0, 99) ? true : false;
+        return rate > randomInteger(0, maxRate) ? true : false;
     }
 
     /**
@@ -155,9 +163,5 @@ public final class RandomUtil {
      */
     public static String uuid() {
         return UUID.randomUUID().toString().replace("-", "");
-    }
-
-    public static void main(String[] args) {
-        System.out.println(randomInteger(0, 1));
     }
 }
