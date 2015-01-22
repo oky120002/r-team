@@ -4,12 +4,13 @@
 package com.r.web.autogame.engine.battle;
 
 /**
- * 战队
+ * 技能效果
  * 
  * @author rain
  *
  */
-public class Tearm {
-    private String name;
-
+public enum SkillEffect {
+    百分数, //
+    数值, //
+    ;
 }

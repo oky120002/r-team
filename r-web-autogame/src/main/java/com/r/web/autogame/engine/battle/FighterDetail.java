@@ -29,8 +29,8 @@ public interface FighterDetail {
     int getMpByRes();
 
     // /-------------CP---
-    /** 获取每回合cp回复量(Restore CP) */
-    int getCpByRes();
+    /** 获取每回合act回复量(Restore ACT) */
+    int getAcTByRes();
 
     // /-------------攻击力---
 

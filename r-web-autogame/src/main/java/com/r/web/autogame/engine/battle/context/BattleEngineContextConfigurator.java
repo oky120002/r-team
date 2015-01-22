@@ -19,10 +19,23 @@ public class BattleEngineContextConfigurator implements InitializingBean {
     /** 日志 */
     private static Logger logger = LoggerFactory.getLogger(BattleEngineContextConfigurator.class);
 
+    /** 初始化战斗人员基础属性最大值 */
+    private int initialFighterBaseAttrMaxNumber = -1;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         logger.debug("战斗引擎参数初始化......");
+        
+    }
 
+    /** 获取初始化战斗人员基础属性最大值 */
+    public int getInitialFighterBaseAttrMaxNumber() {
+        return initialFighterBaseAttrMaxNumber;
+    }
+
+    /** 设置初始化战斗人员基础属性最大值 */
+    public void setInitialFighterBaseAttrMaxNumber(int initialFighterBaseAttrMaxNumber) {
+        this.initialFighterBaseAttrMaxNumber = initialFighterBaseAttrMaxNumber;
     }
 
 }

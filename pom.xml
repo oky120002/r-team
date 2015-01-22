@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<!-- �?��用的object model版本，为了确保稳定的使用，这个元素是强制性的。除非maven�?��者升级模板，否则不需要修�? -->
+	<!-- 通用的object model版本，为了确保稳定的使用，这个元素是强制性的。除非maven开发者升级模板，否则不需要修改 -->
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- 是项目创建团体或组织的唯�?��志符，�?常是域名倒写，如groupId org.apache.maven.plugins就是为所有maven插件预留�? -->
+	<!-- 是项目创建团体或组织的唯一志符，通常是域名倒写，如groupId org.apache.maven.plugins就是为所有maven插件预留着 -->
 	<groupId>com.rain</groupId>
-	<!-- 是项目artifact唯一的基地址�? -->
+	<!-- 是项目artifact唯一的基地址 -->
 	<artifactId>r-team</artifactId>
-	<!-- artifact打包的方式，如jar、war、ear等等。默认为jar。这个不仅表示项目最终产生何种后�?��文件，也表示build过程使用�?��样的lifecycle -->
+	<!-- artifact打包的方式，如jar、war、ear等等。默认为jar。这个不仅表示项目最终产生何种后�?��文件，也表示build过程使用什么样的lifecycle -->
 	<packaging>pom</packaging>
 	<!-- artifact的版本，通常能看见为类似0.0.1-SNAPSHOT，其中SNAPSHOT表示项目�?��中，为开发版本name 表示项目的展现名，在maven生成的文档中使用 -->
 	<version>0.0.1-SNAPSHOT</version>

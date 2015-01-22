@@ -3,13 +3,10 @@
  */
 package com.r.web.autogame.engine.battle.context;
 
-import java.util.Collection;
-
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
 import com.r.web.autogame.engine.battle.Fighter;
-import com.r.web.autogame.engine.battle.Skill;
-import com.r.web.autogame.engine.battle.core.BattleUtils;
+import com.r.web.autogame.engine.battle.Tearm;
 
 /**
  * 战斗引擎容器<br/>
@@ -53,4 +50,8 @@ public class BattleEngineContext extends BattleEngineContextConfigurator {
         return this.battleEngineHepler.createInitialFighter();
     }
 
+    /** 战斗 */
+    public void battle(Tearm... tearms) {
+
+    }
 }

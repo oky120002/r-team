@@ -3,7 +3,6 @@
  */
 package com.r.web.autogame.engine.battle;
 
-import java.util.Collection;
 
 /**
  * 战斗者基础属性<br/>
@@ -31,33 +30,33 @@ public interface Fighter {
      * 获取耐力(Endurance)<br/>
      * 决定血量,血量恢复速度,物理防御力,中等的穿刺防御力,微弱的魔法抗性
      */
-    int getEnd();
+    // int getEnd();
 
     /**
      * 获取敏捷(Speed)<br/>
      * 决定行动力,中等的穿刺攻击力,闪避成功几率,格挡成功几率(只能格挡物理攻击,微弱格挡穿刺攻击)
      */
-    int getSpe();
+    // int getSpe();
 
     /**
      * 获取智力(Intelligence)<br/>
      * 决定魔法攻击力,魔法闪避成功几率(大多数魔法都有必中属性,此类型魔法不能闪避)
      */
-    int getInt();
+    // int getInt();
 
     /**
      * 获取精神(Spunk)<br/>
      * 决定魔法值,魔法恢复速度,魔法抗性
      */
-    int getSpk();
+    // int getSpk();
 
     /**
      * 获取幸运(Luck)<br/>
      * 各种几率性事件(包括但不限于:技能发动成功率,命中,闪避,获取物品几率,获取的物品高级与否等)(此值,每次战斗都随机)
      */
-    int getLuc();
+    // int getLuc();
 
     /** 获取技能 */
-    Collection<Skill> getSkills();
+    // Collection<Skill> getSkills();
 
 }
