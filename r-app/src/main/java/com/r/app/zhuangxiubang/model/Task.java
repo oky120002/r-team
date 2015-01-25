@@ -32,6 +32,10 @@ public class Task {
     private Date createDate;
     @Column
     private Boolean isReaded;
+    
+    /**应标状态*/
+    @Column
+    private String status;
 
     public String getId() {
         return id;
@@ -49,10 +53,12 @@ public class Task {
         this.bianhao = bianhao;
     }
 
+    /**是否可以接标*/
     public Boolean getIsBm() {
         return isBm;
     }
 
+    /**设置是否可以接标*/
     public void setIsBm(Boolean isBm) {
         this.isBm = isBm;
     }
@@ -96,4 +102,14 @@ public class Task {
     public void setIsReaded(Boolean isReaded) {
         this.isReaded = isReaded;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 }

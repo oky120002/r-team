@@ -66,7 +66,7 @@
 		<appender-ref ref="SQL_FILE"/>
 	</logger>
 	
-	<logger name="com.r.core.httpsocket" level="ERROR" />
+	<logger name="com.r.core.httpsocket" level="DEBUG" />
 	<logger name="com.r" level="DEBUG" />
 
 	<!-- level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特殊值INHERITED或者同义词NULL，代表强制执行上级的级别。 -->

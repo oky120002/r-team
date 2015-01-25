@@ -81,6 +81,8 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
             return sdf.format(task.getCreateDate());
         case 6: // 是否已阅
             return task.getIsBm() == null ? "未读" : (task.getIsReaded() ? "已阅" : "未读");
+        case 7: // 状态
+            return task.getStatus() == null ? "" : task.getStatus();
         default:
             throw new SwitchPathException("列表列越界");
         }
@@ -117,9 +119,10 @@ public class TaskListTableModel extends AbstractTableModel implements TableModel
         楼盘("楼盘", String.class, -1, 1), //
         户型("户型", String.class, -1, 3), //
         要求("要求", String.class, -1, 2), //
-        招标("招标状态", String.class, 30, 4), //
+        // 招标("招标状态", String.class, 30, 4), //
         时间("抓取时间", String.class, 25, 5), //
         已阅("已阅", String.class, 25, 6), // 是否已阅
+        状态("状态", String.class, 25, 7), // 状态
         ;
 
         private String colName;

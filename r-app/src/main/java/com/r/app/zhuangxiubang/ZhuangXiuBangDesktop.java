@@ -5,9 +5,9 @@ package com.r.app.zhuangxiubang;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -26,9 +26,12 @@ import com.r.app.zhuangxiubang.service.TaskService;
 import com.r.core.desktop.ctrl.HBaseBox;
 import com.r.core.desktop.ctrl.HBaseFrame;
 import com.r.core.desktop.ctrl.alert.HAlert;
+import com.r.core.desktop.ctrl.obtain.HImageObtain;
 import com.r.core.desktop.support.TitleCellRenderer;
+import com.r.core.httpsocket.HttpSocket;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
+import com.r.core.util.RandomUtil;
 import com.r.core.util.TaskUtil;
 
 /**
@@ -81,9 +84,9 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
                 public void run() {
                     startBtn.setEnabled(false);
                     startBtn.setText("监控中...");
-                    TaskService service = (TaskService) app.getApplicationContext().getBean("taskService");
-                    List<Task> tasks = new ArrayList<Task>();
-                    service.webGetTaskList(tasks);
+                    final TaskService service = (TaskService) app.getApplicationContext().getBean("taskService");
+                    service.doLogin();
+                    List<Task> tasks = service.getWebGetTaskList();
                     service.save(tasks);
                     tasks = service.query(0, 30);
                     taskListTableModel.setTasks(tasks);
@@ -97,7 +100,7 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
                         for (Task task : newTasks) {
                             sb.append(task.getBianhao() + ":" + task.getLoupan()).append("\r\n");
                         }
-                        sb.append("\r\n\r\n-----点击确认阅读-----\r\n\r\n");
+                        sb.append("\r\n\r\n-----点击确认阅读且应标-----\r\n\r\n");
                         // 提示
                         ZhuangXiuBangDesktop.this.setVisible(false);
                         ZhuangXiuBangDesktop.this.setAlwaysOnTop(true);
@@ -106,7 +109,8 @@ public class ZhuangXiuBangDesktop extends HBaseFrame implements ActionListener {
                         ZhuangXiuBangDesktop.this.setVisible(true);
                         int yesno = JOptionPane.showConfirmDialog(ZhuangXiuBangDesktop.this, sb.toString(), "有新的招标信息,请阅读", JOptionPane.YES_NO_OPTION);
                         if (yesno == 0) { // 点击确认
-                            service.saveReaded(newTasks, true);
+                            String msg = service.yingbiao(newTasks);
+                            HAlert.showTips(msg, "投稿情况", null);
                             tasks = service.query(0, 30);
                             taskListTableModel.setTasks(tasks);
                             taskListTable.updateUI();

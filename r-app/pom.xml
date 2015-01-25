@@ -181,6 +181,11 @@
 			<version>4.8.0</version>
 		</dependency>
 
+		<!-- html解析器 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
 
 		<!-- 测试 -->
 		<dependency>

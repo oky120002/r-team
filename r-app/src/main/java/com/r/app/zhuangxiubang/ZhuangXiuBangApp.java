@@ -9,13 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.r.app.core.util.ImageUtil;
-import com.r.app.zhuangxiubang.core.Resolve;
 import com.r.core.desktop.ctrl.HCtrlUtil;
 import com.r.core.desktop.ctrl.alert.HAlert;
 import com.r.core.log.Logger;
@@ -35,7 +35,6 @@ public class ZhuangXiuBangApp {
 
     private static ZhuangXiuBangApp app = null; // 应用程序
     private ZhuangXiuBangDesktop desktop = null;
-    private Resolve resolve = null;
     private ApplicationContext applicationContext;
 
     private ZhuangXiuBangApp() {
@@ -110,15 +109,12 @@ public class ZhuangXiuBangApp {
         });
     }
 
-    public Resolve getResolve() {
-        if (resolve == null) {
-            resolve = new Resolve();
-        }
-        return resolve;
-    }
-
     public ApplicationContext getApplicationContext() {
         return applicationContext;
+    }
+
+    public JFrame getDesktop() {
+        return desktop;
     }
 
 }
