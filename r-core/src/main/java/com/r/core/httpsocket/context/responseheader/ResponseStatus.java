@@ -1,10 +1,10 @@
 package com.r.core.httpsocket.context.responseheader;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.helpers.MessageFormatter;
 
-import com.r.core.exceptions.arg.ArgIllegalException;
+import com.r.core.httpsocket.exception.HttpSocketException;
 import com.r.core.util.AssertUtil;
-import com.r.core.util.StrUtil;
 
 /**
  * 返回时的状态
@@ -21,49 +21,56 @@ public enum ResponseStatus {
     s403("403", "Forbidden", "服务器收到请求，但是拒绝提供服务"), // 403
     s404("404", "Not Found", "没有找到资源"), // 404
     s500("500", "Internal Server Error", "服务器发生不可预期的错误"), // 500
-    s501("501", "Not implemented or not supported.", "Web 服务器不支持实现此请求所需的功能。请检查URL 中的错误，如果问题依然存在，请与 Web服务器的管理员联系。"), s502("502", "Bad Gateway", "服务器作为网关或代理，从上游服务器收到无效响应。 "), // 502
+    s501("501", "Not implemented or not supported.",
+            "Web 服务器不支持实现此请求所需的功能。请检查URL 中的错误，如果问题依然存在，请与 Web服务器的管理员联系。"), s502(
+            "502", "Bad Gateway", "服务器作为网关或代理，从上游服务器收到无效响应。 "), // 502
     s503("503", "Server Unavailable", "服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。"), // 503
     s504("504", "Gateway Timeout", "服务器作为网关或代理，但是没有及时从上游服务器收到请求。"), // 504
     ;
-
+    
     /** 状态编码 */
     private String code;
+    
     /** 状态内容 */
     private String context;
+    
     /** 状态说明 */
     private String caption;
-
+    
     public String getCode() {
         return this.code;
     }
-
+    
     public String getContext() {
         return this.context;
     }
-
+    
     public String getCaption() {
         return this.caption;
     }
-
+    
     ResponseStatus(String code, String context, String caption) {
         this.code = code;
         this.context = context;
         this.caption = caption;
     }
-
+    
     /** 根据状态字符串返回状态,如果找不到则返回空 */
     public static ResponseStatus getResponseStatus(String status) {
-        AssertUtil.isNotBlank("不能传入空的返回状态", status);
+        AssertUtil.isNotBlank("status is empty.", status);
         for (ResponseStatus rs : values()) {
             if (rs.getCode().equals(status)) {
                 return rs;
             }
         }
-        throw new ArgIllegalException("传入了未知的返回状态:[" + status + "]");
+        throw new HttpSocketException("传入了未知的返回状态:[" + status + "]");
     }
-
+    
     @Override
     public String toString() {
-        return StrUtil.formart("{} : {}({})", this.code, this.context, StringUtils.abbreviate(this.caption, 10));
+        return MessageFormatter.arrayFormat("{} : {}({})",
+                new String[] { this.code, this.context,
+                        StringUtils.abbreviate(this.caption, 10) })
+                .getMessage();
     }
 }

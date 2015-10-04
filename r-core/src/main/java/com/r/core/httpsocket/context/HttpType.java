@@ -5,7 +5,7 @@ package com.r.core.httpsocket.context;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.core.exceptions.arg.ArgIllegalException;
+import com.r.core.httpsocket.exception.HttpSocketException;
 
 /**
  * Http协议<br>
@@ -45,6 +45,6 @@ public enum HttpType {
 				return httpType;
 			}
 		}
-		throw new ArgIllegalException("传入了识别不到的http协议:[" + http + "]");
+		throw new HttpSocketException("传入了识别不到的http协议:[" + http + "]");
 	}
 }

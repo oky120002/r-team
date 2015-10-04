@@ -8,7 +8,7 @@ import java.net.Proxy;
 import com.r.core.exceptions.io.NetworkIOReadErrorException;
 import com.r.core.httpsocket.HttpSocket;
 import com.r.core.httpsocket.context.HttpProxy;
-import com.r.core.httpsocket.context.ResponseHeader;
+import com.r.core.httpsocket.context.Response;
 import com.r.core.httpsocket.context.responseheader.ResponseStatus;
 import com.r.core.log.Logger;
 import com.r.core.log.LoggerFactory;
@@ -45,7 +45,7 @@ public class FindProxyUtil {
 			HttpProxy httpProxy = HttpProxy.newInstance(true, proxy);
 			HttpSocket httpSocket = HttpSocket.newHttpSocket(true, httpProxy);
 			startTime = System.currentTimeMillis();
-			ResponseHeader send = httpSocket.send(url);
+			Response send = httpSocket.send(url);
 			endTime = System.currentTimeMillis();
 
 			if (!ResponseStatus.s200.equals(send.getStatus())) {

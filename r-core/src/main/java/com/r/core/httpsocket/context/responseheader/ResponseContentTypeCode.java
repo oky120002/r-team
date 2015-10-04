@@ -5,7 +5,7 @@ package com.r.core.httpsocket.context.responseheader;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.core.exceptions.arg.ArgIllegalException;
+import com.r.core.httpsocket.exception.HttpSocketException;
 
 /**
  * 返回内容的编码格式
@@ -72,7 +72,7 @@ public enum ResponseContentTypeCode {
 				return rctc;
 			}
 		}
-		throw new ArgIllegalException("传入了未知的ContentTypeCode:[" + contentTypeCode + "]");
+		throw new HttpSocketException("传入了未知的ContentTypeCode:[" + contentTypeCode + "]");
 	}
 
 	/** 获得内容编码格式,如果不能识别或者传入的值为空,则抛错 */
@@ -88,6 +88,6 @@ public enum ResponseContentTypeCode {
 				return rctc;
 			}
 		}
-		throw new ArgIllegalException("传入了未知的ContentTypeCode:[" + contentTypeCode + "],fileSuffixName:[" + fileSuffixName + "]");
+		throw new HttpSocketException("传入了未知的ContentTypeCode:[" + contentTypeCode + "],fileSuffixName:[" + fileSuffixName + "]");
 	}
 }

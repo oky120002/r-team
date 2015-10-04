@@ -2,7 +2,7 @@ package com.r.core.httpsocket.context.responseheader;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.r.core.exceptions.arg.ArgIllegalException;
+import com.r.core.httpsocket.exception.HttpSocketException;
 
 /** 返回的压缩类型 */
 public enum ResponseContentEncoding {
@@ -22,6 +22,6 @@ public enum ResponseContentEncoding {
 				return rce;
 			}
 		}
-		throw new ArgIllegalException("传入了未知的ContentEncoding:[" + encoding + "]");
+		throw new HttpSocketException("传入了未知的ContentEncoding:[" + encoding + "]");
 	}
 }
